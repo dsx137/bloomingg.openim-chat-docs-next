@@ -1,0 +1,130 @@
+---
+title: 'Delete a poll option'
+description: 'Support status, OpenIM alternatives, and WASM SDK notes for Delete a poll option.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll-option'
+---
+
+## Overview
+
+The OpenIM WASM SDK does not expose poll, poll option, vote, voter, or poll changelog APIs.
+
+This guide avoids inventing Sendbird-compatible methods and lists related OpenIM signatures.
+
+## OpenIM model
+
+Implement polls as a backend feature and optionally publish poll state changes as OpenIM custom messages.
+
+Support status: there is no public WASM SDK API equivalent to the Sendbird feature named by this page.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Do not call non-existent Sendbird-style methods from the OpenIM client; model the feature with the alternatives below.
+
+## API signatures
+
+No public OpenIM WASM SDK method directly implements this Sendbird feature.
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+createCustomMessage: (params: CustomMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
+searchLocalMessages: (data: SearchLocalParams, operationID?: string) =>
+  Promise<WsResponse<SearchMessageResult>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnRecvCustomBusinessMessage
+CbEvents.OnRecvNewMessages
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Model polls as backend records and publish state changes as custom messages.
+
+```ts
+const poll = await backend.createPoll({ groupID, question, options });
+
+const { data: message } = await OpenIM.createCustomMessage({
+  data: JSON.stringify({ type: 'poll', pollID: poll.id }),
+  extension: 'poll',
+  description: 'Poll',
+});
+
+await OpenIM.sendMessage({ recvID: '', groupID, message });
+```
+
+## Returned data and events
+
+When the page describes a partial, server-side, or unsupported Sendbird feature, treat the listed OpenIM calls as building blocks. Keep the authoritative product state in your backend when the SDK does not own it.
+
+Watch these callbacks while testing: `CbEvents.OnRecvCustomBusinessMessage`, `CbEvents.OnRecvNewMessages`.
+
+Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
+- Confirm your UI does not expose a control that implies native SDK support unless the backend alternative is implemented.
+
+## Troubleshooting
+
+| Case                              | Cause                                                                 | Handling                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404    | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects         | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code    | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| A Sendbird method name is missing | The feature is not part of the OpenIM WASM SDK public API.            | Use the OpenIM alternative on this page or implement the feature in a trusted backend.                 |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

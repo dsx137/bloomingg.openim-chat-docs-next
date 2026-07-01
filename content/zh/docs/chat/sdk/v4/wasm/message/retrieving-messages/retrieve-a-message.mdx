@@ -1,0 +1,83 @@
+---
+title: '获取单条消息'
+description: '使用 OpenIM WASM SDK 按 conversationID 和 clientMsgID 获取指定消息，或读取群聊会话的最新消息。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-message'
+---
+
+在消息列表、搜索结果、引用消息或通知跳转场景中，你可以使用 `conversationID` 和消息的 `clientMsgID` 定位一条 OpenIM 消息。需要展示该消息前后的聊天上下文时，再以已获取的 `MessageItem` 作为起点读取周边消息。
+
+## 按 clientMsgID 查询消息
+
+`findMessageList()` 接收一组会话查询条件。每个条件使用 `conversationID` 指定会话，并通过 `clientMsgIDList` 传入一个或多个客户端消息 ID。
+
+```ts
+const { data: result } = await OpenIM.findMessageList([
+  {
+    conversationID,
+    clientMsgIDList: [clientMsgID],
+  },
+]);
+
+const resultItems = result.findResultItems ?? result.searchResultItems ?? [];
+const targetMessage = resultItems[0]?.messageList?.[0];
+```
+
+`clientMsgID` 是 OpenIM 消息在客户端侧的稳定标识。建议在发送、接收、搜索和历史记录场景中把它随消息一起保存在应用状态中，后续即可用它重新定位消息。
+
+#### 参数列表
+
+| 参数              | 说明                                                                               |
+| ----------------- | ---------------------------------------------------------------------------------- |
+| `conversationID`  | 目标消息所在的会话 ID。                                                            |
+| `clientMsgIDList` | 要查询的客户端消息 ID 列表；获取单条消息时传入一个 `clientMsgID` 即可。            |
+| `operationID`     | 可选的请求追踪 ID；排查失败时建议和 `errCode`、`errMsg` 一起记录。                 |
+| `startMessage`    | 周边消息查询的起点消息，通常来自 `findMessageList()`、历史消息列表或消息事件回调。 |
+| `viewType`        | 周边消息查询的视图类型；历史消息视图可传 `0`。                                     |
+| `before`          | 返回 `startMessage` 之前的消息数量。                                               |
+| `after`           | 返回 `startMessage` 之后的消息数量。                                               |
+
+## 读取消息上下文
+
+当用户从搜索结果、引用消息或外部通知跳转到某条消息时，通常需要同时加载该消息前后的若干条消息。先取得目标 `MessageItem`，再调用 `fetchSurroundingMessages()`。
+
+```ts
+if (!targetMessage) {
+  throw new Error('Message not found');
+}
+
+const { data: surrounding } = await OpenIM.fetchSurroundingMessages({
+  startMessage: targetMessage,
+  viewType: 0,
+  before: 20,
+  after: 20,
+});
+
+renderMessages(surrounding.messageList);
+```
+
+`findMessageList()` 返回的匹配结果可能因本地缓存尚未同步、消息已删除或撤回而为空。消息页打开期间可以监听 `CbEvents.OnSyncServerFinish` 后重试定位，也可以监听 `CbEvents.OnNewRecvMessageRevoked` 更新撤回态。
+
+## 获取群聊最新消息
+
+如果只需要展示群聊最后一条消息，例如会话列表或群聊入口，可以读取群组对应的会话记录。`getOneConversation()` 返回的 `ConversationItem` 通常包含 `latestMsg`、未读数、名称和头像等会话展示信息。
+
+```ts
+const { data: conversation } = await OpenIM.getOneConversation({
+  sourceID: groupID,
+  sessionType: 3,
+});
+
+renderConversationPreview({
+  conversationID: conversation.conversationID,
+  latestMsg: conversation.latestMsg,
+  unreadCount: conversation.unreadCount,
+});
+```
+
+`latestMsg` 适合会话预览，不适合作为任意消息详情页的唯一来源。需要打开这条消息所在上下文时，仍建议使用 `latestMsg` 中的 `clientMsgID`，再通过 `findMessageList()` 或 `fetchSurroundingMessages()` 重新定位。
+
+## 相关页面
+
+- [获取消息列表](/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages)
+- [按关键词搜索群组消息](/docs/chat/sdk/v4/wasm/message/searching-messages-in-a-group-channel/search-messages-by-a-keyword)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

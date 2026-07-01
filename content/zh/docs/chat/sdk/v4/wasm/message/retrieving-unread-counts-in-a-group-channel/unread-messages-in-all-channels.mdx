@@ -1,0 +1,62 @@
+---
+title: '获取所有会话的未读消息总数'
+description: '使用 OpenIM WASM SDK 读取当前用户所有会话的未读消息总数，并通过未读数事件同步应用角标。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels'
+---
+
+调用 `getTotalUnreadMsgCount()` 可以获取当前登录用户所有会话的未读消息总数。返回的 `data` 是未读消息条数总和，适合用于应用图标、主导航、聊天入口或浏览器标签页角标。
+
+```ts
+const { data: totalUnreadCount, errCode, errMsg } = await OpenIM.getTotalUnreadMsgCount();
+
+if (errCode !== 0) {
+  throw new Error(errMsg || 'Failed to load total unread count');
+}
+
+renderTotalUnreadCount(totalUnreadCount);
+```
+
+收到新消息、进入会话后标记已读、同步离线消息或重连恢复本地状态时，总未读数都可能变化。页面启动时主动读取一次总数，运行期间监听 `CbEvents.OnTotalUnreadMessageCountChanged`。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+function handleTotalUnreadChanged({ data }) {
+  renderTotalUnreadCount(data);
+  updateDocumentBadge(data);
+}
+
+OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
+```
+
+## 筛选总数
+
+OpenIM 的 `getTotalUnreadMsgCount()` 不接收频道自定义类型或超级群筛选参数。如果产品只想展示群聊未读消息总数，或按业务标签、归档状态、免打扰策略计算自定义总数，需要读取会话列表后自行过滤并累加 `ConversationItem.unreadCount`。
+
+```ts
+const { data: conversations } = await OpenIM.getAllConversationList();
+
+const totalUnreadGroupMessages = conversations
+  .filter((conversation) => Boolean(conversation.groupID))
+  .reduce((total, conversation) => total + conversation.unreadCount, 0);
+
+renderTotalUnreadGroupMessages(totalUnreadGroupMessages);
+```
+
+会话数量较多时，用 `getConversationListSplit({ offset, count })` 分页读取。全局角标优先使用 `getTotalUnreadMsgCount()` 和 `CbEvents.OnTotalUnreadMessageCountChanged`；只有在需要自定义过滤时，才基于会话列表计算派生总数。
+
+## 标记已读后的变化
+
+用户进入某个会话并看到消息后，调用 `markConversationMessageAsRead(conversationID)` 清理该会话未读数。调用成功后，当前会话的 `unreadCount` 和全局未读总数会通过 SDK 事件同步。
+
+```ts
+await OpenIM.markConversationMessageAsRead(conversationID);
+```
+
+不要在界面中直接假设总未读数只减去当前会话的旧 `unreadCount`。多端登录、离线同步和多个会话同时收消息时，以 `CbEvents.OnTotalUnreadMessageCountChanged` 推送的新总数为准。
+
+## 相关页面
+
+- [获取频道中的未读消息数](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages)
+- [获取有未读消息的会话数量](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels)
+- [将消息标记为已读](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read)

@@ -1,0 +1,130 @@
+---
+title: 'Overview'
+description: 'OpenIM WASM SDK guide for Overview, with API signatures, usage details, and verification steps.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/overview-user'
+---
+
+## Overview
+
+Use user APIs for current-user profile, public user lookup, online status, friendship, blacklist, and group-member views.
+
+This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+OpenIM separates account profile, friendship, blacklist, online status, and group membership. Avoid treating every SDK user call as an application-wide directory query.
+
+Support status: public WASM SDK APIs cover this workflow.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+getSelfUserInfo: (operationID?: string) => Promise<WsResponse<SelfUserInfo>>;
+setSelfInfo: <T>(data: PartialUserItem, operationID?: string) => Promise<WsResponse<T>>;
+getUsersInfo: (data: string[], operationID?: string) => Promise<WsResponse<PublicUserItem[]>>;
+subscribeUsersStatus: (data: string[], operationID?: string) =>
+  Promise<WsResponse<UserOnlineState[]>>;
+getFriendList: (filterBlack?: boolean, operationID?: string) =>
+  Promise<WsResponse<FriendUserItem[]>>;
+addBlack: <T>(data: AddBlackParams, operationID?: string) => Promise<WsResponse<T>>;
+getGroupMemberList: (params: GetGroupMemberParams, operationID?: string) =>
+  Promise<WsResponse<GroupMemberItem[]>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnSelfInfoUpdated
+CbEvents.OnUserStatusChanged
+CbEvents.OnFriendAdded
+CbEvents.OnFriendDeleted
+CbEvents.OnBlackAdded
+CbEvents.OnBlackDeleted
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Load user state by scope.
+
+```ts
+const { data: me } = await OpenIM.getSelfUserInfo();
+const { data: users } = await OpenIM.getUsersInfo(userIDs);
+const { data: friends } = await OpenIM.getFriendList();
+const { data: blocked } = await OpenIM.getBlackList();
+```
+
+Subscribe to presence only for users visible in the current UI.
+
+## Returned data and events
+
+The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnSelfInfoUpdated`, `CbEvents.OnUserStatusChanged`, `CbEvents.OnFriendAdded`, `CbEvents.OnFriendDeleted`, `CbEvents.OnBlackAdded`, `CbEvents.OnBlackDeleted`.
+
+Always log `operationID` with failures.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm refresh and reconnect behavior matches the product requirement.
+
+## Troubleshooting
+
+| Case                           | Cause                                                                 | Handling                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

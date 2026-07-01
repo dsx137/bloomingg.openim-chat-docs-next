@@ -1,0 +1,33 @@
+---
+title: 'OpenIM SDK for React Native'
+description: 'OpenIM React Native SDK entry point for mobile applications.'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-06-30'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/overview'
+---
+
+## Overview
+
+Use the React Native SDK when your chat experience is built with React Native and needs mobile runtime behavior for connectivity, local cache, media selection, file upload, and push notification handoff.
+
+## Integration model
+
+The SDK should be initialized after your application has a backend-issued token for the current `userID`. Register connection and message events before login, then keep conversation state in your application store so native lifecycle changes can restore the UI predictably.
+
+## Mobile considerations
+
+- Validate login, reconnect, and message receipt after app foreground and background transitions.
+- Test file messages with the media picker and upload permissions required by each platform.
+- Route push notification registration through your trusted backend and platform notification services.
+- Record `operationID`, `errCode`, and `errMsg` when diagnosing mobile-only failures.
+
+## Related SDKs
+
+- [iOS SDK](/docs/chat/sdk/v4/ios/overview)
+- [Android SDK](/docs/chat/sdk/v4/android/overview)
+- [Flutter SDK](/docs/chat/sdk/v4/flutter/overview)

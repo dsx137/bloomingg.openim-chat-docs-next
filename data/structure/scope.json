@@ -1,0 +1,25 @@
+{
+  "mode": "current-only",
+  "description": "Only the current SDK guide structure and current Server API structure are active. UIKit, historical versions, legacy compatibility routes, and hand-authored SDK reference stubs are excluded.",
+  "allowReferenceTemplates": false,
+  "products": {
+    "chat": {},
+    "sdk": {
+      "versions": ["v4"],
+      "platforms": [
+        "ios",
+        "android",
+        "flutter",
+        "uniapp",
+        "wasm",
+        "electron",
+        "miniprogram",
+        "react-native",
+        "unity"
+      ]
+    },
+    "platform-api": {
+      "versions": ["v3"]
+    }
+  }
+}

@@ -1,0 +1,159 @@
+---
+title: '获取成员和运营者的有序列表'
+description: '使用 OpenIM WASM SDK 读取群成员和群运营者，并按角色、昵称、入群时间或业务字段生成稳定展示顺序。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order'
+---
+
+OpenIM WASM SDK 不提供类似 `order` 的成员列表服务端排序参数。群成员和群运营者都以 `GroupMemberItem` 表示；你可以先读取成员数据，再在客户端按 `roleLevel`、群内昵称、入群时间或业务扩展字段生成稳定顺序。如果排序规则需要覆盖超大群的全量成员，建议把索引和排序放到可信业务后端。
+
+## 按特定顺序获取成员
+
+使用 `getGroupMemberList()` 分页读取成员，再对已经加载的 `GroupMemberItem[]` 排序。成员选择器、@ 候选人和群资料页常见的排序方式是按群内昵称排列，并用 `userID` 做兜底，保证昵称相同或为空时顺序稳定。
+
+```ts
+const collator = new Intl.Collator('zh-Hans-CN', {
+  numeric: true,
+  sensitivity: 'base',
+});
+
+function getMemberName(member: GroupMemberItem) {
+  return member.nickname || member.userID;
+}
+
+function sortMembersByName(members: GroupMemberItem[]) {
+  return [...members].sort((a, b) => {
+    const nameResult = collator.compare(getMemberName(a), getMemberName(b));
+    return nameResult || collator.compare(a.userID, b.userID);
+  });
+}
+
+async function loadOrderedMemberPage(groupID: string, offset = 0, count = 50) {
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.getGroupMemberList(
+    {
+      groupID,
+      filter: 0,
+      offset,
+      count,
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('getGroupMemberList failed', {
+      errCode,
+      errMsg,
+      operationID,
+      groupID,
+      offset,
+      count,
+    });
+    throw new Error(errMsg || 'Failed to load group members');
+  }
+
+  return sortMembersByName(data);
+}
+
+const members = await loadOrderedMemberPage(groupID);
+renderMembers(members);
+```
+
+上面的排序只覆盖当前页。若你的产品要求“全群成员严格按昵称排序”，需要持续分页直到返回数量小于 `count`，再对完整数组排序；否则后续页中昵称更靠前的成员不会自动插入第一页。
+
+也可以按入群时间或扩展字段排序：
+
+```ts
+function sortMembersByJoinTime(members: GroupMemberItem[]) {
+  return [...members].sort((a, b) => Number(a.joinTime) - Number(b.joinTime));
+}
+```
+
+## 按特定顺序获取运营者
+
+OpenIM 的群运营者由 `roleLevel` 表示。通常 `100` 表示群主，`60` 表示管理员，`20` 表示普通成员。只展示群主和管理员时，直接调用 `getGroupMemberOwnerAndAdmin(groupID)`；需要把运营者置顶到成员列表前面时，按角色分组后再按昵称排序。
+
+```ts
+const roleRank: Record<number, number> = {
+  100: 0,
+  60: 1,
+  20: 2,
+};
+
+function sortOperatorsThenMembers(members: GroupMemberItem[]) {
+  return [...members].sort((a, b) => {
+    const roleResult = (roleRank[a.roleLevel] ?? 3) - (roleRank[b.roleLevel] ?? 3);
+    if (roleResult !== 0) {
+      return roleResult;
+    }
+
+    const nameResult = collator.compare(getMemberName(a), getMemberName(b));
+    return nameResult || collator.compare(a.userID, b.userID);
+  });
+}
+
+const { data: operators } = await OpenIM.getGroupMemberOwnerAndAdmin(groupID);
+renderOperators(sortOperatorsThenMembers(operators));
+```
+
+成员管理页通常把运营者区域和普通成员分页拆开维护：运营者使用 `getGroupMemberOwnerAndAdmin()` 获取，普通成员继续使用 `getGroupMemberList()` 分页，然后过滤掉已经在运营者区域展示的用户。
+
+```ts
+async function loadOperatorsAndMembers(groupID: string, offset = 0, count = 50) {
+  const [{ data: operators }, { data: memberPage }] = await Promise.all([
+    OpenIM.getGroupMemberOwnerAndAdmin(groupID),
+    OpenIM.getGroupMemberList({
+      groupID,
+      filter: 0,
+      offset,
+      count,
+    }),
+  ]);
+
+  const operatorIDs = new Set(operators.map((member) => member.userID));
+
+  return {
+    operators: sortOperatorsThenMembers(operators),
+    members: sortMembersByName(memberPage.filter((member) => !operatorIDs.has(member.userID))),
+  };
+}
+```
+
+普通成员分页仍以 `getGroupMemberList()` 的 `offset` 和 `count` 为准，不要把运营者数量混入普通成员页的偏移量。
+
+## 搜索和成员变化
+
+成员搜索使用 `searchGroupMembers()`。搜索结果仍然是 `GroupMemberItem[]`，因此可以沿用同一套排序函数，让搜索列表和普通列表的展示规则一致。
+
+```ts
+const { data: matchedMembers } = await OpenIM.searchGroupMembers({
+  groupID,
+  keywordList: [keyword.trim()],
+  isSearchUserID: true,
+  isSearchMemberNickname: true,
+  offset: 0,
+  count: 50,
+});
+
+renderMemberSearchResults(sortOperatorsThenMembers(matchedMembers));
+```
+
+成员加入、离开、昵称变化、禁言状态变化或角色变化后，列表顺序可能改变。监听群成员事件后，先把事件中的 `GroupMemberItem` 合并到当前群缓存，再执行同一套排序函数。
+
+```ts
+OpenIM.on(CbEvents.OnGroupMemberAdded, ({ data }) => {
+  upsertMember(data);
+  rerenderMembers(sortOperatorsThenMembers(getCachedMembers(data.groupID)));
+});
+
+OpenIM.on(CbEvents.OnGroupMemberDeleted, ({ data }) => {
+  removeMember(`${data.groupID}:${data.userID}`);
+  rerenderMembers(sortOperatorsThenMembers(getCachedMembers(data.groupID)));
+});
+
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, ({ data }) => {
+  upsertMember(data);
+  rerenderMembers(sortOperatorsThenMembers(getCachedMembers(data.groupID)));
+});
+```
+
+如果事件载荷不足以恢复页面所需状态，重新调用 `getGroupMemberList()` 或 `getGroupMemberOwnerAndAdmin()` 读取权威数据。相关基础能力见 [获取频道用户列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel) 和 [获取运营者列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators)。

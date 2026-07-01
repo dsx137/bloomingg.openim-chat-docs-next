@@ -1,0 +1,127 @@
+---
+title: 'Retrieve number of unread messages in a channel'
+description: 'OpenIM WASM SDK guide for Retrieve number of unread messages in a channel, with API signatures, usage details, and verification steps.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages'
+---
+
+## Overview
+
+Retrieve OpenIM unread counts from conversation records and SDK unread-count callbacks.
+
+This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+OpenIM stores unread count on conversations and exposes global unread totals. Group message reader APIs can list users by read status for a specific message when receipts are enabled.
+
+Support status: public WASM SDK APIs cover this workflow.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Have a target `conversationID`, `recvID`, or `groupID` depending on whether the flow is direct or group chat.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+getTotalUnreadMsgCount: (operationID?: string) => Promise<WsResponse<number>>;
+getAllConversationList: (operationID?: string) => Promise<WsResponse<ConversationItem[]>>;
+getConversationListSplit: (data: SplitConversationParams, operationID?: string) =>
+  Promise<WsResponse<ConversationItem[]>>;
+getGroupMessageReaderList: (params: GetGroupMessageReaderParams, operationID?: string) =>
+  Promise<WsResponse<GroupMemberItem[]>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnTotalUnreadMessageCountChanged
+CbEvents.OnConversationChanged
+CbEvents.OnRecvGroupReadReceipt
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Use conversation data and unread-count callbacks.
+
+```ts
+const { data: totalUnread } = await OpenIM.getTotalUnreadMsgCount();
+const { data: conversations } = await OpenIM.getAllConversationList();
+
+OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
+  setBadgeCount(data);
+});
+```
+
+For a specific group message, query reader lists with filter `0` for read or `1` for unread.
+
+## Returned data and events
+
+The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnTotalUnreadMessageCountChanged`, `CbEvents.OnConversationChanged`, `CbEvents.OnRecvGroupReadReceipt`.
+
+Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
+
+## Troubleshooting
+
+| Case                           | Cause                                                                 | Handling                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

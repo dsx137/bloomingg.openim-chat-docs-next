@@ -1,0 +1,117 @@
+---
+title: '已废弃能力'
+description: '了解 OpenIM WASM SDK 中不应继续依赖的旧包装方法、无内置等价能力，以及推荐替代实现。'
+sourcePath: '/docs/chat/sdk/v4/wasm/deprecated'
+---
+
+新代码应优先使用 OpenIM WASM SDK 当前公开的会话、用户、群组、好友和黑名单 API。历史项目中可能仍保留旧包装方法、旧业务对象或其他聊天 SDK 的能力名，迁移时不要按旧名称硬找一对一替代，而应按 OpenIM 的数据模型重新落地。
+
+## 消息反馈和表单类方法
+
+OpenIM WASM SDK 当前公开来源中没有内置的消息反馈表单、投票表单或消息级满意度收集对象。如果旧代码依赖这类客户端内置能力，迁移时建议拆成两层：
+
+| 旧功能                         | OpenIM 推荐实现                                                                         |
+| ------------------------------ | --------------------------------------------------------------------------------------- |
+| 消息反馈、满意度、举报原因表单 | 用业务后端保存反馈结果；前端可发送自定义消息或调用业务接口刷新状态。                    |
+| 投票、问卷、任务卡片           | 用 `createCustomMessage()` 发送展示 payload；投票结果、权限和防重复提交由后端维护。     |
+| 消息附加状态                   | 对只影响展示的小字段，可使用自定义消息 payload 或应用状态；需要多端权威一致时放在后端。 |
+
+```ts
+const { data: feedbackMessage } = await OpenIM.createCustomMessage({
+  data: JSON.stringify({
+    type: 'message-feedback',
+    messageID: clientMsgID,
+    score: 5,
+  }),
+  extension: 'feedback',
+  description: '消息反馈',
+});
+
+await OpenIM.sendMessage({
+  recvID: '',
+  groupID,
+  message: feedbackMessage,
+});
+```
+
+如果反馈结果不应该作为聊天消息出现在会话中，请只调用你的业务后端接口，并通过后端事件、轮询或页面刷新更新 UI。
+
+## 显式和旧式拉黑模式
+
+OpenIM 的拉黑能力是当前登录用户维度的黑名单关系，不是群内禁言、群成员踢出或全局封禁。迁移旧代码时，应使用 `addBlack()`、`removeBlack()` 和 `getBlackList()`，并监听黑名单事件同步界面。
+
+```ts
+await OpenIM.addBlack({ toUserID: targetUserID });
+
+const { data: blockedUsers } = await OpenIM.getBlackList();
+replaceBlockedUsers(blockedUsers);
+
+await OpenIM.removeBlack(targetUserID);
+```
+
+需要注意这些边界：
+
+| 场景                   | 处理方式                                                |
+| ---------------------- | ------------------------------------------------------- |
+| 当前用户屏蔽另一个用户 | 使用 `addBlack()` 和 `removeBlack()`。                  |
+| 查看当前用户已屏蔽的人 | 使用 `getBlackList()`。                                 |
+| 群管理员禁言或移除成员 | 使用群成员管理相关 API，不要用黑名单代替。              |
+| 管理后台封禁账号       | 放在可信后端或管理端策略中，不要只依赖浏览器 SDK 状态。 |
+
+## 旧包装方法替代
+
+如果历史代码依赖分散的便捷包装方法，新代码应改用集中更新接口。这样后续 OpenIM 字段变化时，应用状态和事件处理也更容易保持一致。
+
+| 旧代码常见依赖               | 推荐 OpenIM API        | 迁移说明                                                           |
+| ---------------------------- | ---------------------- | ------------------------------------------------------------------ |
+| 分散的会话设置包装方法       | `setConversation()`    | 用 `conversationID` 更新置顶、收消息选项、扩展字段等会话属性。     |
+| 分散的当前用户资料更新方法   | `setSelfInfo()`        | 只更新当前用户允许修改的字段，例如 `nickname`、`faceURL` 或 `ex`。 |
+| 旧的群资料或元数据包装方法   | `setGroupInfo()`       | 用 `groupID` 更新群名称、群头像、简介或紧凑的 `ex` 扩展信息。      |
+| 旧的群角色或成员信息包装方法 | `setGroupMemberInfo()` | 用 `groupID`、`userID` 和 `roleLevel` 等字段调整群成员信息。       |
+| 分散的好友资料包装方法       | `updateFriends()`      | 用 `friendUserIDs` 批量更新好友备注等好友关系字段。                |
+
+```ts
+await OpenIM.setConversation({
+  conversationID,
+  isPinned: true,
+  recvMsgOpt: 0,
+});
+
+await OpenIM.setSelfInfo({
+  nickname,
+  faceURL,
+});
+
+await OpenIM.setGroupInfo({
+  groupID,
+  groupName: 'New name',
+});
+
+await OpenIM.setGroupMemberInfo({
+  groupID,
+  userID,
+  roleLevel: 60,
+});
+
+await OpenIM.updateFriends({
+  friendUserIDs: [friendUserID],
+  remark: 'Alex',
+});
+```
+
+替换调用后，不要只根据按钮点击立即写死最终 UI。根据变更范围监听对应事件，并用返回的 `data` 同步本地状态。
+
+```ts
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => updateConversations(data));
+OpenIM.on(CbEvents.OnSelfInfoUpdated, ({ data }) => setCurrentUser(data));
+OpenIM.on(CbEvents.OnGroupInfoChanged, ({ data }) => updateGroup(data));
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, ({ data }) => updateGroupMember(data));
+OpenIM.on(CbEvents.OnFriendInfoChanged, ({ data }) => updateFriend(data));
+```
+
+## 相关页面
+
+- [迁移到 OpenIM](/docs/chat/sdk/v4/wasm/migrating-to-openim)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [拉黑和解除拉黑其他用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members)
+- [添加或移除用户事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler)

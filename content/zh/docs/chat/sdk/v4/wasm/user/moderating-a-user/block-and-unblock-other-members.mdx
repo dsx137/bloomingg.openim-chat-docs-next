@@ -1,0 +1,91 @@
+---
+title: '拉黑和解除拉黑其他用户'
+description: '使用 OpenIM WASM SDK 将用户加入当前账号的黑名单、移出黑名单，并通过事件同步关系状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members'
+---
+
+在 OpenIM WASM SDK 中，拉黑是当前登录用户维度的关系操作。调用 `addBlack()` 后，目标用户进入当前用户的黑名单；调用 `removeBlack()` 后，目标用户从黑名单移除。这个能力适合做用户侧屏蔽、会话入口限制和资料卡关系状态展示。
+
+## 拉黑模式
+
+OpenIM WASM SDK 提供的是当前用户黑名单模式，不提供按频道配置的多种拉黑模式。黑名单只表达“当前登录用户拉黑了目标用户”，不等同于群管理员禁言成员、踢出成员或平台侧封禁账号。
+
+| 需求                   | OpenIM 对应能力                                                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| 当前用户屏蔽另一个用户 | `addBlack({ toUserID })`                                                                                                            |
+| 当前用户解除屏蔽       | `removeBlack(toUserID)`                                                                                                             |
+| 查看当前用户黑名单     | `getBlackList()`                                                                                                                    |
+| 禁言某个群成员         | 使用 `changeGroupMemberMute()`，见 [禁言和解除禁言用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/mute-and-unmute-a-user) |
+| 管理群角色或管理员     | 使用群成员和运营者 API，见 [获取运营者列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators)        |
+
+如果产品需要全局封禁、风控处罚或管理后台策略，应由可信后端保存权威状态，并让客户端只展示后端返回的结果。
+
+## 使用拉黑
+
+拉黑目标用户时传入目标 `userID`。成功后，使用 SDK 响应、黑名单事件或重新读取 `getBlackList()` 来更新界面，不要把按钮的乐观状态当作最终状态。
+
+```ts
+async function blockUser(targetUserID: string) {
+  const operationID = crypto.randomUUID();
+  const { errCode, errMsg } = await OpenIM.addBlack(
+    {
+      toUserID: targetUserID,
+      ex: JSON.stringify({ source: 'profile-menu' }),
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('addBlack failed', {
+      errCode,
+      errMsg,
+      operationID,
+      targetUserID,
+    });
+    throw new Error(errMsg || 'Failed to block user');
+  }
+}
+```
+
+解除拉黑时，`removeBlack()` 的第一个参数是目标用户 ID 字符串，不是对象。
+
+```ts
+async function unblockUser(targetUserID: string) {
+  const operationID = crypto.randomUUID();
+  const { errCode, errMsg } = await OpenIM.removeBlack(targetUserID, operationID);
+
+  if (errCode !== 0) {
+    console.error('removeBlack failed', {
+      errCode,
+      errMsg,
+      operationID,
+      targetUserID,
+    });
+    throw new Error(errMsg || 'Failed to unblock user');
+  }
+}
+```
+
+页面首次进入、刷新或重连后，可以先用 `getBlackList()` 初始化当前黑名单状态。后续通过 `CbEvents.OnBlackAdded` 和 `CbEvents.OnBlackDeleted` 合并增量变化。
+
+```ts
+const { data: initialBlockedUsers } = await OpenIM.getBlackList();
+replaceBlockedUsers(initialBlockedUsers);
+
+function handleBlackAdded({ data }) {
+  upsertBlockedUser(data);
+}
+
+function handleBlackDeleted({ data }) {
+  removeBlockedUser(data.userID);
+}
+
+OpenIM.on(CbEvents.OnBlackAdded, handleBlackAdded);
+OpenIM.on(CbEvents.OnBlackDeleted, handleBlackDeleted);
+
+// 页面卸载、退出登录或切换账号时移除。
+OpenIM.off(CbEvents.OnBlackAdded, handleBlackAdded);
+OpenIM.off(CbEvents.OnBlackDeleted, handleBlackDeleted);
+```
+
+黑名单列表返回 `BlackUserItem[]`。渲染关系状态时以 `userID` 为准；昵称、头像和扩展字段只用于展示。完整黑名单读取流程见 [获取黑名单用户列表](/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users)。

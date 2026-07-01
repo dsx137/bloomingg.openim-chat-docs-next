@@ -1,0 +1,151 @@
+---
+title: '为消息添加附加数据'
+description: '使用 OpenIM WASM SDK 通过自定义消息、高级文本消息和 localEx 为消息携带业务数据。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/adding-extra-data-to-a-message/add-extra-data-to-a-message'
+---
+
+OpenIM 的消息附加数据需要先确定作用范围：需要被其他成员收到的业务数据，应在发送前写入消息内容；只影响当前客户端展示状态的数据，可以写入本地扩展字段 `localEx`。
+
+OpenIM WASM SDK 不提供一个发送后给任意消息追加共享键值对的客户端通用接口。需要跨用户、跨设备共享的业务数据，应作为自定义消息、高级文本消息或业务服务状态的一部分设计。
+
+## 选择数据落点
+
+| 场景                                                 | 推荐方式                                             | 数据是否会同步给其他客户端 |
+| ---------------------------------------------------- | ---------------------------------------------------- | -------------------------- |
+| 订单卡片、任务卡片、邀请、投票等结构化业务消息       | `createCustomMessage()` 后调用 `sendMessage()`       | 是                         |
+| 文本中包含实体、链接、提及或业务范围标记             | `createAdvancedTextMessage()` 后调用 `sendMessage()` | 是                         |
+| 当前客户端的选中、折叠、临时标记、来源追踪等 UI 状态 | `setMessageLocalEx()`                                | 否                         |
+
+`CustomMsgParams` 通常包含 `data`、`extension` 和 `description`。建议把业务 payload 序列化到 `data`，用 `extension` 标识业务类型，并把 `description` 作为无法解析自定义 payload 时的降级展示文案。
+
+```ts
+createCustomMessage: (params: CustomMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createAdvancedTextMessage: (params: AdvancedMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+setMessageLocalEx: <T>(params: SetMessageLocalExParams, operationID?: string) =>
+  Promise<WsResponse<T>>;
+sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
+```
+
+## 发送带共享数据的消息
+
+自定义消息适合承载可被接收端完整解析的业务对象。下面示例创建一条发票卡片消息，并发送到群聊。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const { data: message } = await OpenIM.createCustomMessage(
+  {
+    data: JSON.stringify({
+      type: 'invoice-card',
+      invoiceID,
+      amount,
+      currency: 'CNY',
+    }),
+    extension: 'invoice-card',
+    description: '发票卡片',
+  },
+  operationID,
+);
+
+const { data: sentMessage } = await OpenIM.sendMessage(
+  {
+    recvID: '',
+    groupID,
+    message,
+  },
+  operationID,
+);
+
+mergeMessageIntoConversation(sentMessage);
+```
+
+接收端通过 `CbEvents.OnRecvNewMessages` 收到消息后，按 `extension` 或你项目中的消息类型判断是否进入自定义渲染流程，再解析 `data` 中的 JSON。
+
+```ts
+function handleNewMessages({ data }: { data: MessageItem[] }) {
+  for (const message of data) {
+    if (message.customElem) {
+      renderBusinessMessage(message);
+    }
+
+    mergeMessageIntoConversation(message);
+  }
+}
+
+OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+```
+
+不要把需要参与权限判断、支付状态或审批流的最终状态只放在客户端消息 payload 中。这类状态应由你的业务服务校验和持久化，消息只承载展示入口或快照。
+
+## 为文本消息携带实体数据
+
+当主体仍是文本，但文本中的部分范围需要绑定业务语义时，使用 `createAdvancedTextMessage()` 创建高级文本消息。具体实体字段以你项目安装的 SDK 类型定义为准，发送流程仍然是先创建 `MessageItem`，再传给 `sendMessage()`。
+
+```ts
+const { data: message } = await OpenIM.createAdvancedTextMessage({
+  text: '请查看发票 INV-2026-001',
+  messageEntityList: [
+    {
+      type: 'invoice',
+      offset: 5,
+      length: 12,
+      url: `openim://invoice/${invoiceID}`,
+    },
+  ],
+});
+
+await OpenIM.sendMessage({
+  recvID: receiverUserID,
+  groupID: '',
+  message,
+});
+```
+
+高级文本适合做文本范围标记；如果接收端需要完整业务对象、卡片布局或多字段数据，自定义消息通常更清晰。
+
+## 写入本地附加数据
+
+`localEx` 是当前客户端的本地消息状态，不会作为共享消息内容同步给其他用户。它适合保存 UI 标记，例如当前用户是否选中过某条消息、是否折叠了某个卡片，或这条消息是否来自一次本地迁移流程。
+
+```ts
+await OpenIM.setMessageLocalEx({
+  conversationID,
+  clientMsgID: sentMessage.clientMsgID,
+  localEx: JSON.stringify({
+    selected: true,
+    source: 'invoice-panel',
+  }),
+});
+```
+
+调用 `setMessageLocalEx()` 前需要已经拿到目标消息的 `conversationID` 和 `clientMsgID`。如果这份状态要被多端、多用户共享，请不要使用 `localEx`，应改为发送一条新的业务消息，或把权威状态保存在你的业务服务中。
+
+## 事件和校验
+
+服务端向客户端发送的是自定义业务通知时，客户端可以监听 `CbEvents.OnRecvCustomBusinessMessage`。普通聊天自定义消息、高级文本消息和文件消息仍应通过 `CbEvents.OnRecvNewMessages` 进入消息列表。
+
+| 事件                                   | 用途                                                   |
+| -------------------------------------- | ------------------------------------------------------ |
+| `CbEvents.OnRecvNewMessages`           | 接收普通消息、自定义消息和高级文本消息，并更新消息列表 |
+| `CbEvents.OnRecvCustomBusinessMessage` | 接收服务端下发的自定义业务通知                         |
+
+验证附加数据时，重点确认这些结果：
+
+- `createCustomMessage()`、`createAdvancedTextMessage()`、`sendMessage()` 或 `setMessageLocalEx()` 的响应符合你部署环境的成功约定，例如 `errCode === 0`。
+- 需要同步给其他成员的数据，可以在另一个已登录客户端通过 `CbEvents.OnRecvNewMessages` 收到。
+- 只写入 `localEx` 的状态不会出现在其他用户或其他设备的共享消息内容中。
+- 失败日志包含 `operationID`、`errCode` 和 `errMsg`，便于和服务端日志对齐。
+
+在组件卸载、退出登录或切换账号前，使用同一个处理函数引用调用 `off()`，避免重复消费消息。
+
+```ts
+OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+```
+
+## 相关页面
+
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
+- [获取单条消息](/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-message)

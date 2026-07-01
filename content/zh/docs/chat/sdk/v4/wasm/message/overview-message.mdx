@@ -1,0 +1,154 @@
+---
+title: '消息概览'
+description: '了解 OpenIM WASM SDK 的消息类型、消息标识、收发事件、历史记录、搜索、已读状态和扩展数据能力。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/overview-message'
+---
+
+OpenIM WASM SDK 的消息能力围绕 `MessageItem` 展开。客户端先用 `create*Message()` 创建消息对象，再用 `sendMessage()` 发送到单聊或群聊；收到新消息、撤回、已读回执、上传进度和会话变化时，通过 `CbEvents` 事件同步到应用状态。
+
+消息页通常需要长期保存以下标识：
+
+| 标识             | 用途                                                                  |
+| ---------------- | --------------------------------------------------------------------- |
+| `clientMsgID`    | 消息在客户端侧的稳定 ID，用于渲染去重、状态更新、查询和分页游标。     |
+| `conversationID` | 会话记录 ID，用于读取历史消息、清理未读数、搜索和查询已读状态。       |
+| `recvID`         | 单聊发送目标用户 ID；发送群聊消息时保持为空字符串。                   |
+| `groupID`        | 群聊发送和群消息已读回执的目标群组 ID；发送单聊消息时保持为空字符串。 |
+| `operationID`    | 可选的操作追踪 ID，适合和 `errCode`、`errMsg` 一起写入日志。          |
+
+## 消息类型
+
+不同内容先通过对应的创建方法生成 `MessageItem`。发送层不需要为每种内容维护不同入口，统一把创建方法返回的 `data` 作为 `sendMessage()` 的 `message` 参数。
+
+#### 消息类型对比
+
+| 内容类型        | 创建方法                                          | 典型用途                                   |
+| --------------- | ------------------------------------------------- | ------------------------------------------ |
+| 普通文本        | `createTextMessage(text, operationID?)`           | 发送纯文本聊天内容。                       |
+| 富文本/实体文本 | `createAdvancedTextMessage(params, operationID?)` | 为文本范围绑定链接、实体或业务标记。       |
+| @ 文本          | `createTextAtMessage(data, operationID?)`         | 在群聊中提醒指定成员。                     |
+| 图片            | `createImageMessageByFile(params, operationID?)`  | 从浏览器 `File` 对象发送图片。             |
+| 音频            | `createSoundMessageByFile(data, operationID?)`    | 发送语音或音频文件。                       |
+| 视频            | `createVideoMessageByFile(data, operationID?)`    | 发送视频文件及其快照图。                   |
+| 文件            | `createFileMessageByFile(data, operationID?)`     | 发送通用附件。                             |
+| 自定义消息      | `createCustomMessage(params, operationID?)`       | 承载卡片、邀请、订单等结构化业务 payload。 |
+
+文件、图片、音频和视频消息会走上传链路，可以通过 `CbEvents.OnProgress` 和 `CbEvents.UploadComplete` 更新进度 UI。需要被其他成员收到的业务数据应放入消息内容；只影响当前客户端展示的状态可写入 `localEx`。
+
+## 按主题查看能力
+
+#### 发送消息
+
+先创建消息，再发送到单聊或群聊。单聊填写 `recvID`，群聊填写 `groupID`，另一个目标字段保持为空字符串。
+
+```ts
+const { data: message } = await OpenIM.createTextMessage('你好，OpenIM');
+
+const { data: sentMessage } = await OpenIM.sendMessage({
+  recvID: receiverUserID,
+  groupID: '',
+  message,
+});
+```
+
+更多发送流程见[发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)。
+
+#### 接收消息
+
+消息到达后监听 `CbEvents.OnRecvNewMessages`，离线补偿消息可监听 `CbEvents.OnRecvOfflineNewMessages`。事件回调里建议按 `conversationID` 过滤当前会话，并按 `clientMsgID` 去重。
+
+```ts
+function handleNewMessages({ data }: { data: MessageItem[] }) {
+  mergeMessagesByClientMsgID(data);
+}
+
+OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+```
+
+群聊接收流程见[接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)。
+
+#### 获取消息
+
+历史消息通过 `getAdvancedHistoryMessageList()` 按 `conversationID` 分页读取。第一页把 `startClientMsgID` 设为空字符串；继续加载时，使用边界消息的 `clientMsgID` 作为下一页游标。
+
+```ts
+const { data: history } = await OpenIM.getAdvancedHistoryMessageList({
+  conversationID,
+  startClientMsgID: '',
+  count: 30,
+  viewType: 0,
+});
+```
+
+读取列表见[获取消息列表](/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages)，定位单条消息见[获取单条消息](/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-message)。
+
+#### 搜索消息
+
+`searchLocalMessages()` 在当前用户已同步到本地的消息中搜索。群聊搜索使用群会话的 `conversationID`，不是发送消息时的 `groupID`。
+
+```ts
+const { data: result } = await OpenIM.searchLocalMessages({
+  conversationID,
+  keywordList: ['release'],
+  pageIndex: 1,
+  count: 20,
+});
+```
+
+搜索流程见[按关键词搜索群组消息](/docs/chat/sdk/v4/wasm/message/searching-messages-in-a-group-channel/search-messages-by-a-keyword)。
+
+#### 管理消息
+
+消息发送后可以按业务需要执行复制、更新、删除、撤回、清空历史、发送输入状态等操作。撤回类变化会通过 `CbEvents.OnNewRecvMessageRevoked` 通知接收端，消息列表应使用 `clientMsgID` 更新对应气泡状态。
+
+相关能力见[复制消息](/docs/chat/sdk/v4/wasm/message/managing-a-message/copy-a-message)、[删除消息](/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message)、[清空群聊历史](/docs/chat/sdk/v4/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel)和[发送输入状态](/docs/chat/sdk/v4/wasm/message/managing-a-message/send-typing-indicators-to-other-members)。
+
+#### 标记已读
+
+会话未读数通过 `markConversationMessageAsRead(conversationID)` 清理。群消息需要展示成员级已读情况时，可以发送群消息已读回执，再查询已读或未读成员列表。
+
+```ts
+await OpenIM.markConversationMessageAsRead(conversationID);
+
+await OpenIM.sendGroupMessageReadReceipt({
+  conversationID,
+  clientMsgIDList: visibleMessageIDs,
+});
+```
+
+相关能力见[将消息标记为已读](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read)和[获取已读状态](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status)。
+
+#### 提及其他用户
+
+群聊 @ 消息使用 `createTextAtMessage()` 创建，再通过 `sendMessage()` 发送到群组。接收端可以从 `atTextElem` 渲染被提及成员，并通过会话的 `groupAtType` 展示 @ 提醒。
+
+相关流程见[在消息中提及用户](/docs/chat/sdk/v4/wasm/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message)。
+
+#### 获取未读数
+
+会话列表、总未读数和 @ 提醒通常来自会话 API 与会话事件。消息页应监听 `CbEvents.OnConversationChanged` 和 `CbEvents.OnTotalUnreadMessageCountChanged`，让聊天列表角标与当前会话状态保持一致。
+
+相关能力见[未读消息数](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages)、[所有会话未读消息数](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels)和[未读项](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items)。
+
+#### 为消息添加附加数据
+
+需要同步给其他成员的附加数据，发送前写入自定义消息或高级文本消息；只影响当前客户端展示的数据，写入 `localEx`。
+
+相关流程见[为消息添加附加数据](/docs/chat/sdk/v4/wasm/message/adding-extra-data-to-a-message/add-extra-data-to-a-message)。
+
+#### 常用事件
+
+| 事件                                        | 使用场景                                     |
+| ------------------------------------------- | -------------------------------------------- |
+| `CbEvents.OnRecvNewMessages`                | 收到新消息后合并到消息列表。                 |
+| `CbEvents.OnRecvOfflineNewMessages`         | 登录或重连后接收离线期间的新消息。           |
+| `CbEvents.OnRecvOnlineOnlyMessages`         | 接收只在线分发的临时消息。                   |
+| `CbEvents.OnNewRecvMessageRevoked`          | 对端撤回消息后更新本地展示。                 |
+| `CbEvents.OnProgress`                       | 文件类消息上传进度变化。                     |
+| `CbEvents.UploadComplete`                   | 文件类消息上传完成。                         |
+| `CbEvents.OnRecvC2CReadReceipt`             | 单聊消息已读回执变化。                       |
+| `CbEvents.OnRecvGroupReadReceipt`           | 群消息已读回执变化。                         |
+| `CbEvents.OnConversationChanged`            | 会话最后消息、未读数、置顶或草稿等状态变化。 |
+| `CbEvents.OnTotalUnreadMessageCountChanged` | 全局未读数变化。                             |
+| `CbEvents.OnSyncServerFinish`               | 本地缓存完成服务端同步后刷新可见消息。       |

@@ -1,0 +1,135 @@
+---
+title: 'Send a message'
+description: 'OpenIM WASM SDK guide for Send a message, with API signatures, usage details, and verification steps.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message'
+---
+
+## Overview
+
+Create an OpenIM message object and send it to a direct receiver or group conversation.
+
+This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+Every send starts with a `create*Message` call. `sendMessage()` persists and delivers the resulting `MessageItem`.
+
+Support status: public WASM SDK APIs cover this workflow.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Have a target `conversationID`, `recvID`, or `groupID` depending on whether the flow is direct or group chat.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+createTextMessage: (text: string, operationID?: string) => Promise<WsResponse<MessageItem>>;
+createAdvancedTextMessage: (params: AdvancedMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createImageMessageByFile: (params: ImageMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createFileMessageByFile: (data: FileMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createCustomMessage: (params: CustomMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
+sendMessageNotOss: (params: SendMsgParams, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnRecvNewMessages
+CbEvents.OnProgress
+CbEvents.UploadComplete
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Pick the message factory that matches the content type, then call `sendMessage()`.
+
+```ts
+const { data: textMessage } = await OpenIM.createTextMessage('Hello');
+await OpenIM.sendMessage({ recvID, groupID: '', message: textMessage });
+
+const { data: customMessage } = await OpenIM.createCustomMessage({
+  data: JSON.stringify({ type: 'order-card', orderID }),
+  extension: 'order',
+  description: 'Order card',
+});
+await OpenIM.sendMessage({ recvID: '', groupID, message: customMessage });
+```
+
+## Returned data and events
+
+The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnRecvNewMessages`, `CbEvents.OnProgress`, `CbEvents.UploadComplete`.
+
+Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
+
+## Troubleshooting
+
+| Case                             | Cause                                                                                                      | Handling                                                                                               |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404   | The SDK assets were not copied to the app public path.                                                     | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects        | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong.                                      | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code   | The server rejected the request or the current user lacks permission.                                      | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| Messages do not appear in the UI | The listener was registered too late, the wrong `recvID` or `groupID` was used, or history has not synced. | Register message events before testing and verify the target IDs with a second signed-in user.         |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

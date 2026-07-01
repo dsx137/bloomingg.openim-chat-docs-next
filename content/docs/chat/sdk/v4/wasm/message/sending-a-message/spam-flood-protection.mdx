@@ -1,0 +1,123 @@
+---
+title: 'Spam flood protection'
+description: 'Server-side implementation guidance and WASM SDK boundaries for Spam flood protection.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/sending-a-message/spam-flood-protection'
+---
+
+## Overview
+
+Spam protection and smart throttling are service-side policies, not public WASM SDK APIs.
+
+This guide marks server-owned behavior clearly and lists related browser SDK signatures.
+
+## OpenIM model
+
+Keep abuse prevention in the backend or gateway. The browser should debounce UI actions and render server-side failures without assuming delivery.
+
+Support status: the browser SDK can provide context, but the authoritative action should run on your backend or Platform API layer.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Provide a trusted backend endpoint when the action affects moderation, push, reporting, scheduled jobs, or admin behavior.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
+createTextMessage: (text: string, operationID?: string) => Promise<WsResponse<MessageItem>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnRecvNewMessages
+CbEvents.OnSyncServerFailed
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Use browser throttles only as UX protection.
+
+```ts
+if (sendButtonLocked()) return;
+
+const decision = await backend.checkCanSend({ conversationID });
+if (!decision.allowed) throw new Error(decision.reason);
+
+const { data: message } = await OpenIM.createTextMessage(text);
+await OpenIM.sendMessage({ recvID, groupID, message });
+```
+
+## Returned data and events
+
+When the page describes a partial, server-side, or unsupported Sendbird feature, treat the listed OpenIM calls as building blocks. Keep the authoritative product state in your backend when the SDK does not own it.
+
+Watch these callbacks while testing: `CbEvents.OnRecvNewMessages`, `CbEvents.OnSyncServerFailed`.
+
+Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
+- Confirm the backend validates the current user and does not trust IDs or role claims from the browser alone.
+
+## Troubleshooting
+
+| Case                              | Cause                                                                 | Handling                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404    | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects         | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code    | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| A Sendbird method name is missing | The feature is not part of the OpenIM WASM SDK public API.            | Use the OpenIM alternative on this page or implement the feature in a trusted backend.                 |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

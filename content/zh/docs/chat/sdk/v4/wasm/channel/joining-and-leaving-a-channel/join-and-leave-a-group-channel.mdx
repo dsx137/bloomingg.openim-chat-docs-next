@@ -1,0 +1,178 @@
+---
+title: '加入和离开群组频道'
+description: '使用 OpenIM WASM SDK 加入群组频道、离开群组频道，并通过群组与会话事件同步频道列表。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel'
+---
+
+OpenIM WASM SDK 中的群组频道由 `groupID` 标识。用户加入群组后，才能用该 `groupID` 进入群聊、收发群消息，并在聊天列表中维护对应的 `conversationID`。离开群组后，客户端应移除或刷新本地的群组资料、成员状态和会话列表展示。
+
+加入和离开都依赖同一个已登录的 SDK 实例。调用这些接口前，先确保 `login()` 已成功，并且连接事件已进入可用状态。生产环境建议为写操作传入并记录 `operationID`，便于定位浏览器请求、SDK 事件和服务端日志。
+
+## 加入群组频道
+
+当应用已经拿到可加入的 `groupID` 后，调用 `joinGroup()`。`reqMsg` 是申请说明，`joinSource` 表示加群来源；用户通过搜索结果或频道列表主动加入时通常传 `3`。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const {
+  errCode,
+  errMsg,
+  operationID: responseOperationID,
+} = await OpenIM.joinGroup(
+  {
+    groupID,
+    reqMsg: 'Request to join group',
+    joinSource: 3,
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('joinGroup failed', {
+    groupID,
+    errCode,
+    errMsg,
+    operationID: responseOperationID || operationID,
+  });
+  throw new Error(errMsg || 'Failed to join group');
+}
+```
+
+如果群组允许直接加入，客户端会收到 `CbEvents.OnJoinedGroupAdded`，随后可以打开群聊或刷新频道列表。如果群组需要管理员审核，`joinGroup()` 成功只表示申请已提交；界面应保留申请中状态，并等待审核通过后触发的加入事件或后续查询结果。
+
+加入后可以用 `isJoinGroup()` 或 `getJoinedGroupList()` 确认当前用户的成员状态。
+
+```ts
+const {
+  data: isJoined,
+  errCode: checkErrCode,
+  errMsg: checkErrMsg,
+} = await OpenIM.isJoinGroup(groupID);
+
+if (checkErrCode !== 0) {
+  console.error('isJoinGroup failed', { groupID, errCode: checkErrCode, errMsg: checkErrMsg });
+} else if (isJoined) {
+  openGroupChannel(groupID);
+}
+
+const { data: joinedGroups } = await OpenIM.getJoinedGroupList();
+mergeJoinedGroups(joinedGroups);
+```
+
+## 加载群组会话
+
+加入成功后，聊天列表通常还需要群组对应的会话记录。对群组会话调用 `getConversationIDBySessionType()` 或 `getOneConversation()` 时，`sourceID` 传 `groupID`，`sessionType` 传 `3`。
+
+```ts
+const { data: conversationID } = await OpenIM.getConversationIDBySessionType({
+  sourceID: groupID,
+  sessionType: 3,
+});
+
+const { data: conversation } = await OpenIM.getOneConversation({
+  sourceID: groupID,
+  sessionType: 3,
+});
+
+showGroupChannel({
+  groupID,
+  conversationID,
+  conversation,
+});
+```
+
+如果会话记录尚未创建或本地缓存还没有同步完成，先保存 `groupID`，并等待 `CbEvents.OnConversationChanged` 或下一次会话查询结果。不要只凭按钮点击就把频道列表状态当作最终结果。
+
+## 离开群组频道
+
+当前用户离开群组时，调用 `quitGroup()` 并传入目标 `groupID`。接口成功后，群组会从当前用户的已加入群组列表中移除，客户端应关闭正在展示的群聊页面，或跳转回频道列表。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const {
+  errCode,
+  errMsg,
+  operationID: responseOperationID,
+} = await OpenIM.quitGroup(groupID, operationID);
+
+if (errCode !== 0) {
+  console.error('quitGroup failed', {
+    groupID,
+    errCode,
+    errMsg,
+    operationID: responseOperationID || operationID,
+  });
+  throw new Error(errMsg || 'Failed to leave group');
+}
+
+closeGroupChannel(groupID);
+```
+
+离开成功后，当前客户端通常会收到 `CbEvents.OnJoinedGroupDeleted`。如果聊天列表仍保留旧会话，可以根据该事件删除本地展示，或重新读取会话列表并按成员状态过滤。对于群主、管理员或受企业规则限制的群组，是否允许离开应以服务端返回结果为准。
+
+## 管理员身份和退出限制
+
+OpenIM 的管理员身份由群成员 `roleLevel` 表示，退出群组时没有单独的 `shouldRemoveOperatorStatus` 参数。若产品要求管理员退出前先移除管理身份，应先用 `setGroupMemberInfo()` 把该成员恢复为普通成员，或由业务后端执行经过审计的角色变更，再调用 `quitGroup()`。
+
+群主能否直接退出、是否必须先转让群主或解散群组，取决于服务端规则和你的业务流程。前端应根据 `quitGroup()` 的返回结果展示失败原因，而不是在本地强行清理群主状态。
+
+## 同步加入和离开事件
+
+在频道列表或频道详情页打开期间注册群组和会话事件。`CbEvents.OnJoinedGroupAdded` 表示当前用户已经加入或创建了群组；`CbEvents.OnJoinedGroupDeleted` 表示当前用户不再属于该群组；`CbEvents.OnConversationChanged` 可用于同步聊天列表里的会话状态。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const handleJoinedGroupAdded = ({ data, operationID }) => {
+  mergeJoinedGroup(data);
+  console.debug('joined group added', { groupID: data.groupID, operationID });
+};
+
+const handleJoinedGroupDeleted = ({ data, operationID }) => {
+  removeJoinedGroup(data.groupID);
+  removeGroupConversation(data.groupID);
+  console.debug('joined group deleted', { groupID: data.groupID, operationID });
+};
+
+const handleConversationChanged = ({ data }) => {
+  mergeConversations(data);
+};
+
+OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
+OpenIM.on(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
+OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+```
+
+如果事件载荷只包含局部状态，可以在处理器中记录 `groupID`，再调用群资料或会话查询接口刷新页面需要的完整数据。
+
+## 更新界面状态
+
+加入和离开群组时，界面状态应以 SDK 响应和事件共同确认：
+
+| 状态变化                              | 推荐处理                                                 |
+| ------------------------------------- | -------------------------------------------------------- |
+| `joinGroup()` 返回成功                | 显示已提交或正在同步，等待加入事件或成员状态查询。       |
+| `CbEvents.OnJoinedGroupAdded` 到达    | 合并群组资料，允许打开群聊，并刷新频道列表。             |
+| `quitGroup()` 返回成功                | 关闭当前群聊入口，清理正在编辑的草稿或页面状态。         |
+| `CbEvents.OnJoinedGroupDeleted` 到达  | 从已加入群组和频道列表中移除该群组。                     |
+| `CbEvents.OnConversationChanged` 到达 | 合并会话记录，刷新未读数、最后一条消息和置顶等展示状态。 |
+
+错误路径中记录 `errCode`、`errMsg`、`operationID` 和 `groupID`。如果第二个已登录浏览器会话没有看到预期变化，先确认两个客户端都已连接成功，再检查当前用户是否确实是群成员、群组是否需要审核，以及业务后端是否对加群或退群做了额外权限控制。
+
+## 校验结果
+
+- 确认 `login()` 已成功，并且调用加群或退群接口前 SDK 已连接。
+- 加入后确认 `isJoinGroup(groupID)` 返回已加入，或 `getJoinedGroupList()` 中包含目标 `groupID`。
+- 离开后确认 `getJoinedGroupList()` 中不再包含目标 `groupID`。
+- 确认 `CbEvents.OnJoinedGroupAdded`、`CbEvents.OnJoinedGroupDeleted` 和 `CbEvents.OnConversationChanged` 按当前操作触发，并且页面不会重复注册事件处理器。
+- 在另一个已登录浏览器会话中发送群消息或刷新群成员列表，确认当前用户的加入或离开状态符合预期。
+
+## 相关页面
+
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [创建频道](/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel)
+- [添加或移除频道事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler)
+- [接收群组消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

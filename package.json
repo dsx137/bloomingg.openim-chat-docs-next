@@ -1,0 +1,58 @@
+{
+  "name": "openim-chat-docs-next",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/check-content.mjs && next build",
+    "start": "node .next/standalone/server.js",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "content:check": "node scripts/check-content.mjs",
+    "content:index": "node scripts/build-search-index.mjs",
+    "sdk:zh": "node scripts/build-wasm-sdk-zh-content.mjs",
+    "sdk:zh:check": "node scripts/check-localized-sdk-content.mjs",
+    "structure:sync": "node scripts/import-structure.mjs",
+    "structure:report": "node scripts/structure-report.mjs && prettier --write docs/STRUCTURE_REPORT.md",
+    "check": "eslint . && tsc --noEmit && node scripts/check-content.mjs && node scripts/check-localized-sdk-content.mjs",
+    "postbuild": "node scripts/prepare-standalone.mjs",
+    "content:sync": "node scripts/sync-content-metadata.mjs && node scripts/build-wasm-sdk-zh-content.mjs && node scripts/build-search-index.mjs",
+    "guides:sync": "node scripts/import-openim-guides.mjs",
+    "platform-api:sync": "node scripts/import-openim-platform-api.mjs",
+    "predev": "pnpm run content:sync",
+    "prebuild": "pnpm run content:sync",
+    "source:generate": "fumadocs-mdx",
+    "postinstall": "fumadocs-mdx",
+    "content:status": "node scripts/content-status.mjs",
+    "precheck": "pnpm run content:sync"
+  },
+  "dependencies": {
+    "fumadocs-core": "16.10.5",
+    "fumadocs-mdx": "15.0.12",
+    "fumadocs-ui": "16.10.5",
+    "next": "16.2.9",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "shiki": "3.13.0",
+    "zod": "4.1.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.1",
+    "@types/mdx": "2.0.13",
+    "@types/node": "22.15.0",
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.2",
+    "eslint": "9.39.1",
+    "eslint-config-next": "16.2.9",
+    "prettier": "3.6.2",
+    "tailwindcss": "4.3.1",
+    "typescript": "5.9.3"
+  }
+}

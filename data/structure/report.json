@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-06-30T08:46:28.867Z",
+  "scope": "current-only",
+  "pageCount": 633,
+  "contextCount": 10,
+  "byProduct": {
+    "chat": 1,
+    "platform-api": 25,
+    "sdk": 607
+  },
+  "byTemplate": {
+    "api": 22,
+    "guide": 598,
+    "landing": 1,
+    "overview": 12
+  },
+  "contexts": [
+    {
+      "key": "chat/platform-api/v3",
+      "title": "Platform API",
+      "pageCount": 25
+    },
+    {
+      "key": "chat/sdk/v4/ios",
+      "title": "SDKs · iOS · v4",
+      "pageCount": 128
+    },
+    {
+      "key": "chat/sdk/v4/android",
+      "title": "SDKs · Android · v4",
+      "pageCount": 131
+    },
+    {
+      "key": "chat/sdk/v4/flutter",
+      "title": "SDKs · Flutter · v4",
+      "pageCount": 123
+    },
+    {
+      "key": "chat/sdk/v4/uniapp",
+      "title": "SDKs · uni-app · v4",
+      "pageCount": 1
+    },
+    {
+      "key": "chat/sdk/v4/wasm",
+      "title": "SDKs · WASM · v4",
+      "pageCount": 126
+    },
+    {
+      "key": "chat/sdk/v4/electron",
+      "title": "SDKs · Electron · v4",
+      "pageCount": 1
+    },
+    {
+      "key": "chat/sdk/v4/miniprogram",
+      "title": "SDKs · Mini Program · v4",
+      "pageCount": 1
+    },
+    {
+      "key": "chat/sdk/v4/react-native",
+      "title": "SDKs · React Native · v4",
+      "pageCount": 1
+    },
+    {
+      "key": "chat/sdk/v4/unity",
+      "title": "SDKs · Unity · v4",
+      "pageCount": 95
+    }
+  ]
+}

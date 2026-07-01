@@ -1,0 +1,135 @@
+---
+title: '添加或移除频道事件处理器'
+description: '使用 OpenIM WASM SDK 添加、移除和清理群组与会话事件处理器。'
+sourcePath: '/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler'
+---
+
+OpenIM WASM SDK 使用事件处理器把群组、成员和会话变化同步到前端状态。频道式界面通常需要同时监听会话事件和群组事件：会话事件更新聊天列表、未读数和本地展示状态；群组事件更新群资料、成员列表和群解散等状态。
+
+事件处理器通过同一个 SDK 实例注册。OpenIM 不使用独立的频道 handler ID；如果多个页面或状态模块都需要感知频道变化，可以为同一个 `CbEvents` 注册多个稳定的处理函数，并在对应页面、组件或账号生命周期结束时逐个移除。
+
+## 频道事件类型
+
+#### 会话和消息事件列表
+
+OpenIM 的单聊和群聊都会产生会话、消息和未读数事件。聊天列表、会话页和消息页通常先监听这一组事件，再按 `conversationID`、`groupID`、`recvID` 或 `clientMsgID` 合并到本地状态。
+
+| 事件                                            | 触发时机                                         | 常见处理方式                                               |
+| ----------------------------------------------- | ------------------------------------------------ | ---------------------------------------------------------- |
+| `CbEvents.OnRecvNewMessages`                    | 当前用户收到实时新消息。                         | 筛选当前会话，按 `clientMsgID` 去重后追加到消息列表。      |
+| `CbEvents.OnRecvOfflineNewMessages`             | 离线期间或重连后补偿的新消息到达。               | 按会话合并消息，并保持消息顺序与去重规则一致。             |
+| `CbEvents.OnRecvOnlineOnlyMessages`             | 只在线分发的临时消息或业务通知到达。             | 按产品约定渲染临时提示，或只更新在线态缓存。               |
+| `CbEvents.OnNewRecvMessageRevoked`              | 会话中的消息被撤回。                             | 通过 `clientMsgID` 定位本地消息，更新为撤回态。            |
+| `CbEvents.OnNewConversation`                    | 当前用户本地新增会话。                           | 插入聊天列表，保存 `conversationID` 供后续查询使用。       |
+| `CbEvents.OnConversationChanged`                | 会话最后消息、未读数、置顶、草稿或展示状态变化。 | 合并会话记录，刷新排序、摘要和未读角标。                   |
+| `CbEvents.OnTotalUnreadMessageCountChanged`     | 当前用户所有会话的总未读数变化。                 | 更新应用级角标或浏览器标题。                               |
+| `CbEvents.OnConversationUserInputStatusChanged` | 会话中的其他成员输入状态变化。                   | 在当前会话展示“正在输入”状态，并在页面离开时停止订阅逻辑。 |
+| `CbEvents.OnRecvC2CReadReceipt`                 | 单聊消息已读回执变化。                           | 更新单聊消息的已读状态。                                   |
+| `CbEvents.OnRecvGroupReadReceipt`               | 群聊消息已读回执变化。                           | 更新群消息的已读人数、未读人数或已读成员列表。             |
+
+#### 群组事件列表
+
+群聊详情页、成员列表、管理员工具和群组设置页通常还需要监听群组事件。事件载荷可以直接增量合并；当页面需要服务端权威数据时，再根据 `groupID` 调用查询接口刷新。
+
+| 事件                                  | 触发时机                                     | 常见处理方式                                             |
+| ------------------------------------- | -------------------------------------------- | -------------------------------------------------------- |
+| `CbEvents.OnJoinedGroupAdded`         | 当前用户加入或创建群组。                     | 合并已加入群组列表，允许打开对应群聊。                   |
+| `CbEvents.OnJoinedGroupDeleted`       | 当前用户退出、被移出群组或本地删除群。       | 从已加入群组和频道列表中移除该群组。                     |
+| `CbEvents.OnGroupInfoChanged`         | 群名称、头像、公告、扩展字段或禁言状态变化。 | 更新群资料；必要时调用 `getSpecifiedGroupsInfo()` 复核。 |
+| `CbEvents.OnGroupMemberAdded`         | 群成员新增。                                 | 把新增成员合并进成员列表，或重新读取当前分页。           |
+| `CbEvents.OnGroupMemberDeleted`       | 群成员被移除或退出。                         | 从成员列表中删除对应用户，并更新成员计数。               |
+| `CbEvents.OnGroupMemberInfoChanged`   | 群成员昵称、角色、禁言状态或扩展字段变化。   | 按 `groupID:userID` 合并成员资料。                       |
+| `CbEvents.OnGroupDismissed`           | 群组被解散。                                 | 关闭群聊入口，清理群资料和成员缓存。                     |
+| `CbEvents.OnGroupApplicationAdded`    | 加群申请新增。                               | 刷新审核列表或显示管理员待办。                           |
+| `CbEvents.OnGroupApplicationAccepted` | 加群申请被同意。                             | 更新申请状态，并等待已加入群组或会话事件同步列表。       |
+| `CbEvents.OnGroupApplicationRejected` | 加群申请被拒绝。                             | 更新申请状态，保留失败原因或重新申请入口。               |
+
+## 添加频道事件处理器
+
+使用 `OpenIM.on(event, handler)` 添加事件处理器。处理函数会收到 SDK 事件对象，常用字段包括 `data`、`errCode`、`errMsg` 和 `operationID`。不同事件的 `data` 类型不同，合并状态时应按事件语义处理，而不是假设所有事件都有相同结构。
+
+下面的示例在进入聊天模块时注册一组频道相关事件：
+
+```ts
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+const handleNewMessages = ({ data, operationID }) => {
+  const messages = data.filter((message) => message.conversationID === activeConversationID);
+  mergeMessages(messages);
+  console.debug('new messages received', { operationID, count: messages.length });
+};
+
+const handleConversationChanged = ({ data, operationID }) => {
+  mergeConversations(data);
+  console.debug('conversation changed event', { operationID });
+};
+
+const handleGroupInfoChanged = ({ data }) => {
+  mergeGroups(data);
+};
+
+const handleGroupMemberAdded = ({ data }) => {
+  mergeGroupMembers(data);
+};
+
+const handleGroupMemberDeleted = ({ data }) => {
+  removeGroupMembers(data);
+};
+
+const handleGroupMemberInfoChanged = ({ data }) => {
+  mergeGroupMembers(data);
+};
+
+OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+OpenIM.on(CbEvents.OnGroupMemberAdded, handleGroupMemberAdded);
+OpenIM.on(CbEvents.OnGroupMemberDeleted, handleGroupMemberDeleted);
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+```
+
+事件处理器应尽量保持轻量：把事件载荷合并进本地状态、触发必要的节流查询，或把异常字段记录到日志。不要在处理器里重复创建 SDK 实例，也不要把登录流程放进频道事件处理器中。
+
+## 移除频道事件处理器
+
+使用 `OpenIM.off(event, handler)` 移除事件处理器。移除时必须传入注册时的同一个函数引用；如果注册时使用匿名函数，后续就很难精确移除它。
+
+```ts
+OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
+OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+OpenIM.off(CbEvents.OnGroupMemberAdded, handleGroupMemberAdded);
+OpenIM.off(CbEvents.OnGroupMemberDeleted, handleGroupMemberDeleted);
+OpenIM.off(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+```
+
+对只在某个页面需要的事件，页面离开时立即移除。对整个应用生命周期都需要的事件，例如全局聊天列表状态，可以在应用启动时注册一次，并在用户退出登录或销毁 SDK 会话时统一移除。
+
+如果你的应用使用 React、Vue 或其他组件化框架，把注册和清理放在同一个生命周期中，确保路由重复进入时不会累积多个相同处理器。
+
+```ts
+useEffect(() => {
+  OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+  OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+  OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+  OpenIM.on(CbEvents.OnGroupMemberAdded, handleGroupMemberAdded);
+  OpenIM.on(CbEvents.OnGroupMemberDeleted, handleGroupMemberDeleted);
+  OpenIM.on(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+
+  return () => {
+    OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+    OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
+    OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+    OpenIM.off(CbEvents.OnGroupMemberAdded, handleGroupMemberAdded);
+    OpenIM.off(CbEvents.OnGroupMemberDeleted, handleGroupMemberDeleted);
+    OpenIM.off(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+  };
+}, []);
+```
+
+如果用户切换账号，先移除旧账号页面或状态仓库中的事件处理器，再执行新账号的初始化和登录。这样可以避免旧账号的事件更新到新账号界面。

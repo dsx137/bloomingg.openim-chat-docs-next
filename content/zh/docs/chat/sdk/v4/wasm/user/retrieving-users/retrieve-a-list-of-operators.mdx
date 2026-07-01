@@ -1,0 +1,106 @@
+---
+title: '获取群运营者列表'
+description: '使用 OpenIM WASM SDK 获取群主和管理员成员列表，并在角色变更后同步运营者展示状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators'
+---
+
+OpenIM 的群运营者由群成员角色表示。群主和管理员都是 `GroupMemberItem`：通常 `roleLevel: 100` 表示群主，`roleLevel: 60` 表示管理员，`roleLevel: 20` 表示普通成员。要展示某个群聊的运营者列表，读取该 `groupID` 下的群主和管理员成员记录即可。
+
+## 获取运营者列表
+
+调用 `getGroupMemberOwnerAndAdmin(groupID)` 获取群主和管理员。这个接口不会返回普通成员；如果页面还需要普通成员列表，请另外使用 `getGroupMemberList()` 分页读取。
+
+```ts
+const GROUP_ROLE_LEVEL = {
+  OWNER: 100,
+  ADMIN: 60,
+} as const;
+
+async function loadGroupOperators(groupID: string) {
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.getGroupMemberOwnerAndAdmin(groupID, operationID);
+
+  if (errCode !== 0) {
+    console.error('getGroupMemberOwnerAndAdmin failed', {
+      errCode,
+      errMsg,
+      operationID,
+      groupID,
+    });
+    throw new Error(errMsg || 'Failed to load group operators');
+  }
+
+  return data;
+}
+
+const operators = await loadGroupOperators(groupID);
+```
+
+返回数组同时包含群主和管理员。不要依赖数组原始顺序判断身份，应以每条成员记录的 `roleLevel` 为准。
+
+```ts
+const owner = operators.find((member) => member.roleLevel === GROUP_ROLE_LEVEL.OWNER);
+const admins = operators.filter((member) => member.roleLevel === GROUP_ROLE_LEVEL.ADMIN);
+
+renderOperatorList({
+  owner,
+  admins,
+});
+```
+
+## 运营者属性
+
+运营者仍然是群成员，所以渲染时使用 `GroupMemberItem` 字段。常见字段如下：
+
+| 字段        | 说明                                              |
+| ----------- | ------------------------------------------------- |
+| `groupID`   | 运营者所属群组 ID。                               |
+| `userID`    | 运营者用户 ID，可用于资料卡、权限判断和事件合并。 |
+| `nickname`  | 群内展示昵称。                                    |
+| `faceURL`   | 群内展示头像地址。                                |
+| `roleLevel` | 群角色，常见值为 `100` 群主、`60` 管理员。        |
+| `joinTime`  | 入群时间；排序前确认当前 SDK 返回的时间单位。     |
+| `ex`        | 群成员扩展字段，可用于你的业务展示或排序。        |
+
+如果成员管理页要把运营者置顶显示，可以把运营者列表和普通成员分页拆成两个状态，避免管理员数量变化导致普通成员分页错位。
+
+```ts
+const [{ data: operators }, { data: memberPage }] = await Promise.all([
+  OpenIM.getGroupMemberOwnerAndAdmin(groupID),
+  OpenIM.getGroupMemberList({
+    groupID,
+    filter: 0,
+    offset: 0,
+    count: 50,
+  }),
+]);
+
+const operatorIDs = new Set(operators.map((member) => member.userID));
+const normalMembers = memberPage.filter((member) => !operatorIDs.has(member.userID));
+
+renderMembers({
+  operators,
+  normalMembers,
+});
+```
+
+## 同步运营者变化
+
+管理员添加、移除、群主转移或成员群内资料更新后，SDK 会通过 `CbEvents.OnGroupMemberInfoChanged` 通知已登录客户端。最稳妥的做法是在目标群收到该事件后重新读取运营者列表。
+
+```ts
+function handleGroupMemberInfoChanged({ data }) {
+  if (data.groupID !== groupID) {
+    return;
+  }
+
+  refreshGroupOperators(groupID);
+}
+
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+
+// 页面卸载、退出登录或切换账号时移除。
+OpenIM.off(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+```
+
+如果只做增量更新，收到 `roleLevel: 60` 的成员时把它加入管理员列表；收到 `roleLevel: 20` 的成员时从管理员列表移除；收到 `roleLevel: 100` 的成员时更新群主展示。注册和移除管理员的操作流程见 [注册和移除管理员](/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators)。

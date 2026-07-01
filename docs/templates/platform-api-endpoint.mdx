@@ -1,0 +1,152 @@
+---
+title: '<Verb phrase for endpoint>'
+description: '<One sentence describing the endpoint result and target resource.>'
+product: 'platform-api'
+context: 'chat/platform-api/v3'
+template: 'api'
+status: 'draft'
+lastUpdated: 'YYYY-MM-DD'
+version: 'v3'
+sourcePath: '/docs/chat/platform-api/v3/<sendbird-style-route>'
+---
+
+## Overview
+
+Explain the Sendbird-style workflow this page represents, then document the OpenIM endpoint or composition that implements it. Mention whether the OpenIM operation is read-only or mutates state.
+
+## Endpoint
+
+`<METHOD> <path>`
+
+Use the exact method and path from the current OpenIM REST API page. If OpenIM has no one-to-one endpoint for this Sendbird-style slot, write `Not one-to-one` and explain the supported OpenIM composition.
+
+| Property       | Value                                                             |
+| -------------- | ----------------------------------------------------------------- |
+| Product area   | `<application, user, channel, message, moderation, bot, push-notifications, organization, webhook>` |
+| Resource       | `<resource name>`                                                 |
+| Operation type | `<create, read, update, delete, action, bulk action>`             |
+| Auth scope     | `<APP administrator token, admin secret, webhook callback, none>` |
+| Idempotent     | `<yes, no, conditional>`                                          |
+
+## Authentication
+
+Describe the required credential and where it is passed. Most OpenIM REST APIs require `operationID` and `token` headers. Token-issuing endpoints such as `get_admin_token` use `operationID` plus request body credentials instead.
+
+```http
+operationID: <unique-trace-id>
+token: <admin-token>
+Content-Type: application/json
+```
+
+## Request
+
+### Path parameters
+
+| Parameter | Type     | Required | Description     |
+| --------- | -------- | -------- | --------------- |
+| `<name>`  | `<type>` | Yes      | `<description>` |
+
+Write `Not applicable.` when the endpoint has no path parameters.
+
+### Query parameters
+
+| Parameter | Type     | Required | Default     | Description     |
+| --------- | -------- | -------- | ----------- | --------------- |
+| `<name>`  | `<type>` | No       | `<default>` | `<description>` |
+
+Write `Not applicable.` when the endpoint has no query parameters.
+
+### Headers
+
+| Header                           | Required | Description                                |
+| -------------------------------- | -------- | ------------------------------------------ |
+| `operationID`                    | Yes      | Unique trace ID for this request.          |
+| `token`                          | Yes      | APP administrator token when required.     |
+| `Content-Type: application/json` | Yes      | Required when the request has a JSON body. |
+
+### Body
+
+| Field     | Type     | Required | Description     |
+| --------- | -------- | -------- | --------------- |
+| `<field>` | `<type>` | Yes      | `<description>` |
+
+```json
+{
+  "<field>": "<value>"
+}
+```
+
+Write `Not applicable.` when the endpoint has no request body.
+
+### Request example
+
+```bash
+curl -X <METHOD> 'https://<host><path>' \
+  -H 'operationID: <unique-trace-id>' \
+  -H 'token: <admin-token>' \
+  -H 'Content-Type: application/json' \
+  -d '{"<field>":"<value>"}'
+```
+
+## Response
+
+### Success response
+
+Document the exact success envelope and payload for this endpoint.
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {}
+}
+```
+
+### Response fields
+
+| Field     | Type   | Description                   |
+| --------- | ------ | ----------------------------- |
+| `errCode` | number | OpenIM business status code; `0` means success. |
+| `errMsg`  | string | Human-readable error summary.                  |
+| `errDlt`  | string | Detailed error information.                     |
+| `data`    | object | Endpoint-specific payload.                      |
+
+Write `Not applicable.` when a nested object or list has no additional fields.
+
+## Errors
+
+List HTTP errors and OpenIM business errors separately when both are available. Explain whether each error is retryable.
+
+| HTTP status | `errCode` | Cause     | Retry              |
+| ----------- | --------- | --------- | ------------------ |
+| `<status>`  | `<code>`  | `<cause>` | `<yes/no and why>` |
+
+## Idempotency and side effects
+
+State whether repeating the same request is safe. Include:
+
+- Which resource state changes.
+- Whether repeated calls create duplicates, overwrite fields, or return existing state.
+- Whether webhooks, SDK events, counters, unread counts, or audit logs can be emitted.
+- Whether the operation is eventually consistent.
+
+## Permissions and limits
+
+Document caller role requirements, target-user restrictions, pagination caps, payload size limits, and validation rules. The current OpenIM REST API docs limit all array request fields to 1000 items.
+
+Write `Not applicable.` for rules that do not apply.
+
+## Verify
+
+- Confirm the endpoint returns the expected `errCode`.
+- Confirm the target resource changes or remains unchanged as expected.
+- Confirm the corresponding SDK or webhook event when this endpoint emits one.
+- Confirm behavior for missing, invalid, and duplicate input.
+
+## Related pages
+
+- [Platform API overview](/docs/chat/platform-api/v3/overview)
+- [Prepare to use API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)
+- [Related SDK guide](/docs/chat/sdk/v4/<platform>/<section>/<page-slug>)

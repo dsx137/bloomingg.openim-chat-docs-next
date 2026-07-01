@@ -1,0 +1,105 @@
+---
+title: '注册和移除运营者'
+description: '使用 OpenIM WASM SDK 将群成员设为运营者，或把运营者恢复为普通成员。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators'
+---
+
+OpenIM 的群组运营者由群成员角色表示。群主的 `roleLevel` 为 `100`，管理员为 `60`，普通成员为 `20`。在频道式群聊中，把成员注册为运营者就是更新该成员在目标 `groupID` 下的 `roleLevel`；移除运营者则把该成员恢复为普通成员角色。
+
+执行角色变更前，浏览器客户端应已经完成 SDK 初始化和登录，并且当前登录用户具备调整群成员角色的权限。生产环境建议为每次角色变更传入并记录 `operationID`，便于和 OpenIM 服务端日志对应。
+
+## 注册运营者
+
+调用 `setGroupMemberInfo()`，传入目标群组、目标用户和运营者角色值 `60`。下面的示例会检查 SDK 响应中的 `errCode`，并在失败时带上本次调用的 `operationID`。
+
+```ts
+const GROUP_ROLE_LEVEL = {
+  NORMAL: 20,
+  ADMIN: 60,
+} as const;
+
+async function addGroupAdmin(groupID: string, userID: string) {
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.setGroupMemberInfo(
+    {
+      groupID,
+      userID,
+      roleLevel: GROUP_ROLE_LEVEL.ADMIN,
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('setGroupMemberInfo failed', { errCode, errMsg, operationID });
+    throw new Error(errMsg || 'Failed to add group admin');
+  }
+
+  return data;
+}
+```
+
+如果界面需要先展示现有运营者列表，可以使用 `getGroupMemberOwnerAndAdmin(groupID)` 获取群主和管理员成员记录，再按你的产品规则过滤或排序。
+
+```ts
+const { data: operators, errCode, errMsg } = await OpenIM.getGroupMemberOwnerAndAdmin(groupID);
+
+if (errCode !== 0) {
+  throw new Error(errMsg || 'Failed to load group operators');
+}
+
+const admins = operators.filter((member) => member.roleLevel === 60);
+```
+
+## 移除运营者
+
+移除运营者时仍然调用 `setGroupMemberInfo()`，但把目标成员的 `roleLevel` 改回普通成员值 `20`。不要把群主当作普通管理员处理；群主角色是 `100`，应按你的产品权限流程单独控制。
+
+```ts
+async function removeGroupAdmin(groupID: string, userID: string) {
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.setGroupMemberInfo(
+    {
+      groupID,
+      userID,
+      roleLevel: GROUP_ROLE_LEVEL.NORMAL,
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('setGroupMemberInfo failed', { errCode, errMsg, operationID });
+    throw new Error(errMsg || 'Failed to remove group admin');
+  }
+
+  return data;
+}
+```
+
+## 同步运营者列表
+
+角色变更会影响成员列表、管理员入口和权限按钮状态。除了处理 `setGroupMemberInfo()` 的返回值，还应监听 `CbEvents.OnGroupMemberInfoChanged`，让当前页面和其他已登录会话都能刷新目标成员的角色。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, ({ data }) => {
+  updateGroupMember(data);
+});
+```
+
+如果页面同时展示管理员列表，在收到事件后可以重新调用 `getGroupMemberOwnerAndAdmin(groupID)`，或把事件中的成员记录合并进本地状态。失败日志至少保留 `errCode`、`errMsg`、`groupID`、`userID` 和 `operationID`。
+
+## 校验结果
+
+- 确认 `login()` 已成功，并且在调用角色变更前收到 `CbEvents.OnConnectSuccess`。
+- 注册运营者后，重新拉取 `getGroupMemberOwnerAndAdmin(groupID)`，确认目标成员的 `roleLevel` 为 `60`。
+- 移除运营者后，确认目标成员不再出现在运营者列表中，或其成员记录的 `roleLevel` 已恢复为 `20`。
+- 使用另一个已登录客户端验证 `CbEvents.OnGroupMemberInfoChanged` 会触发，并且相关权限按钮、成员列表和管理员列表同步刷新。
+
+## 相关页面
+
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [创建频道](/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel)
+- [获取管理员列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators)
+- [按指定顺序获取成员和管理员列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order)

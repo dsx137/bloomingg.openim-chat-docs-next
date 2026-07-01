@@ -1,0 +1,126 @@
+---
+title: '冻结和解冻频道'
+description: '使用 OpenIM WASM SDK 开启或关闭群组频道禁言，并同步频道状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/moderating-a-channel/freeze-and-unfreeze-a-channel'
+---
+
+在 OpenIM WASM SDK 中，频道冻结通常对应群组整体禁言。对目标 `groupID` 调用 `changeGroupMute()` 并把 `isMute` 设为 `true` 后，群组进入禁言状态；把 `isMute` 设为 `false` 后恢复发送能力。
+
+调用前，浏览器客户端应已完成 SDK 初始化和 `login()`，并且当前用户具备管理目标群组的权限。OpenIM 没有开放频道冻结方法；群组禁言影响整个群。如果只需要限制某个成员，请使用成员禁言能力，而不是冻结频道。
+
+## 冻结频道
+
+使用 `changeGroupMute()` 开启群组整体禁言。建议为管理类写操作传入 `operationID`，并在失败日志中同时记录它，便于和服务端日志对齐。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const { errCode, errMsg } = await OpenIM.changeGroupMute(
+  {
+    groupID,
+    isMute: true,
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('changeGroupMute failed', { errCode, errMsg, operationID, groupID });
+  throw new Error(errMsg || 'Failed to freeze group channel');
+}
+
+markChannelFrozen(groupID);
+```
+
+不要只依赖按钮点击立即把界面改成最终状态。Promise 成功返回后，可以先更新本地交互状态，再等待群资料事件或主动查询确认服务端状态。
+
+## 解冻频道
+
+解冻时调用同一个方法，并把 `isMute` 设为 `false`。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const { errCode, errMsg } = await OpenIM.changeGroupMute(
+  {
+    groupID,
+    isMute: false,
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('changeGroupMute failed', { errCode, errMsg, operationID, groupID });
+  throw new Error(errMsg || 'Failed to unfreeze group channel');
+}
+
+markChannelUnfrozen(groupID);
+```
+
+如果你的产品把“冻结”作为管理后台策略，还应在自己的后端保存审计记录，例如操作者、原因、时间和目标 `groupID`。OpenIM SDK 调用只负责改变群组禁言状态。
+
+## 同步冻结状态
+
+群组禁言状态属于群资料变化，重点监听 `CbEvents.OnGroupInfoChanged`。当事件只提供局部数据，或页面需要权威状态时，再用 `getSpecifiedGroupsInfo([groupID])` 重新读取目标群组。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const toArray = <T>(value: T | T[]) => (Array.isArray(value) ? value : [value]);
+
+const refreshGroupMuteState = async (groupID: string) => {
+  const { data, errCode, errMsg, operationID } = await OpenIM.getSpecifiedGroupsInfo([groupID]);
+
+  if (errCode !== 0) {
+    console.error('getSpecifiedGroupsInfo failed', { errCode, errMsg, operationID, groupID });
+    return;
+  }
+
+  mergeGroups(data);
+};
+
+const handleGroupInfoChanged = ({ data }) => {
+  mergeGroups(data);
+
+  for (const group of toArray(data)) {
+    if (group.groupID) void refreshGroupMuteState(group.groupID);
+  }
+};
+
+OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+```
+
+页面卸载、退出登录或切换账号时，用同一个函数引用移除处理器。
+
+```ts
+OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+```
+
+## 单个成员禁言
+
+频道冻结是群组级操作。只限制某个成员发言时，使用 `changeGroupMemberMute()`，并用 `mutedSeconds` 指定禁言时长。成员资料中的 `muteEndTime` 可用于判断该成员当前是否仍处于禁言期。
+
+```ts
+await OpenIM.changeGroupMemberMute({
+  groupID,
+  userID: targetUserID,
+  mutedSeconds: 3600,
+});
+```
+
+成员禁言变化通常通过 `CbEvents.OnGroupMemberInfoChanged` 同步。群组整体禁言和成员禁言可以在同一个管理界面展示，但它们是不同的状态来源。
+
+## 校验结果
+
+- 确认调用前已登录成功，并且浏览器收到 `CbEvents.OnConnectSuccess`。
+- 确认 `changeGroupMute()` 返回 `errCode === 0`，失败时记录 `errCode`、`errMsg`、`operationID` 和 `groupID`。
+- 在另一个已登录浏览器会话中确认能收到 `CbEvents.OnGroupInfoChanged`，并且频道冻结状态随群资料更新。
+- 冻结后尝试以普通成员身份发送群消息，确认服务端按预期拒绝或限制发送；解冻后再次确认发送恢复。
+- 刷新页面或断线重连后，用 `getSpecifiedGroupsInfo([groupID])` 恢复频道冻结状态。
+
+## 相关页面
+
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [创建频道](/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [添加或移除频道事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler)

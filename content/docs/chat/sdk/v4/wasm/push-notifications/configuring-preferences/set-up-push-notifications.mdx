@@ -1,0 +1,126 @@
+---
+title: 'Set up push notifications'
+description: 'Server-side implementation guidance and WASM SDK boundaries for Set up push notifications.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/set-up-push-notifications'
+---
+
+## Overview
+
+Set up browser push through your application service worker and backend; the wasm client SDK does not register push tokens.
+
+This guide marks server-owned behavior clearly and lists related browser SDK signatures.
+
+## OpenIM model
+
+The public `@openim/wasm-client-sdk` surface does not include Web Push, APNs, FCM token registration, notification-template, or notification-translation methods. Use OpenIM conversation receive options for in-app behavior and own provider integration in your backend.
+
+Support status: the browser SDK can provide context, but the authoritative action should run on your backend or Platform API layer.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Provide a trusted backend endpoint for authoritative product behavior.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+setConversation: <T>(params: SetConversationParams, operationID?: string) => Promise<WsResponse<T>>;
+setConversationRecvMessageOpt: <T>(data: SetConversationRecvOptParams, operationID?: string) =>
+  Promise<WsResponse<T>>;
+getConversationRecvMessageOpt: (data: string[], operationID?: string) =>
+  Promise<WsResponse<ConversationItem[]>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnRecvNewMessages
+CbEvents.OnTotalUnreadMessageCountChanged
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Set in-app receive behavior through conversation settings, then use your own service worker and backend for browser push.
+
+```ts
+await OpenIM.setConversation({
+  conversationID,
+  recvMsgOpt: 2,
+});
+
+const { data: options } = await OpenIM.getConversationRecvMessageOpt([conversationID]);
+```
+
+Store Web Push subscriptions, localized templates, and provider credentials outside the browser SDK.
+
+## Returned data and events
+
+Treat the listed OpenIM calls as building blocks when the feature is partial or server-owned. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnRecvNewMessages`, `CbEvents.OnTotalUnreadMessageCountChanged`.
+
+Always log `operationID` with failures.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm refresh and reconnect behavior matches the product requirement.
+- Confirm the backend validates user identity, role, and target IDs instead of trusting browser claims.
+
+## Troubleshooting
+
+| Case                              | Cause                                                                 | Handling                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404    | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects         | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code    | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| A Sendbird method name is missing | The feature is not part of the OpenIM WASM SDK public API.            | Use the OpenIM alternative on this page or implement the feature in a trusted backend.                 |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

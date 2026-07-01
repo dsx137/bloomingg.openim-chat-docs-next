@@ -1,0 +1,154 @@
+---
+title: '获取参与者最新资料'
+description: '使用 OpenIM WASM SDK 刷新单聊和群聊参与者资料，并通过用户资料、群成员资料和事件同步保持界面一致。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants'
+---
+
+会话界面展示参与者时，先判断当前需要的是账号级公开资料还是群内成员资料。单聊标题、头像和资料卡通常读取对方的 `PublicUserItem`；群聊成员列表、@ 面板、群成员资料卡和角色标识应优先读取 `GroupMemberItem`。
+
+公开用户资料可以补充账号级信息，但不要覆盖群聊中的成员昵称和角色。同一个 `userID` 在不同群里的群昵称和角色可能不同，业务层应按 `groupID:userID` 缓存群成员资料，再按 `userID` 缓存公开用户资料。
+
+## 选择资料来源
+
+常见界面可以按下面的规则选择 API：
+
+| 场景                     | 优先数据对象      | 常用接口或事件                      |
+| ------------------------ | ----------------- | ----------------------------------- |
+| 单聊对方头像和昵称       | `PublicUserItem`  | `getUsersInfo()`                    |
+| 当前登录用户资料变化     | `SelfUserInfo`    | `CbEvents.OnSelfInfoUpdated`        |
+| 群成员列表和 @ 候选人    | `GroupMemberItem` | `getGroupMemberList()`              |
+| 已知 `userID` 的群内刷新 | `GroupMemberItem` | `getSpecifiedGroupMembersInfo()`    |
+| 群内昵称、角色或禁言变化 | `GroupMemberItem` | `CbEvents.OnGroupMemberInfoChanged` |
+
+## 刷新单聊参与者
+
+单聊会话通常已经知道对方 `userID`。当会话列表从本地缓存恢复、资料卡打开或需要重新展示公开资料时，调用 `getUsersInfo()` 批量刷新。
+
+```ts
+function uniqueUserIDs(userIDs: Array<string | null | undefined>) {
+  return [
+    ...new Set(
+      userIDs.map((userID) => userID?.trim()).filter((userID): userID is string => Boolean(userID)),
+    ),
+  ];
+}
+
+async function refreshPublicUsers(userIDs: Array<string | null | undefined>) {
+  const targetUserIDs = uniqueUserIDs(userIDs);
+
+  if (targetUserIDs.length === 0) {
+    return [];
+  }
+
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.getUsersInfo(targetUserIDs, operationID);
+
+  if (errCode !== 0) {
+    console.error('getUsersInfo failed', {
+      errCode,
+      errMsg,
+      operationID,
+      targetUserIDs,
+    });
+    throw new Error(errMsg || 'Failed to refresh users');
+  }
+
+  mergePublicUsers(data);
+  return data;
+}
+
+const [peer] = await refreshPublicUsers([peerUserID]);
+renderDirectConversationHeader(conversationID, {
+  name: peer?.nickname || peerUserID,
+  avatar: peer?.faceURL,
+});
+```
+
+如果一个页面同时展示多个单聊参与者，例如会话列表或搜索结果，先收集可见项中的 `userID`，去重后一次性调用 `getUsersInfo()`。
+
+## 刷新群聊参与者
+
+群聊中已知一批参与者 `userID` 时，使用 `getSpecifiedGroupMembersInfo()` 读取这些用户在目标群里的成员资料。这个接口适合刷新当前消息发送者、@ 候选人、成员资料卡，或根据群成员事件精确更新某个成员。
+
+```ts
+function groupMemberKey(groupID: string, userID: string) {
+  return `${groupID}:${userID}`;
+}
+
+async function refreshSpecifiedGroupMembers(groupID: string, userIDs: string[]) {
+  const userIDList = uniqueUserIDs(userIDs);
+
+  if (userIDList.length === 0) {
+    return [];
+  }
+
+  const { data } = await OpenIM.getSpecifiedGroupMembersInfo({
+    groupID,
+    userIDList,
+  });
+
+  for (const member of data) {
+    groupMembersByKey.set(groupMemberKey(groupID, member.userID), member);
+  }
+
+  return data;
+}
+
+const members = await refreshSpecifiedGroupMembers(groupID, ['user-1001', 'user-1002']);
+renderGroupMemberRows(groupID, members);
+```
+
+打开群资料页、成员管理页或 @ 面板时，使用 `getGroupMemberList()` 建立当前页面需要的成员快照。成员数较多时按 `offset` 和 `count` 分页读取并合并到本地成员表。
+
+```ts
+const { data: memberPage } = await OpenIM.getGroupMemberList({
+  groupID,
+  filter: 0,
+  offset: 0,
+  count: 50,
+});
+
+renderGroupMemberRows(groupID, memberPage);
+```
+
+渲染群内成员时，昵称、头像、角色和禁言状态应优先来自 `GroupMemberItem`。公开用户资料只在成员对象缺少账号级补充信息时作为备用值。
+
+```ts
+function toGroupParticipantView(groupID: string, userID: string) {
+  const member = groupMembersByKey.get(groupMemberKey(groupID, userID));
+  const publicUser = publicUsersByID.get(userID);
+
+  return {
+    userID,
+    displayName: member?.nickname || publicUser?.nickname || userID,
+    avatar: member?.faceURL || publicUser?.faceURL,
+    roleLevel: member?.roleLevel,
+    mutedUntil: member?.muteEndTime,
+  };
+}
+```
+
+## 监听后续变化
+
+刷新接口负责建立当前快照，事件负责同步后续变化。页面或统一的数据层应注册稳定的事件处理器，并在页面卸载、退出登录或切换账号时移除。
+
+```ts
+function handleSelfInfoUpdated({ data }) {
+  updateCurrentUserPanel(data);
+  mergePublicUsers([data]);
+}
+
+function handleGroupMemberInfoChanged({ data }) {
+  groupMembersByKey.set(groupMemberKey(data.groupID, data.userID), data);
+  renderGroupMemberRows(data.groupID, [data]);
+}
+
+OpenIM.on(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+
+// 页面卸载、退出登录或切换账号时移除。
+OpenIM.off(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
+OpenIM.off(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+```
+
+多数界面可以直接合并事件中的 `GroupMemberItem`。如果你的业务需要确认服务端最终状态，或事件只触发了局部刷新流程，可以再调用 `getSpecifiedGroupMembersInfo()` 读取目标成员。更多成员列表能力见 [获取频道用户列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel)，当前用户资料更新见 [更新用户资料](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile)。

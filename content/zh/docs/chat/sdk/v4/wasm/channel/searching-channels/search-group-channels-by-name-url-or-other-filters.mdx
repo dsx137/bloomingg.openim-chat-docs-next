@@ -1,0 +1,229 @@
+---
+title: '按名称、URL 或其他筛选条件搜索群组频道'
+description: '使用 OpenIM WASM SDK 按群组 ID、群名称和群资料筛选群组频道，并把搜索结果同步到频道列表。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters'
+---
+
+OpenIM WASM SDK 的群组频道以 `groupID` 为稳定标识，以 `groupName` 作为可展示名称。搜索入口通常先用 `searchGroups()` 按关键字查找当前客户端可见的群组，再按你的产品筛选条件处理返回的 `GroupItem[]`。
+
+应用路由中的频道 URL 或 slug 不属于 OpenIM 群资料字段。若界面允许通过 URL 打开频道，请先在业务侧把 URL 映射为 `groupID`，再用 `getSpecifiedGroupsInfo()` 读取群组资料。
+
+## 搜索可加入的群组频道
+
+`searchGroups()` 接收 `keywordList`、`isSearchGroupID` 和 `isSearchGroupName`。搜索名称时只开启 `isSearchGroupName`；同时允许用户输入精确群 ID 时，再开启 `isSearchGroupID`。
+
+```ts
+type SearchGroupOptions = {
+  keyword: string;
+  includeGroupID?: boolean;
+};
+
+const searchGroupChannels = async ({ keyword, includeGroupID = false }: SearchGroupOptions) => {
+  const normalizedKeyword = keyword.trim();
+
+  if (!normalizedKeyword) {
+    return [];
+  }
+
+  const operationID = crypto.randomUUID();
+
+  const { data, errCode, errMsg } = await OpenIM.searchGroups(
+    {
+      keywordList: [normalizedKeyword],
+      isSearchGroupID: includeGroupID,
+      isSearchGroupName: true,
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('searchGroups failed', {
+      errCode,
+      errMsg,
+      operationID,
+      keyword: normalizedKeyword,
+    });
+    throw new Error(errMsg || 'Failed to search group channels');
+  }
+
+  return data;
+};
+```
+
+多个关键字可以放进同一个 `keywordList`。如果你的搜索框只代表一个用户输入，建议先去掉首尾空格并过滤空值，避免把无效关键字传给 SDK。
+
+## 按 URL 或路由打开频道
+
+前端路由常会使用类似 `/channels/project-alpha` 的地址，但 OpenIM SDK 读取群资料需要 `groupID`。生产环境应把 slug 到 `groupID` 的映射放在可信后端或应用配置中，浏览器拿到 `groupID` 后再调用 SDK。
+
+```ts
+const openGroupChannelBySlug = async (slug: string) => {
+  const groupID = await resolveGroupIDFromSlug(slug);
+  const operationID = crypto.randomUUID();
+
+  const { data, errCode, errMsg } = await OpenIM.getSpecifiedGroupsInfo([groupID], operationID);
+
+  if (errCode !== 0) {
+    console.error('getSpecifiedGroupsInfo failed', { errCode, errMsg, operationID, groupID });
+    throw new Error(errMsg || 'Failed to load group channel');
+  }
+
+  const group = data[0];
+
+  if (!group) {
+    throw new Error('Group channel not found');
+  }
+
+  openChannel({
+    groupID: group.groupID,
+    title: group.groupName,
+    faceURL: group.faceURL,
+  });
+};
+```
+
+不要把可变的频道标题当作路由主键。`groupName` 可以被管理员修改，适合显示和名称搜索；`groupID` 才适合保存到数据库、消息发送参数和频道详情路由。
+
+## 筛选参数
+
+`searchGroups()` 只负责按 `groupID` 和 `groupName` 找到候选群组。其他条件应在结果集上筛选，或由后端索引承担。`GroupItem` 中常用于筛选的字段包括 `ownerUserID`、`memberCount`、`status`、`groupType`、`needVerification` 和 `ex`。
+
+```ts
+import type { GroupItem } from '@openim/wasm-client-sdk';
+
+type GroupChannelFilter = {
+  ownerUserID?: string;
+  minMemberCount?: number;
+  topic?: string;
+};
+
+const parseGroupEx = (ex?: string) => {
+  if (!ex) return {};
+
+  try {
+    return JSON.parse(ex) as { topic?: string; visibility?: string };
+  } catch {
+    return {};
+  }
+};
+
+const filterGroupChannels = (groups: GroupItem[], filter: GroupChannelFilter) => {
+  return groups.filter((group) => {
+    if (filter.ownerUserID && group.ownerUserID !== filter.ownerUserID) {
+      return false;
+    }
+
+    if (filter.minMemberCount && group.memberCount < filter.minMemberCount) {
+      return false;
+    }
+
+    if (filter.topic && parseGroupEx(group.ex).topic !== filter.topic) {
+      return false;
+    }
+
+    return true;
+  });
+};
+
+const groups = await searchGroupChannels({ keyword: 'support' });
+const visibleGroups = filterGroupChannels(groups, {
+  topic: 'customer-success',
+  minMemberCount: 3,
+});
+```
+
+`ex` 适合存放紧凑的展示标签，例如业务主题、可见性或外部系统 ID。需要权限判断、跨全量群组搜索、多字段排序或审计条件时，不要只依赖浏览器端筛选；应由后端维护权威索引，再把命中的 `groupID` 返回给客户端。
+
+## 搜索已加入的群组频道
+
+如果搜索范围限定为当前用户已加入的群组，可以分页读取加入列表，再在前端做筛选。这样不会暴露未加入群组，也能和聊天列表中的频道卡片保持一致。
+
+```ts
+const loadJoinedGroupChannelPage = async (keyword: string, offset = 0, count = 50) => {
+  const operationID = crypto.randomUUID();
+
+  const { data, errCode, errMsg } = await OpenIM.getJoinedGroupListPage(
+    {
+      offset,
+      count,
+    },
+    operationID,
+  );
+
+  if (errCode !== 0) {
+    console.error('getJoinedGroupListPage failed', { errCode, errMsg, operationID, offset, count });
+    throw new Error(errMsg || 'Failed to load joined group channels');
+  }
+
+  const normalizedKeyword = keyword.trim().toLowerCase();
+
+  if (!normalizedKeyword) {
+    return data;
+  }
+
+  return data.filter((group) => {
+    return (
+      group.groupID.toLowerCase().includes(normalizedKeyword) ||
+      group.groupName.toLowerCase().includes(normalizedKeyword)
+    );
+  });
+};
+```
+
+当用户继续滚动或修改筛选条件时，继续增加 `offset` 读取下一页。不要一次性拉取全部已加入群组后再渲染大型列表；分页能减少初始化时间，也更容易和虚拟列表配合。
+
+## 超大群频道
+
+OpenIM WASM SDK 不提供单独的超大群频道查询类。大规模频道目录、公开频道发现、按成员数或业务分类筛选等能力，通常由业务后端维护索引并返回命中的 `groupID`。浏览器端拿到候选 `groupID` 后，再用 `getSpecifiedGroupsInfo()` 或会话查询接口读取当前用户可见的数据。
+
+## 同步搜索结果
+
+搜索结果中的群资料可能会在页面打开后变化。展示频道列表时，至少监听群资料变化；如果页面也显示新加入或退出状态，还应监听加入列表变化。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const toArray = <T>(value: T | T[]) => (Array.isArray(value) ? value : [value]);
+
+const handleGroupInfoChanged = ({ data }) => {
+  mergeGroups(toArray(data));
+};
+
+const handleJoinedGroupAdded = ({ data }) => {
+  mergeGroups(toArray(data));
+};
+
+const handleJoinedGroupDeleted = ({ data }) => {
+  removeGroups(toArray(data).map((group) => group.groupID));
+};
+
+OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
+OpenIM.on(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
+```
+
+组件卸载、退出登录或切换账号时，用同一个函数引用移除处理器。
+
+```ts
+OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+OpenIM.off(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
+OpenIM.off(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
+```
+
+失败日志中保留 `errCode`、`errMsg`、`operationID` 和搜索条件。`operationID` 能帮助你把浏览器行为和 OpenIM 服务端日志关联起来。
+
+## 校验结果
+
+- 确认 SDK 已登录成功，并在搜索前收到 `CbEvents.OnConnectSuccess`。
+- 确认按名称搜索时 `isSearchGroupName` 为 `true`，按群 ID 搜索时 `isSearchGroupID` 为 `true`。
+- 确认通过 URL 打开频道时，业务侧解析出的值是有效 `groupID`，并且 `getSpecifiedGroupsInfo([groupID])` 返回目标 `GroupItem`。
+- 确认筛选条件只依赖当前结果集中存在的字段；跨全量群组或权限相关条件应由后端返回候选 `groupID`。
+- 在另一个已登录浏览器会话中修改群名称或头像，确认当前搜索结果能通过 `CbEvents.OnGroupInfoChanged` 更新。
+
+## 相关页面
+
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [创建频道](/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel)
+- [按 URL 获取频道](/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-channel-by-url)
+- [添加或移除频道事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler)

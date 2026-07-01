@@ -1,0 +1,66 @@
+import type { Metadata, Viewport } from 'next';
+import type { ReactNode } from 'react';
+import { RootProvider } from 'fumadocs-ui/provider/next';
+import { siteConfig } from '@/src/config/site';
+import './globals.css';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.siteUrl),
+  title: {
+    default: siteConfig.name,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  openGraph: {
+    type: 'website',
+    siteName: siteConfig.name,
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [{ url: '/og/default.svg', width: 1200, height: 630, alt: siteConfig.name }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: ['/og/default.svg'],
+  },
+  icons: {
+    icon: '/favicon.svg',
+  },
+};
+
+export const viewport: Viewport = {
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0f' },
+  ],
+};
+
+const themeScript = `
+(() => {
+  try {
+    const locale = location.pathname.split('/').filter(Boolean)[0];
+    document.documentElement.lang = locale === 'zh' ? 'zh-CN' : 'en';
+    const stored = localStorage.getItem('openim-docs-theme');
+    const theme = stored === 'dark' || stored === 'light'
+      ? stored
+      : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.dataset.theme = theme;
+  } catch (_) {}
+})();`;
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <RootProvider>{children}</RootProvider>
+      </body>
+    </html>
+  );
+}

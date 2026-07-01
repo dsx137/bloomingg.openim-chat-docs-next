@@ -1,0 +1,30 @@
+import type { MetadataRoute } from 'next';
+import { getAllRoutes } from '@/src/lib/routes';
+import { siteConfig } from '@/src/config/site';
+import { toLocalizedPath } from '@/src/lib/i18n';
+import { getGuidePagePaths } from '@/src/components/docs/guides-page';
+
+export default function sitemap(): MetadataRoute.Sitemap {
+  const lastModified = new Date('2026-06-24T00:00:00.000Z');
+  const routeEntries: MetadataRoute.Sitemap = getAllRoutes().flatMap((route) => {
+    const changeFrequency =
+      route.status === 'published' ? ('monthly' as const) : ('weekly' as const);
+    return (['en', 'zh'] as const).map((locale) => ({
+      url: new URL(toLocalizedPath(route.path, locale), siteConfig.siteUrl).toString(),
+      lastModified,
+      changeFrequency,
+      priority: route.path === '/docs/chat' ? 1 : route.template === 'overview' ? 0.8 : 0.6,
+    }));
+  });
+
+  const guideEntries = (['en', 'zh'] as const).flatMap((locale) =>
+    getGuidePagePaths(locale).map((path) => ({
+      url: new URL(toLocalizedPath(path, locale), siteConfig.siteUrl).toString(),
+      lastModified,
+      changeFrequency: 'weekly' as const,
+      priority: path === '/docs/guides' ? 0.8 : 0.6,
+    })),
+  );
+
+  return [...routeEntries, ...guideEntries];
+}

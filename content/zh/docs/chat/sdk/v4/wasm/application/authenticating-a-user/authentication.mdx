@@ -1,0 +1,159 @@
+---
+title: '用户认证'
+description: '使用 OpenIM WASM SDK 初始化浏览器客户端、登录用户、处理连接事件、token 生命周期、被踢下线和退出登录。'
+sourcePath: '/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication'
+---
+
+OpenIM WASM SDK 使用 `login()` 建立当前用户会话。浏览器端应从可信后端取得 `userID` 和 token，再把它们连同 `apiAddr`、`wsAddr` 和 `platformID: 5` 传给 SDK。不要在浏览器中签发 token、保存管理员密钥或绕过后端权限校验。
+
+## 使用应用配置初始化 SDK
+
+先发布浏览器 SDK 所需的 WASM 资源，再创建 SDK 实例。`coreWasmPath` 和 `sqlWasmPath` 必须指向浏览器可访问的资源路径。
+
+```ts
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+```
+
+### 理解浏览器包
+
+`@openim/wasm-client-sdk` 是浏览器 WASM 包。应用通常只需要创建一个 SDK 实例，并在当前浏览器会话中复用它。不要在服务端渲染阶段、Node.js API 路由或 Electron 主进程中初始化这个实例。
+
+OpenIM 的应用配置分成两部分：WASM 资源路径在 `getSDK()` 时传入；OpenIM 服务地址和用户认证信息在 `login()` 时传入。
+
+## 使用用户 ID 连接 OpenIM 服务
+
+`userID` 标识当前登录用户，但它本身不是认证凭据。OpenIM WASM SDK 的浏览器登录应同时传入 token；这个 token 应由你的可信后端根据当前业务账号、OpenIM 用户和权限策略签发。
+
+```ts
+const session = await fetch('/api/openim/session').then((res) => res.json());
+
+const { userID, token, apiAddr, wsAddr } = session;
+```
+
+如果用户尚未在 OpenIM 中创建，建议由后端在签发 token 前完成用户创建或绑定。前端只接收登录所需的最小信息。
+
+## 管理与 OpenIM 服务的连接
+
+连接事件应在 `login()` 前注册。这样登录阶段的网络、地址、token 或服务端错误都能被 UI 和日志捕获。
+
+```ts
+OpenIM.on(CbEvents.OnConnecting, () => {
+  setConnectionState('connecting');
+});
+
+OpenIM.on(CbEvents.OnConnectSuccess, () => {
+  setConnectionState('connected');
+});
+
+OpenIM.on(CbEvents.OnConnectFailed, ({ errCode, errMsg, operationID }) => {
+  setConnectionState('failed');
+  console.error('OpenIM 连接失败', { errCode, errMsg, operationID });
+});
+```
+
+登录后可以查询当前 SDK 状态：
+
+```ts
+const { data: loginStatus } = await OpenIM.getLoginStatus();
+const { data: currentUserID } = await OpenIM.getLoginUserID();
+```
+
+在浏览器网络恢复或应用前后台状态变化时，可以结合产品状态调用 `networkStatusChanged()` 或 `setAppBackgroundStatus()`，让 SDK 重新感知运行环境。
+
+## 使用用户 ID 和 token 登录
+
+调用 `login()` 时传入当前用户、token、浏览器平台 ID 和服务地址。关键登录流程建议传入 `operationID`，便于把浏览器日志和 OpenIM 服务端日志对应起来。
+
+```ts
+const operationID = crypto.randomUUID();
+
+await OpenIM.login(
+  {
+    userID,
+    token,
+    platformID: 5,
+    apiAddr,
+    wsAddr,
+  },
+  operationID,
+);
+```
+
+登录成功后，等待 `CbEvents.OnConnectSuccess` 再调用消息、会话、群组或用户 API。
+
+### 使用访问 token
+
+OpenIM token 应由可信后端签发并返回给浏览器。前端只负责把 token 传给 `login()`，以及在 token 过期、无效或用户主动切换账号时重新进入认证流程。
+
+```ts
+OpenIM.on(CbEvents.OnUserTokenExpired, async ({ operationID }) => {
+  console.warn('OpenIM token 已过期', { operationID });
+  await refreshSessionAndRelogin();
+});
+
+OpenIM.on(CbEvents.OnUserTokenInvalid, ({ operationID }) => {
+  console.warn('OpenIM token 无效', { operationID });
+  redirectToSignIn();
+});
+```
+
+刷新 token 时，应重新向可信后端请求新的 `userID`、token 和服务地址，然后按产品策略重新调用 `login()` 或引导用户重新登录。
+
+### 会话 token 差异
+
+OpenIM WASM SDK 的浏览器登录流程不区分“访问 token”和“会话 token”两套客户端对象。对前端来说，`login()` 接收的是 OpenIM token；这个 token 的签发、有效期、刷新和撤销策略由你的后端与 OpenIM 服务端配置决定。
+
+如果产品需要短期会话、一次性登录或多端策略，请在后端实现，并通过 token 生命周期事件通知前端重新认证。
+
+## 设置连接生命周期处理
+
+除连接和 token 事件外，还应处理账号被踢下线。这个事件通常表示同一账号在其他端登录、服务端策略要求当前端下线，或当前 token 已不再适合继续使用。
+
+```ts
+OpenIM.on(CbEvents.OnKickedOffline, ({ operationID }) => {
+  clearCurrentSession();
+  showSignedInElsewhereDialog({ operationID });
+});
+```
+
+在组件化框架中，事件注销必须使用与注册时相同的函数引用。退出登录、切换账号或销毁 SDK 所在页面前，清理你注册的事件处理器和应用层缓存。
+
+```ts
+OpenIM.off(CbEvents.OnConnectFailed, handleConnectFailed);
+OpenIM.off(CbEvents.OnUserTokenExpired, handleTokenExpired);
+OpenIM.off(CbEvents.OnKickedOffline, handleKickedOffline);
+```
+
+## 断开与 OpenIM 服务的连接
+
+用户主动退出登录或切换账号时，调用 `logout()`，再清理当前用户的会话列表、消息缓存、未读数、事件处理器和业务状态。
+
+```ts
+const response = await OpenIM.logout();
+
+if (response.errCode !== 0) {
+  console.error('OpenIM 退出失败', {
+    errCode: response.errCode,
+    errMsg: response.errMsg,
+    operationID: response.operationID,
+  });
+}
+
+clearCurrentSession();
+```
+
+### 仅断开 WebSocket
+
+当前公开的 OpenIM WASM 浏览器 SDK 文档来源没有提供仅断开 WebSocket、但保留登录会话的独立方法。需要主动结束当前用户会话时使用 `logout()`；需要表达前后台或网络变化时，使用应用生命周期、`setAppBackgroundStatus()` 和 `networkStatusChanged()` 配合连接事件处理。
+
+## 下一步
+
+- [发送第一条消息](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [连接事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler)
+- [错误码](/docs/chat/sdk/v4/wasm/error-codes)
+- [日志](/docs/chat/sdk/v4/wasm/logger)

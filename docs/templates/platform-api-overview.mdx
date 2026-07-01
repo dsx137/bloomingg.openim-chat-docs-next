@@ -1,0 +1,63 @@
+---
+title: '<OpenIM Platform API overview title>'
+description: '<One sentence describing the API area and the server-side workflows it supports.>'
+product: 'platform-api'
+context: 'chat/platform-api/v3'
+template: 'overview'
+status: 'draft'
+lastUpdated: 'YYYY-MM-DD'
+version: 'v3'
+sourcePath: '/docs/chat/platform-api/v3/<sendbird-style-route>'
+---
+
+## Overview
+
+Describe the Sendbird-style API area, then map it to OpenIM server-side resources and workflows. Keep this page focused on server-to-server usage.
+
+## Base URL and authentication
+
+Document `{API_ADDRESS}`, required token or admin credential, token placement, and security requirements.
+
+```http
+operationID: <unique-trace-id>
+token: <admin-token>
+Content-Type: application/json
+```
+
+## Request conventions
+
+- HTTP and JSON request/response bodies.
+- `operationID` tracing header.
+- `token` header for APP administrator calls.
+- ID formats and uniqueness rules.
+- Millisecond timestamp format and timezone assumptions.
+- Pagination, sorting, and filtering conventions.
+- Array request field limit: 1000 items.
+
+## Response format
+
+Show the standard success and failure envelope used by this API area.
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {}
+}
+```
+
+## Errors and retries
+
+Explain HTTP status codes, OpenIM business error codes, retryable cases, and idempotency requirements.
+
+## Resources
+
+- [Prepare to use API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Users](/docs/chat/platform-api/v3/user)
+- [Channels](/docs/chat/platform-api/v3/channel/channel-overview)
+- [Messages](/docs/chat/platform-api/v3/message)
+- [Applications](/docs/chat/platform-api/v3/application/application-overview)
+- [Moderation](/docs/chat/platform-api/v3/moderation/moderation-overview)
+- [Bots](/docs/chat/platform-api/v3/bot/bot-overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

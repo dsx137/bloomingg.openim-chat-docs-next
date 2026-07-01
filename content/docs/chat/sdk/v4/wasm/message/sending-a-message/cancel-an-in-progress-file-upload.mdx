@@ -1,0 +1,140 @@
+---
+title: 'Cancel an in-progress file upload'
+description: 'OpenIM WASM SDK mapping, API signatures, and implementation notes for Cancel an in-progress file upload.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/sending-a-message/cancel-an-in-progress-file-upload'
+---
+
+## Overview
+
+The OpenIM WASM SDK does not expose a public cancel-upload method. Model cancellation in your app queue before handing the file to the SDK, and reconcile late SDK progress events.
+
+This guide separates public OpenIM SDK support from application-owned behavior and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+Once a file message is passed to `create*MessageByFile()` and `sendMessage()`, the public SDK surface has progress and completion events but no cancel token. Your UI can cancel queued work before SDK submission or ignore a late result after the user cancels.
+
+Support status: the WASM SDK covers part of this workflow; the remaining behavior belongs in your application or backend.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Keep application-owned behavior in your app or backend when the SDK does not expose a direct method.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+createFileMessageByFile: (data: FileMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createImageMessageByFile: (params: ImageMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createVideoMessageByFile: (
+  data: VideoMsgParamsByURL & { videoFile: File; snapshotFile: File },
+  operationID?: string,
+) => Promise<WsResponse<MessageItem>>;
+sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
+fileMapSet: (uuid: string, file: File) => Promise<any>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnProgress
+CbEvents.UploadComplete
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Keep a queue item state around file sends and check cancellation before each SDK boundary.
+
+```ts
+const uploadJob = { id: crypto.randomUUID(), cancelled: false, file };
+if (uploadJob.cancelled) return;
+
+const { data: message } = await OpenIM.createFileMessageByFile({
+  file,
+  filePath: file.name,
+  fileName: file.name,
+  uuid: uploadJob.id,
+  sourceUrl: '',
+  fileSize: file.size,
+  fileType: file.type,
+});
+
+if (uploadJob.cancelled) return;
+await OpenIM.sendMessage({ recvID: '', groupID, message });
+```
+
+If the SDK has already accepted the send, hide or mark the UI item as cancelled locally and let the final success/failure event settle.
+
+## Returned data and events
+
+Treat the listed OpenIM calls as building blocks when the feature is partial or server-owned. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnProgress`, `CbEvents.UploadComplete`.
+
+Always log `operationID` with failures.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm refresh and reconnect behavior matches the product requirement.
+- Confirm the application-owned state survives refresh and a second signed-in device.
+
+## Troubleshooting
+
+| Case                              | Cause                                                                 | Handling                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404    | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects         | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code    | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| A Sendbird method name is missing | The feature is not part of the OpenIM WASM SDK public API.            | Use the OpenIM alternative on this page or implement the feature in a trusted backend.                 |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

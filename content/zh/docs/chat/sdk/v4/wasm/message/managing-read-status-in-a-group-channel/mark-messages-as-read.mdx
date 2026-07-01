@@ -1,0 +1,79 @@
+---
+title: '将消息标记为已读'
+description: '使用 OpenIM WASM SDK 清理群聊会话未读数、发送群消息已读回执，并同步已读成员状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read'
+---
+
+在群聊中，用户进入会话并实际看到消息后，应把当前会话标记为已读。OpenIM WASM SDK 使用 `markConversationMessageAsRead(conversationID)` 清理当前用户在该会话中的未读数；如果产品还展示消息气泡的已读人数或成员列表，再使用 `sendGroupMessageReadReceipt()` 为可见群消息发送已读回执。
+
+常见调用时机包括用户进入群聊并完成首屏渲染、从后台回到当前聊天页、滚动后有新的历史消息进入可视区域，或发送消息后需要刷新当前会话的未读状态。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+async function markVisibleMessagesAsRead(conversationID: string, visibleMessages) {
+  await OpenIM.markConversationMessageAsRead(conversationID);
+
+  const clientMsgIDList = visibleMessages
+    .filter((message) => message.conversationID === conversationID)
+    .map((message) => message.clientMsgID);
+
+  if (clientMsgIDList.length > 0) {
+    await OpenIM.sendGroupMessageReadReceipt({
+      conversationID,
+      clientMsgIDList,
+    });
+  }
+}
+```
+
+## 已读回执
+
+会话已读和群消息已读回执是两类状态。`markConversationMessageAsRead()` 只处理当前用户的会话未读数；`sendGroupMessageReadReceipt()` 用于告诉发送方或其他成员：当前用户已经读过哪些群消息。
+
+其他成员读取群消息并发送回执后，当前客户端可以通过 `CbEvents.OnRecvGroupReadReceipt` 更新消息气泡里的已读人数、未读人数或已读成员入口。
+
+```ts
+function handleGroupReadReceipt({ data }) {
+  for (const item of data.groupMessageReadInfo) {
+    updateMessageReadState(item.clientMsgID, {
+      readCount: item.hasReadCount,
+      unreadCount: item.unreadCount,
+      readMembers: item.readMembers,
+    });
+  }
+}
+
+OpenIM.on(CbEvents.OnRecvGroupReadReceipt, handleGroupReadReceipt);
+```
+
+## 未读消息数
+
+调用 `markConversationMessageAsRead(conversationID)` 后，可以先把当前会话角标置为 `0`。聊天列表和应用总角标仍应通过 SDK 事件同步，避免多端登录、离线同步或多个会话同时收到消息时出现计数偏差。
+
+```ts
+function handleConversationChanged({ data }) {
+  mergeConversations(Array.isArray(data) ? data : [data]);
+}
+
+function handleTotalUnreadChanged({ data }) {
+  setTotalUnreadCount(data);
+}
+
+OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
+```
+
+组件卸载、退出会话或切换账号时，用同一个函数引用调用 `off()` 移除监听器。
+
+## 新成员的历史消息显示
+
+新成员进入群聊后能看到哪些历史消息，取决于你的 OpenIM 服务端配置、群组策略和本地历史消息同步结果。OpenIM WASM SDK 没有客户端侧的 `display_past_message` 开关；前端应只对已经拉取并展示给当前用户的消息调用 `sendGroupMessageReadReceipt()`。
+
+如果新成员无法看到加入前的历史消息，就不要为这些消息发送已读回执。进入会话后，先根据实际展示的消息列表生成 `clientMsgIDList`，再上报已读状态。
+
+## 相关页面
+
+- [获取消息已读状态](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status)
+- [获取频道中的未读消息数](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

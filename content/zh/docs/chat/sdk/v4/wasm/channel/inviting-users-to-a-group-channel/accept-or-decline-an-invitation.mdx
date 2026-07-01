@@ -1,0 +1,185 @@
+---
+title: '接受或拒绝邀请'
+description: '使用 OpenIM WASM SDK 查询收到的群组邀请或入群申请，并在客户端接受或拒绝。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation'
+---
+
+OpenIM 将需要处理的群组邀请和入群请求归入群申请流程。当前登录用户作为接收方时，可以先读取待处理申请，再调用 `acceptGroupApplication()` 或 `refuseGroupApplication()` 完成处理。接受后，用户会成为目标 `groupID` 的成员；拒绝后，该申请记录进入已拒绝状态，不应再作为待办展示。
+
+开始处理前，浏览器客户端应已经完成 SDK 初始化和登录，并且 `CbEvents.OnConnectSuccess` 已触发。处理群申请需要可用的 `groupID`，以及申请人的 `fromUserID`。生产环境建议为每次处理操作生成并记录 `operationID`，便于把浏览器日志和服务端日志串联起来。
+
+## 读取待处理邀请
+
+用 `getGroupApplicationListAsRecipient()` 获取当前用户需要处理的群申请列表。`handleResults: [0]` 表示只读取未处理记录；如果你的页面需要展示历史记录，可以按产品状态加入已同意或已拒绝的处理结果。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const operationID = crypto.randomUUID();
+
+const {
+  data: applications,
+  errCode,
+  errMsg,
+} = await OpenIM.getGroupApplicationListAsRecipient(
+  {
+    groupID: [groupID],
+    handleResults: [0],
+    offset: 0,
+    count: 20,
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('getGroupApplicationListAsRecipient failed', {
+    errCode,
+    errMsg,
+    operationID,
+  });
+  throw new Error(errMsg || 'Failed to load group applications');
+}
+
+renderInvitations(applications);
+```
+
+列表项通常会包含群组、申请人和处理状态等信息。提交接受或拒绝操作时，使用该记录对应的 `groupID` 和申请人用户 ID；如果你的 UI 把字段命名为 `userID`，可以在进入处理函数前统一映射为 `fromUserID`，避免把操作者 ID 和申请人 ID 混用。
+
+```ts
+const selectedApplication = applications[0];
+const applicationGroupID = selectedApplication.groupID;
+const fromUserID = selectedApplication.userID;
+```
+
+## 接受邀请
+
+调用 `acceptGroupApplication()` 同意该申请。`handleMsg` 会作为处理备注进入群申请记录，可用于展示“已同意”原因或审计操作。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const { errCode, errMsg } = await OpenIM.acceptGroupApplication(
+  {
+    groupID: applicationGroupID,
+    fromUserID,
+    handleMsg: 'Approved',
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('acceptGroupApplication failed', {
+    errCode,
+    errMsg,
+    operationID,
+  });
+  throw new Error(errMsg || 'Failed to accept group application');
+}
+
+markInvitationHandled({
+  groupID: applicationGroupID,
+  fromUserID,
+  result: 'accepted',
+});
+```
+
+处理成功后，不要只依赖按钮点击直接改成最终成员状态。接收方和相关成员客户端还会通过群组事件、会话事件或后续查询得到最终状态。
+
+## 拒绝邀请
+
+拒绝时使用同一组标识调用 `refuseGroupApplication()`。如果产品需要向申请人说明原因，把可展示的原因写入 `handleMsg`；如果原因只用于内部风控，应存入你的业务后端，而不是直接暴露在客户端备注中。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const { errCode, errMsg } = await OpenIM.refuseGroupApplication(
+  {
+    groupID: applicationGroupID,
+    fromUserID,
+    handleMsg: 'Declined',
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('refuseGroupApplication failed', {
+    errCode,
+    errMsg,
+    operationID,
+  });
+  throw new Error(errMsg || 'Failed to refuse group application');
+}
+
+markInvitationHandled({
+  groupID: applicationGroupID,
+  fromUserID,
+  result: 'rejected',
+});
+```
+
+## 邀请确认策略
+
+OpenIM WASM SDK 不提供一个由当前用户在客户端切换的“自动接受所有群邀请”开关。是否需要用户手动确认，应由群验证规则、邀请端权限和业务后端策略共同决定。浏览器端不应保存管理员 token，也不应为了“自动接受”而代替其他用户伪造处理操作。
+
+前端仍然需要把收到的待处理申请展示出来，让用户或有权限的群成员明确执行接受、拒绝或忽略。对未处理数量，可以调用 `getGroupApplicationUnhandledCount()` 驱动入口红点或待办计数；`time` 传入毫秒时间戳，传 `0` 表示从最早记录开始统计。
+
+```ts
+const { data: unhandledCount } = await OpenIM.getGroupApplicationUnhandledCount({ time: 0 });
+
+updateInvitationBadge(unhandledCount);
+```
+
+## 通知成员和刷新列表
+
+在用户进入群邀请列表前注册事件监听，避免漏掉前台运行期间的新申请和处理结果。收到事件后，按 `groupID`、申请人 ID 和处理状态合并本地列表；如果事件负载不足以更新完整 UI，再重新调用 `getGroupApplicationListAsRecipient()`。
+
+```ts
+const handleApplicationAdded = ({ data }) => {
+  upsertInvitation(data);
+};
+
+const handleApplicationAccepted = ({ data }) => {
+  markInvitationHandled({
+    groupID: data.groupID,
+    fromUserID: data.userID,
+    result: 'accepted',
+  });
+};
+
+const handleApplicationRejected = ({ data }) => {
+  markInvitationHandled({
+    groupID: data.groupID,
+    fromUserID: data.userID,
+    result: 'rejected',
+  });
+};
+
+const handleJoinedGroup = ({ data }) => {
+  mergeJoinedGroup(data);
+};
+
+OpenIM.on(CbEvents.OnGroupApplicationAdded, handleApplicationAdded);
+OpenIM.on(CbEvents.OnGroupApplicationAccepted, handleApplicationAccepted);
+OpenIM.on(CbEvents.OnGroupApplicationRejected, handleApplicationRejected);
+OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroup);
+
+// 页面卸载或当前用户退出时移除监听。
+OpenIM.off(CbEvents.OnGroupApplicationAdded, handleApplicationAdded);
+OpenIM.off(CbEvents.OnGroupApplicationAccepted, handleApplicationAccepted);
+OpenIM.off(CbEvents.OnGroupApplicationRejected, handleApplicationRejected);
+OpenIM.off(CbEvents.OnJoinedGroupAdded, handleJoinedGroup);
+```
+
+## 校验处理结果
+
+- 确认 `login()` 已成功，并且在调用群申请接口前收到 `CbEvents.OnConnectSuccess`。
+- 确认查询接口返回未处理申请，并且提交处理时传入的是申请人的 `fromUserID`。
+- 确认接受或拒绝接口响应满足 `errCode === 0`，失败时记录 `errCode`、`errMsg` 和 `operationID`。
+- 确认相关客户端收到 `CbEvents.OnGroupApplicationAccepted`、`CbEvents.OnGroupApplicationRejected` 或 `CbEvents.OnJoinedGroupAdded`，并能通过重新查询拿到一致状态。
+
+## 相关页面
+
+- [邀请用户成为成员](/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members)
+- [加入和离开群组频道](/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel)
+- [接收群组消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)

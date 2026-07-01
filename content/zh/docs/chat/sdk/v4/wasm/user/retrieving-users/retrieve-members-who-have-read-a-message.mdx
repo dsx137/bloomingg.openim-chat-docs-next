@@ -1,0 +1,107 @@
+---
+title: '获取已读某条消息的成员'
+description: '使用 OpenIM WASM SDK 查询已读指定群消息的成员列表，并通过群消息已读回执同步读状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-members-who-have-read-a-message'
+---
+
+OpenIM 使用群消息已读回执记录成员是否读过某条群消息。要展示“谁已读”，读到消息的一侧需要先调用 `sendGroupMessageReadReceipt()` 上报回执，查看详情的一侧再调用 `getGroupMessageReaderList()` 查询已读成员。
+
+这个能力只适用于群消息的成员级读状态。会话未读数仍由会话已读接口和会话事件维护，不能替代单条群消息的已读成员列表。
+
+## 上报群消息已读回执
+
+当群消息真正展示给当前用户后，调用 `sendGroupMessageReadReceipt()` 上报已读。常见触发点包括消息进入可视区域、用户从后台回到当前群聊，或群聊页面渲染完成后确认消息已展示。
+
+```ts
+const visibleClientMsgIDs = visibleMessages
+  .filter((message) => message.conversationID === conversationID)
+  .filter((message) => !reportedReadMessageIDs.has(message.clientMsgID))
+  .map((message) => message.clientMsgID);
+
+if (visibleClientMsgIDs.length > 0) {
+  await OpenIM.sendGroupMessageReadReceipt({
+    conversationID,
+    clientMsgIDList: visibleClientMsgIDs,
+  });
+
+  visibleClientMsgIDs.forEach((clientMsgID) => {
+    reportedReadMessageIDs.add(clientMsgID);
+  });
+}
+```
+
+不要在消息尚未展示给用户时提前发送回执，否则已读状态会早于真实阅读行为。`conversationID` 来自会话列表、`getOneConversation()` 或消息对象；`clientMsgID` 来自发送结果、历史消息列表或新消息事件。
+
+## 获取已读成员
+
+调用 `getGroupMessageReaderList()` 并将 `filter` 设为 `0`，可以查询已经读过指定群消息的成员。返回值是当前页的 `GroupMemberItem[]`，适合用于已读头像、已读成员弹窗或消息详情页。
+
+```ts
+const pageSize = 50;
+
+const {
+  data: readMembers,
+  errCode,
+  errMsg,
+  operationID,
+} = await OpenIM.getGroupMessageReaderList({
+  conversationID,
+  clientMsgID,
+  filter: 0,
+  offset: 0,
+  count: pageSize,
+});
+
+if (errCode !== 0) {
+  console.error('getGroupMessageReaderList failed', {
+    errCode,
+    errMsg,
+    operationID,
+    conversationID,
+    clientMsgID,
+  });
+  throw new Error(errMsg || 'Failed to load read members');
+}
+
+renderReadMembers(readMembers);
+```
+
+继续加载下一页时，把 `offset` 增加到已经加载的成员数量。若本次返回数量小于 `count`，通常表示没有更多已读成员。
+
+## 获取未读成员
+
+同一个接口也可以查询未读成员。将 `filter` 设为 `1`，并为未读列表维护独立的分页状态。
+
+```ts
+const { data: unreadMembers } = await OpenIM.getGroupMessageReaderList({
+  conversationID,
+  clientMsgID,
+  filter: 1,
+  offset: 0,
+  count: 50,
+});
+
+renderUnreadMembers(unreadMembers);
+```
+
+已读列表和未读列表都返回 `GroupMemberItem[]`。渲染成员时优先使用群内昵称、头像和角色；如果还需要账号级公开资料，再按 `userID` 调用 `getUsersInfo()` 补充。
+
+## 监听后续读状态
+
+其他成员读到群消息并上报回执后，当前客户端会收到 `CbEvents.OnRecvGroupReadReceipt`。收到事件后，把回执合并到本地消息状态，用于刷新已读人数、详情入口或当前已打开的成员弹窗。
+
+```ts
+function handleGroupReadReceipt({ data }) {
+  mergeGroupMessageReadReceipt(data);
+  refreshOpenReadMemberPanel(data);
+}
+
+OpenIM.on(CbEvents.OnRecvGroupReadReceipt, handleGroupReadReceipt);
+
+// 页面卸载、退出登录或切换账号时移除。
+OpenIM.off(CbEvents.OnRecvGroupReadReceipt, handleGroupReadReceipt);
+```
+
+群消息已读回执和单聊已读回执是两套事件。群聊页面使用 `CbEvents.OnRecvGroupReadReceipt`，不要把 `CbEvents.OnRecvC2CReadReceipt` 混入群消息逻辑。
+
+更多消息读状态能力见 [获取消息已读状态](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status) 和 [将群聊消息标记为已读](/docs/chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read)。

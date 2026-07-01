@@ -1,0 +1,130 @@
+---
+title: '创建频道'
+description: '使用 OpenIM WASM SDK 创建群组频道，并加载聊天列表所需的会话记录。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel'
+---
+
+OpenIM WASM SDK 没有独立的频道对象。面向成员的频道式聊天通常由两类记录共同组成：`groupID` 对应的群组记录保存成员、群主、管理员和群资料；`conversationID` 对应的会话记录用于聊天列表、未读数和本地展示状态。
+
+创建多人聊天时，先调用 `createGroup()` 创建 OpenIM 群组，再用返回的 `groupID` 读取或生成会话。单聊不需要提前创建频道；向目标用户发送第一条消息时传入 `recvID`，OpenIM 会创建或更新对应会话。
+
+## 频道类型
+
+OpenIM 的 WASM SDK 不区分开放频道、群组频道或超大群频道类。创建频道式聊天时，浏览器端使用群组 API；是否允许搜索加入、是否需要邀请或审批，由群资料和服务端群验证策略决定。
+
+创建群组前，浏览器客户端应已经完成 SDK 初始化和登录，并且 `CbEvents.OnConnectSuccess` 已触发。`operationID` 在大多数 SDK 方法中是可选参数，但生产环境建议为关键写操作生成并记录它，便于把浏览器日志和服务端日志串联起来。
+
+常用标识含义如下：
+
+| 标识             | 用途                                      |
+| ---------------- | ----------------------------------------- |
+| `userID`         | OpenIM 用户 ID。                          |
+| `groupID`        | 群组 ID，用于群资料、群成员和群消息操作。 |
+| `conversationID` | 本地会话记录 ID，用于聊天列表和会话状态。 |
+| `recvID`         | 单聊消息的接收用户 ID。                   |
+
+群聊消息发送时使用 `groupID`，并让 `recvID` 为空；单聊消息发送时使用 `recvID`，并让 `groupID` 为空。
+
+## 群组频道
+
+使用 `createGroup()` 创建可收发群消息的频道。调用成功后，返回的 `data` 是创建后的 `GroupItem`，后续发送群消息、读取群资料和加载成员列表都使用同一个 `groupID`。
+
+### CreateGroupParams
+
+`createGroup()` 接收 `CreateGroupParams`。`memberUserIDs` 是初始成员列表，`ownerUserID` 是群主，`adminUserIDs` 可为空数组。`groupInfo.groupName` 用于频道名称；如果你的产品需要固定的自定义 `groupID`、头像、公告或扩展字段，可以在 `groupInfo` 中一并传入。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+OpenIM.on(CbEvents.OnJoinedGroupAdded, ({ data }) => {
+  mergeJoinedGroup(data);
+});
+
+OpenIM.on(CbEvents.OnNewConversation, ({ data }) => {
+  mergeConversations(data);
+});
+
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
+  mergeConversations(data);
+});
+
+const operationID = crypto.randomUUID();
+
+const {
+  data: group,
+  errCode,
+  errMsg,
+} = await OpenIM.createGroup(
+  {
+    memberUserIDs,
+    ownerUserID: currentUserID,
+    adminUserIDs: [],
+    groupInfo: {
+      groupName: 'Project chat',
+      groupType: 2,
+    },
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('createGroup failed', { errCode, errMsg, operationID });
+  throw new Error(errMsg || 'Failed to create group');
+}
+
+saveGroupID(group.groupID);
+```
+
+如果群组创建由可信后端完成，浏览器端仍然使用同一个 `groupID` 加载群资料和会话。不要把管理员 token 或需要服务端校验的权限逻辑放到浏览器中。
+
+## 加载频道会话
+
+群组创建成功后，聊天界面通常还需要会话记录。对群组会话调用 `getConversationIDBySessionType()` 或 `getOneConversation()` 时，`sourceID` 传 `group.groupID`，`sessionType` 传 `3`。
+
+```ts
+const { data: conversationID } = await OpenIM.getConversationIDBySessionType({
+  sourceID: group.groupID,
+  sessionType: 3,
+});
+
+const { data: conversation } = await OpenIM.getOneConversation({
+  sourceID: group.groupID,
+  sessionType: 3,
+});
+
+openConversation({
+  conversationID,
+  groupID: group.groupID,
+  title: group.groupName,
+  conversation,
+});
+```
+
+如果 `getOneConversation()` 尚未返回可展示的会话记录，先保留 `groupID` 并等待 `CbEvents.OnNewConversation` 或 `CbEvents.OnConversationChanged`。这些事件可能在消息同步、会话创建或本地缓存更新后到达。
+
+## 更新频道界面
+
+`createGroup()` 的响应 `data` 提供群组资料，适合立即更新频道标题、头像和成员入口。会话列表则以 `getOneConversation()` 的返回值和后续会话事件为准，避免只凭按钮点击就把聊天列表状态改成最终状态。
+
+测试创建流程时重点关注这些事件：
+
+- `CbEvents.OnJoinedGroupAdded`
+- `CbEvents.OnNewConversation`
+- `CbEvents.OnConversationChanged`
+
+失败时记录 `errCode`、`errMsg` 和 `operationID`。如果其他已登录成员看不到新群组，先确认成员 ID 是否正确、当前用户是否有创建权限，以及另一个浏览器会话是否已经成功连接。
+
+## 校验创建结果
+
+- 确认 `login()` 已成功，并且在调用 `createGroup()` 前收到 `CbEvents.OnConnectSuccess`。
+- 确认 `createGroup()` 响应满足 `errCode === 0`，并返回可用的 `group.groupID`。
+- 确认创建者客户端触发 `CbEvents.OnJoinedGroupAdded`，聊天列表能通过 `getOneConversation()` 或会话事件拿到新会话。
+- 确认另一个初始成员登录后能收到或查询到该群组，并能使用 `groupID` 收发群消息。
+
+## 相关页面
+
+- [OpenIM WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [发送第一条消息](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群组消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

@@ -1,0 +1,132 @@
+---
+title: 'Overview'
+description: 'OpenIM WASM SDK guide for Overview, with API signatures, usage details, and verification steps.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/overview-channel'
+---
+
+## Overview
+
+Use the channel section to map Sendbird channel concepts to OpenIM conversations and groups: create groups, join or invite members, retrieve channel lists, search groups, and moderate group state.
+
+This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+A Sendbird group channel usually maps to an OpenIM group plus its conversation. Direct chats are conversations addressed by `recvID`. OpenIM does not expose a Sendbird open-channel object in the WASM SDK.
+
+Support status: public WASM SDK APIs cover this workflow.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+createGroup: (data: CreateGroupParams, operationID?: string) => Promise<WsResponse<GroupItem>>;
+joinGroup: <T>(data: JoinGroupParams, operationID?: string) => Promise<WsResponse<T>>;
+inviteUserToGroup: <T>(data: AccessToGroupParams, operationID?: string) => Promise<WsResponse<T>>;
+getJoinedGroupList: (operationID?: string) => Promise<WsResponse<GroupItem[]>>;
+getSpecifiedGroupsInfo: (params: string[], operationID?: string) =>
+  Promise<WsResponse<GroupItem[]>>;
+getAllConversationList: (operationID?: string) => Promise<WsResponse<ConversationItem[]>>;
+getOneConversation: (params: GetOneConversationParams, operationID?: string) =>
+  Promise<WsResponse<ConversationItem>>;
+searchGroups: (data: SearchGroupParams, operationID?: string) => Promise<WsResponse<GroupItem[]>>;
+dismissGroup: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnNewConversation
+CbEvents.OnConversationChanged
+CbEvents.OnJoinedGroupAdded
+CbEvents.OnJoinedGroupDeleted
+CbEvents.OnGroupInfoChanged
+CbEvents.OnGroupDismissed
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Load conversations for the visible channel list and groups for group metadata.
+
+```ts
+const { data: conversations } = await OpenIM.getAllConversationList();
+const { data: groups } = await OpenIM.getJoinedGroupList();
+
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => mergeConversations(data));
+OpenIM.on(CbEvents.OnGroupInfoChanged, ({ data }) => mergeGroups(data));
+```
+
+Create a group for member-based group chat. Use direct messages for one-to-one conversations instead of creating a channel first.
+
+## Returned data and events
+
+The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnNewConversation`, `CbEvents.OnConversationChanged`, `CbEvents.OnJoinedGroupAdded`, `CbEvents.OnJoinedGroupDeleted`, `CbEvents.OnGroupInfoChanged`, `CbEvents.OnGroupDismissed`.
+
+Always log `operationID` with failures.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm refresh and reconnect behavior matches the product requirement.
+
+## Troubleshooting
+
+| Case                           | Cause                                                                 | Handling                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

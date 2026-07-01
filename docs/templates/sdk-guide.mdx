@@ -1,0 +1,100 @@
+---
+title: '<Task-oriented SDK guide title>'
+description: '<One sentence describing the exact SDK task this page helps developers complete.>'
+product: 'sdk'
+context: 'chat/sdk/v4/<platform>'
+template: 'guide'
+status: 'draft'
+lastUpdated: 'YYYY-MM-DD'
+version: 'v4'
+platform: '<ios|android|flutter|uniapp|wasm|electron|miniprogram|react-native|unity>'
+sourcePath: '/docs/chat/sdk/v4/<platform>/<section>/<page-slug>'
+---
+
+## Overview
+
+State the developer outcome in one short paragraph. For task tutorials, describe the final user-visible result and whether the flow targets a one-to-one conversation, group conversation, notification, user profile, or moderation workflow.
+
+## How this maps to OpenIM
+
+Map the product concepts used by the task to OpenIM objects. For example, a first-message tutorial should identify the sender user, receiver user or group, message object, and conversation state.
+
+| Concept     | OpenIM object            | Notes                   |
+| ----------- | ------------------------ | ----------------------- |
+| `<concept>` | `<OpenIM object or API>` | `<implementation note>` |
+
+## Prerequisites
+
+- OpenIM Server version: `<version or range>`
+- SDK package and version: `<package name and version>`
+- Required runtime: `<iOS, Android, Flutter, uni-app, WASM, Electron, Mini Program, React Native, or Unity version>`
+- Required server configuration: `<API address, WebSocket address, push provider, storage, or permission>`
+- Required user state: `<user ID, token, target user, group ID, operator role, or app admin token>`
+
+## API signatures
+
+List the public SDK signatures this page depends on. Use the SDK package type definitions as the source of truth. If the page maps a Sendbird feature that OpenIM does not expose directly, say that explicitly and list only the closest OpenIM alternatives.
+
+```ts
+// Replace with exact public SDK signatures.
+```
+
+## Install and configure
+
+Install the SDK package or platform dependency, then document any static assets, build configuration, native permissions, or platform-specific setup required before initialization.
+
+```ts
+// Replace with platform-specific install or setup code.
+```
+
+## Initialize the SDK
+
+Create the SDK client, pass platform-specific configuration, and register lifecycle or connection listeners before making calls.
+
+```ts
+// Replace with verified initialization code.
+```
+
+## Implement the task
+
+### 1. Prepare the app state
+
+Load or validate the data the SDK call needs, such as the current user, receiver, group, conversation, permissions, or local cache state.
+
+```ts
+// Replace with preparation code.
+```
+
+### 2. Call the SDK API
+
+Use the real SDK method names and typed arguments. Keep the example minimal but complete enough to run.
+
+```ts
+// Replace with the verified SDK call.
+```
+
+### 3. Handle the result
+
+Explain the returned value, emitted events, local cache updates, UI state changes, and cleanup behavior.
+
+```ts
+// Replace with result handling code.
+```
+
+## Verify the result
+
+- Confirm the returned SDK response.
+- Confirm the expected event callback fires.
+- Confirm another signed-in client can observe the state change when applicable.
+- Confirm behavior after refresh, reconnect, or app restart when local state is involved.
+
+## Troubleshooting
+
+| Case               | Cause              | Handling                   |
+| ------------------ | ------------------ | -------------------------- |
+| `<error or state>` | `<why it happens>` | `<what the app should do>` |
+
+## Next steps
+
+- [Related SDK guide](/docs/chat/sdk/v4/<platform>/<section>/<related-page>)
+- [Platform API equivalent](/docs/chat/platform-api/v3/<resource>/<operation-group>/<operation>)

@@ -1,0 +1,102 @@
+---
+title: '获取未读项目数量'
+description: '使用 OpenIM WASM SDK 获取总未读数、未读会话数、群聊提及状态，以及单条群消息的未读成员数量。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items'
+---
+
+OpenIM WASM SDK 没有按 `key` 聚合返回“未读项目”的单一接口。应用需要按项目类型从对应数据源计算：总未读消息数来自 `getTotalUnreadMsgCount()`，群聊提及来自会话的 `groupAtType`，群邀请或入群申请数量来自群申请接口，单条群消息的未读成员数量来自群消息已读回执。
+
+```ts
+const [{ data: totalUnread }, { data: conversations }, { data: unhandledApplications }] =
+  await Promise.all([
+    OpenIM.getTotalUnreadMsgCount(),
+    OpenIM.getAllConversationList(),
+    OpenIM.getGroupApplicationUnhandledCount({ time: 0 }),
+  ]);
+
+const unreadMentionConversationCount = conversations.filter((conversation) =>
+  [1, 2, 3].includes(conversation.groupAtType),
+).length;
+
+const unreadGroupConversationCount = conversations.filter(
+  (conversation) => conversation.groupID && conversation.unreadCount > 0,
+).length;
+
+renderUnreadItems({
+  unreadMessages: totalUnread,
+  unreadMentionConversations: unreadMentionConversationCount,
+  unreadGroupConversations: unreadGroupConversationCount,
+  pendingGroupApplications: unhandledApplications,
+});
+```
+
+## 参数列表
+
+| 项目                   | OpenIM 数据来源                                  | 说明                                                |
+| ---------------------- | ------------------------------------------------ | --------------------------------------------------- |
+| 总未读消息数           | `getTotalUnreadMsgCount()`                       | 所有会话的未读消息条数总和。                        |
+| 未读群聊会话数         | `ConversationItem.groupID` + `unreadCount > 0`   | 有未读消息的群聊会话数量。                          |
+| 未读提及会话数         | `ConversationItem.groupAtType`                   | `1`、`2`、`3` 分别表示 @我、@所有人、两者同时存在。 |
+| 待处理群申请数量       | `getGroupApplicationUnhandledCount({ time: 0 })` | 当前用户需要处理的群邀请或入群申请数量。            |
+| 单条群消息未读成员数量 | `getGroupMessageReaderList({ filter: 1 })`       | 某条群消息还有哪些成员没有发送已读回执。            |
+
+如果只需要过滤群聊，优先使用 `groupID` 或业务约定的群聊类型判断。会话开启免打扰时，`unreadCount` 仍会保留在会话上，是否计入全局角标应按产品规则处理。
+
+## 单条群消息的未读成员
+
+群消息的“未读成员”不是会话级未读数。它表示某一条群消息还有哪些成员没有发送已读回执。
+
+```ts
+const { data: unreadMembers } = await OpenIM.getGroupMessageReaderList({
+  conversationID,
+  clientMsgID,
+  filter: 1,
+  offset: 0,
+  count: 50,
+});
+
+setMessageUnreadMemberCount(unreadMembers.length);
+```
+
+如果需要全量精确数量，继续分页直到返回数量小于 `count`。如果只需要消息气泡上的实时计数，可以优先使用 `CbEvents.OnRecvGroupReadReceipt` 中的 `unreadCount`。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+function handleGroupReadReceipt({ data }) {
+  for (const item of data.groupMessageReadInfo) {
+    updateMessageReadState(item.clientMsgID, {
+      readCount: item.hasReadCount,
+      unreadCount: item.unreadCount,
+    });
+  }
+}
+
+OpenIM.on(CbEvents.OnRecvGroupReadReceipt, handleGroupReadReceipt);
+```
+
+## 保持计数同步
+
+启动时主动读取一次未读项目，运行期间用事件更新本地状态。总未读消息数监听 `CbEvents.OnTotalUnreadMessageCountChanged`；会话未读和提及状态监听 `CbEvents.OnConversationChanged`；群申请红点监听 `CbEvents.OnGroupApplicationAdded`、`CbEvents.OnGroupApplicationAccepted` 和 `CbEvents.OnGroupApplicationRejected` 后重新计算或重新查询。
+
+```ts
+OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
+  setUnreadMessageCount(data);
+});
+
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
+  mergeConversationList(Array.isArray(data) ? data : [data]);
+  refreshUnreadConversationItems();
+});
+
+OpenIM.on(CbEvents.OnGroupApplicationAdded, () => {
+  refreshPendingGroupApplications();
+});
+```
+
+## 相关页面
+
+- [获取所有会话的未读消息总数](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels)
+- [获取有未读消息的会话数量](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels)
+- [接受或拒绝邀请](/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation)
+- [获取消息已读状态](/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status)

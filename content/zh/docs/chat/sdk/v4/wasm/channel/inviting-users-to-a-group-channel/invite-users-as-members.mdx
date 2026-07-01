@@ -1,0 +1,90 @@
+---
+title: '邀请用户成为成员'
+description: '使用 OpenIM WASM SDK 将用户邀请进群组频道，并同步群成员变化。'
+sourcePath: '/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members'
+---
+
+在 OpenIM 中，面向成员的频道式聊天由群组承载。要把用户加入已有群聊，当前用户需要先登录 SDK，并且具备该群组配置允许的邀请权限。邀请成功后，被邀请用户会成为群成员，可以使用同一个 `groupID` 接收和发送群消息。
+
+群组邀请是写操作，建议为每次调用生成并记录 `operationID`。如果服务端因群设置、角色权限或目标用户 ID 拒绝请求，`operationID` 可以帮助你把浏览器日志和服务端日志对应起来。
+
+## 私有群和公开群
+
+OpenIM 不使用单独的频道类表示私有群或公开群。邀请是否必需、普通用户能否主动加入、加入后是否需要审批，取决于目标群组的验证配置和服务端权限策略。对需要邀请才能进入的群组，调用 `inviteUserToGroup()`；对允许用户主动加入的群组，使用 [加入和离开群组频道](/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel) 中的 `joinGroup()` 流程。
+
+## 邀请成员
+
+调用 `inviteUserToGroup()` 时传入目标 `groupID`、邀请说明和要加入的用户 ID 列表。`userIDList` 中的值必须是已存在的 OpenIM 用户 ID。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const invitedUserIDs = ['Sally', 'Harry'];
+const operationID = crypto.randomUUID();
+
+OpenIM.on(CbEvents.OnGroupMemberAdded, ({ data }) => {
+  mergeGroupMembers(data);
+});
+
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
+  mergeConversations(data);
+});
+
+const { errCode, errMsg } = await OpenIM.inviteUserToGroup(
+  {
+    groupID,
+    reason: 'Join project chat',
+    userIDList: invitedUserIDs,
+  },
+  operationID,
+);
+
+if (errCode !== 0) {
+  console.error('inviteUserToGroup failed', { errCode, errMsg, operationID });
+  throw new Error(errMsg || 'Failed to invite users');
+}
+```
+
+如果你的产品要求由群主、管理员或后端统一审批邀请，不要在浏览器端绕过权限判断。前端只应使用当前登录用户可以执行的 SDK 调用；需要更高权限的成员管理流程应放在可信后端中完成。
+
+## 刷新成员列表
+
+邀请接口返回成功后，可以立即用 `getSpecifiedGroupMembersInfo()` 读取被邀请用户的群成员资料，并把结果合并到成员列表。这样可以避免界面只根据提交的 ID 渲染成员，而缺少昵称、头像、角色或禁言状态等群成员字段。
+
+```ts
+const { data: addedMembers, errCode: queryErrCode } = await OpenIM.getSpecifiedGroupMembersInfo(
+  {
+    groupID,
+    userIDList: invitedUserIDs,
+  },
+  operationID,
+);
+
+if (queryErrCode === 0) {
+  mergeGroupMembers(addedMembers);
+}
+```
+
+对于人数较多的群组，成员管理页通常还会分页调用 `getGroupMemberList()`。邀请完成后可以刷新当前页，或等待 `CbEvents.OnGroupMemberAdded` 到达后再按需重新查询服务端权威数据。
+
+## 新成员是否可见历史消息
+
+被邀请用户加入群组后，后续群消息会通过该用户的群会话同步。是否能看到加入前的历史消息取决于你的 OpenIM 服务端配置、历史消息保留策略以及客户端拉取历史消息的时间范围。前端不要假设新成员一定能读取加入前的全部消息；打开聊天页时应按产品策略调用历史消息接口，并处理空历史记录的情况。
+
+如果业务要求新成员只能看到加入后的消息，可以在服务端或业务层记录加入时间，并在加载历史消息时按该时间裁剪展示范围。
+
+## 校验邀请结果
+
+- 确认 `login()` 已成功，并且在调用 `inviteUserToGroup()` 前收到 `CbEvents.OnConnectSuccess`。
+- 确认 `inviteUserToGroup()` 响应满足 `errCode === 0`。
+- 确认邀请方或其他已登录成员触发 `CbEvents.OnGroupMemberAdded`，成员列表能合并新增成员。
+- 确认被邀请用户登录后可以查询到该群组，并能使用同一个 `groupID` 收发群消息。
+
+失败时优先检查当前用户的群角色、群组验证设置、目标 `userIDList` 是否正确，以及浏览器会话是否仍保持连接。记录 `errCode`、`errMsg` 和 `operationID`，不要只在界面上显示通用失败提示。
+
+## 相关页面
+
+- [创建频道](/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel)
+- [添加或移除频道事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群组消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

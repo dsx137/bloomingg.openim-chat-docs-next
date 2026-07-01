@@ -1,0 +1,216 @@
+---
+title: '发送第一条消息'
+description: '使用 OpenIM WASM SDK 在浏览器中完成安装、初始化、登录，并向单聊用户或群组发送第一条消息。'
+sourcePath: '/docs/chat/sdk/v4/wasm/getting-started/send-first-message'
+---
+
+本页说明如何在浏览器应用中使用 OpenIM WASM SDK 发送第一条消息。你将完成 SDK 安装、客户端初始化、用户登录、目标确认和文本消息发送。
+
+OpenIM 的消息面向用户或群组发送。单聊消息使用目标用户 `recvID`；群聊消息使用目标群组 `groupID`。
+
+## 支持的浏览器
+
+OpenIM WASM SDK 运行在浏览器 WebAssembly 环境中。下面的最低版本按 WebAssembly 基础支持整理；生产环境仍建议使用主流浏览器的当前稳定版本，并在目标浏览器中验证 WASM 资源加载、WebSocket 连接和本地存储能力。
+
+| 浏览器             | 最低版本 | 运行要求                               |
+| ------------------ | -------- | -------------------------------------- |
+| Chrome             | 57+      | 支持 WebAssembly、WebSocket、IndexedDB |
+| Edge               | 16+      | 支持 WebAssembly、WebSocket、IndexedDB |
+| Firefox            | 52+      | 支持 WebAssembly、WebSocket、IndexedDB |
+| Safari             | 11+      | 支持 WebAssembly、WebSocket、IndexedDB |
+| iOS Safari         | 11+      | 支持 WebAssembly、WebSocket、IndexedDB |
+| Chrome for Android | 57+      | 支持 WebAssembly、WebSocket、IndexedDB |
+
+如果应用使用 Next.js、Nuxt、Remix 等 SSR 框架，SDK 初始化、登录和消息收发必须只在浏览器端执行。
+
+## 开始之前
+
+在开始编码前，先准备 OpenIM 服务、用户和浏览器端可用的登录信息。
+
+- 如果还没有可用服务端，先完成 [Docker 部署](/docs/guides/quick-deployment/docker)，并确认 [端口和域名配置](/docs/guides/quick-deployment/ports) 对浏览器可访问。
+- 如果需要通过后端调用 OpenIM REST API 管理用户或签发 token，先阅读 [准备使用 Platform API](/docs/chat/platform-api/v3/prepare-to-use-api) 和 [签发会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token)。
+- 如果已经有自有账号体系，浏览器端只接收业务后端返回的 `userID`、用户 token、`apiAddr` 和 `wsAddr`。客户端登录流程见 [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)。
+
+### 准备 OpenIM 服务
+
+你需要一套可从浏览器访问的 OpenIM Server，并取得以下地址：
+
+| 字段      | 说明                                             |
+| --------- | ------------------------------------------------ |
+| `apiAddr` | OpenIM HTTP API 地址，用于登录、同步和资源请求。 |
+| `wsAddr`  | OpenIM WebSocket 地址，用于实时连接和事件推送。  |
+
+不要在浏览器代码中保存管理员 token、secret 或其他服务端凭据。创建用户、签发 token、权限校验等敏感操作应由可信后端完成。
+
+### 准备业务登录接口
+
+浏览器客户端应从你的后端接口获取当前用户登录 OpenIM 所需的信息。推荐让后端返回 `userID`、用户 token、`apiAddr` 和 `wsAddr`，前端只负责调用 SDK。
+
+```ts
+type OpenIMSession = {
+  userID: string;
+  token: string;
+  apiAddr: string;
+  wsAddr: string;
+};
+
+async function loadOpenIMSession(): Promise<OpenIMSession> {
+  const response = await fetch('/api/openim/session');
+  if (!response.ok) throw new Error('Failed to load OpenIM session.');
+  return response.json();
+}
+```
+
+### 准备测试身份和目标
+
+单聊测试至少需要当前登录用户和一个已存在的接收方用户。群聊测试需要当前登录用户和一个已存在的 `groupID`；发送群聊消息时不再传接收方用户 ID，也不需要为这条消息指定某个群成员。
+
+| 场景 | 需要准备的目标标识                                      |
+| ---- | ------------------------------------------------------- |
+| 单聊 | 已存在的接收方用户 ID，发送时写入 `recvID`。            |
+| 群聊 | 已存在的 `groupID`，发送时写入 `groupID`，`recvID` 为空。 |
+
+### 确认访问控制
+
+首条消息通常用于验证端到端链路。测试前确认以下条件：
+
+- 当前用户 token 有效，并且前端使用 `platformID: 5` 登录。
+- 浏览器可以访问 `apiAddr`、`wsAddr` 和 SDK 静态资源。
+- 单聊接收方用户已存在。
+- 群聊目标 `groupID` 已存在；是否允许当前用户发言由 OpenIM Server 的群组状态和权限校验决定。
+
+## 开始使用
+
+按照下面步骤完成首条文本消息发送。
+
+### 第 1 步：安装 OpenIM WASM SDK
+
+使用 `pnpm` 安装浏览器 SDK 包，并把 WASM 运行资源发布到前端静态资源目录。
+
+```bash
+pnpm add @openim/wasm-client-sdk
+cp node_modules/@openim/wasm-client-sdk/assets/openIM.wasm public/
+cp node_modules/@openim/wasm-client-sdk/assets/sql-wasm.wasm public/
+cp node_modules/@openim/wasm-client-sdk/assets/wasm_exec.js public/
+```
+
+在创建 SDK 实例前加载 `wasm_exec.js`。
+
+```html
+<script src="/wasm_exec.js"></script>
+```
+
+### 第 2 步：初始化 OpenIM WASM SDK
+
+在浏览器会话中创建并复用一个 SDK 实例。`coreWasmPath` 和 `sqlWasmPath` 必须指向真实可访问的静态资源路径。
+
+```ts
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+```
+
+### 第 3 步：连接到 OpenIM Server
+
+登录前先注册连接事件，便于在 UI 中展示连接中、已连接、连接失败和 token 过期等状态。`login()` 成功后，再调用依赖登录态的消息 API。
+
+```ts
+const { userID, token, apiAddr, wsAddr } = await loadOpenIMSession();
+
+OpenIM.on(CbEvents.OnConnecting, () => {
+  setConnectionState('connecting');
+});
+
+OpenIM.on(CbEvents.OnConnectSuccess, () => {
+  setConnectionState('connected');
+});
+
+OpenIM.on(CbEvents.OnConnectFailed, ({ errCode, errMsg, operationID }) => {
+  setConnectionState('failed');
+  console.error('OpenIM connection failed', { errCode, errMsg, operationID });
+});
+
+OpenIM.on(CbEvents.OnUserTokenExpired, ({ operationID }) => {
+  refreshOpenIMToken(operationID);
+});
+
+await OpenIM.login({
+  userID,
+  token,
+  platformID: 5,
+  apiAddr,
+  wsAddr,
+});
+```
+
+### 第 4 步：确定消息目标
+
+单聊只需要接收方用户 ID。只要当前用户已登录，并且接收方用户存在，就可以把接收方用户 ID 作为 `recvID`。
+
+```ts
+const target = {
+  recvID: 'user_b',
+  groupID: '',
+};
+```
+
+群聊只使用 OpenIM 群组 ID 作为发送目标。你可以复用业务侧已有的 `groupID`，也可以先通过管理后台、业务后端或群组 API 创建测试群，并保存返回的 `groupID`。创建群组时可能会设置初始成员，但发送群消息本身不再传某个接收用户 ID。
+
+```ts
+const target = {
+  recvID: '',
+  groupID: 'group_123',
+};
+```
+
+### 第 5 步：发送消息
+
+OpenIM 发送文本消息分为两步：先创建 `MessageItem`，再通过 `sendMessage()` 发送到目标用户或群组。
+
+```ts
+const { data: message } = await OpenIM.createTextMessage('你好，OpenIM');
+
+const response = await OpenIM.sendMessage({
+  recvID: target.recvID,
+  groupID: target.groupID,
+  message,
+});
+
+if (response.errCode !== 0) {
+  console.error('OpenIM sendMessage failed', {
+    errCode: response.errCode,
+    errMsg: response.errMsg,
+    operationID: response.operationID,
+  });
+  throw new Error(response.errMsg || 'OpenIM message send failed.');
+}
+
+appendOutgoingMessage(response.data);
+```
+
+另一端登录后，可以通过消息事件收到这条消息。建议在消息页面挂载时注册事件，并在页面卸载或退出登录时移除。
+
+```ts
+function handleNewMessages({ data }) {
+  for (const item of data) {
+    appendIncomingMessage(item);
+  }
+}
+
+OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+
+// 页面卸载或退出登录时
+OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+```
+
+发送成功后，检查当前客户端的 `sendMessage()` 返回值，以及另一个已登录客户端是否收到 `CbEvents.OnRecvNewMessages` 事件。排查问题时保留 `errCode`、`errMsg` 和 `operationID`，便于和 OpenIM Server 日志对应。
+
+## 下一步
+
+- [用户认证](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [按运行环境接入](/docs/chat/sdk/v4/wasm/getting-started/environment-specific-implementation)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

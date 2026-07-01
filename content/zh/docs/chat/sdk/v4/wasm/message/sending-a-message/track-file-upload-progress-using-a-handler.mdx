@@ -1,0 +1,145 @@
+---
+title: '使用事件处理器跟踪文件上传进度'
+description: '使用 OpenIM WASM SDK 的上传进度事件跟踪图片、音频、视频和文件消息的发送过程。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/sending-a-message/track-file-upload-progress-using-a-handler'
+---
+
+OpenIM WASM SDK 的文件类消息在创建并发送时进入上传链路。应用应先注册 `CbEvents.OnProgress` 和 `CbEvents.UploadComplete`，再调用文件、图片、音频或视频消息创建方法，并通过 `sendMessage()` 发送生成的 `MessageItem`。
+
+上传中的百分比、失败提示和重试按钮属于应用 UI 状态。SDK 事件负责提供进度和完成信号；你的应用需要把事件数据关联到本地上传项或消息气泡。
+
+## 注册上传处理器
+
+在开始发送文件类消息前注册事件处理器。处理器函数需要保持稳定引用，后续才能用同一个函数调用 `off()`。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+function handleUploadProgress({ data }: { data: unknown }) {
+  updateFileUploadProgress(data);
+}
+
+function handleUploadComplete({ data }: { data: unknown }) {
+  markFileUploadComplete(data);
+}
+
+OpenIM.on(CbEvents.OnProgress, handleUploadProgress);
+OpenIM.on(CbEvents.UploadComplete, handleUploadComplete);
+```
+
+`OnProgress` 适合更新进度条、本地消息状态或上传队列；`UploadComplete` 适合把上传项从进行中改为完成。不同部署和 SDK 版本可能会对事件 `data` 做二次封装，建议在应用层先归一化数据，再写入 UI 状态。
+
+## 创建并发送文件消息
+
+文件消息仍然遵循 OpenIM 的两步发送模型：先创建 `MessageItem`，再传给 `sendMessage()`。单聊填写 `recvID`，群聊填写 `groupID`。
+
+```ts
+type SendFileWithProgressParams = {
+  file: File;
+  recvID?: string;
+  groupID?: string;
+};
+
+async function sendFileWithProgress({
+  file,
+  recvID = '',
+  groupID = '',
+}: SendFileWithProgressParams) {
+  const operationID = crypto.randomUUID();
+  const uuid = crypto.randomUUID();
+
+  const { data: message } = await OpenIM.createFileMessageByFile(
+    {
+      file,
+      filePath: file.name,
+      fileName: file.name,
+      uuid,
+      sourceUrl: '',
+      fileSize: file.size,
+      fileType: file.type,
+    },
+    operationID,
+  );
+
+  const { data: sentMessage } = await OpenIM.sendMessage(
+    {
+      recvID,
+      groupID,
+      message,
+    },
+    operationID,
+  );
+
+  return sentMessage;
+}
+```
+
+图片、音频和视频消息使用对应的创建方法，发送时仍使用同一个 `sendMessage()`。
+
+```ts
+createImageMessageByFile: (params: ImageMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createSoundMessageByFile: (data: SoundMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+createVideoMessageByFile: (
+  data: VideoMsgParamsByURL & { videoFile: File; snapshotFile: File },
+  operationID?: string,
+) => Promise<WsResponse<MessageItem>>;
+createFileMessageByFile: (data: FileMsgParamsByURL & { file: File }, operationID?: string) =>
+  Promise<WsResponse<MessageItem>>;
+```
+
+## 关联进度到消息
+
+如果界面允许同时上传多个文件，不要只按文件名匹配进度。同名文件、重试和多会话并发发送都可能让状态串联。常见做法是用创建消息时传入的 `uuid`、发送返回的 `clientMsgID`、本地上传队列 ID 或事件数据中的文件标识建立映射。
+
+```ts
+type UploadState = {
+  localUploadID: string;
+  fileName: string;
+  percent: number;
+  clientMsgID?: string;
+  status: 'pending' | 'uploading' | 'sent' | 'failed';
+};
+
+function attachSentMessage(localUploadID: string, sentMessage: MessageItem) {
+  updateUploadState(localUploadID, {
+    clientMsgID: sentMessage.clientMsgID,
+    status: 'sent',
+  });
+}
+```
+
+发送失败时保留 `operationID`、`errCode` 和 `errMsg`。如果业务支持重试，重试时重新创建消息或按你的上传策略复用已上传文件地址，避免把旧进度误写到新的消息气泡。
+
+## 移除处理器
+
+上传事件注册在 SDK 实例上。页面或组件退出时应移除监听，避免重复更新同一条本地消息。
+
+```ts
+function registerUploadProgressHandlers() {
+  OpenIM.on(CbEvents.OnProgress, handleUploadProgress);
+  OpenIM.on(CbEvents.UploadComplete, handleUploadComplete);
+
+  return () => {
+    OpenIM.off(CbEvents.OnProgress, handleUploadProgress);
+    OpenIM.off(CbEvents.UploadComplete, handleUploadComplete);
+  };
+}
+```
+
+在 React、Vue 或其他前端框架中，可以把返回的清理函数接入组件卸载逻辑。账号切换、退出登录或销毁 SDK 实例前也应执行相同清理。
+
+## 验证上传结果
+
+- 确认 `login()` 已成功，并且发送前连接状态正常。
+- 使用较大的图片或文件测试 `CbEvents.OnProgress`，确认 UI 会从等待、上传中进入完成态。
+- 确认 `sendMessage()` 返回的 `data` 已合并到当前会话消息列表。
+- 发送多个同名文件，确认每个上传项的进度不会互相覆盖。
+- 切换页面或账号后再次发送文件，确认事件处理器没有重复注册。
+
+## 相关页面
+
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
+- [消息概览](/docs/chat/sdk/v4/wasm/message/overview-message)

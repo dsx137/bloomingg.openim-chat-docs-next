@@ -1,0 +1,34 @@
+---
+title: 'OpenIM Electron SDK 概览'
+description: 'OpenIM Electron SDK 入口，说明 WASM 与 FFI 两种接入形态在 Web 复用和桌面应用打包中的分工。'
+sourcePath: '/docs/chat/sdk/v4/electron/overview'
+---
+
+## 概览
+
+Electron SDK 同时提供 WASM 和 FFI 两种接入形态。它们不是简单的二选一关系：如果同一套产品既要支持 Web 页面，又要支持 Electron 应用打包，通常需要同时规划 WASM 和 FFI。
+
+WASM 形态适用于浏览器页面、Electron 渲染进程、WebView 或希望与 Web 客户端复用的 UI 层；FFI 形态适用于桌面应用程序侧接入，用于应用打包、原生运行时能力和更明确的桌面端边界。两者在用户、会话、消息、群组和事件模型上保持一致，但运行时、资源加载、打包方式和本地能力不同。
+
+## SDK 形态分工
+
+| 接入形态   | 适用场景                                          | 接入要点                                                                                                                             |
+| ---------- | ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| WASM       | Web 页面、Electron 渲染进程、WebView、浏览器式 UI | 按 Web SDK 方式初始化，发布 `openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js`，并确保页面可以访问 OpenIM HTTP API 与 WebSocket 地址。 |
+| FFI        | Electron 应用程序侧能力、桌面应用打包、原生运行时 | 按 Electron FFI SDK 的安装、打包和初始化要求接入，不使用浏览器 WASM 资源路径。适合桌面端应用进程侧集成。                             |
+| WASM + FFI | 同时支持 Web 客户端和 Electron 桌面应用           | 在业务层封装统一的 IM 能力入口，按运行环境选择 WASM 或 FFI；避免同一用户在同一应用实例中被两个 SDK 实例重复登录或竞争连接状态。      |
+
+## 桌面端接入注意事项
+
+- 如果产品同时覆盖 Web 和 Electron，建议先定义一层应用内 IM 适配器，由适配器根据运行环境选择 WASM 或 FFI。
+- 使用 WASM 形态时，通常将 IM 调用放在渲染进程，并在打包后验证 `openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js` 可访问。
+- 使用 FFI 形态时，应按桌面应用程序侧能力设计初始化、权限、安装包资源和升级策略。
+- 如果主进程与渲染进程都需要 IM 状态，应先设计清晰的 IPC 边界，明确连接、登录、消息事件和本地状态由哪一侧拥有，避免多个 SDK 实例竞争同一用户会话。
+- 不要把用户 token 写入 preload 脚本或主进程日志。
+- WebSocket 连通性需要在打包后的应用中验证，不能只依赖本地开发模式。
+
+## 下一步
+
+- [WASM SDK 概览](/docs/chat/sdk/v4/wasm/overview)
+- [按运行环境接入](/docs/chat/sdk/v4/wasm/getting-started/environment-specific-implementation)
+- [发送第一条消息](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)

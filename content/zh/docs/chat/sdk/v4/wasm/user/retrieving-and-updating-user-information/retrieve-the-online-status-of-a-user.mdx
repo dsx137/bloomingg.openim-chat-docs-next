@@ -1,0 +1,109 @@
+---
+title: '获取用户在线状态'
+description: '使用 OpenIM WASM SDK 订阅、查询并同步用户在线状态，适用于会话列表、联系人列表、群成员列表和资料卡。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user'
+---
+
+OpenIM WASM SDK 通过订阅机制同步用户在线状态。业务界面不应长期订阅所有用户，而应按当前可见范围订阅，例如会话列表头像、联系人当前页、群成员搜索结果或打开中的资料卡。
+
+在线状态只表达用户在 OpenIM 连接层的在线或离线，不等同于好友关系、群成员状态、禁言状态或应用自己的活跃时间。
+
+## 获取频道成员在线状态
+
+如果要展示群聊频道成员的在线状态，先读取当前可见成员页，再用成员的 `userID` 调用 `subscribeUsersStatus()`。订阅成功后，返回值中会包含这些用户当前的在线状态。
+
+```ts
+function uniqueUserIDs(userIDs: string[]) {
+  return [...new Set(userIDs.filter(Boolean))];
+}
+
+async function subscribeVisibleMemberStatus(groupID: string) {
+  const { data: members } = await OpenIM.getGroupMemberList({
+    groupID,
+    filter: 0,
+    offset: 0,
+    count: 50,
+  });
+
+  const userIDs = uniqueUserIDs(members.map((member) => member.userID));
+
+  if (userIDs.length === 0) {
+    return [];
+  }
+
+  const operationID = crypto.randomUUID();
+  const { data, errCode, errMsg } = await OpenIM.subscribeUsersStatus(userIDs, operationID);
+
+  if (errCode !== 0) {
+    console.error('subscribeUsersStatus failed', {
+      errCode,
+      errMsg,
+      operationID,
+      userIDs,
+    });
+    throw new Error(errMsg || 'Failed to subscribe user status');
+  }
+
+  return data;
+}
+
+const states = await subscribeVisibleMemberStatus(groupID);
+mergePresence(states);
+```
+
+`subscribeUsersStatus()` 适合当前可见用户，不适合无限制订阅全量群成员。分页、搜索结果或虚拟滚动窗口变化时，只订阅新增可见用户，并取消已经不可见的用户。
+
+## 监听状态变化
+
+已订阅用户上下线后，SDK 会触发 `CbEvents.OnUserStatusChanged`。把事件中的 `UserOnlineState` 按 `userID` 合并到本地状态表，再刷新会话列表、成员列表或资料卡中的在线点。
+
+```ts
+const presenceByUserID = new Map<string, UserOnlineState>();
+
+function handleUserStatusChanged({ data }) {
+  presenceByUserID.set(data.userID, data);
+  renderPresenceDot(data.userID, data.status === OnlineState.Online);
+}
+
+OpenIM.on(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
+```
+
+如果多个页面都需要在线状态，建议把事件注册在统一的用户状态层。各页面只读取自己需要的 `userID`，避免同一个事件在多个组件里重复合并。
+
+## 查询已订阅用户状态
+
+页面刷新局部状态、断线重连后恢复展示，或重新进入某个列表页时，可以调用 `getSubscribeUsersStatus()` 读取当前账号已经订阅的用户状态。它不会替代订阅动作；如果目标用户从未被订阅，应先调用 `subscribeUsersStatus()`。
+
+```ts
+const { data: subscribedStates } = await OpenIM.getSubscribeUsersStatus();
+mergePresence(subscribedStates);
+```
+
+SDK 也提供 `getUserStatus()`，它不接收目标用户 ID 参数，返回当前可获取的用户状态集合。不要把它当作任意用户的按 ID 查询接口；展示其他用户状态时，应优先使用订阅接口和 `getSubscribeUsersStatus()`。
+
+## 取消订阅
+
+当用户离开页面、列表翻页、搜索结果变化或组件卸载时，取消不再可见的用户订阅。这样可以减少无意义的状态推送，也避免旧页面继续写入状态。
+
+```ts
+async function unsubscribeUserStatus(userIDs: string[]) {
+  const targetUserIDs = uniqueUserIDs(userIDs);
+
+  if (targetUserIDs.length === 0) {
+    return [];
+  }
+
+  const { data } = await OpenIM.unsubscribeUsersStatus(targetUserIDs);
+
+  for (const userID of targetUserIDs) {
+    presenceByUserID.delete(userID);
+  }
+
+  return data;
+}
+
+OpenIM.off(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
+await unsubscribeUserStatus(['user-a', 'user-b']);
+```
+
+`UserOnlineState.status` 可和 `OnlineState.Online`、`OnlineState.Offline` 比较；`platformIDs` 可能为空，UI 不应依赖它一定存在。更多事件管理方式见 [添加或移除用户事件处理器](/docs/chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler)。

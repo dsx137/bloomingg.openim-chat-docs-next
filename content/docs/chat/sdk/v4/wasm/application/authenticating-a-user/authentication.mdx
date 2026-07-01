@@ -1,0 +1,151 @@
+---
+title: 'Authentication'
+description: 'OpenIM WASM SDK guide for Authentication, with API signatures, usage details, and verification steps.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication'
+---
+
+## Overview
+
+Authenticate a WASM user by creating the SDK instance, registering connection listeners, calling `login()`, and handling token lifecycle events.
+
+This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+Browser clients should receive `userID` and token from a trusted backend. `login()` starts the session; the connection callbacks tell the UI when the WebSocket is actually ready.
+
+Support status: public WASM SDK APIs cover this workflow.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+login: (params: InitAndLoginConfig, operationID?: string) => Promise<any>;
+logout: <T>(operationID?: string) => Promise<WsResponse<T>>;
+getLoginStatus: (operationID?: string) => Promise<WsResponse<LoginStatus>>;
+getLoginUserID: (operationID?: string) => Promise<WsResponse<string>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnConnecting
+CbEvents.OnConnectSuccess
+CbEvents.OnConnectFailed
+CbEvents.OnKickedOffline
+CbEvents.OnUserTokenExpired
+CbEvents.OnUserTokenInvalid
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Create and reuse one SDK instance in the browser session.
+
+```ts
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+OpenIM.on(CbEvents.OnConnectSuccess, () => {
+  console.info('OpenIM connected');
+});
+
+await OpenIM.login({
+  userID,
+  token,
+  platformID: 5,
+  apiAddr,
+  wsAddr,
+});
+```
+
+Register token and kick-offline handlers before calling `login()`.
+
+```ts
+OpenIM.on(CbEvents.OnUserTokenExpired, requestFreshToken);
+OpenIM.on(CbEvents.OnUserTokenInvalid, forceSignOut);
+OpenIM.on(CbEvents.OnKickedOffline, showSignedInElsewhereDialog);
+
+await OpenIM.login({ userID, token, platformID: 5, apiAddr, wsAddr });
+
+const { data: loginStatus } = await OpenIM.getLoginStatus();
+```
+
+Call `logout()` before switching accounts in the same browser session.
+
+## Returned data and events
+
+The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnConnecting`, `CbEvents.OnConnectSuccess`, `CbEvents.OnConnectFailed`, `CbEvents.OnKickedOffline`, `CbEvents.OnUserTokenExpired`, `CbEvents.OnUserTokenInvalid`.
+
+Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
+
+## Troubleshooting
+
+| Case                           | Cause                                                                 | Handling                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)

@@ -1,0 +1,161 @@
+---
+title: '在消息中提及用户'
+description: '使用 OpenIM WASM SDK 创建 @ 消息，在群聊中提及指定成员并处理 @ 提醒状态。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message'
+---
+
+在 OpenIM WASM SDK 中，提及用户的消息是一种群聊 `MessageItem`。你需要先用 `createTextAtMessage()` 创建 @ 文本消息，再通过 `sendMessage()` 发送到目标群组。接收端可以从消息的 `atTextElem` 读取被提及的用户列表，并从会话的 `groupAtType` 判断当前用户是否有未处理的 @ 提醒。
+
+提及逻辑应基于 OpenIM 用户 ID，而不是昵称、头像或会话 ID。昵称只用于展示，真正触发提醒的是 `atUserIDList`。
+
+## 按用户 ID 提及成员
+
+`createTextAtMessage()` 接收要发送的文本、被提及用户 ID 列表，以及可选的群昵称信息。`atUsersInfo` 能让接收端更稳定地展示 @ 文案。
+
+```ts
+const operationID = crypto.randomUUID();
+
+const mentionedUsers = [
+  { userID: 'alex-user-id', groupNickname: 'Alex' },
+  { userID: 'lee-user-id', groupNickname: 'Lee' },
+];
+
+const { data: message } = await OpenIM.createTextAtMessage(
+  {
+    text: '@Alex @Lee 请看一下这条消息',
+    atUserIDList: mentionedUsers.map((user) => user.userID),
+    atUsersInfo: mentionedUsers.map((user) => ({
+      atUserID: user.userID,
+      groupNickname: user.groupNickname,
+    })),
+  },
+  operationID,
+);
+
+const { data: sentMessage } = await OpenIM.sendMessage(
+  {
+    recvID: '',
+    groupID,
+    message,
+  },
+  operationID,
+);
+
+appendMessage(sentMessage);
+```
+
+发送前建议在业务层做这些校验：
+
+| 校验项         | 说明                                                                              |
+| -------------- | --------------------------------------------------------------------------------- |
+| `text`         | 不能为空，并且应包含与 UI 中 @ 标记一致的展示文本。                               |
+| `groupID`      | @ 消息面向群聊发送；`sendMessage()` 中 `recvID` 应为空字符串。                    |
+| `atUserIDList` | 只传当前群内需要提醒的成员。JS SDK 对单条消息中的提及列表限制为不超过 10 个用户。 |
+| `atUsersInfo`  | 使用和 `atUserIDList` 同源的成员数据，避免展示名称和实际提醒用户不一致。          |
+
+## 提及全体成员
+
+会话状态中可能出现 `GroupAtType.AtAll` 或 `GroupAtType.AtAllAtMe`，表示当前用户在群聊中有全体提醒。创建这类提醒时，需要遵循你项目使用的 OpenIM SDK 类型定义、服务端配置和群管理策略。
+
+如果当前集成只明确使用 `createTextAtMessage()` 的 `atUserIDList`，不要在客户端用超长成员列表模拟全员提醒。单条消息的提及人数限制、群成员变化、权限控制和通知风控都应由产品规则或服务端策略处理。
+
+```ts
+import { GroupAtType } from '@openim/wasm-client-sdk';
+
+function hasGroupMention(groupAtType: GroupAtType) {
+  return (
+    groupAtType === GroupAtType.AtMe ||
+    groupAtType === GroupAtType.AtAll ||
+    groupAtType === GroupAtType.AtAllAtMe
+  );
+}
+```
+
+## 发送带引用的 @ 消息
+
+`createTextAtMessage()` 还可以接收可选的 `message` 字段，用来把一条已有消息作为引用消息带入 @ 文本消息中。
+
+```ts
+const { data: mentionReply } = await OpenIM.createTextAtMessage({
+  text: '@Alex 我回复的是这条消息',
+  atUserIDList: ['alex-user-id'],
+  atUsersInfo: [{ atUserID: 'alex-user-id', groupNickname: 'Alex' }],
+  message: quotedMessage,
+});
+
+await OpenIM.sendMessage({
+  recvID: '',
+  groupID,
+  message: mentionReply,
+});
+```
+
+`quotedMessage` 应来自当前会话的消息列表、历史消息查询结果或新消息事件回调。不要手动拼接一个不完整的 `MessageItem`，否则接收端可能无法正确展示引用内容。
+
+## 处理接收事件
+
+接收新消息时监听 `CbEvents.OnRecvNewMessages`。当消息包含 `atTextElem` 时，可以从 `atUserList` 和 `atUsersInfo` 渲染 @ 内容，或在本地状态中标记这条消息提及了哪些用户。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+function handleNewMessages({ data }: { data: MessageItem[] }) {
+  for (const message of data) {
+    if (message.atTextElem) {
+      renderAtMessage({
+        text: message.atTextElem.text,
+        atUserIDList: message.atTextElem.atUserList,
+        atUsersInfo: message.atTextElem.atUsersInfo ?? [],
+        quoteMessage: message.atTextElem.quoteMessage,
+      });
+    }
+
+    mergeMessageIntoConversation(message);
+  }
+}
+
+OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+```
+
+同一个处理函数引用需要同时用于 `on()` 和 `off()`，否则组件重复挂载后可能多次消费同一批新消息。
+
+## 限制
+
+#### 单条消息的提及人数
+
+单条 @ 消息中，`atUserIDList` 不应超过 JS SDK 的限制。当前页面以不超过 10 个用户为准；如果产品需要提醒更多成员，应改用经过权限控制的全体提醒策略或服务端通知能力。
+
+#### 群聊提醒状态
+
+群聊会话的 `groupAtType` 表示当前用户在该会话中的 @ 提醒状态。会话列表可以监听 `CbEvents.OnConversationChanged`，在会话项上展示 @ 标记。
+
+```ts
+import { CbEvents, GroupAtType } from '@openim/wasm-client-sdk';
+
+OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
+  for (const conversation of data) {
+    updateConversationMentionBadge(
+      conversation.conversationID,
+      hasGroupMention(conversation.groupAtType),
+    );
+  }
+});
+```
+
+用户进入会话并处理完 @ 消息后，可以把该会话的 @ 状态重置为普通状态。
+
+```ts
+await OpenIM.setConversation({
+  conversationID,
+  groupAtType: GroupAtType.AtNormal,
+});
+```
+
+如果你的项目仍使用旧版包装方法，也可以调用 `resetConversationGroupAtType(conversationID)` 完成相同的重置动作。
+
+## 相关页面
+
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
+- [获取未读项](/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items)

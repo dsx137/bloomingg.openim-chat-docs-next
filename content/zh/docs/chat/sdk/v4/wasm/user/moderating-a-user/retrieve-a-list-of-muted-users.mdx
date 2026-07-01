@@ -1,0 +1,111 @@
+---
+title: '获取被禁言用户列表'
+description: '使用 OpenIM WASM SDK 分页读取群成员，并筛选当前仍处于禁言期的群成员。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-muted-users'
+---
+
+OpenIM 的禁言状态保存在群成员资料中。要获取某个群内当前被禁言的用户，先用 `getGroupMemberList()` 按 `groupID` 分页读取 `GroupMemberItem`，再根据每个成员的 `muteEndTime` 过滤仍处于禁言期的成员。
+
+这个列表是群组范围内的结果：同一个 `userID` 在一个群中被禁言，不代表它在其他群或单聊中也被禁言。
+
+## 禁言状态
+
+`GroupMemberItem.muteEndTime` 表示成员禁言截止时间。它大于当前时间时，成员仍在禁言期；为 `0` 或不晚于当前时间时，可以在当前界面视为未禁言。比较时间时应和你安装的 SDK 返回单位保持一致，避免把秒和毫秒混用。
+
+```ts
+function isMutedMember(member: GroupMemberItem, now = Date.now()) {
+  return Number(member.muteEndTime) > now;
+}
+```
+
+如果管理页还要展示禁言原因、操作者或内部备注，这些字段应来自你的业务后端。OpenIM 群成员资料只提供成员身份、展示资料、角色和禁言截止时间等聊天状态。
+
+## 获取被禁言成员
+
+`getGroupMemberList()` 返回当前页的群成员数组。群成员较多时，按 `offset` 和 `count` 继续翻页，直到返回数量小于本次请求数量，再从已读取成员中过滤禁言状态。
+
+```ts
+async function loadMutedMembers(groupID: string, pageSize = 100) {
+  const mutedMembers: GroupMemberItem[] = [];
+  let offset = 0;
+
+  while (true) {
+    const operationID = crypto.randomUUID();
+    const { data, errCode, errMsg } = await OpenIM.getGroupMemberList(
+      {
+        groupID,
+        filter: 0,
+        offset,
+        count: pageSize,
+      },
+      operationID,
+    );
+
+    if (errCode !== 0) {
+      console.error('getGroupMemberList failed', {
+        errCode,
+        errMsg,
+        operationID,
+        groupID,
+        offset,
+        count: pageSize,
+      });
+      throw new Error(errMsg || 'Failed to load group members');
+    }
+
+    const now = Date.now();
+    mutedMembers.push(...data.filter((member) => isMutedMember(member, now)));
+
+    if (data.length < pageSize) {
+      break;
+    }
+
+    offset += data.length;
+  }
+
+  return mutedMembers;
+}
+
+const mutedMembers = await loadMutedMembers(groupID);
+renderMutedMembers(mutedMembers);
+```
+
+如果界面只需要确认某几个用户是否被禁言，例如打开成员详情或刷新某个管理按钮，可以调用 `getSpecifiedGroupMembersInfo()` 读取指定成员，再复用同一套 `muteEndTime` 判断。
+
+```ts
+const { data: selectedMembers } = await OpenIM.getSpecifiedGroupMembersInfo({
+  groupID,
+  userIDList: selectedUserIDs,
+});
+
+const mutedStates = selectedMembers.map((member) => ({
+  groupID: member.groupID,
+  userID: member.userID,
+  muted: isMutedMember(member),
+  muteEndTime: member.muteEndTime,
+}));
+```
+
+渲染被禁言成员时优先使用 `GroupMemberItem` 中的群内昵称、头像和角色，不要用账号级公开资料覆盖群内展示信息。
+
+## 同步禁言变化
+
+成员被禁言或解除禁言后，SDK 会通过 `CbEvents.OnGroupMemberInfoChanged` 通知客户端。管理页可以把事件中的成员合并进本地成员表，然后重新计算当前群的禁言列表。
+
+```ts
+function handleGroupMemberInfoChanged({ data }) {
+  if (data.groupID !== groupID) {
+    return;
+  }
+
+  upsertMember(data);
+  renderMutedMembers(getCachedMembers(groupID).filter((member) => isMutedMember(member)));
+}
+
+OpenIM.on(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+
+// 页面卸载、退出登录或切换账号时移除。
+OpenIM.off(CbEvents.OnGroupMemberInfoChanged, handleGroupMemberInfoChanged);
+```
+
+刷新页面、重新登录或切换到新的群组管理页时，仍应先调用 `getGroupMemberList()` 建立当前群的成员快照，再用事件维护后续变化。禁言和解除禁言操作见 [禁言和解除禁言用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/mute-and-unmute-a-user)。

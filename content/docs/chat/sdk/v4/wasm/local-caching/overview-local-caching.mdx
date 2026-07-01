@@ -1,0 +1,136 @@
+---
+title: 'Local caching'
+description: 'OpenIM WASM SDK mapping, API signatures, and implementation notes for Local caching.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-06-26'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/local-caching/overview-local-caching'
+---
+
+## Overview
+
+Use OpenIM local storage through public conversation, message history, search, sync, and local-delete APIs instead of Sendbird collection classes.
+
+This guide separates public OpenIM SDK support from application-owned behavior and assumes the SDK version is compatible with OpenIM Server.
+
+## OpenIM model
+
+The browser SDK stores local state in IndexedDB through sql.js. Public APIs expose cached data as conversations, message history, and search results; internal database modules are not exported from the package entrypoint.
+
+Support status: the WASM SDK covers part of this workflow; the remaining behavior belongs in your application or backend.
+
+Key concepts to keep straight:
+
+- `userID` identifies an OpenIM user.
+- `conversationID` identifies a local conversation row.
+- `recvID` sends a direct message to one user.
+- `groupID` sends to or operates on a group conversation.
+- `operationID` is optional on most methods and is useful for tracing client/server logs.
+
+## Prerequisites
+
+- Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
+- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
+- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Keep application-owned behavior in your app or backend when the SDK does not expose a direct method.
+
+## API signatures
+
+Relevant public signatures:
+
+```ts
+function getSDK(config?: WasmPathConfig): SDK;
+getConversationListSplit: (data: SplitConversationParams, operationID?: string) => Promise<WsResponse<ConversationItem[]>>;
+getAdvancedHistoryMessageList: (params: GetAdvancedHistoryMsgParams, operationID?: string) => Promise<WsResponse<AdvancedGetMessageResult>>;
+searchLocalMessages: (data: SearchLocalParams, operationID?: string) => Promise<WsResponse<SearchMessageResult>>;
+findMessageList: (data: FindMessageParams[], operationID?: string) => Promise<WsResponse<SearchMessageResult>>;
+deleteMessageFromLocalStorage: <T>(data: AccessMessageParams, operationID?: string) => Promise<WsResponse<T>>;
+deleteAllConversationFromLocal: <T>(operationID?: string) => Promise<WsResponse<T>>;
+exportDB(operationID?: string): Promise<WsResponse<unknown>>;
+```
+
+Relevant events:
+
+```ts
+on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
+off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
+CbEvents.OnSyncServerStart
+CbEvents.OnSyncServerProgress
+CbEvents.OnSyncServerFinish
+CbEvents.OnSyncServerFailed
+CbEvents.OnConversationChanged
+CbEvents.OnRecvNewMessages
+```
+
+Response and event payloads use these common shapes:
+
+```ts
+type WsResponse<T> = {
+  event: string;
+  errCode: number;
+  errMsg: string;
+  data: T;
+  operationID: string;
+};
+type WSEvent<T = unknown> = {
+  event: CbEvents;
+  data: T;
+  errCode: number;
+  errMsg: string;
+  operationID: string;
+};
+```
+
+## Implementation
+
+Load an initial page and merge later SDK events into your own store.
+
+```ts
+const { data: conversations } = await OpenIM.getConversationListSplit({ offset: 0, count: 30 });
+
+const { data: page } = await OpenIM.getAdvancedHistoryMessageList({
+  conversationID,
+  startClientMsgID: '',
+  count: 30,
+  viewType: 0,
+});
+
+OpenIM.on(CbEvents.OnSyncServerFinish, refreshVisibleConversation);
+```
+
+Use `exportDB()` only for explicit diagnostic or migration flows.
+
+## Returned data and events
+
+Treat the listed OpenIM calls as building blocks when the feature is partial or server-owned. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+
+Watch these callbacks while testing: `CbEvents.OnSyncServerStart`, `CbEvents.OnSyncServerProgress`, `CbEvents.OnSyncServerFinish`, `CbEvents.OnSyncServerFailed`, `CbEvents.OnConversationChanged`, `CbEvents.OnRecvNewMessages`.
+
+Always log `operationID` with failures.
+
+## Verify the result
+
+- Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
+- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm refresh and reconnect behavior matches the product requirement.
+- Confirm the application-owned state survives refresh and a second signed-in device.
+
+## Troubleshooting
+
+| Case                              | Cause                                                                 | Handling                                                                                               |
+| --------------------------------- | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| WASM asset requests return 404    | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| The client never connects         | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
+| The response has an error code    | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| A Sendbird method name is missing | The feature is not part of the OpenIM WASM SDK public API.            | Use the OpenIM alternative on this page or implement the feature in a trusted backend.                 |
+
+## Next steps
+
+- [WASM SDK overview](/docs/chat/sdk/v4/wasm/overview)
+- [Authentication](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)
+- [Receive group messages](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
