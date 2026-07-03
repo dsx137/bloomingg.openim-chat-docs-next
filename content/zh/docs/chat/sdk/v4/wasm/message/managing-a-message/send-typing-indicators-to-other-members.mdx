@@ -47,29 +47,15 @@ function handleInputStatusChanged({ data }) {
 OpenIM.on(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
 ```
 
-组件卸载、退出会话或切换账号前，用同一个函数引用移除事件处理器。
-
-```ts
-OpenIM.off(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
-```
-
 ## 查询当前状态
 
 进入会话页时，可以用 `getInputstates()` 查询某个成员在当前会话中仍处于输入状态的平台列表。返回数组非空时展示该成员正在输入。
 
 ```ts
-const {
-  data: platformIDs,
-  errCode,
-  errMsg,
-} = await OpenIM.getInputstates({
+const { data: platformIDs } = await OpenIM.getInputstates({
   conversationID,
   userID: memberUserID,
 });
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to get input state');
-}
 
 if (platformIDs.length > 0) {
   showTypingIndicator(memberUserID);

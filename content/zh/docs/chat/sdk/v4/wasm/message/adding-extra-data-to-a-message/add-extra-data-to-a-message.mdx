@@ -133,17 +133,10 @@ await OpenIM.setMessageLocalEx({
 
 验证附加数据时，重点确认这些结果：
 
-- `createCustomMessage()`、`createAdvancedTextMessage()`、`sendMessage()` 或 `setMessageLocalEx()` 的响应符合你部署环境的成功约定，例如 `errCode === 0`。
+- `createCustomMessage()`、`createAdvancedTextMessage()`、`sendMessage()` 或 `setMessageLocalEx()` 的响应符合你部署环境的成功约定，并在失败时进入 `catch`。
 - 需要同步给其他成员的数据，可以在另一个已登录客户端通过 `CbEvents.OnRecvNewMessages` 收到。
 - 只写入 `localEx` 的状态不会出现在其他用户或其他设备的共享消息内容中。
 - 失败日志包含 `operationID`、`errCode` 和 `errMsg`，便于和服务端日志对齐。
-
-在组件卸载、退出登录或切换账号前，使用同一个处理函数引用调用 `off()`，避免重复消费消息。
-
-```ts
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-```
-
 ## 相关页面
 
 - [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)

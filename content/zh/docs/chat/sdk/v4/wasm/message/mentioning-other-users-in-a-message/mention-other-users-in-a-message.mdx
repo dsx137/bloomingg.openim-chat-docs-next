@@ -115,10 +115,9 @@ function handleNewMessages({ data }: { data: MessageItem[] }) {
 }
 
 OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
 ```
 
-同一个处理函数引用需要同时用于 `on()` 和 `off()`，否则组件重复挂载后可能多次消费同一批新消息。
+处理函数中按 `clientMsgID` 去重，可以避免补偿消息或多端同步时重复合并同一条消息。
 
 ## 限制
 

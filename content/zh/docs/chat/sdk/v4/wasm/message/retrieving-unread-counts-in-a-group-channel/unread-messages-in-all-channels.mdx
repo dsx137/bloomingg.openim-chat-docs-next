@@ -7,11 +7,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-
 调用 `getTotalUnreadMsgCount()` 可以获取当前登录用户所有会话的未读消息总数。返回的 `data` 是未读消息条数总和，适合用于应用图标、主导航、聊天入口或浏览器标签页角标。
 
 ```ts
-const { data: totalUnreadCount, errCode, errMsg } = await OpenIM.getTotalUnreadMsgCount();
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to load total unread count');
-}
+const { data: totalUnreadCount } = await OpenIM.getTotalUnreadMsgCount();
 
 renderTotalUnreadCount(totalUnreadCount);
 ```

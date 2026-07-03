@@ -13,13 +13,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-informatio
 
 ## Overview
 
-Retrieve fresh public user and group-member information for participants displayed in a conversation.
+Retrieve fresh public user and group-member information for participant profile surfaces. Conversation lists and direct-chat headers should use `ConversationItem.showName` from conversation data.
 
 This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
 
 ## OpenIM model
 
-Use public user lookup for direct conversations and group-member APIs when the display name should be group-specific.
+Use public user lookup for profile cards and add-friend flows. Use conversation data for conversation titles, and group-member APIs when the display name should be group-specific.
 
 Support status: public WASM SDK APIs cover this workflow.
 
@@ -80,10 +80,11 @@ type WSEvent<T = unknown> = {
 
 ## Implementation
 
-Use user lookup for account profile and member lookup for group-specific display names.
+Use user lookup for account profile cards and member lookup for group-specific display names.
 
 ```ts
-const { data: publicUsers } = await OpenIM.getUsersInfo(userIDs);
+const publicUsersResponse = await OpenIM.getUsersInfo(userIDs);
+const publicUsers = publicUsersResponse.data ?? [];
 
 const { data: members } = await OpenIM.getSpecifiedGroupMembersInfo({
   groupID,
@@ -102,7 +103,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 ## Verify the result
 
 - Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
-- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the OpenIM call resolves and the returned data or follow-up SDK event matches the expected state.
 - Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
 
 ## Troubleshooting
@@ -111,7 +112,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 | ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
 | The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
-| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| The SDK call rejects | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
 
 ## Next steps
 

@@ -17,11 +17,7 @@ import { CbEvents } from '@openim/wasm-client-sdk';
 
 const operationID = crypto.randomUUID();
 
-const {
-  data: applications,
-  errCode,
-  errMsg,
-} = await OpenIM.getGroupApplicationListAsRecipient(
+const { data: applications } = await OpenIM.getGroupApplicationListAsRecipient(
   {
     groupID: [groupID],
     handleResults: [0],
@@ -30,15 +26,6 @@ const {
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('getGroupApplicationListAsRecipient failed', {
-    errCode,
-    errMsg,
-    operationID,
-  });
-  throw new Error(errMsg || 'Failed to load group applications');
-}
 
 renderInvitations(applications);
 ```
@@ -51,6 +38,23 @@ const applicationGroupID = selectedApplication.groupID;
 const fromUserID = selectedApplication.userID;
 ```
 
+## 读取我发出的申请
+
+当前用户作为申请方时，使用 `getGroupApplicationListAsApplicant()` 查询自己发出的入群申请。它适合“我的申请记录”、“等待管理员审核”等页面，不用于群主或管理员处理别人提交的申请。
+
+```ts
+const { data: sentApplications } = await OpenIM.getGroupApplicationListAsApplicant({
+    groupID: [groupID],
+    handleResults: [0, 1, 2],
+    offset: 0,
+    count: 20,
+  });
+
+renderSentApplications(sentApplications);
+```
+
+如果页面只展示待审核申请，`handleResults` 只传未处理状态；如果页面要展示历史记录，可以同时包含已同意和已拒绝状态。
+
 ## 接受邀请
 
 调用 `acceptGroupApplication()` 同意该申请。`handleMsg` 会作为处理备注进入群申请记录，可用于展示“已同意”原因或审计操作。
@@ -58,7 +62,7 @@ const fromUserID = selectedApplication.userID;
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.acceptGroupApplication(
+await OpenIM.acceptGroupApplication(
   {
     groupID: applicationGroupID,
     fromUserID,
@@ -66,15 +70,6 @@ const { errCode, errMsg } = await OpenIM.acceptGroupApplication(
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('acceptGroupApplication failed', {
-    errCode,
-    errMsg,
-    operationID,
-  });
-  throw new Error(errMsg || 'Failed to accept group application');
-}
 
 markInvitationHandled({
   groupID: applicationGroupID,
@@ -92,7 +87,7 @@ markInvitationHandled({
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.refuseGroupApplication(
+await OpenIM.refuseGroupApplication(
   {
     groupID: applicationGroupID,
     fromUserID,
@@ -100,15 +95,6 @@ const { errCode, errMsg } = await OpenIM.refuseGroupApplication(
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('refuseGroupApplication failed', {
-    errCode,
-    errMsg,
-    operationID,
-  });
-  throw new Error(errMsg || 'Failed to refuse group application');
-}
 
 markInvitationHandled({
   groupID: applicationGroupID,
@@ -129,9 +115,9 @@ const { data: unhandledCount } = await OpenIM.getGroupApplicationUnhandledCount(
 updateInvitationBadge(unhandledCount);
 ```
 
-## 通知成员和刷新列表
+## 同步申请状态
 
-在用户进入群邀请列表前注册事件监听，避免漏掉前台运行期间的新申请和处理结果。收到事件后，按 `groupID`、申请人 ID 和处理状态合并本地列表；如果事件负载不足以更新完整 UI，再重新调用 `getGroupApplicationListAsRecipient()`。
+在用户进入群邀请列表前注册事件监听，避免漏掉前台运行期间的新申请和处理结果。收到事件后，按 `groupID`、申请人 ID 和处理状态合并本地列表；页面首次进入、手动刷新或重连恢复后，再调用 `getGroupApplicationListAsRecipient()` 校准完整列表。
 
 ```ts
 const handleApplicationAdded = ({ data }) => {
@@ -162,20 +148,14 @@ OpenIM.on(CbEvents.OnGroupApplicationAdded, handleApplicationAdded);
 OpenIM.on(CbEvents.OnGroupApplicationAccepted, handleApplicationAccepted);
 OpenIM.on(CbEvents.OnGroupApplicationRejected, handleApplicationRejected);
 OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroup);
-
-// 页面卸载或当前用户退出时移除监听。
-OpenIM.off(CbEvents.OnGroupApplicationAdded, handleApplicationAdded);
-OpenIM.off(CbEvents.OnGroupApplicationAccepted, handleApplicationAccepted);
-OpenIM.off(CbEvents.OnGroupApplicationRejected, handleApplicationRejected);
-OpenIM.off(CbEvents.OnJoinedGroupAdded, handleJoinedGroup);
 ```
 
 ## 校验处理结果
 
 - 确认 `login()` 已成功，并且在调用群申请接口前收到 `CbEvents.OnConnectSuccess`。
 - 确认查询接口返回未处理申请，并且提交处理时传入的是申请人的 `fromUserID`。
-- 确认接受或拒绝接口响应满足 `errCode === 0`，失败时记录 `errCode`、`errMsg` 和 `operationID`。
-- 确认相关客户端收到 `CbEvents.OnGroupApplicationAccepted`、`CbEvents.OnGroupApplicationRejected` 或 `CbEvents.OnJoinedGroupAdded`，并能通过重新查询拿到一致状态。
+- 确认调用成功 resolve，并且返回数据或后续事件符合预期。
+- 确认相关客户端收到 `CbEvents.OnGroupApplicationAccepted`、`CbEvents.OnGroupApplicationRejected` 或 `CbEvents.OnJoinedGroupAdded`，并能把事件载荷合并到本地申请列表或已加入群组列表。
 
 ## 相关页面
 

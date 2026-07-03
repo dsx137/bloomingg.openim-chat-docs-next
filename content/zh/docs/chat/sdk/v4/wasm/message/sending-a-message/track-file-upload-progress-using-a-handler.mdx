@@ -112,23 +112,14 @@ function attachSentMessage(localUploadID: string, sentMessage: MessageItem) {
 
 发送失败时保留 `operationID`、`errCode` 和 `errMsg`。如果业务支持重试，重试时重新创建消息或按你的上传策略复用已上传文件地址，避免把旧进度误写到新的消息气泡。
 
-## 移除处理器
+## 监听上传进度事件
 
-上传事件注册在 SDK 实例上。页面或组件退出时应移除监听，避免重复更新同一条本地消息。
+上传事件注册在 SDK 实例上。处理器中应根据 `clientMsgID` 合并进度，避免把旧上传状态误写到新的消息气泡。
 
 ```ts
-function registerUploadProgressHandlers() {
-  OpenIM.on(CbEvents.OnProgress, handleUploadProgress);
-  OpenIM.on(CbEvents.UploadComplete, handleUploadComplete);
-
-  return () => {
-    OpenIM.off(CbEvents.OnProgress, handleUploadProgress);
-    OpenIM.off(CbEvents.UploadComplete, handleUploadComplete);
-  };
-}
+OpenIM.on(CbEvents.OnProgress, handleUploadProgress);
+OpenIM.on(CbEvents.UploadComplete, handleUploadComplete);
 ```
-
-在 React、Vue 或其他前端框架中，可以把返回的清理函数接入组件卸载逻辑。账号切换、退出登录或销毁 SDK 实例前也应执行相同清理。
 
 ## 验证上传结果
 

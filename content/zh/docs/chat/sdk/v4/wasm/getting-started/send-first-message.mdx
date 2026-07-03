@@ -128,9 +128,9 @@ OpenIM.on(CbEvents.OnConnectSuccess, () => {
   setConnectionState('connected');
 });
 
-OpenIM.on(CbEvents.OnConnectFailed, ({ errCode, errMsg, operationID }) => {
+OpenIM.on(CbEvents.OnConnectFailed, ({ operationID }) => {
   setConnectionState('failed');
-  console.error('OpenIM connection failed', { errCode, errMsg, operationID });
+  console.error('OpenIM connection failed', { operationID });
 });
 
 OpenIM.on(CbEvents.OnUserTokenExpired, ({ operationID }) => {
@@ -168,7 +168,7 @@ const target = {
 
 ### 第 5 步：发送消息
 
-OpenIM 发送文本消息分为两步：先创建 `MessageItem`，再通过 `sendMessage()` 发送到目标用户或群组。
+OpenIM 发送文本消息分为两步：先创建消息对象 `MessageItem`，再通过 `sendMessage()` 发送到目标用户或群组。
 
 ```ts
 const { data: message } = await OpenIM.createTextMessage('你好，OpenIM');
@@ -178,15 +178,6 @@ const response = await OpenIM.sendMessage({
   groupID: target.groupID,
   message,
 });
-
-if (response.errCode !== 0) {
-  console.error('OpenIM sendMessage failed', {
-    errCode: response.errCode,
-    errMsg: response.errMsg,
-    operationID: response.operationID,
-  });
-  throw new Error(response.errMsg || 'OpenIM message send failed.');
-}
 
 appendOutgoingMessage(response.data);
 ```
@@ -201,9 +192,6 @@ function handleNewMessages({ data }) {
 }
 
 OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
-
-// 页面卸载或退出登录时
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
 ```
 
 发送成功后，检查当前客户端的 `sendMessage()` 返回值，以及另一个已登录客户端是否收到 `CbEvents.OnRecvNewMessages` 事件。排查问题时保留 `errCode`、`errMsg` 和 `operationID`，便于和 OpenIM Server 日志对应。

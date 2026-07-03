@@ -1,72 +1,53 @@
 ---
 title: '用户概览'
-description: '了解 OpenIM WASM SDK 中账号资料、好友关系、黑名单、群成员、群运营者和在线状态的用户模型。'
+description: '了解 OpenIM WASM SDK 中账号资料、应用用户查询、好友关系、黑名单和在线状态的用户模型。'
 sourcePath: '/docs/chat/sdk/v4/wasm/user/overview-user'
 ---
 
-OpenIM WASM SDK 的用户能力围绕 `userID` 展开，但不同场景会返回不同的用户对象。实现资料卡、联系人页、群成员列表或成员管理面板时，先判断界面需要的是账号级资料、当前用户的关系状态，还是某个群里的成员身份。
+OpenIM WASM SDK 的用户能力围绕 `userID` 展开。实现资料卡、添加好友、联系人页或黑名单页时，先判断界面需要的是应用用户公开资料、当前用户的好友关系，还是当前用户的屏蔽状态。
+
+群成员列表、群内昵称、群角色和成员管理属于群组范围，应放在群组文档中处理。相关能力见 [获取群成员列表](/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members)。
 
 ## 用户类型
 
 OpenIM 不把所有用户都作为同一种列表返回。常见用户对象可以按使用场景区分：
 
-| 类型              | 适用场景                                                             | 主要接口                                                 |
-| ----------------- | -------------------------------------------------------------------- | -------------------------------------------------------- |
-| `SelfUserInfo`    | 当前登录用户的个人资料、设置页、当前账号头像和昵称                   | `getSelfUserInfo()`、`setSelfInfo()`                     |
-| `PublicUserItem`  | 按已知 `userID` 展示其他用户公开资料，例如资料卡、会话标题、@ 候选人 | `getUsersInfo()`                                         |
-| `FriendUserItem`  | 当前登录用户的好友列表和好友搜索结果                                 | `getFriendList()`、`searchFriends()`                     |
-| `BlackUserItem`   | 当前登录用户拉黑的用户                                               | `getBlackList()`、`addBlack()`、`removeBlack()`          |
-| `GroupMemberItem` | 群聊里的成员、群内昵称、群角色、禁言状态和入群信息                   | `getGroupMemberList()`、`getSpecifiedGroupMembersInfo()` |
-| `UserOnlineState` | 已订阅用户的在线状态                                                 | `subscribeUsersStatus()`、`getSubscribeUsersStatus()`    |
+| 类型 | 适用场景 | 主要接口 |
+| --- | --- | --- |
+| `SelfUserInfo` | 当前登录用户的个人资料、设置页、当前账号头像和昵称 | `getSelfUserInfo()`、`setSelfInfo()` |
+| `PublicUserItem` | 应用用户查询、添加好友候选人、陌生人资料卡 | `getUsersInfo()` |
+| `FriendUserItem` | 当前登录用户的好友列表、好友备注、置顶和关系扩展字段 | `getFriendListPage()`、`getSpecifiedFriendsInfo()` |
+| `BlackUserItem` | 当前登录用户拉黑的用户 | `getBlackList()`、`addBlack()`、`removeBlack()` |
+| `UserOnlineState` | 已订阅用户的在线状态 | `subscribeUsersStatus()`、`getSubscribeUsersStatus()` |
 
-同一个 `userID` 可能同时出现在公开资料、好友资料、黑名单和群成员资料中。渲染群内成员时优先使用 `GroupMemberItem` 的群内昵称和角色；渲染联系人关系时优先使用 `FriendUserItem` 或 `BlackUserItem`；只需要账号公开资料时再调用 `getUsersInfo()`。
+同一个 `userID` 可能同时出现在公开资料、好友资料、黑名单和群成员资料中。渲染联系人关系时优先使用 `FriendUserItem`；只需要账号公开资料时使用 `PublicUserItem`；渲染群内成员时优先使用 `GroupMemberItem`。会话列表和聊天页标题属于会话数据，优先使用 `ConversationItem.showName`。
 
 ```ts
 const { data: me } = await OpenIM.getSelfUserInfo();
-const { data: publicUsers } = await OpenIM.getUsersInfo(['user-a', 'user-b']);
-const { data: friends } = await OpenIM.getFriendList(true);
-const { data: members } = await OpenIM.getGroupMemberList({
-  groupID,
-  filter: 0,
+const publicUsersResponse = await OpenIM.getUsersInfo(['user-a', 'user-b']);
+const publicUsers = publicUsersResponse.data ?? [];
+const { data: friends } = await OpenIM.getFriendListPage({
   offset: 0,
   count: 50,
+  filterBlack: true,
 });
 ```
-
-## 群运营者
-
-OpenIM 的群运营者由群成员角色表示。群主和管理员仍然是 `GroupMemberItem`，只是 `roleLevel` 不同：通常 `100` 表示群主，`60` 表示管理员，`20` 表示普通成员。读取群主和管理员列表时使用 `getGroupMemberOwnerAndAdmin(groupID)`；调整成员角色时使用 `setGroupMemberInfo()`，并监听群成员资料变化事件刷新界面。
-
-```ts
-const { data: operators } = await OpenIM.getGroupMemberOwnerAndAdmin(groupID);
-
-await OpenIM.setGroupMemberInfo({
-  groupID,
-  userID: targetUserID,
-  roleLevel: 60,
-});
-
-OpenIM.on(CbEvents.OnGroupMemberInfoChanged, ({ data }) => {
-  mergeGroupMember(data);
-});
-```
-
-运营者能力是群范围内的权限，不等同于当前用户的黑名单。黑名单通过 `addBlack()` 和 `removeBlack()` 管理，只影响当前登录用户和目标用户之间的关系；群禁言则写入成员的 `muteEndTime`，需要在对应群内处理。
 
 ## 按主题查看功能
 
-用户相关页面按概念顺序分为读取用户、管理用户、更新资料与在线状态。下表列出常见需求和对应入口：
+用户相关页面按概念顺序分为应用用户查询、好友关系、黑名单、资料更新与在线状态。下表列出常见需求和对应入口：
 
-| 需求                                   | 推荐页面                                                                                                                                           |
-| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 读取群成员列表、成员搜索、指定成员资料 | [获取频道中的用户列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel)                                   |
-| 按业务规则展示成员和运营者顺序         | [按特定顺序获取成员和运营者列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order)  |
-| 查询已读某条群消息的成员               | [获取已读消息的成员](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-members-who-have-read-a-message)                                  |
-| 读取群主和管理员                       | [获取运营者列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators)                                                  |
-| 查看和维护当前用户黑名单               | [拉黑和取消拉黑其他成员](/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members)                                      |
-| 查询群内被禁言成员、禁言或解除禁言     | [禁言和解除禁言用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/mute-and-unmute-a-user)                                                   |
-| 读取当前用户资料或公开用户资料         | [更新用户资料](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile)                                     |
-| 订阅和读取在线状态                     | [获取用户在线状态](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user)                |
-| 刷新会话参与者或群成员的最新资料       | [获取参与者的最新信息](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants) |
+| 需求 | 推荐页面 |
+| --- | --- |
+| 按 `userID` 查询应用内用户，用于搜索添加好友或资料卡 | [查询应用用户](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application) |
+| 分页读取当前用户好友列表、好友备注和置顶状态 | [获取好友列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends) |
+| 按指定好友 ID 读取好友关系信息 | [获取指定好友信息](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information) |
+| 查看和维护当前用户黑名单 | [拉黑和取消拉黑其他用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members) |
+| 查询群内被禁言成员、禁言或解除禁言 | [禁言和解除禁言用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/mute-and-unmute-a-user) |
+| 读取当前用户资料或公开用户资料 | [更新用户资料](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile) |
+| 订阅和读取在线状态 | [获取用户在线状态](/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user) |
+| 读取群成员列表、成员搜索、指定成员资料 | [获取群成员列表](/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members) |
 
-用户事件适合用于保持这些列表同步。资料页可以监听 `CbEvents.OnSelfInfoUpdated`，好友和黑名单页可以监听 `CbEvents.OnFriendAdded`、`CbEvents.OnFriendDeleted`、`CbEvents.OnBlackAdded` 和 `CbEvents.OnBlackDeleted`，在线状态界面可以监听 `CbEvents.OnUserStatusChanged`。移除监听器时传入注册时的同一个函数引用，避免页面切换后重复合并事件。
+## 同步事件
+
+用户事件适合用于保持这些列表同步。资料页可以监听 `CbEvents.OnSelfInfoUpdated`，好友页可以监听 `CbEvents.OnFriendAdded`、`CbEvents.OnFriendDeleted` 和 `CbEvents.OnFriendInfoChanged`，黑名单页可以监听 `CbEvents.OnBlackAdded` 和 `CbEvents.OnBlackDeleted`，在线状态界面可以监听 `CbEvents.OnUserStatusChanged`。

@@ -1,0 +1,100 @@
+---
+title: '查询应用用户'
+description: '说明如何使用 OpenIM WASM SDK 按 userID 查询应用内用户公开资料，并用于搜索添加好友和资料卡展示。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application'
+---
+
+`getUsersInfo()` 可以按 `userID` 查询 OpenIM 应用内用户的公开资料，适合“搜索添加好友”“打开陌生人资料卡”等场景。
+
+如果你的产品需要按昵称、手机号、组织、邮箱或其他业务字段检索用户，应先通过业务后端完成搜索和权限控制，再把后端返回的 `userID` 传给 `getUsersInfo()` 读取 OpenIM 公开资料。管理员 token 和后台用户目录能力应只保存在可信后端。
+
+OpenIM 会话对象已经提供 `showName`。会话列表、聊天页标题和最近会话搜索应优先使用会话数据本身，避免把账号公开昵称覆盖到 SDK 已维护的会话展示名上。
+
+## 查询公开资料
+
+通过 SDK 实例调用 `getUsersInfo()`，传入一组 OpenIM 用户 ID，可以返回这些用户的账号级公开资料。好友备注、群内昵称和成员角色分别来自好友关系或群成员资料。
+
+#### 请求参数
+
+| 参数名 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `userIDList` | `string[]` | 必填 | 要查询的 OpenIM 用户 ID 列表。调用前建议去重，并控制单次请求数量。 |
+| `operationID` | `string` | 可选 | 链路追踪 ID，便于对应客户端和服务端日志。 |
+
+#### 返回值
+
+返回 `WsResponse<PublicUserItem[]>`。`data` 是用户公开资料数组。
+
+| 字段 | 类型 | 说明 |
+| --- | --- | --- |
+| `userID` | `string` | OpenIM 用户 ID。 |
+| `nickname` | `string` | 账号级公开昵称。 |
+| `faceURL` | `string` | 账号级公开头像地址。 |
+| `ex` | `string` | 账号级扩展字段，格式由业务约定。 |
+
+```ts
+const operationID = crypto.randomUUID();
+const userIDList = Array.from(new Set(['user_a', 'user_b']));
+
+try {
+  const response = await OpenIM.getUsersInfo(userIDList, operationID);
+  const users = response.data ?? [];
+  const usersByID = new Map(users.map((user) => [user.userID, user]));
+} catch (error) {
+  console.error('getUsersInfo failed', {
+    error,
+    operationID,
+    userIDList,
+  });
+  throw error;
+}
+```
+
+## 搜索添加好友
+
+常见的添加好友流程可以分成两步：业务侧先得到候选 `userID`，浏览器端再调用 `getUsersInfo()` 展示候选用户资料。确认目标用户后，再进入好友申请流程。
+
+```ts
+async function searchUsersForFriendRequest(keyword: string) {
+  const { userIDs } = await searchUserIDsFromYourBackend(keyword);
+
+  if (userIDs.length === 0) {
+    return [];
+  }
+
+  try {
+    const response = await OpenIM.getUsersInfo(userIDs);
+    const users = response.data ?? [];
+
+    return users.map((user) => ({
+      userID: user.userID,
+      displayName: user.nickname || user.userID,
+      avatar: user.faceURL,
+    }));
+  } catch (error) {
+    console.error('getUsersInfo failed', { error, userIDs });
+    throw error;
+  }
+}
+```
+
+如果产品只支持按用户 ID 精确搜索，可以省略后端搜索接口，直接把输入值作为 `userID` 调用 `getUsersInfo()`。如果产品支持模糊搜索或敏感字段搜索，应由后端负责鉴权、限流、脱敏和审计。
+
+## 按场景选择展示数据
+
+同一个 `userID` 在不同场景下可能有不同展示数据。渲染时应按场景选择数据源：
+
+| 场景 | 优先使用 |
+| --- | --- |
+| 应用用户搜索、陌生人资料卡 | `PublicUserItem` |
+| 好友列表、联系人页、好友备注 | `FriendUserItem` |
+| 群成员列表、群内昵称、群角色 | `GroupMemberItem` |
+| 会话列表、单聊会话标题 | `ConversationItem.showName` |
+
+好友备注、群内昵称和会话 `showName` 分别来自好友关系、群成员资料和会话数据。需要好友关系信息时请继续阅读 [获取好友列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends) 和 [获取指定好友信息](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information)；需要群成员信息时请阅读 [获取群成员列表](/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members)。
+
+## 下一步
+
+- [获取好友列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends)
+- [获取指定好友信息](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information)
+- [管理好友申请](/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests)

@@ -13,15 +13,7 @@ OpenIM WASM SDK 不提供把消息直接复制到目标频道的单一 `copyMess
 ```ts
 const operationID = crypto.randomUUID();
 
-const {
-  data: forwardMessage,
-  errCode,
-  errMsg,
-} = await OpenIM.createForwardMessage(sourceMessage, operationID);
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to create forward message');
-}
+const { data: forwardMessage } = await OpenIM.createForwardMessage(sourceMessage, operationID);
 
 const { data: sentMessage } = await OpenIM.sendMessage(
   {
@@ -58,19 +50,11 @@ await OpenIM.sendMessage({
 ```ts
 const summaryList = selectedMessages.map((message) => message.content || '[消息]');
 
-const {
-  data: mergerMessage,
-  errCode,
-  errMsg,
-} = await OpenIM.createMergerMessage({
+const { data: mergerMessage } = await OpenIM.createMergerMessage({
   messageList: selectedMessages,
   title: '聊天记录',
   summaryList,
 });
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to create merger message');
-}
 
 await OpenIM.sendMessage({
   recvID: '',
@@ -90,7 +74,7 @@ await OpenIM.sendMessage({
 | `targetGroupID`     | `string`        | 群聊目标群组 ID。发送到单聊时传空字符串。                    |
 | `operationID`       | `string`        | 可选的调用追踪 ID，便于排查发送失败。                        |
 
-`createForwardMessage()` 和 `createMergerMessage()` 只生成待发送消息；目标会话里的在线成员会在 `sendMessage()` 成功后通过 `CbEvents.OnRecvNewMessages` 收到新消息。失败时记录 `errCode`、`errMsg` 和 `operationID`，并确认当前用户具备目标群聊的发言权限。
+`createForwardMessage()` 和 `createMergerMessage()` 只生成待发送消息；目标会话里的在线成员会在 `sendMessage()` 成功后通过 `CbEvents.OnRecvNewMessages` 收到新消息。失败时在 `catch` 中记录错误对象 和 `operationID`，并确认当前用户具备目标群聊的发言权限。
 
 ## 相关页面
 

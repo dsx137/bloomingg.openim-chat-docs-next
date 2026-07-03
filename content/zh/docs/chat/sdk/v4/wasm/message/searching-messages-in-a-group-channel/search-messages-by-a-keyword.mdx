@@ -16,23 +16,13 @@ OpenIM WASM SDK 通过 `searchLocalMessages()` 搜索当前用户本地可见的
 const getGroupConversationID = async (groupID: string) => {
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.getConversationIDBySessionType(
+  const { data } = await OpenIM.getConversationIDBySessionType(
     {
       sourceID: groupID,
       sessionType: 3,
     },
     operationID,
   );
-
-  if (errCode !== 0) {
-    console.error('getConversationIDBySessionType failed', {
-      errCode,
-      errMsg,
-      operationID,
-      groupID,
-    });
-    throw new Error(errMsg || 'Failed to get group conversation');
-  }
 
   return data;
 };
@@ -69,7 +59,7 @@ const searchGroupMessagesByKeyword = async ({
 
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.searchLocalMessages(
+  const { data } = await OpenIM.searchLocalMessages(
     {
       conversationID,
       keywordList: [normalizedKeyword],
@@ -80,17 +70,6 @@ const searchGroupMessagesByKeyword = async ({
     },
     operationID,
   );
-
-  if (errCode !== 0) {
-    console.error('searchLocalMessages failed', {
-      errCode,
-      errMsg,
-      operationID,
-      conversationID,
-      keyword: normalizedKeyword,
-    });
-    throw new Error(errMsg || 'Failed to search group messages');
-  }
 
   return toSearchRows(data);
 };
@@ -174,10 +153,6 @@ const handleMessageRevoked = ({ data }: { data: MessageItem }) => {
 OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
 OpenIM.on(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
 OpenIM.on(CbEvents.OnSyncServerFinish, rerunCurrentSearch);
-
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
-OpenIM.off(CbEvents.OnSyncServerFinish, rerunCurrentSearch);
 ```
 
 跳转到某条搜索结果时，使用 `clientMsgID` 和 `conversationID` 重新定位消息；需要展示上下文时，再调用 `findMessageList()` 或 `fetchSurroundingMessages()` 读取目标消息附近的聊天记录。

@@ -35,12 +35,7 @@ OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
 
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.dismissGroup(groupID, operationID);
-
-if (errCode !== 0) {
-  console.error('dismissGroup failed', { errCode, errMsg, groupID, operationID });
-  throw new Error(errMsg || 'Failed to dismiss group');
-}
+await OpenIM.dismissGroup(groupID, operationID);
 
 closeChannelView(groupID);
 ```
@@ -54,20 +49,10 @@ closeChannelView(groupID);
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.deleteConversationAndDeleteAllMsg(
+await OpenIM.deleteConversationAndDeleteAllMsg(
   conversationID,
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('deleteConversationAndDeleteAllMsg failed', {
-    errCode,
-    errMsg,
-    conversationID,
-    operationID,
-  });
-  throw new Error(errMsg || 'Failed to delete conversation');
-}
 
 removeConversation(conversationID);
 ```
@@ -109,7 +94,7 @@ const handleConversationChanged = ({ data, operationID }) => {
 
 - 确认调用删除动作前 `login()` 已成功，并且浏览器收到 `CbEvents.OnConnectSuccess`。
 - 调用 `dismissGroup()` 时确认当前用户有解散群组的权限，并且传入的是正确的 `groupID`。
-- 确认 SDK 响应满足 `errCode === 0`；失败时记录 `errCode`、`errMsg`、`operationID` 和目标 ID。
+- 确认 SDK 调用成功 resolve，并且返回数据或后续事件符合预期。
 - 在另一个已登录成员会话中确认解散群组能触发群组删除相关事件，并且旧 `groupID` 不再作为可用聊天入口展示。
 - 对会话级删除，确认其他成员仍然可以访问群组，只有当前账号的聊天列表或消息历史发生变化。
 

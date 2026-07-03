@@ -77,7 +77,7 @@ OpenIM.on(CbEvents.OnRecvGroupReadReceipt, handleGroupReadReceipt);
 
 ## 保持计数同步
 
-启动时主动读取一次未读项目，运行期间用事件更新本地状态。总未读消息数监听 `CbEvents.OnTotalUnreadMessageCountChanged`；会话未读和提及状态监听 `CbEvents.OnConversationChanged`；群申请红点监听 `CbEvents.OnGroupApplicationAdded`、`CbEvents.OnGroupApplicationAccepted` 和 `CbEvents.OnGroupApplicationRejected` 后重新计算或重新查询。
+启动时主动读取一次未读项目，运行期间用事件更新本地状态。总未读消息数监听 `CbEvents.OnTotalUnreadMessageCountChanged`；会话未读和提及状态监听 `CbEvents.OnConversationChanged`；群申请红点监听 `CbEvents.OnGroupApplicationAdded`、`CbEvents.OnGroupApplicationAccepted` 和 `CbEvents.OnGroupApplicationRejected` 后增量合并申请状态。
 
 ```ts
 OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
@@ -86,11 +86,22 @@ OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
 
 OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
   mergeConversationList(Array.isArray(data) ? data : [data]);
-  refreshUnreadConversationItems();
+  recalculateUnreadConversationItems();
 });
 
-OpenIM.on(CbEvents.OnGroupApplicationAdded, () => {
-  refreshPendingGroupApplications();
+OpenIM.on(CbEvents.OnGroupApplicationAdded, ({ data }) => {
+  upsertPendingGroupApplication(data);
+  increasePendingGroupApplicationCount(data);
+});
+
+OpenIM.on(CbEvents.OnGroupApplicationAccepted, ({ data }) => {
+  markGroupApplicationAccepted(data);
+  settlePendingGroupApplicationCount(data);
+});
+
+OpenIM.on(CbEvents.OnGroupApplicationRejected, ({ data }) => {
+  markGroupApplicationRejected(data);
+  settlePendingGroupApplicationCount(data);
 });
 ```
 

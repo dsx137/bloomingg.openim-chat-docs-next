@@ -26,36 +26,33 @@ const refreshGroupChannel = async ({
 }: RefreshGroupChannelParams) => {
   const operationID = crypto.randomUUID();
 
-  const [conversationResult, groupResult, membersResult] = await Promise.all([
-    OpenIM.getOneConversation(
-      {
-        sourceID: groupID,
-        sessionType: 3,
-      },
-      operationID,
-    ),
-    OpenIM.getSpecifiedGroupsInfo([groupID], operationID),
-    OpenIM.getGroupMemberList(
-      {
-        groupID,
-        filter: 0,
-        offset: memberOffset,
-        count: memberCount,
-      },
-      operationID,
-    ),
-  ]);
+  let conversationResult;
+  let groupResult;
+  let membersResult;
 
-  for (const result of [conversationResult, groupResult, membersResult]) {
-    if (result.errCode !== 0) {
-      console.error('refresh group channel failed', {
-        errCode: result.errCode,
-        errMsg: result.errMsg,
-        operationID: result.operationID,
-        groupID,
-      });
-      throw new Error(result.errMsg || 'Failed to refresh group channel');
-    }
+  try {
+    [conversationResult, groupResult, membersResult] = await Promise.all([
+      OpenIM.getOneConversation(
+        {
+          sourceID: groupID,
+          sessionType: 3,
+        },
+        operationID,
+      ),
+      OpenIM.getSpecifiedGroupsInfo([groupID], operationID),
+      OpenIM.getGroupMemberList(
+        {
+          groupID,
+          filter: 0,
+          offset: memberOffset,
+          count: memberCount,
+        },
+        operationID,
+      ),
+    ]);
+  } catch (error) {
+    console.error('refresh group channel failed', { error, operationID, groupID });
+    throw error;
   }
 
   replaceConversation(conversationResult.data);
@@ -93,13 +90,6 @@ OpenIM.on(CbEvents.OnConnectSuccess, refreshVisibleGroupChannel);
 OpenIM.on(CbEvents.OnSyncServerFinish, refreshVisibleGroupChannel);
 ```
 
-页面卸载、退出登录或切换账号时，用同一个函数引用移除处理器：
-
-```ts
-OpenIM.off(CbEvents.OnConnectSuccess, refreshVisibleGroupChannel);
-OpenIM.off(CbEvents.OnSyncServerFinish, refreshVisibleGroupChannel);
-```
-
 如果你的应用在 `login()` 前已经注册了连接事件，重连后的刷新逻辑可以复用同一套连接状态管理。不要在重连事件里再次调用 `login()`；只刷新当前页面需要的数据。
 
 ## 合并实时变化
@@ -128,7 +118,7 @@ OpenIM.on(CbEvents.OnGroupMemberInfoChanged, ({ data }) => {
 });
 ```
 
-当事件只携带局部数据，或你需要以服务端记录为准时，可以在事件处理器中记录受影响的 `groupID`，再对 `refreshGroupChannel()` 做防抖或节流。这样既能保持 UI 实时更新，也能避免短时间内重复请求同一个群聊频道。
+事件处理器应先合并回调中的 `data`。如果还需要以服务端记录做校准，可以在页面首次进入、用户手动刷新或重连恢复后，对 `refreshGroupChannel()` 做防抖或节流，避免事件短时间内触发重复请求。
 
 ## 刷新结果的使用方式
 

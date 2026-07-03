@@ -54,9 +54,9 @@ const handleConnectSuccess = () => {
   loadInitialConversationState();
 };
 
-const handleConnectFailed = ({ errCode, errMsg, operationID }) => {
+const handleConnectFailed = ({ operationID }) => {
   setConnectionState('failed');
-  reportConnectionError({ errCode, errMsg, operationID });
+  reportConnectionError({ operationID });
 };
 
 const handleTokenExpired = ({ operationID }) => {
@@ -64,8 +64,8 @@ const handleTokenExpired = ({ operationID }) => {
   requestFreshToken();
 };
 
-const handleTokenInvalid = ({ errCode, errMsg, operationID }) => {
-  console.error('OpenIM token invalid', { errCode, errMsg, operationID });
+const handleTokenInvalid = ({ operationID }) => {
+  console.error('OpenIM token invalid', { operationID });
   clearLocalSession();
   redirectToSignIn();
 };

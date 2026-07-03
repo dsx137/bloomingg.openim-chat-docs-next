@@ -63,7 +63,6 @@ function handleNewMessages({ data }: { data: MessageItem[] }) {
 }
 
 OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
 ```
 
 群聊接收流程见[接收群聊消息](/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)。

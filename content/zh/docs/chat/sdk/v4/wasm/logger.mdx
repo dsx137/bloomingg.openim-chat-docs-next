@@ -109,16 +109,6 @@ async function runOpenIMTask<T>(
 
   try {
     const response = await task(operationID);
-
-    if (response.errCode !== 0) {
-      appLogger.warn('openim_api_warning', {
-        name,
-        errCode: response.errCode,
-        errMsg: response.errMsg,
-        operationID: response.operationID || operationID,
-      });
-    }
-
     return response;
   } catch (error) {
     appLogger.error('openim_api_exception', {

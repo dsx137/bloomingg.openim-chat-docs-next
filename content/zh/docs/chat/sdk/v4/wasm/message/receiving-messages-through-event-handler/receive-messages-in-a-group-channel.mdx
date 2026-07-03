@@ -151,18 +151,7 @@ OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
 });
 ```
 
-## 移除事件处理器
-
-`off()` 必须接收注册时同一个函数引用。组件卸载、退出登录或切换账号前移除监听器，可以避免重复渲染、重复清理未读数和内存泄漏。
-
-```ts
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnRecvOfflineNewMessages, handleOfflineMessages);
-OpenIM.off(CbEvents.OnRecvOnlineOnlyMessages, handleOnlineOnlyMessages);
-OpenIM.off(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
-```
-
-如果事件注册在全局消息状态层，只在 SDK 销毁或账号切换时清理；不要在每次进入同一个群聊页面时重复注册全局处理器。
+如果事件注册在全局消息状态层，不要在每次进入同一个群聊页面时重复注册全局处理器；处理函数中按 `clientMsgID` 去重，避免重复渲染和重复清理未读数。
 
 ## 验证接收流程
 

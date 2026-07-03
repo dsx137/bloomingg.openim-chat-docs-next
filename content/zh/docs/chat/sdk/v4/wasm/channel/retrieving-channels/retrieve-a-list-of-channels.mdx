@@ -13,12 +13,7 @@ OpenIM 的频道列表通常由两类数据组成：`ConversationItem` 用于聊
 `getAllConversationList()` 返回当前登录用户本地可见的全部会话。它适合会话数量不大、或应用启动后需要一次性恢复聊天列表状态的场景。
 
 ```ts
-const { data: conversations, errCode, errMsg, operationID } = await OpenIM.getAllConversationList();
-
-if (errCode !== 0) {
-  console.error('getAllConversationList failed', { errCode, errMsg, operationID });
-  throw new Error(errMsg || 'Failed to load conversations');
-}
+const { data: conversations, operationID } = await OpenIM.getAllConversationList();
 
 replaceConversationList(conversations);
 ```
@@ -33,15 +28,10 @@ replaceConversationList(conversations);
 const pageSize = 30;
 
 const loadConversationPage = async (pageIndex: number) => {
-  const { data, errCode, errMsg, operationID } = await OpenIM.getConversationListSplit({
+  const { data, operationID } = await OpenIM.getConversationListSplit({
     offset: pageIndex * pageSize,
     count: pageSize,
   });
-
-  if (errCode !== 0) {
-    console.error('getConversationListSplit failed', { errCode, errMsg, operationID });
-    return [];
-  }
 
   return data;
 };
@@ -57,12 +47,7 @@ appendConversations(firstPage);
 `getJoinedGroupList()` 返回当前用户已加入的全部群组。它适合群组数量不大、或需要在设置页、转发页、群组选择器中一次性展示当前用户可访问群组的场景。
 
 ```ts
-const { data: groups, errCode, errMsg, operationID } = await OpenIM.getJoinedGroupList();
-
-if (errCode !== 0) {
-  console.error('getJoinedGroupList failed', { errCode, errMsg, operationID });
-  throw new Error(errMsg || 'Failed to load groups');
-}
+const { data: groups, operationID } = await OpenIM.getJoinedGroupList();
 
 replaceJoinedGroups(groups);
 ```
@@ -76,19 +61,12 @@ replaceJoinedGroups(groups);
 ```ts
 const groupPageSize = 50;
 
-const {
-  data: groupPage,
-  errCode,
-  errMsg,
-  operationID,
-} = await OpenIM.getJoinedGroupListPage({
+const { data: groupPage, operationID } = await OpenIM.getJoinedGroupListPage({
   offset: 0,
   count: groupPageSize,
 });
 
-if (errCode !== 0) {
-  console.error('getJoinedGroupListPage failed', { errCode, errMsg, operationID });
-} else {
+ else {
   appendJoinedGroups(groupPage);
 }
 ```
@@ -175,25 +153,12 @@ const handleTotalUnreadChanged = ({ data }) => {
   updateTotalUnreadCount(data);
 };
 
-const registerChannelListEvents = () => {
-  OpenIM.on(CbEvents.OnNewConversation, handleNewConversation);
-  OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
-  OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
-  OpenIM.on(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
-  OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
-  OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
-
-  return () => {
-    OpenIM.off(CbEvents.OnNewConversation, handleNewConversation);
-    OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
-    OpenIM.off(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
-    OpenIM.off(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
-    OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
-    OpenIM.off(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
-  };
-};
-
-const cleanupChannelListEvents = registerChannelListEvents();
+OpenIM.on(CbEvents.OnNewConversation, handleNewConversation);
+OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
+OpenIM.on(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
+OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
+OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
 ```
 
 `OnNewConversation` 通常用于插入新会话，`OnConversationChanged` 用于更新已有会话的未读数、最后消息、置顶或草稿状态。`OnJoinedGroupAdded`、`OnJoinedGroupDeleted` 和 `OnGroupInfoChanged` 用于维护群资料缓存。群组被解散时还可以监听 `CbEvents.OnGroupDismissed`，把相关入口置为不可用或从列表中移除。
@@ -201,7 +166,7 @@ const cleanupChannelListEvents = registerChannelListEvents();
 ## 校验列表结果
 
 - 确认 `login()` 已成功，并且在读取列表前收到 `CbEvents.OnConnectSuccess`。
-- 确认列表请求响应满足 `errCode === 0`，失败时记录 `errCode`、`errMsg` 和 `operationID`。
+- 确认调用成功 resolve，并且返回数据或后续事件符合预期。
 - 确认会话列表能拿到预期的 `conversationID`，群聊会话能关联到正确的 `groupID`。
 - 确认分页加载不会重复插入同一个 `conversationID` 或 `groupID`。
 - 在另一个已登录浏览器会话中发送消息、创建群组或修改群资料，确认当前页面能通过事件更新列表。

@@ -9,21 +9,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-chan
 查询前需要准备消息所在的 `conversationID` 和目标消息的 `clientMsgID`。`filter: 0` 查询已读成员，`filter: 1` 查询未读成员。
 
 ```ts
-const {
-  data: readMembers,
-  errCode,
-  errMsg,
-} = await OpenIM.getGroupMessageReaderList({
+const { data: readMembers } = await OpenIM.getGroupMessageReaderList({
   conversationID,
   clientMsgID,
   filter: 0,
   offset: 0,
   count: 50,
 });
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to get read members');
-}
 
 renderReadMembers(readMembers);
 ```

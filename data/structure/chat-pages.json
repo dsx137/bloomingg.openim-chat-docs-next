@@ -3280,6 +3280,22 @@
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/moderating-a-user/ban-and-unban-a-user.mdx"
   },
   {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests",
+    "openimPath": "/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests",
+    "title": "Manage friend requests",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends",
+    "openimPath": "/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends",
+    "title": "Update or delete friends",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends.mdx"
+  },
+  {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members",
     "title": "Block and unblock other members",
@@ -3302,14 +3318,6 @@
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user.mdx"
-  },
-  {
-    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-members-who-have-read-a-message",
-    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-members-who-have-read-a-message",
-    "title": "Retrieve members who have read a message",
-    "context": "chat/sdk/v4/wasm",
-    "template": "guide",
-    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-members-who-have-read-a-message.mdx"
   },
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication",
@@ -3598,6 +3606,14 @@
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
+    "openimPath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
+    "title": "Insert a local message",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message.mdx"
   },
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/display-open-graph-tags-in-a-message",
@@ -3896,6 +3912,14 @@
     "contentFile": "content/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message.mdx"
   },
   {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
+    "openimPath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
+    "title": "Create media and rich messages",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages.mdx"
+  },
+  {
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
     "openimPath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
     "title": "Send an admin message",
@@ -4040,36 +4064,28 @@
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile.mdx"
   },
   {
-    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
-    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
-    "title": "Retrieve a list of members and operators in a specific order",
-    "context": "chat/sdk/v4/wasm",
-    "template": "guide",
-    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order.mdx"
-  },
-  {
-    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators",
-    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators",
-    "title": "Retrieve a list of operators",
-    "context": "chat/sdk/v4/wasm",
-    "template": "guide",
-    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-operators.mdx"
-  },
-  {
-    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
-    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
-    "title": "Retrieve a list of users in a channel",
-    "context": "chat/sdk/v4/wasm",
-    "template": "guide",
-    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-a-channel.mdx"
-  },
-  {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "title": "Retrieve a list of users in an application",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+    "title": "Retrieve a list of friends",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
+    "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
+    "title": "Retrieve friend information",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information.mdx"
   },
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
@@ -5062,5 +5078,13 @@
     "context": "chat/platform-api/v3",
     "template": "overview",
     "contentFile": "content/docs/chat/platform-api/v3/error-codes.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
+    "openimPath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
+    "title": "Retrieve group members",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members.mdx"
   }
 ]

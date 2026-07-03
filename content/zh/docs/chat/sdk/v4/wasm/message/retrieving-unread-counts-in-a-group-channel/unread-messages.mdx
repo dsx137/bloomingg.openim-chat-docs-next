@@ -7,16 +7,12 @@ sourcePath: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-
 在 OpenIM 中，某个频道的未读消息数保存在对应的 `ConversationItem.unreadCount` 上。群聊通常用 `groupID` 标识群组，用 `conversationID` 标识当前用户聊天列表中的会话记录；读取未读数时优先使用 `conversationID`。
 
 ```ts
-const {
-  data: conversations,
-  errCode,
-  errMsg,
-} = await OpenIM.getMultipleConversation([conversationID]);
+const { data: conversations } = await OpenIM.getMultipleConversation([conversationID]);
 
 const conversation = conversations?.[0];
 
-if (errCode !== 0 || !conversation) {
-  throw new Error(errMsg || 'Conversation not found');
+if (!conversation) {
+  throw new Error('Conversation not found');
 }
 
 renderChannelUnreadCount(conversation.conversationID, conversation.unreadCount);

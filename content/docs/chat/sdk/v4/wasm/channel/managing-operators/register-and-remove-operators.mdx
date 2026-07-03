@@ -1,6 +1,6 @@
 ---
-title: 'Register and remove operators'
-description: 'OpenIM WASM SDK guide for Register and remove operators, with API signatures, usage details, and verification steps.'
+title: 'Register and remove administrators'
+description: 'OpenIM WASM SDK guide for promoting group members to administrators and demoting them to normal members.'
 product: 'sdk'
 context: 'chat/sdk/v4/wasm'
 template: 'guide'
@@ -13,7 +13,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remo
 
 ## Overview
 
-Manage OpenIM group operators by promoting members to admin role or demoting them back to normal member role.
+Manage OpenIM group administrators by promoting members to admin role or demoting them back to normal member role.
 
 This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
 
@@ -44,8 +44,6 @@ Relevant public signatures:
 
 ```ts
 function getSDK(config?: WasmPathConfig): SDK;
-getGroupMemberOwnerAndAdmin: (data: string, operationID?: string) =>
-  Promise<WsResponse<GroupMemberItem[]>>;
 setGroupMemberInfo: <T>(data: UpdateMemberInfoParams, operationID?: string) =>
   Promise<WsResponse<T>>;
 getGroupMemberList: (params: GetGroupMemberParams, operationID?: string) =>
@@ -84,13 +82,24 @@ type WSEvent<T = unknown> = {
 Promote or demote group members with `setGroupMemberInfo()`.
 
 ```ts
-const { data: operators } = await OpenIM.getGroupMemberOwnerAndAdmin(groupID);
-
 await OpenIM.setGroupMemberInfo({
   groupID,
   userID,
   roleLevel: 60,
 });
+```
+
+If the UI needs to show administrators, retrieve group members and filter by `roleLevel`.
+
+```ts
+const { data: members } = await OpenIM.getGroupMemberList({
+  groupID,
+  filter: 0,
+  offset: 0,
+  count: 100,
+});
+
+const admins = members.filter((member) => member.roleLevel === 60);
 ```
 
 ## Returned data and events
@@ -104,7 +113,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 ## Verify the result
 
 - Confirm `login()` succeeds and `CbEvents.OnConnectSuccess` fires before calling the task API.
-- Confirm the SDK response has `errCode === 0` or follows your deployment's success convention.
+- Confirm the OpenIM call resolves and the returned data or follow-up SDK event matches the expected state.
 - Confirm the expected SDK event fires in another signed-in browser session when the action should be visible to other users.
 
 ## Troubleshooting
@@ -113,7 +122,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 | ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
 | The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
-| The response has an error code | The server rejected the request or the current user lacks permission. | Log `errCode`, `errMsg`, and `operationID`; verify group role, token, and target IDs.                  |
+| The SDK call rejects | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
 
 ## Next steps
 

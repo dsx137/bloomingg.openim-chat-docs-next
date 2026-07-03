@@ -1,0 +1,67 @@
+---
+title: 'Update or delete friends'
+description: 'OpenIM WASM SDK guide for updating friend remarks, pinned state, extension data, and deleting friends.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-01'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends'
+---
+
+## Overview
+
+Use `updateFriends()` to update relationship fields and `deleteFriend()` to remove a friend relationship.
+
+## OpenIM model
+
+These methods operate on the current user's relationship with target users.
+
+## Prerequisites
+
+- Log in as the relationship owner.
+- Prepare the target friend user IDs.
+
+## API signatures
+
+```ts
+updateFriends: (
+  data: UpdateFriendsParams,
+  operationID?: string,
+) => Promise<WsResponse<unknown>>;
+deleteFriend: (data: string, operationID?: string) => Promise<WsResponse<unknown>>;
+```
+
+## Implementation
+
+```ts
+await OpenIM.updateFriends({
+  friendUserIDs: ['user_b'],
+  remark: 'Alex',
+  isPinned: true,
+  ex: JSON.stringify({ source: 'crm' }),
+});
+
+await OpenIM.deleteFriend('user_b');
+```
+
+## Returned data and events
+
+Refresh the contact list when `CbEvents.OnFriendInfoChanged` or `CbEvents.OnFriendDeleted` fires.
+
+## Verify the result
+
+- Confirm remarks and pinned state appear after reload.
+- Confirm deleting a friend removes the relationship from the list.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Remark did not change | The target user is not a friend | Confirm the relationship with `checkFriend()`. |
+
+## Next steps
+
+- [Retrieve a list of friends](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends)

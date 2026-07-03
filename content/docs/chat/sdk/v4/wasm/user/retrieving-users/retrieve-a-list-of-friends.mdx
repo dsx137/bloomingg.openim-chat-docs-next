@@ -1,0 +1,45 @@
+---
+title: 'Retrieve a list of friends'
+description: 'OpenIM WASM SDK guide for retrieving the current user friend list with getFriendListPage.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-01'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends'
+---
+
+## Overview
+
+Use `getFriendListPage()` to retrieve the current signed-in user's friend relationship list in pages.
+
+## API signatures
+
+```ts
+getFriendListPage: (
+  data: OffsetParams & { filterBlack?: boolean },
+  operationID?: string,
+) => Promise<WsResponse<FriendUserItem[]>>;
+```
+
+## Implementation
+
+```ts
+const { data: friends } = await OpenIM.getFriendListPage({
+  offset: 0,
+  count: 50,
+  filterBlack: true,
+});
+
+```
+
+## Returned data and events
+
+The response contains one page of `FriendUserItem[]`. Refresh the first page when friendship events arrive.
+
+## Next steps
+
+- [Retrieve friend information](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information)
+- [Manage friend requests](/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests)

@@ -23,11 +23,7 @@ OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
 async function clearGroupChannelHistory(groupID: string) {
   const operationID = crypto.randomUUID();
 
-  const {
-    data: conversationID,
-    errCode,
-    errMsg,
-  } = await OpenIM.getConversationIDBySessionType(
+  const { data: conversationID } = await OpenIM.getConversationIDBySessionType(
     {
       sourceID: groupID,
       sessionType: 3,
@@ -35,15 +31,7 @@ async function clearGroupChannelHistory(groupID: string) {
     operationID,
   );
 
-  if (errCode !== 0) {
-    throw new Error(errMsg || 'Failed to get conversation ID');
-  }
-
   const clearResult = await OpenIM.clearConversationAndDeleteAllMsg(conversationID, operationID);
-
-  if (clearResult.errCode !== 0) {
-    throw new Error(clearResult.errMsg || 'Failed to clear chat history');
-  }
 
   removeMessagesFromConversation(conversationID);
   resetConversationPreview(conversationID);
@@ -54,7 +42,7 @@ async function clearGroupChannelHistory(groupID: string) {
 
 `clearConversationAndDeleteAllMsg()` 适合“保留群聊入口，只清空当前聊天窗口历史”的用户动作。若产品动作是“删除此聊天”，使用 `deleteConversationAndDeleteAllMsg(conversationID)` 删除当前用户的会话记录和消息；若是账号级重置，才考虑 `deleteAllMsgFromLocal()` 或 `deleteAllMsgFromLocalAndSvr()`。这些账号级 API 不接收 `groupID` 或 `conversationID`，不应挂在单个群组频道的清空按钮上。
 
-清空历史后，确认 SDK 响应的 `errCode === 0`，当前聊天窗口不再展示旧消息，刷新页面后旧消息不会从本地缓存恢复。清空后收到的新群消息仍应通过新消息事件进入该会话，并作为新的历史起点展示。
+清空历史调用成功 resolve 后，确认当前聊天窗口不再展示旧消息，刷新页面后旧消息不会从本地缓存恢复。清空后收到的新群消息仍应通过新消息事件进入该会话，并作为新的历史起点展示。
 
 ## 相关页面
 

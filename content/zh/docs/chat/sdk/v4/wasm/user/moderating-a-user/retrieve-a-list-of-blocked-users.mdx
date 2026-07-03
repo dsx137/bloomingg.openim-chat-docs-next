@@ -6,34 +6,30 @@ sourcePath: '/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-bl
 
 OpenIM 的黑名单是当前登录用户视角下的联系人关系。调用 `getBlackList()` 可以获取当前用户已经拉黑的用户，返回项使用 `BlackUserItem` 表示，适合黑名单设置页、用户资料卡关系状态和聊天入口限制。
 
-黑名单不是群组管理状态。群成员禁言、踢出或角色调整应使用群成员相关 API；`getBlackList()` 只回答“当前用户拉黑了哪些用户”。
+黑名单和群组管理状态是两类数据。群成员禁言、踢出或角色调整使用群成员相关 API；`getBlackList()` 用于读取当前用户维护的黑名单关系。
 
 ## 获取黑名单用户
 
-完成 SDK 初始化和 `login()` 后，调用 `getBlackList()` 读取当前用户的黑名单。空数组表示当前没有已拉黑用户，不应当作请求失败。
+完成 SDK 初始化和 `login()` 后，调用 `getBlackList()` 读取当前用户的黑名单。空数组表示当前没有已拉黑用户。
 
 ```ts
 async function loadBlockedUsers() {
   const operationID = crypto.randomUUID();
-  const { data, errCode, errMsg } = await OpenIM.getBlackList(operationID);
 
-  if (errCode !== 0) {
-    console.error('getBlackList failed', {
-      errCode,
-      errMsg,
-      operationID,
-    });
-    throw new Error(errMsg || 'Failed to load blocked users');
+  try {
+    const { data } = await OpenIM.getBlackList(operationID);
+    return data;
+  } catch (error) {
+    console.error('getBlackList failed', { error, operationID });
+    throw error;
   }
-
-  return data;
 }
 
 const blockedUsers = await loadBlockedUsers();
 replaceBlockedUsers(blockedUsers);
 ```
 
-资料卡、会话操作菜单或联系人列表通常只需要判断某个 `userID` 是否在黑名单中。建议用 `userID` 建立集合，不要用昵称、头像或备注判断关系状态。
+资料卡、会话操作菜单或联系人列表通常只需要判断某个 `userID` 是否在黑名单中。建议用 `userID` 建立集合，并把昵称、头像或备注只作为展示字段。
 
 ```ts
 const blockedUserIDs = new Set(blockedUsers.map((user) => user.userID));
@@ -72,10 +68,6 @@ function handleBlackDeleted({ data }) {
 
 OpenIM.on(CbEvents.OnBlackAdded, handleBlackAdded);
 OpenIM.on(CbEvents.OnBlackDeleted, handleBlackDeleted);
-
-// 页面卸载、退出登录或切换账号时移除。
-OpenIM.off(CbEvents.OnBlackAdded, handleBlackAdded);
-OpenIM.off(CbEvents.OnBlackDeleted, handleBlackDeleted);
 ```
 
-跨页面、刷新浏览器、断线重连或怀疑本地缓存不一致时，重新调用 `getBlackList()`，用完整结果替换本地黑名单缓存。拉黑和取消拉黑操作见 [拉黑和取消拉黑其他成员](/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members)。
+跨页面、刷新浏览器、断线重连或怀疑本地缓存不一致时，重新调用 `getBlackList()`，用完整结果替换本地黑名单缓存。拉黑和解除拉黑操作见 [拉黑和解除拉黑其他用户](/docs/chat/sdk/v4/wasm/user/moderating-a-user/block-and-unblock-other-members)。

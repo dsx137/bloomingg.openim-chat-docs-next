@@ -8,6 +8,23 @@ OpenIM WASM SDK 用于在浏览器应用中接入 OpenIM Chat。浏览器包由 
 
 从这里开始时，通常先完成 SDK 安装、WASM 资源发布、用户登录和第一条消息发送，再按产品功能进入消息、群组、用户、事件和诊断页面。
 
+## 接入准备
+
+浏览器端接入前，需要把 WASM 运行资源发布到前端静态目录，并准备由业务后端签发的 `userID`、用户 token、`apiAddr` 和 `wsAddr`。SDK 实例建议在当前浏览器会话中复用。
+
+```ts
+import { getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+```
+
+## 使用方式
+
+完成初始化后，先按 [发送第一条消息](/docs/chat/sdk/v4/wasm/getting-started/send-first-message) 验证登录、连接、消息创建和发送链路，再按实际产品功能进入下面的专题页面。
+
 ## 热门主题
 
 | 主题                                                                                                                        | 用途                                                           |

@@ -15,7 +15,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/migrating-to-openim'
 - 用 `recvID` 发送单聊消息；单聊不需要提前创建频道。
 - 用 `groupID` 表示多人聊天、群成员、群资料和群消息发送目标。
 - 用 `create*Message()` 创建 `MessageItem`，再用 `sendMessage()` 发送。
-- 用 `OpenIM.on(CbEvents.*)` 和 `OpenIM.off(CbEvents.*, handler)` 同步消息、会话、未读数、用户和连接状态。
+- 用 `OpenIM.on(CbEvents.*)` 同步消息、会话、未读数、用户和连接状态。
 
 OpenIM WASM SDK 没有开放频道、投票、定时消息、消息 reaction、消息线程或集合对象的完全同构客户端对象。迁移这些功能时，应使用 OpenIM 群组、会话、消息、自定义消息和可信后端组合实现，并把权威状态放在后端。
 
@@ -48,8 +48,8 @@ OpenIM.on(CbEvents.OnConnectSuccess, () => {
   setConnectionState('connected');
 });
 
-OpenIM.on(CbEvents.OnConnectFailed, ({ errCode, errMsg, operationID }) => {
-  reportConnectionError({ errCode, errMsg, operationID });
+OpenIM.on(CbEvents.OnConnectFailed, ({ operationID }) => {
+  reportConnectionError({ operationID });
 });
 
 await OpenIM.login({
@@ -98,15 +98,6 @@ const response = await OpenIM.createGroup(
   },
   operationID,
 );
-
-if (response.errCode !== 0) {
-  console.error('createGroup failed', {
-    errCode: response.errCode,
-    errMsg: response.errMsg,
-    operationID,
-  });
-  throw new Error(response.errMsg || 'Failed to create group');
-}
 
 const groupID = response.data.groupID;
 ```
@@ -185,7 +176,7 @@ const { data: nextPage } = await OpenIM.getAdvancedHistoryMessageList({
 });
 ```
 
-实时更新通过事件处理器进入应用状态。连接事件建议在 `login()` 前注册；消息和会话事件可以在聊天主界面加载时注册，并在组件卸载、退出登录或切换账号前使用同一个函数引用调用 `off()`。
+实时更新通过事件处理器进入应用状态。连接事件建议在 `login()` 前注册；消息和会话事件可以在聊天主界面加载时注册，并集中合并到应用状态。
 
 ```ts
 function handleNewMessages({ data }) {
@@ -203,9 +194,6 @@ OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, ({ data }) => {
   updateTotalUnreadCount(data);
 });
 
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnNewConversation, handleConversationChanged);
-OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
 ```
 
 ## 功能差异
@@ -223,7 +211,7 @@ OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
 - `openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js` 在生产静态资源路径下可访问。
 - `login()` 成功返回，并且连接事件触发 `CbEvents.OnConnectSuccess`。
 - 单聊发送时 `recvID` 有值、`groupID` 为空；群聊发送时 `groupID` 有值、`recvID` 为空。
-- 写操作响应满足你部署环境的成功约定，例如 `errCode === 0`。
+- 写操作响应满足你部署环境的成功约定，并在失败时进入 `catch`。
 - 另一个已登录浏览器会话能通过 `CbEvents.OnRecvNewMessages` 收到消息。
 - 会话列表能通过 `getAllConversationList()`、`getOneConversation()` 或会话事件拿到最新 `ConversationItem`。
 - 失败时同时记录 `errCode`、`errMsg` 和 `operationID`，再结合 OpenIM 服务端日志定位。

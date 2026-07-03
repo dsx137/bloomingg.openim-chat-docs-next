@@ -50,11 +50,7 @@ OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
 
 const operationID = crypto.randomUUID();
 
-const {
-  data: group,
-  errCode,
-  errMsg,
-} = await OpenIM.createGroup(
+const { data: group } = await OpenIM.createGroup(
   {
     memberUserIDs,
     ownerUserID: currentUserID,
@@ -66,11 +62,6 @@ const {
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('createGroup failed', { errCode, errMsg, operationID });
-  throw new Error(errMsg || 'Failed to create group');
-}
 
 saveGroupID(group.groupID);
 ```
@@ -117,7 +108,7 @@ openConversation({
 ## 校验创建结果
 
 - 确认 `login()` 已成功，并且在调用 `createGroup()` 前收到 `CbEvents.OnConnectSuccess`。
-- 确认 `createGroup()` 响应满足 `errCode === 0`，并返回可用的 `group.groupID`。
+- 确认 `createGroup()` 调用成功 resolve，并且返回数据或后续事件符合预期。
 - 确认创建者客户端触发 `CbEvents.OnJoinedGroupAdded`，聊天列表能通过 `getOneConversation()` 或会话事件拿到新会话。
 - 确认另一个初始成员登录后能收到或查询到该群组，并能使用 `groupID` 收发群消息。
 

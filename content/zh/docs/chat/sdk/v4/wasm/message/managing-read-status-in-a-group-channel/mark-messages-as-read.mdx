@@ -64,8 +64,6 @@ OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
 OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
 ```
 
-组件卸载、退出会话或切换账号时，用同一个函数引用调用 `off()` 移除监听器。
-
 ## 新成员的历史消息显示
 
 新成员进入群聊后能看到哪些历史消息，取决于你的 OpenIM 服务端配置、群组策略和本地历史消息同步结果。OpenIM WASM SDK 没有客户端侧的 `display_past_message` 开关；前端应只对已经拉取并展示给当前用户的消息调用 `sendGroupMessageReadReceipt()`。

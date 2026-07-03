@@ -15,18 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/channel/moderating-a-channel/freeze-and-unfr
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.changeGroupMute(
+await OpenIM.changeGroupMute(
   {
     groupID,
     isMute: true,
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('changeGroupMute failed', { errCode, errMsg, operationID, groupID });
-  throw new Error(errMsg || 'Failed to freeze group channel');
-}
 
 markChannelFrozen(groupID);
 ```
@@ -40,18 +35,13 @@ markChannelFrozen(groupID);
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.changeGroupMute(
+await OpenIM.changeGroupMute(
   {
     groupID,
     isMute: false,
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  console.error('changeGroupMute failed', { errCode, errMsg, operationID, groupID });
-  throw new Error(errMsg || 'Failed to unfreeze group channel');
-}
 
 markChannelUnfrozen(groupID);
 ```
@@ -60,39 +50,24 @@ markChannelUnfrozen(groupID);
 
 ## 同步冻结状态
 
-群组禁言状态属于群资料变化，重点监听 `CbEvents.OnGroupInfoChanged`。当事件只提供局部数据，或页面需要权威状态时，再用 `getSpecifiedGroupsInfo([groupID])` 重新读取目标群组。
+群组禁言状态属于群资料变化，重点监听 `CbEvents.OnGroupInfoChanged`。事件到达时先处理回调中的 `data`；页面首次进入、手动刷新或重连后校准时，再用 `getSpecifiedGroupsInfo([groupID])` 读取目标群组。
 
 ```ts
 import { CbEvents } from '@openim/wasm-client-sdk';
 
 const toArray = <T>(value: T | T[]) => (Array.isArray(value) ? value : [value]);
 
-const refreshGroupMuteState = async (groupID: string) => {
-  const { data, errCode, errMsg, operationID } = await OpenIM.getSpecifiedGroupsInfo([groupID]);
-
-  if (errCode !== 0) {
-    console.error('getSpecifiedGroupsInfo failed', { errCode, errMsg, operationID, groupID });
-    return;
-  }
-
-  mergeGroups(data);
-};
-
 const handleGroupInfoChanged = ({ data }) => {
-  mergeGroups(data);
+  const groups = toArray(data);
 
-  for (const group of toArray(data)) {
-    if (group.groupID) void refreshGroupMuteState(group.groupID);
+  mergeGroups(groups);
+
+  for (const group of groups) {
+    updateGroupMuteState(group);
   }
 };
 
 OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
-```
-
-页面卸载、退出登录或切换账号时，用同一个函数引用移除处理器。
-
-```ts
-OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
 ```
 
 ## 单个成员禁言
@@ -112,7 +87,7 @@ await OpenIM.changeGroupMemberMute({
 ## 校验结果
 
 - 确认调用前已登录成功，并且浏览器收到 `CbEvents.OnConnectSuccess`。
-- 确认 `changeGroupMute()` 返回 `errCode === 0`，失败时记录 `errCode`、`errMsg`、`operationID` 和 `groupID`。
+- 确认 `changeGroupMute()` 成功 resolve，并通过返回数据或后续事件确认群组禁言状态；失败时在 `catch` 中记录错误对象、`operationID` 和 `groupID`。
 - 在另一个已登录浏览器会话中确认能收到 `CbEvents.OnGroupInfoChanged`，并且频道冻结状态随群资料更新。
 - 冻结后尝试以普通成员身份发送群消息，确认服务端按预期拒绝或限制发送；解冻后再次确认发送恢复。
 - 刷新页面或断线重连后，用 `getSpecifiedGroupsInfo([groupID])` 恢复频道冻结状态。

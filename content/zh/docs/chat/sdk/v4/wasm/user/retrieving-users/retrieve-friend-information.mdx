@@ -1,0 +1,66 @@
+---
+title: '获取指定好友信息'
+description: '说明如何使用 OpenIM WASM SDK 按指定好友 userID 获取好友关系信息，并检查当前用户与目标用户的好友关系。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information'
+---
+
+当页面已经持有一个或多个好友的 `userID`，并且只需要刷新这些好友的关系信息时，使用 `getSpecifiedFriendsInfo()`。这个接口适合好友资料卡、联系人详情页、好友设置页等按需读取场景，可以避免为了少量用户重新拉取整页好友列表。
+
+## 获取指定好友资料
+
+通过 SDK 实例调用 `getSpecifiedFriendsInfo()`，可以按指定好友 ID 返回 `FriendUserItem[]`。`FriendUserItem` 包含好友备注、置顶状态和关系扩展字段，适合渲染当前用户视角下的好友资料。会话列表和单聊聊天页标题应优先使用会话对象的 `showName`。
+
+#### 请求参数
+
+| 参数名 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `friendUserIDList` | `string[]` | 必填 | 要查询的好友用户 ID 列表。 |
+| `filterBlack` | `boolean` | 可选 | 是否过滤当前用户黑名单中的用户。普通好友资料页通常传 `true`。 |
+| `operationID` | `string` | 可选 | 链路追踪 ID，便于对应客户端和服务端日志。 |
+
+#### 返回值
+
+返回 `WsResponse<FriendUserItem[]>`。`FriendUserItem` 的核心字段包括 `userID`、`nickname`、`faceURL`、`remark`、`isPinned`、`ex` 和 `attachedInfo`。
+
+```ts
+const { data: friends } = await OpenIM.getSpecifiedFriendsInfo({
+  friendUserIDList: ['user_a', 'user_b'],
+  filterBlack: true,
+});
+
+const friendsByID = new Map(friends.map((friend) => [friend.userID, friend]));
+```
+
+如果返回数据为空，通常表示目标用户当前不在好友关系中，或被 `filterBlack` 过滤。展示添加好友候选人、陌生人资料卡或业务侧用户搜索结果时，使用 [查询应用用户](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application) 中的 `getUsersInfo()` 读取公开资料。
+
+## 检查好友关系
+
+通过 SDK 实例调用 `checkFriend()`，可以快速判断当前用户与一组用户是否存在好友关系。它适合资料卡关系标识、加好友按钮状态和发送申请前校验；如果页面需要展示好友备注、头像或置顶状态，应继续使用 `getSpecifiedFriendsInfo()`。
+
+```ts
+const { data: checks } = await OpenIM.checkFriend(['user_a', 'user_b']);
+
+const friendStateByID = new Map(
+  checks.map((item) => [item.userID, item.result]),
+);
+```
+
+## 同步变化
+
+指定好友信息可能随着新增好友、备注变更、置顶变更或删除好友等操作变化。资料页可以监听 `CbEvents.OnFriendAdded`、`CbEvents.OnFriendInfoChanged` 和 `CbEvents.OnFriendDeleted`，并优先合并事件载荷；页面首次进入、手动刷新或重连恢复后，再调用 `getSpecifiedFriendsInfo()` 校准目标好友资料。
+
+```ts
+function handleFriendChanged({ data }) {
+  mergeFriendInfo(data);
+}
+
+OpenIM.on(CbEvents.OnFriendAdded, handleFriendChanged);
+OpenIM.on(CbEvents.OnFriendInfoChanged, handleFriendChanged);
+OpenIM.on(CbEvents.OnFriendDeleted, handleFriendChanged);
+```
+
+## 下一步
+
+- [获取好友列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends)
+- [更新或删除好友](/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends)
+- [查询应用用户](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application)

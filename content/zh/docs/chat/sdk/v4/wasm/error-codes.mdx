@@ -6,7 +6,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/error-codes'
 
 OpenIM WASM SDK 的错误信息主要来自两类数据：SDK 方法返回的 `WsResponse<T>`，以及运行时事件回调收到的事件载荷。业务代码应把 `errCode` 作为可判断的错误码，把 `errMsg` 作为诊断文本，并在失败日志中保留 `operationID`，用于把浏览器行为与 OpenIM 服务端日志对应起来。
 
-多数业务方法在 Promise 成功返回后仍需要检查响应体。通常可以把 `errCode === 0` 视为成功约定；如果你的部署对成功码有额外约定，以当前服务端返回为准。
+多数业务方法调用失败时会 reject；在 `catch` 中记录错误对象、`operationID` 和相关业务 ID，成功分支只处理返回的 `data` 与后续事件。
 
 ```ts
 type WsResponse<T> = {
@@ -46,9 +46,7 @@ function logOpenIMError(
   error: Pick<WsResponse<unknown>, 'errCode' | 'errMsg' | 'operationID'>,
 ) {
   console.error(`OpenIM ${action} failed`, {
-    errCode: error.errCode,
-    errMsg: error.errMsg,
-    operationID: error.operationID,
+    errCode: error.    errMsg: error.    operationID: error.operationID,
   });
 }
 
@@ -61,11 +59,6 @@ const response = await OpenIM.sendMessage(
   },
   operationID,
 );
-
-if (response.errCode !== 0) {
-  logOpenIMError('sendMessage', response);
-  return;
-}
 
 appendMessage(response.data);
 ```
@@ -81,11 +74,6 @@ const history = await OpenIM.getAdvancedHistoryMessageList(
   },
   operationID,
 );
-
-if (history.errCode !== 0) {
-  logOpenIMError('getAdvancedHistoryMessageList', history);
-  return;
-}
 
 renderMessages(history.data.messageList);
 ```

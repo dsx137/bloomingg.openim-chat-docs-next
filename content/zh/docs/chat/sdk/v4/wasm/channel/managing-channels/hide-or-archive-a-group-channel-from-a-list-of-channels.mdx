@@ -41,27 +41,8 @@ async function hideGroupChannel(groupID: string) {
     operationID,
   );
 
-  if (conversationIDResponse.errCode !== 0) {
-    console.error('getConversationIDBySessionType failed', {
-      errCode: conversationIDResponse.errCode,
-      errMsg: conversationIDResponse.errMsg,
-      operationID,
-    });
-    throw new Error(conversationIDResponse.errMsg || 'Failed to get conversation ID');
-  }
-
   const conversationID = conversationIDResponse.data;
   const hideResponse = await OpenIM.hideConversation(conversationID, operationID);
-
-  if (hideResponse.errCode !== 0) {
-    console.error('hideConversation failed', {
-      conversationID,
-      errCode: hideResponse.errCode,
-      errMsg: hideResponse.errMsg,
-      operationID,
-    });
-    throw new Error(hideResponse.errMsg || 'Failed to hide conversation');
-  }
 
   removeConversationFromDefaultList(conversationID);
 }
@@ -87,22 +68,13 @@ function readConversationEx(ex?: string): Record<string, unknown> {
 async function archiveGroupChannel(groupID: string) {
   const operationID = crypto.randomUUID();
 
-  const {
-    data: conversation,
-    errCode,
-    errMsg,
-  } = await OpenIM.getOneConversation(
+  const { data: conversation } = await OpenIM.getOneConversation(
     {
       sourceID: groupID,
       sessionType: 3,
     },
     operationID,
   );
-
-  if (errCode !== 0) {
-    console.error('getOneConversation failed', { groupID, errCode, errMsg, operationID });
-    throw new Error(errMsg || 'Failed to get conversation');
-  }
 
   const ex = {
     ...readConversationEx(conversation.ex),
@@ -117,27 +89,7 @@ async function archiveGroupChannel(groupID: string) {
     operationID,
   );
 
-  if (archiveResponse.errCode !== 0) {
-    console.error('setConversation failed', {
-      conversationID: conversation.conversationID,
-      errCode: archiveResponse.errCode,
-      errMsg: archiveResponse.errMsg,
-      operationID,
-    });
-    throw new Error(archiveResponse.errMsg || 'Failed to archive conversation');
-  }
-
   const hideResponse = await OpenIM.hideConversation(conversation.conversationID, operationID);
-
-  if (hideResponse.errCode !== 0) {
-    console.error('hideConversation failed', {
-      conversationID: conversation.conversationID,
-      errCode: hideResponse.errCode,
-      errMsg: hideResponse.errMsg,
-      operationID,
-    });
-    throw new Error(hideResponse.errMsg || 'Failed to hide archived conversation');
-  }
 
   moveConversationToArchiveList(conversation.conversationID, ex);
 }
@@ -172,7 +124,7 @@ const archivedConversations = conversations.filter(isArchivedConversation);
 
 - 确认 SDK 已登录成功，并且在调用会话 API 前收到 `CbEvents.OnConnectSuccess`。
 - 确认 `groupID` 是当前用户已加入的群组，`getConversationIDBySessionType()` 或 `getOneConversation()` 能返回群会话。
-- 确认写操作响应满足 `errCode === 0`，失败时记录 `errMsg` 和同一个 `operationID`。
+- 确认调用成功 resolve，并且返回数据或后续事件符合预期。
 - 确认默认频道列表不再展示目标 `conversationID`，归档列表按你的 `ex.archivedAt` 或后端归档记录展示。
 - 确认另一个成员的客户端不受影响，除非你调用的是解散群组等全局群组管理操作。
 

@@ -28,7 +28,7 @@ const loadHistoryPage = async (
 ): Promise<HistoryPage> => {
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.getAdvancedHistoryMessageList(
+  const { data } = await OpenIM.getAdvancedHistoryMessageList(
     {
       conversationID,
       startClientMsgID,
@@ -37,19 +37,6 @@ const loadHistoryPage = async (
     },
     operationID,
   );
-
-  if (errCode !== 0 || data.errCode !== 0) {
-    console.error('getAdvancedHistoryMessageList failed', {
-      errCode,
-      errMsg,
-      dataErrCode: data.errCode,
-      dataErrMsg: data.errMsg,
-      operationID,
-      conversationID,
-      startClientMsgID,
-    });
-    throw new Error(data.errMsg || errMsg || 'Failed to load messages');
-  }
 
   return {
     messages: data.messageList,
@@ -141,9 +128,6 @@ function refreshAfterSync() {
 
 OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
 OpenIM.on(CbEvents.OnSyncServerFinish, refreshAfterSync);
-
-OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-OpenIM.off(CbEvents.OnSyncServerFinish, refreshAfterSync);
 ```
 
 ## 选择读取方向

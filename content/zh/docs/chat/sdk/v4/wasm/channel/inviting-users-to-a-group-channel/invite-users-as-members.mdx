@@ -30,7 +30,7 @@ OpenIM.on(CbEvents.OnConversationChanged, ({ data }) => {
   mergeConversations(data);
 });
 
-const { errCode, errMsg } = await OpenIM.inviteUserToGroup(
+await OpenIM.inviteUserToGroup(
   {
     groupID,
     reason: 'Join project chat',
@@ -39,20 +39,16 @@ const { errCode, errMsg } = await OpenIM.inviteUserToGroup(
   operationID,
 );
 
-if (errCode !== 0) {
-  console.error('inviteUserToGroup failed', { errCode, errMsg, operationID });
-  throw new Error(errMsg || 'Failed to invite users');
-}
 ```
 
 如果你的产品要求由群主、管理员或后端统一审批邀请，不要在浏览器端绕过权限判断。前端只应使用当前登录用户可以执行的 SDK 调用；需要更高权限的成员管理流程应放在可信后端中完成。
 
-## 刷新成员列表
+## 同步成员列表
 
 邀请接口返回成功后，可以立即用 `getSpecifiedGroupMembersInfo()` 读取被邀请用户的群成员资料，并把结果合并到成员列表。这样可以避免界面只根据提交的 ID 渲染成员，而缺少昵称、头像、角色或禁言状态等群成员字段。
 
 ```ts
-const { data: addedMembers, errCode: queryErrCode } = await OpenIM.getSpecifiedGroupMembersInfo(
+const { data: addedMembers } = await OpenIM.getSpecifiedGroupMembersInfo(
   {
     groupID,
     userIDList: invitedUserIDs,
@@ -60,12 +56,10 @@ const { data: addedMembers, errCode: queryErrCode } = await OpenIM.getSpecifiedG
   operationID,
 );
 
-if (queryErrCode === 0) {
-  mergeGroupMembers(addedMembers);
-}
+mergeGroupMembers(addedMembers);
 ```
 
-对于人数较多的群组，成员管理页通常还会分页调用 `getGroupMemberList()`。邀请完成后可以刷新当前页，或等待 `CbEvents.OnGroupMemberAdded` 到达后再按需重新查询服务端权威数据。
+对于人数较多的群组，成员管理页通常还会分页调用 `getGroupMemberList()`。邀请完成后优先等待 `CbEvents.OnGroupMemberAdded`，并把事件中的成员资料增量合并到当前成员表；页面首次进入、手动刷新或重连恢复后，再用分页接口校准完整列表。
 
 ## 新成员是否可见历史消息
 
@@ -76,7 +70,7 @@ if (queryErrCode === 0) {
 ## 校验邀请结果
 
 - 确认 `login()` 已成功，并且在调用 `inviteUserToGroup()` 前收到 `CbEvents.OnConnectSuccess`。
-- 确认 `inviteUserToGroup()` 响应满足 `errCode === 0`。
+- 确认 `inviteUserToGroup()` 调用成功 resolve，并且返回数据或后续事件符合预期。
 - 确认邀请方或其他已登录成员触发 `CbEvents.OnGroupMemberAdded`，成员列表能合并新增成员。
 - 确认被邀请用户登录后可以查询到该群组，并能使用同一个 `groupID` 收发群消息。
 

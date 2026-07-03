@@ -1,0 +1,48 @@
+---
+title: '插入本地消息'
+description: '说明如何使用 OpenIM WASM SDK 将单聊或群聊消息插入本地存储，并明确它不会发送给对端。'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message'
+---
+
+本地插入消息用于迁移、系统提示、本地占位或产品自定义的只读记录。它只写入当前客户端本地存储，不会把消息发送给对端，也不会替代 `sendMessage()`。
+
+## 单聊本地插入
+
+`insertSingleMessageToLocalStorage()` 需要 `message`、`recvID` 和 `sendID`。
+
+```ts
+const { data: message } = await OpenIM.createTextMessage('本地提示消息');
+
+await OpenIM.insertSingleMessageToLocalStorage({
+  message,
+  recvID: 'user_b',
+  sendID: currentUserID,
+});
+```
+
+## 群聊本地插入
+
+`insertGroupMessageToLocalStorage()` 需要 `message`、`groupID` 和 `sendID`。
+
+```ts
+const { data: message } = await OpenIM.createTextMessage('群内本地提示');
+
+await OpenIM.insertGroupMessageToLocalStorage({
+  message,
+  groupID,
+  sendID: currentUserID,
+});
+```
+
+## 使用边界
+
+- 不要用本地插入实现正常聊天发送。
+- 不要把本地插入当作服务端通知。
+- 如果消息需要多端同步、离线投递或服务端审核，应使用 `sendMessage()` 或服务端接口。
+
+插入完成后，可以重新读取对应会话的历史消息，确认本地列表渲染正确。
+
+## 下一步
+
+- [获取消息列表](/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message)

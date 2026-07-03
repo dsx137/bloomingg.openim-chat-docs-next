@@ -1,0 +1,207 @@
+---
+title: '管理好友申请'
+description: '说明如何使用 OpenIM WASM SDK 发送、查询、统计、同意和拒绝好友申请。'
+sourcePath: '/docs/chat/sdk/v4/wasm/user/managing-friends/manage-friend-requests'
+---
+
+好友申请用于建立需要对方确认的好友关系。当前用户可以向目标用户发送申请，也可以查询自己收到或发出的申请，并对收到的申请执行同意或拒绝。
+
+## 发送好友申请
+
+调用 `addFriend()` 向目标用户发送好友申请。`toUserID` 是申请接收方的 OpenIM 用户 ID，`reqMsg` 用于展示申请附言。
+
+#### 请求参数
+
+| 参数名 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `toUserID` | `string` | 必填 | 申请添加的目标用户 ID。 |
+| `reqMsg` | `string` | 可选 | 申请附言，建议由产品限制长度并做基础内容校验。 |
+| `ex` | `string` | 可选 | 好友申请扩展字段，格式由业务约定。 |
+| `operationID` | `string` | 可选 | 链路追踪 ID，便于对应客户端和服务端日志。 |
+
+#### 返回值
+
+返回 `WsResponse<unknown>`。调用成功表示申请已经提交到 OpenIM 服务端，最终列表状态通过申请列表和好友申请事件同步。
+
+```ts
+async function sendFriendRequest(toUserID: string, reqMsg: string) {
+  const operationID = crypto.randomUUID();
+
+  try {
+    await OpenIM.addFriend(
+      {
+        toUserID,
+        reqMsg,
+      },
+      operationID,
+    );
+  } catch (error) {
+    console.error('addFriend failed', { error, operationID, toUserID });
+    throw error;
+  }
+}
+
+await sendFriendRequest('user_b', '你好，我是 Alex');
+```
+
+## 查询申请列表
+
+当前用户作为接收方时，使用 `getFriendApplicationListAsRecipient()` 查询别人发给自己的申请。审核列表通常传 `handleResults: [0]` 读取待处理记录；历史列表可以按产品需要包含已同意或已拒绝状态。
+
+返回 `WsResponse<FriendApplicationItem[]>`。`data` 是一页好友申请记录，适合渲染待审核列表、历史申请列表和申请详情。
+
+```ts
+async function loadReceivedFriendRequests(offset = 0, count = 20) {
+  try {
+    const { data } = await OpenIM.getFriendApplicationListAsRecipient({
+      handleResults: [0],
+      offset,
+      count,
+    });
+
+    return data ?? [];
+  } catch (error) {
+    console.error('getFriendApplicationListAsRecipient failed', { error, offset, count });
+    throw error;
+  }
+}
+```
+
+当前用户作为申请方时，使用 `getFriendApplicationListAsApplicant()` 查询自己发出的申请。
+
+```ts
+async function loadSentFriendRequests(offset = 0, count = 20) {
+  try {
+    const { data } = await OpenIM.getFriendApplicationListAsApplicant({
+      offset,
+      count,
+    });
+
+    return data ?? [];
+  } catch (error) {
+    console.error('getFriendApplicationListAsApplicant failed', { error, offset, count });
+    throw error;
+  }
+}
+```
+
+分页方式和好友列表一致：第一页从 `offset: 0` 开始，下一页使用已经合并的申请数量作为新的 `offset`。当返回数量小于 `count` 时，可以认为当前方向没有更多申请。
+
+## 未处理申请数量
+
+未处理数量使用 `getFriendApplicationUnhandledCount()`。`time` 通常传入上次查看申请列表的时间点，用于统计该时间之后的未处理变化。
+
+```ts
+async function loadUnhandledFriendRequestCount(lastViewedAt: number) {
+  try {
+    const { data } = await OpenIM.getFriendApplicationUnhandledCount({
+      time: lastViewedAt,
+    });
+
+    return data ?? 0;
+  } catch (error) {
+    console.error('getFriendApplicationUnhandledCount failed', { error, lastViewedAt });
+    throw error;
+  }
+}
+```
+
+## 处理好友申请
+
+同意申请使用 `acceptFriendApplication()`，拒绝申请使用 `refuseFriendApplication()`。处理收到的申请时，`toUserID` 填申请方的用户 ID，`handleMsg` 是处理附言。
+
+#### 请求参数
+
+| 参数名 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `toUserID` | `string` | 必填 | 申请方用户 ID。 |
+| `handleMsg` | `string` | 可选 | 同意或拒绝时展示给对方的处理说明。 |
+| `operationID` | `string` | 可选 | 链路追踪 ID，便于对应客户端和服务端日志。 |
+
+#### 返回值
+
+返回 `WsResponse<unknown>`。同意申请后，好友关系会通过好友相关事件同步到本地好友列表。
+
+```ts
+async function acceptFriendRequest(applicantUserID: string) {
+  const operationID = crypto.randomUUID();
+
+  try {
+    await OpenIM.acceptFriendApplication(
+      {
+        toUserID: applicantUserID,
+        handleMsg: '已通过',
+      },
+      operationID,
+    );
+  } catch (error) {
+    console.error('acceptFriendApplication failed', { error, operationID, applicantUserID });
+    throw error;
+  }
+}
+
+async function refuseFriendRequest(applicantUserID: string) {
+  const operationID = crypto.randomUUID();
+
+  try {
+    await OpenIM.refuseFriendApplication(
+      {
+        toUserID: applicantUserID,
+        handleMsg: '暂不添加',
+      },
+      operationID,
+    );
+  } catch (error) {
+    console.error('refuseFriendApplication failed', { error, operationID, applicantUserID });
+    throw error;
+  }
+}
+```
+
+## 事件同步
+
+申请列表和好友列表建议由事件统一驱动更新：
+
+- `CbEvents.OnFriendApplicationAdded`
+- `CbEvents.OnFriendApplicationAccepted`
+- `CbEvents.OnFriendApplicationRejected`
+- `CbEvents.OnFriendApplicationDeleted`
+- `CbEvents.OnFriendAdded`
+
+事件回调会带上本次变化的 `data`。处理器应优先消费这份事件载荷，对本地申请列表、未处理数量和好友列表做增量合并、标记或删除；初始化、用户手动刷新、断线重连后的校准，才重新读取整页列表。事件处理器应使用稳定函数引用，避免页面重复挂载时重复注册。
+
+```ts
+function handleFriendApplicationAdded({ data }) {
+  upsertReceivedFriendApplication(data);
+  increaseUnhandledFriendApplicationCount(data);
+}
+
+function handleFriendApplicationAccepted({ data }) {
+  markFriendApplicationAccepted(data);
+  removePendingFriendApplication(data);
+}
+
+function handleFriendApplicationRejected({ data }) {
+  markFriendApplicationRejected(data);
+  removePendingFriendApplication(data);
+}
+
+function handleFriendApplicationDeleted({ data }) {
+  removeFriendApplication(data);
+}
+
+function handleFriendAdded({ data }) {
+  upsertFriend(data);
+}
+
+OpenIM.on(CbEvents.OnFriendApplicationAdded, handleFriendApplicationAdded);
+OpenIM.on(CbEvents.OnFriendApplicationAccepted, handleFriendApplicationAccepted);
+OpenIM.on(CbEvents.OnFriendApplicationRejected, handleFriendApplicationRejected);
+OpenIM.on(CbEvents.OnFriendApplicationDeleted, handleFriendApplicationDeleted);
+OpenIM.on(CbEvents.OnFriendAdded, handleFriendAdded);
+```
+
+## 下一步
+
+- [获取好友列表](/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends)
+- [更新或删除好友](/docs/chat/sdk/v4/wasm/user/managing-friends/update-or-delete-friends)

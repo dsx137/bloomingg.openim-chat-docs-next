@@ -27,7 +27,7 @@ const searchGroupChannels = async ({ keyword, includeGroupID = false }: SearchGr
 
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.searchGroups(
+  const { data } = await OpenIM.searchGroups(
     {
       keywordList: [normalizedKeyword],
       isSearchGroupID: includeGroupID,
@@ -35,16 +35,6 @@ const searchGroupChannels = async ({ keyword, includeGroupID = false }: SearchGr
     },
     operationID,
   );
-
-  if (errCode !== 0) {
-    console.error('searchGroups failed', {
-      errCode,
-      errMsg,
-      operationID,
-      keyword: normalizedKeyword,
-    });
-    throw new Error(errMsg || 'Failed to search group channels');
-  }
 
   return data;
 };
@@ -61,12 +51,7 @@ const openGroupChannelBySlug = async (slug: string) => {
   const groupID = await resolveGroupIDFromSlug(slug);
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.getSpecifiedGroupsInfo([groupID], operationID);
-
-  if (errCode !== 0) {
-    console.error('getSpecifiedGroupsInfo failed', { errCode, errMsg, operationID, groupID });
-    throw new Error(errMsg || 'Failed to load group channel');
-  }
+  const { data } = await OpenIM.getSpecifiedGroupsInfo([groupID], operationID);
 
   const group = data[0];
 
@@ -142,18 +127,13 @@ const visibleGroups = filterGroupChannels(groups, {
 const loadJoinedGroupChannelPage = async (keyword: string, offset = 0, count = 50) => {
   const operationID = crypto.randomUUID();
 
-  const { data, errCode, errMsg } = await OpenIM.getJoinedGroupListPage(
+  const { data } = await OpenIM.getJoinedGroupListPage(
     {
       offset,
       count,
     },
     operationID,
   );
-
-  if (errCode !== 0) {
-    console.error('getJoinedGroupListPage failed', { errCode, errMsg, operationID, offset, count });
-    throw new Error(errMsg || 'Failed to load joined group channels');
-  }
 
   const normalizedKeyword = keyword.trim().toLowerCase();
 
@@ -200,14 +180,6 @@ const handleJoinedGroupDeleted = ({ data }) => {
 OpenIM.on(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
 OpenIM.on(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
 OpenIM.on(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
-```
-
-组件卸载、退出登录或切换账号时，用同一个函数引用移除处理器。
-
-```ts
-OpenIM.off(CbEvents.OnGroupInfoChanged, handleGroupInfoChanged);
-OpenIM.off(CbEvents.OnJoinedGroupAdded, handleJoinedGroupAdded);
-OpenIM.off(CbEvents.OnJoinedGroupDeleted, handleJoinedGroupDeleted);
 ```
 
 失败日志中保留 `errCode`、`errMsg`、`operationID` 和搜索条件。`operationID` 能帮助你把浏览器行为和 OpenIM 服务端日志关联起来。

@@ -11,17 +11,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message'
 ```ts
 const operationID = crypto.randomUUID();
 
-const { errCode, errMsg } = await OpenIM.deleteMessage(
+await OpenIM.deleteMessage(
   {
     conversationID,
     clientMsgID,
   },
   operationID,
 );
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to delete message');
-}
 
 markMessageDeleted(clientMsgID);
 ```
@@ -31,14 +27,10 @@ markMessageDeleted(clientMsgID);
 如果用户动作是“只从我这里删除”，使用 `deleteMessageFromLocalStorage()`。这个操作只影响当前客户端缓存，不应让其他成员或其他设备据此更新消息状态。
 
 ```ts
-const { errCode, errMsg } = await OpenIM.deleteMessageFromLocalStorage({
+await OpenIM.deleteMessageFromLocalStorage({
   conversationID,
   clientMsgID,
 });
-
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to delete message locally');
-}
 
 removeMessageFromCurrentList(clientMsgID);
 ```
@@ -58,23 +50,17 @@ function handleMessageRevoked({ data }) {
 
 OpenIM.on(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
 
-const { errCode, errMsg, data } = await OpenIM.revokeMessage({
+const { data } = await OpenIM.revokeMessage({
   conversationID,
   clientMsgID,
 });
 
-if (errCode !== 0) {
-  throw new Error(errMsg || 'Failed to revoke message');
-}
-
 markMessageRevoked(data?.clientMsgID ?? clientMsgID);
 ```
 
-组件卸载、切换账号或退出登录时，使用同一个函数引用调用 `OpenIM.off(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked)` 移除监听器。
-
 ## 删除结果
 
-删除、撤回和本地删除都返回 `WsResponse<T>`。Promise 成功返回只表示 SDK 调用完成，业务上仍应检查 `errCode === 0`，并在失败日志中记录 `operationID`、`conversationID`、`clientMsgID`、`errCode` 和 `errMsg`。
+删除、撤回和本地删除调用失败时会 reject。成功分支根据返回数据和后续事件更新 UI；失败日志中记录错误对象、`operationID`、`conversationID` 和 `clientMsgID`。
 
 | 用户动作                   | API                               | 结果                                                        |
 | -------------------------- | --------------------------------- | ----------------------------------------------------------- |
