@@ -3434,7 +3434,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
     "openimPath": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
-    "title": "Register and remove operators",
+    "title": "Register and remove administrators",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators.mdx"
@@ -4066,7 +4066,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
-    "title": "Retrieve a list of users in an application",
+    "title": "Retrieve users in an application",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application.mdx"
@@ -4082,7 +4082,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
-    "title": "Retrieve friend information",
+    "title": "Retrieve specified friend information",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information.mdx"
@@ -5086,5 +5086,277 @@
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/overview",
+    "openimPath": "/docs/chat/platform-api/v3/user/overview",
+    "title": "用户概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/user/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/channel/overview",
+    "openimPath": "/docs/chat/platform-api/v3/channel/overview",
+    "title": "频道概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/channel/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/message/overview",
+    "openimPath": "/docs/chat/platform-api/v3/message/overview",
+    "title": "消息概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/message/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/migration/overview",
+    "openimPath": "/docs/chat/platform-api/v3/migration/overview",
+    "title": "迁移概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/migration/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/moderation/overview",
+    "openimPath": "/docs/chat/platform-api/v3/moderation/overview",
+    "title": "内容审核概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/moderation/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/create-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/create-group",
+    "title": "创建群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/create-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/set-group-info",
+    "title": "设置群组信息",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "openimPath": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "title": "设置群组信息扩展",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info-ex.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/join-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/join-group",
+    "title": "申请加入群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/join-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/quit-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/quit-group",
+    "title": "退出群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/quit-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "openimPath": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "title": "处理入群申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/respond-group-application.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "openimPath": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "title": "转让群主",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/transfer-group-owner.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "openimPath": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "title": "查询收到的入群申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-received-group-applications.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "openimPath": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "title": "查询用户发起的入群申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-user-requested-group-applications.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "openimPath": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "title": "查询群内多个用户的入群申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-group-users-request-applications.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "title": "查询指定用户入群申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-specified-user-group-request-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "title": "获取群组详情",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "openimPath": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "title": "移除群成员",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/kick-group-members.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "title": "获取指定群成员",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-members-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "title": "获取群成员列表",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-list.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "title": "邀请用户进群",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/invite-users-to-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "title": "获取已加入群组列表",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-joined-group-list.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "title": "解散群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/dismiss-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "openimPath": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "title": "禁言群成员",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group-member.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "openimPath": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "title": "取消禁言群成员",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group-member.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/mute-group",
+    "title": "禁言群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "openimPath": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "title": "取消群组禁言",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "title": "设置群成员信息",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-member-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "title": "获取群组摘要信息",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-abstract-info.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-groups",
+    "title": "分页查询群组",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "title": "获取群成员用户 ID",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-user-ids.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "title": "全量获取群成员用户 ID",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-group-member-user-ids.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "title": "全量获取用户加入的群组 ID",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-join-group-ids.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "openimPath": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "title": "获取未处理入群申请数量",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-application-unhandled-count.mdx"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01",
+  "generatedAt": "2026-07-06",
   "navigationLabels": {
     "advanced-analytics": "高级分析",
     "announcements": "公告",
@@ -84,6 +84,7 @@
     "translations": "翻译",
     "understanding-rate-limits": "理解速率限制",
     "user": "用户",
-    "webhook": "Webhook"
+    "webhook": "Webhook",
+    "group": "群组"
   }
 }

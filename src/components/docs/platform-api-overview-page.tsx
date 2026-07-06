@@ -52,10 +52,10 @@ const copy = {
         visual: 'create-user',
       },
       {
-        title: 'Create a group channel',
+        title: 'Create a group',
         description:
-          'Provision an OpenIM group for channel-style conversations and member management.',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+          'Provision an OpenIM group for conversations, membership, and server-side operations.',
+        href: '/docs/chat/platform-api/v3/group/create-group',
         visual: 'group',
       },
       {
@@ -80,10 +80,10 @@ const copy = {
         href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
       },
       {
-        title: 'Group channels',
+        title: 'Groups',
         description:
           'Create groups, update group information, invite members, and manage membership changes.',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/docs/chat/platform-api/v3/group/create-group',
       },
       {
         title: 'Moderation',
@@ -135,9 +135,9 @@ const copy = {
         visual: 'create-user',
       },
       {
-        title: '创建群组频道',
-        description: '创建 OpenIM 群组，用于承载频道式会话和成员管理。',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        title: '创建群组',
+        description: '创建 OpenIM 群组，用于承载会话、成员管理和服务端运营动作。',
+        href: '/docs/chat/platform-api/v3/group/create-group',
         visual: 'group',
       },
       {
@@ -160,9 +160,9 @@ const copy = {
         href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
       },
       {
-        title: '群组频道',
+        title: '群组',
         description: '创建群组、更新群资料、邀请成员，并处理入群、退群和解散流程。',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/docs/chat/platform-api/v3/group/create-group',
       },
       {
         title: '内容治理',

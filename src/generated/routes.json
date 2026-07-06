@@ -7470,7 +7470,7 @@
     "navOrder": 414
   },
   {
-    "id": 417,
+    "id": 416,
     "path": "/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication",
     "relativePath": "chat/sdk/v4/wasm/application/authenticating-a-user/authentication",
     "sourcePath": "/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication",
@@ -7488,7 +7488,7 @@
     "navOrder": 416
   },
   {
-    "id": 418,
+    "id": 417,
     "path": "/docs/chat/sdk/v4/wasm/application/overview-application",
     "relativePath": "chat/sdk/v4/wasm/application/overview-application",
     "sourcePath": "/docs/chat/sdk/v4/wasm/application/overview-application",
@@ -7506,7 +7506,7 @@
     "navOrder": 417
   },
   {
-    "id": 419,
+    "id": 418,
     "path": "/docs/chat/sdk/v4/wasm/application/understanding-rate-limits/rate-limits",
     "relativePath": "chat/sdk/v4/wasm/application/understanding-rate-limits/rate-limits",
     "sourcePath": "/docs/chat/sdk/v4/wasm/application/understanding-rate-limits/rate-limits",
@@ -7524,7 +7524,7 @@
     "navOrder": 418
   },
   {
-    "id": 420,
+    "id": 419,
     "path": "/docs/chat/sdk/v4/wasm/channel/categorizing-channels/categorize-channels-by-custom-type",
     "relativePath": "chat/sdk/v4/wasm/channel/categorizing-channels/categorize-channels-by-custom-type",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/categorizing-channels/categorize-channels-by-custom-type",
@@ -7542,7 +7542,7 @@
     "navOrder": 419
   },
   {
-    "id": 421,
+    "id": 420,
     "path": "/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel",
     "relativePath": "chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel",
@@ -7560,7 +7560,7 @@
     "navOrder": 420
   },
   {
-    "id": 422,
+    "id": 421,
     "path": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
     "relativePath": "chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
@@ -7578,7 +7578,7 @@
     "navOrder": 421
   },
   {
-    "id": 423,
+    "id": 422,
     "path": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members",
     "relativePath": "chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members",
@@ -7596,7 +7596,7 @@
     "navOrder": 422
   },
   {
-    "id": 424,
+    "id": 423,
     "path": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
     "relativePath": "chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
@@ -7614,7 +7614,7 @@
     "navOrder": 423
   },
   {
-    "id": 425,
+    "id": 424,
     "path": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
     "relativePath": "chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
@@ -7632,7 +7632,7 @@
     "navOrder": 424
   },
   {
-    "id": 426,
+    "id": 425,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metacounters/manage-channel-metacounters",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-channel-metacounters/manage-channel-metacounters",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metacounters/manage-channel-metacounters",
@@ -7650,7 +7650,7 @@
     "navOrder": 425
   },
   {
-    "id": 427,
+    "id": 426,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metadata/manage-channel-metadata",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-channel-metadata/manage-channel-metadata",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metadata/manage-channel-metadata",
@@ -7668,7 +7668,7 @@
     "navOrder": 426
   },
   {
-    "id": 428,
+    "id": 427,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-channels/delete-a-channel",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-channels/delete-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-channels/delete-a-channel",
@@ -7686,7 +7686,7 @@
     "navOrder": 427
   },
   {
-    "id": 429,
+    "id": 428,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
@@ -7704,7 +7704,7 @@
     "navOrder": 428
   },
   {
-    "id": 430,
+    "id": 429,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
@@ -7722,7 +7722,7 @@
     "navOrder": 429
   },
   {
-    "id": 431,
+    "id": 430,
     "path": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
     "relativePath": "chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
@@ -7740,7 +7740,7 @@
     "navOrder": 430
   },
   {
-    "id": 432,
+    "id": 431,
     "path": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-channel-by-url",
     "relativePath": "chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-channel-by-url",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-channel-by-url",
@@ -7758,7 +7758,7 @@
     "navOrder": 431
   },
   {
-    "id": 433,
+    "id": 432,
     "path": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-list-of-channels",
     "relativePath": "chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-list-of-channels",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-list-of-channels",
@@ -7776,7 +7776,7 @@
     "navOrder": 432
   },
   {
-    "id": 434,
+    "id": 433,
     "path": "/docs/chat/sdk/v4/wasm/channel/searching-channels/filter-group-channels-by-user-ids",
     "relativePath": "chat/sdk/v4/wasm/channel/searching-channels/filter-group-channels-by-user-ids",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/searching-channels/filter-group-channels-by-user-ids",
@@ -7794,7 +7794,7 @@
     "navOrder": 433
   },
   {
-    "id": 435,
+    "id": 434,
     "path": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
     "relativePath": "chat/sdk/v4/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
@@ -7812,7 +7812,7 @@
     "navOrder": 434
   },
   {
-    "id": 436,
+    "id": 435,
     "path": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-open-channels-by-name-or-url-or-custom-types",
     "relativePath": "chat/sdk/v4/wasm/channel/searching-channels/search-open-channels-by-name-or-url-or-custom-types",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-open-channels-by-name-or-url-or-custom-types",
@@ -7830,7 +7830,7 @@
     "navOrder": 435
   },
   {
-    "id": 437,
+    "id": 436,
     "path": "/docs/chat/sdk/v4/wasm/deprecated",
     "relativePath": "chat/sdk/v4/wasm/deprecated",
     "sourcePath": "/docs/chat/sdk/v4/wasm/deprecated",
@@ -7848,7 +7848,7 @@
     "navOrder": 436
   },
   {
-    "id": 438,
+    "id": 437,
     "path": "/docs/chat/sdk/v4/wasm/error-codes",
     "relativePath": "chat/sdk/v4/wasm/error-codes",
     "sourcePath": "/docs/chat/sdk/v4/wasm/error-codes",
@@ -7866,7 +7866,7 @@
     "navOrder": 437
   },
   {
-    "id": 439,
+    "id": 438,
     "path": "/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
     "relativePath": "chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
@@ -7884,7 +7884,7 @@
     "navOrder": 438
   },
   {
-    "id": 440,
+    "id": 439,
     "path": "/docs/chat/sdk/v4/wasm/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
     "relativePath": "chat/sdk/v4/wasm/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/wasm/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
@@ -7902,7 +7902,7 @@
     "navOrder": 439
   },
   {
-    "id": 441,
+    "id": 440,
     "path": "/docs/chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
     "relativePath": "chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
@@ -7920,7 +7920,7 @@
     "navOrder": 440
   },
   {
-    "id": 442,
+    "id": 441,
     "path": "/docs/chat/sdk/v4/wasm/event-handler/overview-event-handler",
     "relativePath": "chat/sdk/v4/wasm/event-handler/overview-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/wasm/event-handler/overview-event-handler",
@@ -7938,7 +7938,7 @@
     "navOrder": 441
   },
   {
-    "id": 443,
+    "id": 442,
     "path": "/docs/chat/sdk/v4/wasm/getting-started/environment-specific-implementation",
     "relativePath": "chat/sdk/v4/wasm/getting-started/environment-specific-implementation",
     "sourcePath": "/docs/chat/sdk/v4/wasm/getting-started/environment-specific-implementation",
@@ -7956,7 +7956,7 @@
     "navOrder": 442
   },
   {
-    "id": 444,
+    "id": 443,
     "path": "/docs/chat/sdk/v4/wasm/local-caching/overview-local-caching",
     "relativePath": "chat/sdk/v4/wasm/local-caching/overview-local-caching",
     "sourcePath": "/docs/chat/sdk/v4/wasm/local-caching/overview-local-caching",
@@ -7974,7 +7974,7 @@
     "navOrder": 443
   },
   {
-    "id": 445,
+    "id": 444,
     "path": "/docs/chat/sdk/v4/wasm/local-caching/using-group-channel-collection/group-channel-collection",
     "relativePath": "chat/sdk/v4/wasm/local-caching/using-group-channel-collection/group-channel-collection",
     "sourcePath": "/docs/chat/sdk/v4/wasm/local-caching/using-group-channel-collection/group-channel-collection",
@@ -7992,7 +7992,7 @@
     "navOrder": 444
   },
   {
-    "id": 446,
+    "id": 445,
     "path": "/docs/chat/sdk/v4/wasm/local-caching/using-message-collection/message-collection",
     "relativePath": "chat/sdk/v4/wasm/local-caching/using-message-collection/message-collection",
     "sourcePath": "/docs/chat/sdk/v4/wasm/local-caching/using-message-collection/message-collection",
@@ -8010,7 +8010,7 @@
     "navOrder": 445
   },
   {
-    "id": 447,
+    "id": 446,
     "path": "/docs/chat/sdk/v4/wasm/logger",
     "relativePath": "chat/sdk/v4/wasm/logger",
     "sourcePath": "/docs/chat/sdk/v4/wasm/logger",
@@ -8028,7 +8028,7 @@
     "navOrder": 446
   },
   {
-    "id": 448,
+    "id": 447,
     "path": "/docs/chat/sdk/v4/wasm/message/categorizing-messages/categorize-messages-by-custom-type",
     "relativePath": "chat/sdk/v4/wasm/message/categorizing-messages/categorize-messages-by-custom-type",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/categorizing-messages/categorize-messages-by-custom-type",
@@ -8046,7 +8046,7 @@
     "navOrder": 447
   },
   {
-    "id": 449,
+    "id": 448,
     "path": "/docs/chat/sdk/v4/wasm/message/listing-changelogs/list-changelogs-of-messages",
     "relativePath": "chat/sdk/v4/wasm/message/listing-changelogs/list-changelogs-of-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/listing-changelogs/list-changelogs-of-messages",
@@ -8064,7 +8064,7 @@
     "navOrder": 448
   },
   {
-    "id": 450,
+    "id": 449,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
@@ -8082,7 +8082,7 @@
     "navOrder": 449
   },
   {
-    "id": 451,
+    "id": 450,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/copy-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/copy-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/copy-a-message",
@@ -8100,7 +8100,7 @@
     "navOrder": 450
   },
   {
-    "id": 452,
+    "id": 451,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/delete-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message",
@@ -8118,7 +8118,7 @@
     "navOrder": 451
   },
   {
-    "id": 453,
+    "id": 452,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
@@ -8136,7 +8136,7 @@
     "navOrder": 452
   },
   {
-    "id": 454,
+    "id": 453,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/display-open-graph-tags-in-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/display-open-graph-tags-in-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/display-open-graph-tags-in-a-message",
@@ -8154,7 +8154,7 @@
     "navOrder": 453
   },
   {
-    "id": 455,
+    "id": 454,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-a-message/update-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-a-message/update-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-a-message/update-a-message",
@@ -8172,7 +8172,7 @@
     "navOrder": 454
   },
   {
-    "id": 456,
+    "id": 455,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/list-pinned-messages",
     "relativePath": "chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/list-pinned-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/list-pinned-messages",
@@ -8190,7 +8190,7 @@
     "navOrder": 455
   },
   {
-    "id": 457,
+    "id": 456,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/unpin-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/unpin-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/unpin-a-message",
@@ -8208,7 +8208,7 @@
     "navOrder": 456
   },
   {
-    "id": 458,
+    "id": 457,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/add-a-poll-option",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/add-a-poll-option",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/add-a-poll-option",
@@ -8226,7 +8226,7 @@
     "navOrder": 457
   },
   {
-    "id": 459,
+    "id": 458,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/cast-or-cancel-a-vote",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/cast-or-cancel-a-vote",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/cast-or-cancel-a-vote",
@@ -8244,7 +8244,7 @@
     "navOrder": 458
   },
   {
-    "id": 460,
+    "id": 459,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/close-a-poll",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/close-a-poll",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/close-a-poll",
@@ -8262,7 +8262,7 @@
     "navOrder": 459
   },
   {
-    "id": 461,
+    "id": 460,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/delete-a-poll",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll",
@@ -8280,7 +8280,7 @@
     "navOrder": 460
   },
   {
-    "id": 462,
+    "id": 461,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll-option",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/delete-a-poll-option",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll-option",
@@ -8298,7 +8298,7 @@
     "navOrder": 461
   },
   {
-    "id": 463,
+    "id": 462,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/list-changelogs-of-polls",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/list-changelogs-of-polls",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/list-changelogs-of-polls",
@@ -8316,7 +8316,7 @@
     "navOrder": 462
   },
   {
-    "id": 464,
+    "id": 463,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-polls",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-polls",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-polls",
@@ -8334,7 +8334,7 @@
     "navOrder": 463
   },
   {
-    "id": 465,
+    "id": 464,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-voters",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-voters",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-voters",
@@ -8352,7 +8352,7 @@
     "navOrder": 464
   },
   {
-    "id": 466,
+    "id": 465,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll",
@@ -8370,7 +8370,7 @@
     "navOrder": 465
   },
   {
-    "id": 467,
+    "id": 466,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll-option",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll-option",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll-option",
@@ -8388,7 +8388,7 @@
     "navOrder": 466
   },
   {
-    "id": 468,
+    "id": 467,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/update-a-poll",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll",
@@ -8406,7 +8406,7 @@
     "navOrder": 467
   },
   {
-    "id": 469,
+    "id": 468,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll-option",
     "relativePath": "chat/sdk/v4/wasm/message/managing-polls/update-a-poll-option",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll-option",
@@ -8424,7 +8424,7 @@
     "navOrder": 468
   },
   {
-    "id": 470,
+    "id": 469,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
     "relativePath": "chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
@@ -8442,7 +8442,7 @@
     "navOrder": 469
   },
   {
-    "id": 471,
+    "id": 470,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read",
     "relativePath": "chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read",
@@ -8460,7 +8460,7 @@
     "navOrder": 470
   },
   {
-    "id": 472,
+    "id": 471,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-unread",
     "relativePath": "chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-unread",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-unread",
@@ -8478,7 +8478,7 @@
     "navOrder": 471
   },
   {
-    "id": 473,
+    "id": 472,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
@@ -8496,7 +8496,7 @@
     "navOrder": 472
   },
   {
-    "id": 474,
+    "id": 473,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/list-all-scheduled-messages",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/list-all-scheduled-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/list-all-scheduled-messages",
@@ -8514,7 +8514,7 @@
     "navOrder": 473
   },
   {
-    "id": 475,
+    "id": 474,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-a-scheduled-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-a-scheduled-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-a-scheduled-message",
@@ -8532,7 +8532,7 @@
     "navOrder": 474
   },
   {
-    "id": 476,
+    "id": 475,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-the-total-number-of-scheduled-messages",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-the-total-number-of-scheduled-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-the-total-number-of-scheduled-messages",
@@ -8550,7 +8550,7 @@
     "navOrder": 475
   },
   {
-    "id": 477,
+    "id": 476,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/send-a-scheduled-message-immediately",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/send-a-scheduled-message-immediately",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/send-a-scheduled-message-immediately",
@@ -8568,7 +8568,7 @@
     "navOrder": 476
   },
   {
-    "id": 478,
+    "id": 477,
     "path": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/update-a-scheduled-message",
     "relativePath": "chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/update-a-scheduled-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/update-a-scheduled-message",
@@ -8586,7 +8586,7 @@
     "navOrder": 477
   },
   {
-    "id": 479,
+    "id": 478,
     "path": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel",
     "relativePath": "chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel",
@@ -8604,7 +8604,7 @@
     "navOrder": 478
   },
   {
-    "id": 480,
+    "id": 479,
     "path": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-an-open-channel",
     "relativePath": "chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-an-open-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-an-open-channel",
@@ -8622,7 +8622,7 @@
     "navOrder": 479
   },
   {
-    "id": 481,
+    "id": 480,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
@@ -8640,7 +8640,7 @@
     "navOrder": 480
   },
   {
-    "id": 482,
+    "id": 481,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-read-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-read-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-read-a-message",
@@ -8658,7 +8658,7 @@
     "navOrder": 481
   },
   {
-    "id": 483,
+    "id": 482,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-received-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-received-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-received-a-message",
@@ -8676,7 +8676,7 @@
     "navOrder": 482
   },
   {
-    "id": 484,
+    "id": 483,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels",
@@ -8694,7 +8694,7 @@
     "navOrder": 483
   },
   {
-    "id": 485,
+    "id": 484,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items",
@@ -8712,7 +8712,7 @@
     "navOrder": 484
   },
   {
-    "id": 486,
+    "id": 485,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages",
@@ -8730,7 +8730,7 @@
     "navOrder": 485
   },
   {
-    "id": 487,
+    "id": 486,
     "path": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels",
     "relativePath": "chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels",
@@ -8748,7 +8748,7 @@
     "navOrder": 486
   },
   {
-    "id": 488,
+    "id": 487,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/cancel-an-in-progress-file-upload",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/cancel-an-in-progress-file-upload",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/cancel-an-in-progress-file-upload",
@@ -8766,7 +8766,7 @@
     "navOrder": 487
   },
   {
-    "id": 489,
+    "id": 488,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-critical-alert-message-to-ios-devices",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/send-a-critical-alert-message-to-ios-devices",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-critical-alert-message-to-ios-devices",
@@ -8784,7 +8784,7 @@
     "navOrder": 488
   },
   {
-    "id": 490,
+    "id": 489,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/send-a-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message",
@@ -8802,7 +8802,7 @@
     "navOrder": 489
   },
   {
-    "id": 491,
+    "id": 490,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
@@ -8820,7 +8820,7 @@
     "navOrder": 490
   },
   {
-    "id": 492,
+    "id": 491,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
@@ -8838,7 +8838,7 @@
     "navOrder": 491
   },
   {
-    "id": 493,
+    "id": 492,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/spam-flood-protection",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/spam-flood-protection",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/spam-flood-protection",
@@ -8856,7 +8856,7 @@
     "navOrder": 492
   },
   {
-    "id": 494,
+    "id": 493,
     "path": "/docs/chat/sdk/v4/wasm/message/sending-a-message/track-file-upload-progress-using-a-handler",
     "relativePath": "chat/sdk/v4/wasm/message/sending-a-message/track-file-upload-progress-using-a-handler",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/sending-a-message/track-file-upload-progress-using-a-handler",
@@ -8874,7 +8874,7 @@
     "navOrder": 493
   },
   {
-    "id": 495,
+    "id": 494,
     "path": "/docs/chat/sdk/v4/wasm/message/translating-messages/translation-engine",
     "relativePath": "chat/sdk/v4/wasm/message/translating-messages/translation-engine",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/translating-messages/translation-engine",
@@ -8892,7 +8892,7 @@
     "navOrder": 494
   },
   {
-    "id": 496,
+    "id": 495,
     "path": "/docs/chat/sdk/v4/wasm/message/using-message-threading/list-replies-in-a-message-thread",
     "relativePath": "chat/sdk/v4/wasm/message/using-message-threading/list-replies-in-a-message-thread",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/using-message-threading/list-replies-in-a-message-thread",
@@ -8910,7 +8910,7 @@
     "navOrder": 495
   },
   {
-    "id": 497,
+    "id": 496,
     "path": "/docs/chat/sdk/v4/wasm/migrating-to-openim",
     "relativePath": "chat/sdk/v4/wasm/migrating-to-openim",
     "sourcePath": "/docs/chat/sdk/v4/wasm/migrating-to-sendbird",
@@ -8928,7 +8928,7 @@
     "navOrder": 496
   },
   {
-    "id": 498,
+    "id": 497,
     "path": "/docs/chat/sdk/v4/wasm/migration-guide/collection-migration-guide",
     "relativePath": "chat/sdk/v4/wasm/migration-guide/collection-migration-guide",
     "sourcePath": "/docs/chat/sdk/v4/wasm/migration-guide/collection-migration-guide",
@@ -8946,7 +8946,7 @@
     "navOrder": 497
   },
   {
-    "id": 499,
+    "id": 498,
     "path": "/docs/chat/sdk/v4/wasm/migration-guide/migration-guide",
     "relativePath": "chat/sdk/v4/wasm/migration-guide/migration-guide",
     "sourcePath": "/docs/chat/sdk/v4/wasm/migration-guide/migration-guide",
@@ -8964,7 +8964,7 @@
     "navOrder": 498
   },
   {
-    "id": 500,
+    "id": 499,
     "path": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/push-notification-content-templates",
     "relativePath": "chat/sdk/v4/wasm/push-notifications/configuring-preferences/push-notification-content-templates",
     "sourcePath": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/push-notification-content-templates",
@@ -8982,7 +8982,7 @@
     "navOrder": 499
   },
   {
-    "id": 501,
+    "id": 500,
     "path": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/set-up-push-notifications",
     "relativePath": "chat/sdk/v4/wasm/push-notifications/configuring-preferences/set-up-push-notifications",
     "sourcePath": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/set-up-push-notifications",
@@ -9000,7 +9000,7 @@
     "navOrder": 500
   },
   {
-    "id": 502,
+    "id": 501,
     "path": "/docs/chat/sdk/v4/wasm/report/creating-a-report/report-a-message-user-or-channel",
     "relativePath": "chat/sdk/v4/wasm/report/creating-a-report/report-a-message-user-or-channel",
     "sourcePath": "/docs/chat/sdk/v4/wasm/report/creating-a-report/report-a-message-user-or-channel",
@@ -9018,7 +9018,7 @@
     "navOrder": 501
   },
   {
-    "id": 503,
+    "id": 502,
     "path": "/docs/chat/sdk/v4/wasm/user/managing-user-metadata/manage-user-metadata",
     "relativePath": "chat/sdk/v4/wasm/user/managing-user-metadata/manage-user-metadata",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/managing-user-metadata/manage-user-metadata",
@@ -9036,7 +9036,7 @@
     "navOrder": 502
   },
   {
-    "id": 504,
+    "id": 503,
     "path": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-banned-users",
     "relativePath": "chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-banned-users",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-banned-users",
@@ -9054,7 +9054,7 @@
     "navOrder": 503
   },
   {
-    "id": 505,
+    "id": 504,
     "path": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
     "relativePath": "chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
@@ -9072,7 +9072,7 @@
     "navOrder": 504
   },
   {
-    "id": 506,
+    "id": 505,
     "path": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-muted-users",
     "relativePath": "chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-muted-users",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-muted-users",
@@ -9090,7 +9090,7 @@
     "navOrder": 505
   },
   {
-    "id": 507,
+    "id": 506,
     "path": "/docs/chat/sdk/v4/wasm/user/overview-user",
     "relativePath": "chat/sdk/v4/wasm/user/overview-user",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/overview-user",
@@ -9108,7 +9108,7 @@
     "navOrder": 506
   },
   {
-    "id": 508,
+    "id": 507,
     "path": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
     "relativePath": "chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
@@ -9126,7 +9126,7 @@
     "navOrder": 507
   },
   {
-    "id": 509,
+    "id": 508,
     "path": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile",
     "relativePath": "chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile",
@@ -9144,7 +9144,7 @@
     "navOrder": 508
   },
   {
-    "id": 513,
+    "id": 509,
     "path": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "relativePath": "chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
@@ -9162,7 +9162,7 @@
     "navOrder": 506.1
   },
   {
-    "id": 514,
+    "id": 510,
     "path": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
     "relativePath": "chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
@@ -9180,7 +9180,7 @@
     "navOrder": 506.2
   },
   {
-    "id": 515,
+    "id": 511,
     "path": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
     "relativePath": "chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
@@ -9198,7 +9198,7 @@
     "navOrder": 506.3
   },
   {
-    "id": 517,
+    "id": 512,
     "path": "/docs/chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
     "relativePath": "chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
     "sourcePath": "/docs/chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
@@ -9216,7 +9216,7 @@
     "navOrder": 516
   },
   {
-    "id": 518,
+    "id": 513,
     "path": "/docs/chat/sdk/v4/electron/overview",
     "relativePath": "chat/sdk/v4/electron/overview",
     "sourcePath": "/docs/chat/sdk/v4/electron/overview",
@@ -9234,7 +9234,7 @@
     "navOrder": 517
   },
   {
-    "id": 519,
+    "id": 514,
     "path": "/docs/chat/sdk/v4/miniprogram/overview",
     "relativePath": "chat/sdk/v4/miniprogram/overview",
     "sourcePath": "/docs/chat/sdk/v4/miniprogram/overview",
@@ -9252,7 +9252,7 @@
     "navOrder": 518
   },
   {
-    "id": 520,
+    "id": 515,
     "path": "/docs/chat/sdk/v4/react-native/overview",
     "relativePath": "chat/sdk/v4/react-native/overview",
     "sourcePath": "/docs/chat/sdk/v4/react-native/overview",
@@ -9270,7 +9270,7 @@
     "navOrder": 519
   },
   {
-    "id": 521,
+    "id": 516,
     "path": "/docs/chat/sdk/v4/unity/overview",
     "relativePath": "chat/sdk/v4/unity/overview",
     "sourcePath": "/docs/chat/sdk/v4/unity/overview",
@@ -9288,7 +9288,7 @@
     "navOrder": 520
   },
   {
-    "id": 522,
+    "id": 517,
     "path": "/docs/chat/sdk/v4/unity/application/authenticating-a-user/authentication",
     "relativePath": "chat/sdk/v4/unity/application/authenticating-a-user/authentication",
     "sourcePath": "/docs/chat/sdk/v4/unity/application/authenticating-a-user/authentication",
@@ -9306,7 +9306,7 @@
     "navOrder": 521
   },
   {
-    "id": 523,
+    "id": 518,
     "path": "/docs/chat/sdk/v4/unity/application/overview-application",
     "relativePath": "chat/sdk/v4/unity/application/overview-application",
     "sourcePath": "/docs/chat/sdk/v4/unity/application/overview-application",
@@ -9324,7 +9324,7 @@
     "navOrder": 522
   },
   {
-    "id": 524,
+    "id": 519,
     "path": "/docs/chat/sdk/v4/unity/application/understanding-rate-limits/rate-limits",
     "relativePath": "chat/sdk/v4/unity/application/understanding-rate-limits/rate-limits",
     "sourcePath": "/docs/chat/sdk/v4/unity/application/understanding-rate-limits/rate-limits",
@@ -9342,7 +9342,7 @@
     "navOrder": 523
   },
   {
-    "id": 525,
+    "id": 520,
     "path": "/docs/chat/sdk/v4/unity/channel/categorizing-channels/categorize-channels-by-custom-type",
     "relativePath": "chat/sdk/v4/unity/channel/categorizing-channels/categorize-channels-by-custom-type",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/categorizing-channels/categorize-channels-by-custom-type",
@@ -9360,7 +9360,7 @@
     "navOrder": 524
   },
   {
-    "id": 526,
+    "id": 521,
     "path": "/docs/chat/sdk/v4/unity/channel/creating-a-channel/create-a-channel",
     "relativePath": "chat/sdk/v4/unity/channel/creating-a-channel/create-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/creating-a-channel/create-a-channel",
@@ -9378,7 +9378,7 @@
     "navOrder": 525
   },
   {
-    "id": 527,
+    "id": 522,
     "path": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
     "relativePath": "chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
@@ -9396,7 +9396,7 @@
     "navOrder": 526
   },
   {
-    "id": 528,
+    "id": 523,
     "path": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/invite-users-as-members",
     "relativePath": "chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/invite-users-as-members",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/invite-users-as-members",
@@ -9414,7 +9414,7 @@
     "navOrder": 527
   },
   {
-    "id": 529,
+    "id": 524,
     "path": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
     "relativePath": "chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
@@ -9432,7 +9432,7 @@
     "navOrder": 528
   },
   {
-    "id": 530,
+    "id": 525,
     "path": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
     "relativePath": "chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
@@ -9450,7 +9450,7 @@
     "navOrder": 529
   },
   {
-    "id": 531,
+    "id": 526,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-channel-metacounters/manage-channel-metacounters",
     "relativePath": "chat/sdk/v4/unity/channel/managing-channel-metacounters/manage-channel-metacounters",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-channel-metacounters/manage-channel-metacounters",
@@ -9468,7 +9468,7 @@
     "navOrder": 530
   },
   {
-    "id": 532,
+    "id": 527,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-channel-metadata/manage-channel-metadata",
     "relativePath": "chat/sdk/v4/unity/channel/managing-channel-metadata/manage-channel-metadata",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-channel-metadata/manage-channel-metadata",
@@ -9486,7 +9486,7 @@
     "navOrder": 531
   },
   {
-    "id": 533,
+    "id": 528,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-channels/delete-a-channel",
     "relativePath": "chat/sdk/v4/unity/channel/managing-channels/delete-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-channels/delete-a-channel",
@@ -9504,7 +9504,7 @@
     "navOrder": 532
   },
   {
-    "id": 534,
+    "id": 529,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-channels/hide-or-archive-a-group-channel",
     "relativePath": "chat/sdk/v4/unity/channel/managing-channels/hide-or-archive-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-channels/hide-or-archive-a-group-channel",
@@ -9522,7 +9522,7 @@
     "navOrder": 533
   },
   {
-    "id": 535,
+    "id": 530,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
     "relativePath": "chat/sdk/v4/unity/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
@@ -9540,7 +9540,7 @@
     "navOrder": 534
   },
   {
-    "id": 536,
+    "id": 531,
     "path": "/docs/chat/sdk/v4/unity/channel/managing-operators/register-and-remove-operators",
     "relativePath": "chat/sdk/v4/unity/channel/managing-operators/register-and-remove-operators",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/managing-operators/register-and-remove-operators",
@@ -9558,7 +9558,7 @@
     "navOrder": 535
   },
   {
-    "id": 537,
+    "id": 532,
     "path": "/docs/chat/sdk/v4/unity/channel/moderating-a-channel/freeze-and-unfreeze-a-channel",
     "relativePath": "chat/sdk/v4/unity/channel/moderating-a-channel/freeze-and-unfreeze-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/moderating-a-channel/freeze-and-unfreeze-a-channel",
@@ -9576,7 +9576,7 @@
     "navOrder": 536
   },
   {
-    "id": 538,
+    "id": 533,
     "path": "/docs/chat/sdk/v4/unity/channel/overview-channel",
     "relativePath": "chat/sdk/v4/unity/channel/overview-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/overview-channel",
@@ -9594,7 +9594,7 @@
     "navOrder": 537
   },
   {
-    "id": 539,
+    "id": 534,
     "path": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-channel-by-url",
     "relativePath": "chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-channel-by-url",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-channel-by-url",
@@ -9612,7 +9612,7 @@
     "navOrder": 538
   },
   {
-    "id": 540,
+    "id": 535,
     "path": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-list-of-channels",
     "relativePath": "chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-list-of-channels",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-list-of-channels",
@@ -9630,7 +9630,7 @@
     "navOrder": 539
   },
   {
-    "id": 541,
+    "id": 536,
     "path": "/docs/chat/sdk/v4/unity/channel/searching-channels/filter-group-channels-by-user-ids",
     "relativePath": "chat/sdk/v4/unity/channel/searching-channels/filter-group-channels-by-user-ids",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/searching-channels/filter-group-channels-by-user-ids",
@@ -9648,7 +9648,7 @@
     "navOrder": 540
   },
   {
-    "id": 542,
+    "id": 537,
     "path": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
     "relativePath": "chat/sdk/v4/unity/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
@@ -9666,7 +9666,7 @@
     "navOrder": 541
   },
   {
-    "id": 543,
+    "id": 538,
     "path": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-open-channels-by-name-url-or-custom-type",
     "relativePath": "chat/sdk/v4/unity/channel/searching-channels/search-open-channels-by-name-url-or-custom-type",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-open-channels-by-name-url-or-custom-type",
@@ -9684,7 +9684,7 @@
     "navOrder": 542
   },
   {
-    "id": 544,
+    "id": 539,
     "path": "/docs/chat/sdk/v4/unity/channel/using-group-channel-collection/group-channel-collection",
     "relativePath": "chat/sdk/v4/unity/channel/using-group-channel-collection/group-channel-collection",
     "sourcePath": "/docs/chat/sdk/v4/unity/channel/using-group-channel-collection/group-channel-collection",
@@ -9702,7 +9702,7 @@
     "navOrder": 543
   },
   {
-    "id": 545,
+    "id": 540,
     "path": "/docs/chat/sdk/v4/unity/deprecated",
     "relativePath": "chat/sdk/v4/unity/deprecated",
     "sourcePath": "/docs/chat/sdk/v4/unity/deprecated",
@@ -9720,7 +9720,7 @@
     "navOrder": 544
   },
   {
-    "id": 546,
+    "id": 541,
     "path": "/docs/chat/sdk/v4/unity/error-codes",
     "relativePath": "chat/sdk/v4/unity/error-codes",
     "sourcePath": "/docs/chat/sdk/v4/unity/error-codes",
@@ -9738,7 +9738,7 @@
     "navOrder": 545
   },
   {
-    "id": 547,
+    "id": 542,
     "path": "/docs/chat/sdk/v4/unity/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
     "relativePath": "chat/sdk/v4/unity/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/unity/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
@@ -9756,7 +9756,7 @@
     "navOrder": 546
   },
   {
-    "id": 548,
+    "id": 543,
     "path": "/docs/chat/sdk/v4/unity/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
     "relativePath": "chat/sdk/v4/unity/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/unity/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
@@ -9774,7 +9774,7 @@
     "navOrder": 547
   },
   {
-    "id": 549,
+    "id": 544,
     "path": "/docs/chat/sdk/v4/unity/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
     "relativePath": "chat/sdk/v4/unity/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/unity/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
@@ -9792,7 +9792,7 @@
     "navOrder": 548
   },
   {
-    "id": 550,
+    "id": 545,
     "path": "/docs/chat/sdk/v4/unity/event-handler/overview-event-handler",
     "relativePath": "chat/sdk/v4/unity/event-handler/overview-event-handler",
     "sourcePath": "/docs/chat/sdk/v4/unity/event-handler/overview-event-handler",
@@ -9810,7 +9810,7 @@
     "navOrder": 549
   },
   {
-    "id": 551,
+    "id": 546,
     "path": "/docs/chat/sdk/v4/unity/getting-started/send-first-message",
     "relativePath": "chat/sdk/v4/unity/getting-started/send-first-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/getting-started/send-first-message",
@@ -9828,7 +9828,7 @@
     "navOrder": 550
   },
   {
-    "id": 552,
+    "id": 547,
     "path": "/docs/chat/sdk/v4/unity/logger",
     "relativePath": "chat/sdk/v4/unity/logger",
     "sourcePath": "/docs/chat/sdk/v4/unity/logger",
@@ -9846,7 +9846,7 @@
     "navOrder": 551
   },
   {
-    "id": 553,
+    "id": 548,
     "path": "/docs/chat/sdk/v4/unity/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
     "relativePath": "chat/sdk/v4/unity/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
@@ -9864,7 +9864,7 @@
     "navOrder": 552
   },
   {
-    "id": 554,
+    "id": 549,
     "path": "/docs/chat/sdk/v4/unity/message/categorizing-messages/categorize-messages-by-custom-type",
     "relativePath": "chat/sdk/v4/unity/message/categorizing-messages/categorize-messages-by-custom-type",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/categorizing-messages/categorize-messages-by-custom-type",
@@ -9882,7 +9882,7 @@
     "navOrder": 553
   },
   {
-    "id": 555,
+    "id": 550,
     "path": "/docs/chat/sdk/v4/unity/message/listing-changelogs/list-changelogs-of-messages",
     "relativePath": "chat/sdk/v4/unity/message/listing-changelogs/list-changelogs-of-messages",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/listing-changelogs/list-changelogs-of-messages",
@@ -9900,7 +9900,7 @@
     "navOrder": 554
   },
   {
-    "id": 556,
+    "id": 551,
     "path": "/docs/chat/sdk/v4/unity/message/loading-messages/load-messages-by-timestamp-or-message-id",
     "relativePath": "chat/sdk/v4/unity/message/loading-messages/load-messages-by-timestamp-or-message-id",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/loading-messages/load-messages-by-timestamp-or-message-id",
@@ -9918,7 +9918,7 @@
     "navOrder": 555
   },
   {
-    "id": 557,
+    "id": 552,
     "path": "/docs/chat/sdk/v4/unity/message/loading-messages/load-previous-messages",
     "relativePath": "chat/sdk/v4/unity/message/loading-messages/load-previous-messages",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/loading-messages/load-previous-messages",
@@ -9936,7 +9936,7 @@
     "navOrder": 556
   },
   {
-    "id": 558,
+    "id": 553,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
@@ -9954,7 +9954,7 @@
     "navOrder": 557
   },
   {
-    "id": 559,
+    "id": 554,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/copy-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/copy-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/copy-a-message",
@@ -9972,7 +9972,7 @@
     "navOrder": 558
   },
   {
-    "id": 560,
+    "id": 555,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/delete-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/delete-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/delete-a-message",
@@ -9990,7 +9990,7 @@
     "navOrder": 559
   },
   {
-    "id": 561,
+    "id": 556,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/display-open-graph-tags-in-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/display-open-graph-tags-in-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/display-open-graph-tags-in-a-message",
@@ -10008,7 +10008,7 @@
     "navOrder": 560
   },
   {
-    "id": 562,
+    "id": 557,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/generate-thumbnails-of-a-file-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/generate-thumbnails-of-a-file-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/generate-thumbnails-of-a-file-message",
@@ -10026,7 +10026,7 @@
     "navOrder": 561
   },
   {
-    "id": 563,
+    "id": 558,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/react-to-a-message-in-a-group-channel",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/react-to-a-message-in-a-group-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/react-to-a-message-in-a-group-channel",
@@ -10044,7 +10044,7 @@
     "navOrder": 562
   },
   {
-    "id": 564,
+    "id": 559,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/send-typing-indicators-to-other-members",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/send-typing-indicators-to-other-members",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/send-typing-indicators-to-other-members",
@@ -10062,7 +10062,7 @@
     "navOrder": 563
   },
   {
-    "id": 565,
+    "id": 560,
     "path": "/docs/chat/sdk/v4/unity/message/managing-a-message/update-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-a-message/update-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-a-message/update-a-message",
@@ -10080,7 +10080,7 @@
     "navOrder": 564
   },
   {
-    "id": 566,
+    "id": 561,
     "path": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/pin-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/pin-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/pin-a-message",
@@ -10098,7 +10098,7 @@
     "navOrder": 565
   },
   {
-    "id": 567,
+    "id": 562,
     "path": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/unpin-a-message",
     "relativePath": "chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/unpin-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/unpin-a-message",
@@ -10116,7 +10116,7 @@
     "navOrder": 566
   },
   {
-    "id": 568,
+    "id": 563,
     "path": "/docs/chat/sdk/v4/unity/message/marking-messages-as-delivered-in-a-group-channel/mark-messages-as-delivered",
     "relativePath": "chat/sdk/v4/unity/message/marking-messages-as-delivered-in-a-group-channel/mark-messages-as-delivered",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/marking-messages-as-delivered-in-a-group-channel/mark-messages-as-delivered",
@@ -10134,7 +10134,7 @@
     "navOrder": 567
   },
   {
-    "id": 569,
+    "id": 564,
     "path": "/docs/chat/sdk/v4/unity/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
     "relativePath": "chat/sdk/v4/unity/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
@@ -10152,7 +10152,7 @@
     "navOrder": 568
   },
   {
-    "id": 570,
+    "id": 565,
     "path": "/docs/chat/sdk/v4/unity/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message",
     "relativePath": "chat/sdk/v4/unity/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message",
@@ -10170,7 +10170,7 @@
     "navOrder": 569
   },
   {
-    "id": 571,
+    "id": 566,
     "path": "/docs/chat/sdk/v4/unity/message/overview-message",
     "relativePath": "chat/sdk/v4/unity/message/overview-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/overview-message",
@@ -10188,7 +10188,7 @@
     "navOrder": 570
   },
   {
-    "id": 572,
+    "id": 567,
     "path": "/docs/chat/sdk/v4/unity/message/receiving-messages-through-event-handler/receive-messages-in-a-channel",
     "relativePath": "chat/sdk/v4/unity/message/receiving-messages-through-event-handler/receive-messages-in-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/receiving-messages-through-event-handler/receive-messages-in-a-channel",
@@ -10206,7 +10206,7 @@
     "navOrder": 571
   },
   {
-    "id": 573,
+    "id": 568,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-a-message/retrieve-a-message",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-a-message/retrieve-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-a-message/retrieve-a-message",
@@ -10224,7 +10224,7 @@
     "navOrder": 572
   },
   {
-    "id": 574,
+    "id": 569,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/members-who-havent-read-a-message",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/members-who-havent-read-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/members-who-havent-read-a-message",
@@ -10242,7 +10242,7 @@
     "navOrder": 573
   },
   {
-    "id": 575,
+    "id": 570,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-channels",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-channels",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-channels",
@@ -10260,7 +10260,7 @@
     "navOrder": 574
   },
   {
-    "id": 576,
+    "id": 571,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-items",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-items",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-items",
@@ -10278,7 +10278,7 @@
     "navOrder": 575
   },
   {
-    "id": 577,
+    "id": 572,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-a-channel",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-a-channel",
@@ -10296,7 +10296,7 @@
     "navOrder": 576
   },
   {
-    "id": 578,
+    "id": 573,
     "path": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-all-channels",
     "relativePath": "chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-all-channels",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-all-channels",
@@ -10314,7 +10314,7 @@
     "navOrder": 577
   },
   {
-    "id": 579,
+    "id": 574,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/cancel-an-in-progress-file-upload",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/cancel-an-in-progress-file-upload",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/cancel-an-in-progress-file-upload",
@@ -10332,7 +10332,7 @@
     "navOrder": 578
   },
   {
-    "id": 580,
+    "id": 575,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-a-message",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/send-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-a-message",
@@ -10350,7 +10350,7 @@
     "navOrder": 579
   },
   {
-    "id": 581,
+    "id": 576,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-an-admin-message",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/send-an-admin-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-an-admin-message",
@@ -10368,7 +10368,7 @@
     "navOrder": 580
   },
   {
-    "id": 582,
+    "id": 577,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/share-an-encrypted-file",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/share-an-encrypted-file",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/share-an-encrypted-file",
@@ -10386,7 +10386,7 @@
     "navOrder": 581
   },
   {
-    "id": 583,
+    "id": 578,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/smart-throttling",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/smart-throttling",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/smart-throttling",
@@ -10404,7 +10404,7 @@
     "navOrder": 582
   },
   {
-    "id": 584,
+    "id": 579,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/spam-flood-protection",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/spam-flood-protection",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/spam-flood-protection",
@@ -10422,7 +10422,7 @@
     "navOrder": 583
   },
   {
-    "id": 585,
+    "id": 580,
     "path": "/docs/chat/sdk/v4/unity/message/sending-a-message/track-file-upload-progress-using-a-handler",
     "relativePath": "chat/sdk/v4/unity/message/sending-a-message/track-file-upload-progress-using-a-handler",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/sending-a-message/track-file-upload-progress-using-a-handler",
@@ -10440,7 +10440,7 @@
     "navOrder": 584
   },
   {
-    "id": 586,
+    "id": 581,
     "path": "/docs/chat/sdk/v4/unity/message/translating-messages/auto-translate-messages",
     "relativePath": "chat/sdk/v4/unity/message/translating-messages/auto-translate-messages",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/translating-messages/auto-translate-messages",
@@ -10458,7 +10458,7 @@
     "navOrder": 585
   },
   {
-    "id": 587,
+    "id": 582,
     "path": "/docs/chat/sdk/v4/unity/message/translating-messages/translate-messages-on-demand",
     "relativePath": "chat/sdk/v4/unity/message/translating-messages/translate-messages-on-demand",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/translating-messages/translate-messages-on-demand",
@@ -10476,7 +10476,7 @@
     "navOrder": 586
   },
   {
-    "id": 588,
+    "id": 583,
     "path": "/docs/chat/sdk/v4/unity/message/translating-messages/translation-engine",
     "relativePath": "chat/sdk/v4/unity/message/translating-messages/translation-engine",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/translating-messages/translation-engine",
@@ -10494,7 +10494,7 @@
     "navOrder": 587
   },
   {
-    "id": 589,
+    "id": 584,
     "path": "/docs/chat/sdk/v4/unity/message/using-message-collection/message-collection",
     "relativePath": "chat/sdk/v4/unity/message/using-message-collection/message-collection",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/using-message-collection/message-collection",
@@ -10512,7 +10512,7 @@
     "navOrder": 588
   },
   {
-    "id": 590,
+    "id": 585,
     "path": "/docs/chat/sdk/v4/unity/message/using-message-threading/create-a-message-thread",
     "relativePath": "chat/sdk/v4/unity/message/using-message-threading/create-a-message-thread",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/using-message-threading/create-a-message-thread",
@@ -10530,7 +10530,7 @@
     "navOrder": 589
   },
   {
-    "id": 591,
+    "id": 586,
     "path": "/docs/chat/sdk/v4/unity/message/using-message-threading/list-replies-in-a-message-thread",
     "relativePath": "chat/sdk/v4/unity/message/using-message-threading/list-replies-in-a-message-thread",
     "sourcePath": "/docs/chat/sdk/v4/unity/message/using-message-threading/list-replies-in-a-message-thread",
@@ -10548,7 +10548,7 @@
     "navOrder": 590
   },
   {
-    "id": 592,
+    "id": 587,
     "path": "/docs/chat/sdk/v4/unity/migrating-to-openim",
     "relativePath": "chat/sdk/v4/unity/migrating-to-openim",
     "sourcePath": "/docs/chat/sdk/v4/unity/migrating-to-sendbird",
@@ -10566,7 +10566,7 @@
     "navOrder": 591
   },
   {
-    "id": 593,
+    "id": 588,
     "path": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/configure-push-notification-preferences",
     "relativePath": "chat/sdk/v4/unity/push-notifications/managing-push-notifications/configure-push-notification-preferences",
     "sourcePath": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/configure-push-notification-preferences",
@@ -10584,7 +10584,7 @@
     "navOrder": 592
   },
   {
-    "id": 594,
+    "id": 589,
     "path": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-templates",
     "relativePath": "chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-templates",
     "sourcePath": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-templates",
@@ -10602,7 +10602,7 @@
     "navOrder": 593
   },
   {
-    "id": 595,
+    "id": 590,
     "path": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-tester",
     "relativePath": "chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-tester",
     "sourcePath": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-tester",
@@ -10620,7 +10620,7 @@
     "navOrder": 594
   },
   {
-    "id": 596,
+    "id": 591,
     "path": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-translation",
     "relativePath": "chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-translation",
     "sourcePath": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-translation",
@@ -10638,7 +10638,7 @@
     "navOrder": 595
   },
   {
-    "id": 597,
+    "id": 592,
     "path": "/docs/chat/sdk/v4/unity/push-notifications/overview-push-notifications",
     "relativePath": "chat/sdk/v4/unity/push-notifications/overview-push-notifications",
     "sourcePath": "/docs/chat/sdk/v4/unity/push-notifications/overview-push-notifications",
@@ -10656,7 +10656,7 @@
     "navOrder": 596
   },
   {
-    "id": 598,
+    "id": 593,
     "path": "/docs/chat/sdk/v4/unity/report/creating-a-report/report-a-message-user-or-channel",
     "relativePath": "chat/sdk/v4/unity/report/creating-a-report/report-a-message-user-or-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/report/creating-a-report/report-a-message-user-or-channel",
@@ -10674,7 +10674,7 @@
     "navOrder": 597
   },
   {
-    "id": 599,
+    "id": 594,
     "path": "/docs/chat/sdk/v4/unity/report/overview-report",
     "relativePath": "chat/sdk/v4/unity/report/overview-report",
     "sourcePath": "/docs/chat/sdk/v4/unity/report/overview-report",
@@ -10692,7 +10692,7 @@
     "navOrder": 598
   },
   {
-    "id": 600,
+    "id": 595,
     "path": "/docs/chat/sdk/v4/unity/user/managing-user-metadata/manage-user-metadata",
     "relativePath": "chat/sdk/v4/unity/user/managing-user-metadata/manage-user-metadata",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/managing-user-metadata/manage-user-metadata",
@@ -10710,7 +10710,7 @@
     "navOrder": 599
   },
   {
-    "id": 601,
+    "id": 596,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/ban-and-unban-a-user",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/ban-and-unban-a-user",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/ban-and-unban-a-user",
@@ -10728,7 +10728,7 @@
     "navOrder": 600
   },
   {
-    "id": 602,
+    "id": 597,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/block-and-unblock-other-members",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/block-and-unblock-other-members",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/block-and-unblock-other-members",
@@ -10746,7 +10746,7 @@
     "navOrder": 601
   },
   {
-    "id": 603,
+    "id": 598,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/mute-and-unmute-a-user",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/mute-and-unmute-a-user",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/mute-and-unmute-a-user",
@@ -10764,7 +10764,7 @@
     "navOrder": 602
   },
   {
-    "id": 604,
+    "id": 599,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-banned-users",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-banned-users",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-banned-users",
@@ -10782,7 +10782,7 @@
     "navOrder": 603
   },
   {
-    "id": 605,
+    "id": 600,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-blocked-users",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-blocked-users",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-blocked-users",
@@ -10800,7 +10800,7 @@
     "navOrder": 604
   },
   {
-    "id": 606,
+    "id": 601,
     "path": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-muted-users",
     "relativePath": "chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-muted-users",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-muted-users",
@@ -10818,7 +10818,7 @@
     "navOrder": 605
   },
   {
-    "id": 607,
+    "id": 602,
     "path": "/docs/chat/sdk/v4/unity/user/overview-user",
     "relativePath": "chat/sdk/v4/unity/user/overview-user",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/overview-user",
@@ -10836,7 +10836,7 @@
     "navOrder": 606
   },
   {
-    "id": 608,
+    "id": 603,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
@@ -10854,7 +10854,7 @@
     "navOrder": 607
   },
   {
-    "id": 609,
+    "id": 604,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
@@ -10872,7 +10872,7 @@
     "navOrder": 608
   },
   {
-    "id": 610,
+    "id": 605,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/update-user-profile",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-and-updating-user-information/update-user-profile",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/update-user-profile",
@@ -10890,7 +10890,7 @@
     "navOrder": 609
   },
   {
-    "id": 611,
+    "id": 606,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
@@ -10908,7 +10908,7 @@
     "navOrder": 610
   },
   {
-    "id": 612,
+    "id": 607,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-operators",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-operators",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-operators",
@@ -10926,7 +10926,7 @@
     "navOrder": 611
   },
   {
-    "id": 613,
+    "id": 608,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
@@ -10944,7 +10944,7 @@
     "navOrder": 612
   },
   {
-    "id": 614,
+    "id": 609,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
@@ -10962,7 +10962,7 @@
     "navOrder": 613
   },
   {
-    "id": 615,
+    "id": 610,
     "path": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-members-who-have-read-a-message",
     "relativePath": "chat/sdk/v4/unity/user/retrieving-users/retrieve-members-who-have-read-a-message",
     "sourcePath": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-members-who-have-read-a-message",
@@ -10980,7 +10980,7 @@
     "navOrder": 614
   },
   {
-    "id": 616,
+    "id": 611,
     "path": "/docs/chat/platform-api/v3/overview",
     "relativePath": "chat/platform-api/v3/overview",
     "sourcePath": "/docs/chat/platform-api/v3/overview",
@@ -10998,7 +10998,7 @@
     "navOrder": 615
   },
   {
-    "id": 617,
+    "id": 612,
     "path": "/docs/chat/platform-api/v3/prepare-to-use-api",
     "relativePath": "chat/platform-api/v3/prepare-to-use-api",
     "sourcePath": "/docs/chat/platform-api/v3/prepare-to-use-api",
@@ -11016,7 +11016,7 @@
     "navOrder": 616
   },
   {
-    "id": 618,
+    "id": 613,
     "path": "/docs/chat/platform-api/v3/user/listing-users/list-users",
     "relativePath": "chat/platform-api/v3/user/listing-users/list-users",
     "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/list-users",
@@ -11034,7 +11034,7 @@
     "navOrder": 617
   },
   {
-    "id": 619,
+    "id": 614,
     "path": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
     "relativePath": "chat/platform-api/v3/user/listing-users/get-a-user",
     "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
@@ -11052,7 +11052,7 @@
     "navOrder": 618
   },
   {
-    "id": 620,
+    "id": 615,
     "path": "/docs/chat/platform-api/v3/user/creating-users/create-a-user",
     "relativePath": "chat/platform-api/v3/user/creating-users/create-a-user",
     "sourcePath": "/docs/chat/platform-api/v3/user/creating-users/create-a-user",
@@ -11070,7 +11070,7 @@
     "navOrder": 619
   },
   {
-    "id": 621,
+    "id": 616,
     "path": "/docs/chat/platform-api/v3/user/managing-users/update-a-user",
     "relativePath": "chat/platform-api/v3/user/managing-users/update-a-user",
     "sourcePath": "/docs/chat/platform-api/v3/user/managing-users/update-a-user",
@@ -11088,7 +11088,7 @@
     "navOrder": 620
   },
   {
-    "id": 622,
+    "id": 617,
     "path": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
     "relativePath": "chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
     "sourcePath": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
@@ -11106,7 +11106,7 @@
     "navOrder": 621
   },
   {
-    "id": 623,
+    "id": 618,
     "path": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
     "relativePath": "chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
     "sourcePath": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
@@ -11124,7 +11124,7 @@
     "navOrder": 622
   },
   {
-    "id": 624,
+    "id": 619,
     "path": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
     "relativePath": "chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
@@ -11142,7 +11142,7 @@
     "navOrder": 623
   },
   {
-    "id": 625,
+    "id": 620,
     "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
     "relativePath": "chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
@@ -11160,7 +11160,7 @@
     "navOrder": 624
   },
   {
-    "id": 626,
+    "id": 621,
     "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
     "relativePath": "chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
@@ -11178,7 +11178,7 @@
     "navOrder": 625
   },
   {
-    "id": 627,
+    "id": 622,
     "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
     "relativePath": "chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
@@ -11196,7 +11196,7 @@
     "navOrder": 626
   },
   {
-    "id": 628,
+    "id": 623,
     "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
     "relativePath": "chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
@@ -11214,7 +11214,7 @@
     "navOrder": 627
   },
   {
-    "id": 629,
+    "id": 624,
     "path": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
     "relativePath": "chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
@@ -11232,7 +11232,7 @@
     "navOrder": 628
   },
   {
-    "id": 630,
+    "id": 625,
     "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
     "relativePath": "chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
@@ -11250,7 +11250,7 @@
     "navOrder": 629
   },
   {
-    "id": 631,
+    "id": 626,
     "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
     "relativePath": "chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
@@ -11268,7 +11268,7 @@
     "navOrder": 630
   },
   {
-    "id": 632,
+    "id": 627,
     "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
     "relativePath": "chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
     "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
@@ -11286,7 +11286,7 @@
     "navOrder": 631
   },
   {
-    "id": 633,
+    "id": 628,
     "path": "/docs/chat/platform-api/v3/message/messaging-basics/send-a-message",
     "relativePath": "chat/platform-api/v3/message/messaging-basics/send-a-message",
     "sourcePath": "/docs/chat/platform-api/v3/message/messaging-basics/send-a-message",
@@ -11304,7 +11304,7 @@
     "navOrder": 632
   },
   {
-    "id": 634,
+    "id": 629,
     "path": "/docs/chat/platform-api/v3/migration/migrate-messages",
     "relativePath": "chat/platform-api/v3/migration/migrate-messages",
     "sourcePath": "/docs/chat/platform-api/v3/migration/migrate-messages",
@@ -11322,7 +11322,7 @@
     "navOrder": 633
   },
   {
-    "id": 635,
+    "id": 630,
     "path": "/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
     "relativePath": "chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
@@ -11340,7 +11340,7 @@
     "navOrder": 634
   },
   {
-    "id": 636,
+    "id": 631,
     "path": "/docs/chat/platform-api/v3/moderation/blocking-users/block-users",
     "relativePath": "chat/platform-api/v3/moderation/blocking-users/block-users",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/blocking-users/block-users",
@@ -11358,7 +11358,7 @@
     "navOrder": 635
   },
   {
-    "id": 637,
+    "id": 632,
     "path": "/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
     "relativePath": "chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
@@ -11376,7 +11376,7 @@
     "navOrder": 636
   },
   {
-    "id": 638,
+    "id": 633,
     "path": "/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
     "relativePath": "chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
@@ -11394,7 +11394,7 @@
     "navOrder": 637
   },
   {
-    "id": 639,
+    "id": 634,
     "path": "/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
     "relativePath": "chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
@@ -11412,7 +11412,7 @@
     "navOrder": 638
   },
   {
-    "id": 640,
+    "id": 635,
     "path": "/docs/chat/platform-api/v3/error-codes",
     "relativePath": "chat/platform-api/v3/error-codes",
     "sourcePath": "/docs/chat/platform-api/v3/error-codes",
@@ -11430,7 +11430,7 @@
     "navOrder": 639
   },
   {
-    "id": 512,
+    "id": 636,
     "path": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
     "relativePath": "chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
@@ -11448,7 +11448,7 @@
     "navOrder": 432.5
   },
   {
-    "id": 641,
+    "id": 637,
     "path": "/docs/chat/platform-api/v3/user/overview",
     "relativePath": "chat/platform-api/v3/user/overview",
     "sourcePath": "/docs/chat/platform-api/v3/user/overview",
@@ -11466,7 +11466,7 @@
     "navOrder": 616.5
   },
   {
-    "id": 642,
+    "id": 638,
     "path": "/docs/chat/platform-api/v3/channel/overview",
     "relativePath": "chat/platform-api/v3/channel/overview",
     "sourcePath": "/docs/chat/platform-api/v3/channel/overview",
@@ -11484,7 +11484,7 @@
     "navOrder": 622.5
   },
   {
-    "id": 643,
+    "id": 639,
     "path": "/docs/chat/platform-api/v3/message/overview",
     "relativePath": "chat/platform-api/v3/message/overview",
     "sourcePath": "/docs/chat/platform-api/v3/message/overview",
@@ -11502,7 +11502,7 @@
     "navOrder": 631.5
   },
   {
-    "id": 644,
+    "id": 640,
     "path": "/docs/chat/platform-api/v3/migration/overview",
     "relativePath": "chat/platform-api/v3/migration/overview",
     "sourcePath": "/docs/chat/platform-api/v3/migration/overview",
@@ -11520,7 +11520,7 @@
     "navOrder": 632.5
   },
   {
-    "id": 645,
+    "id": 641,
     "path": "/docs/chat/platform-api/v3/moderation/overview",
     "relativePath": "chat/platform-api/v3/moderation/overview",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/overview",
@@ -11536,5 +11536,527 @@
     "sourceIndex": 633.5,
     "contentFile": "content/docs/chat/platform-api/v3/moderation/overview.mdx",
     "navOrder": 633.5
+  },
+  {
+    "id": 642,
+    "path": "/docs/chat/platform-api/v3/group/create-group",
+    "relativePath": "chat/platform-api/v3/group/create-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/create-group",
+    "title": "创建群组",
+    "description": "OpenIM 群组 REST API：创建群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 640,
+    "contentFile": "content/docs/chat/platform-api/v3/group/create-group.mdx",
+    "navOrder": 640
+  },
+  {
+    "id": 643,
+    "path": "/docs/chat/platform-api/v3/group/set-group-info",
+    "relativePath": "chat/platform-api/v3/group/set-group-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info",
+    "title": "设置群组信息",
+    "description": "OpenIM 群组 REST API：设置群组信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 641,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info.mdx",
+    "navOrder": 641
+  },
+  {
+    "id": 644,
+    "path": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "relativePath": "chat/platform-api/v3/group/set-group-info-ex",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "title": "设置群组信息扩展",
+    "description": "OpenIM 群组 REST API：设置群组信息扩展。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 642,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info-ex.mdx",
+    "navOrder": 642
+  },
+  {
+    "id": 645,
+    "path": "/docs/chat/platform-api/v3/group/join-group",
+    "relativePath": "chat/platform-api/v3/group/join-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/join-group",
+    "title": "申请加入群组",
+    "description": "OpenIM 群组 REST API：申请加入群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 643,
+    "contentFile": "content/docs/chat/platform-api/v3/group/join-group.mdx",
+    "navOrder": 643
+  },
+  {
+    "id": 646,
+    "path": "/docs/chat/platform-api/v3/group/quit-group",
+    "relativePath": "chat/platform-api/v3/group/quit-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/quit-group",
+    "title": "退出群组",
+    "description": "OpenIM 群组 REST API：退出群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 644,
+    "contentFile": "content/docs/chat/platform-api/v3/group/quit-group.mdx",
+    "navOrder": 644
+  },
+  {
+    "id": 647,
+    "path": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "relativePath": "chat/platform-api/v3/group/respond-group-application",
+    "sourcePath": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "title": "处理入群申请",
+    "description": "OpenIM 群组 REST API：处理入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 645,
+    "contentFile": "content/docs/chat/platform-api/v3/group/respond-group-application.mdx",
+    "navOrder": 645
+  },
+  {
+    "id": 648,
+    "path": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "relativePath": "chat/platform-api/v3/group/transfer-group-owner",
+    "sourcePath": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "title": "转让群主",
+    "description": "OpenIM 群组 REST API：转让群主。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 646,
+    "contentFile": "content/docs/chat/platform-api/v3/group/transfer-group-owner.mdx",
+    "navOrder": 646
+  },
+  {
+    "id": 649,
+    "path": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "relativePath": "chat/platform-api/v3/group/list-received-group-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "title": "查询收到的入群申请",
+    "description": "OpenIM 群组 REST API：查询收到的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 647,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-received-group-applications.mdx",
+    "navOrder": 647
+  },
+  {
+    "id": 650,
+    "path": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "relativePath": "chat/platform-api/v3/group/list-user-requested-group-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "title": "查询用户发起的入群申请",
+    "description": "OpenIM 群组 REST API：查询用户发起的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 648,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-user-requested-group-applications.mdx",
+    "navOrder": 648
+  },
+  {
+    "id": 651,
+    "path": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "relativePath": "chat/platform-api/v3/group/list-group-users-request-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "title": "查询群内多个用户的入群申请",
+    "description": "OpenIM 群组 REST API：查询群内多个用户的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 649,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-group-users-request-applications.mdx",
+    "navOrder": 649
+  },
+  {
+    "id": 652,
+    "path": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "relativePath": "chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "title": "查询指定用户入群申请",
+    "description": "OpenIM 群组 REST API：查询指定用户入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 650,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-specified-user-group-request-info.mdx",
+    "navOrder": 650
+  },
+  {
+    "id": 653,
+    "path": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "relativePath": "chat/platform-api/v3/group/get-groups-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "title": "获取群组详情",
+    "description": "OpenIM 群组 REST API：获取群组详情。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 651,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups-info.mdx",
+    "navOrder": 651
+  },
+  {
+    "id": 654,
+    "path": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "relativePath": "chat/platform-api/v3/group/kick-group-members",
+    "sourcePath": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "title": "移除群成员",
+    "description": "OpenIM 群组 REST API：移除群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 652,
+    "contentFile": "content/docs/chat/platform-api/v3/group/kick-group-members.mdx",
+    "navOrder": 652
+  },
+  {
+    "id": 655,
+    "path": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "relativePath": "chat/platform-api/v3/group/get-group-members-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "title": "获取指定群成员",
+    "description": "OpenIM 群组 REST API：获取指定群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 653,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-members-info.mdx",
+    "navOrder": 653
+  },
+  {
+    "id": 656,
+    "path": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "relativePath": "chat/platform-api/v3/group/get-group-member-list",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "title": "获取群成员列表",
+    "description": "OpenIM 群组 REST API：获取群成员列表。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 654,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-list.mdx",
+    "navOrder": 654
+  },
+  {
+    "id": 657,
+    "path": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "relativePath": "chat/platform-api/v3/group/invite-users-to-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "title": "邀请用户进群",
+    "description": "OpenIM 群组 REST API：邀请用户进群。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 655,
+    "contentFile": "content/docs/chat/platform-api/v3/group/invite-users-to-group.mdx",
+    "navOrder": 655
+  },
+  {
+    "id": 658,
+    "path": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "relativePath": "chat/platform-api/v3/group/get-joined-group-list",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "title": "获取已加入群组列表",
+    "description": "OpenIM 群组 REST API：获取已加入群组列表。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 656,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-joined-group-list.mdx",
+    "navOrder": 656
+  },
+  {
+    "id": 659,
+    "path": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "relativePath": "chat/platform-api/v3/group/dismiss-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "title": "解散群组",
+    "description": "OpenIM 群组 REST API：解散群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 657,
+    "contentFile": "content/docs/chat/platform-api/v3/group/dismiss-group.mdx",
+    "navOrder": 657
+  },
+  {
+    "id": 660,
+    "path": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "relativePath": "chat/platform-api/v3/group/mute-group-member",
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "title": "禁言群成员",
+    "description": "OpenIM 群组 REST API：禁言群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 658,
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group-member.mdx",
+    "navOrder": 658
+  },
+  {
+    "id": 661,
+    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "relativePath": "chat/platform-api/v3/group/cancel-mute-group-member",
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "title": "取消禁言群成员",
+    "description": "OpenIM 群组 REST API：取消禁言群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 659,
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group-member.mdx",
+    "navOrder": 659
+  },
+  {
+    "id": 662,
+    "path": "/docs/chat/platform-api/v3/group/mute-group",
+    "relativePath": "chat/platform-api/v3/group/mute-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group",
+    "title": "禁言群组",
+    "description": "OpenIM 群组 REST API：禁言群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 660,
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group.mdx",
+    "navOrder": 660
+  },
+  {
+    "id": 663,
+    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "relativePath": "chat/platform-api/v3/group/cancel-mute-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "title": "取消群组禁言",
+    "description": "OpenIM 群组 REST API：取消群组禁言。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 661,
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group.mdx",
+    "navOrder": 661
+  },
+  {
+    "id": 664,
+    "path": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "relativePath": "chat/platform-api/v3/group/set-group-member-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "title": "设置群成员信息",
+    "description": "OpenIM 群组 REST API：设置群成员信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 662,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-member-info.mdx",
+    "navOrder": 662
+  },
+  {
+    "id": 665,
+    "path": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "relativePath": "chat/platform-api/v3/group/get-group-abstract-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "title": "获取群组摘要信息",
+    "description": "OpenIM 群组 REST API：获取群组摘要信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 663,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-abstract-info.mdx",
+    "navOrder": 663
+  },
+  {
+    "id": 666,
+    "path": "/docs/chat/platform-api/v3/group/get-groups",
+    "relativePath": "chat/platform-api/v3/group/get-groups",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups",
+    "title": "分页查询群组",
+    "description": "OpenIM 群组 REST API：分页查询群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 664,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups.mdx",
+    "navOrder": 664
+  },
+  {
+    "id": 667,
+    "path": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "relativePath": "chat/platform-api/v3/group/get-group-member-user-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "title": "获取群成员用户 ID",
+    "description": "OpenIM 群组 REST API：获取群成员用户 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 665,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-user-ids.mdx",
+    "navOrder": 665
+  },
+  {
+    "id": 668,
+    "path": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "relativePath": "chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "title": "全量获取群成员用户 ID",
+    "description": "OpenIM 群组 REST API：全量获取群成员用户 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 666,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-group-member-user-ids.mdx",
+    "navOrder": 666
+  },
+  {
+    "id": 669,
+    "path": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "relativePath": "chat/platform-api/v3/group/get-full-join-group-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "title": "全量获取用户加入的群组 ID",
+    "description": "OpenIM 群组 REST API：全量获取用户加入的群组 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 667,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-join-group-ids.mdx",
+    "navOrder": 667
+  },
+  {
+    "id": 670,
+    "path": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "relativePath": "chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "title": "获取未处理入群申请数量",
+    "description": "OpenIM 群组 REST API：获取未处理入群申请数量。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 668,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-application-unhandled-count.mdx",
+    "navOrder": 668
   }
 ]

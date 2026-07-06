@@ -38,7 +38,7 @@
             {
               "id": "user/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "用户概览",
               "href": "/docs/chat/platform-api/v3/user/overview",
               "type": "page",
               "children": [],
@@ -151,7 +151,7 @@
             {
               "id": "channel/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "频道概览",
               "href": "/docs/chat/platform-api/v3/channel/overview",
               "type": "page",
               "children": [],
@@ -282,6 +282,277 @@
           "minIndex": 622.5
         },
         {
+          "id": "group",
+          "segment": "group",
+          "title": "群组",
+          "href": null,
+          "type": "folder",
+          "children": [
+            {
+              "id": "group/create-group",
+              "segment": "create-group",
+              "title": "创建群组",
+              "href": "/docs/chat/platform-api/v3/group/create-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 640
+            },
+            {
+              "id": "group/set-group-info",
+              "segment": "set-group-info",
+              "title": "设置群组信息",
+              "href": "/docs/chat/platform-api/v3/group/set-group-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 641
+            },
+            {
+              "id": "group/set-group-info-ex",
+              "segment": "set-group-info-ex",
+              "title": "设置群组信息扩展",
+              "href": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+              "type": "page",
+              "children": [],
+              "minIndex": 642
+            },
+            {
+              "id": "group/join-group",
+              "segment": "join-group",
+              "title": "申请加入群组",
+              "href": "/docs/chat/platform-api/v3/group/join-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 643
+            },
+            {
+              "id": "group/quit-group",
+              "segment": "quit-group",
+              "title": "退出群组",
+              "href": "/docs/chat/platform-api/v3/group/quit-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 644
+            },
+            {
+              "id": "group/respond-group-application",
+              "segment": "respond-group-application",
+              "title": "处理入群申请",
+              "href": "/docs/chat/platform-api/v3/group/respond-group-application",
+              "type": "page",
+              "children": [],
+              "minIndex": 645
+            },
+            {
+              "id": "group/transfer-group-owner",
+              "segment": "transfer-group-owner",
+              "title": "转让群主",
+              "href": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+              "type": "page",
+              "children": [],
+              "minIndex": 646
+            },
+            {
+              "id": "group/list-received-group-applications",
+              "segment": "list-received-group-applications",
+              "title": "查询收到的入群申请",
+              "href": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+              "type": "page",
+              "children": [],
+              "minIndex": 647
+            },
+            {
+              "id": "group/list-user-requested-group-applications",
+              "segment": "list-user-requested-group-applications",
+              "title": "查询用户发起的入群申请",
+              "href": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+              "type": "page",
+              "children": [],
+              "minIndex": 648
+            },
+            {
+              "id": "group/list-group-users-request-applications",
+              "segment": "list-group-users-request-applications",
+              "title": "查询群内多个用户的入群申请",
+              "href": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+              "type": "page",
+              "children": [],
+              "minIndex": 649
+            },
+            {
+              "id": "group/get-specified-user-group-request-info",
+              "segment": "get-specified-user-group-request-info",
+              "title": "查询指定用户入群申请",
+              "href": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 650
+            },
+            {
+              "id": "group/get-groups-info",
+              "segment": "get-groups-info",
+              "title": "获取群组详情",
+              "href": "/docs/chat/platform-api/v3/group/get-groups-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 651
+            },
+            {
+              "id": "group/kick-group-members",
+              "segment": "kick-group-members",
+              "title": "移除群成员",
+              "href": "/docs/chat/platform-api/v3/group/kick-group-members",
+              "type": "page",
+              "children": [],
+              "minIndex": 652
+            },
+            {
+              "id": "group/get-group-members-info",
+              "segment": "get-group-members-info",
+              "title": "获取指定群成员",
+              "href": "/docs/chat/platform-api/v3/group/get-group-members-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 653
+            },
+            {
+              "id": "group/get-group-member-list",
+              "segment": "get-group-member-list",
+              "title": "获取群成员列表",
+              "href": "/docs/chat/platform-api/v3/group/get-group-member-list",
+              "type": "page",
+              "children": [],
+              "minIndex": 654
+            },
+            {
+              "id": "group/invite-users-to-group",
+              "segment": "invite-users-to-group",
+              "title": "邀请用户进群",
+              "href": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 655
+            },
+            {
+              "id": "group/get-joined-group-list",
+              "segment": "get-joined-group-list",
+              "title": "获取已加入群组列表",
+              "href": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+              "type": "page",
+              "children": [],
+              "minIndex": 656
+            },
+            {
+              "id": "group/dismiss-group",
+              "segment": "dismiss-group",
+              "title": "解散群组",
+              "href": "/docs/chat/platform-api/v3/group/dismiss-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 657
+            },
+            {
+              "id": "group/mute-group-member",
+              "segment": "mute-group-member",
+              "title": "禁言群成员",
+              "href": "/docs/chat/platform-api/v3/group/mute-group-member",
+              "type": "page",
+              "children": [],
+              "minIndex": 658
+            },
+            {
+              "id": "group/cancel-mute-group-member",
+              "segment": "cancel-mute-group-member",
+              "title": "取消禁言群成员",
+              "href": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+              "type": "page",
+              "children": [],
+              "minIndex": 659
+            },
+            {
+              "id": "group/mute-group",
+              "segment": "mute-group",
+              "title": "禁言群组",
+              "href": "/docs/chat/platform-api/v3/group/mute-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 660
+            },
+            {
+              "id": "group/cancel-mute-group",
+              "segment": "cancel-mute-group",
+              "title": "取消群组禁言",
+              "href": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+              "type": "page",
+              "children": [],
+              "minIndex": 661
+            },
+            {
+              "id": "group/set-group-member-info",
+              "segment": "set-group-member-info",
+              "title": "设置群成员信息",
+              "href": "/docs/chat/platform-api/v3/group/set-group-member-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 662
+            },
+            {
+              "id": "group/get-group-abstract-info",
+              "segment": "get-group-abstract-info",
+              "title": "获取群组摘要信息",
+              "href": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 663
+            },
+            {
+              "id": "group/get-groups",
+              "segment": "get-groups",
+              "title": "分页查询群组",
+              "href": "/docs/chat/platform-api/v3/group/get-groups",
+              "type": "page",
+              "children": [],
+              "minIndex": 664
+            },
+            {
+              "id": "group/get-group-member-user-ids",
+              "segment": "get-group-member-user-ids",
+              "title": "获取群成员用户 ID",
+              "href": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 665
+            },
+            {
+              "id": "group/get-full-group-member-user-ids",
+              "segment": "get-full-group-member-user-ids",
+              "title": "全量获取群成员用户 ID",
+              "href": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 666
+            },
+            {
+              "id": "group/get-full-join-group-ids",
+              "segment": "get-full-join-group-ids",
+              "title": "全量获取用户加入的群组 ID",
+              "href": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 667
+            },
+            {
+              "id": "group/get-group-application-unhandled-count",
+              "segment": "get-group-application-unhandled-count",
+              "title": "获取未处理入群申请数量",
+              "href": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+              "type": "page",
+              "children": [],
+              "minIndex": 668
+            }
+          ],
+          "minIndex": 640
+        },
+        {
           "id": "message",
           "segment": "message",
           "title": "消息",
@@ -291,7 +562,7 @@
             {
               "id": "message/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "消息概览",
               "href": "/docs/chat/platform-api/v3/message/overview",
               "type": "page",
               "children": [],
@@ -329,7 +600,7 @@
             {
               "id": "migration/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "迁移概览",
               "href": "/docs/chat/platform-api/v3/migration/overview",
               "type": "page",
               "children": [],
@@ -357,7 +628,7 @@
             {
               "id": "moderation/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "内容审核概览",
               "href": "/docs/chat/platform-api/v3/moderation/overview",
               "type": "page",
               "children": [],
@@ -451,7 +722,7 @@
           "minIndex": 639
         }
       ],
-      "pageCount": 30
+      "pageCount": 59
     },
     {
       "key": "chat/sdk/v4/ios",
