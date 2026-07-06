@@ -1,0 +1,49 @@
+---
+title: "关系概览"
+description: "OpenIM Platform API 关系模块概览，覆盖好友申请、好友列表、好友关系管理和黑名单。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/relation/overview"
+---
+
+关系模块面向可信后端服务，用于管理 OpenIM 用户之间的好友关系、好友申请、好友资料扩展和黑名单等用户关系数据。它属于用户关系能力，不放在内容审核模块中；黑名单虽然有治理含义，但数据归属仍是用户关系。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 好友申请 | 发起好友申请、查询收到或发出的申请，并处理同意或拒绝。 |
+| 好友查询 | 分页读取好友列表，或按指定好友 ID 批量获取好友资料。 |
+| 好友管理 | 删除好友、导入好友关系，并批量更新备注、置顶和扩展字段。 |
+| 黑名单 | 将用户加入黑名单、移出黑名单，并分页查询黑名单列表。 |
+
+## 常用接口
+
+- [申请添加好友](/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend)
+- [处理好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply)
+- [查询收到的好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests)
+- [查询发出的好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests)
+- [查询好友列表](/docs/chat/platform-api/v3/relation/listing-friends/list-friends)
+- [获取指定好友](/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends)
+- [删除好友](/docs/chat/platform-api/v3/relation/managing-friends/delete-friend)
+- [导入好友](/docs/chat/platform-api/v3/relation/managing-friends/import-friends)
+- [更新好友](/docs/chat/platform-api/v3/relation/managing-friends/update-friends)
+- [加入黑名单](/docs/chat/platform-api/v3/relation/blacklist/add-black)
+- [查询黑名单](/docs/chat/platform-api/v3/relation/blacklist/list-blacks)
+- [移出黑名单](/docs/chat/platform-api/v3/relation/blacklist/remove-black)
+
+## 接入建议
+
+好友关系应由业务后端统一判断是否允许建立、删除或导入。调用 OpenIM 前，先确认两个用户在业务系统中存在，并记录操作者、来源和原因；需要风控时可以结合回调或业务审批流程。
+
+黑名单应作为用户关系能力处理。产品上可以在内容治理入口中展示黑名单相关链接，但接口文档应保留在关系模块，避免用户误以为它是频道或消息审核能力。
+
+## 相关页面
+
+- [用户概览](/docs/chat/platform-api/v3/user/overview)
+- [内容审核概览](/docs/chat/platform-api/v3/moderation/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

@@ -3434,7 +3434,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
     "openimPath": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
-    "title": "Register and remove operators",
+    "title": "Register and remove administrators",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators.mdx"
@@ -4066,7 +4066,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
-    "title": "Retrieve a list of users in an application",
+    "title": "Retrieve users in an application",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application.mdx"
@@ -4082,7 +4082,7 @@
   {
     "sourcePath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
     "openimPath": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
-    "title": "Retrieve friend information",
+    "title": "Retrieve specified friend information",
     "context": "chat/sdk/v4/wasm",
     "template": "guide",
     "contentFile": "content/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information.mdx"
@@ -4880,9 +4880,17 @@
     "contentFile": "content/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-members-who-have-read-a-message.mdx"
   },
   {
+    "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
+    "openimPath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
+    "title": "Retrieve group members",
+    "context": "chat/sdk/v4/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members.mdx"
+  },
+  {
     "sourcePath": "/docs/chat/platform-api/v3/overview",
     "openimPath": "/docs/chat/platform-api/v3/overview",
-    "title": "OpenIM Platform API",
+    "title": "概述",
     "context": "chat/platform-api/v3",
     "template": "overview",
     "contentFile": "content/docs/chat/platform-api/v3/overview.mdx"
@@ -4896,12 +4904,36 @@
     "contentFile": "content/docs/chat/platform-api/v3/prepare-to-use-api.mdx"
   },
   {
+    "sourcePath": "/docs/chat/platform-api/v3/user/overview",
+    "openimPath": "/docs/chat/platform-api/v3/user/overview",
+    "title": "用户概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/user/overview.mdx"
+  },
+  {
     "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/list-users",
     "openimPath": "/docs/chat/platform-api/v3/user/listing-users/list-users",
     "title": "查询用户列表",
     "context": "chat/platform-api/v3",
     "template": "api",
     "contentFile": "content/docs/chat/platform-api/v3/user/listing-users/list-users.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
+    "openimPath": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
+    "title": "查询全部用户 ID",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
+    "openimPath": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
+    "title": "校验用户账号",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/listing-users/check-user-accounts.mdx"
   },
   {
     "sourcePath": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
@@ -4928,6 +4960,46 @@
     "contentFile": "content/docs/chat/platform-api/v3/user/managing-users/update-a-user.mdx"
   },
   {
+    "sourcePath": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
+    "openimPath": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
+    "title": "查询用户在线状态",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/presence/get-users-online-status.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
+    "openimPath": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
+    "title": "查询用户在线 Token 明细",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
+    "openimPath": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
+    "title": "创建通知账号",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
+    "openimPath": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
+    "title": "更新通知账号",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
+    "openimPath": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
+    "title": "搜索通知账号",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account.mdx"
+  },
+  {
     "sourcePath": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
     "openimPath": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
     "title": "签发会话 Token",
@@ -4942,6 +5014,110 @@
     "context": "chat/platform-api/v3",
     "template": "api",
     "contentFile": "content/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/overview",
+    "openimPath": "/docs/chat/platform-api/v3/relation/overview",
+    "title": "关系概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend",
+    "title": "申请添加好友",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply",
+    "title": "处理好友申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests",
+    "title": "查询收到的好友申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests",
+    "title": "查询发出的好友申请",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/listing-friends/list-friends",
+    "openimPath": "/docs/chat/platform-api/v3/relation/listing-friends/list-friends",
+    "title": "查询好友列表",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/listing-friends/list-friends.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends",
+    "openimPath": "/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends",
+    "title": "获取指定好友",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friends/delete-friend",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friends/delete-friend",
+    "title": "删除好友",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friends/delete-friend.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friends/import-friends",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friends/import-friends",
+    "title": "导入好友",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friends/import-friends.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/managing-friends/update-friends",
+    "openimPath": "/docs/chat/platform-api/v3/relation/managing-friends/update-friends",
+    "title": "更新好友",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/managing-friends/update-friends.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/blacklist/add-black",
+    "openimPath": "/docs/chat/platform-api/v3/relation/blacklist/add-black",
+    "title": "加入黑名单",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/blacklist/add-black.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/blacklist/list-blacks",
+    "openimPath": "/docs/chat/platform-api/v3/relation/blacklist/list-blacks",
+    "title": "查询黑名单",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/blacklist/list-blacks.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/relation/blacklist/remove-black",
+    "openimPath": "/docs/chat/platform-api/v3/relation/blacklist/remove-black",
+    "title": "移出黑名单",
+    "context": "chat/platform-api/v3",
+    "template": "api",
+    "contentFile": "content/docs/chat/platform-api/v3/relation/blacklist/remove-black.mdx"
   },
   {
     "sourcePath": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
@@ -5080,11 +5256,35 @@
     "contentFile": "content/docs/chat/platform-api/v3/error-codes.mdx"
   },
   {
-    "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
-    "openimPath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
-    "title": "Retrieve group members",
-    "context": "chat/sdk/v4/wasm",
-    "template": "guide",
-    "contentFile": "content/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members.mdx"
+    "sourcePath": "/docs/chat/platform-api/v3/channel/overview",
+    "openimPath": "/docs/chat/platform-api/v3/channel/overview",
+    "title": "频道概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/channel/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/message/overview",
+    "openimPath": "/docs/chat/platform-api/v3/message/overview",
+    "title": "消息概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/message/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/migration/overview",
+    "openimPath": "/docs/chat/platform-api/v3/migration/overview",
+    "title": "迁移概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/migration/overview.mdx"
+  },
+  {
+    "sourcePath": "/docs/chat/platform-api/v3/moderation/overview",
+    "openimPath": "/docs/chat/platform-api/v3/moderation/overview",
+    "title": "内容审核概览",
+    "context": "chat/platform-api/v3",
+    "template": "overview",
+    "contentFile": "content/docs/chat/platform-api/v3/moderation/overview.mdx"
   }
 ]

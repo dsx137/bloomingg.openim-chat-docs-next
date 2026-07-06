@@ -1,0 +1,128 @@
+---
+title: "查询全部用户 ID"
+description: "OpenIM Platform API 中文参考：查询全部用户 ID。说明请求结构、分页方式和响应字段。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids"
+---
+
+使用 **查询全部用户 ID** 从可信后端分页读取 OpenIM 已注册用户的 ID 列表。这个接口只返回 `userIDs`，适合做批处理、数据同步或按用户 ID 继续调用其他接口。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/user/get_all_users_uid
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 100
+  }
+}'
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递分页参数。
+
+### 请求头
+
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
+
+### 请求体参数
+
+```json
+{
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 100
+  }
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| pagination | 必填 | object | 分页参数结构体。 |
+| pagination.pageNumber | 必填 | int | 当前页码，从 1 开始。 |
+| pagination.showNumber | 必填 | int | 当前页请求数量。 |
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "total": 2,
+    "userIDs": ["user_001", "user_002"]
+  }
+}
+```
+
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| total | int | 用户总数。 |
+| userIDs | array | 当前页返回的用户 ID 列表。 |
+
+### 分页读取建议
+
+从 `pagination.pageNumber = 1` 开始读取，并根据 `data.total` 和 `pagination.showNumber` 计算是否还有下一页。需要用户资料时，再用返回的 `userIDs` 调用[获取用户](/docs/chat/platform-api/v3/user/listing-users/get-a-user)。
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "pageNumber is invalid"
+}
+```
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 分页参数无效 | `pagination` 缺失，或 `pageNumber` 小于 1。 | 传入完整分页对象，并从第 1 页开始。 |
+| 鉴权失败 | `token` 缺失、过期，或不是管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |

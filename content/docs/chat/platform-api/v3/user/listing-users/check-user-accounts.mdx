@@ -1,0 +1,130 @@
+---
+title: "校验用户账号"
+description: "OpenIM Platform API 中文参考：校验用户账号。说明如何批量判断用户 ID 是否已注册。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts"
+---
+
+使用 **校验用户账号** 从可信后端批量检查一组用户 ID 是否已经在 OpenIM 注册。该接口适合在批量导入、创建会话或发送消息前做账号存在性校验。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/user/account_check
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/user/account_check" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "checkUserIDs": ["user_001", "user_404"]
+}'
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递待校验用户 ID。
+
+### 请求头
+
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
+
+### 请求体参数
+
+```json
+{
+  "checkUserIDs": ["user_001", "user_404"]
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| checkUserIDs | 必填 | array | 需要检查注册状态的用户 ID 列表。列表中不要传入重复 ID。 |
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "results": [
+      {
+        "userID": "user_001",
+        "accountStatus": 1
+      },
+      {
+        "userID": "user_404",
+        "accountStatus": 0
+      }
+    ]
+  }
+}
+```
+
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| results | array | 每个用户 ID 的校验结果。 |
+
+#### results[] 属性
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| results[].userID | string | 被校验的用户 ID。 |
+| results[].accountStatus | int | 账号状态。`1` 表示已注册，`0` 表示未注册。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "userID repeated"
+}
+```
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 参数校验失败 | `checkUserIDs` 为空，或列表中存在重复用户 ID。 | 去重后重新请求，并确保数组非空。 |
+| 鉴权失败 | `token` 缺失、过期，或不是管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |

@@ -130,6 +130,10 @@ const platformApiOverviewHeadingExpectations = new Map([
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
   [
+    '/docs/chat/platform-api/v3/relation/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
     '/docs/chat/platform-api/v3/channel/overview',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],

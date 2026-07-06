@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01",
+  "generatedAt": "2026-07-06",
   "navigationLabels": {
     "advanced-analytics": "高级分析",
     "announcements": "公告",
@@ -84,6 +84,14 @@
     "translations": "翻译",
     "understanding-rate-limits": "理解速率限制",
     "user": "用户",
-    "webhook": "Webhook"
+    "webhook": "Webhook",
+    "presence": "在线状态",
+    "notification-accounts": "通知账号",
+    "friend": "好友",
+    "managing-friend-requests": "好友申请",
+    "listing-friends": "查询好友",
+    "managing-friends": "管理好友",
+    "blacklist": "黑名单",
+    "relation": "关系"
   }
 }

@@ -13,11 +13,11 @@
         {
           "id": "overview",
           "segment": "overview",
-          "title": "OpenIM Platform API",
+          "title": "概述",
           "href": "/docs/chat/platform-api/v3/overview",
           "type": "page",
           "children": [],
-          "minIndex": 615
+          "minIndex": 611
         },
         {
           "id": "prepare-to-use-api",
@@ -26,7 +26,7 @@
           "href": "/docs/chat/platform-api/v3/prepare-to-use-api",
           "type": "page",
           "children": [],
-          "minIndex": 616
+          "minIndex": 612
         },
         {
           "id": "user",
@@ -38,11 +38,11 @@
             {
               "id": "user/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "用户概览",
               "href": "/docs/chat/platform-api/v3/user/overview",
               "type": "page",
               "children": [],
-              "minIndex": 616.5
+              "minIndex": 613
             },
             {
               "id": "user/listing-users",
@@ -58,7 +58,25 @@
                   "href": "/docs/chat/platform-api/v3/user/listing-users/list-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 617
+                  "minIndex": 614
+                },
+                {
+                  "id": "user/listing-users/list-all-user-ids",
+                  "segment": "list-all-user-ids",
+                  "title": "查询全部用户 ID",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 615
+                },
+                {
+                  "id": "user/listing-users/check-user-accounts",
+                  "segment": "check-user-accounts",
+                  "title": "校验用户账号",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 616
                 },
                 {
                   "id": "user/listing-users/get-a-user",
@@ -67,10 +85,10 @@
                   "href": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 618
+                  "minIndex": 617
                 }
               ],
-              "minIndex": 617
+              "minIndex": 614
             },
             {
               "id": "user/creating-users",
@@ -86,10 +104,10 @@
                   "href": "/docs/chat/platform-api/v3/user/creating-users/create-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 619
+                  "minIndex": 618
                 }
               ],
-              "minIndex": 619
+              "minIndex": 618
             },
             {
               "id": "user/managing-users",
@@ -105,10 +123,75 @@
                   "href": "/docs/chat/platform-api/v3/user/managing-users/update-a-user",
                   "type": "page",
                   "children": [],
+                  "minIndex": 619
+                }
+              ],
+              "minIndex": 619
+            },
+            {
+              "id": "user/presence",
+              "segment": "presence",
+              "title": "在线状态",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/presence/get-users-online-status",
+                  "segment": "get-users-online-status",
+                  "title": "查询用户在线状态",
+                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
+                  "type": "page",
+                  "children": [],
                   "minIndex": 620
+                },
+                {
+                  "id": "user/presence/get-users-online-token-detail",
+                  "segment": "get-users-online-token-detail",
+                  "title": "查询用户在线 Token 明细",
+                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 621
                 }
               ],
               "minIndex": 620
+            },
+            {
+              "id": "user/notification-accounts",
+              "segment": "notification-accounts",
+              "title": "通知账号",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/notification-accounts/add-notification-account",
+                  "segment": "add-notification-account",
+                  "title": "创建通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 622
+                },
+                {
+                  "id": "user/notification-accounts/update-notification-account",
+                  "segment": "update-notification-account",
+                  "title": "更新通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 623
+                },
+                {
+                  "id": "user/notification-accounts/search-notification-account",
+                  "segment": "search-notification-account",
+                  "title": "搜索通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 624
+                }
+              ],
+              "minIndex": 622
             },
             {
               "id": "user/managing-session-tokens",
@@ -124,7 +207,7 @@
                   "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
                   "type": "page",
                   "children": [],
-                  "minIndex": 621
+                  "minIndex": 625
                 },
                 {
                   "id": "user/managing-session-tokens/revoke-all-session-tokens",
@@ -133,13 +216,180 @@
                   "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
                   "type": "page",
                   "children": [],
-                  "minIndex": 622
+                  "minIndex": 626
                 }
               ],
-              "minIndex": 621
+              "minIndex": 625
             }
           ],
-          "minIndex": 616.5
+          "minIndex": 613
+        },
+        {
+          "id": "relation",
+          "segment": "relation",
+          "title": "关系",
+          "href": null,
+          "type": "folder",
+          "children": [
+            {
+              "id": "relation/overview",
+              "segment": "overview",
+              "title": "关系概览",
+              "href": "/docs/chat/platform-api/v3/relation/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 627
+            },
+            {
+              "id": "relation/managing-friend-requests",
+              "segment": "managing-friend-requests",
+              "title": "好友申请",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "relation/managing-friend-requests/apply-to-add-friend",
+                  "segment": "apply-to-add-friend",
+                  "title": "申请添加好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 628
+                },
+                {
+                  "id": "relation/managing-friend-requests/respond-friend-apply",
+                  "segment": "respond-friend-apply",
+                  "title": "处理好友申请",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 629
+                },
+                {
+                  "id": "relation/managing-friend-requests/list-received-friend-requests",
+                  "segment": "list-received-friend-requests",
+                  "title": "查询收到的好友申请",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 630
+                },
+                {
+                  "id": "relation/managing-friend-requests/list-sent-friend-requests",
+                  "segment": "list-sent-friend-requests",
+                  "title": "查询发出的好友申请",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 631
+                }
+              ],
+              "minIndex": 628
+            },
+            {
+              "id": "relation/listing-friends",
+              "segment": "listing-friends",
+              "title": "查询好友",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "relation/listing-friends/list-friends",
+                  "segment": "list-friends",
+                  "title": "查询好友列表",
+                  "href": "/docs/chat/platform-api/v3/relation/listing-friends/list-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 632
+                },
+                {
+                  "id": "relation/listing-friends/get-designated-friends",
+                  "segment": "get-designated-friends",
+                  "title": "获取指定好友",
+                  "href": "/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 633
+                }
+              ],
+              "minIndex": 632
+            },
+            {
+              "id": "relation/managing-friends",
+              "segment": "managing-friends",
+              "title": "管理好友",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "relation/managing-friends/delete-friend",
+                  "segment": "delete-friend",
+                  "title": "删除好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/delete-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 634
+                },
+                {
+                  "id": "relation/managing-friends/import-friends",
+                  "segment": "import-friends",
+                  "title": "导入好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/import-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 635
+                },
+                {
+                  "id": "relation/managing-friends/update-friends",
+                  "segment": "update-friends",
+                  "title": "更新好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/update-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 636
+                }
+              ],
+              "minIndex": 634
+            },
+            {
+              "id": "relation/blacklist",
+              "segment": "blacklist",
+              "title": "黑名单",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "relation/blacklist/add-black",
+                  "segment": "add-black",
+                  "title": "加入黑名单",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/add-black",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 637
+                },
+                {
+                  "id": "relation/blacklist/list-blacks",
+                  "segment": "list-blacks",
+                  "title": "查询黑名单",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/list-blacks",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 638
+                },
+                {
+                  "id": "relation/blacklist/remove-black",
+                  "segment": "remove-black",
+                  "title": "移出黑名单",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/remove-black",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 639
+                }
+              ],
+              "minIndex": 637
+            }
+          ],
+          "minIndex": 627
         },
         {
           "id": "channel",
@@ -148,15 +398,6 @@
           "href": null,
           "type": "folder",
           "children": [
-            {
-              "id": "channel/overview",
-              "segment": "overview",
-              "title": "Overview",
-              "href": "/docs/chat/platform-api/v3/channel/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 622.5
-            },
             {
               "id": "channel/creating-a-channel",
               "segment": "creating-a-channel",
@@ -171,10 +412,10 @@
                   "href": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 623
+                  "minIndex": 640
                 }
               ],
-              "minIndex": 623
+              "minIndex": 640
             },
             {
               "id": "channel/managing-a-channel",
@@ -190,7 +431,7 @@
                   "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 624
+                  "minIndex": 641
                 },
                 {
                   "id": "channel/managing-a-channel/delete-a-group-channel",
@@ -199,7 +440,7 @@
                   "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 625
+                  "minIndex": 642
                 },
                 {
                   "id": "channel/managing-a-channel/join-a-channel",
@@ -208,7 +449,7 @@
                   "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 626
+                  "minIndex": 643
                 },
                 {
                   "id": "channel/managing-a-channel/leave-a-channel",
@@ -217,10 +458,10 @@
                   "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 627
+                  "minIndex": 644
                 }
               ],
-              "minIndex": 624
+              "minIndex": 641
             },
             {
               "id": "channel/listing-users",
@@ -236,10 +477,10 @@
                   "href": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 628
+                  "minIndex": 645
                 }
               ],
-              "minIndex": 628
+              "minIndex": 645
             },
             {
               "id": "channel/inviting-a-user",
@@ -255,7 +496,7 @@
                   "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 629
+                  "minIndex": 646
                 },
                 {
                   "id": "channel/inviting-a-user/accept-an-invitation-channel",
@@ -264,7 +505,7 @@
                   "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 630
+                  "minIndex": 647
                 },
                 {
                   "id": "channel/inviting-a-user/decline-an-invitation-channel",
@@ -273,13 +514,22 @@
                   "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 631
+                  "minIndex": 648
                 }
               ],
-              "minIndex": 629
+              "minIndex": 646
+            },
+            {
+              "id": "channel/overview",
+              "segment": "overview",
+              "title": "频道概览",
+              "href": "/docs/chat/platform-api/v3/channel/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 657
             }
           ],
-          "minIndex": 622.5
+          "minIndex": 640
         },
         {
           "id": "message",
@@ -288,15 +538,6 @@
           "href": null,
           "type": "folder",
           "children": [
-            {
-              "id": "message/overview",
-              "segment": "overview",
-              "title": "Overview",
-              "href": "/docs/chat/platform-api/v3/message/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 631.5
-            },
             {
               "id": "message/messaging-basics",
               "segment": "messaging-basics",
@@ -311,13 +552,22 @@
                   "href": "/docs/chat/platform-api/v3/message/messaging-basics/send-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 632
+                  "minIndex": 649
                 }
               ],
-              "minIndex": 632
+              "minIndex": 649
+            },
+            {
+              "id": "message/overview",
+              "segment": "overview",
+              "title": "消息概览",
+              "href": "/docs/chat/platform-api/v3/message/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 658
             }
           ],
-          "minIndex": 631.5
+          "minIndex": 649
         },
         {
           "id": "migration",
@@ -327,25 +577,25 @@
           "type": "folder",
           "children": [
             {
-              "id": "migration/overview",
-              "segment": "overview",
-              "title": "Overview",
-              "href": "/docs/chat/platform-api/v3/migration/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 632.5
-            },
-            {
               "id": "migration/migrate-messages",
               "segment": "migrate-messages",
               "title": "迁移消息",
               "href": "/docs/chat/platform-api/v3/migration/migrate-messages",
               "type": "page",
               "children": [],
-              "minIndex": 633
+              "minIndex": 650
+            },
+            {
+              "id": "migration/overview",
+              "segment": "overview",
+              "title": "迁移概览",
+              "href": "/docs/chat/platform-api/v3/migration/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 659
             }
           ],
-          "minIndex": 632.5
+          "minIndex": 650
         },
         {
           "id": "moderation",
@@ -354,15 +604,6 @@
           "href": null,
           "type": "folder",
           "children": [
-            {
-              "id": "moderation/overview",
-              "segment": "overview",
-              "title": "Overview",
-              "href": "/docs/chat/platform-api/v3/moderation/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 633.5
-            },
             {
               "id": "moderation/listing-blocked-and-blocking-users",
               "segment": "listing-blocked-and-blocking-users",
@@ -377,10 +618,10 @@
                   "href": "/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 634
+                  "minIndex": 651
                 }
               ],
-              "minIndex": 634
+              "minIndex": 651
             },
             {
               "id": "moderation/blocking-users",
@@ -396,7 +637,7 @@
                   "href": "/docs/chat/platform-api/v3/moderation/blocking-users/block-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 635
+                  "minIndex": 652
                 },
                 {
                   "id": "moderation/blocking-users/unblock-a-user",
@@ -405,10 +646,10 @@
                   "href": "/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 636
+                  "minIndex": 653
                 }
               ],
-              "minIndex": 635
+              "minIndex": 652
             },
             {
               "id": "moderation/muting-a-user",
@@ -424,7 +665,7 @@
                   "href": "/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 637
+                  "minIndex": 654
                 },
                 {
                   "id": "moderation/muting-a-user/unmute-a-member-in-a-group-channel",
@@ -433,13 +674,22 @@
                   "href": "/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 638
+                  "minIndex": 655
                 }
               ],
-              "minIndex": 637
+              "minIndex": 654
+            },
+            {
+              "id": "moderation/overview",
+              "segment": "overview",
+              "title": "内容审核概览",
+              "href": "/docs/chat/platform-api/v3/moderation/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 660
             }
           ],
-          "minIndex": 633.5
+          "minIndex": 651
         },
         {
           "id": "error-codes",
@@ -448,10 +698,11 @@
           "href": "/docs/chat/platform-api/v3/error-codes",
           "type": "page",
           "children": [],
-          "minIndex": 639
+          "minIndex": 656
         }
       ],
-      "pageCount": 30
+      "pageCount": 50,
+      "generatedAt": "2026-07-06"
     },
     {
       "key": "chat/sdk/v4/ios",
@@ -5551,7 +5802,7 @@
               "href": "/docs/chat/sdk/v4/wasm/getting-started/environment-specific-implementation",
               "type": "page",
               "children": [],
-              "minIndex": 442
+              "minIndex": 441
             },
             {
               "id": "getting-started/send-first-message",
@@ -5579,7 +5830,7 @@
               "href": "/docs/chat/sdk/v4/wasm/user/overview-user",
               "type": "page",
               "children": [],
-              "minIndex": 506
+              "minIndex": 505
             },
             {
               "id": "user/retrieving-users",
@@ -5595,7 +5846,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
                   "type": "page",
                   "children": [],
-                  "minIndex": 506.1
+                  "minIndex": 505.1
                 },
                 {
                   "id": "user/retrieving-users/retrieve-a-list-of-friends",
@@ -5604,7 +5855,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends",
                   "children": [],
                   "type": "page",
-                  "minIndex": 506.2
+                  "minIndex": 505.2
                 },
                 {
                   "id": "user/retrieving-users/retrieve-friend-information",
@@ -5613,10 +5864,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information",
                   "children": [],
                   "type": "page",
-                  "minIndex": 506.3
+                  "minIndex": 505.3
                 }
               ],
-              "minIndex": 506.1
+              "minIndex": 505.1
             },
             {
               "id": "user/managing-friends",
@@ -5659,7 +5910,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 504
+                  "minIndex": 503
                 },
                 {
                   "id": "user/moderating-a-user/retrieve-a-list-of-banned-users",
@@ -5668,7 +5919,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-banned-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 503
+                  "minIndex": 502
                 },
                 {
                   "id": "user/moderating-a-user/retrieve-a-list-of-muted-users",
@@ -5677,7 +5928,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/moderating-a-user/retrieve-a-list-of-muted-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 505
+                  "minIndex": 504
                 },
                 {
                   "id": "user/moderating-a-user/block-and-unblock-other-members",
@@ -5732,7 +5983,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/update-user-profile",
                   "type": "page",
                   "children": [],
-                  "minIndex": 508
+                  "minIndex": 507
                 },
                 {
                   "id": "user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
@@ -5741,7 +5992,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
                   "type": "page",
                   "children": [],
-                  "minIndex": 507
+                  "minIndex": 506
                 }
               ],
               "minIndex": 414
@@ -5760,10 +6011,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/user/managing-user-metadata/manage-user-metadata",
                   "type": "page",
                   "children": [],
-                  "minIndex": 502
+                  "minIndex": 501
                 }
               ],
-              "minIndex": 502
+              "minIndex": 501
             }
           ],
           "minIndex": 409
@@ -5798,10 +6049,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/creating-a-channel/create-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 420
+                  "minIndex": 419
                 }
               ],
-              "minIndex": 420
+              "minIndex": 419
             },
             {
               "id": "channel/managing-operators",
@@ -5817,10 +6068,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-operators/register-and-remove-operators",
                   "type": "page",
                   "children": [],
-                  "minIndex": 430
+                  "minIndex": 429
                 }
               ],
-              "minIndex": 430
+              "minIndex": 429
             },
             {
               "id": "channel/joining-and-leaving-a-channel",
@@ -5836,7 +6087,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 423
+                  "minIndex": 422
                 },
                 {
                   "id": "channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
@@ -5845,10 +6096,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 424
+                  "minIndex": 423
                 }
               ],
-              "minIndex": 423
+              "minIndex": 422
             },
             {
               "id": "channel/retrieving-channels",
@@ -5864,7 +6115,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-channel-by-url",
                   "type": "page",
                   "children": [],
-                  "minIndex": 431
+                  "minIndex": 430
                 },
                 {
                   "id": "channel/retrieving-channels/retrieve-a-list-of-channels",
@@ -5873,7 +6124,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-a-list-of-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 432
+                  "minIndex": 431
                 },
                 {
                   "id": "channel/retrieving-channels/retrieve-group-members",
@@ -5882,10 +6133,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
                   "type": "page",
                   "children": [],
-                  "minIndex": 432.5
+                  "minIndex": 610
                 }
               ],
-              "minIndex": 431
+              "minIndex": 430
             },
             {
               "id": "channel/inviting-users-to-a-group-channel",
@@ -5901,7 +6152,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/invite-users-as-members",
                   "type": "page",
                   "children": [],
-                  "minIndex": 422
+                  "minIndex": 421
                 },
                 {
                   "id": "channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
@@ -5910,10 +6161,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
                   "type": "page",
                   "children": [],
-                  "minIndex": 421
+                  "minIndex": 420
                 }
               ],
-              "minIndex": 421
+              "minIndex": 420
             },
             {
               "id": "channel/searching-channels",
@@ -5929,7 +6180,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/searching-channels/filter-group-channels-by-user-ids",
                   "type": "page",
                   "children": [],
-                  "minIndex": 433
+                  "minIndex": 432
                 },
                 {
                   "id": "channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
@@ -5938,7 +6189,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
                   "type": "page",
                   "children": [],
-                  "minIndex": 434
+                  "minIndex": 433
                 },
                 {
                   "id": "channel/searching-channels/search-open-channels-by-name-or-url-or-custom-types",
@@ -5947,10 +6198,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/searching-channels/search-open-channels-by-name-or-url-or-custom-types",
                   "type": "page",
                   "children": [],
-                  "minIndex": 435
+                  "minIndex": 434
                 }
               ],
-              "minIndex": 433
+              "minIndex": 432
             },
             {
               "id": "channel/categorizing-channels",
@@ -5966,10 +6217,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/categorizing-channels/categorize-channels-by-custom-type",
                   "type": "page",
                   "children": [],
-                  "minIndex": 419
+                  "minIndex": 418
                 }
               ],
-              "minIndex": 419
+              "minIndex": 418
             },
             {
               "id": "channel/managing-channels",
@@ -5985,7 +6236,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-channels/delete-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 427
+                  "minIndex": 426
                 },
                 {
                   "id": "channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
@@ -5994,7 +6245,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 428
+                  "minIndex": 427
                 },
                 {
                   "id": "channel/managing-channels/refresh-all-data-related-to-a-group-channel",
@@ -6003,10 +6254,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 429
+                  "minIndex": 428
                 }
               ],
-              "minIndex": 427
+              "minIndex": 426
             },
             {
               "id": "channel/moderating-a-channel",
@@ -6041,10 +6292,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metadata/manage-channel-metadata",
                   "type": "page",
                   "children": [],
-                  "minIndex": 426
+                  "minIndex": 425
                 }
               ],
-              "minIndex": 426
+              "minIndex": 425
             },
             {
               "id": "channel/managing-channel-metacounters",
@@ -6060,10 +6311,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/channel/managing-channel-metacounters/manage-channel-metacounters",
                   "type": "page",
                   "children": [],
-                  "minIndex": 425
+                  "minIndex": 424
                 }
               ],
-              "minIndex": 425
+              "minIndex": 424
             }
           ],
           "minIndex": 384
@@ -6098,7 +6349,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 489
+                  "minIndex": 488
                 },
                 {
                   "id": "message/sending-a-message/create-media-and-rich-messages",
@@ -6107,7 +6358,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/create-media-and-rich-messages",
                   "children": [],
                   "type": "page",
-                  "minIndex": 490
+                  "minIndex": 489
                 },
                 {
                   "id": "message/sending-a-message/send-an-admin-message",
@@ -6116,7 +6367,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-an-admin-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 491
+                  "minIndex": 490
                 },
                 {
                   "id": "message/sending-a-message/track-file-upload-progress-using-a-handler",
@@ -6125,7 +6376,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/track-file-upload-progress-using-a-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 493
+                  "minIndex": 492
                 },
                 {
                   "id": "message/sending-a-message/cancel-an-in-progress-file-upload",
@@ -6134,7 +6385,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/cancel-an-in-progress-file-upload",
                   "type": "page",
                   "children": [],
-                  "minIndex": 487
+                  "minIndex": 486
                 },
                 {
                   "id": "message/sending-a-message/share-an-encrypted-file",
@@ -6152,7 +6403,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/spam-flood-protection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 492
+                  "minIndex": 491
                 },
                 {
                   "id": "message/sending-a-message/smart-throttling",
@@ -6170,7 +6421,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/sending-a-message/send-a-critical-alert-message-to-ios-devices",
                   "type": "page",
                   "children": [],
-                  "minIndex": 488
+                  "minIndex": 487
                 }
               ],
               "minIndex": 399
@@ -6189,7 +6440,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-an-open-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 479
+                  "minIndex": 478
                 },
                 {
                   "id": "message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel",
@@ -6198,10 +6449,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 478
+                  "minIndex": 477
                 }
               ],
-              "minIndex": 478
+              "minIndex": 477
             },
             {
               "id": "message/using-message-threading",
@@ -6226,7 +6477,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/using-message-threading/list-replies-in-a-message-thread",
                   "type": "page",
                   "children": [],
-                  "minIndex": 495
+                  "minIndex": 494
                 }
               ],
               "minIndex": 403
@@ -6245,7 +6496,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 480
+                  "minIndex": 479
                 },
                 {
                   "id": "message/retrieving-messages/retrieve-a-message",
@@ -6292,7 +6543,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/copy-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 450
+                  "minIndex": 449
                 },
                 {
                   "id": "message/managing-a-message/update-a-message",
@@ -6301,7 +6552,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/update-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 454
+                  "minIndex": 453
                 },
                 {
                   "id": "message/managing-a-message/delete-a-message",
@@ -6310,7 +6561,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/delete-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 451
+                  "minIndex": 450
                 },
                 {
                   "id": "message/managing-a-message/insert-a-local-message",
@@ -6319,7 +6570,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/insert-a-local-message",
                   "children": [],
                   "type": "page",
-                  "minIndex": 452
+                  "minIndex": 451
                 },
                 {
                   "id": "message/managing-a-message/react-to-a-message-in-a-group-channel",
@@ -6337,7 +6588,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 449
+                  "minIndex": 448
                 },
                 {
                   "id": "message/managing-a-message/send-typing-indicators-to-other-members",
@@ -6355,7 +6606,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-a-message/display-open-graph-tags-in-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 453
+                  "minIndex": 452
                 },
                 {
                   "id": "message/managing-a-message/generate-thumbnails-of-a-file-message",
@@ -6392,7 +6643,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-a-scheduled-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 474
+                  "minIndex": 473
                 },
                 {
                   "id": "message/managing-scheduled-messages-in-group-channel/update-a-scheduled-message",
@@ -6401,7 +6652,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/update-a-scheduled-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 477
+                  "minIndex": 476
                 },
                 {
                   "id": "message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
@@ -6410,7 +6661,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 472
+                  "minIndex": 471
                 },
                 {
                   "id": "message/managing-scheduled-messages-in-group-channel/send-a-scheduled-message-immediately",
@@ -6419,7 +6670,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/send-a-scheduled-message-immediately",
                   "type": "page",
                   "children": [],
-                  "minIndex": 476
+                  "minIndex": 475
                 },
                 {
                   "id": "message/managing-scheduled-messages-in-group-channel/list-all-scheduled-messages",
@@ -6428,7 +6679,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/list-all-scheduled-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 473
+                  "minIndex": 472
                 },
                 {
                   "id": "message/managing-scheduled-messages-in-group-channel/retrieve-the-total-number-of-scheduled-messages",
@@ -6437,7 +6688,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-scheduled-messages-in-group-channel/retrieve-the-total-number-of-scheduled-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 475
+                  "minIndex": 474
                 }
               ],
               "minIndex": 393
@@ -6465,7 +6716,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/unpin-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 456
+                  "minIndex": 455
                 },
                 {
                   "id": "message/managing-pinned-messages-in-group-channels/list-pinned-messages",
@@ -6474,7 +6725,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-pinned-messages-in-group-channels/list-pinned-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 455
+                  "minIndex": 454
                 }
               ],
               "minIndex": 391
@@ -6493,10 +6744,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/listing-changelogs/list-changelogs-of-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 448
+                  "minIndex": 447
                 }
               ],
-              "minIndex": 448
+              "minIndex": 447
             },
             {
               "id": "message/managing-read-status-in-a-group-channel",
@@ -6512,7 +6763,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read",
                   "type": "page",
                   "children": [],
-                  "minIndex": 470
+                  "minIndex": 469
                 },
                 {
                   "id": "message/managing-read-status-in-a-group-channel/mark-messages-as-unread",
@@ -6521,7 +6772,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-unread",
                   "type": "page",
                   "children": [],
-                  "minIndex": 471
+                  "minIndex": 470
                 },
                 {
                   "id": "message/managing-read-status-in-a-group-channel/get-read-status",
@@ -6530,10 +6781,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
                   "type": "page",
                   "children": [],
-                  "minIndex": 469
+                  "minIndex": 468
                 }
               ],
-              "minIndex": 469
+              "minIndex": 468
             },
             {
               "id": "message/marking-messages-as-delivered-in-a-group-channel",
@@ -6596,7 +6847,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll",
                   "type": "page",
                   "children": [],
-                  "minIndex": 465
+                  "minIndex": 464
                 },
                 {
                   "id": "message/managing-polls/update-a-poll",
@@ -6605,7 +6856,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll",
                   "type": "page",
                   "children": [],
-                  "minIndex": 467
+                  "minIndex": 466
                 },
                 {
                   "id": "message/managing-polls/delete-a-poll",
@@ -6614,7 +6865,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll",
                   "type": "page",
                   "children": [],
-                  "minIndex": 460
+                  "minIndex": 459
                 },
                 {
                   "id": "message/managing-polls/close-a-poll",
@@ -6623,7 +6874,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/close-a-poll",
                   "type": "page",
                   "children": [],
-                  "minIndex": 459
+                  "minIndex": 458
                 },
                 {
                   "id": "message/managing-polls/add-a-poll-option",
@@ -6632,7 +6883,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/add-a-poll-option",
                   "type": "page",
                   "children": [],
-                  "minIndex": 457
+                  "minIndex": 456
                 },
                 {
                   "id": "message/managing-polls/retrieve-a-poll-option",
@@ -6641,7 +6892,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-poll-option",
                   "type": "page",
                   "children": [],
-                  "minIndex": 466
+                  "minIndex": 465
                 },
                 {
                   "id": "message/managing-polls/update-a-poll-option",
@@ -6650,7 +6901,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/update-a-poll-option",
                   "type": "page",
                   "children": [],
-                  "minIndex": 468
+                  "minIndex": 467
                 },
                 {
                   "id": "message/managing-polls/delete-a-poll-option",
@@ -6659,7 +6910,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/delete-a-poll-option",
                   "type": "page",
                   "children": [],
-                  "minIndex": 461
+                  "minIndex": 460
                 },
                 {
                   "id": "message/managing-polls/cast-or-cancel-a-vote",
@@ -6668,7 +6919,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/cast-or-cancel-a-vote",
                   "type": "page",
                   "children": [],
-                  "minIndex": 458
+                  "minIndex": 457
                 },
                 {
                   "id": "message/managing-polls/retrieve-a-list-of-polls",
@@ -6677,7 +6928,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-polls",
                   "type": "page",
                   "children": [],
-                  "minIndex": 463
+                  "minIndex": 462
                 },
                 {
                   "id": "message/managing-polls/retrieve-a-list-of-voters",
@@ -6686,7 +6937,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/retrieve-a-list-of-voters",
                   "type": "page",
                   "children": [],
-                  "minIndex": 464
+                  "minIndex": 463
                 },
                 {
                   "id": "message/managing-polls/list-changelogs-of-polls",
@@ -6695,7 +6946,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/managing-polls/list-changelogs-of-polls",
                   "type": "page",
                   "children": [],
-                  "minIndex": 462
+                  "minIndex": 461
                 }
               ],
               "minIndex": 392
@@ -6714,7 +6965,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-read-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 481
+                  "minIndex": 480
                 },
                 {
                   "id": "message/retrieving-unread-counts-in-a-group-channel/members-who-havent-received-a-message",
@@ -6723,7 +6974,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/members-who-havent-received-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 482
+                  "minIndex": 481
                 },
                 {
                   "id": "message/retrieving-unread-counts-in-a-group-channel/unread-channels",
@@ -6732,7 +6983,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 483
+                  "minIndex": 482
                 },
                 {
                   "id": "message/retrieving-unread-counts-in-a-group-channel/unread-items",
@@ -6741,7 +6992,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-items",
                   "type": "page",
                   "children": [],
-                  "minIndex": 484
+                  "minIndex": 483
                 },
                 {
                   "id": "message/retrieving-unread-counts-in-a-group-channel/unread-messages",
@@ -6750,7 +7001,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 485
+                  "minIndex": 484
                 },
                 {
                   "id": "message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels",
@@ -6759,10 +7010,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages-in-all-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 486
+                  "minIndex": 485
                 }
               ],
-              "minIndex": 481
+              "minIndex": 480
             },
             {
               "id": "message/categorizing-messages",
@@ -6778,10 +7029,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/categorizing-messages/categorize-messages-by-custom-type",
                   "type": "page",
                   "children": [],
-                  "minIndex": 447
+                  "minIndex": 446
                 }
               ],
-              "minIndex": 447
+              "minIndex": 446
             },
             {
               "id": "message/adding-extra-data-to-a-message",
@@ -6834,7 +7085,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/translating-messages/translation-engine",
                   "type": "page",
                   "children": [],
-                  "minIndex": 494
+                  "minIndex": 493
                 }
               ],
               "minIndex": 401
@@ -6853,10 +7104,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
                   "type": "page",
                   "children": [],
-                  "minIndex": 516
+                  "minIndex": 511
                 }
               ],
-              "minIndex": 516
+              "minIndex": 511
             }
           ],
           "minIndex": 387
@@ -6875,7 +7126,7 @@
               "href": "/docs/chat/sdk/v4/wasm/application/overview-application",
               "type": "page",
               "children": [],
-              "minIndex": 417
+              "minIndex": 416
             },
             {
               "id": "application/authenticating-a-user",
@@ -6891,10 +7142,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication",
                   "type": "page",
                   "children": [],
-                  "minIndex": 416
+                  "minIndex": 415
                 }
               ],
-              "minIndex": 416
+              "minIndex": 415
             },
             {
               "id": "application/understanding-rate-limits",
@@ -6910,13 +7161,13 @@
                   "href": "/docs/chat/sdk/v4/wasm/application/understanding-rate-limits/rate-limits",
                   "type": "page",
                   "children": [],
-                  "minIndex": 418
+                  "minIndex": 417
                 }
               ],
-              "minIndex": 418
+              "minIndex": 417
             }
           ],
-          "minIndex": 416
+          "minIndex": 415
         },
         {
           "id": "event-handler",
@@ -6932,7 +7183,7 @@
               "href": "/docs/chat/sdk/v4/wasm/event-handler/overview-event-handler",
               "type": "page",
               "children": [],
-              "minIndex": 441
+              "minIndex": 440
             },
             {
               "id": "event-handler/managing-channel-event-handlers",
@@ -6948,10 +7199,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 438
+                  "minIndex": 437
                 }
               ],
-              "minIndex": 438
+              "minIndex": 437
             },
             {
               "id": "event-handler/managing-connection-event-handlers",
@@ -6967,10 +7218,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 439
+                  "minIndex": 438
                 }
               ],
-              "minIndex": 439
+              "minIndex": 438
             },
             {
               "id": "event-handler/managing-user-event-handlers",
@@ -6986,13 +7237,13 @@
                   "href": "/docs/chat/sdk/v4/wasm/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 440
+                  "minIndex": 439
                 }
               ],
-              "minIndex": 440
+              "minIndex": 439
             }
           ],
-          "minIndex": 438
+          "minIndex": 437
         },
         {
           "id": "push-notifications",
@@ -7024,7 +7275,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/set-up-push-notifications",
                   "type": "page",
                   "children": [],
-                  "minIndex": 500
+                  "minIndex": 499
                 },
                 {
                   "id": "push-notifications/configuring-preferences/push-notification-preferences",
@@ -7042,7 +7293,7 @@
                   "href": "/docs/chat/sdk/v4/wasm/push-notifications/configuring-preferences/push-notification-content-templates",
                   "type": "page",
                   "children": [],
-                  "minIndex": 499
+                  "minIndex": 498
                 },
                 {
                   "id": "push-notifications/configuring-preferences/push-notification-translation",
@@ -7089,10 +7340,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/report/creating-a-report/report-a-message-user-or-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 501
+                  "minIndex": 500
                 }
               ],
-              "minIndex": 501
+              "minIndex": 500
             }
           ],
           "minIndex": 408
@@ -7111,7 +7362,7 @@
               "href": "/docs/chat/sdk/v4/wasm/local-caching/overview-local-caching",
               "type": "page",
               "children": [],
-              "minIndex": 443
+              "minIndex": 442
             },
             {
               "id": "local-caching/using-group-channel-collection",
@@ -7127,10 +7378,10 @@
                   "href": "/docs/chat/sdk/v4/wasm/local-caching/using-group-channel-collection/group-channel-collection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 444
+                  "minIndex": 443
                 }
               ],
-              "minIndex": 444
+              "minIndex": 443
             },
             {
               "id": "local-caching/using-message-collection",
@@ -7146,13 +7397,13 @@
                   "href": "/docs/chat/sdk/v4/wasm/local-caching/using-message-collection/message-collection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 445
+                  "minIndex": 444
                 }
               ],
-              "minIndex": 445
+              "minIndex": 444
             }
           ],
-          "minIndex": 443
+          "minIndex": 442
         },
         {
           "id": "migrating-to-openim",
@@ -7161,7 +7412,7 @@
           "href": "/docs/chat/sdk/v4/wasm/migrating-to-openim",
           "type": "page",
           "children": [],
-          "minIndex": 496
+          "minIndex": 495
         },
         {
           "id": "migration-guide",
@@ -7177,7 +7428,7 @@
               "href": "/docs/chat/sdk/v4/wasm/migration-guide/migration-guide",
               "type": "page",
               "children": [],
-              "minIndex": 498
+              "minIndex": 497
             },
             {
               "id": "migration-guide/collection-migration-guide",
@@ -7186,10 +7437,10 @@
               "href": "/docs/chat/sdk/v4/wasm/migration-guide/collection-migration-guide",
               "type": "page",
               "children": [],
-              "minIndex": 497
+              "minIndex": 496
             }
           ],
-          "minIndex": 497
+          "minIndex": 496
         },
         {
           "id": "deprecated",
@@ -7198,7 +7449,7 @@
           "href": "/docs/chat/sdk/v4/wasm/deprecated",
           "type": "page",
           "children": [],
-          "minIndex": 436
+          "minIndex": 435
         },
         {
           "id": "error-codes",
@@ -7207,7 +7458,7 @@
           "href": "/docs/chat/sdk/v4/wasm/error-codes",
           "type": "page",
           "children": [],
-          "minIndex": 437
+          "minIndex": 436
         },
         {
           "id": "logger",
@@ -7216,7 +7467,7 @@
           "href": "/docs/chat/sdk/v4/wasm/logger",
           "type": "page",
           "children": [],
-          "minIndex": 446
+          "minIndex": 445
         },
         {
           "id": "overview",
@@ -7246,7 +7497,7 @@
           "href": "/docs/chat/sdk/v4/electron/overview",
           "type": "page",
           "children": [],
-          "minIndex": 517
+          "minIndex": 512
         }
       ],
       "pageCount": 1
@@ -7267,7 +7518,7 @@
           "href": "/docs/chat/sdk/v4/miniprogram/overview",
           "type": "page",
           "children": [],
-          "minIndex": 518
+          "minIndex": 513
         }
       ],
       "pageCount": 1
@@ -7288,7 +7539,7 @@
           "href": "/docs/chat/sdk/v4/react-native/overview",
           "type": "page",
           "children": [],
-          "minIndex": 519
+          "minIndex": 514
         }
       ],
       "pageCount": 1
@@ -7316,10 +7567,10 @@
               "href": "/docs/chat/sdk/v4/unity/getting-started/send-first-message",
               "type": "page",
               "children": [],
-              "minIndex": 550
+              "minIndex": 545
             }
           ],
-          "minIndex": 550
+          "minIndex": 545
         },
         {
           "id": "user",
@@ -7335,7 +7586,7 @@
               "href": "/docs/chat/sdk/v4/unity/user/overview-user",
               "type": "page",
               "children": [],
-              "minIndex": 606
+              "minIndex": 601
             },
             {
               "id": "user/retrieving-users",
@@ -7351,7 +7602,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
                   "type": "page",
                   "children": [],
-                  "minIndex": 613
+                  "minIndex": 608
                 },
                 {
                   "id": "user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
@@ -7360,7 +7611,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-users-in-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 612
+                  "minIndex": 607
                 },
                 {
                   "id": "user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
@@ -7369,7 +7620,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-members-and-operators-in-a-specific-order",
                   "type": "page",
                   "children": [],
-                  "minIndex": 610
+                  "minIndex": 605
                 },
                 {
                   "id": "user/retrieving-users/retrieve-members-who-have-read-a-message",
@@ -7378,7 +7629,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-members-who-have-read-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 614
+                  "minIndex": 609
                 },
                 {
                   "id": "user/retrieving-users/retrieve-a-list-of-operators",
@@ -7387,10 +7638,10 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-users/retrieve-a-list-of-operators",
                   "type": "page",
                   "children": [],
-                  "minIndex": 611
+                  "minIndex": 606
                 }
               ],
-              "minIndex": 610
+              "minIndex": 605
             },
             {
               "id": "user/moderating-a-user",
@@ -7406,7 +7657,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-blocked-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 604
+                  "minIndex": 599
                 },
                 {
                   "id": "user/moderating-a-user/retrieve-a-list-of-banned-users",
@@ -7415,7 +7666,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-banned-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 603
+                  "minIndex": 598
                 },
                 {
                   "id": "user/moderating-a-user/retrieve-a-list-of-muted-users",
@@ -7424,7 +7675,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/retrieve-a-list-of-muted-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 605
+                  "minIndex": 600
                 },
                 {
                   "id": "user/moderating-a-user/block-and-unblock-other-members",
@@ -7433,7 +7684,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/block-and-unblock-other-members",
                   "type": "page",
                   "children": [],
-                  "minIndex": 601
+                  "minIndex": 596
                 },
                 {
                   "id": "user/moderating-a-user/ban-and-unban-a-user",
@@ -7442,7 +7693,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/ban-and-unban-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 600
+                  "minIndex": 595
                 },
                 {
                   "id": "user/moderating-a-user/mute-and-unmute-a-user",
@@ -7451,10 +7702,10 @@
                   "href": "/docs/chat/sdk/v4/unity/user/moderating-a-user/mute-and-unmute-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 602
+                  "minIndex": 597
                 }
               ],
-              "minIndex": 600
+              "minIndex": 595
             },
             {
               "id": "user/retrieving-and-updating-user-information",
@@ -7470,7 +7721,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 608
+                  "minIndex": 603
                 },
                 {
                   "id": "user/retrieving-and-updating-user-information/update-user-profile",
@@ -7479,7 +7730,7 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/update-user-profile",
                   "type": "page",
                   "children": [],
-                  "minIndex": 609
+                  "minIndex": 604
                 },
                 {
                   "id": "user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
@@ -7488,10 +7739,10 @@
                   "href": "/docs/chat/sdk/v4/unity/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
                   "type": "page",
                   "children": [],
-                  "minIndex": 607
+                  "minIndex": 602
                 }
               ],
-              "minIndex": 607
+              "minIndex": 602
             },
             {
               "id": "user/managing-user-metadata",
@@ -7507,13 +7758,13 @@
                   "href": "/docs/chat/sdk/v4/unity/user/managing-user-metadata/manage-user-metadata",
                   "type": "page",
                   "children": [],
-                  "minIndex": 599
+                  "minIndex": 594
                 }
               ],
-              "minIndex": 599
+              "minIndex": 594
             }
           ],
-          "minIndex": 599
+          "minIndex": 594
         },
         {
           "id": "channel",
@@ -7529,7 +7780,7 @@
               "href": "/docs/chat/sdk/v4/unity/channel/overview-channel",
               "type": "page",
               "children": [],
-              "minIndex": 537
+              "minIndex": 532
             },
             {
               "id": "channel/creating-a-channel",
@@ -7545,10 +7796,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/creating-a-channel/create-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 525
+                  "minIndex": 520
                 }
               ],
-              "minIndex": 525
+              "minIndex": 520
             },
             {
               "id": "channel/using-group-channel-collection",
@@ -7564,10 +7815,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/using-group-channel-collection/group-channel-collection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 543
+                  "minIndex": 538
                 }
               ],
-              "minIndex": 543
+              "minIndex": 538
             },
             {
               "id": "channel/managing-operators",
@@ -7583,10 +7834,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-operators/register-and-remove-operators",
                   "type": "page",
                   "children": [],
-                  "minIndex": 535
+                  "minIndex": 530
                 }
               ],
-              "minIndex": 535
+              "minIndex": 530
             },
             {
               "id": "channel/joining-and-leaving-a-channel",
@@ -7602,7 +7853,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/enter-and-exit-an-open-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 528
+                  "minIndex": 523
                 },
                 {
                   "id": "channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
@@ -7611,10 +7862,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 529
+                  "minIndex": 524
                 }
               ],
-              "minIndex": 528
+              "minIndex": 523
             },
             {
               "id": "channel/retrieving-channels",
@@ -7630,7 +7881,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-list-of-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 539
+                  "minIndex": 534
                 },
                 {
                   "id": "channel/retrieving-channels/retrieve-a-channel-by-url",
@@ -7639,10 +7890,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/retrieving-channels/retrieve-a-channel-by-url",
                   "type": "page",
                   "children": [],
-                  "minIndex": 538
+                  "minIndex": 533
                 }
               ],
-              "minIndex": 538
+              "minIndex": 533
             },
             {
               "id": "channel/inviting-users-to-a-group-channel",
@@ -7658,7 +7909,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/invite-users-as-members",
                   "type": "page",
                   "children": [],
-                  "minIndex": 527
+                  "minIndex": 522
                 },
                 {
                   "id": "channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
@@ -7667,10 +7918,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/inviting-users-to-a-group-channel/accept-or-decline-an-invitation",
                   "type": "page",
                   "children": [],
-                  "minIndex": 526
+                  "minIndex": 521
                 }
               ],
-              "minIndex": 526
+              "minIndex": 521
             },
             {
               "id": "channel/searching-channels",
@@ -7686,7 +7937,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-open-channels-by-name-url-or-custom-type",
                   "type": "page",
                   "children": [],
-                  "minIndex": 542
+                  "minIndex": 537
                 },
                 {
                   "id": "channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
@@ -7695,7 +7946,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/searching-channels/search-group-channels-by-name-url-or-other-filters",
                   "type": "page",
                   "children": [],
-                  "minIndex": 541
+                  "minIndex": 536
                 },
                 {
                   "id": "channel/searching-channels/filter-group-channels-by-user-ids",
@@ -7704,10 +7955,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/searching-channels/filter-group-channels-by-user-ids",
                   "type": "page",
                   "children": [],
-                  "minIndex": 540
+                  "minIndex": 535
                 }
               ],
-              "minIndex": 540
+              "minIndex": 535
             },
             {
               "id": "channel/categorizing-channels",
@@ -7723,10 +7974,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/categorizing-channels/categorize-channels-by-custom-type",
                   "type": "page",
                   "children": [],
-                  "minIndex": 524
+                  "minIndex": 519
                 }
               ],
-              "minIndex": 524
+              "minIndex": 519
             },
             {
               "id": "channel/managing-channels",
@@ -7742,7 +7993,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-channels/delete-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 532
+                  "minIndex": 527
                 },
                 {
                   "id": "channel/managing-channels/hide-or-archive-a-group-channel",
@@ -7751,7 +8002,7 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-channels/hide-or-archive-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 533
+                  "minIndex": 528
                 },
                 {
                   "id": "channel/managing-channels/refresh-all-data-related-to-a-group-channel",
@@ -7760,10 +8011,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 534
+                  "minIndex": 529
                 }
               ],
-              "minIndex": 532
+              "minIndex": 527
             },
             {
               "id": "channel/moderating-a-channel",
@@ -7779,10 +8030,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/moderating-a-channel/freeze-and-unfreeze-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 536
+                  "minIndex": 531
                 }
               ],
-              "minIndex": 536
+              "minIndex": 531
             },
             {
               "id": "channel/managing-channel-metadata",
@@ -7798,10 +8049,10 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-channel-metadata/manage-channel-metadata",
                   "type": "page",
                   "children": [],
-                  "minIndex": 531
+                  "minIndex": 526
                 }
               ],
-              "minIndex": 531
+              "minIndex": 526
             },
             {
               "id": "channel/managing-channel-metacounters",
@@ -7817,13 +8068,13 @@
                   "href": "/docs/chat/sdk/v4/unity/channel/managing-channel-metacounters/manage-channel-metacounters",
                   "type": "page",
                   "children": [],
-                  "minIndex": 530
+                  "minIndex": 525
                 }
               ],
-              "minIndex": 530
+              "minIndex": 525
             }
           ],
-          "minIndex": 524
+          "minIndex": 519
         },
         {
           "id": "message",
@@ -7839,7 +8090,7 @@
               "href": "/docs/chat/sdk/v4/unity/message/overview-message",
               "type": "page",
               "children": [],
-              "minIndex": 570
+              "minIndex": 565
             },
             {
               "id": "message/sending-a-message",
@@ -7855,7 +8106,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 579
+                  "minIndex": 574
                 },
                 {
                   "id": "message/sending-a-message/send-an-admin-message",
@@ -7864,7 +8115,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/send-an-admin-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 580
+                  "minIndex": 575
                 },
                 {
                   "id": "message/sending-a-message/track-file-upload-progress-using-a-handler",
@@ -7873,7 +8124,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/track-file-upload-progress-using-a-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 584
+                  "minIndex": 579
                 },
                 {
                   "id": "message/sending-a-message/cancel-an-in-progress-file-upload",
@@ -7882,7 +8133,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/cancel-an-in-progress-file-upload",
                   "type": "page",
                   "children": [],
-                  "minIndex": 578
+                  "minIndex": 573
                 },
                 {
                   "id": "message/sending-a-message/share-an-encrypted-file",
@@ -7891,7 +8142,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/share-an-encrypted-file",
                   "type": "page",
                   "children": [],
-                  "minIndex": 581
+                  "minIndex": 576
                 },
                 {
                   "id": "message/sending-a-message/spam-flood-protection",
@@ -7900,7 +8151,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/spam-flood-protection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 583
+                  "minIndex": 578
                 },
                 {
                   "id": "message/sending-a-message/smart-throttling",
@@ -7909,10 +8160,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/sending-a-message/smart-throttling",
                   "type": "page",
                   "children": [],
-                  "minIndex": 582
+                  "minIndex": 577
                 }
               ],
-              "minIndex": 578
+              "minIndex": 573
             },
             {
               "id": "message/using-message-collection",
@@ -7928,10 +8179,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/using-message-collection/message-collection",
                   "type": "page",
                   "children": [],
-                  "minIndex": 588
+                  "minIndex": 583
                 }
               ],
-              "minIndex": 588
+              "minIndex": 583
             },
             {
               "id": "message/receiving-messages-through-event-handler",
@@ -7947,10 +8198,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/receiving-messages-through-event-handler/receive-messages-in-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 571
+                  "minIndex": 566
                 }
               ],
-              "minIndex": 571
+              "minIndex": 566
             },
             {
               "id": "message/using-message-threading",
@@ -7966,7 +8217,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/using-message-threading/create-a-message-thread",
                   "type": "page",
                   "children": [],
-                  "minIndex": 589
+                  "minIndex": 584
                 },
                 {
                   "id": "message/using-message-threading/list-replies-in-a-message-thread",
@@ -7975,10 +8226,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/using-message-threading/list-replies-in-a-message-thread",
                   "type": "page",
                   "children": [],
-                  "minIndex": 590
+                  "minIndex": 585
                 }
               ],
-              "minIndex": 589
+              "minIndex": 584
             },
             {
               "id": "message/retrieving-a-message",
@@ -7994,10 +8245,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-a-message/retrieve-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 572
+                  "minIndex": 567
                 }
               ],
-              "minIndex": 572
+              "minIndex": 567
             },
             {
               "id": "message/managing-a-message",
@@ -8013,7 +8264,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/copy-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 558
+                  "minIndex": 553
                 },
                 {
                   "id": "message/managing-a-message/update-a-message",
@@ -8022,7 +8273,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/update-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 564
+                  "minIndex": 559
                 },
                 {
                   "id": "message/managing-a-message/delete-a-message",
@@ -8031,7 +8282,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/delete-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 559
+                  "minIndex": 554
                 },
                 {
                   "id": "message/managing-a-message/react-to-a-message-in-a-group-channel",
@@ -8040,7 +8291,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/react-to-a-message-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 562
+                  "minIndex": 557
                 },
                 {
                   "id": "message/managing-a-message/clear-the-chat-history-in-a-group-channel",
@@ -8049,7 +8300,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 557
+                  "minIndex": 552
                 },
                 {
                   "id": "message/managing-a-message/send-typing-indicators-to-other-members",
@@ -8058,7 +8309,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/send-typing-indicators-to-other-members",
                   "type": "page",
                   "children": [],
-                  "minIndex": 563
+                  "minIndex": 558
                 },
                 {
                   "id": "message/managing-a-message/display-open-graph-tags-in-a-message",
@@ -8067,7 +8318,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/display-open-graph-tags-in-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 560
+                  "minIndex": 555
                 },
                 {
                   "id": "message/managing-a-message/generate-thumbnails-of-a-file-message",
@@ -8076,10 +8327,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-a-message/generate-thumbnails-of-a-file-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 561
+                  "minIndex": 556
                 }
               ],
-              "minIndex": 557
+              "minIndex": 552
             },
             {
               "id": "message/managing-pinned-messages-in-group-channels",
@@ -8095,7 +8346,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/pin-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 565
+                  "minIndex": 560
                 },
                 {
                   "id": "message/managing-pinned-messages-in-group-channels/unpin-a-message",
@@ -8104,10 +8355,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/managing-pinned-messages-in-group-channels/unpin-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 566
+                  "minIndex": 561
                 }
               ],
-              "minIndex": 565
+              "minIndex": 560
             },
             {
               "id": "message/loading-messages",
@@ -8123,7 +8374,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/loading-messages/load-previous-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 556
+                  "minIndex": 551
                 },
                 {
                   "id": "message/loading-messages/load-messages-by-timestamp-or-message-id",
@@ -8132,10 +8383,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/loading-messages/load-messages-by-timestamp-or-message-id",
                   "type": "page",
                   "children": [],
-                  "minIndex": 555
+                  "minIndex": 550
                 }
               ],
-              "minIndex": 555
+              "minIndex": 550
             },
             {
               "id": "message/listing-changelogs",
@@ -8151,10 +8402,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/listing-changelogs/list-changelogs-of-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 554
+                  "minIndex": 549
                 }
               ],
-              "minIndex": 554
+              "minIndex": 549
             },
             {
               "id": "message/marking-messages-as-read-in-a-group-channel",
@@ -8170,10 +8421,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
                   "type": "page",
                   "children": [],
-                  "minIndex": 568
+                  "minIndex": 563
                 }
               ],
-              "minIndex": 568
+              "minIndex": 563
             },
             {
               "id": "message/marking-messages-as-delivered-in-a-group-channel",
@@ -8189,10 +8440,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/marking-messages-as-delivered-in-a-group-channel/mark-messages-as-delivered",
                   "type": "page",
                   "children": [],
-                  "minIndex": 567
+                  "minIndex": 562
                 }
               ],
-              "minIndex": 567
+              "minIndex": 562
             },
             {
               "id": "message/mentioning-other-users-in-a-message",
@@ -8208,10 +8459,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/mentioning-other-users-in-a-message/mention-other-users-in-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 569
+                  "minIndex": 564
                 }
               ],
-              "minIndex": 569
+              "minIndex": 564
             },
             {
               "id": "message/retrieving-unread-count-in-a-group-channel",
@@ -8227,7 +8478,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/members-who-havent-read-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 573
+                  "minIndex": 568
                 },
                 {
                   "id": "message/retrieving-unread-count-in-a-group-channel/unread-channels",
@@ -8236,7 +8487,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 574
+                  "minIndex": 569
                 },
                 {
                   "id": "message/retrieving-unread-count-in-a-group-channel/unread-items",
@@ -8245,7 +8496,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-items",
                   "type": "page",
                   "children": [],
-                  "minIndex": 575
+                  "minIndex": 570
                 },
                 {
                   "id": "message/retrieving-unread-count-in-a-group-channel/unread-messages-in-a-channel",
@@ -8254,7 +8505,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-a-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 576
+                  "minIndex": 571
                 },
                 {
                   "id": "message/retrieving-unread-count-in-a-group-channel/unread-messages-in-all-channels",
@@ -8263,10 +8514,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/retrieving-unread-count-in-a-group-channel/unread-messages-in-all-channels",
                   "type": "page",
                   "children": [],
-                  "minIndex": 577
+                  "minIndex": 572
                 }
               ],
-              "minIndex": 573
+              "minIndex": 568
             },
             {
               "id": "message/categorizing-messages",
@@ -8282,10 +8533,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/categorizing-messages/categorize-messages-by-custom-type",
                   "type": "page",
                   "children": [],
-                  "minIndex": 553
+                  "minIndex": 548
                 }
               ],
-              "minIndex": 553
+              "minIndex": 548
             },
             {
               "id": "message/adding-extra-data-to-a-message",
@@ -8301,10 +8552,10 @@
                   "href": "/docs/chat/sdk/v4/unity/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 552
+                  "minIndex": 547
                 }
               ],
-              "minIndex": 552
+              "minIndex": 547
             },
             {
               "id": "message/translating-messages",
@@ -8320,7 +8571,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/translating-messages/auto-translate-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 585
+                  "minIndex": 580
                 },
                 {
                   "id": "message/translating-messages/translate-messages-on-demand",
@@ -8329,7 +8580,7 @@
                   "href": "/docs/chat/sdk/v4/unity/message/translating-messages/translate-messages-on-demand",
                   "type": "page",
                   "children": [],
-                  "minIndex": 586
+                  "minIndex": 581
                 },
                 {
                   "id": "message/translating-messages/translation-engine",
@@ -8338,13 +8589,13 @@
                   "href": "/docs/chat/sdk/v4/unity/message/translating-messages/translation-engine",
                   "type": "page",
                   "children": [],
-                  "minIndex": 587
+                  "minIndex": 582
                 }
               ],
-              "minIndex": 585
+              "minIndex": 580
             }
           ],
-          "minIndex": 552
+          "minIndex": 547
         },
         {
           "id": "application",
@@ -8360,7 +8611,7 @@
               "href": "/docs/chat/sdk/v4/unity/application/overview-application",
               "type": "page",
               "children": [],
-              "minIndex": 522
+              "minIndex": 517
             },
             {
               "id": "application/authenticating-a-user",
@@ -8376,10 +8627,10 @@
                   "href": "/docs/chat/sdk/v4/unity/application/authenticating-a-user/authentication",
                   "type": "page",
                   "children": [],
-                  "minIndex": 521
+                  "minIndex": 516
                 }
               ],
-              "minIndex": 521
+              "minIndex": 516
             },
             {
               "id": "application/understanding-rate-limits",
@@ -8395,13 +8646,13 @@
                   "href": "/docs/chat/sdk/v4/unity/application/understanding-rate-limits/rate-limits",
                   "type": "page",
                   "children": [],
-                  "minIndex": 523
+                  "minIndex": 518
                 }
               ],
-              "minIndex": 523
+              "minIndex": 518
             }
           ],
-          "minIndex": 521
+          "minIndex": 516
         },
         {
           "id": "event-handler",
@@ -8417,7 +8668,7 @@
               "href": "/docs/chat/sdk/v4/unity/event-handler/overview-event-handler",
               "type": "page",
               "children": [],
-              "minIndex": 549
+              "minIndex": 544
             },
             {
               "id": "event-handler/managing-channel-event-handlers",
@@ -8433,10 +8684,10 @@
                   "href": "/docs/chat/sdk/v4/unity/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 546
+                  "minIndex": 541
                 }
               ],
-              "minIndex": 546
+              "minIndex": 541
             },
             {
               "id": "event-handler/managing-connection-event-handlers",
@@ -8452,10 +8703,10 @@
                   "href": "/docs/chat/sdk/v4/unity/event-handler/managing-connection-event-handlers/add-or-remove-a-connection-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 547
+                  "minIndex": 542
                 }
               ],
-              "minIndex": 547
+              "minIndex": 542
             },
             {
               "id": "event-handler/managing-user-event-handlers",
@@ -8471,13 +8722,13 @@
                   "href": "/docs/chat/sdk/v4/unity/event-handler/managing-user-event-handlers/add-or-remove-a-user-event-handler",
                   "type": "page",
                   "children": [],
-                  "minIndex": 548
+                  "minIndex": 543
                 }
               ],
-              "minIndex": 548
+              "minIndex": 543
             }
           ],
-          "minIndex": 546
+          "minIndex": 541
         },
         {
           "id": "push-notifications",
@@ -8493,7 +8744,7 @@
               "href": "/docs/chat/sdk/v4/unity/push-notifications/overview-push-notifications",
               "type": "page",
               "children": [],
-              "minIndex": 596
+              "minIndex": 591
             },
             {
               "id": "push-notifications/managing-push-notifications",
@@ -8509,7 +8760,7 @@
                   "href": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/configure-push-notification-preferences",
                   "type": "page",
                   "children": [],
-                  "minIndex": 592
+                  "minIndex": 587
                 },
                 {
                   "id": "push-notifications/managing-push-notifications/push-notification-templates",
@@ -8518,7 +8769,7 @@
                   "href": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-templates",
                   "type": "page",
                   "children": [],
-                  "minIndex": 593
+                  "minIndex": 588
                 },
                 {
                   "id": "push-notifications/managing-push-notifications/push-notification-tester",
@@ -8527,7 +8778,7 @@
                   "href": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-tester",
                   "type": "page",
                   "children": [],
-                  "minIndex": 594
+                  "minIndex": 589
                 },
                 {
                   "id": "push-notifications/managing-push-notifications/push-notification-translation",
@@ -8536,13 +8787,13 @@
                   "href": "/docs/chat/sdk/v4/unity/push-notifications/managing-push-notifications/push-notification-translation",
                   "type": "page",
                   "children": [],
-                  "minIndex": 595
+                  "minIndex": 590
                 }
               ],
-              "minIndex": 592
+              "minIndex": 587
             }
           ],
-          "minIndex": 592
+          "minIndex": 587
         },
         {
           "id": "report",
@@ -8558,7 +8809,7 @@
               "href": "/docs/chat/sdk/v4/unity/report/overview-report",
               "type": "page",
               "children": [],
-              "minIndex": 598
+              "minIndex": 593
             },
             {
               "id": "report/creating-a-report",
@@ -8574,13 +8825,13 @@
                   "href": "/docs/chat/sdk/v4/unity/report/creating-a-report/report-a-message-user-or-channel",
                   "type": "page",
                   "children": [],
-                  "minIndex": 597
+                  "minIndex": 592
                 }
               ],
-              "minIndex": 597
+              "minIndex": 592
             }
           ],
-          "minIndex": 597
+          "minIndex": 592
         },
         {
           "id": "migrating-to-openim",
@@ -8589,7 +8840,7 @@
           "href": "/docs/chat/sdk/v4/unity/migrating-to-openim",
           "type": "page",
           "children": [],
-          "minIndex": 591
+          "minIndex": 586
         },
         {
           "id": "deprecated",
@@ -8598,7 +8849,7 @@
           "href": "/docs/chat/sdk/v4/unity/deprecated",
           "type": "page",
           "children": [],
-          "minIndex": 544
+          "minIndex": 539
         },
         {
           "id": "error-codes",
@@ -8607,7 +8858,7 @@
           "href": "/docs/chat/sdk/v4/unity/error-codes",
           "type": "page",
           "children": [],
-          "minIndex": 545
+          "minIndex": 540
         },
         {
           "id": "logger",
@@ -8616,7 +8867,7 @@
           "href": "/docs/chat/sdk/v4/unity/logger",
           "type": "page",
           "children": [],
-          "minIndex": 551
+          "minIndex": 546
         },
         {
           "id": "overview",
@@ -8625,7 +8876,7 @@
           "href": "/docs/chat/sdk/v4/unity/overview",
           "type": "page",
           "children": [],
-          "minIndex": 520
+          "minIndex": 515
         }
       ],
       "pageCount": 95
