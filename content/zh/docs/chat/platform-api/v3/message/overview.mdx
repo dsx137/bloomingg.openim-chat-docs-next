@@ -1,0 +1,39 @@
+---
+title: "消息概览"
+description: "OpenIM Platform API 消息模块概览，覆盖后端发送消息、系统通知和消息迁移入口。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/message/overview"
+---
+
+消息模块用于让可信后端向 OpenIM 单聊或群聊会话写入消息。它适合系统通知、运营消息、业务事件消息，以及由后端控制发送身份、发送时间和离线推送参数的场景。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 后端发送消息 | 使用管理端接口向单聊或群聊发送文本、通知或业务消息。 |
+| 发送身份控制 | 由后端明确 `sendID`、目标用户或目标群组，避免客户端伪造发送方。 |
+| 推送参数 | 按消息设置离线推送标题、描述和扩展字段。 |
+| 迁移写入 | 在迁移流程中写入历史消息，并保留原始发送时间。 |
+
+## 常用接口
+
+- [发送消息](/docs/chat/platform-api/v3/message/messaging-basics/send-a-message)
+- [迁移消息](/docs/chat/platform-api/v3/migration/migrate-messages)
+
+## 接入建议
+
+后端发送消息前，应确认发送身份、目标会话和消息内容都来自可信业务流程。普通用户聊天消息通常由客户端 SDK 发送；需要系统身份、审核后补发、自动通知或跨系统触发时，再使用 Platform API。
+
+消息内容中的业务字段应保持可解析、可审计。涉及订单、审批、支付或工单状态时，消息只承载展示快照或入口，最终状态仍应以业务后端数据库为准。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [迁移概览](/docs/chat/platform-api/v3/migration/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

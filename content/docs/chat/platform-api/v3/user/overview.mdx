@@ -1,0 +1,42 @@
+---
+title: "用户概览"
+description: "OpenIM Platform API 用户模块概览，覆盖用户创建、资料查询、资料更新和会话 Token 管理。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/overview"
+---
+
+用户模块面向可信后端服务，用于把业务系统中的账号映射为 OpenIM 用户，并管理用户资料、用户查询和客户端登录所需的会话 Token。管理员 Token 只能保存在后端，浏览器、移动端或桌面客户端不应直接调用这些管理端接口。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 用户创建 | 在 OpenIM 中注册业务用户 ID，并写入昵称、头像和扩展字段。 |
+| 用户查询 | 按分页读取用户列表，或按用户 ID 批量获取用户资料。 |
+| 用户资料更新 | 由后端同步业务资料变更，例如昵称、头像和扩展信息。 |
+| 会话 Token | 为客户端登录签发用户 Token，或在安全场景下注销用户所有会话 Token。 |
+
+## 常用接口
+
+- [创建用户](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [查询用户列表](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [获取用户](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
+- [更新用户](/docs/chat/platform-api/v3/user/managing-users/update-a-user)
+- [签发会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token)
+- [注销全部会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens)
+
+## 接入建议
+
+用户 ID 应以业务系统为权威来源。创建 OpenIM 用户前，先确认业务账号已经完成注册、风控和权限校验；创建完成后，把 OpenIM 用户 ID 与业务账号关系保存在你的后端数据库中。
+
+客户端登录时，应先向你的业务后端请求登录凭证，再由后端调用 OpenIM 管理端接口签发会话 Token。不要把 APP 管理员 Token 写入客户端代码、前端环境变量或移动端包体。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

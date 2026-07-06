@@ -1,0 +1,41 @@
+---
+title: "内容审核概览"
+description: "OpenIM Platform API 内容审核模块概览，覆盖屏蔽用户、查询屏蔽关系和群成员禁言。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/moderation/overview"
+---
+
+内容审核模块用于由可信后端执行用户屏蔽、屏蔽关系查询和群成员禁言等管理动作。它适合配合风控、举报处理、运营后台和社群治理流程使用。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 屏蔽用户 | 将目标用户加入黑名单，限制后续互动。 |
+| 取消屏蔽 | 按业务处理结果解除用户屏蔽关系。 |
+| 查询屏蔽关系 | 查询用户的屏蔽与被屏蔽关系，用于后台排查和状态展示。 |
+| 群成员禁言 | 在指定群组内禁言或解除禁言成员。 |
+
+## 常用接口
+
+- [查询屏蔽与被屏蔽用户列表](/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users)
+- [屏蔽用户](/docs/chat/platform-api/v3/moderation/blocking-users/block-users)
+- [取消屏蔽用户](/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user)
+- [禁言群组频道成员](/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel)
+- [解除群组频道成员禁言](/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel)
+
+## 接入建议
+
+审核动作应由后端根据举报、风控命中、管理员操作或自动化策略触发。执行前记录操作者、目标用户、目标群组、原因和有效期；执行后同步更新业务后台的审核记录。
+
+屏蔽和群内禁言是不同范围的能力。屏蔽关系通常影响用户之间的互动；群成员禁言只影响指定群组内的发言权限。产品侧应在 UI 中清晰区分这两类状态。
+
+## 相关页面
+
+- [频道概览](/docs/chat/platform-api/v3/channel/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

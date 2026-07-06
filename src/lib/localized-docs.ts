@@ -58,7 +58,11 @@ export function localizeRouteRecord(route: RouteRecord, locale: Locale): RouteRe
 }
 
 export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
-  if (locale !== 'zh') return node.title;
+  const isNestedOverview = node.segment === 'overview' && node.id.includes('/');
+  const isPlatformApiRootOverview = node.href === '/docs/chat/platform-api/v3/overview';
+  if (isPlatformApiRootOverview) return locale === 'zh' ? '概述' : 'Overview';
+  if (locale !== 'zh') return isNestedOverview ? 'Overview' : node.title;
+  if (isNestedOverview) return '概览';
   if (node.href) return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
   const label =
     platformApiZh.navigationLabels[node.segment] ??

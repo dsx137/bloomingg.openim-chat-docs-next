@@ -7,6 +7,7 @@ import { MarkdownContent } from '@/src/components/docs/markdown-content';
 import { Pagination } from '@/src/components/docs/pagination';
 import { PlatformApiOverviewPage } from '@/src/components/docs/platform-api-overview-page';
 import { SdkOverviewPage } from '@/src/components/docs/sdk-overview-page';
+import { TocGithubLink } from '@/src/components/docs/toc-github-link';
 import { getMDXComponents } from '@/src/components/mdx-components';
 import type { ContextOption } from '@/src/components/docs/context-picker';
 import { getNavigationContext, getNavigationContexts } from '@/src/lib/navigation';
@@ -28,6 +29,7 @@ import {
   getLocalizedDocTitle,
   localizeRouteRecord,
 } from '@/src/lib/localized-docs';
+import { getOpenIMServerVersionLink } from '@/src/lib/openim-server-version';
 import { getSourceDocPage } from '@/src/lib/source-docs';
 import type { BreadcrumbItem, TocItem } from '@/src/types/docs';
 
@@ -138,6 +140,13 @@ export async function renderDocumentationPage(
     .map((item) => item.version);
   const showVersion = shouldShowVersion(effectiveRoute.version, routeVersions);
   const breadcrumbs = localizeBreadcrumbs(getBreadcrumbs(effectiveRoute, { showVersion }), locale);
+  const platformApiServerVersion =
+    effectiveRoute.path === '/docs/chat/platform-api/v3/overview'
+      ? await getOpenIMServerVersionLink()
+      : undefined;
+  const tocFooter = platformApiServerVersion ? (
+    <TocGithubLink version={platformApiServerVersion} />
+  ) : undefined;
 
   if (effectiveRoute.path === '/docs/chat/sdk/v4/wasm/overview') {
     return (
@@ -169,6 +178,7 @@ export async function renderDocumentationPage(
         locale={locale}
         overview
         showVersion={showVersion}
+        tocFooter={tocFooter}
         toc={getPlatformApiOverviewToc(locale)}
       >
         <PlatformApiOverviewPage breadcrumbs={breadcrumbs} locale={locale} route={effectiveRoute} />

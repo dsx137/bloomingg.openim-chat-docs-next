@@ -36,6 +36,15 @@
           "type": "folder",
           "children": [
             {
+              "id": "user/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/user/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 616.5
+            },
+            {
               "id": "user/listing-users",
               "segment": "listing-users",
               "title": "查询用户",
@@ -130,7 +139,7 @@
               "minIndex": 621
             }
           ],
-          "minIndex": 617
+          "minIndex": 616.5
         },
         {
           "id": "channel",
@@ -139,6 +148,15 @@
           "href": null,
           "type": "folder",
           "children": [
+            {
+              "id": "channel/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/channel/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 622.5
+            },
             {
               "id": "channel/creating-a-channel",
               "segment": "creating-a-channel",
@@ -261,7 +279,7 @@
               "minIndex": 629
             }
           ],
-          "minIndex": 623
+          "minIndex": 622.5
         },
         {
           "id": "message",
@@ -270,6 +288,15 @@
           "href": null,
           "type": "folder",
           "children": [
+            {
+              "id": "message/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/message/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 631.5
+            },
             {
               "id": "message/messaging-basics",
               "segment": "messaging-basics",
@@ -290,7 +317,7 @@
               "minIndex": 632
             }
           ],
-          "minIndex": 632
+          "minIndex": 631.5
         },
         {
           "id": "migration",
@@ -299,6 +326,15 @@
           "href": null,
           "type": "folder",
           "children": [
+            {
+              "id": "migration/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/migration/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 632.5
+            },
             {
               "id": "migration/migrate-messages",
               "segment": "migrate-messages",
@@ -309,7 +345,7 @@
               "minIndex": 633
             }
           ],
-          "minIndex": 633
+          "minIndex": 632.5
         },
         {
           "id": "moderation",
@@ -318,6 +354,15 @@
           "href": null,
           "type": "folder",
           "children": [
+            {
+              "id": "moderation/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/moderation/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 633.5
+            },
             {
               "id": "moderation/listing-blocked-and-blocking-users",
               "segment": "listing-blocked-and-blocking-users",
@@ -394,7 +439,7 @@
               "minIndex": 637
             }
           ],
-          "minIndex": 634
+          "minIndex": 633.5
         },
         {
           "id": "error-codes",
@@ -406,7 +451,7 @@
           "minIndex": 639
         }
       ],
-      "pageCount": 25
+      "pageCount": 30
     },
     {
       "key": "chat/sdk/v4/ios",

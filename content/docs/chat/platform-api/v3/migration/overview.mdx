@@ -1,0 +1,38 @@
+---
+title: "迁移概览"
+description: "OpenIM Platform API 迁移模块概览，说明历史消息导入和迁移校验的服务端边界。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/migration/overview"
+---
+
+迁移模块用于把其他系统或旧 IM 项目中的历史消息写入 OpenIM。迁移过程应由后端离线任务执行，先完成用户、群组和成员关系映射，再按会话批量写入历史消息。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 历史消息导入 | 将旧系统消息按 OpenIM 消息结构写入目标会话。 |
+| 时间保留 | 使用原始发送时间构造迁移消息，避免导入后时间线混乱。 |
+| 身份映射 | 将旧系统用户、群组和会话 ID 映射为 OpenIM 用户与群组。 |
+| 校验回放 | 导入后抽样校验消息数量、发送方、时间和内容展示效果。 |
+
+## 常用接口
+
+- [迁移消息](/docs/chat/platform-api/v3/migration/migrate-messages)
+
+## 接入建议
+
+迁移前先冻结旧系统写入或建立增量同步窗口，避免同一会话出现重复消息。导入任务应记录 `operationID`、旧消息 ID、OpenIM 目标会话和处理结果，便于失败重试和审计。
+
+大批量迁移应分批执行，并在每批结束后校验用户、群组、成员和消息数量。不要在客户端触发迁移任务，也不要把管理员 Token 暴露给迁移工具以外的环境。
+
+## 相关页面
+
+- [消息概览](/docs/chat/platform-api/v3/message/overview)
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

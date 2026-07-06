@@ -126,10 +126,31 @@ const platformApiOverviewHeadingExpectations = new Map([
     ['## 基础地址', '## 请求头', '## Multipart 请求', '## 鉴权', '## 请求体'],
   ],
   [
+    '/docs/chat/platform-api/v3/user/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/channel/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/message/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/migration/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/moderation/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
     '/docs/chat/platform-api/v3/error-codes',
     ['## 响应结构', '## 错误码范围', '## 处理流程', '## 服务端错误码', '## 排查建议'],
   ],
 ]);
+const platformApiAllowedOverviewPaths = new Set(platformApiOverviewHeadingExpectations.keys());
 const visibleBrandPattern = /\bSendbird\b/i;
 const activeSdkPlatforms = scope.products.sdk?.platforms ?? [];
 if (activeSdkPlatforms.join('\n') !== expectedSdkPlatforms.join('\n')) {
@@ -193,11 +214,7 @@ for (const route of routes) {
     }
     if (
       route.template === 'overview' &&
-      ![
-        '/docs/chat/platform-api/v3/overview',
-        '/docs/chat/platform-api/v3/prepare-to-use-api',
-        '/docs/chat/platform-api/v3/error-codes',
-      ].includes(route.path)
+      !platformApiAllowedOverviewPaths.has(route.path)
     ) {
       errors.push(
         `${route.contentFile}: non-root Platform API overview page is outside current OpenIM coverage scope`,

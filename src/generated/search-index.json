@@ -5086,5 +5086,45 @@
     "context": "SDKs · WASM · v4",
     "keywords": "sdk wasm v4 chat sdk v4 wasm channel retrieving-channels retrieve-group-members",
     "content": "Overview Use getGroupMemberList to retrieve members of an OpenIM group. This page belongs in the group/channel area because every request is scoped by groupID and returns group scoped GroupMemberItem records. API signatures getGroupMemberList: params: GetGroupMemberParams, operationID?: string = Promise ; getSpecifiedGroupMembersInfo: data: Omit , operationID?: string = Promise ; searchGroupMembers: data: SearchGroupMemberParams, operationID?: string = Promise ; getUsersInGroup: data: Omit , operationID?: string = Promise ; Implementation const data: members = await OpenIM.getGroupMemberList groupID, filter: 0, offset: 0, count: 50, ; Returned data The APIs return GroupMemberItem , whose values are scoped to a specific group. Prefer these fields for group member lists, @ mentions, and group member profile panels. Next steps Retrieve a list of channels /docs/chat/sdk/v4/wasm/channel/retrieving channels/retrieve a list of channels Invite users as members /docs/chat/sdk/v4/wasm/channel/inviting users to a group channel/invite users as members Register and remove operators /docs/chat/sdk/v4/wasm/channel/managing operators/register and remove operators"
+  },
+  {
+    "path": "/docs/chat/platform-api/v3/user/overview",
+    "title": "用户概览",
+    "description": "OpenIM Platform API 用户模块概览，覆盖用户创建、资料查询、资料更新和会话 Token 管理。",
+    "context": "Platform API",
+    "keywords": "platform-api v3 chat platform-api v3 user overview",
+    "content": "用户模块面向可信后端服务，用于把业务系统中的账号映射为 OpenIM 用户，并管理用户资料、用户查询和客户端登录所需的会话 Token。管理员 Token 只能保存在后端，浏览器、移动端或桌面客户端不应直接调用这些管理端接口。 能力范围 | 能力 | 说明 | | | | | 用户创建 | 在 OpenIM 中注册业务用户 ID，并写入昵称、头像和扩展字段。 | | 用户查询 | 按分页读取用户列表，或按用户 ID 批量获取用户资料。 | | 用户资料更新 | 由后端同步业务资料变更，例如昵称、头像和扩展信息。 | | 会话 Token | 为客户端登录签发用户 Token，或在安全场景下注销用户所有会话 Token。 | 常用接口 创建用户 /docs/chat/platform api/v3/user/creating users/create a user 查询用户列表 /docs/chat/platform api/v3/user/listing users/list users 获取用户 /docs/chat/platform api/v3/user/listing users/get a user 更新用户 /docs/chat/platform api/v3/user/managing users/update a user 签发会话 Token /docs/chat/platform api/v3/user/managing session tokens/issue a session token 注销全部会话 Token /docs/chat/platform api/v3/user/managing session tokens/revoke all session tokens 接入建议 用户 ID 应以业务系统为权威来源。创建 OpenIM 用户前，先确认业务账号已经完成注册、风控和权限校验；创建完成后，把 OpenIM 用户 ID 与业务账号关系保存在你的后端数据库中。 客户端登录时，应先向你的业务后端请求登录凭证，再由后端调用 OpenIM 管理端接口签发会话 Token。不要把 APP 管理员 Token 写入客户端代码、前端环境变量或移动端包体。 相关页面 接入准备 /docs/chat/platform api/v3/prepare to use api 错误码 /docs/chat/platform api/v3/error codes"
+  },
+  {
+    "path": "/docs/chat/platform-api/v3/channel/overview",
+    "title": "频道概览",
+    "description": "OpenIM Platform API 频道模块概览，覆盖群组创建、成员管理、入群邀请和群成员查询。",
+    "context": "Platform API",
+    "keywords": "platform-api v3 chat platform-api v3 channel overview",
+    "content": "频道模块用于在服务端管理 OpenIM 群组场景。本文档中的“频道”对应 OpenIM 的群组、群成员和入群流程；后端负责执行创建、更新、邀请、加入、退出和成员查询等管理操作。 能力范围 | 能力 | 说明 | | | | | 创建群组 | 从后端创建群组，并设置群名称、头像、所有者和初始成员。 | | 管理群组 | 更新群资料，或按业务规则删除、加入、退出群组。 | | 查询成员 | 分页读取群成员列表，用于后台管理、成员页和权限校验。 | | 邀请流程 | 邀请成员加入群组，并处理接受或拒绝邀请的业务动作。 | 常用接口 创建群组频道 /docs/chat/platform api/v3/channel/creating a channel/create a group channel 更新群组频道 /docs/chat/platform api/v3/channel/managing a channel/update a group channel 删除群组频道 /docs/chat/platform api/v3/channel/managing a channel/delete a group channel 加入群组频道 /docs/chat/platform api/v3/channel/managing a channel/join a channel 退出群组频道 /docs/chat/platform api/v3/channel/managing a channel/leave a channel 查询群组频道成员 /docs/chat/platform api/v3/channel/listing users/list members of a group channel 邀请成员 /docs/chat/platform api/v3/channel/inviting a user/invite as members channel 接入建议 群组是否允许加入、邀请或退出，通常应先由业务后端判断。OpenIM 负责保存群组和成员状态；你的业务系统仍应保存业务空间、组织、项目或付费权限等领域状态。 如果客户端需要展示频道式体验，可以把 OpenIM 群组 ID 作为频道 ID 使用，并在业务后端保存频道元数据。涉及群主、管理员、禁言或踢人等管理动作时，应先校验操作者在业务系统和 OpenIM 群组中的权限。 相关页面 内容审核概览 /docs/chat/platform api/v3/moderation/overview 错误码 /docs/chat/platform api/v3/error codes"
+  },
+  {
+    "path": "/docs/chat/platform-api/v3/message/overview",
+    "title": "消息概览",
+    "description": "OpenIM Platform API 消息模块概览，覆盖后端发送消息、系统通知和消息迁移入口。",
+    "context": "Platform API",
+    "keywords": "platform-api v3 chat platform-api v3 message overview",
+    "content": "消息模块用于让可信后端向 OpenIM 单聊或群聊会话写入消息。它适合系统通知、运营消息、业务事件消息，以及由后端控制发送身份、发送时间和离线推送参数的场景。 能力范围 | 能力 | 说明 | | | | | 后端发送消息 | 使用管理端接口向单聊或群聊发送文本、通知或业务消息。 | | 发送身份控制 | 由后端明确 sendID 、目标用户或目标群组，避免客户端伪造发送方。 | | 推送参数 | 按消息设置离线推送标题、描述和扩展字段。 | | 迁移写入 | 在迁移流程中写入历史消息，并保留原始发送时间。 | 常用接口 发送消息 /docs/chat/platform api/v3/message/messaging basics/send a message 迁移消息 /docs/chat/platform api/v3/migration/migrate messages 接入建议 后端发送消息前，应确认发送身份、目标会话和消息内容都来自可信业务流程。普通用户聊天消息通常由客户端 SDK 发送；需要系统身份、审核后补发、自动通知或跨系统触发时，再使用 Platform API。 消息内容中的业务字段应保持可解析、可审计。涉及订单、审批、支付或工单状态时，消息只承载展示快照或入口，最终状态仍应以业务后端数据库为准。 相关页面 接入准备 /docs/chat/platform api/v3/prepare to use api 迁移概览 /docs/chat/platform api/v3/migration/overview 错误码 /docs/chat/platform api/v3/error codes"
+  },
+  {
+    "path": "/docs/chat/platform-api/v3/migration/overview",
+    "title": "迁移概览",
+    "description": "OpenIM Platform API 迁移模块概览，说明历史消息导入和迁移校验的服务端边界。",
+    "context": "Platform API",
+    "keywords": "platform-api v3 chat platform-api v3 migration overview",
+    "content": "迁移模块用于把其他系统或旧 IM 项目中的历史消息写入 OpenIM。迁移过程应由后端离线任务执行，先完成用户、群组和成员关系映射，再按会话批量写入历史消息。 能力范围 | 能力 | 说明 | | | | | 历史消息导入 | 将旧系统消息按 OpenIM 消息结构写入目标会话。 | | 时间保留 | 使用原始发送时间构造迁移消息，避免导入后时间线混乱。 | | 身份映射 | 将旧系统用户、群组和会话 ID 映射为 OpenIM 用户与群组。 | | 校验回放 | 导入后抽样校验消息数量、发送方、时间和内容展示效果。 | 常用接口 迁移消息 /docs/chat/platform api/v3/migration/migrate messages 接入建议 迁移前先冻结旧系统写入或建立增量同步窗口，避免同一会话出现重复消息。导入任务应记录 operationID 、旧消息 ID、OpenIM 目标会话和处理结果，便于失败重试和审计。 大批量迁移应分批执行，并在每批结束后校验用户、群组、成员和消息数量。不要在客户端触发迁移任务，也不要把管理员 Token 暴露给迁移工具以外的环境。 相关页面 消息概览 /docs/chat/platform api/v3/message/overview 接入准备 /docs/chat/platform api/v3/prepare to use api 错误码 /docs/chat/platform api/v3/error codes"
+  },
+  {
+    "path": "/docs/chat/platform-api/v3/moderation/overview",
+    "title": "内容审核概览",
+    "description": "OpenIM Platform API 内容审核模块概览，覆盖屏蔽用户、查询屏蔽关系和群成员禁言。",
+    "context": "Platform API",
+    "keywords": "platform-api v3 chat platform-api v3 moderation overview",
+    "content": "内容审核模块用于由可信后端执行用户屏蔽、屏蔽关系查询和群成员禁言等管理动作。它适合配合风控、举报处理、运营后台和社群治理流程使用。 能力范围 | 能力 | 说明 | | | | | 屏蔽用户 | 将目标用户加入黑名单，限制后续互动。 | | 取消屏蔽 | 按业务处理结果解除用户屏蔽关系。 | | 查询屏蔽关系 | 查询用户的屏蔽与被屏蔽关系，用于后台排查和状态展示。 | | 群成员禁言 | 在指定群组内禁言或解除禁言成员。 | 常用接口 查询屏蔽与被屏蔽用户列表 /docs/chat/platform api/v3/moderation/listing blocked and blocking users/list blocked and blocking users 屏蔽用户 /docs/chat/platform api/v3/moderation/blocking users/block users 取消屏蔽用户 /docs/chat/platform api/v3/moderation/blocking users/unblock a user 禁言群组频道成员 /docs/chat/platform api/v3/moderation/muting a user/mute a member in a group channel 解除群组频道成员禁言 /docs/chat/platform api/v3/moderation/muting a user/unmute a member in a group channel 接入建议 审核动作应由后端根据举报、风控命中、管理员操作或自动化策略触发。执行前记录操作者、目标用户、目标群组、原因和有效期；执行后同步更新业务后台的审核记录。 屏蔽和群内禁言是不同范围的能力。屏蔽关系通常影响用户之间的互动；群成员禁言只影响指定群组内的发言权限。产品侧应在 UI 中清晰区分这两类状态。 相关页面 频道概览 /docs/chat/platform api/v3/channel/overview 错误码 /docs/chat/platform api/v3/error codes"
   }
 ]
