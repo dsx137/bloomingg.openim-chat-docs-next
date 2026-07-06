@@ -142,6 +142,7 @@ curl --request POST "${API_ADDRESS}/group/get_groups" \
 ## 权限和限制
 
 - 只读查询，不改变群组状态。
+- `pagination` 必填，即使按 `groupID` 精确查询也需要传入。
 - `pagination.pageNumber` 必须大于等于 1。
 - 所有数组型请求参数建议控制在 1000 个元素以内。
 

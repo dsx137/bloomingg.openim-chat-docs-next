@@ -23,7 +23,7 @@ curl --request POST "${API_ADDRESS}/group/join_group" \
   "groupID": "group_001",
   "reqMessage": "申请加入群组",
   "joinSource": 3,
-  "inviterUserID": "",
+  "inviterUserID": "user_002",
   "ex": ""
 }'
 ```
@@ -49,7 +49,7 @@ curl --request POST "${API_ADDRESS}/group/join_group" \
   "groupID": "group_001",
   "reqMessage": "申请加入群组",
   "joinSource": 3,
-  "inviterUserID": "",
+  "inviterUserID": "user_002",
   "ex": ""
 }
 ```
@@ -59,7 +59,7 @@ curl --request POST "${API_ADDRESS}/group/join_group" \
 | groupID | 是 | string | 目标群 ID。 |
 | reqMessage | 否 | string | 申请说明。 |
 | joinSource | 是 | int | 入群来源：1 管理员邀请，2 被邀请，3 搜索加入，4 扫码加入。 |
-| inviterUserID | 条件必填 | string | `joinSource` 为 2 时必填，表示邀请人用户 ID。 |
+| inviterUserID | 是 | string | 申请加入群组的用户 ID；当前服务端沿用该字段名承载申请用户。 |
 | ex | 否 | string | 扩展字段。 |
 
 ## 响应
@@ -103,7 +103,7 @@ curl --request POST "${API_ADDRESS}/group/join_group" \
 ## 权限和限制
 
 - 根据群验证策略创建入群申请或直接加入群组，并可能触发入群申请或成员加入通知。
-- `groupID` 必填。
+- `groupID` 和 `inviterUserID` 必填。
 - `joinSource` 只能为 1、2、3 或 4。
 - 所有数组型请求参数建议控制在 1000 个元素以内。
 

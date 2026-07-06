@@ -9,6 +9,43 @@ const zhContentRoot = 'content/zh/docs/chat/platform-api/v3/group';
 const contextKey = 'chat/platform-api/v3';
 const contextTitle = 'Platform API';
 
+// Mirrors open-im-server/internal/api/router.go groupRouterGroup.POST order.
+const goGroupApiOrder = [
+  '/group/create_group',
+  '/group/set_group_info',
+  '/group/set_group_info_ex',
+  '/group/join_group',
+  '/group/quit_group',
+  '/group/group_application_response',
+  '/group/transfer_group',
+  '/group/get_recv_group_applicationList',
+  '/group/get_user_req_group_applicationList',
+  '/group/get_group_users_req_application_list',
+  '/group/get_specified_user_group_request_info',
+  '/group/get_groups_info',
+  '/group/kick_group',
+  '/group/get_group_members_info',
+  '/group/get_group_member_list',
+  '/group/invite_user_to_group',
+  '/group/get_joined_group_list',
+  '/group/dismiss_group',
+  '/group/mute_group_member',
+  '/group/cancel_mute_group_member',
+  '/group/mute_group',
+  '/group/cancel_mute_group',
+  '/group/set_group_member_info',
+  '/group/get_group_abstract_info',
+  '/group/get_groups',
+  '/group/get_group_member_user_id',
+  '/group/get_incremental_join_groups',
+  '/group/get_incremental_group_members',
+  '/group/get_incremental_group_members_batch',
+  '/group/get_full_group_member_user_ids',
+  '/group/get_full_join_group_ids',
+  '/group/get_group_application_unhandled_count',
+];
+const goGroupApiOrderIndex = new Map(goGroupApiOrder.map((endpoint, index) => [endpoint, index]));
+
 const commonHeaders = [
   ['operationID', '是', 'string', '每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。'],
   ['token', '是', 'string', 'APP 管理员 Token；仅保存在可信后端服务中。'],
@@ -110,7 +147,7 @@ const groupApis = [
       ['groupInfo.introduction', '否', 'string', '群介绍。'],
       ['groupInfo.faceURL', '否', 'string', '群头像 URL。'],
       ['groupInfo.ex', '否', 'string', '群扩展字段。'],
-      ['groupInfo.groupType', '是', 'int', '群类型，取值 0、1 或 2；常用工作群为 2。'],
+      ['groupInfo.groupType', '是', 'int', '群类型；当前服务端只支持工作群，固定传 2。'],
       ['groupInfo.needVerification', '否', 'int', '入群验证策略。'],
       ['groupInfo.lookMemberInfo', '否', 'int', '是否允许查看群成员资料。'],
       ['groupInfo.applyMemberFriend', '否', 'int', '是否允许从群成员处添加好友。'],
@@ -119,7 +156,7 @@ const groupApis = [
     responseData: { groupInfo },
     responseFields: [['data.groupInfo', 'object', '创建后的群资料。']],
     sideEffects: '创建群组、写入群主和初始成员关系，并可能向相关用户下发群创建通知。',
-    limits: ['`groupInfo` 和 `ownerUserID` 必填。', '`memberUserIDs` 最多 1000 个。'],
+    limits: ['`groupInfo` 和 `ownerUserID` 必填。', '`groupInfo.groupType` 只能传 2。', '`memberUserIDs` 最多 1000 个。'],
   },
   {
     slug: 'set-group-info',
@@ -193,18 +230,18 @@ const groupApis = [
       groupID: 'group_001',
       reqMessage: '申请加入群组',
       joinSource: 3,
-      inviterUserID: '',
+      inviterUserID: 'user_002',
       ex: '',
     },
     fields: [
       ['groupID', '是', 'string', '目标群 ID。'],
       ['reqMessage', '否', 'string', '申请说明。'],
       ['joinSource', '是', 'int', '入群来源：1 管理员邀请，2 被邀请，3 搜索加入，4 扫码加入。'],
-      ['inviterUserID', '条件必填', 'string', '`joinSource` 为 2 时必填，表示邀请人用户 ID。'],
+      ['inviterUserID', '是', 'string', '申请加入群组的用户 ID；当前服务端沿用该字段名承载申请用户。'],
       ['ex', '否', 'string', '扩展字段。'],
     ],
     sideEffects: '根据群验证策略创建入群申请或直接加入群组，并可能触发入群申请或成员加入通知。',
-    limits: ['`groupID` 必填。', '`joinSource` 只能为 1、2、3 或 4。'],
+    limits: ['`groupID` 和 `inviterUserID` 必填。', '`joinSource` 只能为 1、2、3 或 4。'],
   },
   {
     slug: 'quit-group',
@@ -214,10 +251,10 @@ const groupApis = [
     sample: { groupID: 'group_001', userID: 'user_001' },
     fields: [
       ['groupID', '是', 'string', '目标群 ID。'],
-      ['userID', '是', 'string', '要退出群组的用户 ID。'],
+      ['userID', '否', 'string', '要退出群组的用户 ID；不传时服务端使用当前操作用户 ID。'],
     ],
     sideEffects: '删除指定用户的群成员关系，并可能触发退群通知。',
-    limits: ['`groupID` 必填。', '群主退出前通常需要先转让群主。'],
+    limits: ['`groupID` 必填。', '传入 `userID` 时服务端会校验操作方是否有权限。', '群主退出前通常需要先转让群主。'],
   },
   {
     slug: 'respond-group-application',
@@ -394,7 +431,7 @@ const groupApis = [
     slug: 'get-group-member-list',
     title: '获取群成员列表',
     endpoint: '/group/get_group_member_list',
-    summary: '按分页、角色过滤和关键字查询群成员列表。',
+    summary: '按分页和关键字查询群成员列表；请求体保留 `filter` 字段并校验取值范围。',
     sample: {
       groupID: 'group_001',
       filter: 0,
@@ -404,7 +441,7 @@ const groupApis = [
     fields: [
       ...paginationFields,
       ['groupID', '是', 'string', '目标群 ID。'],
-      ['filter', '否', 'int', '成员角色过滤，取值范围 0-5。'],
+      ['filter', '否', 'int', '保留字段，入口校验取值范围 0-5；当前实现不使用该字段过滤结果。'],
       ['keyword', '否', 'string', '按用户 ID 或昵称过滤。'],
     ],
     responseData: { total: 1, members: [groupMember] },
@@ -537,11 +574,11 @@ const groupApis = [
       ['members.userID', '是', 'string', '目标成员用户 ID。'],
       ['members.nickname', '否', 'string', '新的群内昵称。'],
       ['members.faceURL', '否', 'string', '新的群内头像 URL。'],
-      ['members.roleLevel', '否', 'int', '群成员角色：100 群主，60 管理员，20 普通成员。'],
+      ['members.roleLevel', '否', 'int', '群成员角色，只能设置为 60 管理员或 20 普通成员；不能设置为 100 群主。'],
       ['members.ex', '否', 'string', '成员扩展字段。'],
     ],
     sideEffects: '更新群成员资料或角色，并可能触发群成员资料变更通知。',
-    limits: ['`members` 必填且最多 1000 个。', '不要通过此接口把成员设置为群主；群主转让应调用转让群主接口。'],
+    limits: ['`members` 必填且最多 1000 个。', '`members.roleLevel` 只能传 60 或 20。', '不要通过此接口把成员设置为群主；群主转让应调用转让群主接口。'],
   },
   {
     slug: 'get-group-abstract-info',
@@ -583,7 +620,7 @@ const groupApis = [
       ['data.groups', 'array', '后台群组列表，包含群资料和群主信息。'],
     ],
     sideEffects: '只读查询，不改变群组状态。',
-    limits: ['`pagination.pageNumber` 必须大于等于 1。'],
+    limits: ['`pagination` 必填，即使按 `groupID` 精确查询也需要传入。', '`pagination.pageNumber` 必须大于等于 1。'],
   },
   {
     slug: 'get-group-member-user-ids',
@@ -771,8 +808,14 @@ const internalGroupApiSlugs = new Set([
   'batch-get-incremental-group-members',
 ]);
 
-const externalGroupApis = groupApis.filter((api) => !internalGroupApiSlugs.has(api.slug));
-const omittedGroupApis = groupApis.filter((api) => internalGroupApiSlugs.has(api.slug));
+validateGoGroupApiOrder();
+
+const externalGroupApis = groupApis
+  .filter((api) => !internalGroupApiSlugs.has(api.slug))
+  .sort(compareByGoGroupApiOrder);
+const omittedGroupApis = groupApis
+  .filter((api) => internalGroupApiSlugs.has(api.slug))
+  .sort(compareByGoGroupApiOrder);
 
 await rm(resolve(root, contentRoot), { force: true, recursive: true });
 await rm(resolve(root, zhContentRoot), { force: true, recursive: true });
@@ -937,6 +980,18 @@ function renderFrontmatter(values) {
   return Object.entries(values)
     .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
     .join('\n');
+}
+
+function validateGoGroupApiOrder() {
+  const endpoints = new Set(groupApis.map((api) => api.endpoint));
+  const missingOrder = [...endpoints].filter((endpoint) => !goGroupApiOrderIndex.has(endpoint));
+  if (missingOrder.length > 0) {
+    throw new Error(`Missing Go group API order for: ${missingOrder.join(', ')}`);
+  }
+}
+
+function compareByGoGroupApiOrder(a, b) {
+  return goGroupApiOrderIndex.get(a.endpoint) - goGroupApiOrderIndex.get(b.endpoint);
 }
 
 function renderTable(headers, rows) {

@@ -51,7 +51,7 @@ curl --request POST "${API_ADDRESS}/group/quit_group" \
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
 | groupID | 是 | string | 目标群 ID。 |
-| userID | 是 | string | 要退出群组的用户 ID。 |
+| userID | 否 | string | 要退出群组的用户 ID；不传时服务端使用当前操作用户 ID。 |
 
 ## 响应
 
@@ -95,6 +95,7 @@ curl --request POST "${API_ADDRESS}/group/quit_group" \
 
 - 删除指定用户的群成员关系，并可能触发退群通知。
 - `groupID` 必填。
+- 传入 `userID` 时服务端会校验操作方是否有权限。
 - 群主退出前通常需要先转让群主。
 - 所有数组型请求参数建议控制在 1000 个元素以内。
 

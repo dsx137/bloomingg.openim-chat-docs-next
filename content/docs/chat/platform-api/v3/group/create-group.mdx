@@ -104,7 +104,7 @@ curl --request POST "${API_ADDRESS}/group/create_group" \
 | groupInfo.introduction | 否 | string | 群介绍。 |
 | groupInfo.faceURL | 否 | string | 群头像 URL。 |
 | groupInfo.ex | 否 | string | 群扩展字段。 |
-| groupInfo.groupType | 是 | int | 群类型，取值 0、1 或 2；常用工作群为 2。 |
+| groupInfo.groupType | 是 | int | 群类型；当前服务端只支持工作群，固定传 2。 |
 | groupInfo.needVerification | 否 | int | 入群验证策略。 |
 | groupInfo.lookMemberInfo | 否 | int | 是否允许查看群成员资料。 |
 | groupInfo.applyMemberFriend | 否 | int | 是否允许从群成员处添加好友。 |
@@ -175,6 +175,7 @@ curl --request POST "${API_ADDRESS}/group/create_group" \
 
 - 创建群组、写入群主和初始成员关系，并可能向相关用户下发群创建通知。
 - `groupInfo` 和 `ownerUserID` 必填。
+- `groupInfo.groupType` 只能传 2。
 - `memberUserIDs` 最多 1000 个。
 - 所有数组型请求参数建议控制在 1000 个元素以内。
 

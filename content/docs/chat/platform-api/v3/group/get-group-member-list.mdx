@@ -10,7 +10,7 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/group/get-group-member-list"
 ---
 
-使用 **获取群成员列表** 从可信后端调用 OpenIM 群组 REST 接口。按分页、角色过滤和关键字查询群成员列表。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+使用 **获取群成员列表** 从可信后端调用 OpenIM 群组 REST 接口。按分页和关键字查询群成员列表；请求体保留 `filter` 字段并校验取值范围。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
 
 ## HTTP 请求
 
@@ -70,7 +70,7 @@ curl --request POST "${API_ADDRESS}/group/get_group_member_list" \
 | pagination.pageNumber | 是 | int | 页码，从 1 开始。 |
 | pagination.showNumber | 是 | int | 每页数量，必须大于 0。 |
 | groupID | 是 | string | 目标群 ID。 |
-| filter | 否 | int | 成员角色过滤，取值范围 0-5。 |
+| filter | 否 | int | 保留字段，入口校验取值范围 0-5；当前实现不使用该字段过滤结果。 |
 | keyword | 否 | string | 按用户 ID 或昵称过滤。 |
 
 ## 响应

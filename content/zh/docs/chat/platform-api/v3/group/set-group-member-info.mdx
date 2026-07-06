@@ -71,7 +71,7 @@ curl --request POST "${API_ADDRESS}/group/set_group_member_info" \
 | members.userID | 是 | string | 目标成员用户 ID。 |
 | members.nickname | 否 | string | 新的群内昵称。 |
 | members.faceURL | 否 | string | 新的群内头像 URL。 |
-| members.roleLevel | 否 | int | 群成员角色：100 群主，60 管理员，20 普通成员。 |
+| members.roleLevel | 否 | int | 群成员角色，只能设置为 60 管理员或 20 普通成员；不能设置为 100 群主。 |
 | members.ex | 否 | string | 成员扩展字段。 |
 
 ## 响应
@@ -116,6 +116,7 @@ curl --request POST "${API_ADDRESS}/group/set_group_member_info" \
 
 - 更新群成员资料或角色，并可能触发群成员资料变更通知。
 - `members` 必填且最多 1000 个。
+- `members.roleLevel` 只能传 60 或 20。
 - 不要通过此接口把成员设置为群主；群主转让应调用转让群主接口。
 - 所有数组型请求参数建议控制在 1000 个元素以内。
 
