@@ -156,7 +156,11 @@ const groupApis = [
     responseData: { groupInfo },
     responseFields: [['data.groupInfo', 'object', '创建后的群资料。']],
     sideEffects: '创建群组、写入群主和初始成员关系，并可能向相关用户下发群创建通知。',
-    limits: ['`groupInfo` 和 `ownerUserID` 必填。', '`groupInfo.groupType` 只能传 2。', '`memberUserIDs` 最多 1000 个。'],
+    limits: [
+      '`groupInfo` 和 `ownerUserID` 必填。',
+      '`groupInfo.groupType` 只能传 2。',
+      '`memberUserIDs` 最多 1000 个。',
+    ],
   },
   {
     slug: 'set-group-info',
@@ -237,7 +241,12 @@ const groupApis = [
       ['groupID', '是', 'string', '目标群 ID。'],
       ['reqMessage', '否', 'string', '申请说明。'],
       ['joinSource', '是', 'int', '入群来源：1 管理员邀请，2 被邀请，3 搜索加入，4 扫码加入。'],
-      ['inviterUserID', '是', 'string', '申请加入群组的用户 ID；当前服务端沿用该字段名承载申请用户。'],
+      [
+        'inviterUserID',
+        '是',
+        'string',
+        '申请加入群组的用户 ID；当前服务端沿用该字段名承载申请用户。',
+      ],
       ['ex', '否', 'string', '扩展字段。'],
     ],
     sideEffects: '根据群验证策略创建入群申请或直接加入群组，并可能触发入群申请或成员加入通知。',
@@ -254,7 +263,11 @@ const groupApis = [
       ['userID', '否', 'string', '要退出群组的用户 ID；不传时服务端使用当前操作用户 ID。'],
     ],
     sideEffects: '删除指定用户的群成员关系，并可能触发退群通知。',
-    limits: ['`groupID` 必填。', '传入 `userID` 时服务端会校验操作方是否有权限。', '群主退出前通常需要先转让群主。'],
+    limits: [
+      '`groupID` 必填。',
+      '传入 `userID` 时服务端会校验操作方是否有权限。',
+      '群主退出前通常需要先转让群主。',
+    ],
   },
   {
     slug: 'respond-group-application',
@@ -574,11 +587,20 @@ const groupApis = [
       ['members.userID', '是', 'string', '目标成员用户 ID。'],
       ['members.nickname', '否', 'string', '新的群内昵称。'],
       ['members.faceURL', '否', 'string', '新的群内头像 URL。'],
-      ['members.roleLevel', '否', 'int', '群成员角色，只能设置为 60 管理员或 20 普通成员；不能设置为 100 群主。'],
+      [
+        'members.roleLevel',
+        '否',
+        'int',
+        '群成员角色，只能设置为 60 管理员或 20 普通成员；不能设置为 100 群主。',
+      ],
       ['members.ex', '否', 'string', '成员扩展字段。'],
     ],
     sideEffects: '更新群成员资料或角色，并可能触发群成员资料变更通知。',
-    limits: ['`members` 必填且最多 1000 个。', '`members.roleLevel` 只能传 60 或 20。', '不要通过此接口把成员设置为群主；群主转让应调用转让群主接口。'],
+    limits: [
+      '`members` 必填且最多 1000 个。',
+      '`members.roleLevel` 只能传 60 或 20。',
+      '不要通过此接口把成员设置为群主；群主转让应调用转让群主接口。',
+    ],
   },
   {
     slug: 'get-group-abstract-info',
@@ -620,7 +642,10 @@ const groupApis = [
       ['data.groups', 'array', '后台群组列表，包含群资料和群主信息。'],
     ],
     sideEffects: '只读查询，不改变群组状态。',
-    limits: ['`pagination` 必填，即使按 `groupID` 精确查询也需要传入。', '`pagination.pageNumber` 必须大于等于 1。'],
+    limits: [
+      '`pagination` 必填，即使按 `groupID` 精确查询也需要传入。',
+      '`pagination.pageNumber` 必须大于等于 1。',
+    ],
   },
   {
     slug: 'get-group-member-user-ids',
@@ -696,7 +721,10 @@ const groupApis = [
       ['data.group', 'object', '当前群资料。'],
     ],
     sideEffects: '只读同步接口，不改变成员状态。',
-    limits: ['`groupID` 必填。', '客户端应保存返回的 `version` 和 `versionID` 用于下一次增量同步。'],
+    limits: [
+      '`groupID` 必填。',
+      '客户端应保存返回的 `version` 和 `versionID` 用于下一次增量同步。',
+    ],
   },
   {
     slug: 'batch-get-incremental-group-members',
@@ -976,7 +1004,7 @@ function renderBody(spec) {
     ...(spec.responseFields ?? []),
   ];
 
-  return `使用 **${spec.title}** 从可信后端调用 OpenIM 群组 REST 接口。${spec.summary} 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。\n\n## HTTP 请求\n\n\`\`\`bash\nPOST {API_ADDRESS}${spec.endpoint}\n\`\`\`\n\n### 请求示例\n\n\`\`\`bash\ncurl --request POST "\${API_ADDRESS}${spec.endpoint}" \\\n  --header "Content-Type: application/json; charset=utf-8" \\\n  --header "operationID: \${OPERATION_ID}" \\\n  --header "token: \${ADMIN_TOKEN}" \\\n  --data-raw '${json(spec.sample)}'\n\`\`\`\n\n> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。\n\n## 参数\n\n此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。\n\n### 请求头\n\n${renderTable(['Header', '是否必填', '类型', '说明'], commonHeaders)}\n\n## 请求体\n\n\`\`\`json\n${json(spec.sample)}\n\`\`\`\n\n${renderTable(['参数名', '是否必填', '类型', '说明'], spec.fields)}\n\n## 响应\n\n请求被 OpenIM 正常处理时通常返回 \`200 OK\`。业务是否成功以响应体中的 \`errCode\` 为准；\`errCode === 0\` 表示成功，非 0 表示业务错误。\n\n\`\`\`json\n${json(success)}\n\`\`\`\n\n### 响应参数\n\n${renderTable(['参数名', '类型', '说明'], responseFields)}\n\n### 错误\n\n如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。\n\n\`\`\`json\n${json({ errCode: 1004, errMsg: 'RecordNotFoundError', errDlt: ': [1004]RecordNotFoundError' })}\n\`\`\`\n\n| 错误场景 | 可能原因 | 处理方式 |\n| -------- | -------- | -------- |\n| 鉴权失败 | \`token\` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |\n| 链路追踪困难 | \`operationID\` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 \`operationID\`，并在服务端日志中保留。 |\n| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |\n\n## 权限和限制\n\n- ${spec.sideEffects}\n${spec.limits.map((item) => `- ${item}`).join('\n')}\n- 所有数组型请求参数建议控制在 1000 个元素以内。\n\n## 相关页面\n\n- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)\n- [频道概览](/docs/chat/platform-api/v3/channel/overview)\n- [内容审核概览](/docs/chat/platform-api/v3/moderation/overview)\n- [错误码](/docs/chat/platform-api/v3/error-codes)`;
+  return `使用 **${spec.title}** 从可信后端调用 OpenIM 群组 REST 接口。${spec.summary} 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。\n\n## HTTP 请求\n\n\`\`\`bash\nPOST {API_ADDRESS}${spec.endpoint}\n\`\`\`\n\n### 请求示例\n\n\`\`\`bash\ncurl --request POST "\${API_ADDRESS}${spec.endpoint}" \\\n  --header "Content-Type: application/json; charset=utf-8" \\\n  --header "operationID: \${OPERATION_ID}" \\\n  --header "token: \${ADMIN_TOKEN}" \\\n  --data-raw '${json(spec.sample)}'\n\`\`\`\n\n> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。\n\n## 参数\n\n此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。\n\n### 请求头\n\n${renderTable(['Header', '是否必填', '类型', '说明'], commonHeaders)}\n\n## 请求体\n\n\`\`\`json\n${json(spec.sample)}\n\`\`\`\n\n${renderTable(['参数名', '是否必填', '类型', '说明'], spec.fields)}\n\n## 响应\n\n请求被 OpenIM 正常处理时通常返回 \`200 OK\`。业务是否成功以响应体中的 \`errCode\` 为准；\`errCode === 0\` 表示成功，非 0 表示业务错误。\n\n\`\`\`json\n${json(success)}\n\`\`\`\n\n### 响应参数\n\n${renderTable(['参数名', '类型', '说明'], responseFields)}\n\n### 错误\n\n如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。\n\n\`\`\`json\n${json({ errCode: 1004, errMsg: 'RecordNotFoundError', errDlt: ': [1004]RecordNotFoundError' })}\n\`\`\`\n\n| 错误场景 | 可能原因 | 处理方式 |\n| -------- | -------- | -------- |\n| 鉴权失败 | \`token\` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |\n| 链路追踪困难 | \`operationID\` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 \`operationID\`，并在服务端日志中保留。 |\n| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |\n\n## 权限和限制\n\n- ${spec.sideEffects}\n${spec.limits.map((item) => `- ${item}`).join('\n')}\n- 所有数组型请求参数建议控制在 1000 个元素以内。\n\n## 相关页面\n\n- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)\n- [群组接口](/docs/chat/platform-api/v3/group/create-group)\n- [内容审核概览](/docs/chat/platform-api/v3/moderation/overview)\n- [错误码](/docs/chat/platform-api/v3/error-codes)`;
 }
 
 function renderFrontmatter(values) {

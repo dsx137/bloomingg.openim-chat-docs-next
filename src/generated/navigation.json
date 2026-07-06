@@ -286,144 +286,50 @@
           "minIndex": 616.5
         },
         {
-          "id": "channel",
-          "segment": "channel",
-          "title": "频道",
+          "id": "auth",
+          "segment": "auth",
+          "title": "认证",
           "href": null,
           "type": "folder",
           "children": [
             {
-              "id": "channel/overview",
-              "segment": "overview",
-              "title": "频道概览",
-              "href": "/docs/chat/platform-api/v3/channel/overview",
+              "id": "auth/get-admin-token",
+              "segment": "get-admin-token",
+              "title": "获取管理员 Token",
+              "href": "/docs/chat/platform-api/v3/auth/get-admin-token",
               "type": "page",
               "children": [],
-              "minIndex": 622.5
+              "minIndex": 715
             },
             {
-              "id": "channel/creating-a-channel",
-              "segment": "creating-a-channel",
-              "title": "创建频道",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "channel/creating-a-channel/create-a-group-channel",
-                  "segment": "create-a-group-channel",
-                  "title": "创建群组频道",
-                  "href": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 623
-                }
-              ],
-              "minIndex": 623
+              "id": "auth/get-user-token",
+              "segment": "get-user-token",
+              "title": "获取用户 Token",
+              "href": "/docs/chat/platform-api/v3/auth/get-user-token",
+              "type": "page",
+              "children": [],
+              "minIndex": 716
             },
             {
-              "id": "channel/managing-a-channel",
-              "segment": "managing-a-channel",
-              "title": "管理频道",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "channel/managing-a-channel/update-a-group-channel",
-                  "segment": "update-a-group-channel",
-                  "title": "更新群组频道",
-                  "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 624
-                },
-                {
-                  "id": "channel/managing-a-channel/delete-a-group-channel",
-                  "segment": "delete-a-group-channel",
-                  "title": "删除群组频道",
-                  "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 625
-                },
-                {
-                  "id": "channel/managing-a-channel/join-a-channel",
-                  "segment": "join-a-channel",
-                  "title": "加入群组频道",
-                  "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 626
-                },
-                {
-                  "id": "channel/managing-a-channel/leave-a-channel",
-                  "segment": "leave-a-channel",
-                  "title": "退出群组频道",
-                  "href": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 627
-                }
-              ],
-              "minIndex": 624
+              "id": "auth/parse-token",
+              "segment": "parse-token",
+              "title": "解析 Token",
+              "href": "/docs/chat/platform-api/v3/auth/parse-token",
+              "type": "page",
+              "children": [],
+              "minIndex": 717
             },
             {
-              "id": "channel/listing-users",
-              "segment": "listing-users",
-              "title": "查询用户",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "channel/listing-users/list-members-of-a-group-channel",
-                  "segment": "list-members-of-a-group-channel",
-                  "title": "查询群组频道成员",
-                  "href": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 628
-                }
-              ],
-              "minIndex": 628
-            },
-            {
-              "id": "channel/inviting-a-user",
-              "segment": "inviting-a-user",
-              "title": "邀请用户",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "channel/inviting-a-user/invite-as-members-channel",
-                  "segment": "invite-as-members-channel",
-                  "title": "邀请成员",
-                  "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 629
-                },
-                {
-                  "id": "channel/inviting-a-user/accept-an-invitation-channel",
-                  "segment": "accept-an-invitation-channel",
-                  "title": "接受邀请",
-                  "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 630
-                },
-                {
-                  "id": "channel/inviting-a-user/decline-an-invitation-channel",
-                  "segment": "decline-an-invitation-channel",
-                  "title": "拒绝邀请",
-                  "href": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 631
-                }
-              ],
-              "minIndex": 629
+              "id": "auth/force-logout",
+              "segment": "force-logout",
+              "title": "强制用户下线",
+              "href": "/docs/chat/platform-api/v3/auth/force-logout",
+              "type": "page",
+              "children": [],
+              "minIndex": 718
             }
           ],
-          "minIndex": 622.5
+          "minIndex": 715
         },
         {
           "id": "friend",
@@ -629,7 +535,7 @@
               "href": "/docs/chat/platform-api/v3/group/create-group",
               "type": "page",
               "children": [],
-              "minIndex": 640
+              "minIndex": 752
             },
             {
               "id": "group/set-group-info",
@@ -638,7 +544,7 @@
               "href": "/docs/chat/platform-api/v3/group/set-group-info",
               "type": "page",
               "children": [],
-              "minIndex": 641
+              "minIndex": 753
             },
             {
               "id": "group/set-group-info-ex",
@@ -647,7 +553,7 @@
               "href": "/docs/chat/platform-api/v3/group/set-group-info-ex",
               "type": "page",
               "children": [],
-              "minIndex": 642
+              "minIndex": 754
             },
             {
               "id": "group/join-group",
@@ -656,7 +562,7 @@
               "href": "/docs/chat/platform-api/v3/group/join-group",
               "type": "page",
               "children": [],
-              "minIndex": 643
+              "minIndex": 755
             },
             {
               "id": "group/quit-group",
@@ -665,7 +571,7 @@
               "href": "/docs/chat/platform-api/v3/group/quit-group",
               "type": "page",
               "children": [],
-              "minIndex": 644
+              "minIndex": 756
             },
             {
               "id": "group/respond-group-application",
@@ -674,7 +580,7 @@
               "href": "/docs/chat/platform-api/v3/group/respond-group-application",
               "type": "page",
               "children": [],
-              "minIndex": 645
+              "minIndex": 757
             },
             {
               "id": "group/transfer-group-owner",
@@ -683,7 +589,7 @@
               "href": "/docs/chat/platform-api/v3/group/transfer-group-owner",
               "type": "page",
               "children": [],
-              "minIndex": 646
+              "minIndex": 758
             },
             {
               "id": "group/list-received-group-applications",
@@ -692,7 +598,7 @@
               "href": "/docs/chat/platform-api/v3/group/list-received-group-applications",
               "type": "page",
               "children": [],
-              "minIndex": 647
+              "minIndex": 759
             },
             {
               "id": "group/list-user-requested-group-applications",
@@ -701,7 +607,7 @@
               "href": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
               "type": "page",
               "children": [],
-              "minIndex": 648
+              "minIndex": 760
             },
             {
               "id": "group/list-group-users-request-applications",
@@ -710,7 +616,7 @@
               "href": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
               "type": "page",
               "children": [],
-              "minIndex": 649
+              "minIndex": 761
             },
             {
               "id": "group/get-specified-user-group-request-info",
@@ -719,7 +625,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
               "type": "page",
               "children": [],
-              "minIndex": 650
+              "minIndex": 762
             },
             {
               "id": "group/get-groups-info",
@@ -728,7 +634,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-groups-info",
               "type": "page",
               "children": [],
-              "minIndex": 651
+              "minIndex": 763
             },
             {
               "id": "group/kick-group-members",
@@ -737,7 +643,7 @@
               "href": "/docs/chat/platform-api/v3/group/kick-group-members",
               "type": "page",
               "children": [],
-              "minIndex": 652
+              "minIndex": 764
             },
             {
               "id": "group/get-group-members-info",
@@ -746,7 +652,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-group-members-info",
               "type": "page",
               "children": [],
-              "minIndex": 653
+              "minIndex": 765
             },
             {
               "id": "group/get-group-member-list",
@@ -755,7 +661,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-group-member-list",
               "type": "page",
               "children": [],
-              "minIndex": 654
+              "minIndex": 766
             },
             {
               "id": "group/invite-users-to-group",
@@ -764,7 +670,7 @@
               "href": "/docs/chat/platform-api/v3/group/invite-users-to-group",
               "type": "page",
               "children": [],
-              "minIndex": 655
+              "minIndex": 767
             },
             {
               "id": "group/get-joined-group-list",
@@ -773,7 +679,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-joined-group-list",
               "type": "page",
               "children": [],
-              "minIndex": 656
+              "minIndex": 768
             },
             {
               "id": "group/dismiss-group",
@@ -782,7 +688,7 @@
               "href": "/docs/chat/platform-api/v3/group/dismiss-group",
               "type": "page",
               "children": [],
-              "minIndex": 657
+              "minIndex": 769
             },
             {
               "id": "group/mute-group-member",
@@ -791,7 +697,7 @@
               "href": "/docs/chat/platform-api/v3/group/mute-group-member",
               "type": "page",
               "children": [],
-              "minIndex": 658
+              "minIndex": 770
             },
             {
               "id": "group/cancel-mute-group-member",
@@ -800,7 +706,7 @@
               "href": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
               "type": "page",
               "children": [],
-              "minIndex": 659
+              "minIndex": 771
             },
             {
               "id": "group/mute-group",
@@ -809,7 +715,7 @@
               "href": "/docs/chat/platform-api/v3/group/mute-group",
               "type": "page",
               "children": [],
-              "minIndex": 660
+              "minIndex": 772
             },
             {
               "id": "group/cancel-mute-group",
@@ -818,7 +724,7 @@
               "href": "/docs/chat/platform-api/v3/group/cancel-mute-group",
               "type": "page",
               "children": [],
-              "minIndex": 661
+              "minIndex": 773
             },
             {
               "id": "group/set-group-member-info",
@@ -827,7 +733,7 @@
               "href": "/docs/chat/platform-api/v3/group/set-group-member-info",
               "type": "page",
               "children": [],
-              "minIndex": 662
+              "minIndex": 774
             },
             {
               "id": "group/get-group-abstract-info",
@@ -836,7 +742,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
               "type": "page",
               "children": [],
-              "minIndex": 663
+              "minIndex": 775
             },
             {
               "id": "group/get-groups",
@@ -845,7 +751,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-groups",
               "type": "page",
               "children": [],
-              "minIndex": 664
+              "minIndex": 776
             },
             {
               "id": "group/get-group-member-user-ids",
@@ -854,7 +760,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
               "type": "page",
               "children": [],
-              "minIndex": 665
+              "minIndex": 777
             },
             {
               "id": "group/get-full-group-member-user-ids",
@@ -863,7 +769,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
               "type": "page",
               "children": [],
-              "minIndex": 666
+              "minIndex": 778
             },
             {
               "id": "group/get-full-join-group-ids",
@@ -872,7 +778,7 @@
               "href": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
               "type": "page",
               "children": [],
-              "minIndex": 667
+              "minIndex": 779
             },
             {
               "id": "group/get-group-application-unhandled-count",
@@ -881,201 +787,110 @@
               "href": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
               "type": "page",
               "children": [],
-              "minIndex": 668
+              "minIndex": 780
             }
           ],
-          "minIndex": 640
+          "minIndex": 752
         },
         {
-          "id": "auth",
-          "segment": "auth",
-          "title": "认证",
+          "id": "conversation",
+          "segment": "conversation",
+          "title": "会话",
           "href": null,
           "type": "folder",
           "children": [
             {
-              "id": "auth/get-admin-token",
-              "segment": "get-admin-token",
-              "title": "获取管理员 Token",
-              "href": "/docs/chat/platform-api/v3/auth/get-admin-token",
+              "id": "conversation/get-sorted-conversation-list",
+              "segment": "get-sorted-conversation-list",
+              "title": "获取排序会话列表",
+              "href": "/docs/chat/platform-api/v3/conversation/get-sorted-conversation-list",
               "type": "page",
               "children": [],
-              "minIndex": 715
+              "minIndex": 689
             },
             {
-              "id": "auth/get-user-token",
-              "segment": "get-user-token",
-              "title": "获取用户 Token",
-              "href": "/docs/chat/platform-api/v3/auth/get-user-token",
+              "id": "conversation/get-all-conversations",
+              "segment": "get-all-conversations",
+              "title": "获取全部会话",
+              "href": "/docs/chat/platform-api/v3/conversation/get-all-conversations",
               "type": "page",
               "children": [],
-              "minIndex": 716
+              "minIndex": 690
             },
             {
-              "id": "auth/parse-token",
-              "segment": "parse-token",
-              "title": "解析 Token",
-              "href": "/docs/chat/platform-api/v3/auth/parse-token",
+              "id": "conversation/get-conversation",
+              "segment": "get-conversation",
+              "title": "获取单个会话",
+              "href": "/docs/chat/platform-api/v3/conversation/get-conversation",
               "type": "page",
               "children": [],
-              "minIndex": 717
+              "minIndex": 691
             },
             {
-              "id": "auth/force-logout",
-              "segment": "force-logout",
-              "title": "强制用户下线",
-              "href": "/docs/chat/platform-api/v3/auth/force-logout",
+              "id": "conversation/get-conversations",
+              "segment": "get-conversations",
+              "title": "批量获取会话",
+              "href": "/docs/chat/platform-api/v3/conversation/get-conversations",
               "type": "page",
               "children": [],
-              "minIndex": 718
+              "minIndex": 692
+            },
+            {
+              "id": "conversation/set-conversations",
+              "segment": "set-conversations",
+              "title": "批量设置会话",
+              "href": "/docs/chat/platform-api/v3/conversation/set-conversations",
+              "type": "page",
+              "children": [],
+              "minIndex": 693
+            },
+            {
+              "id": "conversation/get-conversation-offline-push-user-ids",
+              "segment": "get-conversation-offline-push-user-ids",
+              "title": "获取会话离线推送用户 ID",
+              "href": "/docs/chat/platform-api/v3/conversation/get-conversation-offline-push-user-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 694
+            },
+            {
+              "id": "conversation/get-full-conversation-ids",
+              "segment": "get-full-conversation-ids",
+              "title": "全量获取会话 ID",
+              "href": "/docs/chat/platform-api/v3/conversation/get-full-conversation-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 695
+            },
+            {
+              "id": "conversation/get-owner-conversation",
+              "segment": "get-owner-conversation",
+              "title": "分页获取用户会话",
+              "href": "/docs/chat/platform-api/v3/conversation/get-owner-conversation",
+              "type": "page",
+              "children": [],
+              "minIndex": 696
+            },
+            {
+              "id": "conversation/get-not-notify-conversation-ids",
+              "segment": "get-not-notify-conversation-ids",
+              "title": "获取免打扰会话 ID",
+              "href": "/docs/chat/platform-api/v3/conversation/get-not-notify-conversation-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 697
+            },
+            {
+              "id": "conversation/get-pinned-conversation-ids",
+              "segment": "get-pinned-conversation-ids",
+              "title": "获取置顶会话 ID",
+              "href": "/docs/chat/platform-api/v3/conversation/get-pinned-conversation-ids",
+              "type": "page",
+              "children": [],
+              "minIndex": 698
             }
           ],
-          "minIndex": 715
-        },
-        {
-          "id": "third",
-          "segment": "third",
-          "title": "第三方服务",
-          "href": null,
-          "type": "folder",
-          "children": [
-            {
-              "id": "third/prometheus",
-              "segment": "prometheus",
-              "title": "跳转监控面板",
-              "href": "/docs/chat/platform-api/v3/third/prometheus",
-              "type": "page",
-              "children": [],
-              "minIndex": 719
-            },
-            {
-              "id": "third/fcm-update-token",
-              "segment": "fcm-update-token",
-              "title": "更新 FCM Token",
-              "href": "/docs/chat/platform-api/v3/third/fcm-update-token",
-              "type": "page",
-              "children": [],
-              "minIndex": 720
-            },
-            {
-              "id": "third/set-app-badge",
-              "segment": "set-app-badge",
-              "title": "设置应用角标",
-              "href": "/docs/chat/platform-api/v3/third/set-app-badge",
-              "type": "page",
-              "children": [],
-              "minIndex": 721
-            },
-            {
-              "id": "third/upload-logs",
-              "segment": "upload-logs",
-              "title": "上传日志记录",
-              "href": "/docs/chat/platform-api/v3/third/upload-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 722
-            },
-            {
-              "id": "third/delete-logs",
-              "segment": "delete-logs",
-              "title": "删除日志记录",
-              "href": "/docs/chat/platform-api/v3/third/delete-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 723
-            },
-            {
-              "id": "third/search-logs",
-              "segment": "search-logs",
-              "title": "搜索日志记录",
-              "href": "/docs/chat/platform-api/v3/third/search-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 724
-            },
-            {
-              "id": "third/part-limit",
-              "segment": "part-limit",
-              "title": "获取分片上传限制",
-              "href": "/docs/chat/platform-api/v3/third/part-limit",
-              "type": "page",
-              "children": [],
-              "minIndex": 725
-            },
-            {
-              "id": "third/part-size",
-              "segment": "part-size",
-              "title": "计算分片大小",
-              "href": "/docs/chat/platform-api/v3/third/part-size",
-              "type": "page",
-              "children": [],
-              "minIndex": 726
-            },
-            {
-              "id": "third/initiate-multipart-upload",
-              "segment": "initiate-multipart-upload",
-              "title": "初始化分片上传",
-              "href": "/docs/chat/platform-api/v3/third/initiate-multipart-upload",
-              "type": "page",
-              "children": [],
-              "minIndex": 727
-            },
-            {
-              "id": "third/auth-sign",
-              "segment": "auth-sign",
-              "title": "刷新分片上传签名",
-              "href": "/docs/chat/platform-api/v3/third/auth-sign",
-              "type": "page",
-              "children": [],
-              "minIndex": 728
-            },
-            {
-              "id": "third/complete-multipart-upload",
-              "segment": "complete-multipart-upload",
-              "title": "完成分片上传",
-              "href": "/docs/chat/platform-api/v3/third/complete-multipart-upload",
-              "type": "page",
-              "children": [],
-              "minIndex": 729
-            },
-            {
-              "id": "third/access-url",
-              "segment": "access-url",
-              "title": "获取对象访问地址",
-              "href": "/docs/chat/platform-api/v3/third/access-url",
-              "type": "page",
-              "children": [],
-              "minIndex": 730
-            },
-            {
-              "id": "third/initiate-form-data",
-              "segment": "initiate-form-data",
-              "title": "初始化表单直传",
-              "href": "/docs/chat/platform-api/v3/third/initiate-form-data",
-              "type": "page",
-              "children": [],
-              "minIndex": 731
-            },
-            {
-              "id": "third/complete-form-data",
-              "segment": "complete-form-data",
-              "title": "完成表单直传",
-              "href": "/docs/chat/platform-api/v3/third/complete-form-data",
-              "type": "page",
-              "children": [],
-              "minIndex": 732
-            },
-            {
-              "id": "third/object-redirect",
-              "segment": "object-redirect",
-              "title": "对象访问重定向",
-              "href": "/docs/chat/platform-api/v3/third/object-redirect",
-              "type": "page",
-              "children": [],
-              "minIndex": 733
-            }
-          ],
-          "minIndex": 719
+          "minIndex": 689
         },
         {
           "id": "message",
@@ -1278,104 +1093,149 @@
           "minIndex": 631.5
         },
         {
-          "id": "conversation",
-          "segment": "conversation",
-          "title": "会话",
+          "id": "third",
+          "segment": "third",
+          "title": "第三方服务",
           "href": null,
           "type": "folder",
           "children": [
             {
-              "id": "conversation/get-sorted-conversation-list",
-              "segment": "get-sorted-conversation-list",
-              "title": "获取排序会话列表",
-              "href": "/docs/chat/platform-api/v3/conversation/get-sorted-conversation-list",
+              "id": "third/prometheus",
+              "segment": "prometheus",
+              "title": "跳转监控面板",
+              "href": "/docs/chat/platform-api/v3/third/prometheus",
               "type": "page",
               "children": [],
-              "minIndex": 689
+              "minIndex": 719
             },
             {
-              "id": "conversation/get-all-conversations",
-              "segment": "get-all-conversations",
-              "title": "获取全部会话",
-              "href": "/docs/chat/platform-api/v3/conversation/get-all-conversations",
+              "id": "third/fcm-update-token",
+              "segment": "fcm-update-token",
+              "title": "更新 FCM Token",
+              "href": "/docs/chat/platform-api/v3/third/fcm-update-token",
               "type": "page",
               "children": [],
-              "minIndex": 690
+              "minIndex": 720
             },
             {
-              "id": "conversation/get-conversation",
-              "segment": "get-conversation",
-              "title": "获取单个会话",
-              "href": "/docs/chat/platform-api/v3/conversation/get-conversation",
+              "id": "third/set-app-badge",
+              "segment": "set-app-badge",
+              "title": "设置应用角标",
+              "href": "/docs/chat/platform-api/v3/third/set-app-badge",
               "type": "page",
               "children": [],
-              "minIndex": 691
+              "minIndex": 721
             },
             {
-              "id": "conversation/get-conversations",
-              "segment": "get-conversations",
-              "title": "批量获取会话",
-              "href": "/docs/chat/platform-api/v3/conversation/get-conversations",
+              "id": "third/upload-logs",
+              "segment": "upload-logs",
+              "title": "上传日志记录",
+              "href": "/docs/chat/platform-api/v3/third/upload-logs",
               "type": "page",
               "children": [],
-              "minIndex": 692
+              "minIndex": 722
             },
             {
-              "id": "conversation/set-conversations",
-              "segment": "set-conversations",
-              "title": "批量设置会话",
-              "href": "/docs/chat/platform-api/v3/conversation/set-conversations",
+              "id": "third/delete-logs",
+              "segment": "delete-logs",
+              "title": "删除日志记录",
+              "href": "/docs/chat/platform-api/v3/third/delete-logs",
               "type": "page",
               "children": [],
-              "minIndex": 693
+              "minIndex": 723
             },
             {
-              "id": "conversation/get-conversation-offline-push-user-ids",
-              "segment": "get-conversation-offline-push-user-ids",
-              "title": "获取会话离线推送用户 ID",
-              "href": "/docs/chat/platform-api/v3/conversation/get-conversation-offline-push-user-ids",
+              "id": "third/search-logs",
+              "segment": "search-logs",
+              "title": "搜索日志记录",
+              "href": "/docs/chat/platform-api/v3/third/search-logs",
               "type": "page",
               "children": [],
-              "minIndex": 694
+              "minIndex": 724
             },
             {
-              "id": "conversation/get-full-conversation-ids",
-              "segment": "get-full-conversation-ids",
-              "title": "全量获取会话 ID",
-              "href": "/docs/chat/platform-api/v3/conversation/get-full-conversation-ids",
+              "id": "third/part-limit",
+              "segment": "part-limit",
+              "title": "获取分片上传限制",
+              "href": "/docs/chat/platform-api/v3/third/part-limit",
               "type": "page",
               "children": [],
-              "minIndex": 695
+              "minIndex": 725
             },
             {
-              "id": "conversation/get-owner-conversation",
-              "segment": "get-owner-conversation",
-              "title": "分页获取用户会话",
-              "href": "/docs/chat/platform-api/v3/conversation/get-owner-conversation",
+              "id": "third/part-size",
+              "segment": "part-size",
+              "title": "计算分片大小",
+              "href": "/docs/chat/platform-api/v3/third/part-size",
               "type": "page",
               "children": [],
-              "minIndex": 696
+              "minIndex": 726
             },
             {
-              "id": "conversation/get-not-notify-conversation-ids",
-              "segment": "get-not-notify-conversation-ids",
-              "title": "获取免打扰会话 ID",
-              "href": "/docs/chat/platform-api/v3/conversation/get-not-notify-conversation-ids",
+              "id": "third/initiate-multipart-upload",
+              "segment": "initiate-multipart-upload",
+              "title": "初始化分片上传",
+              "href": "/docs/chat/platform-api/v3/third/initiate-multipart-upload",
               "type": "page",
               "children": [],
-              "minIndex": 697
+              "minIndex": 727
             },
             {
-              "id": "conversation/get-pinned-conversation-ids",
-              "segment": "get-pinned-conversation-ids",
-              "title": "获取置顶会话 ID",
-              "href": "/docs/chat/platform-api/v3/conversation/get-pinned-conversation-ids",
+              "id": "third/auth-sign",
+              "segment": "auth-sign",
+              "title": "刷新分片上传签名",
+              "href": "/docs/chat/platform-api/v3/third/auth-sign",
               "type": "page",
               "children": [],
-              "minIndex": 698
+              "minIndex": 728
+            },
+            {
+              "id": "third/complete-multipart-upload",
+              "segment": "complete-multipart-upload",
+              "title": "完成分片上传",
+              "href": "/docs/chat/platform-api/v3/third/complete-multipart-upload",
+              "type": "page",
+              "children": [],
+              "minIndex": 729
+            },
+            {
+              "id": "third/access-url",
+              "segment": "access-url",
+              "title": "获取对象访问地址",
+              "href": "/docs/chat/platform-api/v3/third/access-url",
+              "type": "page",
+              "children": [],
+              "minIndex": 730
+            },
+            {
+              "id": "third/initiate-form-data",
+              "segment": "initiate-form-data",
+              "title": "初始化表单直传",
+              "href": "/docs/chat/platform-api/v3/third/initiate-form-data",
+              "type": "page",
+              "children": [],
+              "minIndex": 731
+            },
+            {
+              "id": "third/complete-form-data",
+              "segment": "complete-form-data",
+              "title": "完成表单直传",
+              "href": "/docs/chat/platform-api/v3/third/complete-form-data",
+              "type": "page",
+              "children": [],
+              "minIndex": 732
+            },
+            {
+              "id": "third/object-redirect",
+              "segment": "object-redirect",
+              "title": "对象访问重定向",
+              "href": "/docs/chat/platform-api/v3/third/object-redirect",
+              "type": "page",
+              "children": [],
+              "minIndex": 733
             }
           ],
-          "minIndex": 689
+          "minIndex": 719
         },
         {
           "id": "migration",
@@ -1509,7 +1369,7 @@
           "minIndex": 639
         }
       ],
-      "pageCount": 142
+      "pageCount": 132
     },
     {
       "key": "chat/sdk/v4/ios",

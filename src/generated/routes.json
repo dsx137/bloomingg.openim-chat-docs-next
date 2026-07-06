@@ -11125,168 +11125,6 @@
   },
   {
     "id": 619,
-    "path": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
-    "relativePath": "chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel",
-    "title": "创建群组频道",
-    "description": "OpenIM Platform API 中文参考：创建群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 623,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel.mdx",
-    "navOrder": 623
-  },
-  {
-    "id": 620,
-    "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
-    "relativePath": "chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel",
-    "title": "更新群组频道",
-    "description": "OpenIM Platform API 中文参考：更新群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 624,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel.mdx",
-    "navOrder": 624
-  },
-  {
-    "id": 621,
-    "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
-    "relativePath": "chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel",
-    "title": "删除群组频道",
-    "description": "OpenIM Platform API 中文参考：删除群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 625,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/managing-a-channel/delete-a-group-channel.mdx",
-    "navOrder": 625
-  },
-  {
-    "id": 622,
-    "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
-    "relativePath": "chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel",
-    "title": "加入群组频道",
-    "description": "OpenIM Platform API 中文参考：加入群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 626,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel.mdx",
-    "navOrder": 626
-  },
-  {
-    "id": 623,
-    "path": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
-    "relativePath": "chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel",
-    "title": "退出群组频道",
-    "description": "OpenIM Platform API 中文参考：退出群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 627,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/managing-a-channel/leave-a-channel.mdx",
-    "navOrder": 627
-  },
-  {
-    "id": 624,
-    "path": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
-    "relativePath": "chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel",
-    "title": "查询群组频道成员",
-    "description": "OpenIM Platform API 中文参考：查询群组频道成员。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 628,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel.mdx",
-    "navOrder": 628
-  },
-  {
-    "id": 625,
-    "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
-    "relativePath": "chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel",
-    "title": "邀请成员",
-    "description": "OpenIM Platform API 中文参考：邀请成员。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 629,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel.mdx",
-    "navOrder": 629
-  },
-  {
-    "id": 626,
-    "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
-    "relativePath": "chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel",
-    "title": "接受邀请",
-    "description": "OpenIM Platform API 中文参考：接受邀请。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 630,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/inviting-a-user/accept-an-invitation-channel.mdx",
-    "navOrder": 630
-  },
-  {
-    "id": 627,
-    "path": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
-    "relativePath": "chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel",
-    "title": "拒绝邀请",
-    "description": "OpenIM Platform API 中文参考：拒绝邀请。说明 OpenIM REST 支持情况、接口结构和后端实现边界。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 631,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/inviting-a-user/decline-an-invitation-channel.mdx",
-    "navOrder": 631
-  },
-  {
-    "id": 628,
     "path": "/docs/chat/platform-api/v3/message/messaging-basics/send-a-message",
     "relativePath": "chat/platform-api/v3/message/messaging-basics/send-a-message",
     "sourcePath": "/docs/chat/platform-api/v3/message/messaging-basics/send-a-message",
@@ -11304,7 +11142,7 @@
     "navOrder": 632
   },
   {
-    "id": 629,
+    "id": 620,
     "path": "/docs/chat/platform-api/v3/migration/migrate-messages",
     "relativePath": "chat/platform-api/v3/migration/migrate-messages",
     "sourcePath": "/docs/chat/platform-api/v3/migration/migrate-messages",
@@ -11322,7 +11160,7 @@
     "navOrder": 633
   },
   {
-    "id": 630,
+    "id": 621,
     "path": "/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
     "relativePath": "chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users",
@@ -11340,7 +11178,7 @@
     "navOrder": 634
   },
   {
-    "id": 631,
+    "id": 622,
     "path": "/docs/chat/platform-api/v3/moderation/blocking-users/block-users",
     "relativePath": "chat/platform-api/v3/moderation/blocking-users/block-users",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/blocking-users/block-users",
@@ -11358,7 +11196,7 @@
     "navOrder": 635
   },
   {
-    "id": 632,
+    "id": 623,
     "path": "/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
     "relativePath": "chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user",
@@ -11376,7 +11214,7 @@
     "navOrder": 636
   },
   {
-    "id": 633,
+    "id": 624,
     "path": "/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
     "relativePath": "chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel",
@@ -11394,7 +11232,7 @@
     "navOrder": 637
   },
   {
-    "id": 634,
+    "id": 625,
     "path": "/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
     "relativePath": "chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel",
@@ -11412,7 +11250,7 @@
     "navOrder": 638
   },
   {
-    "id": 635,
+    "id": 626,
     "path": "/docs/chat/platform-api/v3/error-codes",
     "relativePath": "chat/platform-api/v3/error-codes",
     "sourcePath": "/docs/chat/platform-api/v3/error-codes",
@@ -11430,7 +11268,7 @@
     "navOrder": 639
   },
   {
-    "id": 636,
+    "id": 627,
     "path": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
     "relativePath": "chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
     "sourcePath": "/docs/chat/sdk/v4/wasm/channel/retrieving-channels/retrieve-group-members",
@@ -11448,7 +11286,7 @@
     "navOrder": 432.5
   },
   {
-    "id": 637,
+    "id": 628,
     "path": "/docs/chat/platform-api/v3/user/overview",
     "relativePath": "chat/platform-api/v3/user/overview",
     "sourcePath": "/docs/chat/platform-api/v3/user/overview",
@@ -11466,25 +11304,7 @@
     "navOrder": 616.5
   },
   {
-    "id": 638,
-    "path": "/docs/chat/platform-api/v3/channel/overview",
-    "relativePath": "chat/platform-api/v3/channel/overview",
-    "sourcePath": "/docs/chat/platform-api/v3/channel/overview",
-    "title": "频道概览",
-    "description": "OpenIM Platform API 频道模块概览，覆盖群组创建、成员管理、入群邀请和群成员查询。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "overview",
-    "status": "published",
-    "sourceIndex": 622.5,
-    "contentFile": "content/docs/chat/platform-api/v3/channel/overview.mdx",
-    "navOrder": 622.5
-  },
-  {
-    "id": 639,
+    "id": 629,
     "path": "/docs/chat/platform-api/v3/message/overview",
     "relativePath": "chat/platform-api/v3/message/overview",
     "sourcePath": "/docs/chat/platform-api/v3/message/overview",
@@ -11502,7 +11322,7 @@
     "navOrder": 631.5
   },
   {
-    "id": 640,
+    "id": 630,
     "path": "/docs/chat/platform-api/v3/migration/overview",
     "relativePath": "chat/platform-api/v3/migration/overview",
     "sourcePath": "/docs/chat/platform-api/v3/migration/overview",
@@ -11520,7 +11340,7 @@
     "navOrder": 632.5
   },
   {
-    "id": 641,
+    "id": 631,
     "path": "/docs/chat/platform-api/v3/moderation/overview",
     "relativePath": "chat/platform-api/v3/moderation/overview",
     "sourcePath": "/docs/chat/platform-api/v3/moderation/overview",
@@ -11538,529 +11358,7 @@
     "navOrder": 633.5
   },
   {
-    "id": 642,
-    "path": "/docs/chat/platform-api/v3/group/create-group",
-    "relativePath": "chat/platform-api/v3/group/create-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/create-group",
-    "title": "创建群组",
-    "description": "OpenIM 群组 REST API：创建群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 640,
-    "contentFile": "content/docs/chat/platform-api/v3/group/create-group.mdx",
-    "navOrder": 640
-  },
-  {
-    "id": 643,
-    "path": "/docs/chat/platform-api/v3/group/set-group-info",
-    "relativePath": "chat/platform-api/v3/group/set-group-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info",
-    "title": "设置群组信息",
-    "description": "OpenIM 群组 REST API：设置群组信息。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 641,
-    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info.mdx",
-    "navOrder": 641
-  },
-  {
-    "id": 644,
-    "path": "/docs/chat/platform-api/v3/group/set-group-info-ex",
-    "relativePath": "chat/platform-api/v3/group/set-group-info-ex",
-    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info-ex",
-    "title": "设置群组信息扩展",
-    "description": "OpenIM 群组 REST API：设置群组信息扩展。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 642,
-    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info-ex.mdx",
-    "navOrder": 642
-  },
-  {
-    "id": 645,
-    "path": "/docs/chat/platform-api/v3/group/join-group",
-    "relativePath": "chat/platform-api/v3/group/join-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/join-group",
-    "title": "申请加入群组",
-    "description": "OpenIM 群组 REST API：申请加入群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 643,
-    "contentFile": "content/docs/chat/platform-api/v3/group/join-group.mdx",
-    "navOrder": 643
-  },
-  {
-    "id": 646,
-    "path": "/docs/chat/platform-api/v3/group/quit-group",
-    "relativePath": "chat/platform-api/v3/group/quit-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/quit-group",
-    "title": "退出群组",
-    "description": "OpenIM 群组 REST API：退出群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 644,
-    "contentFile": "content/docs/chat/platform-api/v3/group/quit-group.mdx",
-    "navOrder": 644
-  },
-  {
-    "id": 647,
-    "path": "/docs/chat/platform-api/v3/group/respond-group-application",
-    "relativePath": "chat/platform-api/v3/group/respond-group-application",
-    "sourcePath": "/docs/chat/platform-api/v3/group/respond-group-application",
-    "title": "处理入群申请",
-    "description": "OpenIM 群组 REST API：处理入群申请。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 645,
-    "contentFile": "content/docs/chat/platform-api/v3/group/respond-group-application.mdx",
-    "navOrder": 645
-  },
-  {
-    "id": 648,
-    "path": "/docs/chat/platform-api/v3/group/transfer-group-owner",
-    "relativePath": "chat/platform-api/v3/group/transfer-group-owner",
-    "sourcePath": "/docs/chat/platform-api/v3/group/transfer-group-owner",
-    "title": "转让群主",
-    "description": "OpenIM 群组 REST API：转让群主。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 646,
-    "contentFile": "content/docs/chat/platform-api/v3/group/transfer-group-owner.mdx",
-    "navOrder": 646
-  },
-  {
-    "id": 649,
-    "path": "/docs/chat/platform-api/v3/group/list-received-group-applications",
-    "relativePath": "chat/platform-api/v3/group/list-received-group-applications",
-    "sourcePath": "/docs/chat/platform-api/v3/group/list-received-group-applications",
-    "title": "查询收到的入群申请",
-    "description": "OpenIM 群组 REST API：查询收到的入群申请。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 647,
-    "contentFile": "content/docs/chat/platform-api/v3/group/list-received-group-applications.mdx",
-    "navOrder": 647
-  },
-  {
-    "id": 650,
-    "path": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
-    "relativePath": "chat/platform-api/v3/group/list-user-requested-group-applications",
-    "sourcePath": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
-    "title": "查询用户发起的入群申请",
-    "description": "OpenIM 群组 REST API：查询用户发起的入群申请。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 648,
-    "contentFile": "content/docs/chat/platform-api/v3/group/list-user-requested-group-applications.mdx",
-    "navOrder": 648
-  },
-  {
-    "id": 651,
-    "path": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
-    "relativePath": "chat/platform-api/v3/group/list-group-users-request-applications",
-    "sourcePath": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
-    "title": "查询群内多个用户的入群申请",
-    "description": "OpenIM 群组 REST API：查询群内多个用户的入群申请。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 649,
-    "contentFile": "content/docs/chat/platform-api/v3/group/list-group-users-request-applications.mdx",
-    "navOrder": 649
-  },
-  {
-    "id": 652,
-    "path": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
-    "relativePath": "chat/platform-api/v3/group/get-specified-user-group-request-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
-    "title": "查询指定用户入群申请",
-    "description": "OpenIM 群组 REST API：查询指定用户入群申请。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 650,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-specified-user-group-request-info.mdx",
-    "navOrder": 650
-  },
-  {
-    "id": 653,
-    "path": "/docs/chat/platform-api/v3/group/get-groups-info",
-    "relativePath": "chat/platform-api/v3/group/get-groups-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups-info",
-    "title": "获取群组详情",
-    "description": "OpenIM 群组 REST API：获取群组详情。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 651,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups-info.mdx",
-    "navOrder": 651
-  },
-  {
-    "id": 654,
-    "path": "/docs/chat/platform-api/v3/group/kick-group-members",
-    "relativePath": "chat/platform-api/v3/group/kick-group-members",
-    "sourcePath": "/docs/chat/platform-api/v3/group/kick-group-members",
-    "title": "移除群成员",
-    "description": "OpenIM 群组 REST API：移除群成员。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 652,
-    "contentFile": "content/docs/chat/platform-api/v3/group/kick-group-members.mdx",
-    "navOrder": 652
-  },
-  {
-    "id": 655,
-    "path": "/docs/chat/platform-api/v3/group/get-group-members-info",
-    "relativePath": "chat/platform-api/v3/group/get-group-members-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-members-info",
-    "title": "获取指定群成员",
-    "description": "OpenIM 群组 REST API：获取指定群成员。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 653,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-members-info.mdx",
-    "navOrder": 653
-  },
-  {
-    "id": 656,
-    "path": "/docs/chat/platform-api/v3/group/get-group-member-list",
-    "relativePath": "chat/platform-api/v3/group/get-group-member-list",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-list",
-    "title": "获取群成员列表",
-    "description": "OpenIM 群组 REST API：获取群成员列表。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 654,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-list.mdx",
-    "navOrder": 654
-  },
-  {
-    "id": 657,
-    "path": "/docs/chat/platform-api/v3/group/invite-users-to-group",
-    "relativePath": "chat/platform-api/v3/group/invite-users-to-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/invite-users-to-group",
-    "title": "邀请用户进群",
-    "description": "OpenIM 群组 REST API：邀请用户进群。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 655,
-    "contentFile": "content/docs/chat/platform-api/v3/group/invite-users-to-group.mdx",
-    "navOrder": 655
-  },
-  {
-    "id": 658,
-    "path": "/docs/chat/platform-api/v3/group/get-joined-group-list",
-    "relativePath": "chat/platform-api/v3/group/get-joined-group-list",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-joined-group-list",
-    "title": "获取已加入群组列表",
-    "description": "OpenIM 群组 REST API：获取已加入群组列表。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 656,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-joined-group-list.mdx",
-    "navOrder": 656
-  },
-  {
-    "id": 659,
-    "path": "/docs/chat/platform-api/v3/group/dismiss-group",
-    "relativePath": "chat/platform-api/v3/group/dismiss-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/dismiss-group",
-    "title": "解散群组",
-    "description": "OpenIM 群组 REST API：解散群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 657,
-    "contentFile": "content/docs/chat/platform-api/v3/group/dismiss-group.mdx",
-    "navOrder": 657
-  },
-  {
-    "id": 660,
-    "path": "/docs/chat/platform-api/v3/group/mute-group-member",
-    "relativePath": "chat/platform-api/v3/group/mute-group-member",
-    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group-member",
-    "title": "禁言群成员",
-    "description": "OpenIM 群组 REST API：禁言群成员。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 658,
-    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group-member.mdx",
-    "navOrder": 658
-  },
-  {
-    "id": 661,
-    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
-    "relativePath": "chat/platform-api/v3/group/cancel-mute-group-member",
-    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
-    "title": "取消禁言群成员",
-    "description": "OpenIM 群组 REST API：取消禁言群成员。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 659,
-    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group-member.mdx",
-    "navOrder": 659
-  },
-  {
-    "id": 662,
-    "path": "/docs/chat/platform-api/v3/group/mute-group",
-    "relativePath": "chat/platform-api/v3/group/mute-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group",
-    "title": "禁言群组",
-    "description": "OpenIM 群组 REST API：禁言群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 660,
-    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group.mdx",
-    "navOrder": 660
-  },
-  {
-    "id": 663,
-    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group",
-    "relativePath": "chat/platform-api/v3/group/cancel-mute-group",
-    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group",
-    "title": "取消群组禁言",
-    "description": "OpenIM 群组 REST API：取消群组禁言。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 661,
-    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group.mdx",
-    "navOrder": 661
-  },
-  {
-    "id": 664,
-    "path": "/docs/chat/platform-api/v3/group/set-group-member-info",
-    "relativePath": "chat/platform-api/v3/group/set-group-member-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-member-info",
-    "title": "设置群成员信息",
-    "description": "OpenIM 群组 REST API：设置群成员信息。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 662,
-    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-member-info.mdx",
-    "navOrder": 662
-  },
-  {
-    "id": 665,
-    "path": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
-    "relativePath": "chat/platform-api/v3/group/get-group-abstract-info",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
-    "title": "获取群组摘要信息",
-    "description": "OpenIM 群组 REST API：获取群组摘要信息。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 663,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-abstract-info.mdx",
-    "navOrder": 663
-  },
-  {
-    "id": 666,
-    "path": "/docs/chat/platform-api/v3/group/get-groups",
-    "relativePath": "chat/platform-api/v3/group/get-groups",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups",
-    "title": "分页查询群组",
-    "description": "OpenIM 群组 REST API：分页查询群组。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 664,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups.mdx",
-    "navOrder": 664
-  },
-  {
-    "id": 667,
-    "path": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
-    "relativePath": "chat/platform-api/v3/group/get-group-member-user-ids",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
-    "title": "获取群成员用户 ID",
-    "description": "OpenIM 群组 REST API：获取群成员用户 ID。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 665,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-user-ids.mdx",
-    "navOrder": 665
-  },
-  {
-    "id": 668,
-    "path": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
-    "relativePath": "chat/platform-api/v3/group/get-full-group-member-user-ids",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
-    "title": "全量获取群成员用户 ID",
-    "description": "OpenIM 群组 REST API：全量获取群成员用户 ID。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 666,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-group-member-user-ids.mdx",
-    "navOrder": 666
-  },
-  {
-    "id": 669,
-    "path": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
-    "relativePath": "chat/platform-api/v3/group/get-full-join-group-ids",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
-    "title": "全量获取用户加入的群组 ID",
-    "description": "OpenIM 群组 REST API：全量获取用户加入的群组 ID。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 667,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-join-group-ids.mdx",
-    "navOrder": 667
-  },
-  {
-    "id": 670,
-    "path": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
-    "relativePath": "chat/platform-api/v3/group/get-group-application-unhandled-count",
-    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
-    "title": "获取未处理入群申请数量",
-    "description": "OpenIM 群组 REST API：获取未处理入群申请数量。",
-    "product": "platform-api",
-    "version": "v3",
-    "platform": null,
-    "contextKey": "chat/platform-api/v3",
-    "contextTitle": "Platform API",
-    "template": "api",
-    "status": "published",
-    "sourceIndex": 668,
-    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-application-unhandled-count.mdx",
-    "navOrder": 668
-  },
-  {
-    "id": 671,
+    "id": 632,
     "path": "/docs/chat/platform-api/v3/friend/delete-friend",
     "relativePath": "chat/platform-api/v3/friend/delete-friend",
     "sourcePath": "/docs/chat/platform-api/v3/friend/delete-friend",
@@ -12078,7 +11376,7 @@
     "navOrder": 669
   },
   {
-    "id": 672,
+    "id": 633,
     "path": "/docs/chat/platform-api/v3/friend/list-received-friend-applications",
     "relativePath": "chat/platform-api/v3/friend/list-received-friend-applications",
     "sourcePath": "/docs/chat/platform-api/v3/friend/list-received-friend-applications",
@@ -12096,7 +11394,7 @@
     "navOrder": 670
   },
   {
-    "id": 673,
+    "id": 634,
     "path": "/docs/chat/platform-api/v3/friend/get-designated-friend-application",
     "relativePath": "chat/platform-api/v3/friend/get-designated-friend-application",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-designated-friend-application",
@@ -12114,7 +11412,7 @@
     "navOrder": 671
   },
   {
-    "id": 674,
+    "id": 635,
     "path": "/docs/chat/platform-api/v3/friend/list-sent-friend-applications",
     "relativePath": "chat/platform-api/v3/friend/list-sent-friend-applications",
     "sourcePath": "/docs/chat/platform-api/v3/friend/list-sent-friend-applications",
@@ -12132,7 +11430,7 @@
     "navOrder": 672
   },
   {
-    "id": 675,
+    "id": 636,
     "path": "/docs/chat/platform-api/v3/friend/get-friend-list",
     "relativePath": "chat/platform-api/v3/friend/get-friend-list",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-friend-list",
@@ -12150,7 +11448,7 @@
     "navOrder": 673
   },
   {
-    "id": 676,
+    "id": 637,
     "path": "/docs/chat/platform-api/v3/friend/get-designated-friends",
     "relativePath": "chat/platform-api/v3/friend/get-designated-friends",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-designated-friends",
@@ -12168,7 +11466,7 @@
     "navOrder": 674
   },
   {
-    "id": 677,
+    "id": 638,
     "path": "/docs/chat/platform-api/v3/friend/add-friend",
     "relativePath": "chat/platform-api/v3/friend/add-friend",
     "sourcePath": "/docs/chat/platform-api/v3/friend/add-friend",
@@ -12186,7 +11484,7 @@
     "navOrder": 675
   },
   {
-    "id": 678,
+    "id": 639,
     "path": "/docs/chat/platform-api/v3/friend/respond-friend-application",
     "relativePath": "chat/platform-api/v3/friend/respond-friend-application",
     "sourcePath": "/docs/chat/platform-api/v3/friend/respond-friend-application",
@@ -12204,7 +11502,7 @@
     "navOrder": 676
   },
   {
-    "id": 679,
+    "id": 640,
     "path": "/docs/chat/platform-api/v3/friend/set-friend-remark",
     "relativePath": "chat/platform-api/v3/friend/set-friend-remark",
     "sourcePath": "/docs/chat/platform-api/v3/friend/set-friend-remark",
@@ -12222,7 +11520,7 @@
     "navOrder": 677
   },
   {
-    "id": 680,
+    "id": 641,
     "path": "/docs/chat/platform-api/v3/friend/add-black",
     "relativePath": "chat/platform-api/v3/friend/add-black",
     "sourcePath": "/docs/chat/platform-api/v3/friend/add-black",
@@ -12240,7 +11538,7 @@
     "navOrder": 678
   },
   {
-    "id": 681,
+    "id": 642,
     "path": "/docs/chat/platform-api/v3/friend/get-black-list",
     "relativePath": "chat/platform-api/v3/friend/get-black-list",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-black-list",
@@ -12258,7 +11556,7 @@
     "navOrder": 679
   },
   {
-    "id": 682,
+    "id": 643,
     "path": "/docs/chat/platform-api/v3/friend/get-specified-blacks",
     "relativePath": "chat/platform-api/v3/friend/get-specified-blacks",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-specified-blacks",
@@ -12276,7 +11574,7 @@
     "navOrder": 680
   },
   {
-    "id": 683,
+    "id": 644,
     "path": "/docs/chat/platform-api/v3/friend/remove-black",
     "relativePath": "chat/platform-api/v3/friend/remove-black",
     "sourcePath": "/docs/chat/platform-api/v3/friend/remove-black",
@@ -12294,7 +11592,7 @@
     "navOrder": 681
   },
   {
-    "id": 684,
+    "id": 645,
     "path": "/docs/chat/platform-api/v3/friend/import-friends",
     "relativePath": "chat/platform-api/v3/friend/import-friends",
     "sourcePath": "/docs/chat/platform-api/v3/friend/import-friends",
@@ -12312,7 +11610,7 @@
     "navOrder": 682
   },
   {
-    "id": 685,
+    "id": 646,
     "path": "/docs/chat/platform-api/v3/friend/is-friend",
     "relativePath": "chat/platform-api/v3/friend/is-friend",
     "sourcePath": "/docs/chat/platform-api/v3/friend/is-friend",
@@ -12330,7 +11628,7 @@
     "navOrder": 683
   },
   {
-    "id": 686,
+    "id": 647,
     "path": "/docs/chat/platform-api/v3/friend/get-friend-ids",
     "relativePath": "chat/platform-api/v3/friend/get-friend-ids",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-friend-ids",
@@ -12348,7 +11646,7 @@
     "navOrder": 684
   },
   {
-    "id": 687,
+    "id": 648,
     "path": "/docs/chat/platform-api/v3/friend/get-specified-friends-info",
     "relativePath": "chat/platform-api/v3/friend/get-specified-friends-info",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-specified-friends-info",
@@ -12366,7 +11664,7 @@
     "navOrder": 685
   },
   {
-    "id": 688,
+    "id": 649,
     "path": "/docs/chat/platform-api/v3/friend/update-friends",
     "relativePath": "chat/platform-api/v3/friend/update-friends",
     "sourcePath": "/docs/chat/platform-api/v3/friend/update-friends",
@@ -12384,7 +11682,7 @@
     "navOrder": 686
   },
   {
-    "id": 689,
+    "id": 650,
     "path": "/docs/chat/platform-api/v3/friend/get-full-friend-user-ids",
     "relativePath": "chat/platform-api/v3/friend/get-full-friend-user-ids",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-full-friend-user-ids",
@@ -12402,7 +11700,7 @@
     "navOrder": 687
   },
   {
-    "id": 690,
+    "id": 651,
     "path": "/docs/chat/platform-api/v3/friend/get-self-unhandled-apply-count",
     "relativePath": "chat/platform-api/v3/friend/get-self-unhandled-apply-count",
     "sourcePath": "/docs/chat/platform-api/v3/friend/get-self-unhandled-apply-count",
@@ -12420,7 +11718,7 @@
     "navOrder": 688
   },
   {
-    "id": 691,
+    "id": 652,
     "path": "/docs/chat/platform-api/v3/conversation/get-sorted-conversation-list",
     "relativePath": "chat/platform-api/v3/conversation/get-sorted-conversation-list",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-sorted-conversation-list",
@@ -12438,7 +11736,7 @@
     "navOrder": 689
   },
   {
-    "id": 692,
+    "id": 653,
     "path": "/docs/chat/platform-api/v3/conversation/get-all-conversations",
     "relativePath": "chat/platform-api/v3/conversation/get-all-conversations",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-all-conversations",
@@ -12456,7 +11754,7 @@
     "navOrder": 690
   },
   {
-    "id": 693,
+    "id": 654,
     "path": "/docs/chat/platform-api/v3/conversation/get-conversation",
     "relativePath": "chat/platform-api/v3/conversation/get-conversation",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-conversation",
@@ -12474,7 +11772,7 @@
     "navOrder": 691
   },
   {
-    "id": 694,
+    "id": 655,
     "path": "/docs/chat/platform-api/v3/conversation/get-conversations",
     "relativePath": "chat/platform-api/v3/conversation/get-conversations",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-conversations",
@@ -12492,7 +11790,7 @@
     "navOrder": 692
   },
   {
-    "id": 695,
+    "id": 656,
     "path": "/docs/chat/platform-api/v3/conversation/set-conversations",
     "relativePath": "chat/platform-api/v3/conversation/set-conversations",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/set-conversations",
@@ -12510,7 +11808,7 @@
     "navOrder": 693
   },
   {
-    "id": 696,
+    "id": 657,
     "path": "/docs/chat/platform-api/v3/conversation/get-conversation-offline-push-user-ids",
     "relativePath": "chat/platform-api/v3/conversation/get-conversation-offline-push-user-ids",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-conversation-offline-push-user-ids",
@@ -12528,7 +11826,7 @@
     "navOrder": 694
   },
   {
-    "id": 697,
+    "id": 658,
     "path": "/docs/chat/platform-api/v3/conversation/get-full-conversation-ids",
     "relativePath": "chat/platform-api/v3/conversation/get-full-conversation-ids",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-full-conversation-ids",
@@ -12546,7 +11844,7 @@
     "navOrder": 695
   },
   {
-    "id": 698,
+    "id": 659,
     "path": "/docs/chat/platform-api/v3/conversation/get-owner-conversation",
     "relativePath": "chat/platform-api/v3/conversation/get-owner-conversation",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-owner-conversation",
@@ -12564,7 +11862,7 @@
     "navOrder": 696
   },
   {
-    "id": 699,
+    "id": 660,
     "path": "/docs/chat/platform-api/v3/conversation/get-not-notify-conversation-ids",
     "relativePath": "chat/platform-api/v3/conversation/get-not-notify-conversation-ids",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-not-notify-conversation-ids",
@@ -12582,7 +11880,7 @@
     "navOrder": 697
   },
   {
-    "id": 700,
+    "id": 661,
     "path": "/docs/chat/platform-api/v3/conversation/get-pinned-conversation-ids",
     "relativePath": "chat/platform-api/v3/conversation/get-pinned-conversation-ids",
     "sourcePath": "/docs/chat/platform-api/v3/conversation/get-pinned-conversation-ids",
@@ -12600,7 +11898,7 @@
     "navOrder": 698
   },
   {
-    "id": 701,
+    "id": 662,
     "path": "/docs/chat/platform-api/v3/user/user-register",
     "relativePath": "chat/platform-api/v3/user/user-register",
     "sourcePath": "/docs/chat/platform-api/v3/user/user-register",
@@ -12618,7 +11916,7 @@
     "navOrder": 699
   },
   {
-    "id": 702,
+    "id": 663,
     "path": "/docs/chat/platform-api/v3/user/update-user-info",
     "relativePath": "chat/platform-api/v3/user/update-user-info",
     "sourcePath": "/docs/chat/platform-api/v3/user/update-user-info",
@@ -12636,7 +11934,7 @@
     "navOrder": 700
   },
   {
-    "id": 703,
+    "id": 664,
     "path": "/docs/chat/platform-api/v3/user/update-user-info-ex",
     "relativePath": "chat/platform-api/v3/user/update-user-info-ex",
     "sourcePath": "/docs/chat/platform-api/v3/user/update-user-info-ex",
@@ -12654,7 +11952,7 @@
     "navOrder": 701
   },
   {
-    "id": 704,
+    "id": 665,
     "path": "/docs/chat/platform-api/v3/user/set-global-msg-recv-opt",
     "relativePath": "chat/platform-api/v3/user/set-global-msg-recv-opt",
     "sourcePath": "/docs/chat/platform-api/v3/user/set-global-msg-recv-opt",
@@ -12672,7 +11970,7 @@
     "navOrder": 702
   },
   {
-    "id": 705,
+    "id": 666,
     "path": "/docs/chat/platform-api/v3/user/get-users-info",
     "relativePath": "chat/platform-api/v3/user/get-users-info",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-users-info",
@@ -12690,7 +11988,7 @@
     "navOrder": 703
   },
   {
-    "id": 706,
+    "id": 667,
     "path": "/docs/chat/platform-api/v3/user/get-all-users-uid",
     "relativePath": "chat/platform-api/v3/user/get-all-users-uid",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-all-users-uid",
@@ -12708,7 +12006,7 @@
     "navOrder": 704
   },
   {
-    "id": 707,
+    "id": 668,
     "path": "/docs/chat/platform-api/v3/user/account-check",
     "relativePath": "chat/platform-api/v3/user/account-check",
     "sourcePath": "/docs/chat/platform-api/v3/user/account-check",
@@ -12726,7 +12024,7 @@
     "navOrder": 705
   },
   {
-    "id": 708,
+    "id": 669,
     "path": "/docs/chat/platform-api/v3/user/get-users",
     "relativePath": "chat/platform-api/v3/user/get-users",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-users",
@@ -12744,7 +12042,7 @@
     "navOrder": 706
   },
   {
-    "id": 709,
+    "id": 670,
     "path": "/docs/chat/platform-api/v3/user/get-users-online-status",
     "relativePath": "chat/platform-api/v3/user/get-users-online-status",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-users-online-status",
@@ -12762,7 +12060,7 @@
     "navOrder": 707
   },
   {
-    "id": 710,
+    "id": 671,
     "path": "/docs/chat/platform-api/v3/user/get-users-online-token-detail",
     "relativePath": "chat/platform-api/v3/user/get-users-online-token-detail",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-users-online-token-detail",
@@ -12780,7 +12078,7 @@
     "navOrder": 708
   },
   {
-    "id": 711,
+    "id": 672,
     "path": "/docs/chat/platform-api/v3/user/subscribe-users-status",
     "relativePath": "chat/platform-api/v3/user/subscribe-users-status",
     "sourcePath": "/docs/chat/platform-api/v3/user/subscribe-users-status",
@@ -12798,7 +12096,7 @@
     "navOrder": 709
   },
   {
-    "id": 712,
+    "id": 673,
     "path": "/docs/chat/platform-api/v3/user/get-users-status",
     "relativePath": "chat/platform-api/v3/user/get-users-status",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-users-status",
@@ -12816,7 +12114,7 @@
     "navOrder": 710
   },
   {
-    "id": 713,
+    "id": 674,
     "path": "/docs/chat/platform-api/v3/user/get-subscribe-users-status",
     "relativePath": "chat/platform-api/v3/user/get-subscribe-users-status",
     "sourcePath": "/docs/chat/platform-api/v3/user/get-subscribe-users-status",
@@ -12834,7 +12132,7 @@
     "navOrder": 711
   },
   {
-    "id": 714,
+    "id": 675,
     "path": "/docs/chat/platform-api/v3/user/add-notification-account",
     "relativePath": "chat/platform-api/v3/user/add-notification-account",
     "sourcePath": "/docs/chat/platform-api/v3/user/add-notification-account",
@@ -12852,7 +12150,7 @@
     "navOrder": 712
   },
   {
-    "id": 715,
+    "id": 676,
     "path": "/docs/chat/platform-api/v3/user/update-notification-account",
     "relativePath": "chat/platform-api/v3/user/update-notification-account",
     "sourcePath": "/docs/chat/platform-api/v3/user/update-notification-account",
@@ -12870,7 +12168,7 @@
     "navOrder": 713
   },
   {
-    "id": 716,
+    "id": 677,
     "path": "/docs/chat/platform-api/v3/user/search-notification-account",
     "relativePath": "chat/platform-api/v3/user/search-notification-account",
     "sourcePath": "/docs/chat/platform-api/v3/user/search-notification-account",
@@ -12888,7 +12186,7 @@
     "navOrder": 714
   },
   {
-    "id": 717,
+    "id": 678,
     "path": "/docs/chat/platform-api/v3/auth/get-admin-token",
     "relativePath": "chat/platform-api/v3/auth/get-admin-token",
     "sourcePath": "/docs/chat/platform-api/v3/auth/get-admin-token",
@@ -12906,7 +12204,7 @@
     "navOrder": 715
   },
   {
-    "id": 718,
+    "id": 679,
     "path": "/docs/chat/platform-api/v3/auth/get-user-token",
     "relativePath": "chat/platform-api/v3/auth/get-user-token",
     "sourcePath": "/docs/chat/platform-api/v3/auth/get-user-token",
@@ -12924,7 +12222,7 @@
     "navOrder": 716
   },
   {
-    "id": 719,
+    "id": 680,
     "path": "/docs/chat/platform-api/v3/auth/parse-token",
     "relativePath": "chat/platform-api/v3/auth/parse-token",
     "sourcePath": "/docs/chat/platform-api/v3/auth/parse-token",
@@ -12942,7 +12240,7 @@
     "navOrder": 717
   },
   {
-    "id": 720,
+    "id": 681,
     "path": "/docs/chat/platform-api/v3/auth/force-logout",
     "relativePath": "chat/platform-api/v3/auth/force-logout",
     "sourcePath": "/docs/chat/platform-api/v3/auth/force-logout",
@@ -12960,7 +12258,7 @@
     "navOrder": 718
   },
   {
-    "id": 721,
+    "id": 682,
     "path": "/docs/chat/platform-api/v3/third/prometheus",
     "relativePath": "chat/platform-api/v3/third/prometheus",
     "sourcePath": "/docs/chat/platform-api/v3/third/prometheus",
@@ -12978,7 +12276,7 @@
     "navOrder": 719
   },
   {
-    "id": 722,
+    "id": 683,
     "path": "/docs/chat/platform-api/v3/third/fcm-update-token",
     "relativePath": "chat/platform-api/v3/third/fcm-update-token",
     "sourcePath": "/docs/chat/platform-api/v3/third/fcm-update-token",
@@ -12996,7 +12294,7 @@
     "navOrder": 720
   },
   {
-    "id": 723,
+    "id": 684,
     "path": "/docs/chat/platform-api/v3/third/set-app-badge",
     "relativePath": "chat/platform-api/v3/third/set-app-badge",
     "sourcePath": "/docs/chat/platform-api/v3/third/set-app-badge",
@@ -13014,7 +12312,7 @@
     "navOrder": 721
   },
   {
-    "id": 724,
+    "id": 685,
     "path": "/docs/chat/platform-api/v3/third/upload-logs",
     "relativePath": "chat/platform-api/v3/third/upload-logs",
     "sourcePath": "/docs/chat/platform-api/v3/third/upload-logs",
@@ -13032,7 +12330,7 @@
     "navOrder": 722
   },
   {
-    "id": 725,
+    "id": 686,
     "path": "/docs/chat/platform-api/v3/third/delete-logs",
     "relativePath": "chat/platform-api/v3/third/delete-logs",
     "sourcePath": "/docs/chat/platform-api/v3/third/delete-logs",
@@ -13050,7 +12348,7 @@
     "navOrder": 723
   },
   {
-    "id": 726,
+    "id": 687,
     "path": "/docs/chat/platform-api/v3/third/search-logs",
     "relativePath": "chat/platform-api/v3/third/search-logs",
     "sourcePath": "/docs/chat/platform-api/v3/third/search-logs",
@@ -13068,7 +12366,7 @@
     "navOrder": 724
   },
   {
-    "id": 727,
+    "id": 688,
     "path": "/docs/chat/platform-api/v3/third/part-limit",
     "relativePath": "chat/platform-api/v3/third/part-limit",
     "sourcePath": "/docs/chat/platform-api/v3/third/part-limit",
@@ -13086,7 +12384,7 @@
     "navOrder": 725
   },
   {
-    "id": 728,
+    "id": 689,
     "path": "/docs/chat/platform-api/v3/third/part-size",
     "relativePath": "chat/platform-api/v3/third/part-size",
     "sourcePath": "/docs/chat/platform-api/v3/third/part-size",
@@ -13104,7 +12402,7 @@
     "navOrder": 726
   },
   {
-    "id": 729,
+    "id": 690,
     "path": "/docs/chat/platform-api/v3/third/initiate-multipart-upload",
     "relativePath": "chat/platform-api/v3/third/initiate-multipart-upload",
     "sourcePath": "/docs/chat/platform-api/v3/third/initiate-multipart-upload",
@@ -13122,7 +12420,7 @@
     "navOrder": 727
   },
   {
-    "id": 730,
+    "id": 691,
     "path": "/docs/chat/platform-api/v3/third/auth-sign",
     "relativePath": "chat/platform-api/v3/third/auth-sign",
     "sourcePath": "/docs/chat/platform-api/v3/third/auth-sign",
@@ -13140,7 +12438,7 @@
     "navOrder": 728
   },
   {
-    "id": 731,
+    "id": 692,
     "path": "/docs/chat/platform-api/v3/third/complete-multipart-upload",
     "relativePath": "chat/platform-api/v3/third/complete-multipart-upload",
     "sourcePath": "/docs/chat/platform-api/v3/third/complete-multipart-upload",
@@ -13158,7 +12456,7 @@
     "navOrder": 729
   },
   {
-    "id": 732,
+    "id": 693,
     "path": "/docs/chat/platform-api/v3/third/access-url",
     "relativePath": "chat/platform-api/v3/third/access-url",
     "sourcePath": "/docs/chat/platform-api/v3/third/access-url",
@@ -13176,7 +12474,7 @@
     "navOrder": 730
   },
   {
-    "id": 733,
+    "id": 694,
     "path": "/docs/chat/platform-api/v3/third/initiate-form-data",
     "relativePath": "chat/platform-api/v3/third/initiate-form-data",
     "sourcePath": "/docs/chat/platform-api/v3/third/initiate-form-data",
@@ -13194,7 +12492,7 @@
     "navOrder": 731
   },
   {
-    "id": 734,
+    "id": 695,
     "path": "/docs/chat/platform-api/v3/third/complete-form-data",
     "relativePath": "chat/platform-api/v3/third/complete-form-data",
     "sourcePath": "/docs/chat/platform-api/v3/third/complete-form-data",
@@ -13212,7 +12510,7 @@
     "navOrder": 732
   },
   {
-    "id": 735,
+    "id": 696,
     "path": "/docs/chat/platform-api/v3/third/object-redirect",
     "relativePath": "chat/platform-api/v3/third/object-redirect",
     "sourcePath": "/docs/chat/platform-api/v3/third/object-redirect",
@@ -13230,7 +12528,7 @@
     "navOrder": 733
   },
   {
-    "id": 736,
+    "id": 697,
     "path": "/docs/chat/platform-api/v3/message/newest-seq",
     "relativePath": "chat/platform-api/v3/message/newest-seq",
     "sourcePath": "/docs/chat/platform-api/v3/message/newest-seq",
@@ -13248,7 +12546,7 @@
     "navOrder": 734
   },
   {
-    "id": 737,
+    "id": 698,
     "path": "/docs/chat/platform-api/v3/message/search-msg",
     "relativePath": "chat/platform-api/v3/message/search-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/search-msg",
@@ -13266,7 +12564,7 @@
     "navOrder": 735
   },
   {
-    "id": 738,
+    "id": 699,
     "path": "/docs/chat/platform-api/v3/message/send-msg",
     "relativePath": "chat/platform-api/v3/message/send-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/send-msg",
@@ -13284,7 +12582,7 @@
     "navOrder": 736
   },
   {
-    "id": 739,
+    "id": 700,
     "path": "/docs/chat/platform-api/v3/message/send-business-notification",
     "relativePath": "chat/platform-api/v3/message/send-business-notification",
     "sourcePath": "/docs/chat/platform-api/v3/message/send-business-notification",
@@ -13302,7 +12600,7 @@
     "navOrder": 737
   },
   {
-    "id": 740,
+    "id": 701,
     "path": "/docs/chat/platform-api/v3/message/pull-msg-by-seq",
     "relativePath": "chat/platform-api/v3/message/pull-msg-by-seq",
     "sourcePath": "/docs/chat/platform-api/v3/message/pull-msg-by-seq",
@@ -13320,7 +12618,7 @@
     "navOrder": 738
   },
   {
-    "id": 741,
+    "id": 702,
     "path": "/docs/chat/platform-api/v3/message/revoke-msg",
     "relativePath": "chat/platform-api/v3/message/revoke-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/revoke-msg",
@@ -13338,7 +12636,7 @@
     "navOrder": 739
   },
   {
-    "id": 742,
+    "id": 703,
     "path": "/docs/chat/platform-api/v3/message/mark-msgs-as-read",
     "relativePath": "chat/platform-api/v3/message/mark-msgs-as-read",
     "sourcePath": "/docs/chat/platform-api/v3/message/mark-msgs-as-read",
@@ -13356,7 +12654,7 @@
     "navOrder": 740
   },
   {
-    "id": 743,
+    "id": 704,
     "path": "/docs/chat/platform-api/v3/message/mark-conversation-as-read",
     "relativePath": "chat/platform-api/v3/message/mark-conversation-as-read",
     "sourcePath": "/docs/chat/platform-api/v3/message/mark-conversation-as-read",
@@ -13374,7 +12672,7 @@
     "navOrder": 741
   },
   {
-    "id": 744,
+    "id": 705,
     "path": "/docs/chat/platform-api/v3/message/get-conversations-has-read-and-max-seq",
     "relativePath": "chat/platform-api/v3/message/get-conversations-has-read-and-max-seq",
     "sourcePath": "/docs/chat/platform-api/v3/message/get-conversations-has-read-and-max-seq",
@@ -13392,7 +12690,7 @@
     "navOrder": 742
   },
   {
-    "id": 745,
+    "id": 706,
     "path": "/docs/chat/platform-api/v3/message/set-conversation-has-read-seq",
     "relativePath": "chat/platform-api/v3/message/set-conversation-has-read-seq",
     "sourcePath": "/docs/chat/platform-api/v3/message/set-conversation-has-read-seq",
@@ -13410,7 +12708,7 @@
     "navOrder": 743
   },
   {
-    "id": 746,
+    "id": 707,
     "path": "/docs/chat/platform-api/v3/message/clear-conversation-msg",
     "relativePath": "chat/platform-api/v3/message/clear-conversation-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/clear-conversation-msg",
@@ -13428,7 +12726,7 @@
     "navOrder": 744
   },
   {
-    "id": 747,
+    "id": 708,
     "path": "/docs/chat/platform-api/v3/message/user-clear-all-msg",
     "relativePath": "chat/platform-api/v3/message/user-clear-all-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/user-clear-all-msg",
@@ -13446,7 +12744,7 @@
     "navOrder": 745
   },
   {
-    "id": 748,
+    "id": 709,
     "path": "/docs/chat/platform-api/v3/message/delete-msgs",
     "relativePath": "chat/platform-api/v3/message/delete-msgs",
     "sourcePath": "/docs/chat/platform-api/v3/message/delete-msgs",
@@ -13464,7 +12762,7 @@
     "navOrder": 746
   },
   {
-    "id": 749,
+    "id": 710,
     "path": "/docs/chat/platform-api/v3/message/delete-msg-physical-by-seq",
     "relativePath": "chat/platform-api/v3/message/delete-msg-physical-by-seq",
     "sourcePath": "/docs/chat/platform-api/v3/message/delete-msg-physical-by-seq",
@@ -13482,7 +12780,7 @@
     "navOrder": 747
   },
   {
-    "id": 750,
+    "id": 711,
     "path": "/docs/chat/platform-api/v3/message/delete-msg-physical",
     "relativePath": "chat/platform-api/v3/message/delete-msg-physical",
     "sourcePath": "/docs/chat/platform-api/v3/message/delete-msg-physical",
@@ -13500,7 +12798,7 @@
     "navOrder": 748
   },
   {
-    "id": 751,
+    "id": 712,
     "path": "/docs/chat/platform-api/v3/message/batch-send-msg",
     "relativePath": "chat/platform-api/v3/message/batch-send-msg",
     "sourcePath": "/docs/chat/platform-api/v3/message/batch-send-msg",
@@ -13518,7 +12816,7 @@
     "navOrder": 749
   },
   {
-    "id": 752,
+    "id": 713,
     "path": "/docs/chat/platform-api/v3/message/check-msg-is-send-success",
     "relativePath": "chat/platform-api/v3/message/check-msg-is-send-success",
     "sourcePath": "/docs/chat/platform-api/v3/message/check-msg-is-send-success",
@@ -13536,7 +12834,7 @@
     "navOrder": 750
   },
   {
-    "id": 753,
+    "id": 714,
     "path": "/docs/chat/platform-api/v3/message/get-server-time",
     "relativePath": "chat/platform-api/v3/message/get-server-time",
     "sourcePath": "/docs/chat/platform-api/v3/message/get-server-time",
@@ -13552,5 +12850,527 @@
     "sourceIndex": 751,
     "contentFile": "content/docs/chat/platform-api/v3/message/get-server-time.mdx",
     "navOrder": 751
+  },
+  {
+    "id": 715,
+    "path": "/docs/chat/platform-api/v3/group/create-group",
+    "relativePath": "chat/platform-api/v3/group/create-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/create-group",
+    "title": "创建群组",
+    "description": "OpenIM 群组 REST API：创建群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 752,
+    "contentFile": "content/docs/chat/platform-api/v3/group/create-group.mdx",
+    "navOrder": 752
+  },
+  {
+    "id": 716,
+    "path": "/docs/chat/platform-api/v3/group/set-group-info",
+    "relativePath": "chat/platform-api/v3/group/set-group-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info",
+    "title": "设置群组信息",
+    "description": "OpenIM 群组 REST API：设置群组信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 753,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info.mdx",
+    "navOrder": 753
+  },
+  {
+    "id": 717,
+    "path": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "relativePath": "chat/platform-api/v3/group/set-group-info-ex",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-info-ex",
+    "title": "设置群组信息扩展",
+    "description": "OpenIM 群组 REST API：设置群组信息扩展。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 754,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-info-ex.mdx",
+    "navOrder": 754
+  },
+  {
+    "id": 718,
+    "path": "/docs/chat/platform-api/v3/group/join-group",
+    "relativePath": "chat/platform-api/v3/group/join-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/join-group",
+    "title": "申请加入群组",
+    "description": "OpenIM 群组 REST API：申请加入群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 755,
+    "contentFile": "content/docs/chat/platform-api/v3/group/join-group.mdx",
+    "navOrder": 755
+  },
+  {
+    "id": 719,
+    "path": "/docs/chat/platform-api/v3/group/quit-group",
+    "relativePath": "chat/platform-api/v3/group/quit-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/quit-group",
+    "title": "退出群组",
+    "description": "OpenIM 群组 REST API：退出群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 756,
+    "contentFile": "content/docs/chat/platform-api/v3/group/quit-group.mdx",
+    "navOrder": 756
+  },
+  {
+    "id": 720,
+    "path": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "relativePath": "chat/platform-api/v3/group/respond-group-application",
+    "sourcePath": "/docs/chat/platform-api/v3/group/respond-group-application",
+    "title": "处理入群申请",
+    "description": "OpenIM 群组 REST API：处理入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 757,
+    "contentFile": "content/docs/chat/platform-api/v3/group/respond-group-application.mdx",
+    "navOrder": 757
+  },
+  {
+    "id": 721,
+    "path": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "relativePath": "chat/platform-api/v3/group/transfer-group-owner",
+    "sourcePath": "/docs/chat/platform-api/v3/group/transfer-group-owner",
+    "title": "转让群主",
+    "description": "OpenIM 群组 REST API：转让群主。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 758,
+    "contentFile": "content/docs/chat/platform-api/v3/group/transfer-group-owner.mdx",
+    "navOrder": 758
+  },
+  {
+    "id": 722,
+    "path": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "relativePath": "chat/platform-api/v3/group/list-received-group-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-received-group-applications",
+    "title": "查询收到的入群申请",
+    "description": "OpenIM 群组 REST API：查询收到的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 759,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-received-group-applications.mdx",
+    "navOrder": 759
+  },
+  {
+    "id": 723,
+    "path": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "relativePath": "chat/platform-api/v3/group/list-user-requested-group-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-user-requested-group-applications",
+    "title": "查询用户发起的入群申请",
+    "description": "OpenIM 群组 REST API：查询用户发起的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 760,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-user-requested-group-applications.mdx",
+    "navOrder": 760
+  },
+  {
+    "id": 724,
+    "path": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "relativePath": "chat/platform-api/v3/group/list-group-users-request-applications",
+    "sourcePath": "/docs/chat/platform-api/v3/group/list-group-users-request-applications",
+    "title": "查询群内多个用户的入群申请",
+    "description": "OpenIM 群组 REST API：查询群内多个用户的入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 761,
+    "contentFile": "content/docs/chat/platform-api/v3/group/list-group-users-request-applications.mdx",
+    "navOrder": 761
+  },
+  {
+    "id": 725,
+    "path": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "relativePath": "chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-specified-user-group-request-info",
+    "title": "查询指定用户入群申请",
+    "description": "OpenIM 群组 REST API：查询指定用户入群申请。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 762,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-specified-user-group-request-info.mdx",
+    "navOrder": 762
+  },
+  {
+    "id": 726,
+    "path": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "relativePath": "chat/platform-api/v3/group/get-groups-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups-info",
+    "title": "获取群组详情",
+    "description": "OpenIM 群组 REST API：获取群组详情。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 763,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups-info.mdx",
+    "navOrder": 763
+  },
+  {
+    "id": 727,
+    "path": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "relativePath": "chat/platform-api/v3/group/kick-group-members",
+    "sourcePath": "/docs/chat/platform-api/v3/group/kick-group-members",
+    "title": "移除群成员",
+    "description": "OpenIM 群组 REST API：移除群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 764,
+    "contentFile": "content/docs/chat/platform-api/v3/group/kick-group-members.mdx",
+    "navOrder": 764
+  },
+  {
+    "id": 728,
+    "path": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "relativePath": "chat/platform-api/v3/group/get-group-members-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-members-info",
+    "title": "获取指定群成员",
+    "description": "OpenIM 群组 REST API：获取指定群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 765,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-members-info.mdx",
+    "navOrder": 765
+  },
+  {
+    "id": 729,
+    "path": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "relativePath": "chat/platform-api/v3/group/get-group-member-list",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-list",
+    "title": "获取群成员列表",
+    "description": "OpenIM 群组 REST API：获取群成员列表。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 766,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-list.mdx",
+    "navOrder": 766
+  },
+  {
+    "id": 730,
+    "path": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "relativePath": "chat/platform-api/v3/group/invite-users-to-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/invite-users-to-group",
+    "title": "邀请用户进群",
+    "description": "OpenIM 群组 REST API：邀请用户进群。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 767,
+    "contentFile": "content/docs/chat/platform-api/v3/group/invite-users-to-group.mdx",
+    "navOrder": 767
+  },
+  {
+    "id": 731,
+    "path": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "relativePath": "chat/platform-api/v3/group/get-joined-group-list",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-joined-group-list",
+    "title": "获取已加入群组列表",
+    "description": "OpenIM 群组 REST API：获取已加入群组列表。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 768,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-joined-group-list.mdx",
+    "navOrder": 768
+  },
+  {
+    "id": 732,
+    "path": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "relativePath": "chat/platform-api/v3/group/dismiss-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/dismiss-group",
+    "title": "解散群组",
+    "description": "OpenIM 群组 REST API：解散群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 769,
+    "contentFile": "content/docs/chat/platform-api/v3/group/dismiss-group.mdx",
+    "navOrder": 769
+  },
+  {
+    "id": 733,
+    "path": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "relativePath": "chat/platform-api/v3/group/mute-group-member",
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group-member",
+    "title": "禁言群成员",
+    "description": "OpenIM 群组 REST API：禁言群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 770,
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group-member.mdx",
+    "navOrder": 770
+  },
+  {
+    "id": 734,
+    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "relativePath": "chat/platform-api/v3/group/cancel-mute-group-member",
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group-member",
+    "title": "取消禁言群成员",
+    "description": "OpenIM 群组 REST API：取消禁言群成员。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 771,
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group-member.mdx",
+    "navOrder": 771
+  },
+  {
+    "id": 735,
+    "path": "/docs/chat/platform-api/v3/group/mute-group",
+    "relativePath": "chat/platform-api/v3/group/mute-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/mute-group",
+    "title": "禁言群组",
+    "description": "OpenIM 群组 REST API：禁言群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 772,
+    "contentFile": "content/docs/chat/platform-api/v3/group/mute-group.mdx",
+    "navOrder": 772
+  },
+  {
+    "id": 736,
+    "path": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "relativePath": "chat/platform-api/v3/group/cancel-mute-group",
+    "sourcePath": "/docs/chat/platform-api/v3/group/cancel-mute-group",
+    "title": "取消群组禁言",
+    "description": "OpenIM 群组 REST API：取消群组禁言。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 773,
+    "contentFile": "content/docs/chat/platform-api/v3/group/cancel-mute-group.mdx",
+    "navOrder": 773
+  },
+  {
+    "id": 737,
+    "path": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "relativePath": "chat/platform-api/v3/group/set-group-member-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/set-group-member-info",
+    "title": "设置群成员信息",
+    "description": "OpenIM 群组 REST API：设置群成员信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 774,
+    "contentFile": "content/docs/chat/platform-api/v3/group/set-group-member-info.mdx",
+    "navOrder": 774
+  },
+  {
+    "id": 738,
+    "path": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "relativePath": "chat/platform-api/v3/group/get-group-abstract-info",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-abstract-info",
+    "title": "获取群组摘要信息",
+    "description": "OpenIM 群组 REST API：获取群组摘要信息。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 775,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-abstract-info.mdx",
+    "navOrder": 775
+  },
+  {
+    "id": 739,
+    "path": "/docs/chat/platform-api/v3/group/get-groups",
+    "relativePath": "chat/platform-api/v3/group/get-groups",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-groups",
+    "title": "分页查询群组",
+    "description": "OpenIM 群组 REST API：分页查询群组。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 776,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-groups.mdx",
+    "navOrder": 776
+  },
+  {
+    "id": 740,
+    "path": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "relativePath": "chat/platform-api/v3/group/get-group-member-user-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-member-user-ids",
+    "title": "获取群成员用户 ID",
+    "description": "OpenIM 群组 REST API：获取群成员用户 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 777,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-member-user-ids.mdx",
+    "navOrder": 777
+  },
+  {
+    "id": 741,
+    "path": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "relativePath": "chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-group-member-user-ids",
+    "title": "全量获取群成员用户 ID",
+    "description": "OpenIM 群组 REST API：全量获取群成员用户 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 778,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-group-member-user-ids.mdx",
+    "navOrder": 778
+  },
+  {
+    "id": 742,
+    "path": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "relativePath": "chat/platform-api/v3/group/get-full-join-group-ids",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-full-join-group-ids",
+    "title": "全量获取用户加入的群组 ID",
+    "description": "OpenIM 群组 REST API：全量获取用户加入的群组 ID。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 779,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-full-join-group-ids.mdx",
+    "navOrder": 779
+  },
+  {
+    "id": 743,
+    "path": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "relativePath": "chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "sourcePath": "/docs/chat/platform-api/v3/group/get-group-application-unhandled-count",
+    "title": "获取未处理入群申请数量",
+    "description": "OpenIM 群组 REST API：获取未处理入群申请数量。",
+    "product": "platform-api",
+    "version": "v3",
+    "platform": null,
+    "contextKey": "chat/platform-api/v3",
+    "contextTitle": "Platform API",
+    "template": "api",
+    "status": "published",
+    "sourceIndex": 780,
+    "contentFile": "content/docs/chat/platform-api/v3/group/get-group-application-unhandled-count.mdx",
+    "navOrder": 780
   }
 ]
