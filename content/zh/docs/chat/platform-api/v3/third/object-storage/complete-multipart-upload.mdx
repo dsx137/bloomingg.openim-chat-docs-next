@@ -1,0 +1,128 @@
+---
+title: "完成分片上传"
+description: "OpenIM 第三方服务 REST API：完成分片上传。"
+sourcePath: "/docs/chat/platform-api/v3/third/object-storage/complete-multipart-upload"
+---
+
+使用 **完成分片上传** 从可信后端调用 OpenIM 第三方服务 REST 接口。在所有分片上传到对象存储后，确认并生成 OpenIM 可访问的对象 URL。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/object/complete_multipart_upload
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/object/complete_multipart_upload" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --header "X-Request-Api: ${API_ADDRESS}" \
+  --data-raw '{
+  "uploadID": "upload_id_sample",
+  "parts": [
+    "etag_part_1",
+    "etag_part_2"
+  ],
+  "name": "attachments/file.zip",
+  "contentType": "application/zip",
+  "cause": "message"
+}'
+```
+
+> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| token | 是 | string | APP 管理员 Token 或具备对应权限的用户 Token；仅保存在可信后端服务中。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+| X-Request-Api | 否 | string | 生成对象访问 URL 时使用的 API 外部地址；不传时服务端根据当前请求地址推导。 |
+
+## 请求体
+
+```json
+{
+  "uploadID": "upload_id_sample",
+  "parts": [
+    "etag_part_1",
+    "etag_part_2"
+  ],
+  "name": "attachments/file.zip",
+  "contentType": "application/zip",
+  "cause": "message"
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| uploadID | 是 | string | 初始化分片上传返回的上传任务 ID。 |
+| parts | 是 | array | 对象存储返回的分片完成标识列表。 |
+| name | 是 | string | 对象名称，需与初始化阶段保持一致。 |
+| contentType | 否 | string | 文件 MIME 类型。 |
+| cause | 否 | string | 业务用途或对象分组。 |
+| urlPrefix | 否 | string | 服务端会根据 `X-Request-Api` 或当前请求地址自动补齐，通常不需要在请求体中传。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "url": "https://api.example.com/object/attachments/file.zip"
+  }
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+| data | object | 接口返回数据。 |
+| data.url | string | 完成上传后 OpenIM 返回的对象访问 URL。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 完成对象存储分片上传，并写入 OpenIM 对象记录。
+- `uploadID`、`parts` 和 `name` 必填。
+- 必须先完成所有分片上传，再调用此接口。
+- 所有数组型请求参数建议控制在 1000 个元素以内。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [认证接口](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

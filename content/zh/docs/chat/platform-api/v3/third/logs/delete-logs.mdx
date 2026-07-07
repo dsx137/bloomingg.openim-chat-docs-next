@@ -1,0 +1,106 @@
+---
+title: "删除日志记录"
+description: "OpenIM 第三方服务 REST API：删除日志记录。"
+sourcePath: "/docs/chat/platform-api/v3/third/logs/delete-logs"
+---
+
+使用 **删除日志记录** 从可信后端调用 OpenIM 第三方服务 REST 接口。按日志 ID 删除后台保存的日志索引记录。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/third/logs/delete
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/third/logs/delete" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "logIDs": [
+    "1234567890"
+  ]
+}'
+```
+
+> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| token | 是 | string | APP 管理员 Token 或具备对应权限的用户 Token；仅保存在可信后端服务中。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+
+## 请求体
+
+```json
+{
+  "logIDs": [
+    "1234567890"
+  ]
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| logIDs | 是 | array | 需要删除的日志 ID 列表。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 删除指定日志索引记录。
+- 必须使用 APP 管理员 Token 调用。
+- `logIDs` 必填且不能为空。
+- 所有数组型请求参数建议控制在 1000 个元素以内。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [认证接口](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

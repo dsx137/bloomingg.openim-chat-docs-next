@@ -1,0 +1,55 @@
+---
+title: "跳转监控面板"
+description: "OpenIM 第三方服务 REST API：跳转监控面板。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/third/monitoring/prometheus"
+---
+
+使用 **跳转监控面板** 调用 OpenIM 第三方服务 GET 接口。重定向到服务端配置的 Grafana 监控地址，用于查看 OpenIM 监控面板。
+
+## HTTP 请求
+
+```bash
+GET {API_ADDRESS}/third/prometheus
+```
+
+### 请求示例
+
+```bash
+curl --request GET "${API_ADDRESS}/third/prometheus"
+```
+
+## 参数
+
+此接口不使用 JSON 请求体。
+
+此接口不需要请求体参数。
+
+## 响应
+
+成功时返回 `302 Found`，并在 `Location` Header 中写入服务端配置项 `API.Prometheus.GrafanaURL`。
+
+| Header | 类型 | 说明 |
+| ------ | ---- | ---- |
+| Location | string | 重定向目标地址。 |
+
+### 错误
+
+如果请求失败，服务端可能返回 `400 Bad Request`、`404 Not Found` 或 `500 Internal Server Error`，响应体为错误文本。
+
+## 权限和限制
+
+- 只读跳转，不改变业务数据。
+- 此接口由 API 服务直接返回 `302 Found`。
+- 如果 Grafana 地址未配置或不可访问，需要先检查服务端监控配置。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [获取对象访问地址](/docs/chat/platform-api/v3/third/object-storage/access-url)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

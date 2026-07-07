@@ -1,0 +1,69 @@
+---
+title: "对象访问重定向"
+description: "OpenIM 第三方服务 REST API：对象访问重定向。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/third/object-storage/object-redirect"
+---
+
+使用 **对象访问重定向** 调用 OpenIM 第三方服务 GET 接口。按对象名称获取临时访问地址，并通过 `302 Found` 重定向到对象存储 URL。
+
+## HTTP 请求
+
+```bash
+GET {API_ADDRESS}/object/{name}
+```
+
+### 请求示例
+
+```bash
+curl --request GET "${API_ADDRESS}/object/attachments/file.zip?operationID=${OPERATION_ID}"
+```
+
+## 参数
+
+此接口不使用 JSON 请求体。
+
+### 路径变量
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| name | 是 | string | 对象名称；路径中的 `{name}` 会作为对象名传给 `/object/access_url`。 |
+
+### Query 参数
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 否 | string | 链路追踪 ID；不传时服务端会生成随机值。 |
+| type | 否 | string | 处理类型；当前支持空值或 `image`。 |
+| format | 否 | string | 图片输出格式，仅 `type=image` 时使用。 |
+| width | 否 | string | 图片宽度，仅 `type=image` 时使用。 |
+| height | 否 | string | 图片高度，仅 `type=image` 时使用。 |
+
+## 响应
+
+成功时返回 `302 Found`，并在 `Location` Header 中写入对象存储临时访问 URL。
+
+| Header | 类型 | 说明 |
+| ------ | ---- | ---- |
+| Location | string | 重定向目标地址。 |
+
+### 错误
+
+如果请求失败，服务端可能返回 `400 Bad Request`、`404 Not Found` 或 `500 Internal Server Error`，响应体为错误文本。
+
+## 权限和限制
+
+- 只读生成访问 URL 并重定向，不修改对象记录。
+- `name` 必须存在且不能为空。
+- `type` 只能为空或 `image`。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [获取对象访问地址](/docs/chat/platform-api/v3/third/object-storage/access-url)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

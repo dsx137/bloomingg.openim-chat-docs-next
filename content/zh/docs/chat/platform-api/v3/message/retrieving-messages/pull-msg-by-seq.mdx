@@ -1,0 +1,201 @@
+---
+title: "按序列号拉取消息"
+description: "OpenIM 消息 REST API：按序列号拉取消息。"
+sourcePath: "/docs/chat/platform-api/v3/message/retrieving-messages/pull-msg-by-seq"
+---
+
+使用 **按序列号拉取消息** 从可信后端调用 OpenIM 消息 REST 接口。按会话 Seq 范围拉取用户可见的历史消息和通知消息。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/msg/pull_msg_by_seq
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/msg/pull_msg_by_seq" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "userID": "user_001",
+  "seqRanges": [
+    {
+      "conversationID": "si_user_001_user_002",
+      "begin": 1,
+      "end": 128,
+      "num": 20
+    }
+  ],
+  "order": 0
+}'
+```
+
+> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。普通用户消息优先由客户端 SDK 按登录用户身份发送。
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| token | 是 | string | APP 管理员 Token 或具备该用户访问权限的用户 Token；仅保存在可信后端服务中。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+
+## 请求体
+
+```json
+{
+  "userID": "user_001",
+  "seqRanges": [
+    {
+      "conversationID": "si_user_001_user_002",
+      "begin": 1,
+      "end": 128,
+      "num": 20
+    }
+  ],
+  "order": 0
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userID | 是 | string | 拉取消息的用户 ID。 |
+| seqRanges | 是 | array | 要拉取的会话 Seq 范围列表。 |
+| seqRanges[].conversationID | 是 | string | 会话 ID。 |
+| seqRanges[].begin | 是 | int | 起始 Seq。 |
+| seqRanges[].end | 是 | int | 结束 Seq。 |
+| seqRanges[].num | 否 | int | 最多拉取条数。 |
+| order | 否 | int | 拉取顺序：0 升序，1 降序。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "msgs": {
+      "si_user_001_user_002": {
+        "Msgs": [
+          {
+            "sendID": "user_001",
+            "recvID": "user_002",
+            "groupID": "",
+            "clientMsgID": "client_msg_001",
+            "serverMsgID": "server_msg_001",
+            "senderPlatformID": 2,
+            "senderNickname": "Tom",
+            "senderFaceURL": "https://example.com/avatar-tom.png",
+            "sessionType": 1,
+            "msgFrom": 100,
+            "contentType": 101,
+            "content": "eyJjb250ZW50IjoiaGVsbG8ifQ==",
+            "seq": 128,
+            "sendTime": 1719800000000,
+            "createTime": 1719800000000,
+            "status": 2,
+            "isRead": false,
+            "options": {
+              "history": true,
+              "persistent": true,
+              "offlinePush": true
+            },
+            "offlinePushInfo": {
+              "title": "OpenIM 消息",
+              "desc": "你收到一条新消息",
+              "ex": "",
+              "iOSPushSound": "default",
+              "iOSBadgeCount": true,
+              "signalInfo": ""
+            },
+            "atUserIDList": [],
+            "attachedInfo": "",
+            "ex": ""
+          }
+        ],
+        "isEnd": true,
+        "endSeq": 128
+      }
+    },
+    "notificationMsgs": {}
+  }
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+| data | object | 接口返回数据。 |
+| data.msgs | object | 普通会话消息映射，key 为会话 ID。 |
+| data.msgs.<conversationID>.Msgs | array | 消息列表。 |
+| data.msgs.<conversationID>.Msgs[].sendID | string | 发送者用户 ID。 |
+| data.msgs.<conversationID>.Msgs[].recvID | string | 接收者用户 ID。 |
+| data.msgs.<conversationID>.Msgs[].groupID | string | 群组 ID。 |
+| data.msgs.<conversationID>.Msgs[].clientMsgID | string | 客户端消息 ID。 |
+| data.msgs.<conversationID>.Msgs[].serverMsgID | string | 服务端消息 ID。 |
+| data.msgs.<conversationID>.Msgs[].senderPlatformID | int | 发送者终端平台 ID。 |
+| data.msgs.<conversationID>.Msgs[].senderNickname | string | 发送者昵称。 |
+| data.msgs.<conversationID>.Msgs[].senderFaceURL | string | 发送者头像 URL。 |
+| data.msgs.<conversationID>.Msgs[].sessionType | int | 会话类型。 |
+| data.msgs.<conversationID>.Msgs[].msgFrom | int | 消息来源。 |
+| data.msgs.<conversationID>.Msgs[].contentType | int | 消息内容类型。 |
+| data.msgs.<conversationID>.Msgs[].content | string | 消息内容；`bytes` 字段在 JSON 中通常为 base64 字符串。 |
+| data.msgs.<conversationID>.Msgs[].seq | int | 消息 Seq。 |
+| data.msgs.<conversationID>.Msgs[].sendTime | int | 发送时间，Unix 毫秒时间戳。 |
+| data.msgs.<conversationID>.Msgs[].createTime | int | 服务端创建时间，Unix 毫秒时间戳。 |
+| data.msgs.<conversationID>.Msgs[].status | int | 消息状态。 |
+| data.msgs.<conversationID>.Msgs[].isRead | boolean | 是否已读。 |
+| data.msgs.<conversationID>.Msgs[].options | object | 消息选项。 |
+| data.msgs.<conversationID>.Msgs[].offlinePushInfo | object | 离线推送信息。 |
+| data.msgs.<conversationID>.Msgs[].atUserIDList | array | @ 用户 ID 列表。 |
+| data.msgs.<conversationID>.Msgs[].attachedInfo | string | 附加信息。 |
+| data.msgs.<conversationID>.Msgs[].ex | string | 扩展字段。 |
+| data.msgs.<conversationID>.isEnd | boolean | 当前范围是否已拉到边界。 |
+| data.msgs.<conversationID>.endSeq | int | 本次返回的边界 Seq。 |
+| data.notificationMsgs | object | 通知会话消息映射。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或消息内容结构不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 只读拉取，不改变消息状态。
+- `userID` 和 `seqRanges` 必填。
+- `seqRanges[].begin` 不能大于 `seqRanges[].end`。
+- 所有数组型请求参数建议控制在 1000 个元素以内。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [消息概览](/docs/chat/platform-api/v3/message/overview)
+- [会话列表](/docs/chat/platform-api/v3/conversation/listing-conversations/get-conversations)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

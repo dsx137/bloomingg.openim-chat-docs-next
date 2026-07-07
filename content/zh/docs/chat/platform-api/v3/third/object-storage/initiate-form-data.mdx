@@ -1,0 +1,155 @@
+---
+title: "初始化表单直传"
+description: "OpenIM 第三方服务 REST API：初始化表单直传。"
+sourcePath: "/docs/chat/platform-api/v3/third/object-storage/initiate-form-data"
+---
+
+使用 **初始化表单直传** 从可信后端调用 OpenIM 第三方服务 REST 接口。初始化表单直传任务，返回第三方存储直传所需的 URL、Header、表单字段和成功状态码。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/object/initiate_form_data
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/object/initiate_form_data" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "name": "avatar.png",
+  "size": 204800,
+  "contentType": "image/png",
+  "group": "avatar",
+  "millisecond": 600000,
+  "absolute": false
+}'
+```
+
+> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| token | 是 | string | APP 管理员 Token 或具备对应权限的用户 Token；仅保存在可信后端服务中。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+
+## 请求体
+
+```json
+{
+  "name": "avatar.png",
+  "size": 204800,
+  "contentType": "image/png",
+  "group": "avatar",
+  "millisecond": 600000,
+  "absolute": false
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| name | 是 | string | 对象名称，通常为文件名或业务路径。 |
+| size | 是 | int | 文件大小，单位字节。 |
+| contentType | 是 | string | 文件 MIME 类型。 |
+| group | 否 | string | 文件分组标识，用于存储端区分业务目录。 |
+| millisecond | 否 | int | 上传凭证有效时长，单位毫秒；管理员调用时可指定，不传默认 10 分钟。 |
+| absolute | 否 | boolean | 管理员调用时是否按 `name` 作为绝对对象 key。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "id": "base64-form-data-id",
+    "url": "https://storage.example.com/form-upload",
+    "file": "file",
+    "header": [
+      {
+        "key": "Content-Type",
+        "values": [
+          "multipart/form-data"
+        ]
+      }
+    ],
+    "formData": {
+      "policy": "BASE64_POLICY",
+      "signature": "SIGN_VALUE",
+      "key": "tmp/avatar.png"
+    },
+    "expires": 1719800600000,
+    "successCodes": [
+      200,
+      204
+    ]
+  }
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+| data | object | 接口返回数据。 |
+| data.id | string | 表单直传任务 ID，完成上传确认时使用。 |
+| data.url | string | 第三方存储直传地址。 |
+| data.file | string | 文件内容在 multipart/form-data 中使用的字段名。 |
+| data.header | array | 直传请求需要携带的 Header。 |
+| data.header[].key | string | Header 或 query 参数名。 |
+| data.header[].values | array | 该参数对应的一个或多个字符串值。 |
+| data.formData | object | 直传请求需要追加到表单中的字段集合。 |
+| data.expires | int | 凭证过期时间，Unix 毫秒时间戳。 |
+| data.successCodes | array | 直传成功时可接受的 HTTP 状态码。 |
+
+## 调用说明
+
+- 构造 `multipart/form-data` 请求时，需要把 `formData` 中的字段原样写入表单，并将真实文件内容放入返回的 `file` 字段。
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 创建一次表单直传凭证；文件内容仍需调用方直接上传到返回的第三方存储地址。
+- `name`、`size` 和 `contentType` 必填。
+- `size` 必须大于 0。
+- 直传成功后必须调用完成接口生成业务可访问 URL。
+- 所有数组型请求参数建议控制在 1000 个元素以内。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [认证接口](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [错误码](/docs/chat/platform-api/v3/error-codes)
