@@ -4882,7 +4882,7 @@
   {
     "sourcePath": "/docs/chat/platform-api/v3/overview",
     "openimPath": "/docs/chat/platform-api/v3/overview",
-    "title": "OpenIM Platform API",
+    "title": "概述",
     "context": "chat/platform-api/v3",
     "template": "overview",
     "contentFile": "content/docs/chat/platform-api/v3/overview.mdx"

@@ -13,7 +13,7 @@
         {
           "id": "overview",
           "segment": "overview",
-          "title": "OpenIM Platform API",
+          "title": "概述",
           "href": "/docs/chat/platform-api/v3/overview",
           "type": "page",
           "children": [],
