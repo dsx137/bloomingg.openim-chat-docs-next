@@ -47,10 +47,11 @@ function SidebarNode({
 
   if (node.children.length === 0) {
     if (!node.href) return null;
+    const isNestedOverview = node.segment === 'overview' && node.id.includes('/');
     return (
       <Link
         aria-current={active ? 'page' : undefined}
-        className={`sidebar-link ${active ? 'is-active' : ''}`}
+        className={`sidebar-link ${isNestedOverview ? 'is-nested-overview' : ''} ${active ? 'is-active' : ''}`}
         href={toLocalizedPath(node.href, locale)}
         style={{ '--nav-depth': depth } as CSSProperties}
       >

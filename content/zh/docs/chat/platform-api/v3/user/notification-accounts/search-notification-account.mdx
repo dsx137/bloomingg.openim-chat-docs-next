@@ -1,10 +1,18 @@
 ---
-title: "搜索系统通知账号"
-description: "OpenIM 用户 REST API：搜索系统通知账号。"
+title: "搜索通知账号"
+description: "OpenIM Platform API 中文参考：搜索通知账号。说明如何按关键字和级别分页查询通知账号。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account"
 ---
 
-使用 **搜索系统通知账号** 从可信后端调用 OpenIM 用户 REST 接口。分页搜索系统通知账号或机器人账号，可按关键字和账号级别过滤。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+使用 **搜索通知账号** 从可信后端分页查询可用于系统通知或业务通知的账号。传入 `keyword` 时，服务端会优先按用户 ID 查找，再按昵称查找；不传 `keyword` 时返回通知账号列表。
+
+---
 
 ## HTTP 请求
 
@@ -14,41 +22,44 @@ POST {API_ADDRESS}/user/search_notification_account
 
 ### 请求示例
 
-```bash
+:::code-tabs
+```bash title="cURL"
 curl --request POST "${API_ADDRESS}/user/search_notification_account" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: ${OPERATION_ID}" \
+  --header "operationID: 1646445464564" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
-  "keyword": "",
-  "appManagerLevel": 3,
+  "keyword": "notice",
+  "appManagerLevel": 60,
   "pagination": {
     "pageNumber": 1,
     "showNumber": 20
   }
 }'
 ```
+:::
 
-> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+> 安全提示：通知账号属于服务端能力边界，建议只在后台管理系统中展示和维护。
+
+---
 
 ## 参数
 
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递搜索条件和分页参数。
 
 ### 请求头
 
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
 
-## 请求体
+### 请求体参数
 
 ```json
 {
-  "keyword": "",
-  "appManagerLevel": 3,
+  "keyword": "notice",
+  "appManagerLevel": 60,
   "pagination": {
     "pageNumber": 1,
     "showNumber": 20
@@ -57,12 +68,14 @@ curl --request POST "${API_ADDRESS}/user/search_notification_account" \
 ```
 
 | 参数名 | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| keyword | 否 | string | 搜索关键字，可匹配用户 ID 或名称。 |
-| appManagerLevel | 否 | int | 系统账号管理级别过滤条件。 |
-| pagination | 是 | object | 分页参数。 |
-| pagination.pageNumber | 是 | int | 页码，从 1 开始。 |
-| pagination.showNumber | 是 | int | 每页数量，必须大于 0。 |
+| :--- | :--- | :--- | :--- |
+| keyword | 选填 | string | 搜索关键字。服务端会优先按用户 ID 查找，再按昵称查找。 |
+| appManagerLevel | 选填 | int | 通知账号级别筛选字段。 |
+| pagination | 必填 | object | 分页参数结构体。 |
+| pagination.pageNumber | 必填 | int | 当前页码，从 1 开始。 |
+| pagination.showNumber | 必填 | int | 当前页请求数量。 |
+
+---
 
 ## 响应
 
@@ -77,30 +90,35 @@ curl --request POST "${API_ADDRESS}/user/search_notification_account" \
     "total": 1,
     "notificationAccounts": [
       {
-        "userID": "notification_001",
-        "faceURL": "https://example.com/notification.png",
+        "userID": "notice_001",
+        "faceURL": "https://cdn.example.com/avatar/notice.png",
         "nickName": "系统通知",
-        "appMangerLevel": 3
+        "appMangerLevel": 60
       }
     ]
   }
 }
 ```
 
-### 响应参数
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| total | int | 匹配到的通知账号总数。 |
+| notificationAccounts | array | 当前页通知账号列表。 |
+
+#### notificationAccounts[] 属性
 
 | 参数名 | 类型 | 说明 |
 | --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
-| data | object | 接口返回数据。 |
-| data.total | int | 系统通知账号总数。 |
-| data.notificationAccounts | array | 系统通知账号列表。 |
-| data.notificationAccounts[].userID | string | 系统通知账号 ID。 |
-| data.notificationAccounts[].faceURL | string | 系统通知账号头像 URL。 |
-| data.notificationAccounts[].nickName | string | 系统通知账号名称。 |
-| data.notificationAccounts[].appMangerLevel | int | 系统账号管理级别。 |
+| notificationAccounts[].userID | string | 通知账号 ID。 |
+| notificationAccounts[].faceURL | string | 通知账号头像地址。 |
+| notificationAccounts[].nickName | string | 通知账号昵称。 |
+| notificationAccounts[].appMangerLevel | int | 应用管理级别。 |
 
 ### 错误
 
@@ -108,28 +126,21 @@ curl --request POST "${API_ADDRESS}/user/search_notification_account" \
 
 ```json
 {
-  "errCode": 1004,
-  "errMsg": "RecordNotFoundError",
-  "errDlt": ": [1004]RecordNotFoundError"
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "pageNumber is invalid"
 }
 ```
 
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
 | 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
-
-## 权限和限制
-
-- 只读查询，不改变系统通知账号资料。
-- `pagination` 必填。
-- `pagination.pageNumber` 必须大于等于 1。
-- 所有数组型请求参数建议控制在 1000 个元素以内。
-
-## 相关页面
-
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [获取指定用户信息](/docs/chat/platform-api/v3/user/listing-users/get-users-info)
-- [好友管理](/docs/chat/platform-api/v3/friend/listing-friends/list-friends)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+| --- | --- | --- |
+| 分页参数无效 | `pagination` 缺失，或 `pageNumber` 小于 1。 | 传入完整分页对象，并从第 1 页开始。 |
+| 查询结果为空 | 关键字未命中用户 ID 或昵称，或账号不满足通知账号级别。 | 调整关键字，或先确认账号是否已创建为通知账号。 |

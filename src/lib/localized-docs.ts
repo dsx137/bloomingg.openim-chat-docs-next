@@ -64,7 +64,7 @@ export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
   if (isPlatformApiRootOverview) return '概述';
   if (isNestedOverview && isPlatformApiNode) return node.title;
   if (locale !== 'zh') return isNestedOverview ? 'Overview' : node.title;
-  if (isNestedOverview) return '概览';
+  if (isNestedOverview) return '概述';
   if (node.href) return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
   const label =
     platformApiZh.navigationLabels[node.segment] ??

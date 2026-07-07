@@ -1,10 +1,18 @@
 ---
-title: "获取全部用户 ID"
-description: "OpenIM 用户 REST API：获取全部用户 ID。"
+title: "查询全部用户 ID"
+description: "OpenIM Platform API 中文参考：查询全部用户 ID。说明请求结构、分页方式和响应字段。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids"
 ---
 
-使用 **获取全部用户 ID** 从可信后端调用 OpenIM 用户 REST 接口。分页获取 OpenIM 中已注册的用户 ID 列表。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+使用 **查询全部用户 ID** 从可信后端分页读取 OpenIM 已注册用户的 ID 列表。这个接口只返回 `userIDs`，适合做批处理、数据同步或按用户 ID 继续调用其他接口。
+
+---
 
 ## HTTP 请求
 
@@ -14,10 +22,11 @@ POST {API_ADDRESS}/user/get_all_users_uid
 
 ### 请求示例
 
-```bash
+:::code-tabs
+```bash title="cURL"
 curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: ${OPERATION_ID}" \
+  --header "operationID: 1646445464564" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "pagination": {
@@ -26,22 +35,24 @@ curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
   }
 }'
 ```
+:::
 
-> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+---
 
 ## 参数
 
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递分页参数。
 
 ### 请求头
 
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
 
-## 请求体
+### 请求体参数
 
 ```json
 {
@@ -53,10 +64,12 @@ curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
 ```
 
 | 参数名 | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| pagination | 是 | object | 分页参数。 |
-| pagination.pageNumber | 是 | int | 页码，从 1 开始。 |
-| pagination.showNumber | 是 | int | 每页数量，必须大于 0。 |
+| :--- | :--- | :--- | :--- |
+| pagination | 必填 | object | 分页参数结构体。 |
+| pagination.pageNumber | 必填 | int | 当前页码，从 1 开始。 |
+| pagination.showNumber | 必填 | int | 当前页请求数量。 |
+
+---
 
 ## 响应
 
@@ -69,24 +82,25 @@ curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
   "errDlt": "",
   "data": {
     "total": 2,
-    "userIDs": [
-      "user_001",
-      "user_002"
-    ]
+    "userIDs": ["user_001", "user_002"]
   }
 }
 ```
 
-### 响应参数
+#### 响应属性列表
 
 | 参数名 | 类型 | 说明 |
-| --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
-| data | object | 接口返回数据。 |
-| data.total | int | 用户总数。 |
-| data.userIDs | array | 用户 ID 列表。 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| total | int | 用户总数。 |
+| userIDs | array | 当前页返回的用户 ID 列表。 |
+
+### 分页读取建议
+
+从 `pagination.pageNumber = 1` 开始读取，并根据 `data.total` 和 `pagination.showNumber` 计算是否还有下一页。需要用户资料时，再用返回的 `userIDs` 调用[获取用户](/docs/chat/platform-api/v3/user/listing-users/get-a-user)。
 
 ### 错误
 
@@ -94,28 +108,21 @@ curl --request POST "${API_ADDRESS}/user/get_all_users_uid" \
 
 ```json
 {
-  "errCode": 1004,
-  "errMsg": "RecordNotFoundError",
-  "errDlt": ": [1004]RecordNotFoundError"
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "pageNumber is invalid"
 }
 ```
 
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
 | 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
-
-## 权限和限制
-
-- 只读查询，不改变用户资料。
-- `pagination` 必填。
-- `pagination.pageNumber` 必须大于等于 1。
-- 所有数组型请求参数建议控制在 1000 个元素以内。
-
-## 相关页面
-
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [获取指定用户信息](/docs/chat/platform-api/v3/user/listing-users/get-users-info)
-- [好友管理](/docs/chat/platform-api/v3/friend/listing-friends/list-friends)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+| --- | --- | --- |
+| 分页参数无效 | `pagination` 缺失，或 `pageNumber` 小于 1。 | 传入完整分页对象，并从第 1 页开始。 |
+| 鉴权失败 | `token` 缺失、过期，或不是管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |

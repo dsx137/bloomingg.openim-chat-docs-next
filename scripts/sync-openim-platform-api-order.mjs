@@ -16,13 +16,14 @@ const structurePath = resolve(root, 'data/structure/chat-pages.json');
 const desiredPlatformOrder = [
   'overview',
   'prepare-to-use-api',
-  'user',
   'auth',
-  'friend',
+  'user',
+  'relation',
   'group',
   'conversation',
   'message',
   'third',
+  'migration-to-openim',
 ];
 
 const removedPlatformRoots = [
@@ -31,7 +32,7 @@ const removedPlatformRoots = [
   'moderation',
   'user/managing-session-tokens',
   'message/messaging-basics',
-  'relation',
+  'friend',
 ];
 const removedRoutePrefixes = removedPlatformRoots.map((segment) => `${localRoot}/${segment}`);
 const removedPlatformPages = [
@@ -43,7 +44,7 @@ const removedPlatformPages = [
 const moduleOverviews = [
   {
     id: 'user',
-    title: '用户概览',
+    title: '概述',
     navLabel: '用户',
     description:
       'OpenIM Platform API 用户模块概览，覆盖用户注册、资料维护、在线状态、订阅状态和通知账号。',
@@ -70,7 +71,7 @@ const moduleOverviews = [
   },
   {
     id: 'auth',
-    title: '认证概览',
+    title: '概述',
     navLabel: '认证',
     description: 'OpenIM Platform API 认证模块概览，覆盖管理员 Token、用户 Token、Token 解析和强制下线。',
     intro:
@@ -93,10 +94,10 @@ const moduleOverviews = [
     ],
   },
   {
-    id: 'friend',
-    title: '好友概览',
-    navLabel: '好友',
-    description: 'OpenIM Platform API 好友模块概览，覆盖好友关系、好友申请、黑名单和好友资料维护。',
+    id: 'relation',
+    title: '概述',
+    navLabel: '关系',
+    description: 'OpenIM Platform API 关系模块概览，覆盖好友申请、好友列表、好友关系管理和黑名单。',
     intro:
       '好友模块用于维护用户之间的好友关系、好友申请流程和黑名单数据。所有接口都应由可信后端根据业务规则调用。',
     capabilities: [
@@ -120,7 +121,7 @@ const moduleOverviews = [
   },
   {
     id: 'group',
-    title: '群组概览',
+    title: '概述',
     navLabel: '群组',
     description: 'OpenIM Platform API 群组模块概览，覆盖建群、入群申请、成员管理、禁言和群资料维护。',
     intro:
@@ -146,7 +147,7 @@ const moduleOverviews = [
   },
   {
     id: 'conversation',
-    title: '会话概览',
+    title: '概述',
     navLabel: '会话',
     description: 'OpenIM Platform API 会话模块概览，覆盖会话读取、批量设置、置顶、免打扰和离线推送用户。',
     intro:
@@ -172,7 +173,7 @@ const moduleOverviews = [
   },
   {
     id: 'message',
-    title: '消息概览',
+    title: '概述',
     navLabel: '消息',
     description: 'OpenIM Platform API 消息模块概览，覆盖后端发送消息、系统通知、消息查询、已读标记和消息删除。',
     intro:
@@ -198,7 +199,7 @@ const moduleOverviews = [
   },
   {
     id: 'third',
-    title: '第三方服务概览',
+    title: '概述',
     navLabel: '第三方服务',
     description: 'OpenIM Platform API 第三方服务模块概览，覆盖监控、FCM、应用角标、日志和对象存储。',
     intro:
@@ -227,11 +228,12 @@ const moduleOverviews = [
 const platformCategoryLabels = {
   user: '用户',
   auth: '认证',
-  friend: '好友',
+  relation: '关系',
   group: '群组',
   conversation: '会话',
   message: '消息',
   third: '第三方服务',
+  'migration-to-openim': '迁移到 OpenIM',
   'creating-users': '创建用户',
   'listing-users': '查询用户',
   'managing-users': '管理用户',
@@ -272,12 +274,12 @@ const childOrderByModule = {
     'user/notification-accounts',
   ],
   auth: ['auth/overview', 'auth/tokens', 'auth/sessions'],
-  friend: [
-    'friend/overview',
-    'friend/managing-friends',
-    'friend/managing-friend-requests',
-    'friend/listing-friends',
-    'friend/blacklist',
+  relation: [
+    'relation/overview',
+    'relation/managing-friend-requests',
+    'relation/listing-friends',
+    'relation/managing-friends',
+    'relation/blacklist',
   ],
   group: [
     'group/overview',

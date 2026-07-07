@@ -935,10 +935,41 @@ select {
   color: var(--text-strong);
 }
 
+.sidebar-tree > .sidebar-link {
+  min-height: 33px;
+  padding: 5px 7px 5px 20px;
+  color: var(--text);
+  font-weight: 680;
+  line-height: 1.35;
+}
+
+.sidebar-tree > .sidebar-link:hover {
+  color: var(--text-strong);
+}
+
+.sidebar-link.is-nested-overview {
+  color: var(--text);
+  font-weight: 680;
+}
+
+.sidebar-link.is-nested-overview:hover {
+  color: var(--text-strong);
+}
+
 .sidebar-link.is-active {
   background: var(--accent-soft);
   color: var(--accent-strong);
   font-weight: 680;
+}
+
+.sidebar-tree > .sidebar-link.is-active {
+  background: var(--surface-soft);
+  color: var(--text-strong);
+}
+
+.sidebar-link.is-nested-overview.is-active {
+  background: var(--surface-soft);
+  color: var(--text-strong);
 }
 
 .article-header {

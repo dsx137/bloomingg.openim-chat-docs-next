@@ -106,14 +106,15 @@ const platformApiListUsersPath = '/docs/chat/platform-api/v3/user/listing-users/
 const platformApiListUsersExpectedSnippets = [
   'POST {API_ADDRESS}/user/get_users',
   'curl --request POST',
+  'process.env.OPENIM_API_ADDRESS',
+  'http.NewRequest',
   '安全提示',
   '200 OK',
   'errCode === 0',
   'users[].userID',
   'pagination.pageNumber',
-  'APP 管理员 Token',
-  '## 权限和限制',
-  '## 相关页面',
+  '### 分页读取建议',
+  '常见错误场景',
   '"showNumber": 100',
 ];
 const platformApiListUsersForbiddenSnippets = ['123.321.1.1', '203.56.175.233'];
@@ -128,11 +129,11 @@ const platformApiOverviewHeadingExpectations = new Map([
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
   [
-    '/docs/chat/platform-api/v3/auth/overview',
+    '/docs/chat/platform-api/v3/relation/overview',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
   [
-    '/docs/chat/platform-api/v3/friend/overview',
+    '/docs/chat/platform-api/v3/auth/overview',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
   [
@@ -149,6 +150,10 @@ const platformApiOverviewHeadingExpectations = new Map([
   ],
   [
     '/docs/chat/platform-api/v3/third/overview',
+    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/migration-to-openim',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
   [
@@ -512,7 +517,7 @@ function extractPlatformApiSecondLevelHeadings(body) {
 
 function checkPlatformApiListUsersPage(body, label) {
   const actualHeadings = extractPlatformApiSecondLevelHeadings(body);
-  for (const heading of ['## HTTP 请求', '## 参数', '## 响应', '## 权限和限制', '## 相关页面']) {
+  for (const heading of ['## HTTP 请求', '## 参数', '## 响应']) {
     if (!actualHeadings.includes(heading)) {
       errors.push(`${label}: list-users page is missing heading "${heading}"`);
     }

@@ -111,6 +111,11 @@
     "monitoring": "监控",
     "push": "推送辅助",
     "logs": "日志",
-    "object-storage": "对象存储"
+    "object-storage": "对象存储",
+    "channel": "频道",
+    "migration": "迁移其他项目到 OpenIM",
+    "moderation": "内容审核",
+    "relation": "关系",
+    "migration-to-openim": "迁移到 OpenIM"
   }
 }

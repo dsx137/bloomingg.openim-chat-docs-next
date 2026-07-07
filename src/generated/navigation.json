@@ -29,219 +29,6 @@
           "minIndex": 612
         },
         {
-          "id": "user",
-          "segment": "user",
-          "title": "用户",
-          "href": null,
-          "type": "folder",
-          "children": [
-            {
-              "id": "user/overview",
-              "segment": "overview",
-              "title": "用户概览",
-              "href": "/docs/chat/platform-api/v3/user/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 642.9
-            },
-            {
-              "id": "user/creating-users",
-              "segment": "creating-users",
-              "title": "创建用户",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/creating-users/user-register",
-                  "segment": "user-register",
-                  "title": "注册用户",
-                  "href": "/docs/chat/platform-api/v3/user/creating-users/user-register",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 636
-                }
-              ],
-              "minIndex": 636
-            },
-            {
-              "id": "user/managing-users",
-              "segment": "managing-users",
-              "title": "管理用户",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/managing-users/update-user-info",
-                  "segment": "update-user-info",
-                  "title": "更新用户信息",
-                  "href": "/docs/chat/platform-api/v3/user/managing-users/update-user-info",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 637
-                },
-                {
-                  "id": "user/managing-users/update-user-info-ex",
-                  "segment": "update-user-info-ex",
-                  "title": "更新用户信息扩展",
-                  "href": "/docs/chat/platform-api/v3/user/managing-users/update-user-info-ex",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 638
-                },
-                {
-                  "id": "user/managing-users/set-global-msg-recv-opt",
-                  "segment": "set-global-msg-recv-opt",
-                  "title": "设置全局消息接收选项",
-                  "href": "/docs/chat/platform-api/v3/user/managing-users/set-global-msg-recv-opt",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 639
-                }
-              ],
-              "minIndex": 637
-            },
-            {
-              "id": "user/listing-users",
-              "segment": "listing-users",
-              "title": "查询用户",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/listing-users/get-users-info",
-                  "segment": "get-users-info",
-                  "title": "获取指定用户信息",
-                  "href": "/docs/chat/platform-api/v3/user/listing-users/get-users-info",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 640
-                },
-                {
-                  "id": "user/listing-users/list-all-user-ids",
-                  "segment": "list-all-user-ids",
-                  "title": "获取全部用户 ID",
-                  "href": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 641
-                },
-                {
-                  "id": "user/listing-users/check-user-accounts",
-                  "segment": "check-user-accounts",
-                  "title": "检查账号是否存在",
-                  "href": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 642
-                },
-                {
-                  "id": "user/listing-users/list-users",
-                  "segment": "list-users",
-                  "title": "分页获取用户列表",
-                  "href": "/docs/chat/platform-api/v3/user/listing-users/list-users",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 643
-                }
-              ],
-              "minIndex": 640
-            },
-            {
-              "id": "user/presence",
-              "segment": "presence",
-              "title": "在线状态",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/presence/get-users-online-status",
-                  "segment": "get-users-online-status",
-                  "title": "获取用户在线状态",
-                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 644
-                },
-                {
-                  "id": "user/presence/get-users-online-token-detail",
-                  "segment": "get-users-online-token-detail",
-                  "title": "获取用户在线 Token 详情",
-                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 645
-                },
-                {
-                  "id": "user/presence/subscribe-users-status",
-                  "segment": "subscribe-users-status",
-                  "title": "订阅用户在线状态",
-                  "href": "/docs/chat/platform-api/v3/user/presence/subscribe-users-status",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 646
-                },
-                {
-                  "id": "user/presence/get-users-status",
-                  "segment": "get-users-status",
-                  "title": "获取用户状态",
-                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-status",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 647
-                },
-                {
-                  "id": "user/presence/get-subscribe-users-status",
-                  "segment": "get-subscribe-users-status",
-                  "title": "获取已订阅用户状态",
-                  "href": "/docs/chat/platform-api/v3/user/presence/get-subscribe-users-status",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 648
-                }
-              ],
-              "minIndex": 644
-            },
-            {
-              "id": "user/notification-accounts",
-              "segment": "notification-accounts",
-              "title": "通知账号",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/notification-accounts/add-notification-account",
-                  "segment": "add-notification-account",
-                  "title": "新增系统通知账号",
-                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 649
-                },
-                {
-                  "id": "user/notification-accounts/update-notification-account",
-                  "segment": "update-notification-account",
-                  "title": "更新系统通知账号",
-                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 650
-                },
-                {
-                  "id": "user/notification-accounts/search-notification-account",
-                  "segment": "search-notification-account",
-                  "title": "搜索系统通知账号",
-                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 651
-                }
-              ],
-              "minIndex": 649
-            }
-          ],
-          "minIndex": 636
-        },
-        {
           "id": "auth",
           "segment": "auth",
           "title": "认证",
@@ -251,7 +38,7 @@
             {
               "id": "auth/overview",
               "segment": "overview",
-              "title": "认证概览",
+              "title": "概述",
               "href": "/docs/chat/platform-api/v3/auth/overview",
               "type": "page",
               "children": [],
@@ -317,243 +104,367 @@
           "minIndex": 700.9
         },
         {
-          "id": "friend",
-          "segment": "friend",
-          "title": "好友",
+          "id": "user",
+          "segment": "user",
+          "title": "用户",
           "href": null,
           "type": "folder",
           "children": [
             {
-              "id": "friend/overview",
+              "id": "user/overview",
               "segment": "overview",
-              "title": "好友概览",
-              "href": "/docs/chat/platform-api/v3/friend/overview",
+              "title": "概述",
+              "href": "/docs/chat/platform-api/v3/user/overview",
               "type": "page",
               "children": [],
-              "minIndex": 651.9
+              "minIndex": 613
             },
             {
-              "id": "friend/managing-friends",
-              "segment": "managing-friends",
-              "title": "管理好友",
+              "id": "user/listing-users",
+              "segment": "listing-users",
+              "title": "查询用户",
               "href": null,
               "type": "folder",
               "children": [
                 {
-                  "id": "friend/managing-friends/delete-friend",
-                  "segment": "delete-friend",
-                  "title": "删除好友",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friends/delete-friend",
+                  "id": "user/listing-users/list-users",
+                  "segment": "list-users",
+                  "title": "查询用户列表",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/list-users",
                   "type": "page",
                   "children": [],
-                  "minIndex": 652
+                  "minIndex": 614
                 },
                 {
-                  "id": "friend/managing-friends/set-friend-remark",
-                  "segment": "set-friend-remark",
-                  "title": "设置好友备注",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friends/set-friend-remark",
+                  "id": "user/listing-users/list-all-user-ids",
+                  "segment": "list-all-user-ids",
+                  "title": "查询全部用户 ID",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
                   "type": "page",
                   "children": [],
-                  "minIndex": 660
+                  "minIndex": 615
                 },
                 {
-                  "id": "friend/managing-friends/import-friends",
-                  "segment": "import-friends",
-                  "title": "导入好友关系",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friends/import-friends",
+                  "id": "user/listing-users/check-user-accounts",
+                  "segment": "check-user-accounts",
+                  "title": "校验用户账号",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
                   "type": "page",
                   "children": [],
-                  "minIndex": 665
+                  "minIndex": 616
                 },
                 {
-                  "id": "friend/managing-friends/update-friends",
-                  "segment": "update-friends",
-                  "title": "更新好友信息",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friends/update-friends",
+                  "id": "user/listing-users/get-a-user",
+                  "segment": "get-a-user",
+                  "title": "获取用户",
+                  "href": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
                   "type": "page",
                   "children": [],
-                  "minIndex": 669
+                  "minIndex": 617
                 }
               ],
-              "minIndex": 652
+              "minIndex": 614
             },
             {
-              "id": "friend/managing-friend-requests",
+              "id": "user/creating-users",
+              "segment": "creating-users",
+              "title": "创建用户",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/creating-users/create-a-user",
+                  "segment": "create-a-user",
+                  "title": "创建用户",
+                  "href": "/docs/chat/platform-api/v3/user/creating-users/create-a-user",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 618
+                }
+              ],
+              "minIndex": 618
+            },
+            {
+              "id": "user/managing-users",
+              "segment": "managing-users",
+              "title": "管理用户",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/managing-users/update-a-user",
+                  "segment": "update-a-user",
+                  "title": "更新用户",
+                  "href": "/docs/chat/platform-api/v3/user/managing-users/update-a-user",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 619
+                }
+              ],
+              "minIndex": 619
+            },
+            {
+              "id": "user/presence",
+              "segment": "presence",
+              "title": "在线状态",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/presence/get-users-online-status",
+                  "segment": "get-users-online-status",
+                  "title": "查询用户在线状态",
+                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 620
+                },
+                {
+                  "id": "user/presence/get-users-online-token-detail",
+                  "segment": "get-users-online-token-detail",
+                  "title": "查询用户在线 Token 明细",
+                  "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 621
+                }
+              ],
+              "minIndex": 620
+            },
+            {
+              "id": "user/notification-accounts",
+              "segment": "notification-accounts",
+              "title": "通知账号",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/notification-accounts/add-notification-account",
+                  "segment": "add-notification-account",
+                  "title": "创建通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 622
+                },
+                {
+                  "id": "user/notification-accounts/update-notification-account",
+                  "segment": "update-notification-account",
+                  "title": "更新通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 623
+                },
+                {
+                  "id": "user/notification-accounts/search-notification-account",
+                  "segment": "search-notification-account",
+                  "title": "搜索通知账号",
+                  "href": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 624
+                }
+              ],
+              "minIndex": 622
+            },
+            {
+              "id": "user/managing-session-tokens",
+              "segment": "managing-session-tokens",
+              "title": "管理会话 Token",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "user/managing-session-tokens/issue-a-session-token",
+                  "segment": "issue-a-session-token",
+                  "title": "签发会话 Token",
+                  "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 625
+                },
+                {
+                  "id": "user/managing-session-tokens/revoke-all-session-tokens",
+                  "segment": "revoke-all-session-tokens",
+                  "title": "注销全部会话 Token",
+                  "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 626
+                }
+              ],
+              "minIndex": 625
+            }
+          ],
+          "minIndex": 613
+        },
+        {
+          "id": "relation",
+          "segment": "relation",
+          "title": "关系",
+          "href": null,
+          "type": "folder",
+          "children": [
+            {
+              "id": "relation/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/platform-api/v3/relation/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 627
+            },
+            {
+              "id": "relation/managing-friend-requests",
               "segment": "managing-friend-requests",
               "title": "好友申请",
               "href": null,
               "type": "folder",
               "children": [
                 {
-                  "id": "friend/managing-friend-requests/list-received-friend-requests",
-                  "segment": "list-received-friend-requests",
-                  "title": "查询收到的好友申请",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/list-received-friend-requests",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 653
-                },
-                {
-                  "id": "friend/managing-friend-requests/get-designated-friend-application",
-                  "segment": "get-designated-friend-application",
-                  "title": "查询指定好友申请",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/get-designated-friend-application",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 654
-                },
-                {
-                  "id": "friend/managing-friend-requests/list-sent-friend-requests",
-                  "segment": "list-sent-friend-requests",
-                  "title": "查询发出的好友申请",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/list-sent-friend-requests",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 655
-                },
-                {
-                  "id": "friend/managing-friend-requests/apply-to-add-friend",
+                  "id": "relation/managing-friend-requests/apply-to-add-friend",
                   "segment": "apply-to-add-friend",
-                  "title": "发送好友申请",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/apply-to-add-friend",
+                  "title": "申请添加好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend",
                   "type": "page",
                   "children": [],
-                  "minIndex": 658
+                  "minIndex": 628
                 },
                 {
-                  "id": "friend/managing-friend-requests/respond-friend-apply",
+                  "id": "relation/managing-friend-requests/respond-friend-apply",
                   "segment": "respond-friend-apply",
                   "title": "处理好友申请",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/respond-friend-apply",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply",
                   "type": "page",
                   "children": [],
-                  "minIndex": 659
+                  "minIndex": 629
                 },
                 {
-                  "id": "friend/managing-friend-requests/get-self-unhandled-apply-count",
-                  "segment": "get-self-unhandled-apply-count",
-                  "title": "获取未处理好友申请数量",
-                  "href": "/docs/chat/platform-api/v3/friend/managing-friend-requests/get-self-unhandled-apply-count",
+                  "id": "relation/managing-friend-requests/list-received-friend-requests",
+                  "segment": "list-received-friend-requests",
+                  "title": "查询收到的好友申请",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests",
                   "type": "page",
                   "children": [],
-                  "minIndex": 671
+                  "minIndex": 630
+                },
+                {
+                  "id": "relation/managing-friend-requests/list-sent-friend-requests",
+                  "segment": "list-sent-friend-requests",
+                  "title": "查询发出的好友申请",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 631
                 }
               ],
-              "minIndex": 653
+              "minIndex": 628
             },
             {
-              "id": "friend/listing-friends",
+              "id": "relation/listing-friends",
               "segment": "listing-friends",
               "title": "查询好友",
               "href": null,
               "type": "folder",
               "children": [
                 {
-                  "id": "friend/listing-friends/list-friends",
+                  "id": "relation/listing-friends/list-friends",
                   "segment": "list-friends",
-                  "title": "获取好友列表",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/list-friends",
+                  "title": "查询好友列表",
+                  "href": "/docs/chat/platform-api/v3/relation/listing-friends/list-friends",
                   "type": "page",
                   "children": [],
-                  "minIndex": 656
+                  "minIndex": 632
                 },
                 {
-                  "id": "friend/listing-friends/get-designated-friends",
+                  "id": "relation/listing-friends/get-designated-friends",
                   "segment": "get-designated-friends",
                   "title": "获取指定好友",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/get-designated-friends",
+                  "href": "/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends",
                   "type": "page",
                   "children": [],
-                  "minIndex": 657
-                },
-                {
-                  "id": "friend/listing-friends/is-friend",
-                  "segment": "is-friend",
-                  "title": "校验好友关系",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/is-friend",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 666
-                },
-                {
-                  "id": "friend/listing-friends/get-friend-ids",
-                  "segment": "get-friend-ids",
-                  "title": "获取好友 ID 列表",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/get-friend-ids",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 667
-                },
-                {
-                  "id": "friend/listing-friends/get-specified-friends-info",
-                  "segment": "get-specified-friends-info",
-                  "title": "获取指定好友信息",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/get-specified-friends-info",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 668
-                },
-                {
-                  "id": "friend/listing-friends/get-full-friend-user-ids",
-                  "segment": "get-full-friend-user-ids",
-                  "title": "全量获取好友用户 ID",
-                  "href": "/docs/chat/platform-api/v3/friend/listing-friends/get-full-friend-user-ids",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 670
+                  "minIndex": 633
                 }
               ],
-              "minIndex": 656
+              "minIndex": 632
             },
             {
-              "id": "friend/blacklist",
+              "id": "relation/managing-friends",
+              "segment": "managing-friends",
+              "title": "管理好友",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "relation/managing-friends/delete-friend",
+                  "segment": "delete-friend",
+                  "title": "删除好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/delete-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 634
+                },
+                {
+                  "id": "relation/managing-friends/import-friends",
+                  "segment": "import-friends",
+                  "title": "导入好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/import-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 635
+                },
+                {
+                  "id": "relation/managing-friends/update-friends",
+                  "segment": "update-friends",
+                  "title": "更新好友",
+                  "href": "/docs/chat/platform-api/v3/relation/managing-friends/update-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 636
+                }
+              ],
+              "minIndex": 634
+            },
+            {
+              "id": "relation/blacklist",
               "segment": "blacklist",
               "title": "黑名单",
               "href": null,
               "type": "folder",
               "children": [
                 {
-                  "id": "friend/blacklist/add-black",
+                  "id": "relation/blacklist/add-black",
                   "segment": "add-black",
                   "title": "加入黑名单",
-                  "href": "/docs/chat/platform-api/v3/friend/blacklist/add-black",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/add-black",
                   "type": "page",
                   "children": [],
-                  "minIndex": 661
+                  "minIndex": 637
                 },
                 {
-                  "id": "friend/blacklist/list-blacks",
+                  "id": "relation/blacklist/list-blacks",
                   "segment": "list-blacks",
-                  "title": "获取黑名单列表",
-                  "href": "/docs/chat/platform-api/v3/friend/blacklist/list-blacks",
+                  "title": "查询黑名单",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/list-blacks",
                   "type": "page",
                   "children": [],
-                  "minIndex": 662
+                  "minIndex": 638
                 },
                 {
-                  "id": "friend/blacklist/get-specified-blacks",
-                  "segment": "get-specified-blacks",
-                  "title": "获取指定黑名单",
-                  "href": "/docs/chat/platform-api/v3/friend/blacklist/get-specified-blacks",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 663
-                },
-                {
-                  "id": "friend/blacklist/remove-black",
+                  "id": "relation/blacklist/remove-black",
                   "segment": "remove-black",
-                  "title": "移除黑名单",
-                  "href": "/docs/chat/platform-api/v3/friend/blacklist/remove-black",
+                  "title": "移出黑名单",
+                  "href": "/docs/chat/platform-api/v3/relation/blacklist/remove-black",
                   "type": "page",
                   "children": [],
-                  "minIndex": 664
+                  "minIndex": 639
                 }
               ],
-              "minIndex": 661
+              "minIndex": 637
             }
           ],
-          "minIndex": 651.9
+          "minIndex": 627
         },
         {
           "id": "group",
@@ -565,7 +476,7 @@
             {
               "id": "group/overview",
               "segment": "overview",
-              "title": "群组概览",
+              "title": "概述",
               "href": "/docs/chat/platform-api/v3/group/overview",
               "type": "page",
               "children": [],
@@ -895,7 +806,7 @@
             {
               "id": "conversation/overview",
               "segment": "overview",
-              "title": "会话概览",
+              "title": "概述",
               "href": "/docs/chat/platform-api/v3/conversation/overview",
               "type": "page",
               "children": [],
@@ -1034,7 +945,7 @@
             {
               "id": "message/overview",
               "segment": "overview",
-              "title": "消息概览",
+              "title": "概述",
               "href": "/docs/chat/platform-api/v3/message/overview",
               "type": "page",
               "children": [],
@@ -1265,7 +1176,7 @@
             {
               "id": "third/overview",
               "segment": "overview",
-              "title": "第三方服务概览",
+              "title": "概述",
               "href": "/docs/chat/platform-api/v3/third/overview",
               "type": "page",
               "children": [],
@@ -1450,6 +1361,15 @@
           "minIndex": 704.9
         },
         {
+          "id": "migration-to-openim",
+          "segment": "migration-to-openim",
+          "title": "迁移到 OpenIM",
+          "href": "/docs/chat/platform-api/v3/migration-to-openim",
+          "type": "page",
+          "children": [],
+          "minIndex": 760.9
+        },
+        {
           "id": "error-codes",
           "segment": "error-codes",
           "title": "错误码",
@@ -1459,7 +1379,7 @@
           "minIndex": 635
         }
       ],
-      "pageCount": 122
+      "pageCount": 123
     },
     {
       "key": "chat/sdk/v4/ios",
