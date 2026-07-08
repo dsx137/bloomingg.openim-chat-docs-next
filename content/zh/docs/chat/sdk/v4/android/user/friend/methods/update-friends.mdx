@@ -29,7 +29,11 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/update-friends'
 
 ## Android 调用参考
 
-TODO: 补充当前 Android SDK 的函数原型。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void updateFriendsReq(OnBase<String> base, UpdateFriendsReq updateFriendsReq)
+```
 
 ## 输入参数
 
@@ -43,17 +47,18 @@ TODO: 补充当前 Android SDK 的函数原型。
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().friendshipManager.updateFriendsReq(new OnBase<String>() {
     @Override
     public void onError(int code, String error) {
-      // todo: 处理错误信息
+        // TODO: 处理错误
     }
+
     @Override
     public void onSuccess(String data) {
-      // todo: 请求成功
+        // TODO: 处理成功结果
     }
 }, updateFriendsReq);
 ```

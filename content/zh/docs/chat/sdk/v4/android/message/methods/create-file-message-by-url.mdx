@@ -29,7 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/create-file-message-by-ur
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
 public Message createFileMessageByURL(FileElem fileElem)
@@ -49,10 +49,10 @@ public Message createFileMessageByURL(FileElem fileElem)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-Message Message= OpenIMClient.getInstance().messageManager.createFileMessageByURL( fileElem)
+Message fileMessage = OpenIMClient.getInstance().messageManager.createFileMessageByURL(fileElem);
 ```
 
 ## 相关页面

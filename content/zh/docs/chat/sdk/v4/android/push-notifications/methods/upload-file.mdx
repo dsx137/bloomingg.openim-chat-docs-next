@@ -29,11 +29,10 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/upload-file'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void uploadFile(OnBase<String> base, OnPutFileListener listener,
-                           PutArgs putArgs)
+public void uploadFile(OnBase<String> base, OnPutFileListener listener, PutArgs putArgs)
 ```
 
 ## 输入参数
@@ -51,50 +50,34 @@ PutArgs 实体必传下面两个参数
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().uploadFile(new OnBase<String>() {
-            @Override
-            public void onError(int code, String error) {
+OpenIMClient.getInstance().uploadFile(
+    new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理上传结果
+    }
+},
+    new OnPutFileListener() {
+        @Override
+        public void uploadComplete(long size, long progress, long storageSize) {
+            // TODO: 更新上传进度
+        }
 
-            @Override
-            public void onSuccess(String data) {
-
-            }
-        }, new OnPutFileListener() {
-            @Override
-            public void hashComplete(String hash, long total) {
-
-            }
-
-            @Override
-            public void hashProgress(long current, long total) {
-
-            }
-
-            @Override
-            public void open(long size) {
-
-            }
-
-            @Override
-            public void putComplete(long total, long putType) {
-
-            }
-
-            @Override
-            public void putProgress(long save, long current, long total) {
-
-            }
-
-            @Override
-            public void putStart(long current, long total) {
-
-            }
-        },putArgs);
+        @Override
+        public void complete(long size, String url, long type) {
+            // TODO: 处理上传完成后的 URL
+        }
+    },
+    putArgs
+);
 ```
 
 ## 相关页面

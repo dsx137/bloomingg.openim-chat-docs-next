@@ -29,22 +29,22 @@ sourcePath: '/docs/chat/sdk/v4/android/channel/methods/create-group'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
 public void createGroup(List<String> memberUserIDs, List<String> adminUserIDs,
-                            GroupInfo groupInfo, String ownerUserID, OnBase<GroupInfo> callBack)
+                        GroupInfo groupInfo, String ownerUserID, OnBase<GroupInfo> callBack)
 ```
 
 ## 输入参数
 
-| 参数名称      | 参数类型          | 是否必填 | 描述                       |
-| ------------- | ----------------- | -------- | -------------------------- |
-| groupInfo     | GroupInitInfo     | 是       | 群聊基础信息               |
-| memberUserIDs | string[]          | 是       | 邀请进入的群成员列表       |
-| adminUserIDs  | string[]          | 否       | 邀请进入并设为管理员的列表 |
-| ownerUserID   | string            | 否       | 群主 ID                    |
-| callBack      | OnBase<GroupInfo> | 是       | 回调接口                   |
+| 参数名称      | 参数类型          | 是否必填 | 描述                           |
+| ------------- | ----------------- | -------- | ------------------------------ |
+| memberUserIDs | List<String>      | 是       | 初始化群成员 ID 列表。         |
+| adminUserIDs  | List<String>      | 否       | 初始化管理员 ID 列表。         |
+| groupInfo     | GroupInfo         | 是       | 群组基础资料。                 |
+| ownerUserID   | String            | 否       | 群主用户 ID。                  |
+| callBack      | OnBase<GroupInfo> | 是       | 创建结果回调，成功返回群资料。 |
 
 ## 返回结果
 
@@ -52,21 +52,26 @@ public void createGroup(List<String> memberUserIDs, List<String> adminUserIDs,
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().groupManager.createGroup(memberUserIDs,  adminUserIDs,
-     groupInfo,  ownerUserID,  new OnBase<String>() {
+OpenIMClient.getInstance().groupManager.createGroup(
+    memberUserIDs,
+    adminUserIDs,
+    groupInfo,
+    ownerUserID,
+    new OnBase<GroupInfo>() {
     @Override
     public void onError(int code, String error) {
-
+        // TODO: 处理错误
     }
 
     @Override
-    public void onSuccess(String data) {
-
+    public void onSuccess(GroupInfo data) {
+        // TODO: 创建成功，处理群资料
     }
-});
+}
+);
 ```
 
 ## 相关页面

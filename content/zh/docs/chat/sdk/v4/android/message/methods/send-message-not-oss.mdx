@@ -29,50 +29,57 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/send-message-not-oss'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void sendMessageNotOss(OnMsgSendCallback base, Message message, String recvUid, String recvGid, OfflinePushInfo offlinePushInfo)
+public void sendMessageNotOss(OnMsgSendCallback base, Message message, String recvUid,
+                              String recvGid, OfflinePushInfo offlinePushInfo)
+public void sendMessageNotOss(OnMsgSendCallback base, Message message, String recvUid,
+                              String recvGid, OfflinePushInfo offlinePushInfo, boolean isOnlineOnly)
 ```
 
 ## 输入参数
 
-| 参数名称        | 参数类型          | 是否必填 | 描述                |
-| --------------- | ----------------- | -------- | ------------------- |
-| base            | OnMsgSendCallback | 是       | callback            |
-| message         | Message           | 是       | 消息体              |
-| userID          | String            | 否       | 接收消息的 user ID  |
-| groupID         | String            | 否       | 接收消息的 group ID |
-| offlinePushInfo | OfflinePushInfo   | 否       | 离线消息体          |
+| 参数名称        | 参数类型          | 是否必填 | 描述                                 |
+| --------------- | ----------------- | -------- | ------------------------------------ |
+| base            | OnMsgSendCallback | 是       | 发送结果和进度回调。                 |
+| message         | Message           | 是       | 要发送的消息体。                     |
+| recvUid         | String            | 单聊必填 | 单聊接收者用户 ID。                  |
+| recvGid         | String            | 群聊必填 | 群聊接收群 ID。                      |
+| offlinePushInfo | OfflinePushInfo   | 否       | 离线推送配置。                       |
+| isOnlineOnly    | boolean           | 否       | 是否只发送在线消息，仅重载方法使用。 |
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+通过 `OnMsgSendCallback` 返回发送状态：`onProgress` 返回上传/发送进度，`onSuccess` 返回发送成功后的消息，`onError` 返回错误信息。
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().messageManager.sendMessageNotOss( new OnMsgSendCallback(){
+OpenIMClient.getInstance().messageManager.sendMessageNotOss(
+    new OnMsgSendCallback() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理发送失败
+    }
 
-              @Override
-              public void onError(int code, String error) {
-                  //发送失败
-              }
+    @Override
+    public void onProgress(long progress) {
+        // TODO: 更新发送进度
+    }
 
-              @Override
-              public void onProgress(long progress) {
-                    //发送进度
-              }
-
-              @Override
-              public void onSuccess(Message s) {
-                     //发送成功
-              }
-          },  message,  recvUid,  recvGid,  offlinePushInfo);
+    @Override
+    public void onSuccess(Message message) {
+        // TODO: 处理发送成功的消息
+    }
+},
+    message,
+    recvUid,
+    recvGid,
+    offlinePushInfo
+);
 ```
 
 ## 相关页面

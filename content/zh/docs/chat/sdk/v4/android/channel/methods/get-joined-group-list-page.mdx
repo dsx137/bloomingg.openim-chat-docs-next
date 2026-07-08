@@ -29,10 +29,10 @@ sourcePath: '/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list-pag
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getJoinedGroupList(OnBase<List<GroupInfo>> callBack)
+public void getJoinedGroupListPage(OnBase<List<GroupInfo>> base, int offset, int count)
 ```
 
 ## 输入参数
@@ -47,20 +47,24 @@ public void getJoinedGroupList(OnBase<List<GroupInfo>> callBack)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().groupManager.getJoinedGroupList(new OnBase<List<GroupInfo>>() {
-            @Override
-            public void onError(int code, String error) {
+OpenIMClient.getInstance().groupManager.getJoinedGroupListPage(
+    new OnBase<List<GroupInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
-
-            @Override
-            public void onSuccess(List<GroupInfo> data) {
-
-            }
-        });
+    @Override
+    public void onSuccess(List<GroupInfo> data) {
+        // TODO: 处理分页群列表
+    }
+},
+    offset,
+    count
+);
 ```
 
 ## 相关页面

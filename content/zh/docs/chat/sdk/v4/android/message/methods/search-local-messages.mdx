@@ -29,12 +29,14 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/search-local-messages'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void searchLocalMessages(OnBase<SearchResult> base, String conversationID, List<String> keywordList, int keywordListMatchType,
-                                    List<String> senderUserIDList, List<Integer> messageTypeList, int searchTimePosition, int searchTimePeriod, int pageIndex
-        , int count)
+public void searchLocalMessages(OnBase<SearchResult> base, String conversationID,
+                                List<String> keywordList, int keywordListMatchType,
+                                List<String> senderUserIDList, List<Integer> messageTypeList,
+                                int searchTimePosition, int searchTimePeriod,
+                                int pageIndex, int count)
 ```
 
 ## 输入参数
@@ -67,22 +69,31 @@ public void searchLocalMessages(OnBase<SearchResult> base, String conversationID
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().messageManager.searchLocalMessages(new OnBase<SearchResult>() {
-            @Override
-            public void onError(int code, String error) {
+OpenIMClient.getInstance().messageManager.searchLocalMessages(
+    new OnBase<SearchResult>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
-
-            @Override
-            public void onSuccess(SearchResult data) {
-
-            }
-        },  conversationID, keywordList,  keywordListMatchType,
-         senderUserIDList, messageTypeList,  searchTimePosition,  searchTimePeriod,  pageIndex
-        ,  count);
+    @Override
+    public void onSuccess(SearchResult data) {
+        // TODO: 处理本地消息搜索结果
+    }
+},
+    conversationID,
+    keywordList,
+    keywordListMatchType,
+    senderUserIDList,
+    messageTypeList,
+    searchTimePosition,
+    searchTimePeriod,
+    pageIndex,
+    count
+);
 ```
 
 ## 相关页面

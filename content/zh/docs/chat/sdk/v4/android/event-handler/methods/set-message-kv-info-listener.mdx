@@ -29,7 +29,11 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info
 
 ## Android 调用参考
 
-TODO: 补充当前 Android SDK 的函数原型。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void setMessageKvInfoListener(OnMessageKvInfoListener listener)
+```
 
 ## 输入参数
 
@@ -43,7 +47,16 @@ TODO: 补充当前 Android SDK 的函数原型。
 
 ## 代码示例
 
-TODO: 补充该方法的 Android 调用示例。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.setMessageKvInfoListener(new OnMessageKvInfoListener() {
+    @Override
+    public void onMessageKvInfoChanged(List<MessageKv> list) {
+        // TODO: 处理消息扩展信息变更
+    }
+});
+```
 
 ## 相关页面
 

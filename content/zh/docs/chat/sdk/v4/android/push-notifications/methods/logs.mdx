@@ -29,28 +29,41 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/logs'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getSelfUserInfo(OnBase<UserInfo> callBack)
+public void logs(@LogLevel int logLevel, String currentClassName, int currentLineNum, @NonNull String msgStr, @Nullable String errStr, @Nullable String... extra)
 ```
 
 ## 输入参数
 
-| 参数名称 | 参数类型         | 是否必填 | 描述     |
-| -------- | ---------------- | -------- | -------- |
-| callBack | OnBase<UserInfo> | 是       | 回调接口 |
+| 参数名称         | 参数类型  | 是否必填 | 描述                                        |
+| ---------------- | --------- | -------- | ------------------------------------------- |
+| logLevel         | int       | 是       | 日志级别，使用 `LogLevel` 常量。            |
+| currentClassName | String    | 是       | 产生日志的类名或文件名。                    |
+| currentLineNum   | int       | 是       | 产生日志的代码行号。                        |
+| msgStr           | String    | 是       | 日志正文。                                  |
+| errStr           | String    | 否       | 错误详情；Warn、Error、Fatal 等级建议传入。 |
+| extra            | String... | 否       | 额外键值对，按 key、value 成对传入。        |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+无直接返回值。SDK 会将日志写入内部日志系统。
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().friendshipManager.getSelfUserInfo(new OnBase<UserInfo>(){…})
+OpenIMClient.getInstance().logs(
+    LogLevel.Info,
+    "ChatActivity",
+    120,
+    "send message",
+    null,
+    "conversationID",
+    conversationID
+);
 ```
 
 ## 相关页面

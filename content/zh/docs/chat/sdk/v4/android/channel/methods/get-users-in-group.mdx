@@ -29,19 +29,19 @@ sourcePath: '/docs/chat/sdk/v4/android/channel/methods/get-users-in-group'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getUsersInGroup(OnBase<String[]> callBack, String groupId, String[] userIdList)
+public void getUsersInGroup(OnBase<List<String>> base, String groupID, List<String> userIdList)
 ```
 
 ## 输入参数
 
-| 参数名称   | 参数类型 | 是否必填 | 描述        |
-| ---------- | -------- | -------- | ----------- |
-| callBack   | OnBase   | 是       | 回调接口    |
-| groupID    | string   | 是       | 群ID        |
-| userIDList | string[] | 是       | 用户ID 列表 |
+| 参数名称   | 参数类型             | 是否必填 | 描述                   |
+| ---------- | -------------------- | -------- | ---------------------- |
+| base       | OnBase<List<String>> | 是       | 查询结果回调。         |
+| groupID    | String               | 是       | 群 ID。                |
+| userIdList | List<String>         | 是       | 待检查的用户 ID 列表。 |
 
 ## 返回结果
 
@@ -49,20 +49,24 @@ public void getUsersInGroup(OnBase<String[]> callBack, String groupId, String[] 
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().groupManager.getUsersInGroup(new OnBase<String>() {
-            @Override
-            public void onError(int code, String error) {
+OpenIMClient.getInstance().groupManager.getUsersInGroup(
+    new OnBase<List<String>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
-
-            @Override
-            public void onSuccess(String[] data) {
-
-            }
-        },gid);
+    @Override
+    public void onSuccess(List<String> data) {
+        // TODO: 处理在群内的用户 ID 列表
+    }
+},
+    groupID,
+    userIdList
+);
 ```
 
 ## 相关页面

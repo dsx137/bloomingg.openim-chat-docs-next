@@ -29,10 +29,10 @@ sourcePath: '/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void changeGroupMemberMute(OnBase<String> callBack, String gid, String uid, long seconds)
+public void changeGroupMemberMute(OnBase<String> base, String gid, String uid, long seconds)
 ```
 
 ## 输入参数
@@ -50,20 +50,20 @@ public void changeGroupMemberMute(OnBase<String> callBack, String gid, String ui
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().groupManager.changeGroupMemberMute(new OnBase<String>() {
-            @Override
-            public void onError(int code, String error) {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
-
-            @Override
-            public void onSuccess(String data) {
-
-            }
-        },gid,uid,seconds)
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理成功结果
+    }
+}, gid, uid, seconds);
 ```
 
 ## 相关页面

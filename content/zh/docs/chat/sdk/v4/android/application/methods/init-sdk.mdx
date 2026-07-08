@@ -29,7 +29,11 @@ sourcePath: '/docs/chat/sdk/v4/android/application/methods/init-sdk'
 
 ## Android 调用参考
 
-TODO: 补充当前 Android SDK 的函数原型。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public boolean initSDK(Application application, InitConfig initConfig, @NotNull OnConnListener listener)
+```
 
 ## 输入参数
 
@@ -45,42 +49,25 @@ TODO: 补充当前 Android SDK 的函数原型。
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-InitConfig initConfig=new InitConfig(
-            Constant.getImApiUrl(),//SDK api地址
-            Constant.getImWsUrl(),//SDK WebSocket地址
-            getStorageDir(),//SDK数据库存储目录
-            );
-     OpenIMClient.getInstance().initSDK(application,
-          initConfig,
-          new OnConnListener() {
-                 @Override
-                public void onConnectFailed(long code, String error) {
-                    //连接服务器失败
-                }
+boolean initialized = OpenIMClient.getInstance().initSDK(application, initConfig, new OnConnListener() {
+    @Override
+    public void onConnectSuccess() {
+        // TODO: SDK 已连接
+    }
 
-                @Override
-                public void onConnectSuccess() {
-                    //连接服务器成功
-                }
+    @Override
+    public void onConnectFailed(int code, String error) {
+        // TODO: 处理连接失败
+    }
 
-                @Override
-                public void onConnecting() {
-                    //连接服务器中...
-                }
-
-                @Override
-                public void onKickedOffline() {
-                    //当前用户被踢下线
-                }
-
-                @Override
-                public void onUserTokenExpired() {
-                    //登录票据已经过期
-                }
-            });
+    @Override
+    public void onUserTokenExpired() {
+        // TODO: 处理登录票据过期
+    }
+});
 ```
 
 ## 相关页面

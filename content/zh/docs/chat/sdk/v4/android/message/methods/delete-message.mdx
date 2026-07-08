@@ -29,7 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/delete-message'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
 public void deleteMessageFromLocalAndSvr(String conversationID, String clientMsgID, OnBase<String> callBack)
@@ -37,11 +37,11 @@ public void deleteMessageFromLocalAndSvr(String conversationID, String clientMsg
 
 ## 输入参数
 
-| 参数名称       | 参数类型       | 是否必填 | 描述     |
-| -------------- | -------------- | -------- | -------- |
-| conversationID | String         | 是       | 回话 ID  |
-| clientMsgID    | String         | 是       | 消息 ID  |
-| callBack       | OnBase<String> | 是       | 回调接口 |
+| 参数名称       | 参数类型       | 是否必填 | 描述            |
+| -------------- | -------------- | -------- | --------------- |
+| conversationID | String         | 是       | 会话 ID。       |
+| clientMsgID    | String         | 是       | 客户端消息 ID。 |
+| callBack       | OnBase<String> | 是       | 删除结果回调。  |
 
 ## 返回结果
 
@@ -51,21 +51,20 @@ public void deleteMessageFromLocalAndSvr(String conversationID, String clientMsg
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().messageManager. deleteMessageFromLocalAndSvr(conversationID,  clientMsgID,new OnBase<String>() {
-            @Override
-            public void onError(int code, String error) {
+OpenIMClient.getInstance().messageManager.deleteMessageFromLocalAndSvr(conversationID, clientMsgID, new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-            }
-
-            @Override
-            public void onSuccess(String data) {
-
-            }
-        })
-    // todo
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理成功结果
+    }
+});
 ```
 
 ## 相关页面

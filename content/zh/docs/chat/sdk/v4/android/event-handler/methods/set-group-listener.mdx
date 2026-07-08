@@ -29,7 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
 public void setOnGroupListener(OnGroupListener listener)
@@ -47,60 +47,25 @@ public void setOnGroupListener(OnGroupListener listener)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().groupManager.setOnGroupListener(new OnGroupListener() {
-            @Override
-            public void onGroupApplicationAccepted(GroupApplicationInfo info) {
+    @Override
+    public void onJoinedGroupAdded(GroupInfo info) {
+        // TODO: 处理加入群组
+    }
 
-            }
+    @Override
+    public void onGroupInfoChanged(GroupInfo info) {
+        // TODO: 处理群资料变更
+    }
 
-            @Override
-            public void onGroupApplicationAdded(GroupApplicationInfo info) {
-
-            }
-
-            @Override
-            public void onGroupApplicationDeleted(GroupApplicationInfo info) {
-
-            }
-
-            @Override
-            public void onGroupApplicationRejected(GroupApplicationInfo info) {
-
-            }
-
-            @Override
-            public void onGroupInfoChanged(GroupInfo info) {
-
-            }
-
-            @Override
-            public void onGroupMemberAdded(GroupMembersInfo info) {
-
-            }
-
-            @Override
-            public void onGroupMemberDeleted(GroupMembersInfo info) {
-
-            }
-
-            @Override
-            public void onGroupMemberInfoChanged(GroupMembersInfo info) {
-
-            }
-
-            @Override
-            public void onJoinedGroupAdded(GroupInfo info) {
-
-            }
-
-            @Override
-            public void onJoinedGroupDeleted(GroupInfo info) {
-
-            }
-        });
+    @Override
+    public void onGroupMemberAdded(GroupMembersInfo info) {
+        // TODO: 处理群成员新增
+    }
+});
 ```
 
 ## 相关页面

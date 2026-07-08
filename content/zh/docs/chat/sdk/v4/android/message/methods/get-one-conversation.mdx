@@ -29,7 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/get-one-conversation'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
 public void getOneConversation(OnBase<ConversationInfo> base, String sourceId, int sessionType)
@@ -37,11 +37,11 @@ public void getOneConversation(OnBase<ConversationInfo> base, String sourceId, i
 
 ## 输入参数
 
-| 参数名称    | 参数类型                 | 是否必填 | 描述                      |
-| ----------- | ------------------------ | -------- | ------------------------- |
-| base        | OnBase<ConversationInfo> | 是       | 回调接口                  |
-| sessionType | int                      | 是       | 会话类型ConversationType  |
-| sourceID    | String                   | 是       | 单聊为用户 ID，群聊为群ID |
+| 参数名称    | 参数类型                 | 是否必填 | 描述                                   |
+| ----------- | ------------------------ | -------- | -------------------------------------- |
+| base        | OnBase<ConversationInfo> | 是       | 查询结果回调。                         |
+| sourceId    | String                   | 是       | 单聊为用户 ID，群聊为群 ID。           |
+| sessionType | int                      | 是       | 会话类型，单聊通常为 1，群聊通常为 2。 |
 
 ## 返回结果
 
@@ -49,20 +49,24 @@ public void getOneConversation(OnBase<ConversationInfo> base, String sourceId, i
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().conversationManager.getOneConversation(new OnBase<List<ConversationInfo>>() {
-              @Override
-              public void onError(int code, String error) {
+OpenIMClient.getInstance().conversationManager.getOneConversation(
+    new OnBase<ConversationInfo>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
 
-              }
-
-              @Override
-              public void onSuccess(List<ConversationInfo> data) {
-
-              }
-          },sessionType,sourceID);
+    @Override
+    public void onSuccess(ConversationInfo data) {
+        // TODO: 处理单个会话资料
+    }
+},
+    sourceId,
+    sessionType
+);
 ```
 
 ## 相关页面

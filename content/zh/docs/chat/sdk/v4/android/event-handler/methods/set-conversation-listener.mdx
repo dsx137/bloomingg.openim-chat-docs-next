@@ -29,9 +29,9 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-li
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
-```java
+```java showLineNumbers
 public void setOnConversationListener(OnConversationListener listener)
 ```
 
@@ -49,40 +49,25 @@ public void setOnConversationListener(OnConversationListener listener)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().conversationManager.setOnConversationListener(new OnConversationListener() {
-            @Override
-            public void onConversationChanged(List<ConversationInfo> list) {
+    @Override
+    public void onNewConversation(List<ConversationInfo> list) {
+        // TODO: 处理新增会话
+    }
 
-            }
+    @Override
+    public void onConversationChanged(List<ConversationInfo> list) {
+        // TODO: 处理会话变更
+    }
 
-            @Override
-            public void onNewConversation(List<ConversationInfo> list) {
-
-            }
-
-            @Override
-            public void onSyncServerFailed() {
-
-            }
-
-            @Override
-            public void onSyncServerFinish() {
-
-            }
-
-            @Override
-            public void onSyncServerStart() {
-
-            }
-
-            @Override
-            public void onTotalUnreadMessageCountChanged(int i) {
-
-            }
-        });
+    @Override
+    public void onTotalUnreadMessageCountChanged(int totalUnreadCount) {
+        // TODO: 更新未读总数
+    }
+});
 ```
 
 ## 相关页面

@@ -29,11 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/methods/hide-all-conversations'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
-
-```java showLineNumbers
-public void deleteAllConversationFromLocal(OnBase<String> base)
-```
+当前 Android SDK v3.8.3.5 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
 
 ## 输入参数
 
@@ -47,21 +43,7 @@ public void deleteAllConversationFromLocal(OnBase<String> base)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
-
-```java showLineNumbers
-OpenIMClient.getInstance().messageManager.deleteAllMsgFromLocalAndSvr(new OnBase<String>() {
-                        @Override
-                        public void onError(int code, String error) {
-
-                        }
-
-                        @Override
-                        public void onSuccess(String data) {
-
-                        }
-                    });
-```
+TODO: 当前 Android SDK v3.8.3.5 未提供公开 Java 调用示例。
 
 ## 相关页面
 
