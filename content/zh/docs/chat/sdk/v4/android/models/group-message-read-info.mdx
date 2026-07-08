@@ -1,0 +1,27 @@
+---
+title: '群消息已读信息'
+description: '说明 Android SDK GroupMessageReadInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/group-message-read-info'
+---
+
+`GroupMessageReadInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.GroupMessageReadInfo`。群消息已读与未读统计信息。
+
+## 字段说明
+
+| 字段名称     | Java 类型              | 描述                   |
+| ------------ | ---------------------- | ---------------------- |
+| clientMsgID  | String                 | SDK 返回或提交的字段。 |
+| hasReadCount | int                    | SDK 返回或提交的字段。 |
+| unreadCount  | int                    | SDK 返回或提交的字段。 |
+| readMembers  | List<GroupMembersInfo> | SDK 返回或提交的字段。 |
+
+## 关联类型
+
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。

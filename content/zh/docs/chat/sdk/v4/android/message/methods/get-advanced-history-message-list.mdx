@@ -37,13 +37,13 @@ public void getAdvancedHistoryMessageList(OnBase<AdvancedMessage> callBack, Stri
 
 ## 输入参数
 
-| 参数名称       | 参数类型                | 是否必填 | 描述                                                                                                           |
-| -------------- | ----------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| callBack       | OnBase<AdvancedMessage> | 是       | 回调接口                                                                                                       |
-| conversationID | Sting                   | 是       | 会话 ID                                                                                                        |
-| startMsg       | Message                 | 是       | 从这条消息开始查询[count]条，获取的列表 index==length-1 为最新消息，所以获取下一页历史记录 startMsg=list.first |
-| count          | int                     | 是       | 数量                                                                                                           |
-| viewType       | ViewType                | 是       | 为History时表示当前在获取历史消息，为Search时表示在执行搜索消息操作                                            |
+| 参数名称       | 参数类型                                                                                                                           | 是否必填 | 描述                                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;[`AdvancedMessage`](/docs/chat/sdk/v4/android/models/advanced-message)&gt; | 是       | 回调接口                                                                                                       |
+| conversationID | String                                                                                                                             | 是       | 会话 ID                                                                                                        |
+| startMsg       | [`Message`](/docs/chat/sdk/v4/android/models/message)                                                                              | 是       | 从这条消息开始查询[count]条，获取的列表 index==length-1 为最新消息，所以获取下一页历史记录 startMsg=list.first |
+| count          | int                                                                                                                                | 是       | 数量                                                                                                           |
+| viewType       | [`ViewType`](/docs/chat/sdk/v4/android/models/view-type)                                                                           | 是       | 为History时表示当前在获取历史消息，为Search时表示在执行搜索消息操作                                            |
 
 ## 返回结果
 
@@ -72,6 +72,14 @@ OpenIMClient.getInstance().messageManager.getAdvancedHistoryMessageList(
     ViewType.History
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [高级历史消息结果](/docs/chat/sdk/v4/android/models/advanced-message)（`AdvancedMessage`）：历史消息分页查询返回的结果对象，包含错误信息、分页游标和消息列表。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息视图类型](/docs/chat/sdk/v4/android/models/view-type)（`ViewType`）：消息列表查询视图类型。
 
 ## 相关页面
 

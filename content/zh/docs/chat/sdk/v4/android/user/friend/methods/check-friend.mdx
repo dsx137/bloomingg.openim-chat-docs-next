@@ -37,10 +37,10 @@ public void checkFriend(OnBase<List<FriendshipInfo>> base, List<String> uidList)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                     | 是否必填 | 描述         |
-| -------- | ---------------------------- | -------- | ------------ |
-| callBack | OnBase<List<FriendshipInfo>> | 是       | 回调接口     |
-| uidList  | String                       | 是       | 用户 ID 集合 |
+| 参数名称 | 参数类型                                                                                                                                     | 是否必填 | 描述         |
+| -------- | -------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`FriendshipInfo`](/docs/chat/sdk/v4/android/models/friendship-info)&gt;&gt; | 是       | 回调接口     |
+| uidList  | String                                                                                                                                       | 是       | 用户 ID 集合 |
 
 #### FriendInfo
 
@@ -70,6 +70,14 @@ OpenIMClient.getInstance().friendshipManager.checkFriend(new OnBase<List<Friends
     }
 }, uidList);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友关系校验结果](/docs/chat/sdk/v4/android/models/friendship-info)（`FriendshipInfo`）：好友关系校验结果。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
 
 ## 相关页面
 

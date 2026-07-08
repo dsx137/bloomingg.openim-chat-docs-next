@@ -45,9 +45,9 @@ public Message createLocationMessage(double latitude, double longitude, String d
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+| 名称 | 类型                                                  | 描述     |
+| ---- | ----------------------------------------------------- | -------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 成功返回 |
 
 ## 代码示例
 
@@ -56,6 +56,10 @@ public Message createLocationMessage(double latitude, double longitude, String d
 ```java showLineNumbers
 Message locationMessage = OpenIMClient.getInstance().messageManager.createLocationMessage(latitude, longitude, description);
 ```
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

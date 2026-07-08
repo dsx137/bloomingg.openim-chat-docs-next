@@ -37,11 +37,11 @@ public boolean initSDK(Application application, InitConfig initConfig, @NotNull 
 
 ## 输入参数
 
-| 参数名称      | 类型             | 描述                       |
-| ------------- | ---------------- | -------------------------- |
-| `listener`    | `OnConnListener` | 事件监听器实例。           |
-| `operationID` | `string`         | 本次操作的追踪 ID。        |
-| `config`      | `string`         | 按 core binding 签名传入。 |
+| 参数名称      | 类型                                                                  | 描述                       |
+| ------------- | --------------------------------------------------------------------- | -------------------------- |
+| `listener`    | [`OnConnListener`](/docs/chat/sdk/v4/android/models/on-conn-listener) | 事件监听器实例。           |
+| `operationID` | `string`                                                              | 本次操作的追踪 ID。        |
+| `config`      | `string`                                                              | 按 core binding 签名传入。 |
 
 ## 返回结果
 
@@ -69,6 +69,11 @@ boolean initialized = OpenIMClient.getInstance().initSDK(application, initConfig
     }
 });
 ```
+
+## 相关类型
+
+- [初始化配置](/docs/chat/sdk/v4/android/models/init-config)（`InitConfig`）：初始化 SDK 时传入的基础配置。
+- [连接状态监听器](/docs/chat/sdk/v4/android/models/on-conn-listener)（`OnConnListener`）：SDK 连接状态和登录票据状态监听器。
 
 ## 相关页面
 

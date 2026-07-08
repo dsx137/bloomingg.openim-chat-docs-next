@@ -37,11 +37,11 @@ public void getUserStatus(OnBase<List<UsersOnlineStatus>> callback, List<String>
 
 ## 输入参数
 
-| 参数名称      | 类型     | 描述                |
-| ------------- | -------- | ------------------- |
-| `callback`    | `Base`   | 异步结果回调。      |
-| `operationID` | `string` | 本次操作的追踪 ID。 |
-| `userIDs`     | `string` | 业务标识参数。      |
+| 参数名称      | 类型                                            | 描述                |
+| ------------- | ----------------------------------------------- | ------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。      |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
+| `userIDs`     | `string`                                        | 业务标识参数。      |
 
 ## 返回结果
 
@@ -64,6 +64,12 @@ OpenIMClient.getInstance().userInfoManager.getUserStatus(new OnBase<List<UsersOn
     }
 }, ids);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [用户在线状态](/docs/chat/sdk/v4/android/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
 
 ## 相关页面
 

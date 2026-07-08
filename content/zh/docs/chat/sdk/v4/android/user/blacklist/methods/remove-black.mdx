@@ -37,10 +37,10 @@ public void removeBlacklist(OnBase<String> base, String uid)
 
 ## 输入参数
 
-| 参数名称 | 参数类型 | 是否必填 | 描述     |
-| -------- | -------- | -------- | -------- |
-| callBack | OnBase   | 是       | 回调接口 |
-| uid      | String   | 是       | 用户 ID  |
+| 参数名称 | 参数类型                                             | 是否必填 | 描述     |
+| -------- | ---------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口 |
+| uid      | String                                               | 是       | 用户 ID  |
 
 ## 返回结果
 
@@ -63,6 +63,12 @@ OpenIMClient.getInstance().friendshipManager.removeBlacklist(new OnBase<String>(
     }
 }, uid);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
 
 ## 相关页面
 

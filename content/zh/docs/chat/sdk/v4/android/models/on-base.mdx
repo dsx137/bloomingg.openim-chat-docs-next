@@ -1,0 +1,40 @@
+---
+title: '通用回调'
+description: '说明 Android SDK OnBase 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-base'
+---
+
+`OnBase` 是 Android SDK 的回调接口，完整类名为 `io.openim.android.sdk.listener.OnBase`。Android SDK 异步方法的通用成功和失败回调。
+
+## 类型说明
+
+api接口回调
+
+## 回调方法
+
+| 方法      | 参数                   | 描述 |
+| --------- | ---------------------- | ---- |
+| onError   | int code；String error | 失败 |
+| onSuccess | T data                 | 成功 |
+
+## 相关页面
+
+- [登录用户](/docs/chat/sdk/v4/android/application/methods/login)
+- [退出登录](/docs/chat/sdk/v4/android/application/methods/logout)
+- [同意入群申请](/docs/chat/sdk/v4/android/channel/methods/accept-group-application)
+- [设置成员禁言](/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute)
+- [设置群禁言](/docs/chat/sdk/v4/android/channel/methods/change-group-mute)
+- [创建群组](/docs/chat/sdk/v4/android/channel/methods/create-group)
+- [解散群组](/docs/chat/sdk/v4/android/channel/methods/dismiss-group)
+- [获取发出的入群申请](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-applicant)
+- [获取收到的入群申请](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-recipient)
+- [按入群时间筛选成员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter)
+- [获取群成员列表](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list)
+- [获取群主和管理员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin)

@@ -1,0 +1,45 @@
+---
+title: '群组监听器'
+description: '说明 Android SDK OnGroupListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-group-listener'
+---
+
+`OnGroupListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnGroupListener`。群组、入群申请和群成员变化监听器。
+
+## 类型说明
+
+群组监听
+
+## 回调方法
+
+| 方法                       | 参数                      | 描述             |
+| -------------------------- | ------------------------- | ---------------- |
+| onGroupApplicationAccepted | GroupApplicationInfo info | 事件触发时回调。 |
+| onGroupApplicationAdded    | GroupApplicationInfo info | 事件触发时回调。 |
+| onGroupApplicationDeleted  | GroupApplicationInfo info | 事件触发时回调。 |
+| onGroupApplicationRejected | GroupApplicationInfo info | 事件触发时回调。 |
+| onGroupDismissed           | GroupInfo info            | 事件触发时回调。 |
+| onGroupInfoChanged         | GroupInfo info            | 事件触发时回调。 |
+| onGroupMemberAdded         | GroupMembersInfo info     | 事件触发时回调。 |
+| onGroupMemberDeleted       | GroupMembersInfo info     | 事件触发时回调。 |
+| onGroupMemberInfoChanged   | GroupMembersInfo info     | 事件触发时回调。 |
+| onJoinedGroupAdded         | GroupInfo info            | 事件触发时回调。 |
+| onJoinedGroupDeleted       | GroupInfo info            | 事件触发时回调。 |
+
+## 关联类型
+
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+- [群申请信息](/docs/chat/sdk/v4/android/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，包含群资料、申请人、处理状态和来源。
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [概述](/docs/chat/sdk/v4/android/channel/overview)
+- [监听群组事件](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener)

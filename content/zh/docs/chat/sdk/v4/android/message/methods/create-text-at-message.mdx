@@ -37,18 +37,18 @@ public Message createTextAtMessage(String text, List<String> atUserIDList, List<
 
 ## 输入参数
 
-| 参数名称       | 参数类型         | 是否必填 | 描述              |
-| -------------- | ---------------- | -------- | ----------------- |
-| text           | String           | 是       | 内容              |
-| atUserIDList   | List<String>     | 是       | @人的 userID 列表 |
-| atUserInfoList | List<AtUserInfo> | 是       | @人的用户信息列表 |
-| quoteMessage   | Message          | 是       | 引用的消息        |
+| 参数名称       | 参数类型                                                                  | 是否必填 | 描述              |
+| -------------- | ------------------------------------------------------------------------- | -------- | ----------------- |
+| text           | String                                                                    | 是       | 内容              |
+| atUserIDList   | List<String>                                                              | 是       | @人的 userID 列表 |
+| atUserInfoList | List&lt;[`AtUserInfo`](/docs/chat/sdk/v4/android/models/at-user-info)&gt; | 是       | @人的用户信息列表 |
+| quoteMessage   | [`Message`](/docs/chat/sdk/v4/android/models/message)                     | 是       | 引用的消息        |
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+| 名称 | 类型                                                  | 描述     |
+| ---- | ----------------------------------------------------- | -------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 成功返回 |
 
 ## 代码示例
 
@@ -57,6 +57,11 @@ public Message createTextAtMessage(String text, List<String> atUserIDList, List<
 ```java showLineNumbers
 Message atMessage = OpenIMClient.getInstance().messageManager.createTextAtMessage(text, atUserIDList, atUserInfoList, quoteMessage);
 ```
+
+## 相关类型
+
+- [被提及用户信息](/docs/chat/sdk/v4/android/models/at-user-info)（`AtUserInfo`）：被提及用户的 ID 与群昵称映射信息。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

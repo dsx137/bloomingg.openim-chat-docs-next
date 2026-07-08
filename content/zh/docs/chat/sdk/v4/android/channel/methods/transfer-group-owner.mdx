@@ -37,11 +37,11 @@ public void transferGroupOwner(OnBase<String> base, String gid, String uid)
 
 ## 输入参数
 
-| 参数名称 | 参数类型 | 是否必填 | 描述     |
-| -------- | -------- | -------- | -------- |
-| callBack | OnBase   | 是       | 回调接口 |
-| gid      | String   | 是       | 群ID     |
-| uid      | Sting    | 否       | 用户 ID  |
+| 参数名称 | 参数类型                                             | 是否必填 | 描述     |
+| -------- | ---------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口 |
+| gid      | String                                               | 是       | 群ID     |
+| uid      | String                                               | 否       | 用户 ID  |
 
 ## 返回结果
 
@@ -64,6 +64,11 @@ OpenIMClient.getInstance().groupManager.transferGroupOwner(new OnBase<String>() 
     }
 }, gid, uid);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
 
 ## 相关页面
 

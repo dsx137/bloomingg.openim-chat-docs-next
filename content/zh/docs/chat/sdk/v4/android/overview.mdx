@@ -23,7 +23,7 @@ sourcePath: '/docs/chat/sdk/v4/android/overview'
 | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | 初始化    | 调用 `InitSDK(listener, operationID, config)`，`config` 是 `sdk_struct.IMConfig` 的 JSON 字符串。                                    |
 | 登录态    | 初始化后设置监听器，再调用 `Login(callback, operationID, userID, token)`。退出当前用户用 `Logout`，释放 SDK 全局资源用 `UnInitSDK`。 |
-| 异步结果  | 大多数方法通过 `Base` 回调返回 `OnSuccess(data string)` 或 `OnError(errCode, errMsg)`。                                              |
+| 异步结果  | 大多数方法通过 [`Base`](/docs/chat/sdk/v4/android/models/base) 回调返回 `OnSuccess(data string)` 或 `OnError(errCode, errMsg)`。     |
 | 同步创建  | `Create*Message`、`GetAtAllTag`、`GetConversationIDBySessionType` 直接返回字符串。                                                   |
 | JSON 参数 | 列表、结构体和请求对象在 binding 层通常表现为 `string`，实际传入 JSON 字符串。                                                       |
 | 示例代码  | 当前 Android API 页不放示例代码，只保留签名、参数语义、返回和注意事项。                                                              |
@@ -50,3 +50,8 @@ sourcePath: '/docs/chat/sdk/v4/android/overview'
 ## 当前未暴露的能力
 
 当前 core 未导出 open channel、poll、scheduled message、message thread、translation、report、channel metadata、metacounter 等独立 Android 方法。这些能力不会作为 Android 中文侧栏入口；如后续 SDK 增加导出方法，再按源码补充。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。

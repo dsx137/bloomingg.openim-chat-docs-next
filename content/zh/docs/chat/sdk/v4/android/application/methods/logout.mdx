@@ -37,10 +37,10 @@ public void logout(OnBase<String> base)
 
 ## 输入参数
 
-| 参数名称      | 类型     | 描述                |
-| ------------- | -------- | ------------------- |
-| `callback`    | `Base`   | 异步结果回调。      |
-| `operationID` | `string` | 本次操作的追踪 ID。 |
+| 参数名称      | 类型                                            | 描述                |
+| ------------- | ----------------------------------------------- | ------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。      |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
 
 ## 返回结果
 
@@ -63,6 +63,11 @@ OpenIMClient.getInstance().logout(new OnBase<String>() {
     }
 });
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
 
 ## 相关页面
 

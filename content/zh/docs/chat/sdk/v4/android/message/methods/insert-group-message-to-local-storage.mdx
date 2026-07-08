@@ -37,12 +37,12 @@ public void insertGroupMessageToLocalStorage(OnBase<String> base, Message messag
 
 ## 输入参数
 
-| 参数名称 | 参数类型       | 是否必填 | 描述               |
-| -------- | -------------- | -------- | ------------------ |
-| callBack | OnBase<String> | 是       | 回调接口           |
-| message  | Message        | 是       | 消息体             |
-| groupID  | String         | 是       | 接收消息的 groupID |
-| senderID | String         | 是       | 发送消息的 userID  |
+| 参数名称 | 参数类型                                                           | 是否必填 | 描述               |
+| -------- | ------------------------------------------------------------------ | -------- | ------------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;String&gt; | 是       | 回调接口           |
+| message  | [`Message`](/docs/chat/sdk/v4/android/models/message)              | 是       | 消息体             |
+| groupID  | String                                                             | 是       | 接收消息的 groupID |
+| senderID | String                                                             | 是       | 发送消息的 userID  |
 
 ## 返回结果
 
@@ -65,6 +65,12 @@ OpenIMClient.getInstance().messageManager.insertGroupMessageToLocalStorage(new O
     }
 }, message, groupID, senderID);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

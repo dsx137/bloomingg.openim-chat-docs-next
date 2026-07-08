@@ -37,10 +37,10 @@ public void getSendFriendApplicationList(OnBase<List<FriendApplicationInfo>> bas
 
 ## 输入参数
 
-| 参数名称     | 参数类型                               | 是否必填 | 描述                 |
-| ------------ | -------------------------------------- | -------- | -------------------- |
-| base         | OnBase<List<FriendApplicationInfo>>    | 是       | 查询结果回调。       |
-| applicantReq | GetFriendApplicationListAsApplicantReq | 是       | 分页和筛选请求参数。 |
+| 参数名称     | 参数类型                                                                                                                                                    | 是否必填 | 描述                 |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| base         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info)&gt;&gt; | 是       | 查询结果回调。       |
+| applicantReq | [`GetFriendApplicationListAsApplicantReq`](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req)                                   | 是       | 分页和筛选请求参数。 |
 
 ## 返回结果
 
@@ -66,6 +66,14 @@ OpenIMClient.getInstance().friendshipManager.getSendFriendApplicationList(
     applicantReq
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [发出的好友申请查询条件](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req)（`GetFriendApplicationListAsApplicantReq`）：查询当前用户发出的好友申请时使用的分页条件。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友申请信息](/docs/chat/sdk/v4/android/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
 
 ## 相关页面
 

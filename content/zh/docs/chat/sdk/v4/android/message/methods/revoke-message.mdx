@@ -37,11 +37,11 @@ public void revokeMessageV2(OnBase<String> callBack, String conversationID, Stri
 
 ## 输入参数
 
-| 参数名称       | 参数类型       | 是否必填 | 描述            |
-| -------------- | -------------- | -------- | --------------- |
-| callBack       | OnBase<String> | 是       | 撤回结果回调。  |
-| conversationID | String         | 是       | 会话 ID。       |
-| clientMsgID    | String         | 是       | 客户端消息 ID。 |
+| 参数名称       | 参数类型                                                           | 是否必填 | 描述            |
+| -------------- | ------------------------------------------------------------------ | -------- | --------------- |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;String&gt; | 是       | 撤回结果回调。  |
+| conversationID | String                                                             | 是       | 会话 ID。       |
+| clientMsgID    | String                                                             | 是       | 客户端消息 ID。 |
 
 ## 返回结果
 
@@ -64,6 +64,11 @@ OpenIMClient.getInstance().messageManager.revokeMessageV2(new OnBase<String>() {
     }
 }, conversationID, clientMsgID);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
 
 ## 相关页面
 

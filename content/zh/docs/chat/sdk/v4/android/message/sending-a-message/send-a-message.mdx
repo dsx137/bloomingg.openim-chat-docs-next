@@ -53,12 +53,12 @@ sourcePath: '/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message'
 
 ## 结果事件
 
-| 事件     | 来源                                                                               | 说明                                     |
-| -------- | ---------------------------------------------------------------------------------- | ---------------------------------------- |
-| 发送成功 | `SendMsgCallBack.OnSuccess`                                                        | 返回服务端确认后的消息 JSON。            |
-| 发送进度 | `SendMsgCallBack.OnProgress`                                                       | 文件、图片、视频等可能产生进度。         |
-| 新消息   | `OnAdvancedMsgListener.OnRecvNewMessage` 或 `OnBatchMsgListener.OnRecvNewMessages` | 接收端通过监听器收到消息。               |
-| 会话变化 | `OnConversationListener.OnNewConversation`、`OnConversationChanged`                | 发送或接收消息可能改变会话列表和未读数。 |
+| 事件     | 来源                                                                                                                                                                                                      | 说明                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| 发送成功 | [`SendMsgCallBack`](/docs/chat/sdk/v4/android/models/send-msg-call-back).OnSuccess                                                                                                                        | 返回服务端确认后的消息 JSON。            |
+| 发送进度 | [`SendMsgCallBack`](/docs/chat/sdk/v4/android/models/send-msg-call-back).OnProgress                                                                                                                       | 文件、图片、视频等可能产生进度。         |
+| 新消息   | [`OnAdvancedMsgListener`](/docs/chat/sdk/v4/android/models/on-advanced-msg-listener).OnRecvNewMessage 或 [`OnBatchMsgListener`](/docs/chat/sdk/v4/android/models/on-batch-msg-listener).OnRecvNewMessages | 接收端通过监听器收到消息。               |
+| 会话变化 | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener).OnNewConversation、OnConversationChanged                                                                            | 发送或接收消息可能改变会话列表和未读数。 |
 
 ## 注意事项
 
@@ -66,3 +66,11 @@ sourcePath: '/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message'
 - `Create*MessageByURL` 类方法适合资源已上传或由业务侧提供 URL 的场景。
 - 发送前必须已登录，并已设置消息和会话监听器。
 - 不要直接套用其他平台或其他封装层的示例；应按独立方法页签名映射。
+
+## 相关类型
+
+- [底层消息发送回调](/docs/chat/sdk/v4/android/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，Android 调用层通常映射为 OnMsgSendCallback。
+- [底层高级消息监听器](/docs/chat/sdk/v4/android/models/on-advanced-msg-listener)（`OnAdvancedMsgListener`）：core binding 高级消息监听器，Android 调用层对应 OnAdvanceMsgListener。
+- [批量消息监听器](/docs/chat/sdk/v4/android/models/on-batch-msg-listener)（`OnBatchMsgListener`）：core binding 批量消息监听器，用于接收多条新消息和离线消息。
+- [会话监听器](/docs/chat/sdk/v4/android/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。

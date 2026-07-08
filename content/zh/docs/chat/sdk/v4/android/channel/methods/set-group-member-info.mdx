@@ -37,9 +37,9 @@ public void setGroupMemberInfo(SetGroupMemberInfo setGroupMemberInfo, OnBase<Str
 
 ## 输入参数
 
-| 参数名称         | 参数类型           | 是否必填 | 描述     |
-| ---------------- | ------------------ | -------- | -------- |
-| groupMembersInfo | SetGroupMemberInfo | 是       | 成员信息 |
+| 参数名称         | 参数类型                                                                       | 是否必填 | 描述     |
+| ---------------- | ------------------------------------------------------------------------------ | -------- | -------- |
+| groupMembersInfo | [`SetGroupMemberInfo`](/docs/chat/sdk/v4/android/models/set-group-member-info) | 是       | 成员信息 |
 
 ## 返回结果
 
@@ -62,6 +62,12 @@ OpenIMClient.getInstance().groupManager.setGroupMemberInfo(setGroupMemberInfo, n
     }
 });
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群成员设置请求](/docs/chat/sdk/v4/android/models/set-group-member-info)（`SetGroupMemberInfo`）：设置群成员资料时使用的请求对象。
 
 ## 相关页面
 

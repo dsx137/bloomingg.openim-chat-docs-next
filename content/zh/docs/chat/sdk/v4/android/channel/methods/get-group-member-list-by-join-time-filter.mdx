@@ -39,15 +39,15 @@ public void getGroupMemberListByJoinTime(OnBase<List<GroupMembersInfo>> base, St
 
 ## 输入参数
 
-| 参数名称          | 参数类型                       | 是否必填 | 描述                  |
-| ----------------- | ------------------------------ | -------- | --------------------- |
-| callBack          | OnBase<List<GroupMembersInfo>> | 是       | 回调接口              |
-| groupID           | String                         | 是       | 群ID                  |
-| offset            | int                            | 是       | 开始下标              |
-| count             | int                            | 是       | 总数                  |
-| joinTimeBegin     | int                            | 是       | 加入开始时间          |
-| joinTimeEnd       | int                            | 是       | 加入结束时间          |
-| excludeUserIDList | List<String>                   | 否       | 剔除不被查询的成员 ID |
+| 参数名称          | 参数类型                                                                                                                                          | 是否必填 | 描述                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
+| callBack          | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)&gt;&gt; | 是       | 回调接口              |
+| groupID           | String                                                                                                                                            | 是       | 群ID                  |
+| offset            | int                                                                                                                                               | 是       | 开始下标              |
+| count             | int                                                                                                                                               | 是       | 总数                  |
+| joinTimeBegin     | int                                                                                                                                               | 是       | 加入开始时间          |
+| joinTimeEnd       | int                                                                                                                                               | 是       | 加入结束时间          |
+| excludeUserIDList | List<String>                                                                                                                                      | 否       | 剔除不被查询的成员 ID |
 
 ## 返回结果
 
@@ -78,6 +78,12 @@ OpenIMClient.getInstance().groupManager.getGroupMemberListByJoinTime(
     excludeUserIDList
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
 
 ## 相关页面
 

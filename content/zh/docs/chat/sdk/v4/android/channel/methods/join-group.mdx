@@ -38,12 +38,12 @@ public void joinGroup(OnBase<String> base, String gid, String reason, int joinSo
 
 ## 输入参数
 
-| 参数名称   | 参数类型 | 是否必填 | 描述                |
-| ---------- | -------- | -------- | ------------------- |
-| callBack   | OnBase   | 是       | 回调接口            |
-| gid        | String   | 是       | 群ID                |
-| reason     | Sting    | 否       | 请求信息            |
-| joinSource | int      | 是       | JoinSource 请求来源 |
+| 参数名称   | 参数类型                                             | 是否必填 | 描述                                                                  |
+| ---------- | ---------------------------------------------------- | -------- | --------------------------------------------------------------------- |
+| callBack   | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口                                                              |
+| gid        | String                                               | 是       | 群ID                                                                  |
+| reason     | String                                               | 否       | 请求信息                                                              |
+| joinSource | int                                                  | 是       | [`JoinSource`](/docs/chat/sdk/v4/android/models/join-source) 请求来源 |
 
 ## 返回结果
 
@@ -66,6 +66,12 @@ OpenIMClient.getInstance().groupManager.joinGroup(new OnBase<String>() {
     }
 }, gid, reason, joinSource);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [入群来源](/docs/chat/sdk/v4/android/models/join-source)（`JoinSource`）：入群来源枚举。
 
 ## 相关页面
 

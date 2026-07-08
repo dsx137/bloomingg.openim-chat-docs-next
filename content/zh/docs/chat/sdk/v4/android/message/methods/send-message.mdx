@@ -40,14 +40,14 @@ public void sendMessage(OnMsgSendCallback base, Message message, String recvUid,
 
 ## 输入参数
 
-| 参数名称        | 参数类型          | 是否必填 | 描述                                 |
-| --------------- | ----------------- | -------- | ------------------------------------ |
-| base            | OnMsgSendCallback | 是       | 发送结果和进度回调。                 |
-| message         | Message           | 是       | 要发送的消息体。                     |
-| recvUid         | String            | 单聊必填 | 单聊接收者用户 ID。                  |
-| recvGid         | String            | 群聊必填 | 群聊接收群 ID。                      |
-| offlinePushInfo | OfflinePushInfo   | 否       | 离线推送配置。                       |
-| isOnlineOnly    | boolean           | 否       | 是否只发送在线消息，仅重载方法使用。 |
+| 参数名称        | 参数类型                                                                     | 是否必填 | 描述                                 |
+| --------------- | ---------------------------------------------------------------------------- | -------- | ------------------------------------ |
+| base            | [`OnMsgSendCallback`](/docs/chat/sdk/v4/android/models/on-msg-send-callback) | 是       | 发送结果和进度回调。                 |
+| message         | [`Message`](/docs/chat/sdk/v4/android/models/message)                        | 是       | 要发送的消息体。                     |
+| recvUid         | String                                                                       | 单聊必填 | 单聊接收者用户 ID。                  |
+| recvGid         | String                                                                       | 群聊必填 | 群聊接收群 ID。                      |
+| offlinePushInfo | [`OfflinePushInfo`](/docs/chat/sdk/v4/android/models/offline-push-info)      | 否       | 离线推送配置。                       |
+| isOnlineOnly    | boolean                                                                      | 否       | 是否只发送在线消息，仅重载方法使用。 |
 
 ## 返回结果
 
@@ -81,6 +81,13 @@ OpenIMClient.getInstance().messageManager.sendMessage(
     offlinePushInfo
 );
 ```
+
+## 相关类型
+
+- [底层消息发送回调](/docs/chat/sdk/v4/android/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，Android 调用层通常映射为 OnMsgSendCallback。
+- [离线推送信息](/docs/chat/sdk/v4/android/models/offline-push-info)（`OfflinePushInfo`）：发送消息时携带的离线推送配置。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息发送回调](/docs/chat/sdk/v4/android/models/on-msg-send-callback)（`OnMsgSendCallback`）：发送消息时使用的进度、成功和失败回调。
 
 ## 相关页面
 

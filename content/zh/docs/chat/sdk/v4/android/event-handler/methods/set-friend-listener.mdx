@@ -37,9 +37,9 @@ public void setOnFriendshipListener(OnFriendshipListener listener)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                  | 是否必填 | 描述 |
-| -------- | ------------------------- | -------- | ---- |
-| listener | id <OnFriendshipListener> | 是       |      |
+| 参数名称 | 参数类型                                                                                     | 是否必填 | 描述 |
+| -------- | -------------------------------------------------------------------------------------------- | -------- | ---- |
+| listener | id &lt;[`OnFriendshipListener`](/docs/chat/sdk/v4/android/models/on-friendship-listener)&gt; | 是       |      |
 
 ## 返回结果
 
@@ -67,6 +67,12 @@ OpenIMClient.getInstance().friendshipManager.setOnFriendshipListener(new OnFrien
     }
 });
 ```
+
+## 相关类型
+
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/android/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
 
 ## 相关页面
 

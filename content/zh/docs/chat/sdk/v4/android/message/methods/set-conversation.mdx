@@ -37,10 +37,10 @@ public void setConversation(OnBase<String> base, String conversationID, Conversa
 
 ## 输入参数
 
-| 参数名称        | 参数类型        | 是否必填 | 描述         |
-| --------------- | --------------- | -------- | ------------ |
-| conversationID  | String          | 是       | 会话 ID      |
-| conversationReq | ConversationReq | 是       | 变更的结构体 |
+| 参数名称        | 参数类型                                                               | 是否必填 | 描述         |
+| --------------- | ---------------------------------------------------------------------- | -------- | ------------ |
+| conversationID  | String                                                                 | 是       | 会话 ID      |
+| conversationReq | [`ConversationReq`](/docs/chat/sdk/v4/android/models/conversation-req) | 是       | 变更的结构体 |
 
 ## 返回结果
 
@@ -63,6 +63,12 @@ OpenIMClient.getInstance().conversationManager.setConversation(new OnBase<String
     }
 }, conversationID, conversationReq);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [会话设置请求](/docs/chat/sdk/v4/android/models/conversation-req)（`ConversationReq`）：会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。
 
 ## 相关页面
 

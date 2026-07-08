@@ -37,14 +37,14 @@ public void logs(@LogLevel int logLevel, String currentClassName, int currentLin
 
 ## 输入参数
 
-| 参数名称         | 参数类型  | 是否必填 | 描述                                        |
-| ---------------- | --------- | -------- | ------------------------------------------- |
-| logLevel         | int       | 是       | 日志级别，使用 `LogLevel` 常量。            |
-| currentClassName | String    | 是       | 产生日志的类名或文件名。                    |
-| currentLineNum   | int       | 是       | 产生日志的代码行号。                        |
-| msgStr           | String    | 是       | 日志正文。                                  |
-| errStr           | String    | 否       | 错误详情；Warn、Error、Fatal 等级建议传入。 |
-| extra            | String... | 否       | 额外键值对，按 key、value 成对传入。        |
+| 参数名称         | 参数类型  | 是否必填 | 描述                                                                           |
+| ---------------- | --------- | -------- | ------------------------------------------------------------------------------ |
+| logLevel         | int       | 是       | 日志级别，使用 [`LogLevel`](/docs/chat/sdk/v4/android/models/log-level) 常量。 |
+| currentClassName | String    | 是       | 产生日志的类名或文件名。                                                       |
+| currentLineNum   | int       | 是       | 产生日志的代码行号。                                                           |
+| msgStr           | String    | 是       | 日志正文。                                                                     |
+| errStr           | String    | 否       | 错误详情；Warn、Error、Fatal 等级建议传入。                                    |
+| extra            | String... | 否       | 额外键值对，按 key、value 成对传入。                                           |
 
 ## 返回结果
 
@@ -65,6 +65,11 @@ OpenIMClient.getInstance().logs(
     conversationID
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [日志等级](/docs/chat/sdk/v4/android/models/log-level)（`LogLevel`）：SDK 日志等级常量。
 
 ## 相关页面
 

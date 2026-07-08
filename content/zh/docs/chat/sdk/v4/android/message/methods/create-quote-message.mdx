@@ -37,16 +37,16 @@ public Message createQuoteMessage(String text, Message message)
 
 ## 输入参数
 
-| 参数名称 | 参数类型 | 是否必填 | 描述         |
-| -------- | -------- | -------- | ------------ |
-| text     | String   | 是       | 文本内容     |
-| quoteMsg | Message  | 是       | 被引用的消息 |
+| 参数名称 | 参数类型                                              | 是否必填 | 描述         |
+| -------- | ----------------------------------------------------- | -------- | ------------ |
+| text     | String                                                | 是       | 文本内容     |
+| quoteMsg | [`Message`](/docs/chat/sdk/v4/android/models/message) | 是       | 被引用的消息 |
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+| 名称 | 类型                                                  | 描述     |
+| ---- | ----------------------------------------------------- | -------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 成功返回 |
 
 ## 代码示例
 
@@ -55,6 +55,10 @@ public Message createQuoteMessage(String text, Message message)
 ```java showLineNumbers
 Message quoteMessage = OpenIMClient.getInstance().messageManager.createQuoteMessage(text, message);
 ```
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

@@ -37,13 +37,13 @@ public void getGroupMemberList(OnBase<List<GroupMembersInfo>> base, String group
 
 ## 输入参数
 
-| 参数名称 | 参数类型                       | 是否必填 | 描述                       |
-| -------- | ------------------------------ | -------- | -------------------------- |
-| callBack | OnBase<List<GroupMembersInfo>> | 是       | 回调接口                   |
-| groupId  | String                         | 是       | 群 ID                      |
-| filter   | int                            | 否       | GroupMemberFilter 过滤成员 |
-| offset   | int                            | 是       | 偏移量                     |
-| count    | int                            | 是       | 每页数量                   |
+| 参数名称 | 参数类型                                                                                                                                          | 是否必填 | 描述                                                                                 |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)&gt;&gt; | 是       | 回调接口                                                                             |
+| groupId  | String                                                                                                                                            | 是       | 群 ID                                                                                |
+| filter   | int                                                                                                                                               | 否       | [`GroupMemberFilter`](/docs/chat/sdk/v4/android/models/group-member-filter) 过滤成员 |
+| offset   | int                                                                                                                                               | 是       | 偏移量                                                                               |
+| count    | int                                                                                                                                               | 是       | 每页数量                                                                             |
 
 ## 返回结果
 
@@ -72,6 +72,13 @@ OpenIMClient.getInstance().groupManager.getGroupMemberList(
     count
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群成员筛选类型](/docs/chat/sdk/v4/android/models/group-member-filter)（`GroupMemberFilter`）：群成员列表筛选类型。
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
 
 ## 相关页面
 

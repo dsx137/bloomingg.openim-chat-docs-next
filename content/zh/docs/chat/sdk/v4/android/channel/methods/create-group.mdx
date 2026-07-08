@@ -38,13 +38,13 @@ public void createGroup(List<String> memberUserIDs, List<String> adminUserIDs,
 
 ## 输入参数
 
-| 参数名称      | 参数类型          | 是否必填 | 描述                           |
-| ------------- | ----------------- | -------- | ------------------------------ |
-| memberUserIDs | List<String>      | 是       | 初始化群成员 ID 列表。         |
-| adminUserIDs  | List<String>      | 否       | 初始化管理员 ID 列表。         |
-| groupInfo     | GroupInfo         | 是       | 群组基础资料。                 |
-| ownerUserID   | String            | 否       | 群主用户 ID。                  |
-| callBack      | OnBase<GroupInfo> | 是       | 创建结果回调，成功返回群资料。 |
+| 参数名称      | 参数类型                                                                                                               | 是否必填 | 描述                           |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+| memberUserIDs | List<String>                                                                                                           | 是       | 初始化群成员 ID 列表。         |
+| adminUserIDs  | List<String>                                                                                                           | 否       | 初始化管理员 ID 列表。         |
+| groupInfo     | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)                                                             | 是       | 群组基础资料。                 |
+| ownerUserID   | String                                                                                                                 | 否       | 群主用户 ID。                  |
+| callBack      | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)&gt; | 是       | 创建结果回调，成功返回群资料。 |
 
 ## 返回结果
 
@@ -73,6 +73,12 @@ OpenIMClient.getInstance().groupManager.createGroup(
 }
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
 
 ## 相关页面
 

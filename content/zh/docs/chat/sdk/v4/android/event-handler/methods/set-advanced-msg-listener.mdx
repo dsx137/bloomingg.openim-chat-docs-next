@@ -37,9 +37,9 @@ public void setAdvancedMsgListener(OnAdvanceMsgListener listener)
 
 ## 输入参数
 
-| 参数名称 | 参数类型              | 描述 |
-| -------- | --------------------- | ---- |
-| listener | OnAdvancedMsgListener | 是   |
+| 参数名称 | 参数类型                                                                             | 描述 |
+| -------- | ------------------------------------------------------------------------------------ | ---- |
+| listener | [`OnAdvancedMsgListener`](/docs/chat/sdk/v4/android/models/on-advanced-msg-listener) | 是   |
 
 ## 返回结果
 
@@ -72,6 +72,15 @@ OpenIMClient.getInstance().messageManager.setAdvancedMsgListener(new OnAdvanceMs
     }
 });
 ```
+
+## 相关类型
+
+- [底层高级消息监听器](/docs/chat/sdk/v4/android/models/on-advanced-msg-listener)（`OnAdvancedMsgListener`）：core binding 高级消息监听器，Android 调用层对应 OnAdvanceMsgListener。
+- [单聊已读回执信息](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info)（`C2CReadReceiptInfo`）：单聊消息已读回执信息。
+- [高级消息监听器](/docs/chat/sdk/v4/android/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）：接收新消息、已读回执、撤回和消息扩展事件的监听器。
+- [群消息已读回执](/docs/chat/sdk/v4/android/models/group-message-receipt)（`GroupMessageReceipt`）：群消息已读回执。
+- [消息撤回信息](/docs/chat/sdk/v4/android/models/revoked-info)（`RevokedInfo`）：消息撤回事件中的撤回详情。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

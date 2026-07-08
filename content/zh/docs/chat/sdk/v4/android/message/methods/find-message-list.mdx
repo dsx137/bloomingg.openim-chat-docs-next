@@ -37,16 +37,16 @@ public void findMessageList(OnBase<SearchResult> base, List<SearchParams> search
 
 ## 输入参数
 
-| 参数名称     | 参数类型                 | 是否必填 | 描述     |
-| ------------ | ------------------------ | -------- | -------- |
-| callBack     | OnBase<TypeKeySetResult> | 是       | 回调接口 |
-| SearchParams | List<SearchParams>       | 是       |          |
+| 参数名称                                                         | 参数类型                                                                                                                               | 是否必填 | 描述     |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- |
+| callBack                                                         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;[`TypeKeySetResult`](/docs/chat/sdk/v4/android/models/type-key-set-result)&gt; | 是       | 回调接口 |
+| [`SearchParams`](/docs/chat/sdk/v4/android/models/search-params) | List&lt;[`SearchParams`](/docs/chat/sdk/v4/android/models/search-params)&gt;                                                           | 是       |          |
 
 ## 返回结果
 
-| 名称 | 类型             | 描述     |
-| ---- | ---------------- | -------- |
-| ~    | TypeKeySetResult | 成功返回 |
+| 名称 | 类型                                                                       | 描述     |
+| ---- | -------------------------------------------------------------------------- | -------- |
+| ~    | [`TypeKeySetResult`](/docs/chat/sdk/v4/android/models/type-key-set-result) | 成功返回 |
 
 ## 代码示例
 
@@ -65,6 +65,14 @@ OpenIMClient.getInstance().messageManager.findMessageList(new OnBase<SearchResul
     }
 }, searchParams);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [搜索参数](/docs/chat/sdk/v4/android/models/search-params)（`SearchParams`）：搜索会话或好友时使用的搜索条件。
+- [消息扩展设置结果](/docs/chat/sdk/v4/android/models/type-key-set-result)（`TypeKeySetResult`）：设置消息扩展后的结果信息。
+- [消息搜索结果](/docs/chat/sdk/v4/android/models/search-result)（`SearchResult`）：本地消息搜索结果。
 
 ## 相关页面
 

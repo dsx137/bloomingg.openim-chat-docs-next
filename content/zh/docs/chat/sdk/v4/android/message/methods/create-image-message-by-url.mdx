@@ -37,18 +37,18 @@ public Message createImageMessageByURL(String sourcePath, PictureInfo sourcePict
 
 ## 输入参数
 
-| 参数名称        | 参数类型    | 是否必填 | 描述                     |
-| --------------- | ----------- | -------- | ------------------------ |
-| sourcePath      | String      | 是       | 原始图片资源路径或 URL。 |
-| sourcePicture   | PictureInfo | 是       | 原图相关信息。           |
-| bigPicture      | PictureInfo | 是       | 大图相关信息。           |
-| snapshotPicture | PictureInfo | 是       | 缩略图相关信息。         |
+| 参数名称        | 参数类型                                                       | 是否必填 | 描述                     |
+| --------------- | -------------------------------------------------------------- | -------- | ------------------------ |
+| sourcePath      | String                                                         | 是       | 原始图片资源路径或 URL。 |
+| sourcePicture   | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 是       | 原图相关信息。           |
+| bigPicture      | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 是       | 大图相关信息。           |
+| snapshotPicture | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 是       | 缩略图相关信息。         |
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+| 名称 | 类型                                                  | 描述     |
+| ---- | ----------------------------------------------------- | -------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 成功返回 |
 
 ## 代码示例
 
@@ -57,6 +57,11 @@ public Message createImageMessageByURL(String sourcePath, PictureInfo sourcePict
 ```java showLineNumbers
 Message imageMessage = OpenIMClient.getInstance().messageManager.createImageMessageByURL(sourcePath, sourcePicture, bigPicture, snapshotPicture);
 ```
+
+## 相关类型
+
+- [图片资源信息](/docs/chat/sdk/v4/android/models/picture-info)（`PictureInfo`）：图片资源信息，包含 UUID、URL、尺寸和大小。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

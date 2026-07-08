@@ -37,15 +37,15 @@ public void setOnConversationListener(OnConversationListener listener)
 
 ## 输入参数
 
-| 参数名称   | 类型                     | 描述             |
-| ---------- | ------------------------ | ---------------- |
-| `listener` | `OnConversationListener` | 事件监听器实例。 |
+| 参数名称   | 类型                                                                                  | 描述             |
+| ---------- | ------------------------------------------------------------------------------------- | ---------------- |
+| `listener` | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener) | 事件监听器实例。 |
 
 ## 返回结果
 
-| 参数名称 | 参数类型             | 描述 |
-| -------- | -------------------- | ---- |
-| listener | ConversationListener | 是   |
+| 参数名称 | 参数类型                                                                              | 描述 |
+| -------- | ------------------------------------------------------------------------------------- | ---- |
+| listener | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener) | 是   |
 
 ## 代码示例
 
@@ -69,6 +69,11 @@ OpenIMClient.getInstance().conversationManager.setOnConversationListener(new OnC
     }
 });
 ```
+
+## 相关类型
+
+- [会话监听器](/docs/chat/sdk/v4/android/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+- [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
 
 ## 相关页面
 

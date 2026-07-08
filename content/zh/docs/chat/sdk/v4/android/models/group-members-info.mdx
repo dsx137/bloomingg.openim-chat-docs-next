@@ -1,0 +1,39 @@
+---
+title: '群成员信息'
+description: '说明 Android SDK GroupMembersInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/group-members-info'
+---
+
+`GroupMembersInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.GroupMembersInfo`。群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+
+## 字段说明
+
+| 字段名称       | Java 类型 | 描述                                               |
+| -------------- | --------- | -------------------------------------------------- |
+| groupID        | String    | 群id                                               |
+| userID         | String    | 用户id                                             |
+| nickname       | String    | 群内昵称                                           |
+| faceURL        | String    | 头像                                               |
+| roleLevel      | int       | 群角色                                             |
+| joinTime       | long      | 入群时间                                           |
+| joinSource     | int       | 加入方式 2：邀请加入 3：搜索加入 4：通过二维码加入 |
+| operatorUserID | String    | 操作者id                                           |
+| ex             | String    | 扩展字段                                           |
+| muteEndTime    | long      | 禁言结束时间                                       |
+| inviterUserID  | String    | 邀请人id                                           |
+
+## 相关页面
+
+- [按入群时间筛选成员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter)
+- [获取群成员列表](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list)
+- [获取群主和管理员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin)
+- [获取指定群成员资料](/docs/chat/sdk/v4/android/channel/methods/get-specified-group-members-info)
+- [搜索群成员](/docs/chat/sdk/v4/android/channel/methods/search-group-members)
+- [监听群组事件](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener)

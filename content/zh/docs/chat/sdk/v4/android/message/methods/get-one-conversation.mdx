@@ -37,11 +37,11 @@ public void getOneConversation(OnBase<ConversationInfo> base, String sourceId, i
 
 ## 输入参数
 
-| 参数名称    | 参数类型                 | 是否必填 | 描述                                   |
-| ----------- | ------------------------ | -------- | -------------------------------------- |
-| base        | OnBase<ConversationInfo> | 是       | 查询结果回调。                         |
-| sourceId    | String                   | 是       | 单聊为用户 ID，群聊为群 ID。           |
-| sessionType | int                      | 是       | 会话类型，单聊通常为 1，群聊通常为 2。 |
+| 参数名称    | 参数类型                                                                                                                             | 是否必填 | 描述                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------------------- |
+| base        | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)&gt; | 是       | 查询结果回调。                         |
+| sourceId    | String                                                                                                                               | 是       | 单聊为用户 ID，群聊为群 ID。           |
+| sessionType | int                                                                                                                                  | 是       | 会话类型，单聊通常为 1，群聊通常为 2。 |
 
 ## 返回结果
 
@@ -68,6 +68,12 @@ OpenIMClient.getInstance().conversationManager.getOneConversation(
     sessionType
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
 
 ## 相关页面
 

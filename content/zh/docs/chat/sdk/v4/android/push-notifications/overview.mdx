@@ -27,14 +27,19 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/overview'
 
 ## 上传回调
 
-| 回调                                                                                     | 说明                   |
-| ---------------------------------------------------------------------------------------- | ---------------------- |
-| `UploadLogProgress.OnProgress(current int64, size int64)`                                | 日志上传进度。         |
-| `UploadFileCallback.Open(size int64)`                                                    | 文件打开并得到总大小。 |
-| `UploadFileCallback.PartSize(partSize int64, num int)`                                   | 分片大小和分片数量。   |
-| `UploadFileCallback.HashPartProgress(index int, size int64, partHash string)`            | 分片哈希进度。         |
-| `UploadFileCallback.HashPartComplete(partsHash string, fileHash string)`                 | 所有分片哈希完成。     |
-| `UploadFileCallback.UploadID(uploadID string)`                                           | 获取上传 ID。          |
-| `UploadFileCallback.UploadPartComplete(index int, partSize int64, partHash string)`      | 单个分片上传完成。     |
-| `UploadFileCallback.UploadComplete(fileSize int64, streamSize int64, storageSize int64)` | 文件上传完成阶段信息。 |
-| `UploadFileCallback.Complete(size int64, url string, typ int)`                           | 文件完成并返回 URL。   |
+| 回调                                                                                                                                              | 说明                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------- |
+| [`UploadLogProgress`](/docs/chat/sdk/v4/android/models/upload-log-progress).OnProgress(current int64, size int64)                                 | 日志上传进度。         |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).Open(size int64)                                                    | 文件打开并得到总大小。 |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).PartSize(partSize int64, num int)                                   | 分片大小和分片数量。   |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).HashPartProgress(index int, size int64, partHash string)            | 分片哈希进度。         |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).HashPartComplete(partsHash string, fileHash string)                 | 所有分片哈希完成。     |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).UploadID(uploadID string)                                           | 获取上传 ID。          |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).UploadPartComplete(index int, partSize int64, partHash string)      | 单个分片上传完成。     |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).UploadComplete(fileSize int64, streamSize int64, storageSize int64) | 文件上传完成阶段信息。 |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/android/models/upload-file-callback).Complete(size int64, url string, typ int)                           | 文件完成并返回 URL。   |
+
+## 相关类型
+
+- [底层文件上传回调](/docs/chat/sdk/v4/android/models/upload-file-callback)（`UploadFileCallback`）：core binding 文件上传回调，Android 调用层通常映射为 OnPutFileListener。
+- [日志上传进度回调](/docs/chat/sdk/v4/android/models/upload-log-progress)（`UploadLogProgress`）：日志上传进度回调接口。

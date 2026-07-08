@@ -37,10 +37,10 @@ public void getSendGroupApplicationList(OnBase<List<GroupApplicationInfo>> base,
 
 ## 输入参数
 
-| 参数名称     | 参数类型                              | 是否必填 | 描述                 |
-| ------------ | ------------------------------------- | -------- | -------------------- |
-| base         | OnBase<List<GroupApplicationInfo>>    | 是       | 查询结果回调。       |
-| applicantReq | GetGroupApplicationListAsApplicantReq | 是       | 分页和筛选请求参数。 |
+| 参数名称     | 参数类型                                                                                                                                                  | 是否必填 | 描述                 |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| base         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info)&gt;&gt; | 是       | 查询结果回调。       |
+| applicantReq | [`GetGroupApplicationListAsApplicantReq`](/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req)                                   | 是       | 分页和筛选请求参数。 |
 
 ## 返回结果
 
@@ -66,6 +66,13 @@ OpenIMClient.getInstance().groupManager.getSendGroupApplicationList(
     applicantReq
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [发出的群申请查询条件](/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req)（`GetGroupApplicationListAsApplicantReq`）：查询当前用户发出的入群申请时使用的分页和过滤条件。
+- [群申请信息](/docs/chat/sdk/v4/android/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，包含群资料、申请人、处理状态和来源。
 
 ## 相关页面
 

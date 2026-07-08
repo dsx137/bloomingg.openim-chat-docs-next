@@ -37,17 +37,17 @@ public Message createMergerMessage(List<Message> messageList, String title, List
 
 ## 输入参数
 
-| 参数名称    | 参数类型      | 是否必填 | 描述         |
-| ----------- | ------------- | -------- | ------------ |
-| messageList | List<Message> | 是       | 消息列表     |
-| title       | String        | 是       | 标题         |
-| summaryList | List<String>  | 是       | 消息摘要列表 |
+| 参数名称    | 参数类型                                                          | 是否必填 | 描述         |
+| ----------- | ----------------------------------------------------------------- | -------- | ------------ |
+| messageList | List&lt;[`Message`](/docs/chat/sdk/v4/android/models/message)&gt; | 是       | 消息列表     |
+| title       | String                                                            | 是       | 标题         |
+| summaryList | List<String>                                                      | 是       | 消息摘要列表 |
 
 ## 返回结果
 
-| 名称 | 类型    | 描述     |
-| ---- | ------- | -------- |
-| ~    | Message | 成功返回 |
+| 名称 | 类型                                                  | 描述     |
+| ---- | ----------------------------------------------------- | -------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 成功返回 |
 
 ## 代码示例
 
@@ -56,6 +56,10 @@ public Message createMergerMessage(List<Message> messageList, String title, List
 ```java showLineNumbers
 Message mergerMessage = OpenIMClient.getInstance().messageManager.createMergerMessage(messageList, title, summaryList);
 ```
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
 
 ## 相关页面
 

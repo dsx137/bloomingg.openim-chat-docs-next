@@ -37,12 +37,12 @@ public void inviteUserToGroup(OnBase<String> base, String groupId, List<String> 
 
 ## 输入参数
 
-| 参数名称 | 参数类型                 | 是否必填 | 描述             |
-| -------- | ------------------------ | -------- | ---------------- |
-| callBack | OnBase<List<ResultInfo>> | 是       | 回调接口         |
-| groupId  | String                   | 是       | 群ID             |
-| reason   | Sting                    | 是       | 邀请信息         |
-| uidList  | List<String>             | 是       | 被邀请人 ID 集合 |
+| 参数名称 | 参数类型                                                           | 是否必填 | 描述             |
+| -------- | ------------------------------------------------------------------ | -------- | ---------------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;String&gt; | 是       | 操作结果回调     |
+| groupId  | String                                                             | 是       | 群ID             |
+| reason   | String                                                             | 是       | 邀请信息         |
+| uidList  | List<String>                                                       | 是       | 被邀请人 ID 集合 |
 
 ## 返回结果
 
@@ -65,6 +65,11 @@ OpenIMClient.getInstance().groupManager.inviteUserToGroup(new OnBase<String>() {
     }
 }, groupId, uidList, reason);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
 
 ## 相关页面
 

@@ -37,9 +37,9 @@ public void setOnGroupListener(OnGroupListener listener)
 
 ## 输入参数
 
-| 参数名称 | 参数类型        | 是否必填 | 描述     |
-| -------- | --------------- | -------- | -------- |
-| listener | OnGroupListener | 是       | 回调接口 |
+| 参数名称 | 参数类型                                                                | 是否必填 | 描述     |
+| -------- | ----------------------------------------------------------------------- | -------- | -------- |
+| listener | [`OnGroupListener`](/docs/chat/sdk/v4/android/models/on-group-listener) | 是       | 回调接口 |
 
 ## 返回结果
 
@@ -67,6 +67,12 @@ OpenIMClient.getInstance().groupManager.setOnGroupListener(new OnGroupListener()
     }
 });
 ```
+
+## 相关类型
+
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+- [群组监听器](/docs/chat/sdk/v4/android/models/on-group-listener)（`OnGroupListener`）：群组、入群申请和群成员变化监听器。
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
 
 ## 相关页面
 

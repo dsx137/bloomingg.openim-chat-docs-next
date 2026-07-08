@@ -37,9 +37,9 @@ public void updateFriendsReq(OnBase<String> base, UpdateFriendsReq updateFriends
 
 ## 输入参数
 
-| 参数名称         | 参数类型         | 是否必填 | 描述         |
-| ---------------- | ---------------- | -------- | ------------ |
-| updateFriendsReq | UpdateFriendsReq | 是       | 变更的结构体 |
+| 参数名称         | 参数类型                                                                  | 是否必填 | 描述         |
+| ---------------- | ------------------------------------------------------------------------- | -------- | ------------ |
+| updateFriendsReq | [`UpdateFriendsReq`](/docs/chat/sdk/v4/android/models/update-friends-req) | 是       | 变更的结构体 |
 
 ## 返回结果
 
@@ -62,6 +62,13 @@ OpenIMClient.getInstance().friendshipManager.updateFriendsReq(new OnBase<String>
     }
 }, updateFriendsReq);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友资料更新请求](/docs/chat/sdk/v4/android/models/update-friends-req)（`UpdateFriendsReq`）：批量更新好友备注或扩展信息的请求对象。
 
 ## 相关页面
 

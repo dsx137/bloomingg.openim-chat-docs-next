@@ -37,11 +37,11 @@ public void getAdvancedHistoryMessageListReverse(OnBase<AdvancedMessage> callBac
 
 ## 输入参数
 
-| 参数名称            | 类型     | 描述                                                        |
-| ------------------- | -------- | ----------------------------------------------------------- |
-| `callback`          | `Base`   | 异步结果回调。                                              |
-| `operationID`       | `string` | 本次操作的追踪 ID。                                         |
-| `getMessageOptions` | `string` | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称            | 类型                                            | 描述                                                        |
+| ------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| `callback`          | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
+| `operationID`       | `string`                                        | 本次操作的追踪 ID。                                         |
+| `getMessageOptions` | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
 
 ## 返回结果
 
@@ -70,6 +70,14 @@ OpenIMClient.getInstance().messageManager.getAdvancedHistoryMessageListReverse(
     ViewType.History
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [高级历史消息结果](/docs/chat/sdk/v4/android/models/advanced-message)（`AdvancedMessage`）：历史消息分页查询返回的结果对象，包含错误信息、分页游标和消息列表。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息视图类型](/docs/chat/sdk/v4/android/models/view-type)（`ViewType`）：消息列表查询视图类型。
 
 ## 相关页面
 

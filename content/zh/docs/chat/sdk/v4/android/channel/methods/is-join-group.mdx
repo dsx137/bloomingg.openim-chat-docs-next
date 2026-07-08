@@ -37,10 +37,10 @@ public void isJoinGroup(String gid, OnBase<Boolean> callBack)
 
 ## 输入参数
 
-| 参数名称 | 参数类型        | 是否必填 | 描述                                   |
-| -------- | --------------- | -------- | -------------------------------------- |
-| gid      | String          | 是       | 群 ID。                                |
-| callBack | OnBase<Boolean> | 是       | 查询结果回调，成功返回是否已加入该群。 |
+| 参数名称 | 参数类型                                                            | 是否必填 | 描述                                   |
+| -------- | ------------------------------------------------------------------- | -------- | -------------------------------------- |
+| gid      | String                                                              | 是       | 群 ID。                                |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;Boolean&gt; | 是       | 查询结果回调，成功返回是否已加入该群。 |
 
 ## 返回结果
 
@@ -65,6 +65,11 @@ OpenIMClient.getInstance().groupManager.isJoinGroup(gid, new OnBase<Boolean>() {
     }
 });
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
 
 ## 相关页面
 

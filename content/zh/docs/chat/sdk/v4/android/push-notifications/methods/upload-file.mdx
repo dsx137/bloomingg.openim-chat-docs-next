@@ -80,6 +80,14 @@ OpenIMClient.getInstance().uploadFile(
 );
 ```
 
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [底层文件上传回调](/docs/chat/sdk/v4/android/models/upload-file-callback)（`UploadFileCallback`）：core binding 文件上传回调，Android 调用层通常映射为 OnPutFileListener。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [上传参数](/docs/chat/sdk/v4/android/models/put-args)（`PutArgs`）：文件上传参数。
+- [文件上传回调](/docs/chat/sdk/v4/android/models/on-put-file-listener)（`OnPutFileListener`）：上传文件时使用的阶段和进度回调。
+
 ## 相关页面
 
 - [推送、日志与文件](/docs/chat/sdk/v4/android/push-notifications/overview)

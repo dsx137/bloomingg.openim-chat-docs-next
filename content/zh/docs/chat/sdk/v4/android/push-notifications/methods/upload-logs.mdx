@@ -37,13 +37,13 @@ public void uploadLogs(OnBase<String> base, List<String> params, int line, Strin
 
 ## 输入参数
 
-| 参数名称 | 参数类型          | 是否必填 | 描述                                                |
-| -------- | ----------------- | -------- | --------------------------------------------------- |
-| base     | OnBase<String>    | 是       | 上传结果回调。                                      |
-| params   | List<String>      | 否       | 预留参数，当前 Android SDK 方法签名保留该参数。     |
-| line     | int               | 是       | 上传日志的起始行或限制行数，由业务按 SDK 约定传入。 |
-| ex       | String            | 否       | 扩展信息。                                          |
-| progress | UploadLogProgress | 否       | 日志上传进度回调。                                  |
+| 参数名称 | 参数类型                                                                    | 是否必填 | 描述                                                |
+| -------- | --------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;String&gt;          | 是       | 上传结果回调。                                      |
+| params   | List<String>                                                                | 否       | 预留参数，当前 Android SDK 方法签名保留该参数。     |
+| line     | int                                                                         | 是       | 上传日志的起始行或限制行数，由业务按 SDK 约定传入。 |
+| ex       | String                                                                      | 否       | 扩展信息。                                          |
+| progress | [`UploadLogProgress`](/docs/chat/sdk/v4/android/models/upload-log-progress) | 否       | 日志上传进度回调。                                  |
 
 ## 返回结果
 
@@ -77,6 +77,12 @@ OpenIMClient.getInstance().uploadLogs(
     }
 );
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [日志上传进度回调](/docs/chat/sdk/v4/android/models/upload-log-progress)（`UploadLogProgress`）：日志上传进度回调接口。
 
 ## 相关页面
 

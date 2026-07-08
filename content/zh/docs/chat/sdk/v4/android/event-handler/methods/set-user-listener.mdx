@@ -37,9 +37,9 @@ public void setOnUserListener(OnUserListener listener)
 
 ## 输入参数
 
-| 参数名称 | 参数类型       | 是否必填               | 描述 |
-| -------- | -------------- | ---------------------- | ---- |
-| listener | OnUserListener | 用户信息更新的回调函数 |
+| 参数名称 | 参数类型                                                              | 是否必填               | 描述 |
+| -------- | --------------------------------------------------------------------- | ---------------------- | ---- |
+| listener | [`OnUserListener`](/docs/chat/sdk/v4/android/models/on-user-listener) | 用户信息更新的回调函数 |
 
 ## 返回结果
 
@@ -62,6 +62,12 @@ OpenIMClient.getInstance().userInfoManager.setOnUserListener(new OnUserListener(
     }
 });
 ```
+
+## 相关类型
+
+- [用户信息](/docs/chat/sdk/v4/android/models/user-info)（`UserInfo`）：用户资料对象。
+- [用户在线状态](/docs/chat/sdk/v4/android/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+- [用户状态监听器](/docs/chat/sdk/v4/android/models/on-user-listener)（`OnUserListener`）：当前用户资料与用户在线状态变化监听器。
 
 ## 相关页面
 
