@@ -1,0 +1,35 @@
+---
+title: '未支持或未暴露能力'
+description: '说明当前 open_im_sdk 未导出的 Flutter 能力边界，避免使用与当前 SDK 不一致的接口。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/deprecated'
+---
+
+当前 Flutter 中文文档只保留 `open_im_sdk` 已导出的能力。以下能力当前未作为 OpenIM Flutter SDK 的独立 core API 暴露。
+
+## 当前未作为 Flutter core API 暴露的能力
+
+| 能力范围                                             | 当前处理                                                                                                  |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 开放群组、进入/退出开放群组                          | 当前 core 没有这类独立开放群组导出方法；多人聊天使用 OpenIM 群组。                                        |
+| 群组元数据、计数器、自定义类型                       | 当前 core 未导出独立方法；如需扩展信息，优先使用 OpenIM 已有群组、会话、消息扩展字段。                    |
+| poll、scheduled message、message thread、translation | 当前 core 未导出独立 Flutter 方法。                                                                       |
+| 举报消息、用户或群组                                 | 当前 core 未导出独立举报方法。                                                                            |
+| push notification tester、template、HMS 多设备配置   | 当前 core 只导出 `UpdateFcmToken` 和 `SetAppBadge`；其余通常由应用或服务端配置完成。                      |
+| operator 注册/移除                                   | 当前 core 没有单独 operator API；群主、管理员和成员能力以群组接口为准。                                   |
+| 群组冻结/解冻                                        | 当前 core 对应可用能力是群禁言 `ChangeGroupMute` 和成员禁言 `ChangeGroupMemberMute`，不提供独立冻结接口。 |
+
+## 文档处理原则
+
+| 原则         | 说明                                                 |
+| ------------ | ---------------------------------------------------- |
+| 以源码为准   | 只记录 `open_im_sdk/*.go` 已导出的包级方法。         |
+| 示例保持一致 | 仅保留与当前 Flutter SDK 调用方式一致的示例代码。    |
+| 保留真实签名 | API 页保留方法名、参数、返回和回调说明。             |
+| 后续增量补充 | 如果 SDK core 新增导出方法，再按源码补充页面和侧栏。 |

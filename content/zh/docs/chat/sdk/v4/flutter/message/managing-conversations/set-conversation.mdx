@@ -1,0 +1,69 @@
+---
+title: '设置会话'
+description: '说明 Flutter core binding 方法 SetConversation 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/managing-conversations/set-conversation'
+---
+
+设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
+
+## 功能介绍
+
+设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                    |
+| -------- | --------------------------------------------------------------------------------------- |
+| 方法签名 | `SetConversation(callback Base, operationID string, conversationID string, req string)` |
+| 所属能力 | 会话与消息                                                                              |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                       |
+
+## Flutter 调用参考
+
+Flutter SDK 3.8.3+hotfix.12 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_conversation_manager.dart`。
+
+```dart showLineNumbers
+Future setConversation(String conversationID, ConversationReq req, { String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称       | 参数类型        | 是否必填   | 描述                                   |
+| -------------- | --------------- | ---------- | -------------------------------------- |
+| conversationID | String          | 按方法原型 | 会话 ID 或会话 ID 列表。               |
+| req            | ConversationReq | 按方法原型 | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+返回 `Future`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK 3.8.3+hotfix.12 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.conversationManager.setConversation(
+  conversationID: 'conversationID',
+  req: {},
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [会话设置请求](/docs/chat/sdk/v4/flutter/models/conversation-req)（`ConversationReq`）：会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/flutter/message/overview)

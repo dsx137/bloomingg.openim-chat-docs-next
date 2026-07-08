@@ -1,0 +1,48 @@
+---
+title: '日志'
+description: '说明 React Native SDK 初始化日志配置、主动写日志和上传日志的当前导出方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/logger'
+---
+
+React Native core 的日志能力分为初始化配置、主动写日志和日志上传。日志方法已经拆分到独立页面。
+
+## 初始化日志配置
+
+`InitSDK` 会读取 `IMConfig` 中的日志字段：
+
+| 字段                  | 说明                                |
+| --------------------- | ----------------------------------- |
+| `logLevel`            | 日志等级。                          |
+| `isLogStandardOutput` | 是否输出到标准输出。                |
+| `logFilePath`         | 日志文件目录。                      |
+| `systemType`          | 系统类型，会写入日志上下文。        |
+| `platformID`          | 平台 ID，会映射为日志中的平台名称。 |
+
+## 日志方法
+
+| 方法                                                                              | 说明                                                                |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| [上传日志](/docs/chat/sdk/v4/react-native/push-notifications/methods/upload-logs) | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。               |
+| [写入客户端日志](/docs/chat/sdk/v4/react-native/push-notifications/methods/logs)  | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。 |
+
+## 日志排查字段
+
+| 字段                 | 建议                                                  |
+| -------------------- | ----------------------------------------------------- |
+| `operationID`        | 每次 API 调用都传非空值，便于串联客户端和服务端日志。 |
+| `errCode` / `errMsg` | 失败回调必须记录。                                    |
+| SDK version          | 可通过 `GetSdkVersion()` 获取。                       |
+| login user           | 可通过 `GetLoginUserID()` 获取，注意脱敏。            |
+
+## 注意事项
+
+- 生产环境日志等级应按合规和性能要求控制。
+- 上传日志前应征得用户授权或遵守产品隐私策略。
+- `Logs` 在 SDK 未初始化时会返回错误。

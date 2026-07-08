@@ -1,0 +1,45 @@
+---
+title: '概述'
+description: '推送、日志与文件方法目录，所有方法均拆分到独立页面说明。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/push-notifications/overview'
+---
+
+第三方能力来自 `open_im_sdk/third.go`。当前 React Native core 只暴露 FCM token、应用角标、日志上传、日志写入和文件上传；HMS、多设备推送模板和推送测试器当前不是 core 的独立导出方法。
+
+本页是推送、日志与文件方法目录。FCM token、角标、日志和文件上传方法都拆成独立页面。
+
+## 方法索引
+
+| 方法                                                                                         | 说明                                                                            |
+| -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [更新 FCM Token](/docs/chat/sdk/v4/react-native/push-notifications/methods/update-fcm-token) | 更新当前设备的 FCM token，用于服务端向 React Native 设备发送离线推送。          |
+| [设置应用角标](/docs/chat/sdk/v4/react-native/push-notifications/methods/set-app-badge)      | 设置应用角标未读数，适合未读数变化后同步系统角标。                              |
+| [上传日志](/docs/chat/sdk/v4/react-native/push-notifications/methods/upload-logs)            | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。                           |
+| [写入客户端日志](/docs/chat/sdk/v4/react-native/push-notifications/methods/logs)             | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。             |
+| [上传文件](/docs/chat/sdk/v4/react-native/push-notifications/methods/upload-file)            | 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。 |
+
+## 上传回调
+
+| 回调                                                                                                                                                   | 说明                   |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------- |
+| [`UploadLogProgress`](/docs/chat/sdk/v4/react-native/models/upload-log-progress).OnProgress(current int64, size int64)                                 | 日志上传进度。         |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).Open(size int64)                                                    | 文件打开并得到总大小。 |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).PartSize(partSize int64, num int)                                   | 分片大小和分片数量。   |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).HashPartProgress(index int, size int64, partHash string)            | 分片哈希进度。         |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).HashPartComplete(partsHash string, fileHash string)                 | 所有分片哈希完成。     |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).UploadID(uploadID string)                                           | 获取上传 ID。          |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).UploadPartComplete(index int, partSize int64, partHash string)      | 单个分片上传完成。     |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).UploadComplete(fileSize int64, streamSize int64, storageSize int64) | 文件上传完成阶段信息。 |
+| [`UploadFileCallback`](/docs/chat/sdk/v4/react-native/models/upload-file-callback).Complete(size int64, url string, typ int)                           | 文件完成并返回 URL。   |
+
+## 相关类型
+
+- [底层文件上传回调](/docs/chat/sdk/v4/react-native/models/upload-file-callback)（`UploadFileCallback`）：core binding 文件上传回调，React Native 调用层通常映射为 OnPutFileListener。
+- [日志上传进度回调](/docs/chat/sdk/v4/react-native/models/upload-log-progress)（`UploadLogProgress`）：日志上传进度回调接口。

@@ -1,0 +1,28 @@
+---
+title: '消息搜索结果项'
+description: '说明 uni-app SDK SearchResultItem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/models/search-result-item'
+---
+
+`SearchResultItem` 是 uni-app SDK 的数据模型，完整类名为 `io.openim.uniapp.sdk.models.SearchResultItem`。本地消息搜索结果中的单个会话结果。
+
+## 字段说明
+
+| 字段名称       | JavaScript 类型 | 描述                 |
+| -------------- | --------------- | -------------------- |
+| conversationID | String          | 会话ID               |
+| messageCount   | int             | 这个会话下的消息数量 |
+| showName       | String          | 显示名               |
+| faceURL        | String          | 头像                 |
+| messageList    | List<Message>   | Message的列表        |
+
+## 关联类型
+
+- [消息对象](/docs/chat/sdk/v4/uniapp/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。

@@ -1,0 +1,41 @@
+---
+title: '好友信息'
+description: '说明 React Native SDK FriendInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/friend-info'
+---
+
+`FriendInfo` 是 React Native SDK 的数据模型，完整类名为 `io.openim.react-native.sdk.models.FriendInfo`。好友资料，包含昵称、头像、备注和添加来源等信息。
+
+## 类型说明
+
+好友信息
+
+## 字段说明
+
+| 字段名称       | TypeScript 类型 | 描述       |
+| -------------- | --------------- | ---------- |
+| userID         | String          | 好友id     |
+| nickname       | String          | 好友昵称   |
+| faceURL        | String          | 好友头像   |
+| gender         | int             | 性别       |
+| phoneNumber    | String          | 手机号     |
+| birth          | long            | 出生日期   |
+| email          | String          | 邮箱       |
+| remark         | String          | 好友备注名 |
+| ex             | String          | 扩展字段   |
+| createTime     | long            | 创建时间   |
+| addSource      | int             | 添加方式   |
+| operatorUserID | String          | 操作者id   |
+
+## 相关页面
+
+- [监听好友事件](/docs/chat/sdk/v4/react-native/event-handler/methods/set-friend-listener)
+- [校验好友关系](/docs/chat/sdk/v4/react-native/user/friend/methods/check-friend)
+- [搜索好友](/docs/chat/sdk/v4/react-native/user/friend/methods/search-friends)

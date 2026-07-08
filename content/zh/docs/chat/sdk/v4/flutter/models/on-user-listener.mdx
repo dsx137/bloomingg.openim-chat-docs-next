@@ -1,0 +1,30 @@
+---
+title: '用户状态监听器'
+description: '说明 Flutter SDK OnUserListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/on-user-listener'
+---
+
+`OnUserListener` 是 Flutter SDK 的监听器，完整类名为 `io.openim.flutter.sdk.listener.OnUserListener`。当前用户资料与用户在线状态变化监听器。
+
+## 回调方法
+
+| 方法                | 参数                           | 描述                                                        |
+| ------------------- | ------------------------------ | ----------------------------------------------------------- |
+| onSelfInfoUpdated   | UserInfo info                  | 当前用户的资料发生了更新 可以在 UI 上更新自己的头像和昵称。 |
+| onUserStatusChanged | UsersOnlineStatus onlineStatus | When the user's online status changes, call                 |
+
+## 关联类型
+
+- [用户信息](/docs/chat/sdk/v4/flutter/models/user-info)（`UserInfo`）：用户资料对象。
+- [用户在线状态](/docs/chat/sdk/v4/flutter/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+
+## 相关页面
+
+- [监听用户事件](/docs/chat/sdk/v4/flutter/event-handler/methods/set-user-listener)

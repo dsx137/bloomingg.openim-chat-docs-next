@@ -1,0 +1,29 @@
+---
+title: '底层高级消息监听器'
+description: '说明 Flutter SDK OnAdvancedMsgListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/on-advanced-msg-listener'
+---
+
+`OnAdvancedMsgListener` 是 Flutter SDK 文档中展示 core binding 方法签名时使用的回调类型，完整类名为 `open_im_sdk_callback.OnAdvancedMsgListener`。core binding 高级消息监听器，Flutter 调用层对应 OnAdvanceMsgListener。
+
+## 回调方法
+
+| 方法                    | 参数                   | 描述               |
+| ----------------------- | ---------------------- | ------------------ |
+| OnRecvNewMessage        | message: string        | 收到单条新消息。   |
+| OnRecvC2CReadReceipt    | msgReceiptList: string | 收到单聊已读回执。 |
+| OnNewRecvMessageRevoked | messageRevoked: string | 收到消息撤回事件。 |
+| OnRecvOfflineNewMessage | message: string        | 收到离线新消息。   |
+| OnMsgDeleted            | message: string        | 消息被删除。       |
+| OnRecvOnlineOnlyMessage | message: string        | 收到仅在线消息。   |
+
+## 对应 Flutter 类型
+
+- [高级消息监听器](/docs/chat/sdk/v4/flutter/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）

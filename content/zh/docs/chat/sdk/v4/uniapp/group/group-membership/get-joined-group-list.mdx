@@ -1,0 +1,67 @@
+---
+title: '获取已加入群组'
+description: '说明 uni-app core binding 方法 GetJoinedGroupList 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/group/group-membership/get-joined-group-list'
+---
+
+获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。
+
+## 功能介绍
+
+获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                    |
+| -------- | ------------------------------------------------------- |
+| 方法签名 | `GetJoinedGroupList(callback Base, operationID string)` |
+| 所属能力 | 群组                                                    |
+| 源码位置 | `open_im_sdk/group.go`                                  |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`。
+
+```js showLineNumbers
+openIM.getJoinedGroupList(operationID, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                              |
+| -------- | -------- | -------- | --------------------------------- |
+| callback | Function | 是       | 按 uni-app 原生插件导出方法传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.getJoinedGroupList('operationID', callback);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/uniapp/models/base)（`Base`）：core binding 异步结果回调，uni-app 调用层通常映射为 callback。
+- [群组信息](/docs/chat/sdk/v4/uniapp/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/uniapp/group/overview)

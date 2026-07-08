@@ -1,0 +1,62 @@
+---
+title: '会话信息'
+description: '说明 React Native SDK ConversationInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/conversation-info'
+---
+
+`ConversationInfo` 是 React Native SDK 中的会话资料对象，完整类名为 `io.openim.react-native.sdk.models.ConversationInfo`。会话列表、单个会话查询、批量会话查询和会话监听回调都会使用这个类型。
+
+## 使用场景
+
+| 场景     | 说明                                                                 |
+| -------- | -------------------------------------------------------------------- |
+| 会话列表 | `getAllConversationList`、`getConversationListSplit` 返回会话列表。  |
+| 会话详情 | `getOneConversation`、`getMultipleConversation` 返回一个或多个会话。 |
+| 事件回调 | `OnConversationListener` 的新增会话和会话变更回调会返回会话列表。    |
+
+## 字段说明
+
+| 字段名称          | TypeScript 类型 | 描述                                                               |
+| ----------------- | --------------- | ------------------------------------------------------------------ |
+| conversationID    | String          | 会话 ID。                                                          |
+| conversationType  | int             | 会话类型，React Native SDK 注释中 1 表示单聊，2 表示群聊。         |
+| userID            | String          | 单聊会话对应的用户 ID。                                            |
+| groupID           | String          | 群聊会话对应的群 ID。                                              |
+| showName          | String          | 会话展示名称，通常来自用户昵称或群名称。                           |
+| faceURL           | String          | 会话头像 URL，通常来自用户头像或群头像。                           |
+| recvMsgOpt        | int             | 接收消息选项：0 正常接收并离线推送；1 不接收；2 接收但离线不推送。 |
+| unreadCount       | int             | 当前会话未读消息数。                                               |
+| groupAtType       | int             | 群聊强提醒类型，例如 @ 消息或公告提醒。                            |
+| latestMsg         | String          | 最后一条消息的 JSON 字符串。                                       |
+| latestMsgSendTime | long            | 最后一条消息发送时间，单位毫秒。                                   |
+| draftText         | String          | 会话草稿文本。                                                     |
+| draftTextTime     | long            | 草稿设置时间。                                                     |
+| isPinned          | boolean         | 是否置顶。                                                         |
+| isPrivateChat     | boolean         | 是否开启私聊。                                                     |
+| ext               | String          | 扩展预留字段。                                                     |
+| ex                | String          | 扩展预留字段。                                                     |
+| isNotInGroup      | boolean         | 当前用户是否已不在该群内。                                         |
+| burnDuration      | int             | 阅后即焚阅读时长，单位秒。                                         |
+| msgDestructTime   | long            | 定期删除时间。                                                     |
+| isMsgDestruct     | boolean         | 是否开启定期删除。                                                 |
+
+## 使用建议
+
+- 展示聊天列表时，通常使用 `conversationID`、`showName`、`faceURL`、`latestMsg`、`latestMsgSendTime` 和 `unreadCount`。
+- 单聊会话关注 `userID`，群聊会话关注 `groupID`；不要只根据展示名称判断会话目标。
+- `latestMsg` 是消息 JSON 字符串，如需展示摘要，应按业务已有的消息解析逻辑处理。
+- 修改置顶、免打扰、扩展字段等会话属性时，应通过会话设置方法提交，不要只修改本地对象字段。
+
+## 相关页面
+
+- [获取全部会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-all-conversation-list)
+- [分页获取会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-conversation-list-split)
+- [获取单个会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-one-conversation)
+- [批量获取会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-multiple-conversation)

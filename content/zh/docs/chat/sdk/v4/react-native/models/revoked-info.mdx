@@ -1,0 +1,37 @@
+---
+title: '消息撤回信息'
+description: '说明 React Native SDK RevokedInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/revoked-info'
+---
+
+`RevokedInfo` 是 React Native SDK 的数据模型，完整类名为 `io.openim.react-native.sdk.models.RevokedInfo`。消息撤回事件中的撤回详情。
+
+## 字段说明
+
+| 字段名称                    | TypeScript 类型 | 描述                      |
+| --------------------------- | --------------- | ------------------------- |
+| revokerID                   | String          | 撤回者ID                  |
+| revokerRole                 | int             | 撤回者群角色 GroupRole    |
+| revokerNickname             | String          | 撤回者昵称                |
+| clientMsgID                 | String          | 消息id                    |
+| revokeTime                  | long            | 撤回时间                  |
+| sourceMessageSendTime       | long            | 消息发送时间              |
+| sourceMessageSendID         | String          | 消息发送者                |
+| sourceMessageSenderNickname | String          | 消息发送者昵称            |
+| sessionType                 | int             | 会话类型 ConversationType |
+
+## 关联类型
+
+- [会话类型](/docs/chat/sdk/v4/react-native/models/conversation-type)（`ConversationType`）：会话类型常量，用于区分单聊、群聊和通知会话。
+- [群成员角色](/docs/chat/sdk/v4/react-native/models/group-role)（`GroupRole`）：群成员角色常量。
+
+## 相关页面
+
+- [监听单条消息事件](/docs/chat/sdk/v4/react-native/event-handler/methods/set-advanced-msg-listener)

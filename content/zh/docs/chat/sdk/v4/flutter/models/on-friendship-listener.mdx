@@ -1,0 +1,54 @@
+---
+title: '好友关系监听器'
+description: '说明 Flutter SDK OnFriendshipListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/on-friendship-listener'
+---
+
+`OnFriendshipListener` 是 Flutter SDK 的监听器，完整类名为 `io.openim.flutter.sdk.listener.OnFriendshipListener`。好友、好友申请和黑名单变化监听器。
+
+## 类型说明
+
+好友关系监听
+
+## 回调方法
+
+| 方法                        | 参数                    | 描述             |
+| --------------------------- | ----------------------- | ---------------- |
+| onBlacklistAdded            | BlacklistInfo u         | 事件触发时回调。 |
+| onBlacklistDeleted          | BlacklistInfo u         | 事件触发时回调。 |
+| onFriendApplicationAccepted | FriendApplicationInfo u | 事件触发时回调。 |
+| onFriendApplicationAdded    | FriendApplicationInfo u | 事件触发时回调。 |
+| onFriendApplicationDeleted  | FriendApplicationInfo u | 事件触发时回调。 |
+| onFriendApplicationRejected | FriendApplicationInfo u | 事件触发时回调。 |
+| onFriendInfoChanged         | FriendInfo u            | 事件触发时回调。 |
+| onFriendAdded               | FriendInfo u            | 事件触发时回调。 |
+| onFriendDeleted             | FriendInfo u            | 事件触发时回调。 |
+
+## 关联类型
+
+- [好友申请信息](/docs/chat/sdk/v4/flutter/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+- [好友信息](/docs/chat/sdk/v4/flutter/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/flutter/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
+- [用户信息](/docs/chat/sdk/v4/flutter/models/user-info)（`UserInfo`）：用户资料对象。
+
+## 相关页面
+
+- [监听好友事件](/docs/chat/sdk/v4/flutter/event-handler/methods/set-friend-listener)
+- [加入黑名单](/docs/chat/sdk/v4/flutter/user/blacklist/methods/add-black)
+- [获取黑名单列表](/docs/chat/sdk/v4/flutter/user/blacklist/methods/get-black-list)
+- [移出黑名单](/docs/chat/sdk/v4/flutter/user/blacklist/methods/remove-black)
+- [概述](/docs/chat/sdk/v4/flutter/user/blacklist/overview)
+- [同意好友申请](/docs/chat/sdk/v4/flutter/user/friend/methods/accept-friend-application)
+- [发送好友申请](/docs/chat/sdk/v4/flutter/user/friend/methods/add-friend)
+- [校验好友关系](/docs/chat/sdk/v4/flutter/user/friend/methods/check-friend)
+- [删除好友](/docs/chat/sdk/v4/flutter/user/friend/methods/delete-friend)
+- [获取发出的好友申请](/docs/chat/sdk/v4/flutter/user/friend/methods/get-friend-application-list-as-applicant)
+- [获取收到的好友申请](/docs/chat/sdk/v4/flutter/user/friend/methods/get-friend-application-list-as-recipient)
+- [获取未处理好友申请数](/docs/chat/sdk/v4/flutter/user/friend/methods/get-friend-application-unhandled-count)

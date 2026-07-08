@@ -1,0 +1,77 @@
+---
+title: '发送非 OSS 消息'
+description: '说明 Flutter core binding 方法 SendMessageNotOss 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/sending-messages/send-message-not-oss'
+---
+
+发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。
+
+## 功能介绍
+
+发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                                                          |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| 方法签名 | `SendMessageNotOss(callback SendMsgCallBack, operationID string, message, recvID, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
+| 所属能力 | 会话与消息                                                                                                                                    |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                                                                             |
+
+## Flutter 调用参考
+
+Flutter SDK 3.8.3+hotfix.12 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_message_manager.dart`。
+
+```dart showLineNumbers
+Future<Message> sendMessageNotOss({ required Message message, required OfflinePushInfo offlinePushInfo, String? userID, String? groupID, bool isOnlineOnly = false, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称        | 参数类型                                                              | 是否必填 | 描述                                   |
+| --------------- | --------------------------------------------------------------------- | -------- | -------------------------------------- |
+| message         | [Message](/docs/chat/sdk/v4/flutter/models/message)                   | 是       | 消息对象、消息内容或消息 ID。          |
+| offlinePushInfo | [OfflinePushInfo](/docs/chat/sdk/v4/flutter/models/offline-push-info) | 是       | 请求对象，字段以对应平台类型定义为准。 |
+| userID          | String?                                                               | 否       | 用户 ID 或用户 ID 列表。               |
+| groupID         | String?                                                               | 否       | 群组 ID 或群组 ID 列表。               |
+| isOnlineOnly    | bool                                                                  | 否       | 按方法原型传入。                       |
+
+## 返回结果
+
+返回 `Future<Message>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK 3.8.3+hotfix.12 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.sendMessageNotOss(
+  message: {},
+  offlinePushInfo: {},
+  userID: 'userID',
+  groupID: 'groupID',
+  isOnlineOnly: false,
+);
+```
+
+## 相关类型
+
+- [底层消息发送回调](/docs/chat/sdk/v4/flutter/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，Flutter 调用层通常映射为 OnMsgSendCallback。
+- [离线推送信息](/docs/chat/sdk/v4/flutter/models/offline-push-info)（`OfflinePushInfo`）：发送消息时携带的离线推送配置。
+- [消息对象](/docs/chat/sdk/v4/flutter/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息发送回调](/docs/chat/sdk/v4/flutter/models/on-msg-send-callback)（`OnMsgSendCallback`）：发送消息时使用的进度、成功和失败回调。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/flutter/message/overview)

@@ -1,0 +1,26 @@
+---
+title: '底层消息发送回调'
+description: '说明 Flutter SDK SendMsgCallBack 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/send-msg-call-back'
+---
+
+`SendMsgCallBack` 是 Flutter SDK 文档中展示 core binding 方法签名时使用的回调类型，完整类名为 `open_im_sdk_callback.SendMsgCallBack`。core binding 消息发送回调，Flutter 调用层通常映射为 OnMsgSendCallback。
+
+## 回调方法
+
+| 方法       | 参数                           | 描述                                   |
+| ---------- | ------------------------------ | -------------------------------------- |
+| OnError    | errCode: int32；errMsg: string | 发送失败时返回错误码和错误信息。       |
+| OnSuccess  | data: string                   | 发送成功时返回服务端确认后的消息数据。 |
+| OnProgress | progress: int                  | 发送或上传过程中的进度回调。           |
+
+## 对应 Flutter 类型
+
+- [消息发送回调](/docs/chat/sdk/v4/flutter/models/on-msg-send-callback)（`OnMsgSendCallback`）

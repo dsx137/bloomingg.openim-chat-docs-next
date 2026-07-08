@@ -1,0 +1,30 @@
+---
+title: '概述'
+description: '撤回消息和维护消息本地业务状态的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/managing-messages/overview'
+---
+
+管理消息用于撤回已发送消息，并维护只影响本地展示或业务状态的消息扩展字段。
+
+## 方法索引
+
+| 方法                                                                                              | 说明                                                                     |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [撤回消息](/docs/chat/sdk/v4/react-native/message/managing-messages/revoke-message)               | 撤回指定消息，通常受时间窗口和权限限制。                                 |
+| [设置消息本地扩展](/docs/chat/sdk/v4/react-native/message/managing-messages/set-message-local-ex) | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。 |
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/react-native/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息扩展设置结果](/docs/chat/sdk/v4/react-native/models/type-key-set-result)（`TypeKeySetResult`）：消息扩展设置后的结果对象。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

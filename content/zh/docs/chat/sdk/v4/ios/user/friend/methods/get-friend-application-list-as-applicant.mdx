@@ -1,0 +1,68 @@
+---
+title: '获取发出的好友申请'
+description: '说明 iOS core binding 方法 GetFriendApplicationListAsApplicant 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-application-list-as-applicant'
+---
+
+获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。
+
+## 功能介绍
+
+获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。
+
+好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                          |
+| -------- | ----------------------------------------------------------------------------- |
+| 方法签名 | `GetFriendApplicationListAsApplicant(callback Base, operationID, req string)` |
+| 所属能力 | 好友                                                                          |
+| 源码位置 | `open_im_sdk/relation.go`                                                     |
+
+## iOS 调用参考
+
+iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT void Open_im_sdkGetFriendApplicationListAsApplicant(id<Open_im_sdk_callbackBase> _Nullable callback, NSString* _Nullable operationID, NSString* _Nullable req);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                     | 是否必填   | 描述                                   |
+| -------- | ---------------------------- | ---------- | -------------------------------------- |
+| callback | id<Open_im_sdk_callbackBase> | 是         | 回调或监听器。                         |
+| req      | NSString\*                   | 按方法原型 | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```objective-c showLineNumbers
+Open_im_sdkGetFriendApplicationListAsApplicant(callback, @"operationID", @"req");
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/ios/models/base)（`Base`）：core binding 异步结果回调，iOS 调用层通常映射为 Base。
+- [发出的好友申请查询条件](/docs/chat/sdk/v4/ios/models/get-friend-application-list-as-applicant-req)（`GetFriendApplicationListAsApplicantReq`）：查询当前用户发出的好友申请时使用的分页条件。
+- [好友关系监听器](/docs/chat/sdk/v4/ios/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友申请信息](/docs/chat/sdk/v4/ios/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+
+## 相关页面
+
+- [好友](/docs/chat/sdk/v4/ios/user/friend/overview)
