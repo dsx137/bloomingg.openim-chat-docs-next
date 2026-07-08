@@ -3093,12 +3093,30 @@
           "minIndex": 131
         },
         {
-          "id": "application/overview-application",
-          "segment": "overview-application",
-          "title": "Overview",
-          "href": "/docs/chat/sdk/v4/android/application/overview-application",
-          "type": "page",
+          "id": "application",
+          "segment": "application",
+          "title": "初始化与登录",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "application/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/application/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 160
+            },
+            {
+              "id": "application/authenticating-a-user/authentication",
+              "segment": "authentication",
+              "title": "Authentication",
+              "href": "/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication",
+              "type": "page",
+              "children": [],
+              "minIndex": 159
+            },
             {
               "id": "application/methods/get-sdk-version",
               "segment": "get-sdk-version",
@@ -3181,24 +3199,24 @@
               "minIndex": 160.009
             }
           ],
-          "minIndex": 160
-        },
-        {
-          "id": "application/authenticating-a-user/authentication",
-          "segment": "authentication",
-          "title": "Authentication",
-          "href": "/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication",
-          "type": "page",
-          "children": [],
           "minIndex": 159
         },
         {
-          "id": "event-handler/overview-event-handler",
-          "segment": "overview-event-handler",
-          "title": "Event handler",
-          "href": "/docs/chat/sdk/v4/android/event-handler/overview-event-handler",
-          "type": "page",
+          "id": "event-handler",
+          "segment": "event-handler",
+          "title": "监听器",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "event-handler/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/event-handler/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 184
+            },
             {
               "id": "event-handler/methods/set-group-listener",
               "segment": "set-group-listener",
@@ -3275,12 +3293,21 @@
           "minIndex": 184
         },
         {
-          "id": "user/overview-user",
-          "segment": "overview-user",
-          "title": "Overview",
-          "href": "/docs/chat/sdk/v4/android/user/overview-user",
-          "type": "page",
+          "id": "user",
+          "segment": "user",
+          "title": "用户",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "user/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/user/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 252
+            },
             {
               "id": "user/methods/get-self-user-info",
               "segment": "get-self-user-info",
@@ -3375,12 +3402,21 @@
           "minIndex": 252
         },
         {
-          "id": "user/retrieving-users/retrieve-a-list-of-users-in-an-application",
-          "segment": "retrieve-a-list-of-users-in-an-application",
-          "title": "Retrieve a list of users in an application",
-          "href": "/docs/chat/sdk/v4/android/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
-          "type": "page",
+          "id": "user/friend",
+          "segment": "friend",
+          "title": "好友",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "user/friend/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/user/friend/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 252.9
+            },
             {
               "id": "user/friend/methods/get-specified-friends-info",
               "segment": "get-specified-friends-info",
@@ -3499,15 +3535,24 @@
               "minIndex": 253.013
             }
           ],
-          "minIndex": 258
+          "minIndex": 252.9
         },
         {
-          "id": "user/moderating-a-user/block-and-unblock-other-members",
-          "segment": "block-and-unblock-other-members",
-          "title": "Block and unblock other members",
-          "href": "/docs/chat/sdk/v4/android/user/moderating-a-user/block-and-unblock-other-members",
-          "type": "page",
+          "id": "user/blacklist",
+          "segment": "blacklist",
+          "title": "黑名单",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "user/blacklist/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/user/blacklist/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 253.9
+            },
             {
               "id": "user/blacklist/methods/add-black",
               "segment": "add-black",
@@ -3536,15 +3581,24 @@
               "minIndex": 254.003
             }
           ],
-          "minIndex": 155
+          "minIndex": 253.9
         },
         {
-          "id": "channel/overview-channel",
-          "segment": "overview-channel",
-          "title": "Overview",
-          "href": "/docs/chat/sdk/v4/android/channel/overview-channel",
-          "type": "page",
+          "id": "channel",
+          "segment": "channel",
+          "title": "群组",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "channel/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/channel/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 130
+            },
             {
               "id": "channel/methods/create-group",
               "segment": "create-group",
@@ -3792,12 +3846,30 @@
           "minIndex": 130
         },
         {
-          "id": "message/overview-message",
-          "segment": "overview-message",
-          "title": "Overview",
-          "href": "/docs/chat/sdk/v4/android/message/overview-message",
-          "type": "page",
+          "id": "message",
+          "segment": "message",
+          "title": "会话与消息",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "message/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/message/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 141
+            },
+            {
+              "id": "message/sending-a-message/send-a-message",
+              "segment": "send-a-message",
+              "title": "Send a message",
+              "href": "/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message",
+              "type": "page",
+              "children": [],
+              "minIndex": 233
+            },
             {
               "id": "message/methods/get-all-conversation-list",
               "segment": "get-all-conversation-list",
@@ -4315,21 +4387,30 @@
           "minIndex": 141
         },
         {
-          "id": "message/sending-a-message/send-a-message",
-          "segment": "send-a-message",
-          "title": "Send a message",
-          "href": "/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message",
-          "type": "page",
-          "children": [],
-          "minIndex": 233
-        },
-        {
-          "id": "push-notifications/overview-push-notifications",
-          "segment": "overview-push-notifications",
-          "title": "Overview",
-          "href": "/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications",
-          "type": "page",
+          "id": "push-notifications",
+          "segment": "push-notifications",
+          "title": "推送、日志与文件",
+          "href": null,
+          "type": "folder",
           "children": [
+            {
+              "id": "push-notifications/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/sdk/v4/android/push-notifications/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 152
+            },
+            {
+              "id": "logger",
+              "segment": "logger",
+              "title": "Logger",
+              "href": "/docs/chat/sdk/v4/android/logger",
+              "type": "page",
+              "children": [],
+              "minIndex": 191
+            },
             {
               "id": "push-notifications/methods/update-fcm-token",
               "segment": "update-fcm-token",
@@ -4377,15 +4458,6 @@
             }
           ],
           "minIndex": 152
-        },
-        {
-          "id": "logger",
-          "segment": "logger",
-          "title": "Logger",
-          "href": "/docs/chat/sdk/v4/android/logger",
-          "type": "page",
-          "children": [],
-          "minIndex": 191
         },
         {
           "id": "error-codes",
