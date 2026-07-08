@@ -1045,15 +1045,15 @@
     "description": "群组方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel overview",
-    "content": "OpenIM Android core 使用群组承载多人聊天能力。本节将 channel 场景映射为 OpenIM 群组；当前 core 没有 open channel 的独立导出方法。 本页是群组方法目录。创建、加入、成员、申请、禁言和群管理方法都拆到了独立页面。 方法索引 | 方法 | 说明 | | | | | CreateGroup /docs/chat/sdk/v4/android/channel/methods/create group | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。 | | JoinGroup /docs/chat/sdk/v4/android/channel/methods/join group | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。 | | QuitGroup /docs/chat/sdk/v4/android/channel/methods/quit group | 当前用户主动退出指定群组。 | | DismissGroup /docs/chat/sdk/v4/android/channel/methods/dismiss group | 解散指定群组，通常要求当前用户具备群主或管理权限。 | | ChangeGroupMute /docs/chat/sdk/v4/android/channel/methods/change group mute | 开启或关闭全群禁言。适合群管理者控制群内发言状态。 | | ChangeGroupMemberMute /docs/chat/sdk/v4/android/channel/methods/change group member mute | 设置指定群成员禁言时长。适合临时限制单个成员发言。 | | TransferGroupOwner /docs/chat/sdk/v4/android/channel/methods/transfer group owner | 将群主转让给指定成员，通常只允许当前群主执行。 | | KickGroupMember /docs/chat/sdk/v4/android/channel/methods/kick group member | 将一批成员移出群组，通常要求操作者具备管理权限。 | | SetGroupInfo /docs/chat/sdk/v4/android/channel/methods/set group info | 更新群资料，例如群名称、头像、公告或扩展字段。 | | SetGroupMemberInfo /docs/chat/sdk/v4/android/channel/methods/set group member info | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。 | | GetJoinedGroupList /docs/chat/sdk/v4/android/channel/methods/get joined group list | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。 | | GetJoinedGroupListPage /docs/chat/sdk/v4/android/channel/methods/get joined group list page | 分页获取当前用户已加入群组，适合群数量较多的账号。 | | GetSpecifiedGroupsInfo /docs/chat/sdk/v4/android/channel/methods/get specified groups info | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。 | | SearchGroups /docs/chat/sdk/v4/android/channel/methods/search groups | 按关键字搜索群组，可按群 ID、群名称等字段搜索。 | | GetGroupMemberOwnerAndAdmin /docs/chat/sdk/v4/android/channel/methods/get group member owner and admin | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 | | GetGroupMemberListByJoinTimeFilter /docs/chat/sdk/v4/android/channel/methods/get group member list by join time filter | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。 | | GetSpecifiedGroupMembersInfo /docs/chat/sdk/v4/android/channel/methods/get specified group members info | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。 | | GetGroupMemberList /docs/chat/sdk/v4/android/channel/methods/get group member list | 按成员类型筛选并分页获取群成员列表。 | | GetGroupApplicationListAsRecipient /docs/chat/sdk/v4/android/channel/methods/get group application list as recipient | 获取当前用户作为群管理者收到的入群申请列表。 | | GetGroupApplicationListAsApplicant /docs/chat/sdk/v4/android/channel/methods/get group application list as applicant | 获取当前用户自己提交的入群申请列表。 | | SearchGroupMembers /docs/chat/sdk/v4/android/channel/methods/search group members | 搜索群成员，适合按用户 ID 或群昵称查找成员。 | | IsJoinGroup /docs/chat/sdk/v4/android/channel/methods/is join group | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。 | | GetUsersInGroup /docs/chat/sdk/v4/android/channel/methods/get users in group | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。 | | InviteUserToGroup /docs/chat/sdk/v4/android/channel/methods/invite user to group | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。 | | AcceptGroupApplication /docs/chat/sdk/v4/android/channel/methods/accept group application | 同意指定用户的入群申请。 | | RefuseGroupApplication /docs/chat/sdk/v4/android/channel/methods/refuse group application | 拒绝指定用户的入群申请。 | | GetGroupApplicationUnhandledCount /docs/chat/sdk/v4/android/channel/methods/get group application unhandled count | 获取未处理入群申请数量，适合管理入口角标和后台同步。 | 事件联动 群组相关变化通过 SetGroupListener 注册的 OnGroupListener 接收，包括群新增/删除、群资料变化、成员新增/删除、成员资料变化、群申请新增/删除/接受/拒绝等。"
+    "content": "OpenIM Android core 使用群组承载多人聊天能力。本节将 channel 场景映射为 OpenIM 群组；当前 core 没有 open channel 的独立导出方法。 本页是群组方法目录。创建、加入、成员、申请、禁言和群管理方法都拆到了独立页面。 方法索引 | 方法 | 说明 | | | | | 创建群组 /docs/chat/sdk/v4/android/channel/methods/create group | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。 | | 申请加入群组 /docs/chat/sdk/v4/android/channel/methods/join group | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。 | | 退出群组 /docs/chat/sdk/v4/android/channel/methods/quit group | 当前用户主动退出指定群组。 | | 解散群组 /docs/chat/sdk/v4/android/channel/methods/dismiss group | 解散指定群组，通常要求当前用户具备群主或管理权限。 | | 设置群禁言 /docs/chat/sdk/v4/android/channel/methods/change group mute | 开启或关闭全群禁言。适合群管理者控制群内发言状态。 | | 设置成员禁言 /docs/chat/sdk/v4/android/channel/methods/change group member mute | 设置指定群成员禁言时长。适合临时限制单个成员发言。 | | 转让群主 /docs/chat/sdk/v4/android/channel/methods/transfer group owner | 将群主转让给指定成员，通常只允许当前群主执行。 | | 移出群成员 /docs/chat/sdk/v4/android/channel/methods/kick group member | 将一批成员移出群组，通常要求操作者具备管理权限。 | | 更新群资料 /docs/chat/sdk/v4/android/channel/methods/set group info | 更新群资料，例如群名称、头像、公告或扩展字段。 | | 更新群成员资料 /docs/chat/sdk/v4/android/channel/methods/set group member info | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。 | | 获取已加入群组 /docs/chat/sdk/v4/android/channel/methods/get joined group list | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。 | | 分页获取已加入群组 /docs/chat/sdk/v4/android/channel/methods/get joined group list page | 分页获取当前用户已加入群组，适合群数量较多的账号。 | | 获取指定群组资料 /docs/chat/sdk/v4/android/channel/methods/get specified groups info | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。 | | 搜索群组 /docs/chat/sdk/v4/android/channel/methods/search groups | 按关键字搜索群组，可按群 ID、群名称等字段搜索。 | | 获取群主和管理员 /docs/chat/sdk/v4/android/channel/methods/get group member owner and admin | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 | | 按入群时间筛选成员 /docs/chat/sdk/v4/android/channel/methods/get group member list by join time filter | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。 | | 获取指定群成员资料 /docs/chat/sdk/v4/android/channel/methods/get specified group members info | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。 | | 获取群成员列表 /docs/chat/sdk/v4/android/channel/methods/get group member list | 按成员类型筛选并分页获取群成员列表。 | | 获取收到的入群申请 /docs/chat/sdk/v4/android/channel/methods/get group application list as recipient | 获取当前用户作为群管理者收到的入群申请列表。 | | 获取发出的入群申请 /docs/chat/sdk/v4/android/channel/methods/get group application list as applicant | 获取当前用户自己提交的入群申请列表。 | | 搜索群成员 /docs/chat/sdk/v4/android/channel/methods/search group members | 搜索群成员，适合按用户 ID 或群昵称查找成员。 | | 判断是否已入群 /docs/chat/sdk/v4/android/channel/methods/is join group | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。 | | 查询用户是否在群内 /docs/chat/sdk/v4/android/channel/methods/get users in group | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。 | | 邀请用户入群 /docs/chat/sdk/v4/android/channel/methods/invite user to group | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。 | | 同意入群申请 /docs/chat/sdk/v4/android/channel/methods/accept group application | 同意指定用户的入群申请。 | | 拒绝入群申请 /docs/chat/sdk/v4/android/channel/methods/refuse group application | 拒绝指定用户的入群申请。 | | 获取未处理入群申请数 /docs/chat/sdk/v4/android/channel/methods/get group application unhandled count | 获取未处理入群申请数量，适合管理入口角标和后台同步。 | 事件联动 群组相关变化通过 SetGroupListener 注册的 OnGroupListener 接收，包括群新增/删除、群资料变化、成员新增/删除、成员资料变化、群申请新增/删除/接受/拒绝等。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/getting-started/send-first-message",
-    "title": "Send your first message",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "Android 接入流程",
+    "description": "按当前 open_im_sdk 导出方法说明 Android SDK 从初始化、监听器、登录到消息调用前的接入顺序，不包含示例代码。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android getting-started send-first-message",
-    "content": ""
+    "content": "本页只说明接入顺序和需要准备的参数，不提供示例代码。具体 API 签名见各能力页。 调用顺序 | 步骤 | 必要方法 | 说明 | | | | | | 读取版本 | GetSdkVersion | 可用于诊断当前 AAR 或 core binding 版本。 | | 初始化 | InitSDK listener, operationID, config | config 传入 IMConfig JSON； listener 处理连接生命周期。 | | 设置监听器 | SetConversationListener 、 SetAdvancedMsgListener 、 SetFriendListener | 建议在登录前设置，避免漏掉登录同步期间的事件。 | | 登录 | Login callback, operationID, userID, token | token 应由业务服务端签发；登录成功后再调用会话、消息、群组等接口。 | | 创建消息 | CreateTextMessage 、 CreateImageMessage 等 | 创建方法同步返回消息 JSON 字符串。 | | 发送消息 | SendMessage 或 SendMessageNotOss | 单聊传 recvID ，群聊传 groupID ；发送结果走 SendMsgCallBack 。 | | 退出或销毁 | Logout 、 UnInitSDK | 退出当前用户用 Logout ；释放 SDK 全局资源用 UnInitSDK 。 | 初始化配置 | 字段 | 类型 | 说明 | | | | | | systemType | string | 系统类型，用于日志和运行环境标识。 | | platformID | int32 | 平台 ID；Android 必须传非 0 值。 | | apiAddr | string | OpenIM HTTP API 地址，必须包含 http 协议。 | | wsAddr | string | OpenIM WebSocket 地址，必须包含 ws 协议。 | | dataDir | string | 本地数据库、缓存和 SDK 数据目录。 | | logLevel | uint32 | SDK 日志等级。 | | isLogStandardOutput | bool | 是否输出到标准输出。 | | logFilePath | string | 日志文件目录。 | | isExternalExtensions | bool | 是否启用外部扩展字段处理。 | 接入检查 | 检查项 | 通过标准 | | | | | 初始化只执行一次 | 重复初始化会复用已有 UserForSDK ，不应在同一进程内频繁重建。 | | operationID 非空 | core 调用链会校验 operationID ，建议每次业务操作生成可追踪 ID。 | | 登录后调用业务接口 | 未初始化或未登录时，多数接口会走错误回调。 | | JSON 参数合法 | userIDList 、 groupIDList 、 searchParam 、 req 等字符串应是目标结构的 JSON。 | | 监听器不重复丢失 | Set Listener 是替换式设置；应用层需要自行做分发时，应在 wrapper 层维护。 | 相关页面 初始化与登录 /docs/chat/sdk/v4/android/application/overview 监听器 /docs/chat/sdk/v4/android/event handler/overview 发送消息 /docs/chat/sdk/v4/android/message/sending a message/send a message"
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
@@ -1133,7 +1133,7 @@
     "description": "会话与消息方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message overview",
-    "content": "会话和消息方法来自 open im sdk/conversation msg.go 。创建消息类方法同步返回消息 JSON；发送、查询、删除、已读等方法通过回调返回。 本页是会话与消息方法目录。会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态都拆成了独立方法页。 方法索引 | 方法 | 说明 | | | | | GetAllConversationList /docs/chat/sdk/v4/android/message/methods/get all conversation list | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。 | | GetConversationListSplit /docs/chat/sdk/v4/android/message/methods/get conversation list split | 分页获取会话列表，适合会话数量较多时按页加载。 | | GetOneConversation /docs/chat/sdk/v4/android/message/methods/get one conversation | 按会话类型和目标 ID 获取单个会话。单聊 sourceID 通常是用户 ID，群聊 sourceID 通常是群 ID。 | | GetMultipleConversation /docs/chat/sdk/v4/android/message/methods/get multiple conversation | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。 | | SetConversation /docs/chat/sdk/v4/android/message/methods/set conversation | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。 | | HideConversation /docs/chat/sdk/v4/android/message/methods/hide conversation | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。 | | SetConversationDraft /docs/chat/sdk/v4/android/message/methods/set conversation draft | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。 | | GetTotalUnreadMsgCount /docs/chat/sdk/v4/android/message/methods/get total unread msg count | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。 | | HideAllConversations /docs/chat/sdk/v4/android/message/methods/hide all conversations | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。 | | SearchConversation /docs/chat/sdk/v4/android/message/methods/search conversation | 搜索本地会话，适合聊天列表搜索入口。 | | ChangeInputStates /docs/chat/sdk/v4/android/message/methods/change input states | 更新当前用户在指定会话中的输入状态。 | | GetInputStates /docs/chat/sdk/v4/android/message/methods/get input states | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。 | | GetConversationIDBySessionType /docs/chat/sdk/v4/android/message/methods/get conversation id by session type | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。 | | GetAtAllTag /docs/chat/sdk/v4/android/message/methods/get at all tag | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 | | CreateTextMessage /docs/chat/sdk/v4/android/message/methods/create text message | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。 | | CreateAdvancedTextMessage /docs/chat/sdk/v4/android/message/methods/create advanced text message | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。 | | CreateTextAtMessage /docs/chat/sdk/v4/android/message/methods/create text at message | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。 | | CreateLocationMessage /docs/chat/sdk/v4/android/message/methods/create location message | 创建位置消息。适合发送地图位置、门店位置或业务地点。 | | CreateCustomMessage /docs/chat/sdk/v4/android/message/methods/create custom message | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。 | | CreateQuoteMessage /docs/chat/sdk/v4/android/message/methods/create quote message | 创建引用消息。用于回复某条历史消息并携带新的文本内容。 | | CreateAdvancedQuoteMessage /docs/chat/sdk/v4/android/message/methods/create advanced quote message | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。 | | CreateCardMessage /docs/chat/sdk/v4/android/message/methods/create card message | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。 | | CreateFaceMessage /docs/chat/sdk/v4/android/message/methods/create face message | 创建表情消息。适合业务自定义表情包或贴纸消息。 | | CreateForwardMessage /docs/chat/sdk/v4/android/message/methods/create forward message | 创建单条转发消息。用于把已有消息转发给另一个用户或群。 | | CreateMergerMessage /docs/chat/sdk/v4/android/message/methods/create merger message | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。 | | CreateImageMessage /docs/chat/sdk/v4/android/message/methods/create image message | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。 | | CreateImageMessageFromFullPath /docs/chat/sdk/v4/android/message/methods/create image message from full path | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。 | | CreateImageMessageByURL /docs/chat/sdk/v4/android/message/methods/create image message by url | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。 | | CreateSoundMessage /docs/chat/sdk/v4/android/message/methods/create sound message | 通过音频路径创建语音消息。 | | CreateSoundMessageFromFullPath /docs/chat/sdk/v4/android/message/methods/create sound message from full path | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。 | | CreateSoundMessageByURL /docs/chat/sdk/v4/android/message/methods/create sound message by url | 通过已上传音频 URL 信息创建语音消息。 | | CreateVideoMessage /docs/chat/sdk/v4/android/message/methods/create video message | 通过视频路径和快照路径创建视频消息。 | | CreateVideoMessageFromFullPath /docs/chat/sdk/v4/android/message/methods/create video message from full path | 通过完整视频路径和完整快照路径创建视频消息。 | | CreateVideoMessageByURL /docs/chat/sdk/v4/android/message/methods/create video message by url | 通过已上传视频 URL 信息创建视频消息。 | | CreateFileMessage /docs/chat/sdk/v4/android/message/methods/create file message | 通过文件路径创建普通文件消息。 | | CreateFileMessageFromFullPath /docs/chat/sdk/v4/android/message/methods/create file message from full path | 通过完整文件路径创建普通文件消息。 | | CreateFileMessageByURL /docs/chat/sdk/v4/android/message/methods/create file message by url | 通过已上传文件 URL 信息创建文件消息。 | | SendMessage /docs/chat/sdk/v4/android/message/methods/send message | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。 | | SendMessageNotOss /docs/chat/sdk/v4/android/message/methods/send message not oss | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 Create ByURL 方法创建的消息。 | | FindMessageList /docs/chat/sdk/v4/android/message/methods/find message list | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。 | | GetAdvancedHistoryMessageList /docs/chat/sdk/v4/android/message/methods/get advanced history message list | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。 | | GetAdvancedHistoryMessageListReverse /docs/chat/sdk/v4/android/message/methods/get advanced history message list reverse | 按反向方向获取历史消息，适合围绕游标向另一方向加载。 | | RevokeMessage /docs/chat/sdk/v4/android/message/methods/revoke message | 撤回指定消息，通常受时间窗口和权限限制。 | | TypingStatusUpdate /docs/chat/sdk/v4/android/message/methods/typing status update | 发送输入状态提示，适合单聊输入中状态展示。 | | MarkConversationMessageAsRead /docs/chat/sdk/v4/android/message/methods/mark conversation message as read | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。 | | MarkAllConversationMessageAsRead /docs/chat/sdk/v4/android/message/methods/mark all conversation message as read | 将全部会话消息标记为已读，适合一键清除全部未读。 | | MarkMessagesAsReadByMsgID /docs/chat/sdk/v4/android/message/methods/mark messages as read by msg id | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。 | | DeleteMessageFromLocalStorage /docs/chat/sdk/v4/android/message/methods/delete message from local storage | 仅从本地存储删除指定消息，不表示服务端消息被删除。 | | DeleteMessage /docs/chat/sdk/v4/android/message/methods/delete message | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。 | | DeleteAllMsgFromLocalAndSvr /docs/chat/sdk/v4/android/message/methods/delete all msg from local and svr | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。 | | DeleteAllMsgFromLocal /docs/chat/sdk/v4/android/message/methods/delete all msg from local | 仅删除当前用户本地全部消息数据，适合本地缓存清理。 | | ClearConversationAndDeleteAllMsg /docs/chat/sdk/v4/android/message/methods/clear conversation and delete all msg | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。 | | DeleteConversationAndDeleteAllMsg /docs/chat/sdk/v4/android/message/methods/delete conversation and delete all msg | 删除指定会话及其消息，适合彻底移除某个会话记录。 | | InsertSingleMessageToLocalStorage /docs/chat/sdk/v4/android/message/methods/insert single message to local storage | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。 | | InsertGroupMessageToLocalStorage /docs/chat/sdk/v4/android/message/methods/insert group message to local storage | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。 | | SearchLocalMessages /docs/chat/sdk/v4/android/message/methods/search local messages | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。 | | SetMessageLocalEx /docs/chat/sdk/v4/android/message/methods/set message local ex | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。 | 相关页面 发送消息 /docs/chat/sdk/v4/android/message/sending a message/send a message 监听器 /docs/chat/sdk/v4/android/event handler/overview"
+    "content": "会话和消息方法来自 open im sdk/conversation msg.go 。创建消息类方法同步返回消息 JSON；发送、查询、删除、已读等方法通过回调返回。 本页是会话与消息方法目录。会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态都拆成了独立方法页。 方法索引 | 方法 | 说明 | | | | | 获取全部会话 /docs/chat/sdk/v4/android/message/methods/get all conversation list | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。 | | 分页获取会话 /docs/chat/sdk/v4/android/message/methods/get conversation list split | 分页获取会话列表，适合会话数量较多时按页加载。 | | 获取单个会话 /docs/chat/sdk/v4/android/message/methods/get one conversation | 按会话类型和目标 ID 获取单个会话。单聊 sourceID 通常是用户 ID，群聊 sourceID 通常是群 ID。 | | 批量获取会话 /docs/chat/sdk/v4/android/message/methods/get multiple conversation | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。 | | 设置会话 /docs/chat/sdk/v4/android/message/methods/set conversation | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。 | | 隐藏会话 /docs/chat/sdk/v4/android/message/methods/hide conversation | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。 | | 设置会话草稿 /docs/chat/sdk/v4/android/message/methods/set conversation draft | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。 | | 获取总未读数 /docs/chat/sdk/v4/android/message/methods/get total unread msg count | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。 | | 隐藏全部会话 /docs/chat/sdk/v4/android/message/methods/hide all conversations | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。 | | 搜索会话 /docs/chat/sdk/v4/android/message/methods/search conversation | 搜索本地会话，适合聊天列表搜索入口。 | | 更新输入状态 /docs/chat/sdk/v4/android/message/methods/change input states | 更新当前用户在指定会话中的输入状态。 | | 获取输入状态 /docs/chat/sdk/v4/android/message/methods/get input states | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。 | | 生成会话 ID /docs/chat/sdk/v4/android/message/methods/get conversation id by session type | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。 | | 获取 @ 所有人标记 /docs/chat/sdk/v4/android/message/methods/get at all tag | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 | | 创建文本消息 /docs/chat/sdk/v4/android/message/methods/create text message | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。 | | 创建高级文本消息 /docs/chat/sdk/v4/android/message/methods/create advanced text message | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。 | | 创建 @ 文本消息 /docs/chat/sdk/v4/android/message/methods/create text at message | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。 | | 创建位置消息 /docs/chat/sdk/v4/android/message/methods/create location message | 创建位置消息。适合发送地图位置、门店位置或业务地点。 | | 创建自定义消息 /docs/chat/sdk/v4/android/message/methods/create custom message | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。 | | 创建引用消息 /docs/chat/sdk/v4/android/message/methods/create quote message | 创建引用消息。用于回复某条历史消息并携带新的文本内容。 | | 创建高级引用消息 /docs/chat/sdk/v4/android/message/methods/create advanced quote message | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。 | | 创建名片消息 /docs/chat/sdk/v4/android/message/methods/create card message | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。 | | 创建表情消息 /docs/chat/sdk/v4/android/message/methods/create face message | 创建表情消息。适合业务自定义表情包或贴纸消息。 | | 创建转发消息 /docs/chat/sdk/v4/android/message/methods/create forward message | 创建单条转发消息。用于把已有消息转发给另一个用户或群。 | | 创建合并转发消息 /docs/chat/sdk/v4/android/message/methods/create merger message | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。 | | 创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。 | | 通过完整路径创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message from full path | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。 | | 通过 URL 创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message by url | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。 | | 创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message | 通过音频路径创建语音消息。 | | 通过完整路径创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message from full path | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。 | | 通过 URL 创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message by url | 通过已上传音频 URL 信息创建语音消息。 | | 创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message | 通过视频路径和快照路径创建视频消息。 | | 通过完整路径创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message from full path | 通过完整视频路径和完整快照路径创建视频消息。 | | 通过 URL 创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message by url | 通过已上传视频 URL 信息创建视频消息。 | | 创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message | 通过文件路径创建普通文件消息。 | | 通过完整路径创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message from full path | 通过完整文件路径创建普通文件消息。 | | 通过 URL 创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message by url | 通过已上传文件 URL 信息创建文件消息。 | | 发送消息 /docs/chat/sdk/v4/android/message/methods/send message | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。 | | 发送非 OSS 消息 /docs/chat/sdk/v4/android/message/methods/send message not oss | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 Create ByURL 方法创建的消息。 | | 查找消息列表 /docs/chat/sdk/v4/android/message/methods/find message list | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。 | | 获取历史消息 /docs/chat/sdk/v4/android/message/methods/get advanced history message list | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。 | | 反向获取历史消息 /docs/chat/sdk/v4/android/message/methods/get advanced history message list reverse | 按反向方向获取历史消息，适合围绕游标向另一方向加载。 | | 撤回消息 /docs/chat/sdk/v4/android/message/methods/revoke message | 撤回指定消息，通常受时间窗口和权限限制。 | | 发送输入提示 /docs/chat/sdk/v4/android/message/methods/typing status update | 发送输入状态提示，适合单聊输入中状态展示。 | | 标记会话已读 /docs/chat/sdk/v4/android/message/methods/mark conversation message as read | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。 | | 标记全部会话已读 /docs/chat/sdk/v4/android/message/methods/mark all conversation message as read | 将全部会话消息标记为已读，适合一键清除全部未读。 | | 按消息 ID 标记已读 /docs/chat/sdk/v4/android/message/methods/mark messages as read by msg id | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。 | | 删除本地消息 /docs/chat/sdk/v4/android/message/methods/delete message from local storage | 仅从本地存储删除指定消息，不表示服务端消息被删除。 | | 删除消息 /docs/chat/sdk/v4/android/message/methods/delete message | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。 | | 清空本地和服务端消息 /docs/chat/sdk/v4/android/message/methods/delete all msg from local and svr | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。 | | 清空本地消息 /docs/chat/sdk/v4/android/message/methods/delete all msg from local | 仅删除当前用户本地全部消息数据，适合本地缓存清理。 | | 清空会话消息 /docs/chat/sdk/v4/android/message/methods/clear conversation and delete all msg | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。 | | 删除会话及消息 /docs/chat/sdk/v4/android/message/methods/delete conversation and delete all msg | 删除指定会话及其消息，适合彻底移除某个会话记录。 | | 插入单聊本地消息 /docs/chat/sdk/v4/android/message/methods/insert single message to local storage | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。 | | 插入群聊本地消息 /docs/chat/sdk/v4/android/message/methods/insert group message to local storage | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。 | | 搜索本地消息 /docs/chat/sdk/v4/android/message/methods/search local messages | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。 | | 设置消息本地扩展 /docs/chat/sdk/v4/android/message/methods/set message local ex | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。 | 相关页面 发送消息 /docs/chat/sdk/v4/android/message/sending a message/send a message 监听器 /docs/chat/sdk/v4/android/event handler/overview"
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/retrieving-messages/retrieve-a-message",
@@ -1193,11 +1193,11 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/overview",
-    "title": "OpenIM SDK for Android",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for OpenIM SDK for Android. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "OpenIM Android SDK 概览",
+    "description": "基于 open_im_sdk 当前导出方法整理 Android SDK 的初始化、登录、监听器、用户、好友、黑名单、群组、会话、消息和第三方能力。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android overview",
-    "content": ""
+    "content": "本 Android 文档以 open im sdk/ .go 当前导出的 132 个包级方法为准。每个方法均提供独立页面，围绕当前 Android SDK 的调用方式、参数和返回结果说明。 这里记录的是 Android core binding 的真实能力边界。若项目使用上层 Android Manager 类，Manager 方法应映射到本页列出的 core 方法；当上层封装和 core 导出方法不一致时，以 core 导出方法为准。 每个导出方法都有独立页面说明方法签名、用途、关键参数、返回或事件和使用边界；能力概览页只保留目录和调用关系说明。 接入模型 | 模型 | 说明 | | | | | 初始化 | 调用 InitSDK listener, operationID, config ， config 是 sdk struct.IMConfig 的 JSON 字符串。 | | 登录态 | 初始化后设置监听器，再调用 Login callback, operationID, userID, token 。退出当前用户用 Logout ，释放 SDK 全局资源用 UnInitSDK 。 | | 异步结果 | 大多数方法通过 Base 回调返回 OnSuccess data string 或 OnError errCode, errMsg 。 | | 同步创建 | Create Message 、 GetAtAllTag 、 GetConversationIDBySessionType 直接返回字符串。 | | JSON 参数 | 列表、结构体和请求对象在 binding 层通常表现为 string ，实际传入 JSON 字符串。 | | 示例代码 | 当前 Android API 页不放示例代码，只保留签名、参数语义、返回和注意事项。 | 当前能力页 | 页面 | 覆盖范围 | | | | | 接入流程 /docs/chat/sdk/v4/android/getting started/send first message | 初始化、监听器、登录、发送消息前置条件的顺序说明。 | | 初始化与登录 /docs/chat/sdk/v4/android/application/overview | GetSdkVersion 、 InitSDK 、 Login 、 Logout 、登录状态和前后台状态。 | | 认证流程 /docs/chat/sdk/v4/android/application/authenticating a user/authentication | token、连接监听、登录状态和退出登录的边界。 | | 监听器 /docs/chat/sdk/v4/android/event handler/overview | 连接、用户、好友、群组、会话、消息、自定义业务和消息 KV 回调。 | | 用户 /docs/chat/sdk/v4/android/user/overview | 用户资料、用户命令和在线状态订阅。 | | 好友 /docs/chat/sdk/v4/android/user/friend/overview | 好友列表、好友资料、好友搜索、好友申请和好友关系维护。 | | 黑名单 /docs/chat/sdk/v4/android/user/blacklist/overview | 加入黑名单、获取黑名单和移出黑名单。 | | 群组 /docs/chat/sdk/v4/android/channel/overview | OpenIM 群组创建、加入、成员、申请、禁言和转让。 | | 会话与消息 /docs/chat/sdk/v4/android/message/overview | 会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态。 | | 发送消息 /docs/chat/sdk/v4/android/message/sending a message/send a message | Create Message 与 SendMessage / SendMessageNotOss 的关系。 | | 推送、日志与文件 /docs/chat/sdk/v4/android/push notifications/overview | FCM token、角标、日志上传、客户端日志和文件上传。 | | 日志 /docs/chat/sdk/v4/android/logger | 初始化日志配置与主动写日志接口。 | | 错误码 /docs/chat/sdk/v4/android/error codes | 回调错误、登录状态和常见错误处理。 | | 未支持或未暴露能力 /docs/chat/sdk/v4/android/deprecated | 当前 core 未导出的能力边界。 | 当前未暴露的能力 当前 core 未导出 open channel、poll、scheduled message、message thread、translation、report、channel metadata、metacounter 等独立 Android 方法。这些能力不会作为 Android 中文侧栏入口；如后续 SDK 增加导出方法，再按源码补充。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/managing-push-notifications/configure-push-notification-preferences",
@@ -1221,7 +1221,7 @@
     "description": "推送、日志与文件方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications overview",
-    "content": "第三方能力来自 open im sdk/third.go 。当前 Android core 只暴露 FCM token、应用角标、日志上传、日志写入和文件上传；HMS、多设备推送模板和推送测试器当前不是 core 的独立导出方法。 本页是推送、日志与文件方法目录。FCM token、角标、日志和文件上传方法都拆成独立页面。 方法索引 | 方法 | 说明 | | | | | UpdateFcmToken /docs/chat/sdk/v4/android/push notifications/methods/update fcm token | 更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。 | | SetAppBadge /docs/chat/sdk/v4/android/push notifications/methods/set app badge | 设置应用角标未读数，适合未读数变化后同步系统角标。 | | UploadLogs /docs/chat/sdk/v4/android/push notifications/methods/upload logs | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。 | | Logs /docs/chat/sdk/v4/android/push notifications/methods/logs | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。 | | UploadFile /docs/chat/sdk/v4/android/push notifications/methods/upload file | 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。 | 上传回调 | 回调 | 说明 | | | | | UploadLogProgress.OnProgress current int64, size int64 | 日志上传进度。 | | UploadFileCallback.Open size int64 | 文件打开并得到总大小。 | | UploadFileCallback.PartSize partSize int64, num int | 分片大小和分片数量。 | | UploadFileCallback.HashPartProgress index int, size int64, partHash string | 分片哈希进度。 | | UploadFileCallback.HashPartComplete partsHash string, fileHash string | 所有分片哈希完成。 | | UploadFileCallback.UploadID uploadID string | 获取上传 ID。 | | UploadFileCallback.UploadPartComplete index int, partSize int64, partHash string | 单个分片上传完成。 | | UploadFileCallback.UploadComplete fileSize int64, streamSize int64, storageSize int64 | 文件上传完成阶段信息。 | | UploadFileCallback.Complete size int64, url string, typ int | 文件完成并返回 URL。 |"
+    "content": "第三方能力来自 open im sdk/third.go 。当前 Android core 只暴露 FCM token、应用角标、日志上传、日志写入和文件上传；HMS、多设备推送模板和推送测试器当前不是 core 的独立导出方法。 本页是推送、日志与文件方法目录。FCM token、角标、日志和文件上传方法都拆成独立页面。 方法索引 | 方法 | 说明 | | | | | 更新 FCM Token /docs/chat/sdk/v4/android/push notifications/methods/update fcm token | 更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。 | | 设置应用角标 /docs/chat/sdk/v4/android/push notifications/methods/set app badge | 设置应用角标未读数，适合未读数变化后同步系统角标。 | | 上传日志 /docs/chat/sdk/v4/android/push notifications/methods/upload logs | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。 | | 写入客户端日志 /docs/chat/sdk/v4/android/push notifications/methods/logs | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。 | | 上传文件 /docs/chat/sdk/v4/android/push notifications/methods/upload file | 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。 | 上传回调 | 回调 | 说明 | | | | | UploadLogProgress.OnProgress current int64, size int64 | 日志上传进度。 | | UploadFileCallback.Open size int64 | 文件打开并得到总大小。 | | UploadFileCallback.PartSize partSize int64, num int | 分片大小和分片数量。 | | UploadFileCallback.HashPartProgress index int, size int64, partHash string | 分片哈希进度。 | | UploadFileCallback.HashPartComplete partsHash string, fileHash string | 所有分片哈希完成。 | | UploadFileCallback.UploadID uploadID string | 获取上传 ID。 | | UploadFileCallback.UploadPartComplete index int, partSize int64, partHash string | 单个分片上传完成。 | | UploadFileCallback.UploadComplete fileSize int64, streamSize int64, storageSize int64 | 文件上传完成阶段信息。 | | UploadFileCallback.Complete size int64, url string, typ int | 文件完成并返回 URL。 |"
   },
   {
     "path": "/docs/chat/sdk/v4/android/report/overview-report",
@@ -1245,7 +1245,7 @@
     "description": "黑名单方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user blacklist overview",
-    "content": "黑名单方法来自 open im sdk/relation.go 中的黑名单部分。它们用于维护当前用户的屏蔽关系；具体屏蔽效果仍以 SDK 和服务端策略为准。 本页是黑名单方法目录。加入、查询和移出黑名单分别有独立方法页。 方法索引 | 方法 | 说明 | | | | | AddBlack /docs/chat/sdk/v4/android/user/blacklist/methods/add black | 将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。 | | GetBlackList /docs/chat/sdk/v4/android/user/blacklist/methods/get black list | 获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。 | | RemoveBlack /docs/chat/sdk/v4/android/user/blacklist/methods/remove black | 将指定用户移出黑名单，恢复与该用户的普通关系能力。 | 事件联动 黑名单新增和移除通过 SetFriendListener 注册的 OnFriendshipListener 接收。"
+    "content": "黑名单方法来自 open im sdk/relation.go 中的黑名单部分。它们用于维护当前用户的屏蔽关系；具体屏蔽效果仍以 SDK 和服务端策略为准。 本页是黑名单方法目录。加入、查询和移出黑名单分别有独立方法页。 方法索引 | 方法 | 说明 | | | | | 加入黑名单 /docs/chat/sdk/v4/android/user/blacklist/methods/add black | 将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。 | | 获取黑名单列表 /docs/chat/sdk/v4/android/user/blacklist/methods/get black list | 获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。 | | 移出黑名单 /docs/chat/sdk/v4/android/user/blacklist/methods/remove black | 将指定用户移出黑名单，恢复与该用户的普通关系能力。 | 事件联动 黑名单新增和移除通过 SetFriendListener 注册的 OnFriendshipListener 接收。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/moderating-a-user/mute-and-unmute-a-user",
@@ -1273,11 +1273,11 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication",
-    "title": "Authentication",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Authentication. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "认证流程",
+    "description": "说明 Android SDK 登录认证、token 生命周期、连接监听和退出登录的真实方法边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application authenticating-a-user authentication",
-    "content": ""
+    "content": "Android SDK 不在客户端生成 token。应用应从业务服务端获取当前用户的 OpenIM token，再调用 Login 。 认证边界 | 阶段 | 方法或回调 | 说明 | | | | | | 初始化连接监听 | InitSDK listener, operationID, config | listener 负责连接、踢下线和 token 状态。 | | 用户登录 | Login callback, operationID, userID, token | token 必须与 userID 匹配。 | | 查询登录态 | GetLoginStatus operationID | 用于决定是否允许业务层继续调用消息、群组、用户等接口。 | | 查询当前用户 | GetLoginUserID | 返回当前登录用户 ID，未初始化时为空字符串。 | | token 过期 | OnUserTokenExpired | 应重新获取 token 并重新登录。 | | token 无效 | OnUserTokenInvalid errMsg | 应停止当前会话，提示用户重新认证。 | | 被踢下线 | OnKickedOffline | 当前账号在其他端或后台策略下被踢出。 | | 退出登录 | Logout callback, operationID | 退出当前用户，但不等同于销毁 SDK。 | 登录前置条件 | 条件 | 说明 | | | | | SDK 已初始化 | InitSDK 返回成功后再登录。 | | 监听器已设置 | 建议在登录前设置会话、消息、群组、好友和用户监听器。 | | token 由服务端签发 | 客户端不应持有生成 token 的密钥。 | | 网络地址有效 | apiAddr 和 wsAddr 必须来自同一套 OpenIM 服务。 | 错误处理 | 场景 | 处理建议 | | | | | OnConnectFailed | 记录 errCode 、 errMsg 、 operationID ，检查网络、网关和 ws 地址。 | | OnUserTokenExpired | 向业务服务端刷新 token，再调用登录流程。 | | OnUserTokenInvalid | 清理本地登录态，要求用户重新认证。 | | Login 失败 | 不继续调用会话、消息、群组接口，先处理认证错误。 | 相关页面 初始化与登录 /docs/chat/sdk/v4/android/application/overview 错误码 /docs/chat/sdk/v4/android/error codes"
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/overview",
@@ -1285,7 +1285,7 @@
     "description": "初始化与登录方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application overview",
-    "content": "初始化与登录方法来自 open im sdk/init login.go 。初始化成功后，SDK 会创建全局 UserForSDK ；后续用户、群组、会话、消息和第三方能力都依赖这个实例。 本页是初始化与登录能力的方法目录。每个方法的签名、参数、返回和使用边界都放在独立页面中。 方法索引 | 方法 | 说明 | | | | | GetSdkVersion /docs/chat/sdk/v4/android/application/methods/get sdk version | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。 | | InitSDK /docs/chat/sdk/v4/android/application/methods/init sdk | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。 | | UnInitSDK /docs/chat/sdk/v4/android/application/methods/un init sdk | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。 | | Login /docs/chat/sdk/v4/android/application/methods/login | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 | | Logout /docs/chat/sdk/v4/android/application/methods/logout | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。 | | SetAppBackgroundStatus /docs/chat/sdk/v4/android/application/methods/set app background status | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。 | | NetworkStatusChanged /docs/chat/sdk/v4/android/application/methods/network status changed | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。 | | GetLoginStatus /docs/chat/sdk/v4/android/application/methods/get login status | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。 | | GetLoginUserID /docs/chat/sdk/v4/android/application/methods/get login user id | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。 |"
+    "content": "初始化与登录方法来自 open im sdk/init login.go 。初始化成功后，SDK 会创建全局 UserForSDK ；后续用户、群组、会话、消息和第三方能力都依赖这个实例。 本页是初始化与登录能力的方法目录。每个方法的签名、参数、返回和使用边界都放在独立页面中。 方法索引 | 方法 | 说明 | | | | | 获取 SDK 版本 /docs/chat/sdk/v4/android/application/methods/get sdk version | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。 | | 初始化 SDK /docs/chat/sdk/v4/android/application/methods/init sdk | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。 | | 释放 SDK /docs/chat/sdk/v4/android/application/methods/un init sdk | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。 | | 登录用户 /docs/chat/sdk/v4/android/application/methods/login | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 | | 退出登录 /docs/chat/sdk/v4/android/application/methods/logout | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。 | | 设置前后台状态 /docs/chat/sdk/v4/android/application/methods/set app background status | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。 | | 通知网络变化 /docs/chat/sdk/v4/android/application/methods/network status changed | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。 | | 获取登录状态 /docs/chat/sdk/v4/android/application/methods/get login status | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。 | | 获取登录用户 ID /docs/chat/sdk/v4/android/application/methods/get login user id | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。 |"
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/understanding-rate-limits/rate-limits",
@@ -1433,19 +1433,19 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/deprecated",
-    "title": "Deprecated",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Deprecated. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "未支持或未暴露能力",
+    "description": "说明当前 open_im_sdk 未导出的 Android 能力边界，避免使用与当前 SDK 不一致的接口。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android deprecated",
-    "content": ""
+    "content": "当前 Android 中文文档只保留 open im sdk 已导出的能力。以下能力当前未作为 OpenIM Android SDK 的独立 core API 暴露。 当前未作为 Android core API 暴露的能力 | 能力范围 | 当前处理 | | | | | open channel、enter/exit open channel | 当前 core 没有独立 open channel 导出方法；多人聊天使用 OpenIM 群组。 | | channel metadata、metacounter、custom type | 当前 core 未导出独立方法；如需扩展信息，优先使用 OpenIM 已有群组、会话、消息扩展字段。 | | poll、scheduled message、message thread、translation | 当前 core 未导出独立 Android 方法。 | | report message/user/channel | 当前 core 未导出独立举报方法。 | | push notification tester、template、HMS 多设备配置 | 当前 core 只导出 UpdateFcmToken 和 SetAppBadge ；其余通常由应用或服务端配置完成。 | | operator 注册/移除 | 当前 core 没有单独 operator API；群主、管理员和成员能力以群组接口为准。 | | freeze/unfreeze channel | 当前 core 对应可用能力是群禁言 ChangeGroupMute 和成员禁言 ChangeGroupMemberMute ，不是频道冻结。 | 文档处理原则 | 原则 | 说明 | | | | | 以源码为准 | 只记录 open im sdk/ .go 已导出的包级方法。 | | 示例保持一致 | 仅保留与当前 Android SDK 调用方式一致的示例代码。 | | 保留真实签名 | API 页保留方法名、参数、返回和回调说明。 | | 后续增量补充 | 如果 SDK core 新增导出方法，再按源码补充页面和侧栏。 |"
   },
   {
     "path": "/docs/chat/sdk/v4/android/error-codes",
-    "title": "Error codes",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Error codes. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "错误码",
+    "description": "说明 Android core binding 的回调错误、登录状态错误和排查流程。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android error-codes",
-    "content": ""
+    "content": "Android core binding 通过 Base.OnError errCode int32, errMsg string 返回大多数异步错误。同步方法通常直接返回字符串、布尔值或状态值；如果创建消息失败，返回内容应按 wrapper 约定和日志一起判断。 错误返回位置 | 来源 | 错误形态 | 说明 | | | | | | 异步 API | OnError errCode, errMsg | 用户、好友、群组、会话、消息、第三方能力通用。 | | 发送消息 | SendMsgCallBack.OnError errCode, errMsg | 发送失败、上传失败或服务端拒绝。 | | 初始化 | InitSDK ... bool | 配置 JSON 解析失败、平台 ID 缺失、地址格式错误或 listener 为空时返回 false 。 | | 登录状态 | GetLoginStatus operationID int | 未初始化时返回未初始化状态。 | | 连接监听 | OnConnectFailed errCode, errMsg | 长连接失败。 | 常见场景 | 场景 | 可能原因 | 处理建议 | | | | | | 初始化返回 false | config 不是合法 JSON、 platformID 为 0、 apiAddr / wsAddr 格式不正确、listener 为空。 | 修正初始化参数后重新初始化。 | | 调用 API 直接失败 | SDK 未初始化、未登录、 operationID 为空或资源未加载。 | 检查初始化和登录顺序，记录 operationID 。 | | token 相关失败 | token 过期、无效或与用户 ID 不匹配。 | 从服务端刷新 token 后重新登录。 | | 消息发送失败 | 会话目标错误、消息 JSON 不合法、上传失败或服务端拒绝。 | 检查 recvID / groupID 、消息创建结果、离线推送参数和服务端日志。 | | JSON 参数解析失败 | 列表或结构体参数不是目标结构的 JSON。 | 按对应结构重新序列化参数。 | 排查流程 | 步骤 | 操作 | | | | | 1 | 确认 GetSdkVersion 、 GetLoginStatus operationID 和 GetLoginUserID 。 | | 2 | 收集失败 API 的 operationID 、 errCode 、 errMsg 。 | | 3 | 检查初始化配置中的 apiAddr 、 wsAddr 、 platformID 、日志目录。 | | 4 | 对 JSON 字符串参数做反序列化校验。 | | 5 | 必要时调用 UploadLogs 上传日志。 |"
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/managing-channel-event-handlers/add-or-remove-a-channel-event-handler",
@@ -1477,7 +1477,7 @@
     "description": "监听器方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler overview",
-    "content": "监听器方法来自 open im sdk/listener.go ，回调接口来自 open im sdk callback/callback client.go 。 Set Listener 是替换式设置；如果应用需要多处消费事件，应在业务层做分发。 本页是监听器设置方法目录。每个监听器方法都有独立页面说明事件范围和替换式设置行为。 方法索引 | 方法 | 说明 | | | | | SetGroupListener /docs/chat/sdk/v4/android/event handler/methods/set group listener | 设置群组事件监听器，用于接收已加入群变化、群资料变化、群成员变化和群申请处理结果。 | | SetConversationListener /docs/chat/sdk/v4/android/event handler/methods/set conversation listener | 设置会话事件监听器，用于接收服务端同步进度、新会话、会话变更、总未读数和输入状态变化。 | | SetAdvancedMsgListener /docs/chat/sdk/v4/android/event handler/methods/set advanced msg listener | 设置单条消息高级监听器，用于处理新消息、离线消息、已读回执、消息撤回、消息删除和在线消息。 | | SetBatchMsgListener /docs/chat/sdk/v4/android/event handler/methods/set batch msg listener | 设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。 | | SetUserListener /docs/chat/sdk/v4/android/event handler/methods/set user listener | 设置用户事件监听器，用于接收当前用户资料更新、用户在线状态变化和用户命令增删改事件。 | | SetFriendListener /docs/chat/sdk/v4/android/event handler/methods/set friend listener | 设置好友关系监听器，用于接收好友申请、好友新增或删除、好友资料变化以及黑名单变化。 | | SetCustomBusinessListener /docs/chat/sdk/v4/android/event handler/methods/set custom business listener | 设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。 | | SetMessageKvInfoListener /docs/chat/sdk/v4/android/event handler/methods/set message kv info listener | 设置消息 KV 信息变化监听器，用于接收消息扩展键值信息变化。 |"
+    "content": "监听器方法来自 open im sdk/listener.go ，回调接口来自 open im sdk callback/callback client.go 。 Set Listener 是替换式设置；如果应用需要多处消费事件，应在业务层做分发。 本页是监听器设置方法目录。每个监听器方法都有独立页面说明事件范围和替换式设置行为。 方法索引 | 方法 | 说明 | | | | | 监听群组事件 /docs/chat/sdk/v4/android/event handler/methods/set group listener | 设置群组事件监听器，用于接收已加入群变化、群资料变化、群成员变化和群申请处理结果。 | | 监听会话事件 /docs/chat/sdk/v4/android/event handler/methods/set conversation listener | 设置会话事件监听器，用于接收服务端同步进度、新会话、会话变更、总未读数和输入状态变化。 | | 监听单条消息事件 /docs/chat/sdk/v4/android/event handler/methods/set advanced msg listener | 设置单条消息高级监听器，用于处理新消息、离线消息、已读回执、消息撤回、消息删除和在线消息。 | | 监听批量消息事件 /docs/chat/sdk/v4/android/event handler/methods/set batch msg listener | 设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。 | | 监听用户事件 /docs/chat/sdk/v4/android/event handler/methods/set user listener | 设置用户事件监听器，用于接收当前用户资料更新、用户在线状态变化和用户命令增删改事件。 | | 监听好友事件 /docs/chat/sdk/v4/android/event handler/methods/set friend listener | 设置好友关系监听器，用于接收好友申请、好友新增或删除、好友资料变化以及黑名单变化。 | | 监听自定义业务事件 /docs/chat/sdk/v4/android/event handler/methods/set custom business listener | 设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。 | | 监听消息 KV 变化 /docs/chat/sdk/v4/android/event handler/methods/set message kv info listener | 设置消息 KV 信息变化监听器，用于接收消息扩展键值信息变化。 |"
   },
   {
     "path": "/docs/chat/sdk/v4/android/getting-started/collection-migration-guide",
@@ -1529,11 +1529,11 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/logger",
-    "title": "Logger",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Logger. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "日志",
+    "description": "说明 Android SDK 初始化日志配置、主动写日志和上传日志的当前导出方法。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android logger",
-    "content": ""
+    "content": "Android core 的日志能力分为初始化配置、主动写日志和日志上传。日志方法已经拆分到独立页面。 初始化日志配置 InitSDK 会读取 IMConfig 中的日志字段： | 字段 | 说明 | | | | | logLevel | 日志等级。 | | isLogStandardOutput | 是否输出到标准输出。 | | logFilePath | 日志文件目录。 | | systemType | 系统类型，会写入日志上下文。 | | platformID | 平台 ID，会映射为日志中的平台名称。 | 日志方法 | 方法 | 说明 | | | | | 上传日志 /docs/chat/sdk/v4/android/push notifications/methods/upload logs | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。 | | 写入客户端日志 /docs/chat/sdk/v4/android/push notifications/methods/logs | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。 | 日志排查字段 | 字段 | 建议 | | | | | operationID | 每次 API 调用都传非空值，便于串联客户端和服务端日志。 | | errCode / errMsg | 失败回调必须记录。 | | SDK version | 可通过 GetSdkVersion 获取。 | | login user | 可通过 GetLoginUserID 获取，注意脱敏。 | 注意事项 生产环境日志等级应按合规和性能要求控制。 上传日志前应征得用户授权或遵守产品隐私策略。 Logs 在 SDK 未初始化时会返回错误。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/categorizing-messages/categorize-messages-by-custom-type",
@@ -1865,11 +1865,11 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message",
-    "title": "Send a message",
-    "description": "OpenIM · SDK · Android · v4 documentation scaffold for Send a message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.",
+    "title": "发送消息",
+    "description": "说明 Android core binding 中消息创建方法、SendMessage 和 SendMessageNotOss 的关系，不包含示例代码。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message sending-a-message send-a-message",
-    "content": ""
+    "content": "发送消息由两个阶段组成：先用 Create Message 同步创建消息 JSON，再把该消息 JSON 传给 SendMessage 或 SendMessageNotOss 。本页只说明关系和入口，具体方法说明见独立页面。 相关方法 | 方法 | 说明 | | | | | 获取 @ 所有人标记 /docs/chat/sdk/v4/android/message/methods/get at all tag | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 | | 创建文本消息 /docs/chat/sdk/v4/android/message/methods/create text message | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。 | | 创建高级文本消息 /docs/chat/sdk/v4/android/message/methods/create advanced text message | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。 | | 创建 @ 文本消息 /docs/chat/sdk/v4/android/message/methods/create text at message | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。 | | 创建位置消息 /docs/chat/sdk/v4/android/message/methods/create location message | 创建位置消息。适合发送地图位置、门店位置或业务地点。 | | 创建自定义消息 /docs/chat/sdk/v4/android/message/methods/create custom message | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。 | | 创建引用消息 /docs/chat/sdk/v4/android/message/methods/create quote message | 创建引用消息。用于回复某条历史消息并携带新的文本内容。 | | 创建高级引用消息 /docs/chat/sdk/v4/android/message/methods/create advanced quote message | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。 | | 创建名片消息 /docs/chat/sdk/v4/android/message/methods/create card message | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。 | | 创建表情消息 /docs/chat/sdk/v4/android/message/methods/create face message | 创建表情消息。适合业务自定义表情包或贴纸消息。 | | 创建转发消息 /docs/chat/sdk/v4/android/message/methods/create forward message | 创建单条转发消息。用于把已有消息转发给另一个用户或群。 | | 创建合并转发消息 /docs/chat/sdk/v4/android/message/methods/create merger message | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。 | | 创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。 | | 通过完整路径创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message from full path | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。 | | 通过 URL 创建图片消息 /docs/chat/sdk/v4/android/message/methods/create image message by url | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。 | | 创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message | 通过音频路径创建语音消息。 | | 通过完整路径创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message from full path | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。 | | 通过 URL 创建语音消息 /docs/chat/sdk/v4/android/message/methods/create sound message by url | 通过已上传音频 URL 信息创建语音消息。 | | 创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message | 通过视频路径和快照路径创建视频消息。 | | 通过完整路径创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message from full path | 通过完整视频路径和完整快照路径创建视频消息。 | | 通过 URL 创建视频消息 /docs/chat/sdk/v4/android/message/methods/create video message by url | 通过已上传视频 URL 信息创建视频消息。 | | 创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message | 通过文件路径创建普通文件消息。 | | 通过完整路径创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message from full path | 通过完整文件路径创建普通文件消息。 | | 通过 URL 创建文件消息 /docs/chat/sdk/v4/android/message/methods/create file message by url | 通过已上传文件 URL 信息创建文件消息。 | | 发送消息 /docs/chat/sdk/v4/android/message/methods/send message | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。 | | 发送非 OSS 消息 /docs/chat/sdk/v4/android/message/methods/send message not oss | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 Create ByURL 方法创建的消息。 | 参数选择 | 目标 | recvID | groupID | 说明 | | | | | | | 单聊 | 接收用户 ID | 空字符串 | 向一个用户发送消息。 | | 群聊 | 空字符串 | 群 ID | 向一个 OpenIM 群组发送消息。 | 结果事件 | 事件 | 来源 | 说明 | | | | | | 发送成功 | SendMsgCallBack.OnSuccess | 返回服务端确认后的消息 JSON。 | | 发送进度 | SendMsgCallBack.OnProgress | 文件、图片、视频等可能产生进度。 | | 新消息 | OnAdvancedMsgListener.OnRecvNewMessage 或 OnBatchMsgListener.OnRecvNewMessages | 接收端通过监听器收到消息。 | | 会话变化 | OnConversationListener.OnNewConversation 、 OnConversationChanged | 发送或接收消息可能改变会话列表和未读数。 | 注意事项 单聊和群聊只选择一个目标字段：单聊传 recvID ，群聊传 groupID 。 Create MessageByURL 类方法适合资源已上传或由业务侧提供 URL 的场景。 发送前必须已登录，并已设置消息和会话监听器。 不要直接套用其他平台或其他封装层的示例；应按独立方法页签名映射。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/sending-a-message/send-an-admin-message",
@@ -2021,7 +2021,7 @@
     "description": "用户方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user overview",
-    "content": "本页覆盖 open im sdk/user.go 和 online.go 中与用户资料、用户命令、在线状态相关的方法。好友和黑名单已拆分为独立页面。 本页是用户资料、用户命令和在线状态方法目录。每个方法的详细说明见独立页面。 方法索引 | 方法 | 说明 | | | | | GetSelfUserInfo /docs/chat/sdk/v4/android/user/methods/get self user info | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 | | SetSelfInfo /docs/chat/sdk/v4/android/user/methods/set self info | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。 | | GetUsersInfo /docs/chat/sdk/v4/android/user/methods/get users info | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。 | | AddUserCommand /docs/chat/sdk/v4/android/user/methods/add user command | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。 | | DeleteUserCommand /docs/chat/sdk/v4/android/user/methods/delete user command | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。 | | GetAllUserCommands /docs/chat/sdk/v4/android/user/methods/get all user commands | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。 | | SubscribeUsersStatus /docs/chat/sdk/v4/android/user/methods/subscribe users status | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。 | | UnsubscribeUsersStatus /docs/chat/sdk/v4/android/user/methods/unsubscribe users status | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。 | | GetSubscribeUsersStatus /docs/chat/sdk/v4/android/user/methods/get subscribe users status | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。 | | GetUserStatus /docs/chat/sdk/v4/android/user/methods/get user status | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。 | 相关页面 好友 /docs/chat/sdk/v4/android/user/friend/overview 黑名单 /docs/chat/sdk/v4/android/user/blacklist/overview"
+    "content": "本页覆盖 open im sdk/user.go 和 online.go 中与用户资料、用户命令、在线状态相关的方法。好友和黑名单已拆分为独立页面。 本页是用户资料、用户命令和在线状态方法目录。每个方法的详细说明见独立页面。 方法索引 | 方法 | 说明 | | | | | 获取当前用户资料 /docs/chat/sdk/v4/android/user/methods/get self user info | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 | | 更新当前用户资料 /docs/chat/sdk/v4/android/user/methods/set self info | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。 | | 批量获取用户资料 /docs/chat/sdk/v4/android/user/methods/get users info | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。 | | 添加用户命令 /docs/chat/sdk/v4/android/user/methods/add user command | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。 | | 删除用户命令 /docs/chat/sdk/v4/android/user/methods/delete user command | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。 | | 获取用户命令列表 /docs/chat/sdk/v4/android/user/methods/get all user commands | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。 | | 订阅用户在线状态 /docs/chat/sdk/v4/android/user/methods/subscribe users status | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。 | | 取消订阅在线状态 /docs/chat/sdk/v4/android/user/methods/unsubscribe users status | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。 | | 获取已订阅用户状态 /docs/chat/sdk/v4/android/user/methods/get subscribe users status | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。 | | 获取用户在线状态 /docs/chat/sdk/v4/android/user/methods/get user status | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。 | 相关页面 好友 /docs/chat/sdk/v4/android/user/friend/overview 黑名单 /docs/chat/sdk/v4/android/user/blacklist/overview"
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/retrieving-and-updating-user-information/retrieve-the-latest-information-on-participants",
@@ -2069,7 +2069,7 @@
     "description": "好友方法目录，所有方法均拆分到独立页面说明。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend overview",
-    "content": "好友方法来自 open im sdk/relation.go 中的好友关系部分。它们负责好友资料读取、好友列表分页、好友搜索、申请处理和好友关系更新。 本页是好友关系方法目录。好友资料、好友列表、好友申请和关系维护都拆成了独立方法页。 方法索引 | 方法 | 说明 | | | | | GetSpecifiedFriendsInfo /docs/chat/sdk/v4/android/user/friend/methods/get specified friends info | 批量获取指定好友的关系资料，适合好友详情页、会话资料补齐或局部刷新好友信息。 | | GetFriendList /docs/chat/sdk/v4/android/user/friend/methods/get friend list | 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。 | | GetFriendListPage /docs/chat/sdk/v4/android/user/friend/methods/get friend list page | 分页获取好友列表，适合好友数量较多时按页加载。 | | SearchFriends /docs/chat/sdk/v4/android/user/friend/methods/search friends | 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。 | | CheckFriend /docs/chat/sdk/v4/android/user/friend/methods/check friend | 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。 | | AddFriend /docs/chat/sdk/v4/android/user/friend/methods/add friend | 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。 | | UpdateFriends /docs/chat/sdk/v4/android/user/friend/methods/update friends | 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。 | | DeleteFriend /docs/chat/sdk/v4/android/user/friend/methods/delete friend | 删除指定好友关系，适合用户主动解除好友。 | | GetFriendApplicationListAsRecipient /docs/chat/sdk/v4/android/user/friend/methods/get friend application list as recipient | 获取当前用户收到的好友申请列表，适合好友申请入口和审核页。 | | GetFriendApplicationListAsApplicant /docs/chat/sdk/v4/android/user/friend/methods/get friend application list as applicant | 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。 | | AcceptFriendApplication /docs/chat/sdk/v4/android/user/friend/methods/accept friend application | 同意指定好友申请，建立好友关系。 | | RefuseFriendApplication /docs/chat/sdk/v4/android/user/friend/methods/refuse friend application | 拒绝指定好友申请。 | | GetFriendApplicationUnhandledCount /docs/chat/sdk/v4/android/user/friend/methods/get friend application unhandled count | 获取未处理好友申请数量，适合好友入口角标和后台同步。 | 事件联动 好友申请、新增好友、删除好友和好友资料变化通过 SetFriendListener 注册的 OnFriendshipListener 接收。"
+    "content": "好友方法来自 open im sdk/relation.go 中的好友关系部分。它们负责好友资料读取、好友列表分页、好友搜索、申请处理和好友关系更新。 本页是好友关系方法目录。好友资料、好友列表、好友申请和关系维护都拆成了独立方法页。 方法索引 | 方法 | 说明 | | | | | 获取指定好友资料 /docs/chat/sdk/v4/android/user/friend/methods/get specified friends info | 批量获取指定好友的关系资料，适合好友详情页、会话资料补齐或局部刷新好友信息。 | | 获取好友列表 /docs/chat/sdk/v4/android/user/friend/methods/get friend list | 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。 | | 分页获取好友列表 /docs/chat/sdk/v4/android/user/friend/methods/get friend list page | 分页获取好友列表，适合好友数量较多时按页加载。 | | 搜索好友 /docs/chat/sdk/v4/android/user/friend/methods/search friends | 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。 | | 校验好友关系 /docs/chat/sdk/v4/android/user/friend/methods/check friend | 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。 | | 发送好友申请 /docs/chat/sdk/v4/android/user/friend/methods/add friend | 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。 | | 更新好友资料 /docs/chat/sdk/v4/android/user/friend/methods/update friends | 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。 | | 删除好友 /docs/chat/sdk/v4/android/user/friend/methods/delete friend | 删除指定好友关系，适合用户主动解除好友。 | | 获取收到的好友申请 /docs/chat/sdk/v4/android/user/friend/methods/get friend application list as recipient | 获取当前用户收到的好友申请列表，适合好友申请入口和审核页。 | | 获取发出的好友申请 /docs/chat/sdk/v4/android/user/friend/methods/get friend application list as applicant | 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。 | | 同意好友申请 /docs/chat/sdk/v4/android/user/friend/methods/accept friend application | 同意指定好友申请，建立好友关系。 | | 拒绝好友申请 /docs/chat/sdk/v4/android/user/friend/methods/refuse friend application | 拒绝指定好友申请。 | | 获取未处理好友申请数 /docs/chat/sdk/v4/android/user/friend/methods/get friend application unhandled count | 获取未处理好友申请数量，适合好友入口角标和后台同步。 | 事件联动 好友申请、新增好友、删除好友和好友资料变化通过 SetFriendListener 注册的 OnFriendshipListener 接收。"
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/marking-messages-as-read-in-a-group-channel/mark-messages-as-read",
@@ -5785,7 +5785,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/get-sdk-version",
-    "title": "GetSdkVersion",
+    "title": "获取 SDK 版本",
     "description": "说明 Android core binding 方法 GetSdkVersion 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods get-sdk-version",
@@ -5793,7 +5793,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/init-sdk",
-    "title": "InitSDK",
+    "title": "初始化 SDK",
     "description": "说明 Android core binding 方法 InitSDK 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods init-sdk",
@@ -5801,7 +5801,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/un-init-sdk",
-    "title": "UnInitSDK",
+    "title": "释放 SDK",
     "description": "说明 Android core binding 方法 UnInitSDK 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods un-init-sdk",
@@ -5809,7 +5809,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/login",
-    "title": "Login",
+    "title": "登录用户",
     "description": "说明 Android core binding 方法 Login 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods login",
@@ -5817,7 +5817,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/logout",
-    "title": "Logout",
+    "title": "退出登录",
     "description": "说明 Android core binding 方法 Logout 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods logout",
@@ -5825,7 +5825,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/set-app-background-status",
-    "title": "SetAppBackgroundStatus",
+    "title": "设置前后台状态",
     "description": "说明 Android core binding 方法 SetAppBackgroundStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods set-app-background-status",
@@ -5833,7 +5833,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/network-status-changed",
-    "title": "NetworkStatusChanged",
+    "title": "通知网络变化",
     "description": "说明 Android core binding 方法 NetworkStatusChanged 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods network-status-changed",
@@ -5841,7 +5841,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/get-login-status",
-    "title": "GetLoginStatus",
+    "title": "获取登录状态",
     "description": "说明 Android core binding 方法 GetLoginStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods get-login-status",
@@ -5849,7 +5849,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/application/methods/get-login-user-id",
-    "title": "GetLoginUserID",
+    "title": "获取登录用户 ID",
     "description": "说明 Android core binding 方法 GetLoginUserID 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android application methods get-login-user-id",
@@ -5857,7 +5857,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener",
-    "title": "SetGroupListener",
+    "title": "监听群组事件",
     "description": "说明 Android core binding 方法 SetGroupListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-group-listener",
@@ -5865,7 +5865,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener",
-    "title": "SetConversationListener",
+    "title": "监听会话事件",
     "description": "说明 Android core binding 方法 SetConversationListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-conversation-listener",
@@ -5873,7 +5873,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener",
-    "title": "SetAdvancedMsgListener",
+    "title": "监听单条消息事件",
     "description": "说明 Android core binding 方法 SetAdvancedMsgListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-advanced-msg-listener",
@@ -5881,7 +5881,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener",
-    "title": "SetBatchMsgListener",
+    "title": "监听批量消息事件",
     "description": "说明 Android core binding 方法 SetBatchMsgListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-batch-msg-listener",
@@ -5889,7 +5889,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener",
-    "title": "SetUserListener",
+    "title": "监听用户事件",
     "description": "说明 Android core binding 方法 SetUserListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-user-listener",
@@ -5897,7 +5897,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener",
-    "title": "SetFriendListener",
+    "title": "监听好友事件",
     "description": "说明 Android core binding 方法 SetFriendListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-friend-listener",
@@ -5905,7 +5905,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener",
-    "title": "SetCustomBusinessListener",
+    "title": "监听自定义业务事件",
     "description": "说明 Android core binding 方法 SetCustomBusinessListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-custom-business-listener",
@@ -5913,7 +5913,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener",
-    "title": "SetMessageKvInfoListener",
+    "title": "监听消息 KV 变化",
     "description": "说明 Android core binding 方法 SetMessageKvInfoListener 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android event-handler methods set-message-kv-info-listener",
@@ -5921,7 +5921,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/get-self-user-info",
-    "title": "GetSelfUserInfo",
+    "title": "获取当前用户资料",
     "description": "说明 Android core binding 方法 GetSelfUserInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods get-self-user-info",
@@ -5929,7 +5929,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/set-self-info",
-    "title": "SetSelfInfo",
+    "title": "更新当前用户资料",
     "description": "说明 Android core binding 方法 SetSelfInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods set-self-info",
@@ -5937,7 +5937,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/get-users-info",
-    "title": "GetUsersInfo",
+    "title": "批量获取用户资料",
     "description": "说明 Android core binding 方法 GetUsersInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods get-users-info",
@@ -5945,7 +5945,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/add-user-command",
-    "title": "AddUserCommand",
+    "title": "添加用户命令",
     "description": "说明 Android core binding 方法 AddUserCommand 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods add-user-command",
@@ -5953,7 +5953,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/delete-user-command",
-    "title": "DeleteUserCommand",
+    "title": "删除用户命令",
     "description": "说明 Android core binding 方法 DeleteUserCommand 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods delete-user-command",
@@ -5961,7 +5961,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/get-all-user-commands",
-    "title": "GetAllUserCommands",
+    "title": "获取用户命令列表",
     "description": "说明 Android core binding 方法 GetAllUserCommands 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods get-all-user-commands",
@@ -5969,7 +5969,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/subscribe-users-status",
-    "title": "SubscribeUsersStatus",
+    "title": "订阅用户在线状态",
     "description": "说明 Android core binding 方法 SubscribeUsersStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods subscribe-users-status",
@@ -5977,7 +5977,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status",
-    "title": "UnsubscribeUsersStatus",
+    "title": "取消订阅在线状态",
     "description": "说明 Android core binding 方法 UnsubscribeUsersStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods unsubscribe-users-status",
@@ -5985,7 +5985,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status",
-    "title": "GetSubscribeUsersStatus",
+    "title": "获取已订阅用户状态",
     "description": "说明 Android core binding 方法 GetSubscribeUsersStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods get-subscribe-users-status",
@@ -5993,7 +5993,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/methods/get-user-status",
-    "title": "GetUserStatus",
+    "title": "获取用户在线状态",
     "description": "说明 Android core binding 方法 GetUserStatus 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user methods get-user-status",
@@ -6001,7 +6001,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-specified-friends-info",
-    "title": "GetSpecifiedFriendsInfo",
+    "title": "获取指定好友资料",
     "description": "说明 Android core binding 方法 GetSpecifiedFriendsInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-specified-friends-info",
@@ -6009,7 +6009,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list",
-    "title": "GetFriendList",
+    "title": "获取好友列表",
     "description": "说明 Android core binding 方法 GetFriendList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-friend-list",
@@ -6017,7 +6017,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page",
-    "title": "GetFriendListPage",
+    "title": "分页获取好友列表",
     "description": "说明 Android core binding 方法 GetFriendListPage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-friend-list-page",
@@ -6025,7 +6025,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/search-friends",
-    "title": "SearchFriends",
+    "title": "搜索好友",
     "description": "说明 Android core binding 方法 SearchFriends 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods search-friends",
@@ -6033,7 +6033,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/check-friend",
-    "title": "CheckFriend",
+    "title": "校验好友关系",
     "description": "说明 Android core binding 方法 CheckFriend 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods check-friend",
@@ -6041,7 +6041,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/add-friend",
-    "title": "AddFriend",
+    "title": "发送好友申请",
     "description": "说明 Android core binding 方法 AddFriend 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods add-friend",
@@ -6049,7 +6049,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/update-friends",
-    "title": "UpdateFriends",
+    "title": "更新好友资料",
     "description": "说明 Android core binding 方法 UpdateFriends 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods update-friends",
@@ -6057,7 +6057,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/delete-friend",
-    "title": "DeleteFriend",
+    "title": "删除好友",
     "description": "说明 Android core binding 方法 DeleteFriend 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods delete-friend",
@@ -6065,7 +6065,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-recipient",
-    "title": "GetFriendApplicationListAsRecipient",
+    "title": "获取收到的好友申请",
     "description": "说明 Android core binding 方法 GetFriendApplicationListAsRecipient 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-friend-application-list-as-recipient",
@@ -6073,7 +6073,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant",
-    "title": "GetFriendApplicationListAsApplicant",
+    "title": "获取发出的好友申请",
     "description": "说明 Android core binding 方法 GetFriendApplicationListAsApplicant 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-friend-application-list-as-applicant",
@@ -6081,7 +6081,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/accept-friend-application",
-    "title": "AcceptFriendApplication",
+    "title": "同意好友申请",
     "description": "说明 Android core binding 方法 AcceptFriendApplication 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods accept-friend-application",
@@ -6089,7 +6089,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/refuse-friend-application",
-    "title": "RefuseFriendApplication",
+    "title": "拒绝好友申请",
     "description": "说明 Android core binding 方法 RefuseFriendApplication 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods refuse-friend-application",
@@ -6097,7 +6097,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count",
-    "title": "GetFriendApplicationUnhandledCount",
+    "title": "获取未处理好友申请数",
     "description": "说明 Android core binding 方法 GetFriendApplicationUnhandledCount 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user friend methods get-friend-application-unhandled-count",
@@ -6105,7 +6105,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/blacklist/methods/add-black",
-    "title": "AddBlack",
+    "title": "加入黑名单",
     "description": "说明 Android core binding 方法 AddBlack 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user blacklist methods add-black",
@@ -6113,7 +6113,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list",
-    "title": "GetBlackList",
+    "title": "获取黑名单列表",
     "description": "说明 Android core binding 方法 GetBlackList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user blacklist methods get-black-list",
@@ -6121,7 +6121,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black",
-    "title": "RemoveBlack",
+    "title": "移出黑名单",
     "description": "说明 Android core binding 方法 RemoveBlack 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android user blacklist methods remove-black",
@@ -6129,7 +6129,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/create-group",
-    "title": "CreateGroup",
+    "title": "创建群组",
     "description": "说明 Android core binding 方法 CreateGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods create-group",
@@ -6137,7 +6137,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/join-group",
-    "title": "JoinGroup",
+    "title": "申请加入群组",
     "description": "说明 Android core binding 方法 JoinGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods join-group",
@@ -6145,7 +6145,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/quit-group",
-    "title": "QuitGroup",
+    "title": "退出群组",
     "description": "说明 Android core binding 方法 QuitGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods quit-group",
@@ -6153,7 +6153,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/dismiss-group",
-    "title": "DismissGroup",
+    "title": "解散群组",
     "description": "说明 Android core binding 方法 DismissGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods dismiss-group",
@@ -6161,7 +6161,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/change-group-mute",
-    "title": "ChangeGroupMute",
+    "title": "设置群禁言",
     "description": "说明 Android core binding 方法 ChangeGroupMute 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods change-group-mute",
@@ -6169,7 +6169,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute",
-    "title": "ChangeGroupMemberMute",
+    "title": "设置成员禁言",
     "description": "说明 Android core binding 方法 ChangeGroupMemberMute 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods change-group-member-mute",
@@ -6177,7 +6177,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/transfer-group-owner",
-    "title": "TransferGroupOwner",
+    "title": "转让群主",
     "description": "说明 Android core binding 方法 TransferGroupOwner 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods transfer-group-owner",
@@ -6185,7 +6185,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/kick-group-member",
-    "title": "KickGroupMember",
+    "title": "移出群成员",
     "description": "说明 Android core binding 方法 KickGroupMember 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods kick-group-member",
@@ -6193,7 +6193,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/set-group-info",
-    "title": "SetGroupInfo",
+    "title": "更新群资料",
     "description": "说明 Android core binding 方法 SetGroupInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods set-group-info",
@@ -6201,7 +6201,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/set-group-member-info",
-    "title": "SetGroupMemberInfo",
+    "title": "更新群成员资料",
     "description": "说明 Android core binding 方法 SetGroupMemberInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods set-group-member-info",
@@ -6209,7 +6209,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list",
-    "title": "GetJoinedGroupList",
+    "title": "获取已加入群组",
     "description": "说明 Android core binding 方法 GetJoinedGroupList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-joined-group-list",
@@ -6217,7 +6217,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list-page",
-    "title": "GetJoinedGroupListPage",
+    "title": "分页获取已加入群组",
     "description": "说明 Android core binding 方法 GetJoinedGroupListPage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-joined-group-list-page",
@@ -6225,7 +6225,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-specified-groups-info",
-    "title": "GetSpecifiedGroupsInfo",
+    "title": "获取指定群组资料",
     "description": "说明 Android core binding 方法 GetSpecifiedGroupsInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-specified-groups-info",
@@ -6233,7 +6233,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/search-groups",
-    "title": "SearchGroups",
+    "title": "搜索群组",
     "description": "说明 Android core binding 方法 SearchGroups 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods search-groups",
@@ -6241,7 +6241,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin",
-    "title": "GetGroupMemberOwnerAndAdmin",
+    "title": "获取群主和管理员",
     "description": "说明 Android core binding 方法 GetGroupMemberOwnerAndAdmin 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-member-owner-and-admin",
@@ -6249,7 +6249,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter",
-    "title": "GetGroupMemberListByJoinTimeFilter",
+    "title": "按入群时间筛选成员",
     "description": "说明 Android core binding 方法 GetGroupMemberListByJoinTimeFilter 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-member-list-by-join-time-filter",
@@ -6257,7 +6257,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-specified-group-members-info",
-    "title": "GetSpecifiedGroupMembersInfo",
+    "title": "获取指定群成员资料",
     "description": "说明 Android core binding 方法 GetSpecifiedGroupMembersInfo 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-specified-group-members-info",
@@ -6265,7 +6265,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-member-list",
-    "title": "GetGroupMemberList",
+    "title": "获取群成员列表",
     "description": "说明 Android core binding 方法 GetGroupMemberList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-member-list",
@@ -6273,7 +6273,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-recipient",
-    "title": "GetGroupApplicationListAsRecipient",
+    "title": "获取收到的入群申请",
     "description": "说明 Android core binding 方法 GetGroupApplicationListAsRecipient 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-application-list-as-recipient",
@@ -6281,7 +6281,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-applicant",
-    "title": "GetGroupApplicationListAsApplicant",
+    "title": "获取发出的入群申请",
     "description": "说明 Android core binding 方法 GetGroupApplicationListAsApplicant 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-application-list-as-applicant",
@@ -6289,7 +6289,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/search-group-members",
-    "title": "SearchGroupMembers",
+    "title": "搜索群成员",
     "description": "说明 Android core binding 方法 SearchGroupMembers 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods search-group-members",
@@ -6297,7 +6297,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/is-join-group",
-    "title": "IsJoinGroup",
+    "title": "判断是否已入群",
     "description": "说明 Android core binding 方法 IsJoinGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods is-join-group",
@@ -6305,7 +6305,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-users-in-group",
-    "title": "GetUsersInGroup",
+    "title": "查询用户是否在群内",
     "description": "说明 Android core binding 方法 GetUsersInGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-users-in-group",
@@ -6313,7 +6313,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/invite-user-to-group",
-    "title": "InviteUserToGroup",
+    "title": "邀请用户入群",
     "description": "说明 Android core binding 方法 InviteUserToGroup 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods invite-user-to-group",
@@ -6321,7 +6321,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/accept-group-application",
-    "title": "AcceptGroupApplication",
+    "title": "同意入群申请",
     "description": "说明 Android core binding 方法 AcceptGroupApplication 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods accept-group-application",
@@ -6329,7 +6329,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/refuse-group-application",
-    "title": "RefuseGroupApplication",
+    "title": "拒绝入群申请",
     "description": "说明 Android core binding 方法 RefuseGroupApplication 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods refuse-group-application",
@@ -6337,7 +6337,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/channel/methods/get-group-application-unhandled-count",
-    "title": "GetGroupApplicationUnhandledCount",
+    "title": "获取未处理入群申请数",
     "description": "说明 Android core binding 方法 GetGroupApplicationUnhandledCount 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android channel methods get-group-application-unhandled-count",
@@ -6345,7 +6345,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-all-conversation-list",
-    "title": "GetAllConversationList",
+    "title": "获取全部会话",
     "description": "说明 Android core binding 方法 GetAllConversationList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-all-conversation-list",
@@ -6353,7 +6353,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-conversation-list-split",
-    "title": "GetConversationListSplit",
+    "title": "分页获取会话",
     "description": "说明 Android core binding 方法 GetConversationListSplit 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-conversation-list-split",
@@ -6361,7 +6361,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-one-conversation",
-    "title": "GetOneConversation",
+    "title": "获取单个会话",
     "description": "说明 Android core binding 方法 GetOneConversation 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-one-conversation",
@@ -6369,7 +6369,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-multiple-conversation",
-    "title": "GetMultipleConversation",
+    "title": "批量获取会话",
     "description": "说明 Android core binding 方法 GetMultipleConversation 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-multiple-conversation",
@@ -6377,7 +6377,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/set-conversation",
-    "title": "SetConversation",
+    "title": "设置会话",
     "description": "说明 Android core binding 方法 SetConversation 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods set-conversation",
@@ -6385,7 +6385,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/hide-conversation",
-    "title": "HideConversation",
+    "title": "隐藏会话",
     "description": "说明 Android core binding 方法 HideConversation 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods hide-conversation",
@@ -6393,7 +6393,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/set-conversation-draft",
-    "title": "SetConversationDraft",
+    "title": "设置会话草稿",
     "description": "说明 Android core binding 方法 SetConversationDraft 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods set-conversation-draft",
@@ -6401,7 +6401,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-total-unread-msg-count",
-    "title": "GetTotalUnreadMsgCount",
+    "title": "获取总未读数",
     "description": "说明 Android core binding 方法 GetTotalUnreadMsgCount 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-total-unread-msg-count",
@@ -6409,7 +6409,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/hide-all-conversations",
-    "title": "HideAllConversations",
+    "title": "隐藏全部会话",
     "description": "说明 Android core binding 方法 HideAllConversations 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods hide-all-conversations",
@@ -6417,7 +6417,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/search-conversation",
-    "title": "SearchConversation",
+    "title": "搜索会话",
     "description": "说明 Android core binding 方法 SearchConversation 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods search-conversation",
@@ -6425,7 +6425,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/change-input-states",
-    "title": "ChangeInputStates",
+    "title": "更新输入状态",
     "description": "说明 Android core binding 方法 ChangeInputStates 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods change-input-states",
@@ -6433,7 +6433,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-input-states",
-    "title": "GetInputStates",
+    "title": "获取输入状态",
     "description": "说明 Android core binding 方法 GetInputStates 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-input-states",
@@ -6441,7 +6441,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-conversation-id-by-session-type",
-    "title": "GetConversationIDBySessionType",
+    "title": "生成会话 ID",
     "description": "说明 Android core binding 方法 GetConversationIDBySessionType 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-conversation-id-by-session-type",
@@ -6449,7 +6449,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-at-all-tag",
-    "title": "GetAtAllTag",
+    "title": "获取 @ 所有人标记",
     "description": "说明 Android core binding 方法 GetAtAllTag 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-at-all-tag",
@@ -6457,7 +6457,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-text-message",
-    "title": "CreateTextMessage",
+    "title": "创建文本消息",
     "description": "说明 Android core binding 方法 CreateTextMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-text-message",
@@ -6465,7 +6465,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-advanced-text-message",
-    "title": "CreateAdvancedTextMessage",
+    "title": "创建高级文本消息",
     "description": "说明 Android core binding 方法 CreateAdvancedTextMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-advanced-text-message",
@@ -6473,7 +6473,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-text-at-message",
-    "title": "CreateTextAtMessage",
+    "title": "创建 @ 文本消息",
     "description": "说明 Android core binding 方法 CreateTextAtMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-text-at-message",
@@ -6481,7 +6481,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-location-message",
-    "title": "CreateLocationMessage",
+    "title": "创建位置消息",
     "description": "说明 Android core binding 方法 CreateLocationMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-location-message",
@@ -6489,7 +6489,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-custom-message",
-    "title": "CreateCustomMessage",
+    "title": "创建自定义消息",
     "description": "说明 Android core binding 方法 CreateCustomMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-custom-message",
@@ -6497,7 +6497,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-quote-message",
-    "title": "CreateQuoteMessage",
+    "title": "创建引用消息",
     "description": "说明 Android core binding 方法 CreateQuoteMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-quote-message",
@@ -6505,7 +6505,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-advanced-quote-message",
-    "title": "CreateAdvancedQuoteMessage",
+    "title": "创建高级引用消息",
     "description": "说明 Android core binding 方法 CreateAdvancedQuoteMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-advanced-quote-message",
@@ -6513,7 +6513,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-card-message",
-    "title": "CreateCardMessage",
+    "title": "创建名片消息",
     "description": "说明 Android core binding 方法 CreateCardMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-card-message",
@@ -6521,7 +6521,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-face-message",
-    "title": "CreateFaceMessage",
+    "title": "创建表情消息",
     "description": "说明 Android core binding 方法 CreateFaceMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-face-message",
@@ -6529,7 +6529,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-forward-message",
-    "title": "CreateForwardMessage",
+    "title": "创建转发消息",
     "description": "说明 Android core binding 方法 CreateForwardMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-forward-message",
@@ -6537,7 +6537,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-merger-message",
-    "title": "CreateMergerMessage",
+    "title": "创建合并转发消息",
     "description": "说明 Android core binding 方法 CreateMergerMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-merger-message",
@@ -6545,7 +6545,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-image-message",
-    "title": "CreateImageMessage",
+    "title": "创建图片消息",
     "description": "说明 Android core binding 方法 CreateImageMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-image-message",
@@ -6553,7 +6553,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-image-message-from-full-path",
-    "title": "CreateImageMessageFromFullPath",
+    "title": "通过完整路径创建图片消息",
     "description": "说明 Android core binding 方法 CreateImageMessageFromFullPath 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-image-message-from-full-path",
@@ -6561,7 +6561,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-image-message-by-url",
-    "title": "CreateImageMessageByURL",
+    "title": "通过 URL 创建图片消息",
     "description": "说明 Android core binding 方法 CreateImageMessageByURL 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-image-message-by-url",
@@ -6569,7 +6569,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-sound-message",
-    "title": "CreateSoundMessage",
+    "title": "创建语音消息",
     "description": "说明 Android core binding 方法 CreateSoundMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-sound-message",
@@ -6577,7 +6577,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-sound-message-from-full-path",
-    "title": "CreateSoundMessageFromFullPath",
+    "title": "通过完整路径创建语音消息",
     "description": "说明 Android core binding 方法 CreateSoundMessageFromFullPath 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-sound-message-from-full-path",
@@ -6585,7 +6585,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-sound-message-by-url",
-    "title": "CreateSoundMessageByURL",
+    "title": "通过 URL 创建语音消息",
     "description": "说明 Android core binding 方法 CreateSoundMessageByURL 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-sound-message-by-url",
@@ -6593,7 +6593,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-video-message",
-    "title": "CreateVideoMessage",
+    "title": "创建视频消息",
     "description": "说明 Android core binding 方法 CreateVideoMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-video-message",
@@ -6601,7 +6601,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-video-message-from-full-path",
-    "title": "CreateVideoMessageFromFullPath",
+    "title": "通过完整路径创建视频消息",
     "description": "说明 Android core binding 方法 CreateVideoMessageFromFullPath 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-video-message-from-full-path",
@@ -6609,7 +6609,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-video-message-by-url",
-    "title": "CreateVideoMessageByURL",
+    "title": "通过 URL 创建视频消息",
     "description": "说明 Android core binding 方法 CreateVideoMessageByURL 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-video-message-by-url",
@@ -6617,7 +6617,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-file-message",
-    "title": "CreateFileMessage",
+    "title": "创建文件消息",
     "description": "说明 Android core binding 方法 CreateFileMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-file-message",
@@ -6625,7 +6625,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-file-message-from-full-path",
-    "title": "CreateFileMessageFromFullPath",
+    "title": "通过完整路径创建文件消息",
     "description": "说明 Android core binding 方法 CreateFileMessageFromFullPath 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-file-message-from-full-path",
@@ -6633,7 +6633,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/create-file-message-by-url",
-    "title": "CreateFileMessageByURL",
+    "title": "通过 URL 创建文件消息",
     "description": "说明 Android core binding 方法 CreateFileMessageByURL 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods create-file-message-by-url",
@@ -6641,7 +6641,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/send-message",
-    "title": "SendMessage",
+    "title": "发送消息",
     "description": "说明 Android core binding 方法 SendMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods send-message",
@@ -6649,7 +6649,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/send-message-not-oss",
-    "title": "SendMessageNotOss",
+    "title": "发送非 OSS 消息",
     "description": "说明 Android core binding 方法 SendMessageNotOss 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods send-message-not-oss",
@@ -6657,7 +6657,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/find-message-list",
-    "title": "FindMessageList",
+    "title": "查找消息列表",
     "description": "说明 Android core binding 方法 FindMessageList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods find-message-list",
@@ -6665,7 +6665,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list",
-    "title": "GetAdvancedHistoryMessageList",
+    "title": "获取历史消息",
     "description": "说明 Android core binding 方法 GetAdvancedHistoryMessageList 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-advanced-history-message-list",
@@ -6673,7 +6673,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list-reverse",
-    "title": "GetAdvancedHistoryMessageListReverse",
+    "title": "反向获取历史消息",
     "description": "说明 Android core binding 方法 GetAdvancedHistoryMessageListReverse 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods get-advanced-history-message-list-reverse",
@@ -6681,7 +6681,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/revoke-message",
-    "title": "RevokeMessage",
+    "title": "撤回消息",
     "description": "说明 Android core binding 方法 RevokeMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods revoke-message",
@@ -6689,7 +6689,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/typing-status-update",
-    "title": "TypingStatusUpdate",
+    "title": "发送输入提示",
     "description": "说明 Android core binding 方法 TypingStatusUpdate 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods typing-status-update",
@@ -6697,7 +6697,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/mark-conversation-message-as-read",
-    "title": "MarkConversationMessageAsRead",
+    "title": "标记会话已读",
     "description": "说明 Android core binding 方法 MarkConversationMessageAsRead 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods mark-conversation-message-as-read",
@@ -6705,7 +6705,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/mark-all-conversation-message-as-read",
-    "title": "MarkAllConversationMessageAsRead",
+    "title": "标记全部会话已读",
     "description": "说明 Android core binding 方法 MarkAllConversationMessageAsRead 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods mark-all-conversation-message-as-read",
@@ -6713,7 +6713,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/mark-messages-as-read-by-msg-id",
-    "title": "MarkMessagesAsReadByMsgID",
+    "title": "按消息 ID 标记已读",
     "description": "说明 Android core binding 方法 MarkMessagesAsReadByMsgID 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods mark-messages-as-read-by-msg-id",
@@ -6721,7 +6721,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/delete-message-from-local-storage",
-    "title": "DeleteMessageFromLocalStorage",
+    "title": "删除本地消息",
     "description": "说明 Android core binding 方法 DeleteMessageFromLocalStorage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods delete-message-from-local-storage",
@@ -6729,7 +6729,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/delete-message",
-    "title": "DeleteMessage",
+    "title": "删除消息",
     "description": "说明 Android core binding 方法 DeleteMessage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods delete-message",
@@ -6737,7 +6737,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local-and-svr",
-    "title": "DeleteAllMsgFromLocalAndSvr",
+    "title": "清空本地和服务端消息",
     "description": "说明 Android core binding 方法 DeleteAllMsgFromLocalAndSvr 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods delete-all-msg-from-local-and-svr",
@@ -6745,7 +6745,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local",
-    "title": "DeleteAllMsgFromLocal",
+    "title": "清空本地消息",
     "description": "说明 Android core binding 方法 DeleteAllMsgFromLocal 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods delete-all-msg-from-local",
@@ -6753,7 +6753,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/clear-conversation-and-delete-all-msg",
-    "title": "ClearConversationAndDeleteAllMsg",
+    "title": "清空会话消息",
     "description": "说明 Android core binding 方法 ClearConversationAndDeleteAllMsg 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods clear-conversation-and-delete-all-msg",
@@ -6761,7 +6761,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/delete-conversation-and-delete-all-msg",
-    "title": "DeleteConversationAndDeleteAllMsg",
+    "title": "删除会话及消息",
     "description": "说明 Android core binding 方法 DeleteConversationAndDeleteAllMsg 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods delete-conversation-and-delete-all-msg",
@@ -6769,7 +6769,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/insert-single-message-to-local-storage",
-    "title": "InsertSingleMessageToLocalStorage",
+    "title": "插入单聊本地消息",
     "description": "说明 Android core binding 方法 InsertSingleMessageToLocalStorage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods insert-single-message-to-local-storage",
@@ -6777,7 +6777,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/insert-group-message-to-local-storage",
-    "title": "InsertGroupMessageToLocalStorage",
+    "title": "插入群聊本地消息",
     "description": "说明 Android core binding 方法 InsertGroupMessageToLocalStorage 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods insert-group-message-to-local-storage",
@@ -6785,7 +6785,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/search-local-messages",
-    "title": "SearchLocalMessages",
+    "title": "搜索本地消息",
     "description": "说明 Android core binding 方法 SearchLocalMessages 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods search-local-messages",
@@ -6793,7 +6793,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/message/methods/set-message-local-ex",
-    "title": "SetMessageLocalEx",
+    "title": "设置消息本地扩展",
     "description": "说明 Android core binding 方法 SetMessageLocalEx 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android message methods set-message-local-ex",
@@ -6801,7 +6801,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/methods/update-fcm-token",
-    "title": "UpdateFcmToken",
+    "title": "更新 FCM Token",
     "description": "说明 Android core binding 方法 UpdateFcmToken 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications methods update-fcm-token",
@@ -6809,7 +6809,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge",
-    "title": "SetAppBadge",
+    "title": "设置应用角标",
     "description": "说明 Android core binding 方法 SetAppBadge 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications methods set-app-badge",
@@ -6817,7 +6817,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/methods/upload-logs",
-    "title": "UploadLogs",
+    "title": "上传日志",
     "description": "说明 Android core binding 方法 UploadLogs 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications methods upload-logs",
@@ -6825,7 +6825,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/methods/logs",
-    "title": "Logs",
+    "title": "写入客户端日志",
     "description": "说明 Android core binding 方法 Logs 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications methods logs",
@@ -6833,7 +6833,7 @@
   },
   {
     "path": "/docs/chat/sdk/v4/android/push-notifications/methods/upload-file",
-    "title": "UploadFile",
+    "title": "上传文件",
     "description": "说明 Android core binding 方法 UploadFile 的用途、参数、返回和使用边界。",
     "context": "SDKs · Android · v4",
     "keywords": "sdk android v4 chat sdk v4 android push-notifications methods upload-file",

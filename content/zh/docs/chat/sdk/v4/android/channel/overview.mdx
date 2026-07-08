@@ -17,35 +17,35 @@ OpenIM Android core 使用群组承载多人聊天能力。本节将 channel 场
 
 ## 方法索引
 
-| 方法                                                                                                                        | 说明                                                                     |
-| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| [`CreateGroup`](/docs/chat/sdk/v4/android/channel/methods/create-group)                                                     | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。   |
-| [`JoinGroup`](/docs/chat/sdk/v4/android/channel/methods/join-group)                                                         | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。             |
-| [`QuitGroup`](/docs/chat/sdk/v4/android/channel/methods/quit-group)                                                         | 当前用户主动退出指定群组。                                               |
-| [`DismissGroup`](/docs/chat/sdk/v4/android/channel/methods/dismiss-group)                                                   | 解散指定群组，通常要求当前用户具备群主或管理权限。                       |
-| [`ChangeGroupMute`](/docs/chat/sdk/v4/android/channel/methods/change-group-mute)                                            | 开启或关闭全群禁言。适合群管理者控制群内发言状态。                       |
-| [`ChangeGroupMemberMute`](/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute)                               | 设置指定群成员禁言时长。适合临时限制单个成员发言。                       |
-| [`TransferGroupOwner`](/docs/chat/sdk/v4/android/channel/methods/transfer-group-owner)                                      | 将群主转让给指定成员，通常只允许当前群主执行。                           |
-| [`KickGroupMember`](/docs/chat/sdk/v4/android/channel/methods/kick-group-member)                                            | 将一批成员移出群组，通常要求操作者具备管理权限。                         |
-| [`SetGroupInfo`](/docs/chat/sdk/v4/android/channel/methods/set-group-info)                                                  | 更新群资料，例如群名称、头像、公告或扩展字段。                           |
-| [`SetGroupMemberInfo`](/docs/chat/sdk/v4/android/channel/methods/set-group-member-info)                                     | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。                 |
-| [`GetJoinedGroupList`](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list)                                     | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。           |
-| [`GetJoinedGroupListPage`](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list-page)                            | 分页获取当前用户已加入群组，适合群数量较多的账号。                       |
-| [`GetSpecifiedGroupsInfo`](/docs/chat/sdk/v4/android/channel/methods/get-specified-groups-info)                             | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。           |
-| [`SearchGroups`](/docs/chat/sdk/v4/android/channel/methods/search-groups)                                                   | 按关键字搜索群组，可按群 ID、群名称等字段搜索。                          |
-| [`GetGroupMemberOwnerAndAdmin`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin)                 | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 |
-| [`GetGroupMemberListByJoinTimeFilter`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter) | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。   |
-| [`GetSpecifiedGroupMembersInfo`](/docs/chat/sdk/v4/android/channel/methods/get-specified-group-members-info)                | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。   |
-| [`GetGroupMemberList`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list)                                     | 按成员类型筛选并分页获取群成员列表。                                     |
-| [`GetGroupApplicationListAsRecipient`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-recipient)   | 获取当前用户作为群管理者收到的入群申请列表。                             |
-| [`GetGroupApplicationListAsApplicant`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-applicant)   | 获取当前用户自己提交的入群申请列表。                                     |
-| [`SearchGroupMembers`](/docs/chat/sdk/v4/android/channel/methods/search-group-members)                                      | 搜索群成员，适合按用户 ID 或群昵称查找成员。                             |
-| [`IsJoinGroup`](/docs/chat/sdk/v4/android/channel/methods/is-join-group)                                                    | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。   |
-| [`GetUsersInGroup`](/docs/chat/sdk/v4/android/channel/methods/get-users-in-group)                                           | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。                 |
-| [`InviteUserToGroup`](/docs/chat/sdk/v4/android/channel/methods/invite-user-to-group)                                       | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。             |
-| [`AcceptGroupApplication`](/docs/chat/sdk/v4/android/channel/methods/accept-group-application)                              | 同意指定用户的入群申请。                                                 |
-| [`RefuseGroupApplication`](/docs/chat/sdk/v4/android/channel/methods/refuse-group-application)                              | 拒绝指定用户的入群申请。                                                 |
-| [`GetGroupApplicationUnhandledCount`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-unhandled-count)      | 获取未处理入群申请数量，适合管理入口角标和后台同步。                     |
+| 方法                                                                                                      | 说明                                                                     |
+| --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [创建群组](/docs/chat/sdk/v4/android/channel/methods/create-group)                                        | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。   |
+| [申请加入群组](/docs/chat/sdk/v4/android/channel/methods/join-group)                                      | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。             |
+| [退出群组](/docs/chat/sdk/v4/android/channel/methods/quit-group)                                          | 当前用户主动退出指定群组。                                               |
+| [解散群组](/docs/chat/sdk/v4/android/channel/methods/dismiss-group)                                       | 解散指定群组，通常要求当前用户具备群主或管理权限。                       |
+| [设置群禁言](/docs/chat/sdk/v4/android/channel/methods/change-group-mute)                                 | 开启或关闭全群禁言。适合群管理者控制群内发言状态。                       |
+| [设置成员禁言](/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute)                        | 设置指定群成员禁言时长。适合临时限制单个成员发言。                       |
+| [转让群主](/docs/chat/sdk/v4/android/channel/methods/transfer-group-owner)                                | 将群主转让给指定成员，通常只允许当前群主执行。                           |
+| [移出群成员](/docs/chat/sdk/v4/android/channel/methods/kick-group-member)                                 | 将一批成员移出群组，通常要求操作者具备管理权限。                         |
+| [更新群资料](/docs/chat/sdk/v4/android/channel/methods/set-group-info)                                    | 更新群资料，例如群名称、头像、公告或扩展字段。                           |
+| [更新群成员资料](/docs/chat/sdk/v4/android/channel/methods/set-group-member-info)                         | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。                 |
+| [获取已加入群组](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list)                         | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。           |
+| [分页获取已加入群组](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list-page)                | 分页获取当前用户已加入群组，适合群数量较多的账号。                       |
+| [获取指定群组资料](/docs/chat/sdk/v4/android/channel/methods/get-specified-groups-info)                   | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。           |
+| [搜索群组](/docs/chat/sdk/v4/android/channel/methods/search-groups)                                       | 按关键字搜索群组，可按群 ID、群名称等字段搜索。                          |
+| [获取群主和管理员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin)            | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 |
+| [按入群时间筛选成员](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter) | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。   |
+| [获取指定群成员资料](/docs/chat/sdk/v4/android/channel/methods/get-specified-group-members-info)          | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。   |
+| [获取群成员列表](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list)                         | 按成员类型筛选并分页获取群成员列表。                                     |
+| [获取收到的入群申请](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-recipient)   | 获取当前用户作为群管理者收到的入群申请列表。                             |
+| [获取发出的入群申请](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-applicant)   | 获取当前用户自己提交的入群申请列表。                                     |
+| [搜索群成员](/docs/chat/sdk/v4/android/channel/methods/search-group-members)                              | 搜索群成员，适合按用户 ID 或群昵称查找成员。                             |
+| [判断是否已入群](/docs/chat/sdk/v4/android/channel/methods/is-join-group)                                 | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。   |
+| [查询用户是否在群内](/docs/chat/sdk/v4/android/channel/methods/get-users-in-group)                        | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。                 |
+| [邀请用户入群](/docs/chat/sdk/v4/android/channel/methods/invite-user-to-group)                            | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。             |
+| [同意入群申请](/docs/chat/sdk/v4/android/channel/methods/accept-group-application)                        | 同意指定用户的入群申请。                                                 |
+| [拒绝入群申请](/docs/chat/sdk/v4/android/channel/methods/refuse-group-application)                        | 拒绝指定用户的入群申请。                                                 |
+| [获取未处理入群申请数](/docs/chat/sdk/v4/android/channel/methods/get-group-application-unhandled-count)   | 获取未处理入群申请数量，适合管理入口角标和后台同步。                     |
 
 ## 事件联动
 

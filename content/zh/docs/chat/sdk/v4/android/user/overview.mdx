@@ -17,18 +17,18 @@ sourcePath: '/docs/chat/sdk/v4/android/user/overview'
 
 ## 方法索引
 
-| 方法                                                                                           | 说明                                                                                             |
-| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [`GetSelfUserInfo`](/docs/chat/sdk/v4/android/user/methods/get-self-user-info)                 | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 |
-| [`SetSelfInfo`](/docs/chat/sdk/v4/android/user/methods/set-self-info)                          | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。             |
-| [`GetUsersInfo`](/docs/chat/sdk/v4/android/user/methods/get-users-info)                        | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。                     |
-| [`AddUserCommand`](/docs/chat/sdk/v4/android/user/methods/add-user-command)                    | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。     |
-| [`DeleteUserCommand`](/docs/chat/sdk/v4/android/user/methods/delete-user-command)              | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。             |
-| [`GetAllUserCommands`](/docs/chat/sdk/v4/android/user/methods/get-all-user-commands)           | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。                         |
-| [`SubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/subscribe-users-status)        | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。                   |
-| [`UnsubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status)    | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。                         |
-| [`GetSubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status) | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。                   |
-| [`GetUserStatus`](/docs/chat/sdk/v4/android/user/methods/get-user-status)                      | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。               |
+| 方法                                                                                    | 说明                                                                                             |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [获取当前用户资料](/docs/chat/sdk/v4/android/user/methods/get-self-user-info)           | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 |
+| [更新当前用户资料](/docs/chat/sdk/v4/android/user/methods/set-self-info)                | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。             |
+| [批量获取用户资料](/docs/chat/sdk/v4/android/user/methods/get-users-info)               | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。                     |
+| [添加用户命令](/docs/chat/sdk/v4/android/user/methods/add-user-command)                 | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。     |
+| [删除用户命令](/docs/chat/sdk/v4/android/user/methods/delete-user-command)              | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。             |
+| [获取用户命令列表](/docs/chat/sdk/v4/android/user/methods/get-all-user-commands)        | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。                         |
+| [订阅用户在线状态](/docs/chat/sdk/v4/android/user/methods/subscribe-users-status)       | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。                   |
+| [取消订阅在线状态](/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status)     | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。                         |
+| [获取已订阅用户状态](/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status) | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。                   |
+| [获取用户在线状态](/docs/chat/sdk/v4/android/user/methods/get-user-status)              | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。               |
 
 ## 相关页面
 

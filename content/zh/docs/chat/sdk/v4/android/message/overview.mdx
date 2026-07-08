@@ -17,65 +17,65 @@ sourcePath: '/docs/chat/sdk/v4/android/message/overview'
 
 ## 方法索引
 
-| 方法                                                                                                                          | 说明                                                                                                           |
-| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| [`GetAllConversationList`](/docs/chat/sdk/v4/android/message/methods/get-all-conversation-list)                               | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。                                             |
-| [`GetConversationListSplit`](/docs/chat/sdk/v4/android/message/methods/get-conversation-list-split)                           | 分页获取会话列表，适合会话数量较多时按页加载。                                                                 |
-| [`GetOneConversation`](/docs/chat/sdk/v4/android/message/methods/get-one-conversation)                                        | 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。                 |
-| [`GetMultipleConversation`](/docs/chat/sdk/v4/android/message/methods/get-multiple-conversation)                              | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。                                               |
-| [`SetConversation`](/docs/chat/sdk/v4/android/message/methods/set-conversation)                                               | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。                                                 |
-| [`HideConversation`](/docs/chat/sdk/v4/android/message/methods/hide-conversation)                                             | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。                                                       |
-| [`SetConversationDraft`](/docs/chat/sdk/v4/android/message/methods/set-conversation-draft)                                    | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。                                                           |
-| [`GetTotalUnreadMsgCount`](/docs/chat/sdk/v4/android/message/methods/get-total-unread-msg-count)                              | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。                                              |
-| [`HideAllConversations`](/docs/chat/sdk/v4/android/message/methods/hide-all-conversations)                                    | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。                                                             |
-| [`SearchConversation`](/docs/chat/sdk/v4/android/message/methods/search-conversation)                                         | 搜索本地会话，适合聊天列表搜索入口。                                                                           |
-| [`ChangeInputStates`](/docs/chat/sdk/v4/android/message/methods/change-input-states)                                          | 更新当前用户在指定会话中的输入状态。                                                                           |
-| [`GetInputStates`](/docs/chat/sdk/v4/android/message/methods/get-input-states)                                                | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。                                                   |
-| [`GetConversationIDBySessionType`](/docs/chat/sdk/v4/android/message/methods/get-conversation-id-by-session-type)             | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。                            |
-| [`GetAtAllTag`](/docs/chat/sdk/v4/android/message/methods/get-at-all-tag)                                                     | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。                 |
-| [`CreateTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-message)                                          | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。                           |
-| [`CreateAdvancedTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-text-message)                         | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。                             |
-| [`CreateTextAtMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-at-message)                                     | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                            |
-| [`CreateLocationMessage`](/docs/chat/sdk/v4/android/message/methods/create-location-message)                                  | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                           |
-| [`CreateCustomMessage`](/docs/chat/sdk/v4/android/message/methods/create-custom-message)                                      | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                            |
-| [`CreateQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-quote-message)                                        | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                                                         |
-| [`CreateAdvancedQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-quote-message)                       | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
-| [`CreateCardMessage`](/docs/chat/sdk/v4/android/message/methods/create-card-message)                                          | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。                                                           |
-| [`CreateFaceMessage`](/docs/chat/sdk/v4/android/message/methods/create-face-message)                                          | 创建表情消息。适合业务自定义表情包或贴纸消息。                                                                 |
-| [`CreateForwardMessage`](/docs/chat/sdk/v4/android/message/methods/create-forward-message)                                    | 创建单条转发消息。用于把已有消息转发给另一个用户或群。                                                         |
-| [`CreateMergerMessage`](/docs/chat/sdk/v4/android/message/methods/create-merger-message)                                      | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                                     |
-| [`CreateImageMessage`](/docs/chat/sdk/v4/android/message/methods/create-image-message)                                        | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。                                                   |
-| [`CreateImageMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-image-message-from-full-path)             | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                                                   |
-| [`CreateImageMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-image-message-by-url)                            | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                            |
-| [`CreateSoundMessage`](/docs/chat/sdk/v4/android/message/methods/create-sound-message)                                        | 通过音频路径创建语音消息。                                                                                     |
-| [`CreateSoundMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-from-full-path)             | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                                   |
-| [`CreateSoundMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-by-url)                            | 通过已上传音频 URL 信息创建语音消息。                                                                          |
-| [`CreateVideoMessage`](/docs/chat/sdk/v4/android/message/methods/create-video-message)                                        | 通过视频路径和快照路径创建视频消息。                                                                           |
-| [`CreateVideoMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-video-message-from-full-path)             | 通过完整视频路径和完整快照路径创建视频消息。                                                                   |
-| [`CreateVideoMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-video-message-by-url)                            | 通过已上传视频 URL 信息创建视频消息。                                                                          |
-| [`CreateFileMessage`](/docs/chat/sdk/v4/android/message/methods/create-file-message)                                          | 通过文件路径创建普通文件消息。                                                                                 |
-| [`CreateFileMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-file-message-from-full-path)               | 通过完整文件路径创建普通文件消息。                                                                             |
-| [`CreateFileMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-file-message-by-url)                              | 通过已上传文件 URL 信息创建文件消息。                                                                          |
-| [`SendMessage`](/docs/chat/sdk/v4/android/message/methods/send-message)                                                       | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                  |
-| [`SendMessageNotOss`](/docs/chat/sdk/v4/android/message/methods/send-message-not-oss)                                         | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。 |
-| [`FindMessageList`](/docs/chat/sdk/v4/android/message/methods/find-message-list)                                              | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。                                                       |
-| [`GetAdvancedHistoryMessageList`](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list)                | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。                                                 |
-| [`GetAdvancedHistoryMessageListReverse`](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list-reverse) | 按反向方向获取历史消息，适合围绕游标向另一方向加载。                                                           |
-| [`RevokeMessage`](/docs/chat/sdk/v4/android/message/methods/revoke-message)                                                   | 撤回指定消息，通常受时间窗口和权限限制。                                                                       |
-| [`TypingStatusUpdate`](/docs/chat/sdk/v4/android/message/methods/typing-status-update)                                        | 发送输入状态提示，适合单聊输入中状态展示。                                                                     |
-| [`MarkConversationMessageAsRead`](/docs/chat/sdk/v4/android/message/methods/mark-conversation-message-as-read)                | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。                                                       |
-| [`MarkAllConversationMessageAsRead`](/docs/chat/sdk/v4/android/message/methods/mark-all-conversation-message-as-read)         | 将全部会话消息标记为已读，适合一键清除全部未读。                                                               |
-| [`MarkMessagesAsReadByMsgID`](/docs/chat/sdk/v4/android/message/methods/mark-messages-as-read-by-msg-id)                      | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。                                                       |
-| [`DeleteMessageFromLocalStorage`](/docs/chat/sdk/v4/android/message/methods/delete-message-from-local-storage)                | 仅从本地存储删除指定消息，不表示服务端消息被删除。                                                             |
-| [`DeleteMessage`](/docs/chat/sdk/v4/android/message/methods/delete-message)                                                   | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。                                                |
-| [`DeleteAllMsgFromLocalAndSvr`](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local-and-svr)                  | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。                                                     |
-| [`DeleteAllMsgFromLocal`](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local)                                | 仅删除当前用户本地全部消息数据，适合本地缓存清理。                                                             |
-| [`ClearConversationAndDeleteAllMsg`](/docs/chat/sdk/v4/android/message/methods/clear-conversation-and-delete-all-msg)         | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。                                                |
-| [`DeleteConversationAndDeleteAllMsg`](/docs/chat/sdk/v4/android/message/methods/delete-conversation-and-delete-all-msg)       | 删除指定会话及其消息，适合彻底移除某个会话记录。                                                               |
-| [`InsertSingleMessageToLocalStorage`](/docs/chat/sdk/v4/android/message/methods/insert-single-message-to-local-storage)       | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。                                         |
-| [`InsertGroupMessageToLocalStorage`](/docs/chat/sdk/v4/android/message/methods/insert-group-message-to-local-storage)         | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。                                                       |
-| [`SearchLocalMessages`](/docs/chat/sdk/v4/android/message/methods/search-local-messages)                                      | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。                                                         |
-| [`SetMessageLocalEx`](/docs/chat/sdk/v4/android/message/methods/set-message-local-ex)                                         | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。                                       |
+| 方法                                                                                                      | 说明                                                                                                           |
+| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [获取全部会话](/docs/chat/sdk/v4/android/message/methods/get-all-conversation-list)                       | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。                                             |
+| [分页获取会话](/docs/chat/sdk/v4/android/message/methods/get-conversation-list-split)                     | 分页获取会话列表，适合会话数量较多时按页加载。                                                                 |
+| [获取单个会话](/docs/chat/sdk/v4/android/message/methods/get-one-conversation)                            | 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。                 |
+| [批量获取会话](/docs/chat/sdk/v4/android/message/methods/get-multiple-conversation)                       | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。                                               |
+| [设置会话](/docs/chat/sdk/v4/android/message/methods/set-conversation)                                    | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。                                                 |
+| [隐藏会话](/docs/chat/sdk/v4/android/message/methods/hide-conversation)                                   | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。                                                       |
+| [设置会话草稿](/docs/chat/sdk/v4/android/message/methods/set-conversation-draft)                          | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。                                                           |
+| [获取总未读数](/docs/chat/sdk/v4/android/message/methods/get-total-unread-msg-count)                      | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。                                              |
+| [隐藏全部会话](/docs/chat/sdk/v4/android/message/methods/hide-all-conversations)                          | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。                                                             |
+| [搜索会话](/docs/chat/sdk/v4/android/message/methods/search-conversation)                                 | 搜索本地会话，适合聊天列表搜索入口。                                                                           |
+| [更新输入状态](/docs/chat/sdk/v4/android/message/methods/change-input-states)                             | 更新当前用户在指定会话中的输入状态。                                                                           |
+| [获取输入状态](/docs/chat/sdk/v4/android/message/methods/get-input-states)                                | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。                                                   |
+| [生成会话 ID](/docs/chat/sdk/v4/android/message/methods/get-conversation-id-by-session-type)              | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。                            |
+| [获取 @ 所有人标记](/docs/chat/sdk/v4/android/message/methods/get-at-all-tag)                             | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。                 |
+| [创建文本消息](/docs/chat/sdk/v4/android/message/methods/create-text-message)                             | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。                           |
+| [创建高级文本消息](/docs/chat/sdk/v4/android/message/methods/create-advanced-text-message)                | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。                             |
+| [创建 @ 文本消息](/docs/chat/sdk/v4/android/message/methods/create-text-at-message)                       | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                            |
+| [创建位置消息](/docs/chat/sdk/v4/android/message/methods/create-location-message)                         | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                           |
+| [创建自定义消息](/docs/chat/sdk/v4/android/message/methods/create-custom-message)                         | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                            |
+| [创建引用消息](/docs/chat/sdk/v4/android/message/methods/create-quote-message)                            | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                                                         |
+| [创建高级引用消息](/docs/chat/sdk/v4/android/message/methods/create-advanced-quote-message)               | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
+| [创建名片消息](/docs/chat/sdk/v4/android/message/methods/create-card-message)                             | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。                                                           |
+| [创建表情消息](/docs/chat/sdk/v4/android/message/methods/create-face-message)                             | 创建表情消息。适合业务自定义表情包或贴纸消息。                                                                 |
+| [创建转发消息](/docs/chat/sdk/v4/android/message/methods/create-forward-message)                          | 创建单条转发消息。用于把已有消息转发给另一个用户或群。                                                         |
+| [创建合并转发消息](/docs/chat/sdk/v4/android/message/methods/create-merger-message)                       | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                                     |
+| [创建图片消息](/docs/chat/sdk/v4/android/message/methods/create-image-message)                            | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。                                                   |
+| [通过完整路径创建图片消息](/docs/chat/sdk/v4/android/message/methods/create-image-message-from-full-path) | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                                                   |
+| [通过 URL 创建图片消息](/docs/chat/sdk/v4/android/message/methods/create-image-message-by-url)            | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                            |
+| [创建语音消息](/docs/chat/sdk/v4/android/message/methods/create-sound-message)                            | 通过音频路径创建语音消息。                                                                                     |
+| [通过完整路径创建语音消息](/docs/chat/sdk/v4/android/message/methods/create-sound-message-from-full-path) | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                                   |
+| [通过 URL 创建语音消息](/docs/chat/sdk/v4/android/message/methods/create-sound-message-by-url)            | 通过已上传音频 URL 信息创建语音消息。                                                                          |
+| [创建视频消息](/docs/chat/sdk/v4/android/message/methods/create-video-message)                            | 通过视频路径和快照路径创建视频消息。                                                                           |
+| [通过完整路径创建视频消息](/docs/chat/sdk/v4/android/message/methods/create-video-message-from-full-path) | 通过完整视频路径和完整快照路径创建视频消息。                                                                   |
+| [通过 URL 创建视频消息](/docs/chat/sdk/v4/android/message/methods/create-video-message-by-url)            | 通过已上传视频 URL 信息创建视频消息。                                                                          |
+| [创建文件消息](/docs/chat/sdk/v4/android/message/methods/create-file-message)                             | 通过文件路径创建普通文件消息。                                                                                 |
+| [通过完整路径创建文件消息](/docs/chat/sdk/v4/android/message/methods/create-file-message-from-full-path)  | 通过完整文件路径创建普通文件消息。                                                                             |
+| [通过 URL 创建文件消息](/docs/chat/sdk/v4/android/message/methods/create-file-message-by-url)             | 通过已上传文件 URL 信息创建文件消息。                                                                          |
+| [发送消息](/docs/chat/sdk/v4/android/message/methods/send-message)                                        | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                  |
+| [发送非 OSS 消息](/docs/chat/sdk/v4/android/message/methods/send-message-not-oss)                         | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。 |
+| [查找消息列表](/docs/chat/sdk/v4/android/message/methods/find-message-list)                               | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。                                                       |
+| [获取历史消息](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list)               | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。                                                 |
+| [反向获取历史消息](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list-reverse)   | 按反向方向获取历史消息，适合围绕游标向另一方向加载。                                                           |
+| [撤回消息](/docs/chat/sdk/v4/android/message/methods/revoke-message)                                      | 撤回指定消息，通常受时间窗口和权限限制。                                                                       |
+| [发送输入提示](/docs/chat/sdk/v4/android/message/methods/typing-status-update)                            | 发送输入状态提示，适合单聊输入中状态展示。                                                                     |
+| [标记会话已读](/docs/chat/sdk/v4/android/message/methods/mark-conversation-message-as-read)               | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。                                                       |
+| [标记全部会话已读](/docs/chat/sdk/v4/android/message/methods/mark-all-conversation-message-as-read)       | 将全部会话消息标记为已读，适合一键清除全部未读。                                                               |
+| [按消息 ID 标记已读](/docs/chat/sdk/v4/android/message/methods/mark-messages-as-read-by-msg-id)           | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。                                                       |
+| [删除本地消息](/docs/chat/sdk/v4/android/message/methods/delete-message-from-local-storage)               | 仅从本地存储删除指定消息，不表示服务端消息被删除。                                                             |
+| [删除消息](/docs/chat/sdk/v4/android/message/methods/delete-message)                                      | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。                                                |
+| [清空本地和服务端消息](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local-and-svr)       | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。                                                     |
+| [清空本地消息](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local)                       | 仅删除当前用户本地全部消息数据，适合本地缓存清理。                                                             |
+| [清空会话消息](/docs/chat/sdk/v4/android/message/methods/clear-conversation-and-delete-all-msg)           | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。                                                |
+| [删除会话及消息](/docs/chat/sdk/v4/android/message/methods/delete-conversation-and-delete-all-msg)        | 删除指定会话及其消息，适合彻底移除某个会话记录。                                                               |
+| [插入单聊本地消息](/docs/chat/sdk/v4/android/message/methods/insert-single-message-to-local-storage)      | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。                                         |
+| [插入群聊本地消息](/docs/chat/sdk/v4/android/message/methods/insert-group-message-to-local-storage)       | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。                                                       |
+| [搜索本地消息](/docs/chat/sdk/v4/android/message/methods/search-local-messages)                           | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。                                                         |
+| [设置消息本地扩展](/docs/chat/sdk/v4/android/message/methods/set-message-local-ex)                        | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。                                       |
 
 ## 相关页面
 

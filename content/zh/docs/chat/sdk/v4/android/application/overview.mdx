@@ -17,14 +17,14 @@ sourcePath: '/docs/chat/sdk/v4/android/application/overview'
 
 ## 方法索引
 
-| 方法                                                                                                | 说明                                                                                                |
-| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| [`GetSdkVersion`](/docs/chat/sdk/v4/android/application/methods/get-sdk-version)                    | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。                            |
-| [`InitSDK`](/docs/chat/sdk/v4/android/application/methods/init-sdk)                                 | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。           |
-| [`UnInitSDK`](/docs/chat/sdk/v4/android/application/methods/un-init-sdk)                            | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。                           |
-| [`Login`](/docs/chat/sdk/v4/android/application/methods/login)                                      | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 |
-| [`Logout`](/docs/chat/sdk/v4/android/application/methods/logout)                                    | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。               |
-| [`SetAppBackgroundStatus`](/docs/chat/sdk/v4/android/application/methods/set-app-background-status) | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。                                |
-| [`NetworkStatusChanged`](/docs/chat/sdk/v4/android/application/methods/network-status-changed)      | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。                               |
-| [`GetLoginStatus`](/docs/chat/sdk/v4/android/application/methods/get-login-status)                  | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。                                   |
-| [`GetLoginUserID`](/docs/chat/sdk/v4/android/application/methods/get-login-user-id)                 | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。                            |
+| 方法                                                                                      | 说明                                                                                                |
+| ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [获取 SDK 版本](/docs/chat/sdk/v4/android/application/methods/get-sdk-version)            | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。                            |
+| [初始化 SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)                      | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。           |
+| [释放 SDK](/docs/chat/sdk/v4/android/application/methods/un-init-sdk)                     | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。                           |
+| [登录用户](/docs/chat/sdk/v4/android/application/methods/login)                           | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 |
+| [退出登录](/docs/chat/sdk/v4/android/application/methods/logout)                          | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。               |
+| [设置前后台状态](/docs/chat/sdk/v4/android/application/methods/set-app-background-status) | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。                                |
+| [通知网络变化](/docs/chat/sdk/v4/android/application/methods/network-status-changed)      | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。                               |
+| [获取登录状态](/docs/chat/sdk/v4/android/application/methods/get-login-status)            | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。                                   |
+| [获取登录用户 ID](/docs/chat/sdk/v4/android/application/methods/get-login-user-id)        | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。                            |
