@@ -1,0 +1,75 @@
+---
+title: 'Get group members by join time'
+description: 'Explains the Get group members by join time method in Flutter SDK 3.8.3+hotfix.12, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/group/group-members/get-group-member-list-by-join-time-filter'
+---
+
+Use **Get group members by join time** when your application needs this OpenIM capability from Flutter SDK 3.8.3+hotfix.12. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `GetGroupMemberListByJoinTimeFilter` through the platform wrapper to get group members by join time. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Method signature | `GetGroupMemberListByJoinTimeFilter(callback Base, operationID string, groupID string, offset int32, count int32, joinTimeBegin int64, joinTimeEnd int64, filterUserIDList string)` |
+| Capability       | Group                                                                                                                                                                               |
+| Source location  | `open_im_sdk/group.go`                                                                                                                                                              |
+
+## Flutter Call Reference
+
+Flutter SDK 3.8.3+hotfix.12 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`lib/src/manager/im_group_manager.dart`.
+
+```dart showLineNumbers
+Future<List<GroupMembersInfo>> getGroupMemberListByJoinTime({ required String groupID, int offset = 0, int count = 0, int joinTimeBegin = 0, int joinTimeEnd = 0, List<String> filterUserIDList = const [], String? operationID, })
+```
+
+## Parameters
+
+| Parameter        | Type               | Required | Description                    |
+| ---------------- | ------------------ | -------- | ------------------------------ |
+| groupID          | String             | Yes      | Group ID or list of group IDs. |
+| offset           | int                | No       | Pagination parameter.          |
+| count            | int                | No       | Pagination parameter.          |
+| joinTimeBegin    | int                | No       | Pass as defined.               |
+| joinTimeEnd      | int                | No       | Pass as defined.               |
+| filterUserIDList | List&lt;String&gt; | No       | User ID or list of user IDs.   |
+
+## Return Value
+
+Returns `Future<List<GroupMembersInfo>>`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK 3.8.3+hotfix.12 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.groupManager.getGroupMemberListByJoinTime(
+  groupID: 'groupID',
+  offset: 0,
+  count: 0,
+  joinTimeBegin: 0,
+  joinTimeEnd: 0,
+  filterUserIDList: [],
+);
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/flutter/models/base) (`Base`)
+- [Group member info](/docs/chat/sdk/v4/flutter/models/group-members-info) (`GroupMembersInfo`)
+
+## Related pages
+
+- [Group](/docs/chat/sdk/v4/flutter/group/overview)

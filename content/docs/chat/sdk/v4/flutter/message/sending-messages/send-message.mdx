@@ -1,0 +1,75 @@
+---
+title: 'Send message'
+description: 'Explains the Send message method in Flutter SDK 3.8.3+hotfix.12, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/sending-messages/send-message'
+---
+
+Use **Send message** when your application needs this OpenIM capability from Flutter SDK 3.8.3+hotfix.12. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `SendMessage` through the platform wrapper to send message. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Method signature | `SendMessage(callback SendMsgCallBack, operationID, message, recvID, groupID, offlinePushInfo string, isOnlineOnly bool)` |
+| Capability       | Conversations and messages                                                                                                |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                                                         |
+
+## Flutter Call Reference
+
+Flutter SDK 3.8.3+hotfix.12 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`lib/src/manager/im_message_manager.dart`.
+
+```dart showLineNumbers
+Future<Message> sendMessage({ required Message message, required OfflinePushInfo offlinePushInfo, String? userID, String? groupID, bool isOnlineOnly = false, String? operationID, })
+```
+
+## Parameters
+
+| Parameter       | Type                                                                  | Required | Description                                                  |
+| --------------- | --------------------------------------------------------------------- | -------- | ------------------------------------------------------------ |
+| message         | [Message](/docs/chat/sdk/v4/flutter/models/message)                   | Yes      | Message object, message content, or message ID.              |
+| offlinePushInfo | [OfflinePushInfo](/docs/chat/sdk/v4/flutter/models/offline-push-info) | Yes      | Request object. Use the fields defined by the platform type. |
+| userID          | String?                                                               | No       | User ID or list of user IDs.                                 |
+| groupID         | String?                                                               | No       | Group ID or list of group IDs.                               |
+| isOnlineOnly    | bool                                                                  | No       | Pass as defined.                                             |
+
+## Return Value
+
+Returns `Future<Message>`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK 3.8.3+hotfix.12 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.sendMessage(
+  message: {},
+  offlinePushInfo: {},
+  userID: 'userID',
+  groupID: 'groupID',
+  isOnlineOnly: false,
+);
+```
+
+## Related types
+
+- [SendMsgCallBack](/docs/chat/sdk/v4/flutter/models/send-msg-call-back) (`SendMsgCallBack`)
+- [Offline push info](/docs/chat/sdk/v4/flutter/models/offline-push-info) (`OfflinePushInfo`)
+- [Message](/docs/chat/sdk/v4/flutter/models/message) (`Message`)
+- [Message send callback](/docs/chat/sdk/v4/flutter/models/on-msg-send-callback) (`OnMsgSendCallback`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/flutter/message/overview)

@@ -1,0 +1,62 @@
+---
+title: 'Create an image message'
+description: 'Explains the Create an image message method in React Native SDK v3.8.3-patch.12.4, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/creating-messages/create-image-message'
+---
+
+Use **Create an image message** when your application needs this OpenIM capability from React Native SDK v3.8.3-patch.12.4. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `CreateImageMessage` through the platform wrapper to create an image message. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                       |
+| ---------------- | ----------------------------------------------------------------- |
+| Method signature | `CreateImageMessage(operationID string, imagePath string) string` |
+| Capability       | Conversations and messages                                        |
+| Source location  | `open_im_sdk/conversation_msg.go`                                 |
+
+## React Native Call Reference
+
+React Native SDK v3.8.3-patch.12.4 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+```ts showLineNumbers
+createImageMessage(/* ... */);
+```
+
+## Parameters
+
+| Parameter | Type                 | Required   | Description                                 |
+| --------- | -------------------- | ---------- | ------------------------------------------- |
+| Parameter | See method signature | As defined | Pass according to the call signature above. |
+
+## Return Value
+
+Returns `Promise`. If the call fails, the Promise rejects and the error is wrapped as OpenIMApiError.
+
+## Code Example
+
+The following example shows the React Native SDK v3.8.3-patch.12.4 call shape. Replace placeholder values with real business data and add production error handling.
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.createImageMessage();
+```
+
+## Related types
+
+- [Message](/docs/chat/sdk/v4/react-native/models/message) (`Message`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/react-native/message/overview)

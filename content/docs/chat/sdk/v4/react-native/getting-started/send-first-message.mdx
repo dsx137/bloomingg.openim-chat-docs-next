@@ -1,0 +1,53 @@
+---
+title: 'React Native integration flow'
+description: 'Explains the React Native integration flow method in React Native SDK v3.8.3-patch.12.4, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/getting-started/send-first-message'
+---
+
+This page explains the React Native sequence from SDK initialization to sending the first message. See each method page for exact signatures.
+
+## Call Sequence
+
+| Step                    | Required API                                                  | Description                                                                                |
+| ----------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| Initialize              | SDK initialization API                                        | Configure `apiAddr`, `wsAddr`, data directory, logging, and the connection listener.       |
+| Register listeners      | Conversation, message, friend, group, and user listeners      | Register listeners before login when possible.                                             |
+| Log in                  | Login API                                                     | Use a token issued by your business backend. Call business APIs only after login succeeds. |
+| Create a message        | `createTextMessage` / `CreateTextMessage` and related methods | Create a local message object or JSON payload.                                             |
+| Send the message        | `sendMessage` / `SendMessage`                                 | Pass a user ID for one-to-one chat or a group ID for group chat.                           |
+| Log out or uninitialize | Logout and uninitialize APIs                                  | Log out the current user or release global SDK resources.                                  |
+
+## Initialization Config
+
+| Field                 | Type    | Description                                           |
+| --------------------- | ------- | ----------------------------------------------------- |
+| `platformID`          | number  | Platform ID expected by the React Native SDK wrapper. |
+| `apiAddr`             | string  | OpenIM HTTP API address.                              |
+| `wsAddr`              | string  | OpenIM WebSocket address.                             |
+| `dataDir`             | string  | Local database, cache, and SDK data directory.        |
+| `logLevel`            | number  | SDK log level.                                        |
+| `isLogStandardOutput` | boolean | Whether logs are written to standard output.          |
+| `logFilePath`         | string  | Log file directory.                                   |
+
+## Checklist
+
+| Check                 | Expected result                                                                            |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| Initialize once       | Avoid recreating the SDK instance repeatedly in the same process.                          |
+| Trace operationID     | Generate a traceable operationID for each business operation.                              |
+| Call after login      | Most business APIs require initialization and login.                                       |
+| Validate parameters   | Request objects and message objects must match the platform type definitions.              |
+| Keep listeners stable | Listener setters usually replace previous listeners. Add your own fan-out layer if needed. |
+
+## Related Pages
+
+- [Initialization and login](/docs/chat/sdk/v4/react-native/application/overview)
+- [Event handlers](/docs/chat/sdk/v4/react-native/event-handler/overview)
+- [Sending messages](/docs/chat/sdk/v4/react-native/message/sending-messages/overview)
