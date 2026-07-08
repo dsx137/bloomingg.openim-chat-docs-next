@@ -393,12 +393,6 @@ OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外
 | operationID | 是 | 全局链路追踪 ID。建议每次请求生成独立值，便于串联服务端日志。 |
 | token | 管理端接口必填 | APP 管理员 Token。创建用户等少数初始化接口可能不需要，具体以接口页为准。 |
 
-## Multipart 请求
-
-当前保留的 Platform API 页面主要覆盖 OpenIM 已有的 JSON REST 接口。涉及文件或媒体上传时，按具体上传接口要求使用 \`multipart/form-data\` 或上传服务返回的上传参数；不要在 multipart 请求中强制设置 JSON 的 \`Content-Type\`。
-
-如果接口页仍标注 JSON 请求体，则应继续使用 JSON 请求体提交业务字段。
-
 ## 鉴权
 
 后端服务需要先通过 OpenIM 管理端认证能力获取 APP 管理员 Token，再把该 Token 放入后续管理端接口的 \`token\` 请求头。Token 应在服务端保存、刷新和轮换，客户端只应拿到为当前用户签发的登录 Token。

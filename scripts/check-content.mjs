@@ -122,7 +122,7 @@ const platformApiOverviewHeadingExpectations = new Map([
   ['/docs/chat/platform-api/v3/overview', ['## 最常用', '## 推荐功能', '## 资源']],
   [
     '/docs/chat/platform-api/v3/prepare-to-use-api',
-    ['## 基础地址', '## 请求头', '## Multipart 请求', '## 鉴权', '## 请求体'],
+    ['## 基础地址', '## 请求头', '## 鉴权', '## 请求体'],
   ],
   [
     '/docs/chat/platform-api/v3/user/overview',

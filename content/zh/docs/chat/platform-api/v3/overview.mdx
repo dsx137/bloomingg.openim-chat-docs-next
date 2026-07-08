@@ -5,12 +5,12 @@ product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
 status: "published"
-lastUpdated: "2026-07-07"
+lastUpdated: "2026-07-08"
 version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/overview"
 ---
 
-OpenIM Platform API 面向可信后端服务，提供认证、用户、关系、群组、会话、消息、上传、日志和运营管理相关的 REST 接口参考。中文文档保留 Platform API 的导航方式，具体能力、接口路径和请求字段以 OpenIM REST 已覆盖的文档为准。
+OpenIM Platform API 面向可信后端服务，提供用户、认证、好友、群组、会话、消息、上传、日志和运营管理相关的 REST 接口参考。中文文档保留 Platform API 的导航方式，具体能力、接口路径和请求字段以 OpenIM REST 已覆盖的文档为准。
 
 ## 最常用
 
@@ -26,9 +26,9 @@ OpenIM Platform API 面向可信后端服务，提供认证、用户、关系、
 
 通过 OpenIM 用户管理接口创建、更新、查询用户资料，并把注册、注销、权限等业务规则保留在业务系统中。
 
-- [创建用户](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [注册用户](/docs/chat/platform-api/v3/user/creating-users/user-register)
 - [分页获取用户列表](/docs/chat/platform-api/v3/user/listing-users/list-users)
-- [获取用户详情](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
+- [获取指定用户信息](/docs/chat/platform-api/v3/user/listing-users/get-users-info)
 
 ### 消息
 
@@ -40,13 +40,13 @@ OpenIM Platform API 面向可信后端服务，提供认证、用户、关系、
 
 ## 推荐功能
 
-### 关系
+### 好友
 
-OpenIM 关系接口用于维护好友关系、好友申请和黑名单。
+OpenIM 好友接口用于维护好友关系、好友申请和黑名单。
 
-- [申请添加好友](/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend)
-- [查询好友列表](/docs/chat/platform-api/v3/relation/listing-friends/list-friends)
-- [加入黑名单](/docs/chat/platform-api/v3/relation/blacklist/add-black)
+- [申请添加好友](/docs/chat/platform-api/v3/friend/managing-friend-requests/apply-to-add-friend)
+- [查询好友列表](/docs/chat/platform-api/v3/friend/listing-friends/list-friends)
+- [加入黑名单](/docs/chat/platform-api/v3/friend/blacklist/add-black)
 
 ### 群组
 

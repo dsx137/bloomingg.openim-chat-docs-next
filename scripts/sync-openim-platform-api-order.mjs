@@ -73,19 +73,17 @@ const moduleOverviews = [
     id: 'auth',
     title: '概述',
     navLabel: '认证',
-    description: 'OpenIM Platform API 认证模块概览，覆盖管理员 Token、用户 Token、Token 解析和强制下线。',
+    description: 'OpenIM Platform API 认证模块概览，覆盖管理员 Token、用户 Token 和强制下线。',
     intro:
-      '认证模块用于后端获取管理端调用凭证、为客户端签发用户 Token，并在安全场景下解析 Token 或强制用户下线。',
+      '认证模块用于服务端获取管理端调用凭证、为客户端签发用户 Token，并在安全场景下强制用户下线。',
     capabilities: [
       ['管理员 Token', '通过管理员凭据获取后端调用管理端 API 所需的 Token。'],
       ['用户 Token', '为指定用户和平台签发客户端登录 Token。'],
-      ['Token 解析', '校验 Token 并解析用户、平台等上下文信息。'],
       ['强制下线', '让指定用户端会话失效，适用于封禁、改密和风险处置。'],
     ],
     commonLinks: [
       ['获取管理员 Token', '/docs/chat/platform-api/v3/auth/get-admin-token'],
       ['获取用户 Token', '/docs/chat/platform-api/v3/auth/get-user-token'],
-      ['解析 Token', '/docs/chat/platform-api/v3/auth/parse-token'],
       ['强制用户下线', '/docs/chat/platform-api/v3/auth/force-logout'],
     ],
     advice: [
@@ -239,8 +237,6 @@ const platformCategoryLabels = {
   'managing-users': '管理用户',
   presence: '在线状态',
   'notification-accounts': '通知账号',
-  tokens: 'Token',
-  sessions: '会话控制',
   'managing-friend-requests': '好友申请',
   'listing-friends': '查询好友',
   'managing-friends': '管理好友',
@@ -273,7 +269,12 @@ const childOrderByModule = {
     'user/presence',
     'user/notification-accounts',
   ],
-  auth: ['auth/overview', 'auth/tokens', 'auth/sessions'],
+  auth: [
+    'auth/overview',
+    'auth/tokens/get-admin-token',
+    'auth/tokens/get-user-token',
+    'auth/sessions/force-logout',
+  ],
   relation: [
     'relation/overview',
     'relation/managing-friend-requests',
@@ -326,7 +327,6 @@ const routeRelocations = [
 
   ['auth/get-admin-token', 'auth/tokens/get-admin-token'],
   ['auth/get-user-token', 'auth/tokens/get-user-token'],
-  ['auth/parse-token', 'auth/tokens/parse-token'],
   ['auth/force-logout', 'auth/sessions/force-logout'],
 
   ['friend/delete-friend', 'friend/managing-friends/delete-friend'],

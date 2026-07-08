@@ -32,25 +32,24 @@ OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外
 | operationID | 是 | 全局链路追踪 ID。建议每次请求生成独立值，便于串联服务端日志。 |
 | token | 管理端接口必填 | APP 管理员 Token。创建用户等少数初始化接口可能不需要，具体以接口页为准。 |
 
-## Multipart 请求
-
-当前保留的 Platform API 页面主要覆盖 OpenIM 已有的 JSON REST 接口。涉及文件或媒体上传时，按具体上传接口要求使用 `multipart/form-data` 或上传服务返回的上传参数；不要在 multipart 请求中强制设置 JSON 的 `Content-Type`。
-
-如果接口页仍标注 JSON 请求体，则应继续使用 JSON 请求体提交业务字段。
-
 ## 鉴权
 
-后端服务需要先通过 OpenIM 管理端认证能力获取 APP 管理员 Token，再把该 Token 放入后续管理端接口的 `token` 请求头。Token 应在服务端保存、刷新和轮换，客户端只应拿到为当前用户签发的登录 Token。
+Platform API 应由服务端调用。这个服务端可以是客户自己的业务服务器，也可以是 OpenIM 提供的 Chat Server；它负责配置 OpenIM API 地址、管理员账号和管理员凭据 `secret`，并在服务端完成 Token 获取、缓存、刷新和审计。
+
+### 管理端调用
+
+服务端先调用[获取管理员 Token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)，使用管理员账号和 `secret` 换取 APP 管理员 Token。后续创建用户、创建群组、发送服务端消息、导入关系或执行运营管理接口时，把管理员 Token 放在请求头 `token` 中调用对应 Platform API。
+
+### 客户端登录
+
+当业务用户注册、密码登录或完成第三方登录后，客户端不应直接接触管理员 Token。业务服务器或 OpenIM Chat Server 在确认业务身份后，调用[获取用户 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)为该用户签发用户 Token，也就是客户端登录 OpenIM SDK 使用的 IM Token，并把它返回给客户端。
 
 常见接入顺序如下：
 
-1. 在服务端配置 OpenIM API 地址和管理员凭据。
-2. 调用 OpenIM 管理端认证接口获取 APP 管理员 Token。
-3. 使用管理员 Token 调用用户、群组、消息等管理端接口。
-4. 当客户端需要登录 OpenIM 时，由服务端调用用户 Token 接口签发会话 Token。
-
-- [签发会话 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
-- [OpenIM 管理员 Token 文档](https://docs.openim.io/restapi/apis/authenticationManagement/getAdminToken)
+1. 在业务服务器或 OpenIM Chat Server 中配置 OpenIM API 地址、管理员账号和 `secret`。
+2. 服务端调用[获取管理员 Token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)，换取 APP 管理员 Token。
+3. 服务端使用管理员 Token 调用用户、群组、消息、关系等管理端接口。
+4. 用户登录业务系统后，服务端调用[获取用户 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)，签发 IM Token 并返回给客户端。
 
 ## 请求体
 

@@ -4928,14 +4928,6 @@
     "contentFile": "content/docs/chat/platform-api/v3/auth/tokens/get-user-token.mdx"
   },
   {
-    "sourcePath": "/docs/chat/platform-api/v3/auth/tokens/parse-token",
-    "openimPath": "/docs/chat/platform-api/v3/auth/tokens/parse-token",
-    "title": "解析 Token",
-    "context": "chat/platform-api/v3",
-    "template": "api",
-    "contentFile": "content/docs/chat/platform-api/v3/auth/tokens/parse-token.mdx"
-  },
-  {
     "sourcePath": "/docs/chat/platform-api/v3/auth/sessions/force-logout",
     "openimPath": "/docs/chat/platform-api/v3/auth/sessions/force-logout",
     "title": "强制用户下线",
@@ -5038,22 +5030,6 @@
     "context": "chat/platform-api/v3",
     "template": "api",
     "contentFile": "content/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account.mdx"
-  },
-  {
-    "sourcePath": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
-    "openimPath": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
-    "title": "签发会话 Token",
-    "context": "chat/platform-api/v3",
-    "template": "api",
-    "contentFile": "content/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token.mdx"
-  },
-  {
-    "sourcePath": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
-    "openimPath": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
-    "title": "注销全部会话 Token",
-    "context": "chat/platform-api/v3",
-    "template": "api",
-    "contentFile": "content/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens.mdx"
   },
   {
     "sourcePath": "/docs/chat/platform-api/v3/relation/overview",

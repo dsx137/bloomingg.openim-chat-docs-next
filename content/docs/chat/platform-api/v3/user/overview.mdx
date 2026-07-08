@@ -1,6 +1,6 @@
 ---
 title: "概述"
-description: "OpenIM Platform API 用户模块概览，覆盖用户创建、资料查询、在线状态、通知账号和会话 Token 管理。"
+description: "OpenIM Platform API 用户模块概览，覆盖用户创建、资料查询、在线状态和通知账号。"
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,7 +10,7 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/user/overview"
 ---
 
-用户模块面向可信后端服务，用于把业务系统中的账号映射为 OpenIM 用户，并管理用户资料、用户查询、在线状态、通知账号和客户端登录所需的会话 Token。管理员 Token 只能保存在后端，浏览器、移动端或桌面客户端不应直接调用这些管理端接口。
+用户模块面向可信后端服务，用于把业务系统中的账号映射为 OpenIM 用户，并管理用户资料、用户查询、在线状态和通知账号。管理员 Token 只能保存在后端，浏览器、移动端或桌面客户端不应直接调用这些管理端接口。
 
 ## 能力范围
 
@@ -21,7 +21,6 @@ sourcePath: "/docs/chat/platform-api/v3/user/overview"
 | 用户资料更新 | 由后端同步业务资料变更，例如昵称、头像和扩展信息。 |
 | 在线状态 | 查询用户是否在线、在线终端连接信息和在线 Token 聚合明细。 |
 | 通知账号 | 创建、更新和搜索用于系统通知或业务通知的服务端账号。 |
-| 会话 Token | 为客户端登录签发用户 Token，或在安全场景下注销用户所有会话 Token。 |
 
 ## 常用接口
 
@@ -36,14 +35,12 @@ sourcePath: "/docs/chat/platform-api/v3/user/overview"
 - [创建通知账号](/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account)
 - [更新通知账号](/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account)
 - [搜索通知账号](/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account)
-- [签发会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token)
-- [注销全部会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens)
 
 ## 接入建议
 
 用户 ID 应以业务系统为权威来源。创建 OpenIM 用户前，先确认业务账号已经完成注册、风控和权限校验；创建完成后，把 OpenIM 用户 ID 与业务账号关系保存在你的后端数据库中。
 
-客户端登录时，应先向你的业务后端请求登录凭证，再由后端调用 OpenIM 管理端接口签发会话 Token。不要把 APP 管理员 Token 写入客户端代码、前端环境变量或移动端包体。
+客户端登录时，应先向你的业务后端请求登录凭证，再由后端调用认证模块签发用户 Token。不要把 APP 管理员 Token 写入客户端代码、前端环境变量或移动端包体。
 
 ## 相关页面
 

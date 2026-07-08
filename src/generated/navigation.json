@@ -45,59 +45,30 @@
               "minIndex": 700.9
             },
             {
-              "id": "auth/tokens",
-              "segment": "tokens",
-              "title": "Token",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "auth/tokens/get-admin-token",
-                  "segment": "get-admin-token",
-                  "title": "获取管理员 Token",
-                  "href": "/docs/chat/platform-api/v3/auth/tokens/get-admin-token",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 701
-                },
-                {
-                  "id": "auth/tokens/get-user-token",
-                  "segment": "get-user-token",
-                  "title": "获取用户 Token",
-                  "href": "/docs/chat/platform-api/v3/auth/tokens/get-user-token",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 702
-                },
-                {
-                  "id": "auth/tokens/parse-token",
-                  "segment": "parse-token",
-                  "title": "解析 Token",
-                  "href": "/docs/chat/platform-api/v3/auth/tokens/parse-token",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 703
-                }
-              ],
+              "id": "auth/tokens/get-admin-token",
+              "segment": "get-admin-token",
+              "title": "获取管理员 Token",
+              "href": "/docs/chat/platform-api/v3/auth/tokens/get-admin-token",
+              "type": "page",
+              "children": [],
               "minIndex": 701
             },
             {
-              "id": "auth/sessions",
-              "segment": "sessions",
-              "title": "会话控制",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "auth/sessions/force-logout",
-                  "segment": "force-logout",
-                  "title": "强制用户下线",
-                  "href": "/docs/chat/platform-api/v3/auth/sessions/force-logout",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 704
-                }
-              ],
+              "id": "auth/tokens/get-user-token",
+              "segment": "get-user-token",
+              "title": "获取用户 Token",
+              "href": "/docs/chat/platform-api/v3/auth/tokens/get-user-token",
+              "type": "page",
+              "children": [],
+              "minIndex": 702
+            },
+            {
+              "id": "auth/sessions/force-logout",
+              "segment": "force-logout",
+              "title": "强制用户下线",
+              "href": "/docs/chat/platform-api/v3/auth/sessions/force-logout",
+              "type": "page",
+              "children": [],
               "minIndex": 704
             }
           ],
@@ -267,34 +238,6 @@
                 }
               ],
               "minIndex": 622
-            },
-            {
-              "id": "user/managing-session-tokens",
-              "segment": "managing-session-tokens",
-              "title": "管理会话 Token",
-              "href": null,
-              "type": "folder",
-              "children": [
-                {
-                  "id": "user/managing-session-tokens/issue-a-session-token",
-                  "segment": "issue-a-session-token",
-                  "title": "签发会话 Token",
-                  "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 625
-                },
-                {
-                  "id": "user/managing-session-tokens/revoke-all-session-tokens",
-                  "segment": "revoke-all-session-tokens",
-                  "title": "注销全部会话 Token",
-                  "href": "/docs/chat/platform-api/v3/user/managing-session-tokens/revoke-all-session-tokens",
-                  "type": "page",
-                  "children": [],
-                  "minIndex": 626
-                }
-              ],
-              "minIndex": 625
             }
           ],
           "minIndex": 613

@@ -111,7 +111,7 @@ const copy = {
   },
   zh: {
     intro:
-      'OpenIM Platform API 面向可信后端服务组织，当前只保留 OpenIM REST 已覆盖的服务端能力，用于管理用户、群组、消息、会话 Token、内容治理和运营工作流。',
+      'OpenIM Platform API 面向服务端集成场景，提供用户、好友、群组、消息、内容治理等管理能力。',
     mostPopular: '最常用',
     recommended: '推荐功能',
     resources: '资源',
