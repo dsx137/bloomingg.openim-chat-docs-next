@@ -1,6 +1,6 @@
 ---
 title: '发送消息'
-description: '逐个说明 Android core binding 中消息创建方法、SendMessage 和 SendMessageNotOss 的关系，不包含示例代码。'
+description: '说明 Android core binding 中消息创建方法、SendMessage 和 SendMessageNotOss 的关系，不包含示例代码。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
@@ -11,245 +11,38 @@ platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message'
 ---
 
-发送消息由两个阶段组成：先用 `Create*Message` 同步创建消息 JSON，再把该消息 JSON 传给 `SendMessage` 或 `SendMessageNotOss`。本页只列真实签名、参数关系和方法用途，不提供示例代码。
+发送消息由两个阶段组成：先用 `Create*Message` 同步创建消息 JSON，再把该消息 JSON 传给 `SendMessage` 或 `SendMessageNotOss`。本页只说明关系和入口，具体方法说明见独立页面。
 
-## 发送方法
+## 相关方法
 
-### SendMessage
-
-| 项目       | 说明                                                                                                                                                  |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SendMessage(callback SendMsgCallBack, operationID string, message string, recvID string, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
-| 作用       | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                                                         |
-| 关键参数   | `message` 是消息 JSON；单聊传 `recvID`；群聊传 `groupID`；`offlinePushInfo` 是离线推送 JSON；`isOnlineOnly` 控制是否只在线投递。                      |
-| 结果或事件 | 成功通过 `OnSuccess` 返回服务端确认后的消息 JSON，进度通过 `OnProgress` 返回，失败通过 `OnError` 返回。                                               |
-
-### SendMessageNotOss
-
-| 项目       | 说明                                                                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SendMessageNotOss(callback SendMsgCallBack, operationID string, message string, recvID string, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
-| 作用       | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。                                              |
-| 关键参数   | 参数语义与 `SendMessage` 相同，但调用方需要保证消息里的资源信息已经可被接收端访问。                                                                         |
-| 结果或事件 | 成功、进度和失败回调与 `SendMessage` 一致。                                                                                                                 |
-
-## 创建普通、媒体与文件消息方法
-
-### GetAtAllTag
-
-| 项目       | 说明                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetAtAllTag(operationID string) string`                                                       |
-| 作用       | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 |
-| 关键参数   | `operationID` 用于追踪。                                                                       |
-| 结果或事件 | 同步返回 @ 所有人标记字符串。                                                                  |
-
-### CreateTextMessage
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateTextMessage(operationID string, text string) string`                          |
-| 作用       | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。 |
-| 关键参数   | `text` 是消息文本。                                                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串，随后传给发送方法。                                         |
-
-### CreateAdvancedTextMessage
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateAdvancedTextMessage(operationID string, text string, messageEntityList string) string` |
-| 作用       | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。            |
-| 关键参数   | `messageEntityList` 是 `MessageEntity` 列表 JSON。                                            |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                    |
-
-### CreateTextAtMessage
-
-| 项目       | 说明                                                                                                                 |
-| ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateTextAtMessage(operationID string, text string, atUserList string, atUsersInfo string, message string) string` |
-| 作用       | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                                  |
-| 关键参数   | `atUserList` 是被 @ 用户 ID 列表 JSON；`atUsersInfo` 是 @ 用户资料 JSON；`message` 可传被引用消息 JSON。             |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                           |
-
-### CreateLocationMessage
-
-| 项目       | 说明                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateLocationMessage(operationID string, description string, longitude float64, latitude float64) string` |
-| 作用       | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                        |
-| 关键参数   | `description` 是位置描述；`longitude` 和 `latitude` 是经纬度。                                              |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                  |
-
-### CreateCustomMessage
-
-| 项目       | 说明                                                                                                |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateCustomMessage(operationID string, data string, extension string, description string) string` |
-| 作用       | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                 |
-| 关键参数   | `data` 是业务 payload；`extension` 标识业务类型；`description` 是降级展示文案。                     |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                          |
-
-### CreateQuoteMessage
-
-| 项目       | 说明                                                                         |
-| ---------- | ---------------------------------------------------------------------------- |
-| 方法签名   | `CreateQuoteMessage(operationID string, text string, message string) string` |
-| 作用       | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                       |
-| 关键参数   | `message` 是被引用消息 JSON。                                                |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                   |
-
-### CreateAdvancedQuoteMessage
-
-| 项目       | 说明                                                                                                           |
-| ---------- | -------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateAdvancedQuoteMessage(operationID string, text string, message string, messageEntityList string) string` |
-| 作用       | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
-| 关键参数   | `message` 是被引用消息 JSON；`messageEntityList` 是实体列表 JSON。                                             |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                     |
-
-### CreateCardMessage
-
-| 项目       | 说明                                                            |
-| ---------- | --------------------------------------------------------------- |
-| 方法签名   | `CreateCardMessage(operationID string, cardInfo string) string` |
-| 作用       | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。            |
-| 关键参数   | `cardInfo` 是名片信息 JSON。                                    |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                      |
-
-### CreateFaceMessage
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `CreateFaceMessage(operationID string, index int, data string) string` |
-| 作用       | 创建表情消息。适合业务自定义表情包或贴纸消息。                         |
-| 关键参数   | `index` 是表情索引；`data` 是表情资源或业务数据。                      |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                             |
-
-### CreateForwardMessage
-
-| 项目       | 说明                                                        |
-| ---------- | ----------------------------------------------------------- |
-| 方法签名   | `CreateForwardMessage(operationID string, m string) string` |
-| 作用       | 创建单条转发消息。用于把已有消息转发给另一个用户或群。      |
-| 关键参数   | `m` 是原消息 JSON。                                         |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                  |
-
-### CreateMergerMessage
-
-| 项目       | 说明                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateMergerMessage(operationID string, messageList string, title string, summaryList string) string` |
-| 作用       | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                             |
-| 关键参数   | `messageList` 是消息列表 JSON；`title` 是合并标题；`summaryList` 是摘要列表 JSON。                     |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                             |
-
-### CreateImageMessage
-
-| 项目       | 说明                                                              |
-| ---------- | ----------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessage(operationID string, imagePath string) string` |
-| 作用       | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。      |
-| 关键参数   | `imagePath` 是图片路径。                                          |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                        |
-
-### CreateImageMessageFromFullPath
-
-| 项目       | 说明                                                                              |
-| ---------- | --------------------------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessageFromFullPath(operationID string, imageFullPath string) string` |
-| 作用       | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                      |
-| 关键参数   | `imageFullPath` 是完整图片路径。                                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                        |
-
-### CreateImageMessageByURL
-
-| 项目       | 说明                                                                                                                                     |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessageByURL(operationID string, sourcePath string, sourcePicture string, bigPicture string, snapshotPicture string) string` |
-| 作用       | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                                                      |
-| 关键参数   | `sourcePath` 是原始路径或来源标识；`sourcePicture`、`bigPicture`、`snapshotPicture` 是不同规格图片信息 JSON。                            |
-| 结果或事件 | 同步返回消息 JSON 字符串，通常配合不走 OSS 的发送链路。                                                                                  |
-
-### CreateSoundMessage
-
-| 项目       | 说明                                                                              |
-| ---------- | --------------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessage(operationID string, soundPath string, duration int64) string` |
-| 作用       | 通过音频路径创建语音消息。                                                        |
-| 关键参数   | `soundPath` 是音频路径；`duration` 是语音时长。                                   |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                        |
-
-### CreateSoundMessageFromFullPath
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessageFromFullPath(operationID string, soundPath string, duration int64) string` |
-| 作用       | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                  |
-| 关键参数   | `soundPath` 是完整音频路径；`duration` 是语音时长。                                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                    |
-
-### CreateSoundMessageByURL
-
-| 项目       | 说明                                                                       |
-| ---------- | -------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessageByURL(operationID string, soundBaseInfo string) string` |
-| 作用       | 通过已上传音频 URL 信息创建语音消息。                                      |
-| 关键参数   | `soundBaseInfo` 是 `SoundBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                 |
-
-### CreateVideoMessage
-
-| 项目       | 说明                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateVideoMessage(operationID string, videoPath string, videoType string, duration int64, snapshotPath string) string` |
-| 作用       | 通过视频路径和快照路径创建视频消息。                                                                                     |
-| 关键参数   | `videoPath` 是视频路径；`videoType` 是视频类型；`duration` 是时长；`snapshotPath` 是快照路径。                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                               |
-
-### CreateVideoMessageFromFullPath
-
-| 项目       | 说明                                                                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateVideoMessageFromFullPath(operationID string, videoFullPath string, videoType string, duration int64, snapshotFullPath string) string` |
-| 作用       | 通过完整视频路径和完整快照路径创建视频消息。                                                                                                 |
-| 关键参数   | `videoFullPath` 与 `snapshotFullPath` 是完整路径。                                                                                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                                                   |
-
-### CreateVideoMessageByURL
-
-| 项目       | 说明                                                                       |
-| ---------- | -------------------------------------------------------------------------- |
-| 方法签名   | `CreateVideoMessageByURL(operationID string, videoBaseInfo string) string` |
-| 作用       | 通过已上传视频 URL 信息创建视频消息。                                      |
-| 关键参数   | `videoBaseInfo` 是 `VideoBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                 |
-
-### CreateFileMessage
-
-| 项目       | 说明                                                                             |
-| ---------- | -------------------------------------------------------------------------------- |
-| 方法签名   | `CreateFileMessage(operationID string, filePath string, fileName string) string` |
-| 作用       | 通过文件路径创建普通文件消息。                                                   |
-| 关键参数   | `filePath` 是文件路径；`fileName` 是展示文件名。                                 |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                       |
-
-### CreateFileMessageFromFullPath
-
-| 项目       | 说明                                                                                             |
-| ---------- | ------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateFileMessageFromFullPath(operationID string, fileFullPath string, fileName string) string` |
-| 作用       | 通过完整文件路径创建普通文件消息。                                                               |
-| 关键参数   | `fileFullPath` 是完整文件路径；`fileName` 是展示文件名。                                         |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                       |
-
-### CreateFileMessageByURL
-
-| 项目       | 说明                                                                     |
-| ---------- | ------------------------------------------------------------------------ |
-| 方法签名   | `CreateFileMessageByURL(operationID string, fileBaseInfo string) string` |
-| 作用       | 通过已上传文件 URL 信息创建文件消息。                                    |
-| 关键参数   | `fileBaseInfo` 是 `FileBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                               |
+| 方法                                                                                                              | 说明                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`GetAtAllTag`](/docs/chat/sdk/v4/android/message/methods/get-at-all-tag)                                         | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。                 |
+| [`CreateTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-message)                              | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。                           |
+| [`CreateAdvancedTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-text-message)             | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。                             |
+| [`CreateTextAtMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-at-message)                         | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                            |
+| [`CreateLocationMessage`](/docs/chat/sdk/v4/android/message/methods/create-location-message)                      | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                           |
+| [`CreateCustomMessage`](/docs/chat/sdk/v4/android/message/methods/create-custom-message)                          | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                            |
+| [`CreateQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-quote-message)                            | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                                                         |
+| [`CreateAdvancedQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-quote-message)           | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
+| [`CreateCardMessage`](/docs/chat/sdk/v4/android/message/methods/create-card-message)                              | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。                                                           |
+| [`CreateFaceMessage`](/docs/chat/sdk/v4/android/message/methods/create-face-message)                              | 创建表情消息。适合业务自定义表情包或贴纸消息。                                                                 |
+| [`CreateForwardMessage`](/docs/chat/sdk/v4/android/message/methods/create-forward-message)                        | 创建单条转发消息。用于把已有消息转发给另一个用户或群。                                                         |
+| [`CreateMergerMessage`](/docs/chat/sdk/v4/android/message/methods/create-merger-message)                          | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                                     |
+| [`CreateImageMessage`](/docs/chat/sdk/v4/android/message/methods/create-image-message)                            | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。                                                   |
+| [`CreateImageMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-image-message-from-full-path) | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                                                   |
+| [`CreateImageMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-image-message-by-url)                | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                            |
+| [`CreateSoundMessage`](/docs/chat/sdk/v4/android/message/methods/create-sound-message)                            | 通过音频路径创建语音消息。                                                                                     |
+| [`CreateSoundMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-from-full-path) | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                                   |
+| [`CreateSoundMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-by-url)                | 通过已上传音频 URL 信息创建语音消息。                                                                          |
+| [`CreateVideoMessage`](/docs/chat/sdk/v4/android/message/methods/create-video-message)                            | 通过视频路径和快照路径创建视频消息。                                                                           |
+| [`CreateVideoMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-video-message-from-full-path) | 通过完整视频路径和完整快照路径创建视频消息。                                                                   |
+| [`CreateVideoMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-video-message-by-url)                | 通过已上传视频 URL 信息创建视频消息。                                                                          |
+| [`CreateFileMessage`](/docs/chat/sdk/v4/android/message/methods/create-file-message)                              | 通过文件路径创建普通文件消息。                                                                                 |
+| [`CreateFileMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-file-message-from-full-path)   | 通过完整文件路径创建普通文件消息。                                                                             |
+| [`CreateFileMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-file-message-by-url)                  | 通过已上传文件 URL 信息创建文件消息。                                                                          |
+| [`SendMessage`](/docs/chat/sdk/v4/android/message/methods/send-message)                                           | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                  |
+| [`SendMessageNotOss`](/docs/chat/sdk/v4/android/message/methods/send-message-not-oss)                             | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。 |
 
 ## 参数选择
 
@@ -272,4 +65,4 @@ sourcePath: '/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message'
 - 单聊和群聊只选择一个目标字段：单聊传 `recvID`，群聊传 `groupID`。
 - `Create*MessageByURL` 类方法适合资源已上传或由业务侧提供 URL 的场景。
 - 发送前必须已登录，并已设置消息和会话监听器。
-- 不要把旧文档里的跨平台示例直接复制到 Android core binding；应按本页签名映射。
+- 不要把旧文档里的跨平台示例直接复制到 Android core binding；应按独立方法页签名映射。

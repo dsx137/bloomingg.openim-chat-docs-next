@@ -1,0 +1,42 @@
+---
+title: 'InitSDK'
+description: '说明 Android core binding 方法 InitSDK 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/init-sdk'
+---
+
+`InitSDK` 来自 `open_im_sdk/init_login.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                       |
+| -------- | -------------------------------------------------------------------------- |
+| 方法     | `InitSDK(listener OnConnListener, operationID string, config string) bool` |
+| 所属能力 | 初始化与登录                                                               |
+| 源码位置 | `open_im_sdk/init_login.go`                                                |
+
+## 作用
+
+初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
+
+## 参数说明
+
+`listener` 接收连接生命周期事件；`operationID` 用于日志追踪；`config` 是 `IMConfig` JSON。
+
+## 返回与事件
+
+同步返回 `true` 或 `false`，失败通常表示配置 JSON、平台 ID、地址格式或 listener 不合法。
+
+## 使用边界
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## 相关页面
+
+- [初始化与登录](/docs/chat/sdk/v4/android/application/overview-application)

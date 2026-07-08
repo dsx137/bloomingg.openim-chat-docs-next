@@ -1,0 +1,42 @@
+---
+title: 'GetJoinedGroupList'
+description: '说明 Android core binding 方法 GetJoinedGroupList 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list'
+---
+
+`GetJoinedGroupList` 来自 `open_im_sdk/group.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                    |
+| -------- | ------------------------------------------------------- |
+| 方法     | `GetJoinedGroupList(callback Base, operationID string)` |
+| 所属能力 | 群组                                                    |
+| 源码位置 | `open_im_sdk/group.go`                                  |
+
+## 作用
+
+获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。
+
+## 参数说明
+
+无业务参数。
+
+## 返回与事件
+
+成功返回已加入群列表 JSON。
+
+## 使用边界
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/channel/overview-channel)

@@ -1,0 +1,42 @@
+---
+title: 'GetFriendApplicationListAsApplicant'
+description: '说明 Android core binding 方法 GetFriendApplicationListAsApplicant 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant'
+---
+
+`GetFriendApplicationListAsApplicant` 来自 `open_im_sdk/relation.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                 |
+| -------- | ------------------------------------------------------------------------------------ |
+| 方法     | `GetFriendApplicationListAsApplicant(callback Base, operationID string, req string)` |
+| 所属能力 | 好友                                                                                 |
+| 源码位置 | `open_im_sdk/relation.go`                                                            |
+
+## 作用
+
+获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。
+
+## 参数说明
+
+`req` 是申请列表分页或筛选请求 JSON。
+
+## 返回与事件
+
+成功返回发出的好友申请列表 JSON。
+
+## 使用边界
+
+好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
+
+## 相关页面
+
+- [好友](/docs/chat/sdk/v4/android/user/retrieving-users/retrieve-a-list-of-users-in-an-application)

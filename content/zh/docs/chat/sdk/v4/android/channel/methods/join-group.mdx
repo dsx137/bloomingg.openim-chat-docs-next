@@ -1,0 +1,42 @@
+---
+title: 'JoinGroup'
+description: '说明 Android core binding 方法 JoinGroup 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/channel/methods/join-group'
+---
+
+`JoinGroup` 来自 `open_im_sdk/group.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| 方法     | `JoinGroup(callback Base, operationID string, groupID string, reqMsg string, joinSource int32, ex string)` |
+| 所属能力 | 群组                                                                                                       |
+| 源码位置 | `open_im_sdk/group.go`                                                                                     |
+
+## 作用
+
+申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。
+
+## 参数说明
+
+`groupID` 是目标群 ID；`reqMsg` 是申请说明；`joinSource` 表示入群来源；`ex` 为扩展信息。
+
+## 返回与事件
+
+成功返回申请或入群结果，群相关监听会收到变化。
+
+## 使用边界
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/channel/overview-channel)

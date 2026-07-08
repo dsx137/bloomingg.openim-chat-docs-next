@@ -1,0 +1,42 @@
+---
+title: 'GetLoginStatus'
+description: '说明 Android core binding 方法 GetLoginStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/get-login-status'
+---
+
+`GetLoginStatus` 来自 `open_im_sdk/init_login.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                     |
+| -------- | ---------------------------------------- |
+| 方法     | `GetLoginStatus(operationID string) int` |
+| 所属能力 | 初始化与登录                             |
+| 源码位置 | `open_im_sdk/init_login.go`              |
+
+## 作用
+
+查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。
+
+## 参数说明
+
+`operationID` 用于日志追踪；SDK 未初始化时会直接返回未初始化状态。
+
+## 返回与事件
+
+同步返回登录状态枚举值。
+
+## 使用边界
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## 相关页面
+
+- [初始化与登录](/docs/chat/sdk/v4/android/application/overview-application)

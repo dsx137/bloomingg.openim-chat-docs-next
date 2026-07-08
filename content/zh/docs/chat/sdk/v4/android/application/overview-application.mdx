@@ -1,6 +1,6 @@
 ---
 title: '初始化与登录'
-description: '逐个说明 Android core binding 当前导出的初始化、登录、退出、前后台状态和登录状态方法。'
+description: '初始化与登录方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,97 +13,18 @@ sourcePath: '/docs/chat/sdk/v4/android/application/overview-application'
 
 初始化与登录方法来自 `open_im_sdk/init_login.go`。初始化成功后，SDK 会创建全局 `UserForSDK`；后续用户、群组、会话、消息和第三方能力都依赖这个实例。
 
-## 方法列表
+本页是初始化与登录能力的方法目录。每个方法的签名、参数、返回和使用边界都放在独立页面中。
 
-### GetSdkVersion
+## 方法索引
 
-| 项目       | 说明                                                                     |
-| ---------- | ------------------------------------------------------------------------ |
-| 方法签名   | `GetSdkVersion() string`                                                 |
-| 作用       | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。 |
-| 关键参数   | 无入参。                                                                 |
-| 结果或事件 | 直接返回版本字符串。                                                     |
-
-### InitSDK
-
-| 项目       | 说明                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------ |
-| 方法签名   | `InitSDK(listener OnConnListener, operationID string, config string) bool`                 |
-| 作用       | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。  |
-| 关键参数   | `listener` 接收连接生命周期事件；`operationID` 用于日志追踪；`config` 是 `IMConfig` JSON。 |
-| 结果或事件 | 同步返回 `true` 或 `false`，失败通常表示配置 JSON、平台 ID、地址格式或 listener 不合法。   |
-
-### UnInitSDK
-
-| 项目       | 说明                                                                      |
-| ---------- | ------------------------------------------------------------------------- |
-| 方法签名   | `UnInitSDK(operationID string)`                                           |
-| 作用       | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。 |
-| 关键参数   | `operationID` 用于日志追踪。                                              |
-| 结果或事件 | 无业务数据返回；未初始化时只打印状态。                                    |
-
-### Login
-
-| 项目       | 说明                                                                                                |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| 方法签名   | `Login(callback Base, operationID string, userID string, token string)`                             |
-| 作用       | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 |
-| 关键参数   | `userID` 是 OpenIM 用户 ID；`token` 必须与该用户匹配；`operationID` 建议每次登录唯一。              |
-| 结果或事件 | 成功或失败通过 `Base` 回调返回。                                                                    |
-
-### Logout
-
-| 项目       | 说明                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------- |
-| 方法签名   | `Logout(callback Base, operationID string)`                                           |
-| 作用       | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。 |
-| 关键参数   | `operationID` 用于串联退出登录日志。                                                  |
-| 结果或事件 | 通过 `Base` 回调返回退出结果。                                                        |
-
-### SetAppBackgroundStatus
-
-| 项目       | 说明                                                                           |
-| ---------- | ------------------------------------------------------------------------------ |
-| 方法签名   | `SetAppBackgroundStatus(callback Base, operationID string, isBackground bool)` |
-| 作用       | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。           |
-| 关键参数   | `isBackground` 为 `true` 表示进入后台，`false` 表示回到前台。                  |
-| 结果或事件 | 通过 `Base` 回调返回处理结果。                                                 |
-
-### NetworkStatusChanged
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `NetworkStatusChanged(callback Base, operationID string)`              |
-| 作用       | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。  |
-| 关键参数   | `operationID` 用于定位网络切换链路。                                   |
-| 结果或事件 | 通过 `Base` 回调返回调用结果，连接最终状态仍以 `OnConnListener` 为准。 |
-
-### GetLoginStatus
-
-| 项目       | 说明                                                               |
-| ---------- | ------------------------------------------------------------------ |
-| 方法签名   | `GetLoginStatus(operationID string) int`                           |
-| 作用       | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。  |
-| 关键参数   | `operationID` 用于日志追踪；SDK 未初始化时会直接返回未初始化状态。 |
-| 结果或事件 | 同步返回登录状态枚举值。                                           |
-
-### GetLoginUserID
-
-| 项目       | 说明                                                                     |
-| ---------- | ------------------------------------------------------------------------ |
-| 方法签名   | `GetLoginUserID() string`                                                |
-| 作用       | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。 |
-| 关键参数   | 无入参。                                                                 |
-| 结果或事件 | 同步返回用户 ID；SDK 未初始化时返回空字符串。                            |
-
-## 回调与返回约定
-
-Android core binding 的异步方法通过回调返回结果。
-
-| 回调类型          | 方法                                    | 说明                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------ |
-| `Base`            | `OnSuccess(data string)`                | 成功时返回 JSON 字符串、空字符串或基础类型序列化结果。 |
-| `Base`            | `OnError(errCode int32, errMsg string)` | 失败时返回 SDK 错误码和错误消息。                      |
-| `SendMsgCallBack` | `OnProgress(progress int)`              | 仅发送消息时使用，表示发送或上传进度。                 |
-
-除同步创建消息类方法外，带 `callback` 的方法不直接返回业务数据。参数中名称包含 `List`、`Info`、`Param`、`Req`、`Options` 的 `string` 通常是 JSON 字符串，SDK 内部会反序列化为对应结构。
+| 方法                                                                                                | 说明                                                                                                |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [`GetSdkVersion`](/docs/chat/sdk/v4/android/application/methods/get-sdk-version)                    | 获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。                            |
+| [`InitSDK`](/docs/chat/sdk/v4/android/application/methods/init-sdk)                                 | 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。           |
+| [`UnInitSDK`](/docs/chat/sdk/v4/android/application/methods/un-init-sdk)                            | 释放当前 SDK 全局实例，适合应用完全退出 IM 能力或测试环境重建实例时使用。                           |
+| [`Login`](/docs/chat/sdk/v4/android/application/methods/login)                                      | 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。 |
+| [`Logout`](/docs/chat/sdk/v4/android/application/methods/logout)                                    | 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。               |
+| [`SetAppBackgroundStatus`](/docs/chat/sdk/v4/android/application/methods/set-app-background-status) | 通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。                                |
+| [`NetworkStatusChanged`](/docs/chat/sdk/v4/android/application/methods/network-status-changed)      | 通知 SDK 网络状态已变化，当前实现会触发长连接关闭并进入后续重连处理。                               |
+| [`GetLoginStatus`](/docs/chat/sdk/v4/android/application/methods/get-login-status)                  | 查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。                                   |
+| [`GetLoginUserID`](/docs/chat/sdk/v4/android/application/methods/get-login-user-id)                 | 获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。                            |

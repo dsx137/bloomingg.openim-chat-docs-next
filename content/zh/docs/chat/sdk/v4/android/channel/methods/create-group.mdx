@@ -1,0 +1,42 @@
+---
+title: 'CreateGroup'
+description: '说明 Android core binding 方法 CreateGroup 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/channel/methods/create-group'
+---
+
+`CreateGroup` 来自 `open_im_sdk/group.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| 方法     | `CreateGroup(callback Base, operationID string, groupReqInfo string)` |
+| 所属能力 | 群组                                                                  |
+| 源码位置 | `open_im_sdk/group.go`                                                |
+
+## 作用
+
+创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。
+
+## 参数说明
+
+`groupReqInfo` 是群创建请求 JSON，包含群资料、群主和成员等字段。
+
+## 返回与事件
+
+成功返回群资料 JSON，并触发相关群组事件。
+
+## 使用边界
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/channel/overview-channel)

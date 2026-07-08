@@ -1,0 +1,42 @@
+---
+title: 'SearchGroups'
+description: '说明 Android core binding 方法 SearchGroups 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/channel/methods/search-groups'
+---
+
+`SearchGroups` 来自 `open_im_sdk/group.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| 方法     | `SearchGroups(callback Base, operationID string, searchParam string)` |
+| 所属能力 | 群组                                                                  |
+| 源码位置 | `open_im_sdk/group.go`                                                |
+
+## 作用
+
+按关键字搜索群组，可按群 ID、群名称等字段搜索。
+
+## 参数说明
+
+`searchParam` 是 `SearchGroupsParam` JSON。
+
+## 返回与事件
+
+成功返回搜索结果 JSON。
+
+## 使用边界
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/channel/overview-channel)

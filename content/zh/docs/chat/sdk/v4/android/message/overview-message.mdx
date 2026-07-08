@@ -1,6 +1,6 @@
 ---
 title: '会话与消息'
-description: '逐个说明 Android core binding 当前导出的会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态方法。'
+description: '会话与消息方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,534 +13,69 @@ sourcePath: '/docs/chat/sdk/v4/android/message/overview-message'
 
 会话和消息方法来自 `open_im_sdk/conversation_msg.go`。创建消息类方法同步返回消息 JSON；发送、查询、删除、已读等方法通过回调返回。
 
-## 会话方法
-
-### GetAllConversationList
-
-| 项目       | 说明                                                               |
-| ---------- | ------------------------------------------------------------------ |
-| 方法签名   | `GetAllConversationList(callback Base, operationID string)`        |
-| 作用       | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。 |
-| 关键参数   | 无业务参数。                                                       |
-| 结果或事件 | 成功返回会话列表 JSON。                                            |
-
-### GetConversationListSplit
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `GetConversationListSplit(callback Base, operationID string, offset int, count int)` |
-| 作用       | 分页获取会话列表，适合会话数量较多时按页加载。                                       |
-| 关键参数   | `offset` 和 `count` 控制分页。                                                       |
-| 结果或事件 | 成功返回当前页会话列表 JSON。                                                        |
-
-### GetOneConversation
-
-| 项目       | 说明                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetOneConversation(callback Base, operationID string, sessionType int32, sourceID string)`    |
-| 作用       | 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。 |
-| 关键参数   | `sessionType` 指定会话类型；`sourceID` 指定目标 ID。                                           |
-| 结果或事件 | 成功返回会话 JSON。                                                                            |
-
-### GetMultipleConversation
-
-| 项目       | 说明                                                                                    |
-| ---------- | --------------------------------------------------------------------------------------- |
-| 方法签名   | `GetMultipleConversation(callback Base, operationID string, conversationIDList string)` |
-| 作用       | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。                        |
-| 关键参数   | `conversationIDList` 是会话 ID 列表 JSON。                                              |
-| 结果或事件 | 成功返回会话列表 JSON。                                                                 |
-
-### SetConversation
-
-| 项目       | 说明                                                                                    |
-| ---------- | --------------------------------------------------------------------------------------- |
-| 方法签名   | `SetConversation(callback Base, operationID string, conversationID string, req string)` |
-| 作用       | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。                          |
-| 关键参数   | `conversationID` 定位会话；`req` 是会话设置请求 JSON。                                  |
-| 结果或事件 | 成功返回更新结果，并可能触发会话变更事件。                                              |
-
-### HideConversation
-
-| 项目       | 说明                                                                         |
-| ---------- | ---------------------------------------------------------------------------- |
-| 方法签名   | `HideConversation(callback Base, operationID string, conversationID string)` |
-| 作用       | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。                     |
-| 关键参数   | `conversationID` 是目标会话 ID。                                             |
-| 结果或事件 | 成功返回处理结果，并触发会话变更。                                           |
-
-### SetConversationDraft
-
-| 项目       | 说明                                                                                               |
-| ---------- | -------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SetConversationDraft(callback Base, operationID string, conversationID string, draftText string)` |
-| 作用       | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。                                               |
-| 关键参数   | `draftText` 是草稿内容，传空字符串可清空草稿。                                                     |
-| 结果或事件 | 成功返回处理结果，并触发会话变更。                                                                 |
-
-### GetTotalUnreadMsgCount
-
-| 项目       | 说明                                                              |
-| ---------- | ----------------------------------------------------------------- |
-| 方法签名   | `GetTotalUnreadMsgCount(callback Base, operationID string)`       |
-| 作用       | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。 |
-| 关键参数   | 无业务参数。                                                      |
-| 结果或事件 | 成功返回总未读数。                                                |
-
-### HideAllConversations
-
-| 项目       | 说明                                                      |
-| ---------- | --------------------------------------------------------- |
-| 方法签名   | `HideAllConversations(callback Base, operationID string)` |
-| 作用       | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。        |
-| 关键参数   | 无业务参数。                                              |
-| 结果或事件 | 成功返回处理结果。                                        |
-
-### SearchConversation
-
-| 项目       | 说明                                                                        |
-| ---------- | --------------------------------------------------------------------------- |
-| 方法签名   | `SearchConversation(callback Base, operationID string, searchParam string)` |
-| 作用       | 搜索本地会话，适合聊天列表搜索入口。                                        |
-| 关键参数   | `searchParam` 是搜索条件 JSON。                                             |
-| 结果或事件 | 成功返回会话搜索结果 JSON。                                                 |
-
-### ChangeInputStates
-
-| 项目       | 说明                                                                                      |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| 方法签名   | `ChangeInputStates(callback Base, operationID string, conversationID string, focus bool)` |
-| 作用       | 更新当前用户在指定会话中的输入状态。                                                      |
-| 关键参数   | `conversationID` 定位会话；`focus` 表示是否正在输入或聚焦，具体语义由 SDK 和业务约定。    |
-| 结果或事件 | 成功返回处理结果，并可能触发输入状态事件。                                                |
-
-### GetInputStates
-
-| 项目       | 说明                                                                                      |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| 方法签名   | `GetInputStates(callback Base, operationID string, conversationID string, userID string)` |
-| 作用       | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。                              |
-| 关键参数   | `conversationID` 定位会话；`userID` 定位用户。                                            |
-| 结果或事件 | 成功返回输入状态 JSON。                                                                   |
-
-### GetConversationIDBySessionType
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetConversationIDBySessionType(operationID string, sourceID string, sessionType int) string` |
-| 作用       | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。           |
-| 关键参数   | `sourceID` 是目标用户或群 ID；`sessionType` 是会话类型。                                      |
-| 结果或事件 | 同步返回会话 ID 字符串。                                                                      |
-
-## 消息方法
-
-### GetAtAllTag
-
-| 项目       | 说明                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetAtAllTag(operationID string) string`                                                       |
-| 作用       | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 |
-| 关键参数   | `operationID` 用于追踪。                                                                       |
-| 结果或事件 | 同步返回 @ 所有人标记字符串。                                                                  |
-
-### CreateTextMessage
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateTextMessage(operationID string, text string) string`                          |
-| 作用       | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。 |
-| 关键参数   | `text` 是消息文本。                                                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串，随后传给发送方法。                                         |
-
-### CreateAdvancedTextMessage
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateAdvancedTextMessage(operationID string, text string, messageEntityList string) string` |
-| 作用       | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。            |
-| 关键参数   | `messageEntityList` 是 `MessageEntity` 列表 JSON。                                            |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                    |
-
-### CreateTextAtMessage
-
-| 项目       | 说明                                                                                                                 |
-| ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateTextAtMessage(operationID string, text string, atUserList string, atUsersInfo string, message string) string` |
-| 作用       | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                                  |
-| 关键参数   | `atUserList` 是被 @ 用户 ID 列表 JSON；`atUsersInfo` 是 @ 用户资料 JSON；`message` 可传被引用消息 JSON。             |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                           |
-
-### CreateLocationMessage
-
-| 项目       | 说明                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateLocationMessage(operationID string, description string, longitude float64, latitude float64) string` |
-| 作用       | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                        |
-| 关键参数   | `description` 是位置描述；`longitude` 和 `latitude` 是经纬度。                                              |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                  |
-
-### CreateCustomMessage
-
-| 项目       | 说明                                                                                                |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateCustomMessage(operationID string, data string, extension string, description string) string` |
-| 作用       | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                 |
-| 关键参数   | `data` 是业务 payload；`extension` 标识业务类型；`description` 是降级展示文案。                     |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                          |
-
-### CreateQuoteMessage
-
-| 项目       | 说明                                                                         |
-| ---------- | ---------------------------------------------------------------------------- |
-| 方法签名   | `CreateQuoteMessage(operationID string, text string, message string) string` |
-| 作用       | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                       |
-| 关键参数   | `message` 是被引用消息 JSON。                                                |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                   |
-
-### CreateAdvancedQuoteMessage
-
-| 项目       | 说明                                                                                                           |
-| ---------- | -------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateAdvancedQuoteMessage(operationID string, text string, message string, messageEntityList string) string` |
-| 作用       | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
-| 关键参数   | `message` 是被引用消息 JSON；`messageEntityList` 是实体列表 JSON。                                             |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                     |
-
-### CreateCardMessage
-
-| 项目       | 说明                                                            |
-| ---------- | --------------------------------------------------------------- |
-| 方法签名   | `CreateCardMessage(operationID string, cardInfo string) string` |
-| 作用       | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。            |
-| 关键参数   | `cardInfo` 是名片信息 JSON。                                    |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                      |
-
-### CreateFaceMessage
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `CreateFaceMessage(operationID string, index int, data string) string` |
-| 作用       | 创建表情消息。适合业务自定义表情包或贴纸消息。                         |
-| 关键参数   | `index` 是表情索引；`data` 是表情资源或业务数据。                      |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                             |
-
-### CreateForwardMessage
-
-| 项目       | 说明                                                        |
-| ---------- | ----------------------------------------------------------- |
-| 方法签名   | `CreateForwardMessage(operationID string, m string) string` |
-| 作用       | 创建单条转发消息。用于把已有消息转发给另一个用户或群。      |
-| 关键参数   | `m` 是原消息 JSON。                                         |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                  |
-
-### CreateMergerMessage
-
-| 项目       | 说明                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateMergerMessage(operationID string, messageList string, title string, summaryList string) string` |
-| 作用       | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                             |
-| 关键参数   | `messageList` 是消息列表 JSON；`title` 是合并标题；`summaryList` 是摘要列表 JSON。                     |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                             |
-
-### CreateImageMessage
-
-| 项目       | 说明                                                              |
-| ---------- | ----------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessage(operationID string, imagePath string) string` |
-| 作用       | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。      |
-| 关键参数   | `imagePath` 是图片路径。                                          |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                        |
-
-### CreateImageMessageFromFullPath
-
-| 项目       | 说明                                                                              |
-| ---------- | --------------------------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessageFromFullPath(operationID string, imageFullPath string) string` |
-| 作用       | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                      |
-| 关键参数   | `imageFullPath` 是完整图片路径。                                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                        |
-
-### CreateImageMessageByURL
-
-| 项目       | 说明                                                                                                                                     |
-| ---------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateImageMessageByURL(operationID string, sourcePath string, sourcePicture string, bigPicture string, snapshotPicture string) string` |
-| 作用       | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                                                      |
-| 关键参数   | `sourcePath` 是原始路径或来源标识；`sourcePicture`、`bigPicture`、`snapshotPicture` 是不同规格图片信息 JSON。                            |
-| 结果或事件 | 同步返回消息 JSON 字符串，通常配合不走 OSS 的发送链路。                                                                                  |
-
-### CreateSoundMessage
-
-| 项目       | 说明                                                                              |
-| ---------- | --------------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessage(operationID string, soundPath string, duration int64) string` |
-| 作用       | 通过音频路径创建语音消息。                                                        |
-| 关键参数   | `soundPath` 是音频路径；`duration` 是语音时长。                                   |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                        |
-
-### CreateSoundMessageFromFullPath
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessageFromFullPath(operationID string, soundPath string, duration int64) string` |
-| 作用       | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                  |
-| 关键参数   | `soundPath` 是完整音频路径；`duration` 是语音时长。                                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                    |
-
-### CreateSoundMessageByURL
-
-| 项目       | 说明                                                                       |
-| ---------- | -------------------------------------------------------------------------- |
-| 方法签名   | `CreateSoundMessageByURL(operationID string, soundBaseInfo string) string` |
-| 作用       | 通过已上传音频 URL 信息创建语音消息。                                      |
-| 关键参数   | `soundBaseInfo` 是 `SoundBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                 |
-
-### CreateVideoMessage
-
-| 项目       | 说明                                                                                                                     |
-| ---------- | ------------------------------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateVideoMessage(operationID string, videoPath string, videoType string, duration int64, snapshotPath string) string` |
-| 作用       | 通过视频路径和快照路径创建视频消息。                                                                                     |
-| 关键参数   | `videoPath` 是视频路径；`videoType` 是视频类型；`duration` 是时长；`snapshotPath` 是快照路径。                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                               |
-
-### CreateVideoMessageFromFullPath
-
-| 项目       | 说明                                                                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `CreateVideoMessageFromFullPath(operationID string, videoFullPath string, videoType string, duration int64, snapshotFullPath string) string` |
-| 作用       | 通过完整视频路径和完整快照路径创建视频消息。                                                                                                 |
-| 关键参数   | `videoFullPath` 与 `snapshotFullPath` 是完整路径。                                                                                           |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                                                                   |
-
-### CreateVideoMessageByURL
-
-| 项目       | 说明                                                                       |
-| ---------- | -------------------------------------------------------------------------- |
-| 方法签名   | `CreateVideoMessageByURL(operationID string, videoBaseInfo string) string` |
-| 作用       | 通过已上传视频 URL 信息创建视频消息。                                      |
-| 关键参数   | `videoBaseInfo` 是 `VideoBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                 |
-
-### CreateFileMessage
-
-| 项目       | 说明                                                                             |
-| ---------- | -------------------------------------------------------------------------------- |
-| 方法签名   | `CreateFileMessage(operationID string, filePath string, fileName string) string` |
-| 作用       | 通过文件路径创建普通文件消息。                                                   |
-| 关键参数   | `filePath` 是文件路径；`fileName` 是展示文件名。                                 |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                       |
-
-### CreateFileMessageFromFullPath
-
-| 项目       | 说明                                                                                             |
-| ---------- | ------------------------------------------------------------------------------------------------ |
-| 方法签名   | `CreateFileMessageFromFullPath(operationID string, fileFullPath string, fileName string) string` |
-| 作用       | 通过完整文件路径创建普通文件消息。                                                               |
-| 关键参数   | `fileFullPath` 是完整文件路径；`fileName` 是展示文件名。                                         |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                                                       |
-
-### CreateFileMessageByURL
-
-| 项目       | 说明                                                                     |
-| ---------- | ------------------------------------------------------------------------ |
-| 方法签名   | `CreateFileMessageByURL(operationID string, fileBaseInfo string) string` |
-| 作用       | 通过已上传文件 URL 信息创建文件消息。                                    |
-| 关键参数   | `fileBaseInfo` 是 `FileBaseInfo` JSON。                                  |
-| 结果或事件 | 同步返回消息 JSON 字符串。                                               |
-
-### SendMessage
-
-| 项目       | 说明                                                                                                                                                  |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SendMessage(callback SendMsgCallBack, operationID string, message string, recvID string, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
-| 作用       | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                                                         |
-| 关键参数   | `message` 是消息 JSON；单聊传 `recvID`；群聊传 `groupID`；`offlinePushInfo` 是离线推送 JSON；`isOnlineOnly` 控制是否只在线投递。                      |
-| 结果或事件 | 成功通过 `OnSuccess` 返回服务端确认后的消息 JSON，进度通过 `OnProgress` 返回，失败通过 `OnError` 返回。                                               |
-
-### SendMessageNotOss
-
-| 项目       | 说明                                                                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SendMessageNotOss(callback SendMsgCallBack, operationID string, message string, recvID string, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
-| 作用       | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。                                              |
-| 关键参数   | 参数语义与 `SendMessage` 相同，但调用方需要保证消息里的资源信息已经可被接收端访问。                                                                         |
-| 结果或事件 | 成功、进度和失败回调与 `SendMessage` 一致。                                                                                                                 |
-
-### FindMessageList
-
-| 项目       | 说明                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
-| 方法签名   | `FindMessageList(callback Base, operationID string, findMessageOptions string)` |
-| 作用       | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。                        |
-| 关键参数   | `findMessageOptions` 是查找条件 JSON。                                          |
-| 结果或事件 | 成功返回查找结果 JSON。                                                         |
-
-### GetAdvancedHistoryMessageList
-
-| 项目       | 说明                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetAdvancedHistoryMessageList(callback Base, operationID string, getMessageOptions string)` |
-| 作用       | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。                               |
-| 关键参数   | `getMessageOptions` 是历史消息分页请求 JSON。                                                |
-| 结果或事件 | 成功返回消息列表和是否结束等信息 JSON。                                                      |
-
-### GetAdvancedHistoryMessageListReverse
-
-| 项目       | 说明                                                                                                |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetAdvancedHistoryMessageListReverse(callback Base, operationID string, getMessageOptions string)` |
-| 作用       | 按反向方向获取历史消息，适合围绕游标向另一方向加载。                                                |
-| 关键参数   | `getMessageOptions` 是历史消息分页请求 JSON。                                                       |
-| 结果或事件 | 成功返回消息列表和分页状态 JSON。                                                                   |
-
-### RevokeMessage
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `RevokeMessage(callback Base, operationID string, conversationID string, clientMsgID string)` |
-| 作用       | 撤回指定消息，通常受时间窗口和权限限制。                                                      |
-| 关键参数   | `conversationID` 定位会话；`clientMsgID` 定位消息。                                           |
-| 结果或事件 | 成功返回撤回结果，并触发消息撤回事件。                                                        |
-
-### TypingStatusUpdate
-
-| 项目       | 说明                                                                                  |
-| ---------- | ------------------------------------------------------------------------------------- |
-| 方法签名   | `TypingStatusUpdate(callback Base, operationID string, recvID string, msgTip string)` |
-| 作用       | 发送输入状态提示，适合单聊输入中状态展示。                                            |
-| 关键参数   | `recvID` 是接收用户 ID；`msgTip` 是输入提示内容。                                     |
-| 结果或事件 | 成功返回发送结果，对端通过事件感知。                                                  |
-
-### MarkConversationMessageAsRead
-
-| 项目       | 说明                                                                                      |
-| ---------- | ----------------------------------------------------------------------------------------- |
-| 方法签名   | `MarkConversationMessageAsRead(callback Base, operationID string, conversationID string)` |
-| 作用       | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。                                  |
-| 关键参数   | `conversationID` 是目标会话 ID。                                                          |
-| 结果或事件 | 成功返回处理结果，并更新未读数。                                                          |
-
-### MarkAllConversationMessageAsRead
-
-| 项目       | 说明                                                                  |
-| ---------- | --------------------------------------------------------------------- |
-| 方法签名   | `MarkAllConversationMessageAsRead(callback Base, operationID string)` |
-| 作用       | 将全部会话消息标记为已读，适合一键清除全部未读。                      |
-| 关键参数   | 无业务参数。                                                          |
-| 结果或事件 | 成功返回处理结果，并更新总未读数。                                    |
-
-### MarkMessagesAsReadByMsgID
-
-| 项目       | 说明                                                                                                       |
-| ---------- | ---------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `MarkMessagesAsReadByMsgID(callback Base, operationID string, conversationID string, clientMsgIDs string)` |
-| 作用       | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。                                                   |
-| 关键参数   | `clientMsgIDs` 是消息 ID 列表 JSON。                                                                       |
-| 结果或事件 | 成功返回处理结果。                                                                                         |
-
-### DeleteMessageFromLocalStorage
-
-| 项目       | 说明                                                                                                          |
-| ---------- | ------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `DeleteMessageFromLocalStorage(callback Base, operationID string, conversationID string, clientMsgID string)` |
-| 作用       | 仅从本地存储删除指定消息，不表示服务端消息被删除。                                                            |
-| 关键参数   | `conversationID` 和 `clientMsgID` 定位消息。                                                                  |
-| 结果或事件 | 成功返回本地删除结果。                                                                                        |
-
-### DeleteMessage
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `DeleteMessage(callback Base, operationID string, conversationID string, clientMsgID string)` |
-| 作用       | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。                               |
-| 关键参数   | `conversationID` 和 `clientMsgID` 定位消息。                                                  |
-| 结果或事件 | 成功返回删除结果，并可能触发消息删除事件。                                                    |
-
-### DeleteAllMsgFromLocalAndSvr
-
-| 项目       | 说明                                                             |
-| ---------- | ---------------------------------------------------------------- |
-| 方法签名   | `DeleteAllMsgFromLocalAndSvr(callback Base, operationID string)` |
-| 作用       | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。       |
-| 关键参数   | 无业务参数。                                                     |
-| 结果或事件 | 成功返回清理结果。                                               |
-
-### DeleteAllMsgFromLocal
-
-| 项目       | 说明                                                       |
-| ---------- | ---------------------------------------------------------- |
-| 方法签名   | `DeleteAllMsgFromLocal(callback Base, operationID string)` |
-| 作用       | 仅删除当前用户本地全部消息数据，适合本地缓存清理。         |
-| 关键参数   | 无业务参数。                                               |
-| 结果或事件 | 成功返回本地清理结果。                                     |
-
-### ClearConversationAndDeleteAllMsg
-
-| 项目       | 说明                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| 方法签名   | `ClearConversationAndDeleteAllMsg(callback Base, operationID string, conversationID string)` |
-| 作用       | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。                              |
-| 关键参数   | `conversationID` 是目标会话 ID。                                                             |
-| 结果或事件 | 成功返回清理结果。                                                                           |
-
-### DeleteConversationAndDeleteAllMsg
-
-| 项目       | 说明                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------- |
-| 方法签名   | `DeleteConversationAndDeleteAllMsg(callback Base, operationID string, conversationID string)` |
-| 作用       | 删除指定会话及其消息，适合彻底移除某个会话记录。                                              |
-| 关键参数   | `conversationID` 是目标会话 ID。                                                              |
-| 结果或事件 | 成功返回删除结果，并更新会话列表。                                                            |
-
-### InsertSingleMessageToLocalStorage
-
-| 项目       | 说明                                                                                                                 |
-| ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `InsertSingleMessageToLocalStorage(callback Base, operationID string, message string, recvID string, sendID string)` |
-| 作用       | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。                                               |
-| 关键参数   | `message` 是消息 JSON；`recvID` 是接收用户；`sendID` 是发送用户。                                                    |
-| 结果或事件 | 成功返回插入后的消息 JSON。                                                                                          |
-
-### InsertGroupMessageToLocalStorage
-
-| 项目       | 说明                                                                                                                 |
-| ---------- | -------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `InsertGroupMessageToLocalStorage(callback Base, operationID string, message string, groupID string, sendID string)` |
-| 作用       | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。                                                             |
-| 关键参数   | `message` 是消息 JSON；`groupID` 是群 ID；`sendID` 是发送用户。                                                      |
-| 结果或事件 | 成功返回插入后的消息 JSON。                                                                                          |
-
-### SearchLocalMessages
-
-| 项目       | 说明                                                                         |
-| ---------- | ---------------------------------------------------------------------------- |
-| 方法签名   | `SearchLocalMessages(callback Base, operationID string, searchParam string)` |
-| 作用       | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。                       |
-| 关键参数   | `searchParam` 是 `SearchLocalMessagesParams` JSON。                          |
-| 结果或事件 | 成功返回搜索结果 JSON。                                                      |
-
-### SetMessageLocalEx
-
-| 项目       | 说明                                                                                                              |
-| ---------- | ----------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `SetMessageLocalEx(callback Base, operationID string, conversationID string, clientMsgID string, localEx string)` |
-| 作用       | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。                                          |
-| 关键参数   | `conversationID` 和 `clientMsgID` 定位消息；`localEx` 是本地扩展字符串。                                          |
-| 结果或事件 | 成功返回处理结果。                                                                                                |
-
-## 回调与返回约定
-
-Android core binding 的异步方法通过回调返回结果。
-
-| 回调类型          | 方法                                    | 说明                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------ |
-| `Base`            | `OnSuccess(data string)`                | 成功时返回 JSON 字符串、空字符串或基础类型序列化结果。 |
-| `Base`            | `OnError(errCode int32, errMsg string)` | 失败时返回 SDK 错误码和错误消息。                      |
-| `SendMsgCallBack` | `OnProgress(progress int)`              | 仅发送消息时使用，表示发送或上传进度。                 |
-
-除同步创建消息类方法外，带 `callback` 的方法不直接返回业务数据。参数中名称包含 `List`、`Info`、`Param`、`Req`、`Options` 的 `string` 通常是 JSON 字符串，SDK 内部会反序列化为对应结构。
+本页是会话与消息方法目录。会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态都拆成了独立方法页。
+
+## 方法索引
+
+| 方法                                                                                                                          | 说明                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [`GetAllConversationList`](/docs/chat/sdk/v4/android/message/methods/get-all-conversation-list)                               | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。                                             |
+| [`GetConversationListSplit`](/docs/chat/sdk/v4/android/message/methods/get-conversation-list-split)                           | 分页获取会话列表，适合会话数量较多时按页加载。                                                                 |
+| [`GetOneConversation`](/docs/chat/sdk/v4/android/message/methods/get-one-conversation)                                        | 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。                 |
+| [`GetMultipleConversation`](/docs/chat/sdk/v4/android/message/methods/get-multiple-conversation)                              | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。                                               |
+| [`SetConversation`](/docs/chat/sdk/v4/android/message/methods/set-conversation)                                               | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。                                                 |
+| [`HideConversation`](/docs/chat/sdk/v4/android/message/methods/hide-conversation)                                             | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。                                                       |
+| [`SetConversationDraft`](/docs/chat/sdk/v4/android/message/methods/set-conversation-draft)                                    | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。                                                           |
+| [`GetTotalUnreadMsgCount`](/docs/chat/sdk/v4/android/message/methods/get-total-unread-msg-count)                              | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。                                              |
+| [`HideAllConversations`](/docs/chat/sdk/v4/android/message/methods/hide-all-conversations)                                    | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。                                                             |
+| [`SearchConversation`](/docs/chat/sdk/v4/android/message/methods/search-conversation)                                         | 搜索本地会话，适合聊天列表搜索入口。                                                                           |
+| [`ChangeInputStates`](/docs/chat/sdk/v4/android/message/methods/change-input-states)                                          | 更新当前用户在指定会话中的输入状态。                                                                           |
+| [`GetInputStates`](/docs/chat/sdk/v4/android/message/methods/get-input-states)                                                | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。                                                   |
+| [`GetConversationIDBySessionType`](/docs/chat/sdk/v4/android/message/methods/get-conversation-id-by-session-type)             | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。                            |
+| [`GetAtAllTag`](/docs/chat/sdk/v4/android/message/methods/get-at-all-tag)                                                     | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。                 |
+| [`CreateTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-message)                                          | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。                           |
+| [`CreateAdvancedTextMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-text-message)                         | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。                             |
+| [`CreateTextAtMessage`](/docs/chat/sdk/v4/android/message/methods/create-text-at-message)                                     | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                                            |
+| [`CreateLocationMessage`](/docs/chat/sdk/v4/android/message/methods/create-location-message)                                  | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                                           |
+| [`CreateCustomMessage`](/docs/chat/sdk/v4/android/message/methods/create-custom-message)                                      | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。                            |
+| [`CreateQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-quote-message)                                        | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                                                         |
+| [`CreateAdvancedQuoteMessage`](/docs/chat/sdk/v4/android/message/methods/create-advanced-quote-message)                       | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                                     |
+| [`CreateCardMessage`](/docs/chat/sdk/v4/android/message/methods/create-card-message)                                          | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。                                                           |
+| [`CreateFaceMessage`](/docs/chat/sdk/v4/android/message/methods/create-face-message)                                          | 创建表情消息。适合业务自定义表情包或贴纸消息。                                                                 |
+| [`CreateForwardMessage`](/docs/chat/sdk/v4/android/message/methods/create-forward-message)                                    | 创建单条转发消息。用于把已有消息转发给另一个用户或群。                                                         |
+| [`CreateMergerMessage`](/docs/chat/sdk/v4/android/message/methods/create-merger-message)                                      | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                                     |
+| [`CreateImageMessage`](/docs/chat/sdk/v4/android/message/methods/create-image-message)                                        | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。                                                   |
+| [`CreateImageMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-image-message-from-full-path)             | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                                                   |
+| [`CreateImageMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-image-message-by-url)                            | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                                            |
+| [`CreateSoundMessage`](/docs/chat/sdk/v4/android/message/methods/create-sound-message)                                        | 通过音频路径创建语音消息。                                                                                     |
+| [`CreateSoundMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-from-full-path)             | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                                   |
+| [`CreateSoundMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-sound-message-by-url)                            | 通过已上传音频 URL 信息创建语音消息。                                                                          |
+| [`CreateVideoMessage`](/docs/chat/sdk/v4/android/message/methods/create-video-message)                                        | 通过视频路径和快照路径创建视频消息。                                                                           |
+| [`CreateVideoMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-video-message-from-full-path)             | 通过完整视频路径和完整快照路径创建视频消息。                                                                   |
+| [`CreateVideoMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-video-message-by-url)                            | 通过已上传视频 URL 信息创建视频消息。                                                                          |
+| [`CreateFileMessage`](/docs/chat/sdk/v4/android/message/methods/create-file-message)                                          | 通过文件路径创建普通文件消息。                                                                                 |
+| [`CreateFileMessageFromFullPath`](/docs/chat/sdk/v4/android/message/methods/create-file-message-from-full-path)               | 通过完整文件路径创建普通文件消息。                                                                             |
+| [`CreateFileMessageByURL`](/docs/chat/sdk/v4/android/message/methods/create-file-message-by-url)                              | 通过已上传文件 URL 信息创建文件消息。                                                                          |
+| [`SendMessage`](/docs/chat/sdk/v4/android/message/methods/send-message)                                                       | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                  |
+| [`SendMessageNotOss`](/docs/chat/sdk/v4/android/message/methods/send-message-not-oss)                                         | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。 |
+| [`FindMessageList`](/docs/chat/sdk/v4/android/message/methods/find-message-list)                                              | 按多个会话和消息 ID 条件查找消息，适合定位指定消息集合。                                                       |
+| [`GetAdvancedHistoryMessageList`](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list)                | 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。                                                 |
+| [`GetAdvancedHistoryMessageListReverse`](/docs/chat/sdk/v4/android/message/methods/get-advanced-history-message-list-reverse) | 按反向方向获取历史消息，适合围绕游标向另一方向加载。                                                           |
+| [`RevokeMessage`](/docs/chat/sdk/v4/android/message/methods/revoke-message)                                                   | 撤回指定消息，通常受时间窗口和权限限制。                                                                       |
+| [`TypingStatusUpdate`](/docs/chat/sdk/v4/android/message/methods/typing-status-update)                                        | 发送输入状态提示，适合单聊输入中状态展示。                                                                     |
+| [`MarkConversationMessageAsRead`](/docs/chat/sdk/v4/android/message/methods/mark-conversation-message-as-read)                | 将指定会话中的消息标记为已读，适合进入会话页后清理未读。                                                       |
+| [`MarkAllConversationMessageAsRead`](/docs/chat/sdk/v4/android/message/methods/mark-all-conversation-message-as-read)         | 将全部会话消息标记为已读，适合一键清除全部未读。                                                               |
+| [`MarkMessagesAsReadByMsgID`](/docs/chat/sdk/v4/android/message/methods/mark-messages-as-read-by-msg-id)                      | 按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。                                                       |
+| [`DeleteMessageFromLocalStorage`](/docs/chat/sdk/v4/android/message/methods/delete-message-from-local-storage)                | 仅从本地存储删除指定消息，不表示服务端消息被删除。                                                             |
+| [`DeleteMessage`](/docs/chat/sdk/v4/android/message/methods/delete-message)                                                   | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。                                                |
+| [`DeleteAllMsgFromLocalAndSvr`](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local-and-svr)                  | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。                                                     |
+| [`DeleteAllMsgFromLocal`](/docs/chat/sdk/v4/android/message/methods/delete-all-msg-from-local)                                | 仅删除当前用户本地全部消息数据，适合本地缓存清理。                                                             |
+| [`ClearConversationAndDeleteAllMsg`](/docs/chat/sdk/v4/android/message/methods/clear-conversation-and-delete-all-msg)         | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。                                                |
+| [`DeleteConversationAndDeleteAllMsg`](/docs/chat/sdk/v4/android/message/methods/delete-conversation-and-delete-all-msg)       | 删除指定会话及其消息，适合彻底移除某个会话记录。                                                               |
+| [`InsertSingleMessageToLocalStorage`](/docs/chat/sdk/v4/android/message/methods/insert-single-message-to-local-storage)       | 向本地单聊会话插入一条消息，适合导入历史、补写系统消息或本地展示消息。                                         |
+| [`InsertGroupMessageToLocalStorage`](/docs/chat/sdk/v4/android/message/methods/insert-group-message-to-local-storage)         | 向本地群聊会话插入一条消息，适合导入或补写群聊本地消息。                                                       |
+| [`SearchLocalMessages`](/docs/chat/sdk/v4/android/message/methods/search-local-messages)                                      | 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。                                                         |
+| [`SetMessageLocalEx`](/docs/chat/sdk/v4/android/message/methods/set-message-local-ex)                                         | 设置消息本地扩展字段，只影响本地展示或业务状态，不应当作服务端消息内容。                                       |
 
 ## 相关页面
 

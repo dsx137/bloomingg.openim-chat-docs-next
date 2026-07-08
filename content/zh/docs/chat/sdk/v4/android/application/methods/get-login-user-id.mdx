@@ -1,0 +1,42 @@
+---
+title: 'GetLoginUserID'
+description: '说明 Android core binding 方法 GetLoginUserID 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/get-login-user-id'
+---
+
+`GetLoginUserID` 来自 `open_im_sdk/init_login.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                        |
+| -------- | --------------------------- |
+| 方法     | `GetLoginUserID() string`   |
+| 所属能力 | 初始化与登录                |
+| 源码位置 | `open_im_sdk/init_login.go` |
+
+## 作用
+
+获取当前 SDK 实例记录的登录用户 ID，常用于日志、会话归属和账号切换判断。
+
+## 参数说明
+
+无入参。
+
+## 返回与事件
+
+同步返回用户 ID；SDK 未初始化时返回空字符串。
+
+## 使用边界
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## 相关页面
+
+- [初始化与登录](/docs/chat/sdk/v4/android/application/overview-application)

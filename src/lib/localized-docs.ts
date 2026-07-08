@@ -27,10 +27,16 @@ const localizedPageCache = new Map<string, LocalizedDocPage | undefined>();
 
 const zhLabelOverrides: Record<string, string> = {
   Chat: '聊天',
+  Blacklist: '黑名单',
+  Friend: '好友',
+  Group: '群组',
   Home: '首页',
+  Methods: '方法',
   'OpenIM Platform API': 'OpenIM 平台 API',
   'Platform API': '平台 API',
+  'Push, logs, and files': '推送、日志与文件',
   'Server API': '服务端 API',
+  User: '用户',
 };
 
 export function getLocalizedDocPage(
@@ -65,7 +71,8 @@ export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
   if (isNestedOverview && isPlatformApiNode) return node.title;
   if (locale !== 'zh') return isNestedOverview ? 'Overview' : node.title;
   if (isNestedOverview) return '概述';
-  if (node.href) return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
+  if (node.href)
+    return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
   const label =
     platformApiZh.navigationLabels[node.segment] ??
     sdkZh.navigationLabels[node.segment] ??
@@ -133,7 +140,9 @@ function getManualLocalizedPage(path: string, locale: Locale): LocalizedDocPage 
   const fallback = sdkZh.pages[path];
   const page = {
     body: normalizedBody,
-    description: normalizeOpenImZhTerminology(frontmatter.description ?? fallback?.description ?? ''),
+    description: normalizeOpenImZhTerminology(
+      frontmatter.description ?? fallback?.description ?? '',
+    ),
     headings: extractMarkdownHeadings(normalizedBody),
     sourcePath: frontmatter.sourcePath ?? path,
     title: normalizeOpenImZhTerminology(frontmatter.title ?? fallback?.title ?? ''),

@@ -1,6 +1,6 @@
 ---
 title: '监听器'
-description: '逐个说明 Android core binding 当前导出的监听器设置方法，以及各监听器会收到的回调事件。'
+description: '监听器方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,76 +13,17 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/overview-event-handler'
 
 监听器方法来自 `open_im_sdk/listener.go`，回调接口来自 `open_im_sdk_callback/callback_client.go`。`Set*Listener` 是替换式设置；如果应用需要多处消费事件，应在业务层做分发。
 
-## 方法列表
+本页是监听器设置方法目录。每个监听器方法都有独立页面说明事件范围和替换式设置行为。
 
-### SetGroupListener
+## 方法索引
 
-| 项目       | 说明                                                                               |
-| ---------- | ---------------------------------------------------------------------------------- |
-| 方法签名   | `SetGroupListener(listener OnGroupListener)`                                       |
-| 作用       | 设置群组事件监听器，用于接收已加入群变化、群资料变化、群成员变化和群申请处理结果。 |
-| 关键参数   | `listener` 实现 `OnGroupListener`；重复设置会替换旧监听器。                        |
-| 结果或事件 | 群组事件以 JSON 字符串回调到 listener。                                            |
-
-### SetConversationListener
-
-| 项目       | 说明                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------- |
-| 方法签名   | `SetConversationListener(listener OnConversationListener)`                             |
-| 作用       | 设置会话事件监听器，用于接收服务端同步进度、新会话、会话变更、总未读数和输入状态变化。 |
-| 关键参数   | `listener` 实现 `OnConversationListener`。                                             |
-| 结果或事件 | 会话列表和状态变化以 JSON 字符串或基础类型回调。                                       |
-
-### SetAdvancedMsgListener
-
-| 项目       | 说明                                                                                       |
-| ---------- | ------------------------------------------------------------------------------------------ |
-| 方法签名   | `SetAdvancedMsgListener(listener OnAdvancedMsgListener)`                                   |
-| 作用       | 设置单条消息高级监听器，用于处理新消息、离线消息、已读回执、消息撤回、消息删除和在线消息。 |
-| 关键参数   | `listener` 实现 `OnAdvancedMsgListener`。                                                  |
-| 结果或事件 | 消息和回执事件以 JSON 字符串回调。                                                         |
-
-### SetBatchMsgListener
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `SetBatchMsgListener(listener OnBatchMsgListener)`                                   |
-| 作用       | 设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。 |
-| 关键参数   | `listener` 实现 `OnBatchMsgListener`。                                               |
-| 结果或事件 | 批量消息列表以 JSON 数组字符串回调。                                                 |
-
-### SetUserListener
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `SetUserListener(listener OnUserListener)`                                           |
-| 作用       | 设置用户事件监听器，用于接收当前用户资料更新、用户在线状态变化和用户命令增删改事件。 |
-| 关键参数   | `listener` 实现 `OnUserListener`。                                                   |
-| 结果或事件 | 用户资料、状态和命令以 JSON 字符串回调。                                             |
-
-### SetFriendListener
-
-| 项目       | 说明                                                                               |
-| ---------- | ---------------------------------------------------------------------------------- |
-| 方法签名   | `SetFriendListener(listener OnFriendshipListener)`                                 |
-| 作用       | 设置好友关系监听器，用于接收好友申请、好友新增或删除、好友资料变化以及黑名单变化。 |
-| 关键参数   | `listener` 实现 `OnFriendshipListener`。                                           |
-| 结果或事件 | 好友和黑名单事件以 JSON 字符串回调。                                               |
-
-### SetCustomBusinessListener
-
-| 项目       | 说明                                                           |
-| ---------- | -------------------------------------------------------------- |
-| 方法签名   | `SetCustomBusinessListener(listener OnCustomBusinessListener)` |
-| 作用       | 设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。   |
-| 关键参数   | `listener` 实现 `OnCustomBusinessListener`。                   |
-| 结果或事件 | 自定义业务消息以 JSON 字符串回调。                             |
-
-### SetMessageKvInfoListener
-
-| 项目       | 说明                                                         |
-| ---------- | ------------------------------------------------------------ |
-| 方法签名   | `SetMessageKvInfoListener(listener OnMessageKvInfoListener)` |
-| 作用       | 设置消息 KV 信息变化监听器，用于接收消息扩展键值信息变化。   |
-| 关键参数   | `listener` 实现 `OnMessageKvInfoListener`。                  |
-| 结果或事件 | 变更列表以 JSON 字符串回调。                                 |
+| 方法                                                                                                        | 说明                                                                                       |
+| ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| [`SetGroupListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener)                    | 设置群组事件监听器，用于接收已加入群变化、群资料变化、群成员变化和群申请处理结果。         |
+| [`SetConversationListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener)      | 设置会话事件监听器，用于接收服务端同步进度、新会话、会话变更、总未读数和输入状态变化。     |
+| [`SetAdvancedMsgListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener)       | 设置单条消息高级监听器，用于处理新消息、离线消息、已读回执、消息撤回、消息删除和在线消息。 |
+| [`SetBatchMsgListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener)             | 设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。       |
+| [`SetUserListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener)                      | 设置用户事件监听器，用于接收当前用户资料更新、用户在线状态变化和用户命令增删改事件。       |
+| [`SetFriendListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener)                  | 设置好友关系监听器，用于接收好友申请、好友新增或删除、好友资料变化以及黑名单变化。         |
+| [`SetCustomBusinessListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener) | 设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。                               |
+| [`SetMessageKvInfoListener`](/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener)  | 设置消息 KV 信息变化监听器，用于接收消息扩展键值信息变化。                                 |

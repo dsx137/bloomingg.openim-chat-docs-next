@@ -45,11 +45,24 @@ export async function generateDocumentationMetadata(
   const path = pathFromSlug(slug);
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
-  if (!route || !page) return {};
 
+  if (!route) return {};
   const localized = getLocalizedDocPage(route.path, locale);
-  const title = localizeDocLabel(localized?.title ?? page.data.title ?? route.title, locale);
-  const description = localized?.description ?? page.data.description ?? route.description;
+  const routeFilePage =
+    !page && route.contentFile.startsWith('content/zh/')
+      ? getSourceDocPage(route.contentFile)
+      : undefined;
+  if (!page && !localized && !routeFilePage) return {};
+
+  const title = localizeDocLabel(
+    localized?.title ?? routeFilePage?.title ?? page?.data.title ?? route.title,
+    locale,
+  );
+  const description =
+    localized?.description ??
+    routeFilePage?.description ??
+    page?.data.description ??
+    route.description;
   const url = toLocalizedPath(route.path, locale);
 
   return {
@@ -81,34 +94,48 @@ export async function renderDocumentationPage(
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
 
-  if (!route || !page) notFound();
+  if (!route) notFound();
 
   const localizedPage = getLocalizedDocPage(route.path, locale);
+  const routeFilePage =
+    !page && route.contentFile.startsWith('content/zh/')
+      ? getSourceDocPage(route.contentFile)
+      : undefined;
+  if (!page && !localizedPage && !routeFilePage) notFound();
 
   const effectiveRoute = {
     ...route,
-    title: localizeDocLabel(localizedPage?.title ?? page.data.title ?? route.title, locale),
-    description: localizedPage?.description ?? page.data.description ?? route.description,
-    product: page.data.product ?? route.product,
-    template: page.data.template ?? route.template,
-    status: page.data.status ?? route.status,
-    version: page.data.version ?? route.version,
-    platform: page.data.platform ?? route.platform,
+    title: localizeDocLabel(
+      localizedPage?.title ?? routeFilePage?.title ?? page?.data.title ?? route.title,
+      locale,
+    ),
+    description:
+      localizedPage?.description ??
+      routeFilePage?.description ??
+      page?.data.description ??
+      route.description,
+    product: page?.data.product ?? route.product,
+    template: page?.data.template ?? route.template,
+    status: page?.data.status ?? route.status,
+    version: page?.data.version ?? route.version,
+    platform: page?.data.platform ?? route.platform,
   };
 
-  const loaded = await page.data.load();
-  const MdxContent = loaded.body;
+  const loaded = page ? await page.data.load() : undefined;
+  const MdxContent = loaded?.body;
   const sourceMarkdownPage =
     !localizedPage && effectiveRoute.product === 'platform-api'
       ? getSourceDocPage(effectiveRoute.contentFile)
       : undefined;
-  const markdownPage = localizedPage ?? sourceMarkdownPage;
-  const toc = markdownPage?.headings ?? ((loaded.toc ?? []) as TocItem[]);
+  const markdownPage = localizedPage ?? routeFilePage ?? sourceMarkdownPage;
+  const toc = markdownPage?.headings ?? ((loaded?.toc ?? []) as TocItem[]);
 
   if (effectiveRoute.template === 'landing') {
+    if (!MdxContent) notFound();
+    const LandingContent = MdxContent;
     return (
       <div className="chat-landing">
-        <MdxContent components={getMDXComponents(locale)} />
+        <LandingContent components={getMDXComponents(locale)} />
       </div>
     );
   }
@@ -205,9 +232,9 @@ export async function renderDocumentationPage(
       <div className="prose-docs">
         {markdownPage ? (
           <MarkdownContent body={markdownPage.body} locale={locale} />
-        ) : (
+        ) : MdxContent ? (
           <MdxContent components={getMDXComponents(locale)} />
-        )}
+        ) : null}
       </div>
       <Feedback locale={locale} path={toLocalizedPath(effectiveRoute.path, locale)} />
       <Pagination locale={locale} next={neighbors.next} previous={neighbors.previous} />

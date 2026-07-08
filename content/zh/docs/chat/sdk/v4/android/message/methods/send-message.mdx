@@ -1,0 +1,42 @@
+---
+title: 'SendMessage'
+description: '说明 Android core binding 方法 SendMessage 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/methods/send-message'
+---
+
+`SendMessage` 来自 `open_im_sdk/conversation_msg.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                                                                                  |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 方法     | `SendMessage(callback SendMsgCallBack, operationID string, message string, recvID string, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
+| 所属能力 | 会话与消息                                                                                                                                            |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                                                                                     |
+
+## 作用
+
+发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。
+
+## 参数说明
+
+`message` 是消息 JSON；单聊传 `recvID`；群聊传 `groupID`；`offlinePushInfo` 是离线推送 JSON；`isOnlineOnly` 控制是否只在线投递。
+
+## 返回与事件
+
+成功通过 `OnSuccess` 返回服务端确认后的消息 JSON，进度通过 `OnProgress` 返回，失败通过 `OnError` 返回。
+
+## 使用边界
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview-message)

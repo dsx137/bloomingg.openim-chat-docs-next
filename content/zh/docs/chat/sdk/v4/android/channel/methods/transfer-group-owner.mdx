@@ -1,0 +1,42 @@
+---
+title: 'TransferGroupOwner'
+description: '说明 Android core binding 方法 TransferGroupOwner 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/channel/methods/transfer-group-owner'
+---
+
+`TransferGroupOwner` 来自 `open_im_sdk/group.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                           |
+| -------- | ---------------------------------------------------------------------------------------------- |
+| 方法     | `TransferGroupOwner(callback Base, operationID string, groupID string, newOwnerUserID string)` |
+| 所属能力 | 群组                                                                                           |
+| 源码位置 | `open_im_sdk/group.go`                                                                         |
+
+## 作用
+
+将群主转让给指定成员，通常只允许当前群主执行。
+
+## 参数说明
+
+`groupID` 是目标群 ID；`newOwnerUserID` 是新群主用户 ID。
+
+## 返回与事件
+
+成功返回转让结果，并触发群资料或成员资料变化事件。
+
+## 使用边界
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/channel/overview-channel)

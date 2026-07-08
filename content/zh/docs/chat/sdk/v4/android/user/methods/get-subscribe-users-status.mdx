@@ -1,0 +1,42 @@
+---
+title: 'GetSubscribeUsersStatus'
+description: '说明 Android core binding 方法 GetSubscribeUsersStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status'
+---
+
+`GetSubscribeUsersStatus` 来自 `open_im_sdk/user.go、open_im_sdk/online.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| 方法     | `GetSubscribeUsersStatus(callback Base, operationID string)` |
+| 所属能力 | 用户                                                         |
+| 源码位置 | `open_im_sdk/user.go、open_im_sdk/online.go`                 |
+
+## 作用
+
+获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。
+
+## 参数说明
+
+不需要用户列表，读取当前订阅集合。
+
+## 返回与事件
+
+成功返回在线状态 JSON。
+
+## 使用边界
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/android/user/overview-user)

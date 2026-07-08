@@ -1,0 +1,42 @@
+---
+title: 'Logs'
+description: '说明 Android core binding 方法 Logs 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/logs'
+---
+
+`Logs` 来自 `open_im_sdk/third.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                                                        |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 方法     | `Logs(callback Base, operationID string, logLevel int, file string, line int, msgs string, err string, keyAndValue string)` |
+| 所属能力 | 推送、日志与文件                                                                                                            |
+| 源码位置 | `open_im_sdk/third.go`                                                                                                      |
+
+## 作用
+
+主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。
+
+## 参数说明
+
+`logLevel` 是日志等级；`file` 和 `line` 标识调用位置；`msgs`、`err`、`keyAndValue` 保存日志内容。
+
+## 返回与事件
+
+成功返回写入结果；SDK 未初始化时通过 `OnError` 返回 `sdk not init`。
+
+## 使用边界
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## 相关页面
+
+- [推送、日志与文件](/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications)

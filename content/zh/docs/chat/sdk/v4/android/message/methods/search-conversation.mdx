@@ -1,0 +1,42 @@
+---
+title: 'SearchConversation'
+description: '说明 Android core binding 方法 SearchConversation 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/methods/search-conversation'
+---
+
+`SearchConversation` 来自 `open_im_sdk/conversation_msg.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                        |
+| -------- | --------------------------------------------------------------------------- |
+| 方法     | `SearchConversation(callback Base, operationID string, searchParam string)` |
+| 所属能力 | 会话与消息                                                                  |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                           |
+
+## 作用
+
+搜索本地会话，适合聊天列表搜索入口。
+
+## 参数说明
+
+`searchParam` 是搜索条件 JSON。
+
+## 返回与事件
+
+成功返回会话搜索结果 JSON。
+
+## 使用边界
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview-message)

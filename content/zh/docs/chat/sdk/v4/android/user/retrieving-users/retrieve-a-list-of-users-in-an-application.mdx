@@ -1,6 +1,6 @@
 ---
 title: '好友'
-description: '逐个说明 Android core binding 当前导出的好友资料、好友列表、好友申请和好友关系处理方法。'
+description: '好友方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,136 +13,25 @@ sourcePath: '/docs/chat/sdk/v4/android/user/retrieving-users/retrieve-a-list-of-
 
 好友方法来自 `open_im_sdk/relation.go` 中的好友关系部分。它们负责好友资料读取、好友列表分页、好友搜索、申请处理和好友关系更新。
 
-## 方法列表
+本页是好友关系方法目录。好友资料、好友列表、好友申请和关系维护都拆成了独立方法页。
 
-### GetSpecifiedFriendsInfo
+## 方法索引
 
-| 项目       | 说明                                                                                              |
-| ---------- | ------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetSpecifiedFriendsInfo(callback Base, operationID string, userIDList string, filterBlack bool)` |
-| 作用       | 批量获取指定好友的关系资料，适合好友详情页、会话资料补齐或局部刷新好友信息。                      |
-| 关键参数   | `userIDList` 是用户 ID 列表 JSON；`filterBlack` 为 `true` 时过滤黑名单用户。                      |
-| 结果或事件 | 成功返回好友资料列表 JSON。                                                                       |
-
-### GetFriendList
-
-| 项目       | 说明                                                                 |
-| ---------- | -------------------------------------------------------------------- |
-| 方法签名   | `GetFriendList(callback Base, operationID string, filterBlack bool)` |
-| 作用       | 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。   |
-| 关键参数   | `filterBlack` 控制是否排除已拉黑用户。                               |
-| 结果或事件 | 成功返回好友列表 JSON。                                              |
-
-### GetFriendListPage
-
-| 项目       | 说明                                                                                                |
-| ---------- | --------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetFriendListPage(callback Base, operationID string, offset int32, count int32, filterBlack bool)` |
-| 作用       | 分页获取好友列表，适合好友数量较多时按页加载。                                                      |
-| 关键参数   | `offset` 和 `count` 控制分页；`filterBlack` 控制是否排除黑名单用户。                                |
-| 结果或事件 | 成功返回当前页好友列表 JSON。                                                                       |
-
-### SearchFriends
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `SearchFriends(callback Base, operationID string, searchParam string)` |
-| 作用       | 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。  |
-| 关键参数   | `searchParam` 是好友搜索条件 JSON。                                    |
-| 结果或事件 | 成功返回好友搜索结果 JSON。                                            |
-
-### CheckFriend
-
-| 项目       | 说明                                                                             |
-| ---------- | -------------------------------------------------------------------------------- |
-| 方法签名   | `CheckFriend(callback Base, operationID string, userIDList string)`              |
-| 作用       | 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。 |
-| 关键参数   | `userIDList` 是待检查的用户 ID 列表 JSON。                                       |
-| 结果或事件 | 成功返回好友关系检查结果 JSON。                                                  |
-
-### AddFriend
-
-| 项目       | 说明                                                                |
-| ---------- | ------------------------------------------------------------------- |
-| 方法签名   | `AddFriend(callback Base, operationID string, userIDReqMsg string)` |
-| 作用       | 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。    |
-| 关键参数   | `userIDReqMsg` 是好友申请请求 JSON，通常包含目标用户和申请说明。    |
-| 结果或事件 | 成功返回申请发送结果，并可能触发好友申请事件。                      |
-
-### UpdateFriends
-
-| 项目       | 说明                                                           |
-| ---------- | -------------------------------------------------------------- |
-| 方法签名   | `UpdateFriends(callback Base, operationID string, req string)` |
-| 作用       | 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。       |
-| 关键参数   | `req` 是好友更新请求 JSON；字段以当前关系结构为准。            |
-| 结果或事件 | 成功返回更新结果，并触发好友资料变化事件。                     |
-
-### DeleteFriend
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `DeleteFriend(callback Base, operationID string, friendUserID string)` |
-| 作用       | 删除指定好友关系，适合用户主动解除好友。                               |
-| 关键参数   | `friendUserID` 是要删除的好友用户 ID。                                 |
-| 结果或事件 | 成功返回删除结果，并触发好友删除事件。                                 |
-
-### GetFriendApplicationListAsRecipient
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `GetFriendApplicationListAsRecipient(callback Base, operationID string, req string)` |
-| 作用       | 获取当前用户收到的好友申请列表，适合好友申请入口和审核页。                           |
-| 关键参数   | `req` 是申请列表分页或筛选请求 JSON。                                                |
-| 结果或事件 | 成功返回收到的好友申请列表 JSON。                                                    |
-
-### GetFriendApplicationListAsApplicant
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `GetFriendApplicationListAsApplicant(callback Base, operationID string, req string)` |
-| 作用       | 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。                         |
-| 关键参数   | `req` 是申请列表分页或筛选请求 JSON。                                                |
-| 结果或事件 | 成功返回发出的好友申请列表 JSON。                                                    |
-
-### AcceptFriendApplication
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `AcceptFriendApplication(callback Base, operationID string, userIDHandleMsg string)` |
-| 作用       | 同意指定好友申请，建立好友关系。                                                     |
-| 关键参数   | `userIDHandleMsg` 是好友申请处理请求 JSON，包含申请人和处理说明等字段。              |
-| 结果或事件 | 成功返回处理结果，并触发好友新增和申请接受事件。                                     |
-
-### RefuseFriendApplication
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `RefuseFriendApplication(callback Base, operationID string, userIDHandleMsg string)` |
-| 作用       | 拒绝指定好友申请。                                                                   |
-| 关键参数   | `userIDHandleMsg` 是好友申请处理请求 JSON。                                          |
-| 结果或事件 | 成功返回处理结果，并触发申请拒绝事件。                                               |
-
-### GetFriendApplicationUnhandledCount
-
-| 项目       | 说明                                                                                |
-| ---------- | ----------------------------------------------------------------------------------- |
-| 方法签名   | `GetFriendApplicationUnhandledCount(callback Base, operationID string, req string)` |
-| 作用       | 获取未处理好友申请数量，适合好友入口角标和后台同步。                                |
-| 关键参数   | `req` 是未处理数量查询请求 JSON，可携带当前结构支持的筛选条件。                     |
-| 结果或事件 | 成功返回未处理申请数量 JSON。                                                       |
-
-## 回调与返回约定
-
-Android core binding 的异步方法通过回调返回结果。
-
-| 回调类型          | 方法                                    | 说明                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------ |
-| `Base`            | `OnSuccess(data string)`                | 成功时返回 JSON 字符串、空字符串或基础类型序列化结果。 |
-| `Base`            | `OnError(errCode int32, errMsg string)` | 失败时返回 SDK 错误码和错误消息。                      |
-| `SendMsgCallBack` | `OnProgress(progress int)`              | 仅发送消息时使用，表示发送或上传进度。                 |
-
-除同步创建消息类方法外，带 `callback` 的方法不直接返回业务数据。参数中名称包含 `List`、`Info`、`Param`、`Req`、`Options` 的 `string` 通常是 JSON 字符串，SDK 内部会反序列化为对应结构。
+| 方法                                                                                                                            | 说明                                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [`GetSpecifiedFriendsInfo`](/docs/chat/sdk/v4/android/user/friend/methods/get-specified-friends-info)                           | 批量获取指定好友的关系资料，适合好友详情页、会话资料补齐或局部刷新好友信息。     |
+| [`GetFriendList`](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list)                                                | 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。               |
+| [`GetFriendListPage`](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page)                                       | 分页获取好友列表，适合好友数量较多时按页加载。                                   |
+| [`SearchFriends`](/docs/chat/sdk/v4/android/user/friend/methods/search-friends)                                                 | 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。            |
+| [`CheckFriend`](/docs/chat/sdk/v4/android/user/friend/methods/check-friend)                                                     | 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。 |
+| [`AddFriend`](/docs/chat/sdk/v4/android/user/friend/methods/add-friend)                                                         | 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。                 |
+| [`UpdateFriends`](/docs/chat/sdk/v4/android/user/friend/methods/update-friends)                                                 | 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。                         |
+| [`DeleteFriend`](/docs/chat/sdk/v4/android/user/friend/methods/delete-friend)                                                   | 删除指定好友关系，适合用户主动解除好友。                                         |
+| [`GetFriendApplicationListAsRecipient`](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-recipient) | 获取当前用户收到的好友申请列表，适合好友申请入口和审核页。                       |
+| [`GetFriendApplicationListAsApplicant`](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant) | 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。                     |
+| [`AcceptFriendApplication`](/docs/chat/sdk/v4/android/user/friend/methods/accept-friend-application)                            | 同意指定好友申请，建立好友关系。                                                 |
+| [`RefuseFriendApplication`](/docs/chat/sdk/v4/android/user/friend/methods/refuse-friend-application)                            | 拒绝指定好友申请。                                                               |
+| [`GetFriendApplicationUnhandledCount`](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count)    | 获取未处理好友申请数量，适合好友入口角标和后台同步。                             |
 
 ## 事件联动
 

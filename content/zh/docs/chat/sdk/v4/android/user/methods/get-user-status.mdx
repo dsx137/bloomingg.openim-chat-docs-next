@@ -1,0 +1,42 @@
+---
+title: 'GetUserStatus'
+description: '说明 Android core binding 方法 GetUserStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-user-status'
+---
+
+`GetUserStatus` 来自 `open_im_sdk/user.go、open_im_sdk/online.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                               |
+| -------- | ------------------------------------------------------------------ |
+| 方法     | `GetUserStatus(callback Base, operationID string, userIDs string)` |
+| 所属能力 | 用户                                                               |
+| 源码位置 | `open_im_sdk/user.go、open_im_sdk/online.go`                       |
+
+## 作用
+
+获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。
+
+## 参数说明
+
+`userIDs` 是用户 ID 列表 JSON。
+
+## 返回与事件
+
+成功返回在线状态 JSON，后续变化以用户监听为准。
+
+## 使用边界
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/android/user/overview-user)

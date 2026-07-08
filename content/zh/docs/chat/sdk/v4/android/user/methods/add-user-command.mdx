@@ -1,0 +1,42 @@
+---
+title: 'AddUserCommand'
+description: '说明 Android core binding 方法 AddUserCommand 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/methods/add-user-command'
+---
+
+`AddUserCommand` 来自 `open_im_sdk/user.go、open_im_sdk/online.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------ |
+| 方法     | `AddUserCommand(callback Base, operationID string, Type int32, uuid string, value string)` |
+| 所属能力 | 用户                                                                                       |
+| 源码位置 | `open_im_sdk/user.go、open_im_sdk/online.go`                                               |
+
+## 作用
+
+新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。
+
+## 参数说明
+
+`Type` 区分命令类型；`uuid` 标识命令；`value` 保存命令内容。
+
+## 返回与事件
+
+成功返回命令处理结果。
+
+## 使用边界
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/android/user/overview-user)

@@ -1,6 +1,6 @@
 ---
 title: '推送、日志与文件'
-description: '逐个说明 Android core binding 当前导出的 FCM token、角标、日志上传、日志写入和文件上传方法。'
+description: '推送、日志与文件方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,52 +13,17 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/overview-push-notifica
 
 第三方能力来自 `open_im_sdk/third.go`。当前 Android core 只暴露 FCM token、应用角标、日志上传、日志写入和文件上传；旧生成页中的 HMS、多设备推送模板和推送测试器不是当前 core 的独立导出方法。
 
-## 方法列表
+本页是推送、日志与文件方法目录。FCM token、角标、日志和文件上传方法都拆成独立页面。
 
-### UpdateFcmToken
+## 方法索引
 
-| 项目       | 说明                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------- |
-| 方法签名   | `UpdateFcmToken(callback Base, operationID string, fcmToken string, expireTime int64)` |
-| 作用       | 更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。                      |
-| 关键参数   | `fcmToken` 是 Firebase 返回的 token；`expireTime` 是过期时间。                         |
-| 结果或事件 | 成功返回更新结果。                                                                     |
-
-### SetAppBadge
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `SetAppBadge(callback Base, operationID string, appUnreadCount int32)` |
-| 作用       | 设置应用角标未读数，适合未读数变化后同步系统角标。                     |
-| 关键参数   | `appUnreadCount` 是要展示的未读数量。                                  |
-| 结果或事件 | 成功返回设置结果。                                                     |
-
-### UploadLogs
-
-| 项目       | 说明                                                                                             |
-| ---------- | ------------------------------------------------------------------------------------------------ |
-| 方法签名   | `UploadLogs(callback Base, operationID string, line int, ex string, progress UploadLogProgress)` |
-| 作用       | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。                                            |
-| 关键参数   | `line` 和 `ex` 作为上传附加信息；`progress` 接收上传进度。                                       |
-| 结果或事件 | 成功返回上传结果，进度走 `UploadLogProgress`。                                                   |
-
-### Logs
-
-| 项目       | 说明                                                                                                                        |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `Logs(callback Base, operationID string, logLevel int, file string, line int, msgs string, err string, keyAndValue string)` |
-| 作用       | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。                                                         |
-| 关键参数   | `logLevel` 是日志等级；`file` 和 `line` 标识调用位置；`msgs`、`err`、`keyAndValue` 保存日志内容。                           |
-| 结果或事件 | 成功返回写入结果；SDK 未初始化时通过 `OnError` 返回 `sdk not init`。                                                        |
-
-### UploadFile
-
-| 项目       | 说明                                                                                     |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| 方法签名   | `UploadFile(callback Base, operationID string, req string, progress UploadFileCallback)` |
-| 作用       | 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。          |
-| 关键参数   | `req` 是上传请求 JSON；`progress` 接收打开、分片、哈希、上传和完成事件。                 |
-| 结果或事件 | 成功返回文件上传结果，详细过程走 `UploadFileCallback`。                                  |
+| 方法                                                                                      | 说明                                                                            |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| [`UpdateFcmToken`](/docs/chat/sdk/v4/android/push-notifications/methods/update-fcm-token) | 更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。               |
+| [`SetAppBadge`](/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge)       | 设置应用角标未读数，适合未读数变化后同步系统角标。                              |
+| [`UploadLogs`](/docs/chat/sdk/v4/android/push-notifications/methods/upload-logs)          | 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。                           |
+| [`Logs`](/docs/chat/sdk/v4/android/push-notifications/methods/logs)                       | 主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。             |
+| [`UploadFile`](/docs/chat/sdk/v4/android/push-notifications/methods/upload-file)          | 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。 |
 
 ## 上传回调
 
@@ -73,9 +38,3 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/overview-push-notifica
 | `UploadFileCallback.UploadPartComplete(index int, partSize int64, partHash string)`      | 单个分片上传完成。     |
 | `UploadFileCallback.UploadComplete(fileSize int64, streamSize int64, storageSize int64)` | 文件上传完成阶段信息。 |
 | `UploadFileCallback.Complete(size int64, url string, typ int)`                           | 文件完成并返回 URL。   |
-
-## 注意事项
-
-- `Logs` 会在 SDK 未初始化时直接通过 `OnError` 返回 `sdk not init`。
-- 推送展示内容、HMS 接入、推送模板等属于应用或服务端配置，不在当前 core 导出方法中。
-- 文件上传请求 `req` 是 JSON 字符串，具体字段应以当前 file upload 结构为准。

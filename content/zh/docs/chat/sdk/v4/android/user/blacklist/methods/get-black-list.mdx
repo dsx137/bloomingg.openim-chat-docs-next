@@ -1,0 +1,42 @@
+---
+title: 'GetBlackList'
+description: '说明 Android core binding 方法 GetBlackList 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list'
+---
+
+`GetBlackList` 来自 `open_im_sdk/relation.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                              |
+| -------- | ------------------------------------------------- |
+| 方法     | `GetBlackList(callback Base, operationID string)` |
+| 所属能力 | 黑名单                                            |
+| 源码位置 | `open_im_sdk/relation.go`                         |
+
+## 作用
+
+获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。
+
+## 参数说明
+
+`operationID` 用于日志追踪；无其他业务参数。
+
+## 返回与事件
+
+成功返回黑名单用户列表 JSON。
+
+## 使用边界
+
+黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
+
+## 相关页面
+
+- [黑名单](/docs/chat/sdk/v4/android/user/moderating-a-user/block-and-unblock-other-members)

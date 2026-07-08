@@ -1,6 +1,6 @@
 ---
 title: '群组'
-description: '逐个说明 Android core binding 当前导出的 OpenIM 群组创建、成员、申请、搜索、禁言和管理方法。'
+description: '群组方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,262 +13,39 @@ sourcePath: '/docs/chat/sdk/v4/android/channel/overview-channel'
 
 OpenIM Android core 使用群组承载多人聊天能力。旧版结构中的 channel 页面在这里统一映射为 OpenIM 群组；当前 core 没有 open channel 的独立导出方法。
 
-## 方法列表
+本页是群组方法目录。创建、加入、成员、申请、禁言和群管理方法都拆到了独立页面。
 
-### CreateGroup
+## 方法索引
 
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `CreateGroup(callback Base, operationID string, groupReqInfo string)`  |
-| 作用       | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。 |
-| 关键参数   | `groupReqInfo` 是群创建请求 JSON，包含群资料、群主和成员等字段。       |
-| 结果或事件 | 成功返回群资料 JSON，并触发相关群组事件。                              |
-
-### JoinGroup
-
-| 项目       | 说明                                                                                                       |
-| ---------- | ---------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `JoinGroup(callback Base, operationID string, groupID string, reqMsg string, joinSource int32, ex string)` |
-| 作用       | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。                                               |
-| 关键参数   | `groupID` 是目标群 ID；`reqMsg` 是申请说明；`joinSource` 表示入群来源；`ex` 为扩展信息。                   |
-| 结果或事件 | 成功返回申请或入群结果，群相关监听会收到变化。                                                             |
-
-### QuitGroup
-
-| 项目       | 说明                                                           |
-| ---------- | -------------------------------------------------------------- |
-| 方法签名   | `QuitGroup(callback Base, operationID string, groupID string)` |
-| 作用       | 当前用户主动退出指定群组。                                     |
-| 关键参数   | `groupID` 是要退出的群 ID。                                    |
-| 结果或事件 | 成功返回退出结果，并触发已加入群删除或成员删除事件。           |
-
-### DismissGroup
-
-| 项目       | 说明                                                              |
-| ---------- | ----------------------------------------------------------------- |
-| 方法签名   | `DismissGroup(callback Base, operationID string, groupID string)` |
-| 作用       | 解散指定群组，通常要求当前用户具备群主或管理权限。                |
-| 关键参数   | `groupID` 是要解散的群 ID。                                       |
-| 结果或事件 | 成功返回解散结果，并触发群解散事件。                              |
-
-### ChangeGroupMute
-
-| 项目       | 说明                                                                              |
-| ---------- | --------------------------------------------------------------------------------- |
-| 方法签名   | `ChangeGroupMute(callback Base, operationID string, groupID string, isMute bool)` |
-| 作用       | 开启或关闭全群禁言。适合群管理者控制群内发言状态。                                |
-| 关键参数   | `groupID` 是目标群 ID；`isMute` 为 `true` 表示开启全群禁言。                      |
-| 结果或事件 | 成功返回处理结果，并触发群资料变化事件。                                          |
-
-### ChangeGroupMemberMute
-
-| 项目       | 说明                                                                                                        |
-| ---------- | ----------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `ChangeGroupMemberMute(callback Base, operationID string, groupID string, userID string, mutedSeconds int)` |
-| 作用       | 设置指定群成员禁言时长。适合临时限制单个成员发言。                                                          |
-| 关键参数   | `userID` 是被禁言成员；`mutedSeconds` 是禁言秒数，通常 `0` 表示取消禁言。                                   |
-| 结果或事件 | 成功返回处理结果，并触发群成员资料变化事件。                                                                |
-
-### TransferGroupOwner
-
-| 项目       | 说明                                                                                           |
-| ---------- | ---------------------------------------------------------------------------------------------- |
-| 方法签名   | `TransferGroupOwner(callback Base, operationID string, groupID string, newOwnerUserID string)` |
-| 作用       | 将群主转让给指定成员，通常只允许当前群主执行。                                                 |
-| 关键参数   | `groupID` 是目标群 ID；`newOwnerUserID` 是新群主用户 ID。                                      |
-| 结果或事件 | 成功返回转让结果，并触发群资料或成员资料变化事件。                                             |
-
-### KickGroupMember
-
-| 项目       | 说明                                                                                                   |
-| ---------- | ------------------------------------------------------------------------------------------------------ |
-| 方法签名   | `KickGroupMember(callback Base, operationID string, groupID string, reason string, userIDList string)` |
-| 作用       | 将一批成员移出群组，通常要求操作者具备管理权限。                                                       |
-| 关键参数   | `reason` 是移除原因；`userIDList` 是成员用户 ID 列表 JSON。                                            |
-| 结果或事件 | 成功返回移除结果，并触发群成员删除事件。                                                               |
-
-### SetGroupInfo
-
-| 项目       | 说明                                                                |
-| ---------- | ------------------------------------------------------------------- |
-| 方法签名   | `SetGroupInfo(callback Base, operationID string, groupInfo string)` |
-| 作用       | 更新群资料，例如群名称、头像、公告或扩展字段。                      |
-| 关键参数   | `groupInfo` 是群资料 JSON。                                         |
-| 结果或事件 | 成功返回更新结果，并触发群资料变化事件。                            |
-
-### SetGroupMemberInfo
-
-| 项目       | 说明                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
-| 方法签名   | `SetGroupMemberInfo(callback Base, operationID string, groupMemberInfo string)` |
-| 作用       | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。                        |
-| 关键参数   | `groupMemberInfo` 是群成员资料 JSON。                                           |
-| 结果或事件 | 成功返回更新结果，并触发群成员资料变化事件。                                    |
-
-### GetJoinedGroupList
-
-| 项目       | 说明                                                           |
-| ---------- | -------------------------------------------------------------- |
-| 方法签名   | `GetJoinedGroupList(callback Base, operationID string)`        |
-| 作用       | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。 |
-| 关键参数   | 无业务参数。                                                   |
-| 结果或事件 | 成功返回已加入群列表 JSON。                                    |
-
-### GetJoinedGroupListPage
-
-| 项目       | 说明                                                                                   |
-| ---------- | -------------------------------------------------------------------------------------- |
-| 方法签名   | `GetJoinedGroupListPage(callback Base, operationID string, offset int32, count int32)` |
-| 作用       | 分页获取当前用户已加入群组，适合群数量较多的账号。                                     |
-| 关键参数   | `offset` 和 `count` 控制分页。                                                         |
-| 结果或事件 | 成功返回当前页群列表 JSON。                                                            |
-
-### GetSpecifiedGroupsInfo
-
-| 项目       | 说明                                                                            |
-| ---------- | ------------------------------------------------------------------------------- |
-| 方法签名   | `GetSpecifiedGroupsInfo(callback Base, operationID string, groupIDList string)` |
-| 作用       | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。                  |
-| 关键参数   | `groupIDList` 是群 ID 列表 JSON。                                               |
-| 结果或事件 | 成功返回群资料列表 JSON。                                                       |
-
-### SearchGroups
-
-| 项目       | 说明                                                                  |
-| ---------- | --------------------------------------------------------------------- |
-| 方法签名   | `SearchGroups(callback Base, operationID string, searchParam string)` |
-| 作用       | 按关键字搜索群组，可按群 ID、群名称等字段搜索。                       |
-| 关键参数   | `searchParam` 是 `SearchGroupsParam` JSON。                           |
-| 结果或事件 | 成功返回搜索结果 JSON。                                               |
-
-### GetGroupMemberOwnerAndAdmin
-
-| 项目       | 说明                                                                             |
-| ---------- | -------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupMemberOwnerAndAdmin(callback Base, operationID string, groupID string)` |
-| 作用       | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。         |
-| 关键参数   | `groupID` 是目标群 ID。                                                          |
-| 结果或事件 | 成功返回群主和管理员成员信息 JSON。                                              |
-
-### GetGroupMemberListByJoinTimeFilter
-
-| 项目       | 说明                                                                                                                                                                                |
-| ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupMemberListByJoinTimeFilter(callback Base, operationID string, groupID string, offset int32, count int32, joinTimeBegin int64, joinTimeEnd int64, filterUserIDList string)` |
-| 作用       | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。                                                                                                              |
-| 关键参数   | `joinTimeBegin` 与 `joinTimeEnd` 是时间范围；`filterUserIDList` 是需要过滤的用户 ID 列表 JSON。                                                                                     |
-| 结果或事件 | 成功返回群成员列表 JSON。                                                                                                                                                           |
-
-### GetSpecifiedGroupMembersInfo
-
-| 项目       | 说明                                                                                                 |
-| ---------- | ---------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetSpecifiedGroupMembersInfo(callback Base, operationID string, groupID string, userIDList string)` |
-| 作用       | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。                               |
-| 关键参数   | `groupID` 是群 ID；`userIDList` 是用户 ID 列表 JSON。                                                |
-| 结果或事件 | 成功返回群成员资料列表 JSON。                                                                        |
-
-### GetGroupMemberList
-
-| 项目       | 说明                                                                                                             |
-| ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupMemberList(callback Base, operationID string, groupID string, filter int32, offset int32, count int32)` |
-| 作用       | 按成员类型筛选并分页获取群成员列表。                                                                             |
-| 关键参数   | `filter` 指定成员筛选类型；`offset` 和 `count` 控制分页。                                                        |
-| 结果或事件 | 成功返回群成员列表 JSON。                                                                                        |
-
-### GetGroupApplicationListAsRecipient
-
-| 项目       | 说明                                                                                |
-| ---------- | ----------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupApplicationListAsRecipient(callback Base, operationID string, req string)` |
-| 作用       | 获取当前用户作为群管理者收到的入群申请列表。                                        |
-| 关键参数   | `req` 是群申请分页和筛选请求 JSON。                                                 |
-| 结果或事件 | 成功返回收到的群申请列表 JSON。                                                     |
-
-### GetGroupApplicationListAsApplicant
-
-| 项目       | 说明                                                                                |
-| ---------- | ----------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupApplicationListAsApplicant(callback Base, operationID string, req string)` |
-| 作用       | 获取当前用户自己提交的入群申请列表。                                                |
-| 关键参数   | `req` 是分页和筛选请求 JSON。                                                       |
-| 结果或事件 | 成功返回发出的群申请列表 JSON。                                                     |
-
-### SearchGroupMembers
-
-| 项目       | 说明                                                                        |
-| ---------- | --------------------------------------------------------------------------- |
-| 方法签名   | `SearchGroupMembers(callback Base, operationID string, searchParam string)` |
-| 作用       | 搜索群成员，适合按用户 ID 或群昵称查找成员。                                |
-| 关键参数   | `searchParam` 是 `SearchGroupMembersParam` JSON。                           |
-| 结果或事件 | 成功返回群成员搜索结果 JSON。                                               |
-
-### IsJoinGroup
-
-| 项目       | 说明                                                                   |
-| ---------- | ---------------------------------------------------------------------- |
-| 方法签名   | `IsJoinGroup(callback Base, operationID string, groupID string)`       |
-| 作用       | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。 |
-| 关键参数   | `groupID` 是目标群 ID。                                                |
-| 结果或事件 | 成功返回是否已入群的结果 JSON。                                        |
-
-### GetUsersInGroup
-
-| 项目       | 说明                                                                                    |
-| ---------- | --------------------------------------------------------------------------------------- |
-| 方法签名   | `GetUsersInGroup(callback Base, operationID string, groupID string, userIDList string)` |
-| 作用       | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。                                |
-| 关键参数   | `groupID` 是群 ID；`userIDList` 是用户 ID 列表 JSON。                                   |
-| 结果或事件 | 成功返回用户入群状态 JSON。                                                             |
-
-### InviteUserToGroup
-
-| 项目       | 说明                                                                                                     |
-| ---------- | -------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `InviteUserToGroup(callback Base, operationID string, groupID string, reason string, userIDList string)` |
-| 作用       | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。                                             |
-| 关键参数   | `reason` 是邀请说明；`userIDList` 是被邀请用户 ID 列表 JSON。                                            |
-| 结果或事件 | 成功返回邀请结果，并触发群成员或群申请事件。                                                             |
-
-### AcceptGroupApplication
-
-| 项目       | 说明                                                                                                             |
-| ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `AcceptGroupApplication(callback Base, operationID string, groupID string, fromUserID string, handleMsg string)` |
-| 作用       | 同意指定用户的入群申请。                                                                                         |
-| 关键参数   | `groupID` 是群 ID；`fromUserID` 是申请人；`handleMsg` 是处理说明。                                               |
-| 结果或事件 | 成功返回处理结果，并触发申请接受和成员新增事件。                                                                 |
-
-### RefuseGroupApplication
-
-| 项目       | 说明                                                                                                             |
-| ---------- | ---------------------------------------------------------------------------------------------------------------- |
-| 方法签名   | `RefuseGroupApplication(callback Base, operationID string, groupID string, fromUserID string, handleMsg string)` |
-| 作用       | 拒绝指定用户的入群申请。                                                                                         |
-| 关键参数   | `groupID` 是群 ID；`fromUserID` 是申请人；`handleMsg` 是处理说明。                                               |
-| 结果或事件 | 成功返回处理结果，并触发申请拒绝事件。                                                                           |
-
-### GetGroupApplicationUnhandledCount
-
-| 项目       | 说明                                                                               |
-| ---------- | ---------------------------------------------------------------------------------- |
-| 方法签名   | `GetGroupApplicationUnhandledCount(callback Base, operationID string, req string)` |
-| 作用       | 获取未处理入群申请数量，适合管理入口角标和后台同步。                               |
-| 关键参数   | `req` 是包含时间或筛选条件的请求 JSON。                                            |
-| 结果或事件 | 成功返回未处理数量 JSON。                                                          |
-
-## 回调与返回约定
-
-Android core binding 的异步方法通过回调返回结果。
-
-| 回调类型          | 方法                                    | 说明                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------ |
-| `Base`            | `OnSuccess(data string)`                | 成功时返回 JSON 字符串、空字符串或基础类型序列化结果。 |
-| `Base`            | `OnError(errCode int32, errMsg string)` | 失败时返回 SDK 错误码和错误消息。                      |
-| `SendMsgCallBack` | `OnProgress(progress int)`              | 仅发送消息时使用，表示发送或上传进度。                 |
-
-除同步创建消息类方法外，带 `callback` 的方法不直接返回业务数据。参数中名称包含 `List`、`Info`、`Param`、`Req`、`Options` 的 `string` 通常是 JSON 字符串，SDK 内部会反序列化为对应结构。
+| 方法                                                                                                                        | 说明                                                                     |
+| --------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [`CreateGroup`](/docs/chat/sdk/v4/android/channel/methods/create-group)                                                     | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。   |
+| [`JoinGroup`](/docs/chat/sdk/v4/android/channel/methods/join-group)                                                         | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。             |
+| [`QuitGroup`](/docs/chat/sdk/v4/android/channel/methods/quit-group)                                                         | 当前用户主动退出指定群组。                                               |
+| [`DismissGroup`](/docs/chat/sdk/v4/android/channel/methods/dismiss-group)                                                   | 解散指定群组，通常要求当前用户具备群主或管理权限。                       |
+| [`ChangeGroupMute`](/docs/chat/sdk/v4/android/channel/methods/change-group-mute)                                            | 开启或关闭全群禁言。适合群管理者控制群内发言状态。                       |
+| [`ChangeGroupMemberMute`](/docs/chat/sdk/v4/android/channel/methods/change-group-member-mute)                               | 设置指定群成员禁言时长。适合临时限制单个成员发言。                       |
+| [`TransferGroupOwner`](/docs/chat/sdk/v4/android/channel/methods/transfer-group-owner)                                      | 将群主转让给指定成员，通常只允许当前群主执行。                           |
+| [`KickGroupMember`](/docs/chat/sdk/v4/android/channel/methods/kick-group-member)                                            | 将一批成员移出群组，通常要求操作者具备管理权限。                         |
+| [`SetGroupInfo`](/docs/chat/sdk/v4/android/channel/methods/set-group-info)                                                  | 更新群资料，例如群名称、头像、公告或扩展字段。                           |
+| [`SetGroupMemberInfo`](/docs/chat/sdk/v4/android/channel/methods/set-group-member-info)                                     | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。                 |
+| [`GetJoinedGroupList`](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list)                                     | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。           |
+| [`GetJoinedGroupListPage`](/docs/chat/sdk/v4/android/channel/methods/get-joined-group-list-page)                            | 分页获取当前用户已加入群组，适合群数量较多的账号。                       |
+| [`GetSpecifiedGroupsInfo`](/docs/chat/sdk/v4/android/channel/methods/get-specified-groups-info)                             | 批量获取指定群组资料，适合会话列表补齐群信息或刷新部分群资料。           |
+| [`SearchGroups`](/docs/chat/sdk/v4/android/channel/methods/search-groups)                                                   | 按关键字搜索群组，可按群 ID、群名称等字段搜索。                          |
+| [`GetGroupMemberOwnerAndAdmin`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-owner-and-admin)                 | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 |
+| [`GetGroupMemberListByJoinTimeFilter`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list-by-join-time-filter) | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。   |
+| [`GetSpecifiedGroupMembersInfo`](/docs/chat/sdk/v4/android/channel/methods/get-specified-group-members-info)                | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。   |
+| [`GetGroupMemberList`](/docs/chat/sdk/v4/android/channel/methods/get-group-member-list)                                     | 按成员类型筛选并分页获取群成员列表。                                     |
+| [`GetGroupApplicationListAsRecipient`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-recipient)   | 获取当前用户作为群管理者收到的入群申请列表。                             |
+| [`GetGroupApplicationListAsApplicant`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-list-as-applicant)   | 获取当前用户自己提交的入群申请列表。                                     |
+| [`SearchGroupMembers`](/docs/chat/sdk/v4/android/channel/methods/search-group-members)                                      | 搜索群成员，适合按用户 ID 或群昵称查找成员。                             |
+| [`IsJoinGroup`](/docs/chat/sdk/v4/android/channel/methods/is-join-group)                                                    | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。   |
+| [`GetUsersInGroup`](/docs/chat/sdk/v4/android/channel/methods/get-users-in-group)                                           | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。                 |
+| [`InviteUserToGroup`](/docs/chat/sdk/v4/android/channel/methods/invite-user-to-group)                                       | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。             |
+| [`AcceptGroupApplication`](/docs/chat/sdk/v4/android/channel/methods/accept-group-application)                              | 同意指定用户的入群申请。                                                 |
+| [`RefuseGroupApplication`](/docs/chat/sdk/v4/android/channel/methods/refuse-group-application)                              | 拒绝指定用户的入群申请。                                                 |
+| [`GetGroupApplicationUnhandledCount`](/docs/chat/sdk/v4/android/channel/methods/get-group-application-unhandled-count)      | 获取未处理入群申请数量，适合管理入口角标和后台同步。                     |
 
 ## 事件联动
 

@@ -1,0 +1,42 @@
+---
+title: 'UploadLogs'
+description: '说明 Android core binding 方法 UploadLogs 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/upload-logs'
+---
+
+`UploadLogs` 来自 `open_im_sdk/third.go`。本页只说明当前 Android core binding 暴露的真实方法，不包含示例代码。
+
+## 方法签名
+
+| 项目     | 说明                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------ |
+| 方法     | `UploadLogs(callback Base, operationID string, line int, ex string, progress UploadLogProgress)` |
+| 所属能力 | 推送、日志与文件                                                                                 |
+| 源码位置 | `open_im_sdk/third.go`                                                                           |
+
+## 作用
+
+上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。
+
+## 参数说明
+
+`line` 和 `ex` 作为上传附加信息；`progress` 接收上传进度。
+
+## 返回与事件
+
+成功返回上传结果，进度走 `UploadLogProgress`。
+
+## 使用边界
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## 相关页面
+
+- [推送、日志与文件](/docs/chat/sdk/v4/android/push-notifications/overview-push-notifications)

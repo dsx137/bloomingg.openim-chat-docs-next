@@ -1,6 +1,6 @@
 ---
 title: '用户'
-description: '逐个说明 Android core binding 当前导出的用户资料、用户命令和在线状态方法。'
+description: '用户方法目录，所有方法均拆分到独立页面说明。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -13,109 +13,22 @@ sourcePath: '/docs/chat/sdk/v4/android/user/overview-user'
 
 本页覆盖 `open_im_sdk/user.go` 和 `online.go` 中与用户资料、用户命令、在线状态相关的方法。好友和黑名单已拆分为独立页面。
 
-## 方法列表
+本页是用户资料、用户命令和在线状态方法目录。每个方法的详细说明见独立页面。
 
-### GetSelfUserInfo
+## 方法索引
 
-| 项目       | 说明                                                                                             |
-| ---------- | ------------------------------------------------------------------------------------------------ |
-| 方法签名   | `GetSelfUserInfo(callback Base, operationID string)`                                             |
-| 作用       | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 |
-| 关键参数   | `operationID` 用于追踪；不需要传用户 ID，SDK 使用当前登录用户。                                  |
-| 结果或事件 | 成功返回当前用户资料 JSON。                                                                      |
-
-### SetSelfInfo
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `SetSelfInfo(callback Base, operationID string, userInfo string)`                    |
-| 作用       | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。 |
-| 关键参数   | `userInfo` 是用户资料 JSON；字段以当前 SDK 用户结构为准。                            |
-| 结果或事件 | 成功返回更新结果，相关变更会触发用户监听。                                           |
-
-### GetUsersInfo
-
-| 项目       | 说明                                                                         |
-| ---------- | ---------------------------------------------------------------------------- |
-| 方法签名   | `GetUsersInfo(callback Base, operationID string, userIDs string)`            |
-| 作用       | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。 |
-| 关键参数   | `userIDs` 是用户 ID 列表 JSON。                                              |
-| 结果或事件 | 成功返回用户资料列表 JSON。                                                  |
-
-### AddUserCommand
-
-| 项目       | 说明                                                                                         |
-| ---------- | -------------------------------------------------------------------------------------------- |
-| 方法签名   | `AddUserCommand(callback Base, operationID string, Type int32, uuid string, value string)`   |
-| 作用       | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。 |
-| 关键参数   | `Type` 区分命令类型；`uuid` 标识命令；`value` 保存命令内容。                                 |
-| 结果或事件 | 成功返回命令处理结果。                                                                       |
-
-### DeleteUserCommand
-
-| 项目       | 说明                                                                                 |
-| ---------- | ------------------------------------------------------------------------------------ |
-| 方法签名   | `DeleteUserCommand(callback Base, operationID string, Type int32, uuid string)`      |
-| 作用       | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。 |
-| 关键参数   | `Type` 和 `uuid` 共同定位要删除的命令。                                              |
-| 结果或事件 | 成功返回删除处理结果。                                                               |
-
-### GetAllUserCommands
-
-| 项目       | 说明                                                                     |
-| ---------- | ------------------------------------------------------------------------ |
-| 方法签名   | `GetAllUserCommands(callback Base, operationID string, Type int32)`      |
-| 作用       | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。 |
-| 关键参数   | `Type` 指定命令类型。                                                    |
-| 结果或事件 | 成功返回命令列表 JSON。                                                  |
-
-### SubscribeUsersStatus
-
-| 项目       | 说明                                                                           |
-| ---------- | ------------------------------------------------------------------------------ |
-| 方法签名   | `SubscribeUsersStatus(callback Base, operationID string, userIDs string)`      |
-| 作用       | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。 |
-| 关键参数   | `userIDs` 是用户 ID 列表 JSON。                                                |
-| 结果或事件 | 成功返回订阅结果，后续状态变化通过用户监听回调。                               |
-
-### UnsubscribeUsersStatus
-
-| 项目       | 说明                                                                        |
-| ---------- | --------------------------------------------------------------------------- |
-| 方法签名   | `UnsubscribeUsersStatus(callback Base, operationID string, userIDs string)` |
-| 作用       | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。    |
-| 关键参数   | `userIDs` 是用户 ID 列表 JSON。                                             |
-| 结果或事件 | 成功返回取消订阅结果。                                                      |
-
-### GetSubscribeUsersStatus
-
-| 项目       | 说明                                                                           |
-| ---------- | ------------------------------------------------------------------------------ |
-| 方法签名   | `GetSubscribeUsersStatus(callback Base, operationID string)`                   |
-| 作用       | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。 |
-| 关键参数   | 不需要用户列表，读取当前订阅集合。                                             |
-| 结果或事件 | 成功返回在线状态 JSON。                                                        |
-
-### GetUserStatus
-
-| 项目       | 说明                                                                               |
-| ---------- | ---------------------------------------------------------------------------------- |
-| 方法签名   | `GetUserStatus(callback Base, operationID string, userIDs string)`                 |
-| 作用       | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。 |
-| 关键参数   | `userIDs` 是用户 ID 列表 JSON。                                                    |
-| 结果或事件 | 成功返回在线状态 JSON，后续变化以用户监听为准。                                    |
-
-## 回调与返回约定
-
-Android core binding 的异步方法通过回调返回结果。
-
-| 回调类型          | 方法                                    | 说明                                                   |
-| ----------------- | --------------------------------------- | ------------------------------------------------------ |
-| `Base`            | `OnSuccess(data string)`                | 成功时返回 JSON 字符串、空字符串或基础类型序列化结果。 |
-| `Base`            | `OnError(errCode int32, errMsg string)` | 失败时返回 SDK 错误码和错误消息。                      |
-| `SendMsgCallBack` | `OnProgress(progress int)`              | 仅发送消息时使用，表示发送或上传进度。                 |
-
-除同步创建消息类方法外，带 `callback` 的方法不直接返回业务数据。参数中名称包含 `List`、`Info`、`Param`、`Req`、`Options` 的 `string` 通常是 JSON 字符串，SDK 内部会反序列化为对应结构。
+| 方法                                                                                           | 说明                                                                                             |
+| ---------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`GetSelfUserInfo`](/docs/chat/sdk/v4/android/user/methods/get-self-user-info)                 | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 |
+| [`SetSelfInfo`](/docs/chat/sdk/v4/android/user/methods/set-self-info)                          | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。             |
+| [`GetUsersInfo`](/docs/chat/sdk/v4/android/user/methods/get-users-info)                        | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。                     |
+| [`AddUserCommand`](/docs/chat/sdk/v4/android/user/methods/add-user-command)                    | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。     |
+| [`DeleteUserCommand`](/docs/chat/sdk/v4/android/user/methods/delete-user-command)              | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。             |
+| [`GetAllUserCommands`](/docs/chat/sdk/v4/android/user/methods/get-all-user-commands)           | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。                         |
+| [`SubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/subscribe-users-status)        | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。                   |
+| [`UnsubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status)    | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。                         |
+| [`GetSubscribeUsersStatus`](/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status) | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。                   |
+| [`GetUserStatus`](/docs/chat/sdk/v4/android/user/methods/get-user-status)                      | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。               |
 
 ## 相关页面
 
