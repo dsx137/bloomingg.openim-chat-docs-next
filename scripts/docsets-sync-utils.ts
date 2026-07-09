@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { appendFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { appendFile, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { docsetsDataSchema, type DocsetRecord, type DocsetsData } from '../src/types/docs.js';
 
@@ -8,7 +8,7 @@ interface DiffRecord {
   repoUrl: string;
   packageName: string | null;
   docsRoot: string;
-  sourceRef: string;
+  sourceRef: string | null;
   targetRef: string;
   targetVersion: string;
   targetTagPattern: string;
@@ -56,6 +56,7 @@ const outputDir = resolve(repoRoot, '.docsets-sync');
 const upstreamsDir = join(outputDir, 'upstreams');
 const diffsDir = join(outputDir, 'diffs');
 const summaryPath = join(outputDir, 'summary.json');
+const emptyTreeSha = '4b825dc642cb6eb9a060e54bf8d69288fbee4904';
 const [command, ...commandArgs] = process.argv.slice(2);
 
 await run().catch((error: unknown) => {
@@ -99,11 +100,6 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
     if (docsetKey && docset.key !== docsetKey) continue;
     matchedFilter = true;
 
-    if (!docset.sourceRef) {
-      skipped.push({ key: docset.key, reason: 'missing sourceRef' });
-      continue;
-    }
-
     const target = resolveTargetRef(docset);
     if (!target) {
       skipped.push({ key: docset.key, reason: 'no target ref matched' });
@@ -115,22 +111,22 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
     git(['init', '-q'], repoDir);
     git(['remote', 'add', 'origin', docset.repoUrl], repoDir);
 
-    const sourceSha = fetchRef(repoDir, docset.sourceRef);
     const targetSha = fetchRef(repoDir, target.ref);
+    const sourceSha = docset.sourceRef ? fetchRef(repoDir, docset.sourceRef) : emptyTreeSha;
 
-    if (sourceSha === targetSha) {
+    if (docset.sourceRef && sourceSha === targetSha) {
       skipped.push({ key: docset.key, reason: `no update (${docset.sourceRef} == ${target.ref})` });
       continue;
     }
 
-    const diff = git(['diff', '--binary', sourceSha, targetSha, '--'], repoDir);
-    if (!diff.trim()) {
+    const diffPath = join(diffsDir, `${safeName(docset.key)}.diff`);
+    gitDiffToFile(repoDir, sourceSha, targetSha, diffPath);
+    if ((await stat(diffPath)).size === 0) {
+      await rm(diffPath, { force: true });
       skipped.push({ key: docset.key, reason: 'ref changed but no file diff was produced' });
       continue;
     }
 
-    const diffPath = join(diffsDir, `${safeName(docset.key)}.diff`);
-    await writeFile(diffPath, diff);
     records.push({
       key: docset.key,
       repoUrl: docset.repoUrl,
@@ -221,7 +217,7 @@ function renderSummary(records: DiffRecord[], skipped: SkippedRecord[]): string 
       lines.push(`- Repo: ${record.repoUrl}`);
       if (record.packageName) lines.push(`- Package: ${record.packageName}`);
       lines.push(`- Docs root: ${record.docsRoot}`);
-      lines.push(`- Source: ${record.sourceRef} (${record.sourceSha})`);
+      lines.push(`- Source: ${renderSourceRef(record)} (${record.sourceSha})`);
       lines.push(`- Target: ${record.targetRef} (${record.targetSha})`);
       lines.push(`- Target tag pattern: ${record.targetTagPattern}`);
       lines.push(`- Target semver: ${record.targetVersion}`);
@@ -258,11 +254,15 @@ function renderPrompt(records: DiffRecord[]): string {
     lines.push(`- Upstream repo: ${record.repoUrl}`);
     if (record.packageName) lines.push(`- Package: ${record.packageName}`);
     lines.push(
-      `- Compare: ${record.sourceRef} (${record.sourceSha}) -> ${record.targetRef} (${record.targetSha})`,
+      `- Compare: ${renderSourceRef(record)} (${record.sourceSha}) -> ${record.targetRef} (${record.targetSha})`,
     );
     lines.push(`- Diff file: ${record.diffPath}`, '');
   }
   return `${lines.join('\n')}\n`;
+}
+
+function renderSourceRef(record: DiffRecord): string {
+  return record.sourceRef ?? 'initial import (empty baseline)';
 }
 
 function resolveTargetRef(docset: DocsetRecord): ResolvedTargetRef | null {
@@ -340,6 +340,24 @@ function git(args: string[], cwd: string): string {
     throw new Error(`git ${args.join(' ')} failed:\n${result.stderr || result.stdout}`);
   }
   return result.stdout;
+}
+
+function gitDiffToFile(
+  repoDir: string,
+  sourceSha: string,
+  targetSha: string,
+  outputPath: string,
+): void {
+  const result = spawnSync(
+    'git',
+    ['diff', '--binary', `--output=${outputPath}`, sourceSha, targetSha, '--'],
+    { cwd: repoDir, encoding: 'utf8', maxBuffer: 1024 * 1024 },
+  );
+  if (result.status !== 0) {
+    throw new Error(
+      `git diff ${sourceSha} ${targetSha} failed:\n${result.stderr || result.stdout}`,
+    );
+  }
 }
 
 function compareVersionParts(a: VersionParts, b: VersionParts): number {
