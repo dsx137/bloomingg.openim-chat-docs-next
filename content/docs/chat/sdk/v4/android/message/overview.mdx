@@ -1,0 +1,43 @@
+---
+title: 'Overview'
+description: 'Conversation and message method index for Android SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/overview'
+---
+This page covers conversations and messages: conversation lists, conversation settings, typing state, message creation, sending, history, read status, deletion, search, and local messages.
+
+## Main Flow
+
+| Stage | Methods |
+| ----- | ------- |
+| Create message | Use `Create*Message` methods to create local message objects. |
+| Send message | Send with [Send message](/docs/chat/sdk/v4/android/message/sending-messages/send-message) or [Send message without OSS](/docs/chat/sdk/v4/android/message/sending-messages/send-message-not-oss). |
+| Receive message | Register message listeners from [Event handlers](/docs/chat/sdk/v4/android/event-handler/overview). |
+| Query history | Use history and local search APIs under retrieving messages. |
+| Maintain read state | Mark conversation or message IDs as read. |
+
+## Conversation Methods
+
+| Group | Scope |
+| ----- | ----- |
+| [Listing conversations](/docs/chat/sdk/v4/android/message/listing-conversations/get-all-conversation-list) | Get all, paged, single, multiple, search, and generate conversation ID. |
+| [Managing conversations](/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation) | Set conversation options, hide conversations, and update drafts. |
+| [Conversation state](/docs/chat/sdk/v4/android/message/conversation-state/get-total-unread-msg-count) | Unread counts, input state, and typing status. |
+
+## Message Methods
+
+| Group | Scope |
+| ----- | ----- |
+| [Creating messages](/docs/chat/sdk/v4/android/message/creating-messages/create-text-message) | Text, @ text, location, custom, quote, card, face, forward, merge, media, and file messages. |
+| [Sending messages](/docs/chat/sdk/v4/android/message/sending-messages/send-message) | Send regular messages or send without OSS. |
+| [Retrieving messages](/docs/chat/sdk/v4/android/message/retrieving-messages/get-advanced-history-message-list) | History message lists, reverse history, message list lookup, and local search. |
+| [Managing messages](/docs/chat/sdk/v4/android/message/managing-messages/revoke-message) | Revoke messages and set local message extension. |
+| [Read status](/docs/chat/sdk/v4/android/message/read-status/mark-conversation-message-as-read) | Mark conversation messages, all conversations, or selected message IDs as read. |
+| [Deleting messages](/docs/chat/sdk/v4/android/message/deleting-messages/delete-message) | Delete local messages, delete server messages, clear messages, and delete conversation messages. |
+| [Local messages](/docs/chat/sdk/v4/android/message/local-messages/insert-single-message-to-local-storage) | Insert local single-chat or group messages. |

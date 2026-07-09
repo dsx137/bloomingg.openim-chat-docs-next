@@ -1,0 +1,33 @@
+---
+title: '概述'
+description: '日志方法目录，覆盖写入客户端日志和上传 SDK 日志。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/logger/overview'
+---
+日志页面覆盖客户端主动写日志和上传 SDK 日志。离线推送和文件上传已拆分到独立模块。
+
+## 使用边界
+
+| 场景 | 说明 |
+| ---- | ---- |
+| 初始化日志配置 | 初始化 SDK 时配置日志级别和日志目录。 |
+| 写入客户端日志 | 业务层可把关键 IM 操作写入 SDK 日志链路，便于排查问题。 |
+| 上传日志 | 用户反馈或线上问题定位时上传 SDK 日志，并用 operationID 串联服务端日志。 |
+
+## 方法索引
+
+| 方法 | 说明 |
+| ---- | ---- |
+| [写入客户端日志](/docs/chat/sdk/v4/electron/logger/methods/logs) | 主动写入一条客户端日志。 |
+| [上传日志](/docs/chat/sdk/v4/electron/logger/methods/upload-logs) | 上传 SDK 日志，适合故障排查或线上问题定位。 |
+
+## 相关类型
+
+- [日志等级](/docs/chat/sdk/v4/electron/models/log-level)（`LogLevel`）
+- [日志上传进度](/docs/chat/sdk/v4/electron/models/upload-log-progress)（`UploadLogProgress`）

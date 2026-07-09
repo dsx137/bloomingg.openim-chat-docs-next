@@ -1,0 +1,55 @@
+---
+title: 'Overview'
+description: 'Explains the SDK lifecycle for Android SDK v3.8.3, including initialization, login, logout, login status, and runtime state.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/overview'
+---
+SDK lifecycle covers initialization, login, logout, login status, foreground/background state, and network change notification. Register required listeners after initialization and before login whenever possible.
+
+## Lifecycle Order
+
+| Stage | Method | Description |
+| ----- | ------ | ----------- |
+| Version record | [Get SDK version](/docs/chat/sdk/v4/android/application/methods/get-sdk-version) | Record the SDK version in startup logs, support tickets, and compatibility checks. |
+| Initialization | [Initialize the SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk) | Create the SDK instance, logging, connection management, local data directory, and base resources. |
+| Listeners | [Event handlers](/docs/chat/sdk/v4/android/event-handler/overview) | Register connection, message, conversation, friend, group, and user listeners before login when possible. |
+| Login | [Login](/docs/chat/sdk/v4/android/application/methods/login) | Log in a user with a token issued by your backend service. |
+| State query | [Get login status](/docs/chat/sdk/v4/android/application/methods/get-login-status) / [Get login user ID](/docs/chat/sdk/v4/android/application/methods/get-login-user-id) | Decide whether user-scoped conversation, message, group, and friend APIs can be called. |
+| Runtime state | [Set foreground/background status](/docs/chat/sdk/v4/android/application/methods/set-app-background-status) / [Network status changed](/docs/chat/sdk/v4/android/application/methods/network-status-changed) | Notify the SDK when app or network state changes. |
+| Logout | [Log out](/docs/chat/sdk/v4/android/application/methods/logout) | End the current user session without destroying the SDK instance. |
+| Release | [Uninitialize the SDK](/docs/chat/sdk/v4/android/application/methods/un-init-sdk) | Release global SDK resources when the app leaves IM capability entirely or tests recreate the instance. |
+
+## Boundaries
+
+| Boundary | Description |
+| -------- | ----------- |
+| Initialization creates the runtime environment | Successful initialization does not mean the user is logged in. User, friend, group, conversation, and message APIs usually require login. |
+| Login depends on a backend token | The client should not mint tokens. Refresh expired or invalid tokens through your backend, then log in again. |
+| Logout is not SDK release | `Logout` ends the current user session; `UnInitSDK` releases the global SDK instance. |
+| operationID should be traceable | Generate operationID values that can correlate client logs, server logs, and support tickets. |
+
+## Method Index
+
+| Method | Description |
+| ------ | ----------- |
+| [Get SDK version](/docs/chat/sdk/v4/android/application/methods/get-sdk-version) | Get the current core SDK version. |
+| [Initialize the SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk) | Initialize the SDK instance and base resources. |
+| [Uninitialize the SDK](/docs/chat/sdk/v4/android/application/methods/un-init-sdk) | Release the current SDK instance. |
+| [Login](/docs/chat/sdk/v4/android/application/methods/login) | Log in a user with a backend-issued token. |
+| [Log out](/docs/chat/sdk/v4/android/application/methods/logout) | Log out the current user. |
+| [Set foreground/background status](/docs/chat/sdk/v4/android/application/methods/set-app-background-status) | Notify the SDK that the app entered foreground or background. |
+| [Network status changed](/docs/chat/sdk/v4/android/application/methods/network-status-changed) | Notify the SDK that network status changed. |
+| [Get login status](/docs/chat/sdk/v4/android/application/methods/get-login-status) | Query the current SDK login status. |
+| [Get login user ID](/docs/chat/sdk/v4/android/application/methods/get-login-user-id) | Get the user ID recorded by the current SDK instance. |
+
+## Related Pages
+
+- [Authentication flow](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication)
+- [Event handlers](/docs/chat/sdk/v4/android/event-handler/overview)
+- [Error codes](/docs/chat/sdk/v4/android/error-codes)

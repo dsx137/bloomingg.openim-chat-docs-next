@@ -1,0 +1,33 @@
+---
+title: 'Overview'
+description: 'Logger method index for WASM SDK v3.8.3, covering client log writing and SDK log upload.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/logger/overview'
+---
+Logger covers writing client logs and uploading SDK logs. Offline push and file upload are documented in separate modules.
+
+## Boundaries
+
+| Scenario | Description |
+| -------- | ----------- |
+| Log configuration | Configure log level and log directory during SDK initialization. |
+| Write client logs | Let the app layer write important IM operations into the SDK log stream. |
+| Upload logs | Upload SDK logs for support tickets or production issue analysis, and correlate them with operationID values. |
+
+## Method Index
+
+| Method | Description |
+| ------ | ----------- |
+| [Write client logs](/docs/chat/sdk/v4/wasm/logger/methods/logs) | Write one client log entry. |
+| [Upload logs](/docs/chat/sdk/v4/wasm/logger/methods/upload-logs) | Upload SDK logs for troubleshooting or production diagnostics. |
+
+## Related Types
+
+- [Log level](/docs/chat/sdk/v4/wasm/models/log-level) (`LogLevel`)
+- [Log upload progress](/docs/chat/sdk/v4/wasm/models/upload-log-progress) (`UploadLogProgress`)

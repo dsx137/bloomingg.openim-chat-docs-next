@@ -1,0 +1,72 @@
+---
+title: '上传文件'
+description: '说明 Electron OpenIM core 方法 UploadFile 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/file/methods/upload-file'
+---
+
+上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。
+
+## 功能介绍
+
+上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## 底层能力
+
+| 项目     | 说明                                                                                     |
+| -------- | ---------------------------------------------------------------------------------------- |
+| 方法签名 | `UploadFile(callback Base, operationID string, req string, progress UploadFileCallback)` |
+| 所属能力 | 文件上传 |
+| 源码位置 | `open_im_sdk/third.go`                                                                   |
+
+## Electron 调用参考
+
+Electron SDK v3.8.3 暴露以下平台方法原型。底层能力表用于说明 OpenIM core 能力和参数映射。
+
+源码位置：`src/core/index.ts`。
+
+```ts showLineNumbers
+uploadFile(params: UploadFileParams, opid = uuidV4())
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型         | 是否必填 | 描述                               |
+| -------- | ---------------- | -------- | ---------------------------------- |
+| params   | UploadFileParams | 是       | 按平台类型定义传入。               |
+| opid     | As defined       | 否       | 链路追踪 ID；不传时 SDK 自动生成。 |
+
+## 返回结果
+
+返回 `Promise` 或注册回调结果。调用失败时 Promise reject；建议在业务层使用 `try/catch` 或 `.catch()` 处理错误。
+
+## 代码示例
+
+以下示例展示 Electron SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```ts showLineNumbers
+import { getWithRenderProcess } from '@openim/electron-client-sdk/lib/render';
+
+const { instance: openIM } = getWithRenderProcess();
+
+const result = await openIM.uploadFile({});
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/electron/models/base)（`Base`）：OpenIM core 异步结果回调，Electron 调用层通常映射为 Promise。
+- [底层文件上传回调](/docs/chat/sdk/v4/electron/models/upload-file-callback)（`UploadFileCallback`）：OpenIM core 文件上传回调，Electron 调用层通常映射为 OnPutFileListener。
+- [上传参数](/docs/chat/sdk/v4/electron/models/put-args)（`PutArgs`）：文件上传参数。
+- [文件上传回调](/docs/chat/sdk/v4/electron/models/on-put-file-listener)（`OnPutFileListener`）：上传文件时使用的阶段和进度回调。
+
+## 相关页面
+
+- [文件上传](/docs/chat/sdk/v4/electron/file/overview)
