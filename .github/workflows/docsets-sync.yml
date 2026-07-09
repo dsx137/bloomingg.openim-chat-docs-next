@@ -38,7 +38,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 'latest'
 
@@ -123,8 +123,9 @@ jobs:
       - name: Apply docsets diffs with Agent
         if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
         run: |
-          prompt="$(cat .docsets-sync/omp-prompt.md)"
-          omp -p --no-session "$prompt"
+          jq -nc --arg message "$(cat .docsets-sync/omp-prompt.md)" \
+            '{id:"docsets_sync", type:"prompt", message:$message}' \
+            | omp -p --mode rpc --no-session --auto-approve
 
       - name: Refresh docs and verify
         if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}

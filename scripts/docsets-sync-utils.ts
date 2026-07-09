@@ -221,7 +221,8 @@ function renderSummary(records: DiffRecord[], skipped: SkippedRecord[]): string 
       lines.push(`- Target: ${record.targetRef} (${record.targetSha})`);
       lines.push(`- Target tag pattern: ${record.targetTagPattern}`);
       lines.push(`- Target semver: ${record.targetVersion}`);
-      lines.push(`- Diff: ${record.diffPath}`, '', '```text', record.stat.trim(), '```', '');
+      lines.push(`- Diff: ${record.diffPath}`);
+      lines.push(`- Stat: ${readStatSummary(record.stat)}`, '');
     }
   }
   if (skipped.length > 0) {
@@ -241,6 +242,7 @@ function renderPrompt(records: DiffRecord[]): string {
     'Requirements:',
     '- Edit only files that are needed to reflect the upstream changes in the local docs.',
     '- Prefer existing docs style and frontmatter conventions.',
+    '- Preserve the original document structure, formatting, and writing style as much as possible.',
     '- Keep generated files consistent by running the repository sync/check commands after edits when needed.',
     '- Do not update data/structure/docsets.json; this workflow updates docsets baselines after the docs edits.',
     '- Do not change unrelated pages or repository configuration.',
@@ -263,6 +265,17 @@ function renderPrompt(records: DiffRecord[]): string {
 
 function renderSourceRef(record: DiffRecord): string {
   return record.sourceRef ?? 'initial import (empty baseline)';
+}
+
+function readStatSummary(statText: string): string {
+  return (
+    statText
+      .trim()
+      .split('\n')
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .at(-1) ?? 'No stat summary was produced.'
+  );
 }
 
 function resolveTargetRef(docset: DocsetRecord): ResolvedTargetRef | null {
