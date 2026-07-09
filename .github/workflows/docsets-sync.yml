@@ -31,7 +31,6 @@ jobs:
       OMP_MODEL: ${{ vars.OMP_MODEL }}
       OMP_OPENAI_BASE_URL: ${{ vars.OMP_OPENAI_BASE_URL }}
       OMP_OPENAI_API_KEY: ${{ secrets.OMP_OPENAI_API_KEY }}
-      COREPACK_ENABLE_PROJECT_SPEC: '0'
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -44,9 +43,7 @@ jobs:
           node-version: 'latest'
 
       - name: Setup pnpm
-        run: |
-          corepack enable
-          corepack install -g pnpm@latest
+        run: corepack enable pnpm
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
