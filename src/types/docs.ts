@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export type DocTemplate = 'landing' | 'overview' | 'guide' | 'api';
 export type DocStatus = 'scaffold' | 'draft' | 'published' | 'deprecated';
 
@@ -46,6 +48,21 @@ export interface NavigationData {
   generatedAt: string;
   contexts: NavContext[];
 }
+
+export const docsetRecordSchema = z.strictObject({
+  key: z.string(),
+  repoUrl: z.string(),
+  packageName: z.string().optional(),
+  sourceRef: z.string().nullable(),
+  targetTagPattern: z.string(),
+});
+
+export const docsetsDataSchema = z.strictObject({
+  docsets: z.array(docsetRecordSchema),
+});
+
+export type DocsetRecord = z.infer<typeof docsetRecordSchema>;
+export type DocsetsData = z.infer<typeof docsetsDataSchema>;
 
 export interface TocItem {
   title: string;

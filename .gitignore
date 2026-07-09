@@ -3,6 +3,9 @@ node_modules
 out
 .source
 .tmp
+.docsets-sync
+.idea
+.sisyphus
 .env
 .env.local
 .env.*.local

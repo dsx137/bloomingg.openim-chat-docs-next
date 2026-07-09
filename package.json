@@ -16,6 +16,8 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "content:check": "node scripts/check-content.mjs",
+    "docsets-sync:diff": "tsx scripts/docsets-sync-utils.ts diff",
+    "docsets-sync:baseline": "tsx scripts/docsets-sync-utils.ts baseline",
     "wasm:examples:check": "node scripts/check-wasm-sdk-examples.mjs",
     "content:index": "node scripts/build-search-index.mjs",
     "sdk:zh": "node scripts/build-wasm-sdk-zh-content.mjs",
@@ -54,6 +56,7 @@
     "eslint-config-next": "16.2.9",
     "prettier": "3.6.2",
     "tailwindcss": "4.3.1",
+    "tsx": "^4.23.0",
     "typescript": "5.9.3"
   }
 }

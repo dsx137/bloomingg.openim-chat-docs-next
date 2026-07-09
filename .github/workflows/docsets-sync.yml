@@ -1,0 +1,171 @@
+name: Docsets sync proposal
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+    inputs:
+      docset_key:
+        description: 'Optional docset key to check, for example chat/sdk/v4/wasm'
+        required: false
+        type: string
+      dry_run:
+        description: 'Collect diffs and run agent, but do not push a branch or open a PR'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: docsets-sync-proposal
+  cancel-in-progress: false
+
+jobs:
+  propose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      OMP_MODEL: ${{ vars.OMP_MODEL }}
+      OMP_OPENAI_BASE_URL: ${{ vars.OMP_OPENAI_BASE_URL }}
+      OMP_OPENAI_API_KEY: ${{ secrets.OMP_OPENAI_API_KEY }}
+      COREPACK_ENABLE_PROJECT_SPEC: '0'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'latest'
+
+      - name: Setup pnpm
+        run: |
+          corepack enable
+          corepack install -g pnpm@latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Install OMP
+        run: |
+          curl -fsSL https://omp.sh/install | sh
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Configure OMP
+        run: |
+          required_vars=(OMP_MODEL OMP_OPENAI_BASE_URL OMP_OPENAI_API_KEY)
+          for var_name in "${required_vars[@]}"; do
+            if [ -z "${!var_name}" ]; then
+              echo "$var_name is required." >&2
+              exit 1
+            fi
+          done
+
+          mkdir -p "$HOME/.omp/agent"
+          cat > "$HOME/.omp/agent/config.yml" <<EOF
+          defaultThinkingLevel: auto
+          browser:
+            headless: true
+          symbolPreset: unicode
+          providers:
+            webSearch: exa
+          modelRoles:
+            default: $OMP_MODEL
+          EOF
+
+          cat > "$HOME/.omp/agent/models.yml" <<EOF
+          providers:
+            openai:
+              baseUrl: $OMP_OPENAI_BASE_URL
+              apiKey: OMP_OPENAI_API_KEY
+          EOF
+
+      - name: Collect upstream docsets diffs
+        id: collect
+        env:
+          DOCSET_KEY: ${{ inputs.docset_key }}
+        run: |
+          if [ -n "$DOCSET_KEY" ]; then
+            pnpm run docsets-sync:diff -- --docset-key "$DOCSET_KEY"
+          else
+            pnpm run docsets-sync:diff
+          fi
+
+      - name: Log summary when no upstream changes were found
+        if: ${{ steps.collect.outputs.changed != 'true' }}
+        run: cat .docsets-sync/summary.md
+
+      - name: Check existing proposal
+        id: existing
+        if: ${{ steps.collect.outputs.changed == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url="$(gh pr list \
+            --state open \
+            --json headRefName,url \
+            --jq '.[] | select(.headRefName | startswith("docsets-sync/")) | .url' \
+            | head -n 1)"
+          if [ -n "$url" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "url=$url" >> "$GITHUB_OUTPUT"
+            echo "A docsets sync proposal is already open: $url"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create proposal branch
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
+        run: git checkout -b "docsets-sync/${GITHUB_RUN_ID}"
+
+      - name: Apply docsets diffs with Agent
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
+        run: |
+          prompt="$(cat .docsets-sync/omp-prompt.md)"
+          omp -p --no-session "$prompt"
+
+      - name: Refresh docs and verify
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
+        run: |
+          pnpm run docsets-sync:baseline
+          pnpm run content:sync
+          pnpm exec fumadocs-mdx
+          pnpm run check
+          pnpm run build
+
+      - name: Show dry-run diff
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && inputs.dry_run }}
+        run: |
+          git status --short
+          git diff --stat
+
+      - name: Commit changes
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && !inputs.dry_run }}
+        id: commit
+        run: |
+          if [ -z "$(git status --porcelain)" ]; then
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "docs: propose docsets sync"
+          git push --set-upstream origin "docsets-sync/${GITHUB_RUN_ID}"
+          echo "committed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && steps.commit.outputs.committed == 'true' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh pr create \
+            --base "${GITHUB_REF_NAME}" \
+            --head "docsets-sync/${GITHUB_RUN_ID}" \
+            --title "docs: update synced docsets" \
+            --body-file .docsets-sync/summary.md
