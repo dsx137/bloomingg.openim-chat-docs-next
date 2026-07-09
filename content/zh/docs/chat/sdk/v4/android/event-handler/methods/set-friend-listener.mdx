@@ -29,17 +29,17 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
-```Java
+```java showLineNumbers
 public void setOnFriendshipListener(OnFriendshipListener listener)
 ```
 
 ## 输入参数
 
-| 参数名称 | 参数类型                  | 是否必填 | 描述 |
-| -------- | ------------------------- | -------- | ---- |
-| listener | id <OnFriendshipListener> | 是       |      |
+| 参数名称 | 参数类型                                                                                     | 是否必填 | 描述 |
+| -------- | -------------------------------------------------------------------------------------------- | -------- | ---- |
+| listener | id &lt;[`OnFriendshipListener`](/docs/chat/sdk/v4/android/models/on-friendship-listener)&gt; | 是       |      |
 
 ## 返回结果
 
@@ -47,11 +47,32 @@ public void setOnFriendshipListener(OnFriendshipListener listener)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
-```Java showLineNumbers
-OpenIMClient.getInstance().friendshipManager.setOnFriendshipListener(new OnFriendshipListener{...} )
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.setOnFriendshipListener(new OnFriendshipListener() {
+    @Override
+    public void onFriendAdded(FriendInfo info) {
+        // TODO: 处理新增好友
+    }
+
+    @Override
+    public void onFriendDeleted(FriendInfo info) {
+        // TODO: 处理好友删除
+    }
+
+    @Override
+    public void onBlacklistAdded(BlacklistInfo info) {
+        // TODO: 处理加入黑名单
+    }
+});
 ```
+
+## 相关类型
+
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/android/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
 
 ## 相关页面
 

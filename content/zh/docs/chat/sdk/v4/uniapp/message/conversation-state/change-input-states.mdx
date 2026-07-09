@@ -1,0 +1,67 @@
+---
+title: '更新输入状态'
+description: '说明 uni-app core binding 方法 ChangeInputStates 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/message/conversation-state/change-input-states'
+---
+
+更新当前用户在指定会话中的输入状态。
+
+## 功能介绍
+
+更新当前用户在指定会话中的输入状态。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------- |
+| 方法签名 | `ChangeInputStates(callback Base, operationID string, conversationID string, focus bool)` |
+| 所属能力 | 会话与消息                                                                                |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                         |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`。
+
+```js showLineNumbers
+openIM.changeInputStates(operationID, options, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填   | 描述                              |
+| -------- | -------- | ---------- | --------------------------------- |
+| options  | Object   | 按方法原型 | 按 uni-app 原生插件导出方法传入。 |
+| callback | Function | 是         | 按 uni-app 原生插件导出方法传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.changeInputStates('operationID', {}, callback);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/uniapp/models/base)（`Base`）：core binding 异步结果回调，uni-app 调用层通常映射为 callback。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/uniapp/message/overview)

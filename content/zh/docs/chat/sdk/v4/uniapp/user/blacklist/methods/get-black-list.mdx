@@ -1,0 +1,68 @@
+---
+title: '获取黑名单列表'
+description: '说明 uni-app core binding 方法 GetBlackList 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/user/blacklist/methods/get-black-list'
+---
+
+获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。
+
+## 功能介绍
+
+获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。
+
+黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
+
+## Core Binding 方法
+
+| 项目     | 说明                                              |
+| -------- | ------------------------------------------------- |
+| 方法签名 | `GetBlackList(callback Base, operationID string)` |
+| 所属能力 | 黑名单                                            |
+| 源码位置 | `open_im_sdk/relation.go`                         |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`。
+
+```js showLineNumbers
+openIM.getBlackList(operationID, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                              |
+| -------- | -------- | -------- | --------------------------------- |
+| callback | Function | 是       | 按 uni-app 原生插件导出方法传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.getBlackList('operationID', callback);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/uniapp/models/base)（`Base`）：core binding 异步结果回调，uni-app 调用层通常映射为 callback。
+- [好友关系监听器](/docs/chat/sdk/v4/uniapp/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [用户信息](/docs/chat/sdk/v4/uniapp/models/user-info)（`UserInfo`）：用户资料对象。
+
+## 相关页面
+
+- [黑名单](/docs/chat/sdk/v4/uniapp/user/blacklist/overview)

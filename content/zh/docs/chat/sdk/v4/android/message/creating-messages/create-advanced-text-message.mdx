@@ -1,0 +1,65 @@
+---
+title: '创建高级文本消息'
+description: '说明 Android core binding 方法 CreateAdvancedTextMessage 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-text-message'
+---
+
+创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。
+
+## 功能介绍
+
+创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                   |
+| -------- | -------------------------------------------------------------------------------------- |
+| 方法签名 | `CreateAdvancedTextMessage(operationID string, text, messageEntityList string) string` |
+| 所属能力 | 会话与消息                                                                             |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                      |
+
+## Android 调用参考
+
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public Message createAdvancedTextMessage(String text, List<RichMessage> richList)
+```
+
+## 输入参数
+
+| 参数名称            | 类型     | 描述                                                        |
+| ------------------- | -------- | ----------------------------------------------------------- |
+| `operationID`       | `string` | 本次操作的追踪 ID。                                         |
+| `text`              | `string` | 按 core binding 签名传入。                                  |
+| `messageEntityList` | `string` | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+
+## 返回结果
+
+同步返回 `string`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
+
+```java showLineNumbers
+Message advancedTextMessage = OpenIMClient.getInstance().messageManager.createAdvancedTextMessage(text, richList);
+```
+
+## 相关类型
+
+- [富文本消息片段](/docs/chat/sdk/v4/android/models/rich-message)（`RichMessage`）：高级文本消息中的富文本片段。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview)

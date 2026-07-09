@@ -1,0 +1,68 @@
+---
+title: '获取收到的入群申请'
+description: '说明 Flutter core binding 方法 GetGroupApplicationListAsRecipient 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/group/group-applications/get-group-application-list-as-recipient'
+---
+
+获取当前用户作为群管理者收到的入群申请列表。
+
+## 功能介绍
+
+获取当前用户作为群管理者收到的入群申请列表。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                         |
+| -------- | ---------------------------------------------------------------------------- |
+| 方法签名 | `GetGroupApplicationListAsRecipient(callback Base, operationID, req string)` |
+| 所属能力 | 群组                                                                         |
+| 源码位置 | `open_im_sdk/group.go`                                                       |
+
+## Flutter 调用参考
+
+Flutter SDK 3.8.3+hotfix.12 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_group_manager.dart`。
+
+```dart showLineNumbers
+Future<List<GroupApplicationInfo>> getGroupApplicationListAsRecipient({ GetGroupApplicationListAsRecipientReq? req, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                               | 是否必填 | 描述                                   |
+| -------- | -------------------------------------- | -------- | -------------------------------------- |
+| req      | GetGroupApplicationListAsRecipientReq? | 否       | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+返回 `Future<List<GroupApplicationInfo>>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK 3.8.3+hotfix.12 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.groupManager.getGroupApplicationListAsRecipient(
+  req: [],
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [群申请信息](/docs/chat/sdk/v4/flutter/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，包含群资料、申请人、处理状态和来源。
+- [收到的群申请查询条件](/docs/chat/sdk/v4/flutter/models/get-group-application-list-as-recipient-req)（`GetGroupApplicationListAsRecipientReq`）：查询当前用户收到的入群申请时使用的分页和过滤条件。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/flutter/group/overview)

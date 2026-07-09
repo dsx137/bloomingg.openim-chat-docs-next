@@ -1,0 +1,29 @@
+---
+title: '消息扩展键值'
+description: '说明 Android SDK MessageKv 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/message-kv'
+---
+
+`MessageKv` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.MessageKv`。消息扩展键值信息。
+
+## 字段说明
+
+| 字段名称      | Java 类型                  | 描述                   |
+| ------------- | -------------------------- | ---------------------- |
+| clientMsgID   | String                     | SDK 返回或提交的字段。 |
+| changedKvList | List<SingleTypeKeyInfoSum> | SDK 返回或提交的字段。 |
+
+## 关联类型
+
+- [单类型扩展统计](/docs/chat/sdk/v4/android/models/single-type-key-info-sum)（`SingleTypeKeyInfoSum`）：消息扩展中单个类型和 key 的统计信息。
+
+## 相关页面
+
+- [监听消息 KV 变化](/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener)

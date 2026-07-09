@@ -1,0 +1,32 @@
+---
+title: '概述'
+description: '黑名单方法目录，所有方法均拆分到独立页面说明。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/user/blacklist/overview'
+---
+
+黑名单方法来自 `open_im_sdk/relation.go` 中的黑名单部分。它们用于维护当前用户的屏蔽关系；具体屏蔽效果仍以 SDK 和服务端策略为准。
+
+本页是黑名单方法目录。加入、查询和移出黑名单分别有独立方法页。
+
+## 方法索引
+
+| 方法                                                                                   | 说明                                                                                        |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [加入黑名单](/docs/chat/sdk/v4/react-native/user/blacklist/methods/add-black)          | 将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。 |
+| [获取黑名单列表](/docs/chat/sdk/v4/react-native/user/blacklist/methods/get-black-list) | 获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。                            |
+| [移出黑名单](/docs/chat/sdk/v4/react-native/user/blacklist/methods/remove-black)       | 将指定用户移出黑名单，恢复与该用户的普通关系能力。                                          |
+
+## 事件联动
+
+黑名单新增和移除通过 `SetFriendListener` 注册的 `OnFriendshipListener` 接收。
+
+## 相关类型
+
+- [好友关系监听器](/docs/chat/sdk/v4/react-native/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。

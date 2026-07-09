@@ -1,0 +1,39 @@
+---
+title: '好友申请信息'
+description: '说明 React Native SDK FriendApplicationInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/friend-application-info'
+---
+
+`FriendApplicationInfo` 是 React Native SDK 的数据模型，完整类名为 `io.openim.react-native.sdk.models.FriendApplicationInfo`。好友申请记录，包含申请人、接收人、处理状态和备注。
+
+## 字段说明
+
+| 字段名称      | TypeScript 类型 | 描述                                     |
+| ------------- | --------------- | ---------------------------------------- |
+| fromUserID    | String          | 请求用户id                               |
+| fromNickname  | String          | 请求用户昵称                             |
+| fromFaceURL   | String          | 请求用户头像                             |
+| fromGender    | int             | 请求用户性别                             |
+| toUserID      | String          | 接受用户id                               |
+| toNickname    | String          | 接受用户昵称                             |
+| toFaceURL     | String          | 接受用户头像                             |
+| toGender      | int             | 接受用户性别                             |
+| handleResult  | int             | 处理结果 0 等待处理，1 已同意， 2 已拒绝 |
+| reqMsg        | String          | 请求备注                                 |
+| createTime    | long            | 创建时间                                 |
+| handlerUserID | String          | 处理者id                                 |
+| handleMsg     | String          | 处理备注                                 |
+| handleTime    | long            | 处理时间                                 |
+| ex            | String          | 扩展字段                                 |
+
+## 相关页面
+
+- [获取发出的好友申请](/docs/chat/sdk/v4/react-native/user/friend/methods/get-friend-application-list-as-applicant)
+- [获取收到的好友申请](/docs/chat/sdk/v4/react-native/user/friend/methods/get-friend-application-list-as-recipient)

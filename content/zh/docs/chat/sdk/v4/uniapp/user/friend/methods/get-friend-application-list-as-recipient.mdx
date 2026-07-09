@@ -1,0 +1,69 @@
+---
+title: '获取收到的好友申请'
+description: '说明 uni-app core binding 方法 GetFriendApplicationListAsRecipient 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/user/friend/methods/get-friend-application-list-as-recipient'
+---
+
+获取当前用户收到的好友申请列表，适合好友申请入口和审核页。
+
+## 功能介绍
+
+获取当前用户收到的好友申请列表，适合好友申请入口和审核页。
+
+好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                          |
+| -------- | ----------------------------------------------------------------------------- |
+| 方法签名 | `GetFriendApplicationListAsRecipient(callback Base, operationID, req string)` |
+| 所属能力 | 好友                                                                          |
+| 源码位置 | `open_im_sdk/relation.go`                                                     |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`。
+
+```js showLineNumbers
+openIM.getFriendApplicationListAsRecipient(operationID, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                              |
+| -------- | -------- | -------- | --------------------------------- |
+| callback | Function | 是       | 按 uni-app 原生插件导出方法传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.getFriendApplicationListAsRecipient('operationID', callback);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/uniapp/models/base)（`Base`）：core binding 异步结果回调，uni-app 调用层通常映射为 callback。
+- [好友关系监听器](/docs/chat/sdk/v4/uniapp/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友申请信息](/docs/chat/sdk/v4/uniapp/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+- [收到的好友申请查询条件](/docs/chat/sdk/v4/uniapp/models/get-friend-application-list-as-recipient-req)（`GetFriendApplicationListAsRecipientReq`）：查询当前用户收到的好友申请时使用的分页和状态过滤条件。
+
+## 相关页面
+
+- [好友](/docs/chat/sdk/v4/uniapp/user/friend/overview)

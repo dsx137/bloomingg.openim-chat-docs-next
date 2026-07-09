@@ -1,0 +1,38 @@
+---
+title: 'Typing Elem'
+description: 'Describes the Typing Elem type used by Flutter SDK 3.8.3+hotfix.12.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/typing-elem'
+---
+
+`TypingElem` is a common type used by Flutter SDK 3.8.3+hotfix.12. Use this page to understand where the type appears and how it connects to method parameters, return values, and event callbacks.
+
+## Usage
+
+| Scenario          | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| Method parameters | Some SDK methods accept this type or a request object with the same shape. |
+| Return values     | Query methods and callbacks may return this type or a list of this type.   |
+| Event handling    | Listener callbacks may include this type when related data changes.        |
+
+## Fields
+
+| Field   | Type   | Description                        |
+| ------- | ------ | ---------------------------------- |
+| msgTips | String | Defined by the platform SDK model. |
+
+## Usage Notes
+
+- Treat ID fields such as `userID`, `groupID`, `conversationID`, and `clientMsgID` as stable identifiers.
+- Optional extension fields are usually JSON strings or platform-specific maps. Validate them before using them in UI logic.
+- Prefer SDK update methods instead of mutating local objects only.
+
+## Related Pages
+
+- [Models overview](/docs/chat/sdk/v4/flutter/models/overview)

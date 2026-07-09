@@ -1,0 +1,64 @@
+---
+title: '监听自定义业务事件'
+description: '说明 uni-app core binding 方法 SetCustomBusinessListener 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/event-handler/methods/set-custom-business-listener'
+---
+
+设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。
+
+## 功能介绍
+
+设置自定义业务消息监听器，用于接收业务自定义通道传入的消息。
+
+`Set*Listener` 会替换当前 SDK 保存的同类监听器；如果多个模块都要消费事件，应在业务层封装统一分发。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                           |
+| -------- | -------------------------------------------------------------- |
+| 方法签名 | `SetCustomBusinessListener(listener OnCustomBusinessListener)` |
+| 所属能力 | 监听器                                                         |
+| 源码位置 | `open_im_sdk/listener.go`                                      |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+```js showLineNumbers
+openIM.setCustomBusinessListener(operationID, /* ... */, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型   | 是否必填   | 描述                 |
+| -------- | ---------- | ---------- | -------------------- |
+| 参数     | 见方法原型 | 按方法原型 | 按上方调用原型传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.setCustomBusinessListener('operationID', callback);
+```
+
+## 相关类型
+
+- [自定义业务监听器](/docs/chat/sdk/v4/uniapp/models/on-custom-business-listener)（`OnCustomBusinessListener`）：自定义业务消息监听器。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/uniapp/event-handler/overview)

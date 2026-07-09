@@ -1,0 +1,32 @@
+---
+title: '概述'
+description: '获取未读数、输入状态和发送输入提示的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/conversation-state/overview'
+---
+
+会话状态用于维护会话未读数和输入中状态，让会话列表和聊天页展示及时同步。
+
+## 方法索引
+
+| 方法                                                                                                 | 说明                                                              |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| [获取总未读数](/docs/chat/sdk/v4/react-native/message/conversation-state/get-total-unread-msg-count) | 获取当前用户全部会话的总未读数，适合应用角标和底部 Tab 未读角标。 |
+| [更新输入状态](/docs/chat/sdk/v4/react-native/message/conversation-state/change-input-states)        | 更新当前用户在指定会话中的输入状态。                              |
+| [获取输入状态](/docs/chat/sdk/v4/react-native/message/conversation-state/get-input-states)           | 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。      |
+| [发送输入提示](/docs/chat/sdk/v4/react-native/message/conversation-state/typing-status-update)       | 发送输入状态提示，适合单聊输入中状态展示。                        |
+
+## 相关类型
+
+- [会话信息](/docs/chat/sdk/v4/react-native/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+- [会话监听器](/docs/chat/sdk/v4/react-native/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

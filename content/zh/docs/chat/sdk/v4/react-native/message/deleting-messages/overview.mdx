@@ -1,0 +1,33 @@
+---
+title: '概述'
+description: '删除单条消息、清空消息和删除会话消息的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/deleting-messages/overview'
+---
+
+删除消息用于删除本地消息、服务端消息、会话内消息或全部消息。清理类方法通常需要额外确认业务风险。
+
+## 方法索引
+
+| 方法                                                                                                               | 说明                                                            |
+| ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+| [删除本地消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/delete-message-from-local-storage)         | 仅从本地存储删除指定消息，不表示服务端消息被删除。              |
+| [删除消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/delete-message)                                | 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。 |
+| [清空本地和服务端消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/delete-all-msg-from-local-and-svr) | 删除当前用户本地和服务端全部消息数据，属于高风险清理操作。      |
+| [清空本地消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/delete-all-msg-from-local)                 | 仅删除当前用户本地全部消息数据，适合本地缓存清理。              |
+| [清空会话消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/clear-conversation-and-delete-all-msg)     | 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。 |
+| [删除会话及消息](/docs/chat/sdk/v4/react-native/message/deleting-messages/delete-conversation-and-delete-all-msg)  | 删除指定会话及其消息，适合彻底移除某个会话记录。                |
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/react-native/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

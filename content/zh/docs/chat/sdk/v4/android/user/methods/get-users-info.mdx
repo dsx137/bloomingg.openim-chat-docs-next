@@ -29,18 +29,18 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-users-info'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getUsersInfo(OnBase<List<PublicUserInfo>> callBack, List<String> uidList)
+public void getUsersInfo(OnBase<List<PublicUserInfo>> base, List<String> uidList)
 ```
 
 ## 输入参数
 
-| 参数名称 | 参数类型                     | 是否必填 | 描述         |
-| -------- | ---------------------------- | -------- | ------------ |
-| callBack | OnBase<List<PublicUserInfo>> | 是       | 回调接口     |
-| uidList  | List<String>                 | 是       | 用户 ID 集合 |
+| 参数名称 | 参数类型                                                                                                                                      | 是否必填 | 描述         |
+| -------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`PublicUserInfo`](/docs/chat/sdk/v4/android/models/public-user-info)&gt;&gt; | 是       | 回调接口     |
+| uidList  | List<String>                                                                                                                                  | 是       | 用户 ID 集合 |
 
 ## 返回结果
 
@@ -48,20 +48,27 @@ public void getUsersInfo(OnBase<List<PublicUserInfo>> callBack, List<String> uid
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().userInfoManager.getUsersInfo(new OnBase<List<PublicUserInfo>>() {
     @Override
     public void onError(int code, String error) {
-      // todo: 处理错误信息
+        // TODO: 处理错误
     }
+
     @Override
     public void onSuccess(List<PublicUserInfo> data) {
-      // todo: 请求成功，返回PublicUser
+        // TODO: 处理公开用户资料
     }
-},uidList);
+}, uidList);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [公开用户信息](/docs/chat/sdk/v4/android/models/public-user-info)（`PublicUserInfo`）：公开用户资料。
 
 ## 相关页面
 

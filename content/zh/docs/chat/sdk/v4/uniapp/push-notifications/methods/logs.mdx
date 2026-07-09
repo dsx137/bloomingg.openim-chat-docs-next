@@ -1,0 +1,68 @@
+---
+title: '写入客户端日志'
+description: '说明 uni-app core binding 方法 Logs 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/push-notifications/methods/logs'
+---
+
+主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。
+
+## 功能介绍
+
+主动写入一条客户端日志，适合业务层把关键 IM 操作写入 SDK 日志链路。
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                                        |
+| -------- | --------------------------------------------------------------------------------------------------------------------------- |
+| 方法签名 | `Logs(callback Base, operationID string, logLevel int, file string, line int, msgs string, err string, keyAndValue string)` |
+| 所属能力 | 推送、日志与文件                                                                                                            |
+| 源码位置 | `open_im_sdk/third.go`                                                                                                      |
+
+## uni-app 调用参考
+
+uni-app SDK v3.8.3 的 JavaScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`。
+
+```js showLineNumbers
+openIM.logs(operationID, options, callback);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填   | 描述                              |
+| -------- | -------- | ---------- | --------------------------------- |
+| options  | Object   | 按方法原型 | 按 uni-app 原生插件导出方法传入。 |
+| callback | Function | 是         | 按 uni-app 原生插件导出方法传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 uni-app SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.logs('operationID', {}, callback);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/uniapp/models/base)（`Base`）：core binding 异步结果回调，uni-app 调用层通常映射为 callback。
+- [日志等级](/docs/chat/sdk/v4/uniapp/models/log-level)（`LogLevel`）：SDK 日志等级常量。
+
+## 相关页面
+
+- [推送、日志与文件](/docs/chat/sdk/v4/uniapp/push-notifications/overview)

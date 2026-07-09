@@ -29,17 +29,21 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/upload-logs'
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getSelfUserInfo(OnBase<UserInfo> callBack)
+public void uploadLogs(OnBase<String> base, List<String> params, int line, String ex, UploadLogProgress progress)
 ```
 
 ## 输入参数
 
-| 参数名称 | 参数类型         | 是否必填 | 描述     |
-| -------- | ---------------- | -------- | -------- |
-| callBack | OnBase<UserInfo> | 是       | 回调接口 |
+| 参数名称 | 参数类型                                                                    | 是否必填 | 描述                                                |
+| -------- | --------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;String&gt;          | 是       | 上传结果回调。                                      |
+| params   | List<String>                                                                | 否       | 预留参数，当前 Android SDK 方法签名保留该参数。     |
+| line     | int                                                                         | 是       | 上传日志的起始行或限制行数，由业务按 SDK 约定传入。 |
+| ex       | String                                                                      | 否       | 扩展信息。                                          |
+| progress | [`UploadLogProgress`](/docs/chat/sdk/v4/android/models/upload-log-progress) | 否       | 日志上传进度回调。                                  |
 
 ## 返回结果
 
@@ -47,11 +51,38 @@ public void getSelfUserInfo(OnBase<UserInfo> callBack)
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().friendshipManager.getSelfUserInfo(new OnBase<UserInfo>(){…})
+OpenIMClient.getInstance().uploadLogs(
+    new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理日志上传结果
+    }
+},
+    params,
+    line,
+    ex,
+    new UploadLogProgress() {
+        @Override
+        public void onProgress(long current, long size) {
+            // TODO: 更新日志上传进度
+        }
+    }
+);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [日志上传进度回调](/docs/chat/sdk/v4/android/models/upload-log-progress)（`UploadLogProgress`）：日志上传进度回调接口。
 
 ## 相关页面
 

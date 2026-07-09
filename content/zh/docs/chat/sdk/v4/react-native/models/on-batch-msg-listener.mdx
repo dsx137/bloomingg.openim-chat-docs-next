@@ -1,0 +1,21 @@
+---
+title: '批量消息监听器'
+description: '说明 React Native SDK OnBatchMsgListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/on-batch-msg-listener'
+---
+
+`OnBatchMsgListener` 是 React Native SDK 文档中展示 core binding 方法签名时使用的回调类型，完整类名为 `open_im_sdk_callback.OnBatchMsgListener`。core binding 批量消息监听器，用于接收多条新消息和离线消息。
+
+## 回调方法
+
+| 方法                     | 参数                | 描述               |
+| ------------------------ | ------------------- | ------------------ |
+| OnRecvNewMessages        | messageList: string | 收到多条新消息。   |
+| OnRecvOfflineNewMessages | messageList: string | 收到多条离线消息。 |

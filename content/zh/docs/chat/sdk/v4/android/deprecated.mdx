@@ -15,15 +15,15 @@ sourcePath: '/docs/chat/sdk/v4/android/deprecated'
 
 ## 当前未作为 Android core API 暴露的能力
 
-| 能力范围                                             | 当前处理                                                                                            |
-| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| open channel、enter/exit open channel                | 当前 core 没有独立 open channel 导出方法；多人聊天使用 OpenIM 群组。                                |
-| channel metadata、metacounter、custom type           | 当前 core 未导出独立方法；如需扩展信息，优先使用 OpenIM 已有群组、会话、消息扩展字段。              |
-| poll、scheduled message、message thread、translation | 当前 core 未导出独立 Android 方法。                                                                 |
-| report message/user/channel                          | 当前 core 未导出独立举报方法。                                                                      |
-| push notification tester、template、HMS 多设备配置   | 当前 core 只导出 `UpdateFcmToken` 和 `SetAppBadge`；其余通常由应用或服务端配置完成。                |
-| operator 注册/移除                                   | 当前 core 没有单独 operator API；群主、管理员和成员能力以群组接口为准。                             |
-| freeze/unfreeze channel                              | 当前 core 对应可用能力是群禁言 `ChangeGroupMute` 和成员禁言 `ChangeGroupMemberMute`，不是频道冻结。 |
+| 能力范围                                             | 当前处理                                                                                                  |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 开放群组、进入/退出开放群组                          | 当前 core 没有这类独立开放群组导出方法；多人聊天使用 OpenIM 群组。                                        |
+| 群组元数据、计数器、自定义类型                       | 当前 core 未导出独立方法；如需扩展信息，优先使用 OpenIM 已有群组、会话、消息扩展字段。                    |
+| poll、scheduled message、message thread、translation | 当前 core 未导出独立 Android 方法。                                                                       |
+| 举报消息、用户或群组                                 | 当前 core 未导出独立举报方法。                                                                            |
+| push notification tester、template、HMS 多设备配置   | 当前 core 只导出 `UpdateFcmToken` 和 `SetAppBadge`；其余通常由应用或服务端配置完成。                      |
+| operator 注册/移除                                   | 当前 core 没有单独 operator API；群主、管理员和成员能力以群组接口为准。                                   |
+| 群组冻结/解冻                                        | 当前 core 对应可用能力是群禁言 `ChangeGroupMute` 和成员禁言 `ChangeGroupMemberMute`，不提供独立冻结接口。 |
 
 ## 文档处理原则
 

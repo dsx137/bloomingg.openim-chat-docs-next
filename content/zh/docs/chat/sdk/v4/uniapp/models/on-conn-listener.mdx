@@ -1,0 +1,37 @@
+---
+title: '连接状态监听器'
+description: '说明 uni-app SDK OnConnListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/models/on-conn-listener'
+---
+
+`OnConnListener` 是 uni-app SDK 的监听器，完整类名为 `io.openim.uniapp.sdk.listener.OnConnListener`。SDK 连接状态和登录票据状态监听器。
+
+## 类型说明
+
+只有在调用sdk的login方法后才开始回调
+
+## 回调方法
+
+| 方法               | 参数                   | 描述                                                                                |
+| ------------------ | ---------------------- | ----------------------------------------------------------------------------------- |
+| onConnectFailed    | int code；String error | 连接服务器失败 可以提示用户当前网络连接不可用                                       |
+| onConnectSuccess   | 无                     | 已经成功连接到服务器                                                                |
+| onConnecting       | 无                     | 正在连接到服务器 适合在 UI 上展示“正在连接”状态。                                   |
+| onKickedOffline    | 无                     | 当前用户被踢下线 此时可以 UI 提示用户“您已经在其他端登录了当前账号，是否重新登录？” |
+| onUserTokenExpired | 无                     | 登录票据已经过期 请使用新签发的 UserSig 进行登录。                                  |
+| onUserTokenInvalid | String s               | 登录票据无效 请使用新签发的 UserSig 进行登录。                                      |
+
+## 关联类型
+
+- [用户信息](/docs/chat/sdk/v4/uniapp/models/user-info)（`UserInfo`）：用户资料对象。
+
+## 相关页面
+
+- [初始化 SDK](/docs/chat/sdk/v4/uniapp/application/methods/init-sdk)

@@ -1,0 +1,68 @@
+---
+title: '上传日志'
+description: '说明 iOS core binding 方法 UploadLogs 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/push-notifications/methods/upload-logs'
+---
+
+上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。
+
+## 功能介绍
+
+上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                             |
+| -------- | ------------------------------------------------------------------------------------------------ |
+| 方法签名 | `UploadLogs(callback Base, operationID string, line int, ex string, progress UploadLogProgress)` |
+| 所属能力 | 推送、日志与文件                                                                                 |
+| 源码位置 | `open_im_sdk/third.go`                                                                           |
+
+## iOS 调用参考
+
+iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT void Open_im_sdkUploadLogs(id<Open_im_sdk_callbackBase> _Nullable callback, NSString* _Nullable operationID, long line, NSString* _Nullable ex, id<Open_im_sdk_callbackUploadLogProgress> _Nullable progress);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                  | 是否必填   | 描述             |
+| -------- | ----------------------------------------- | ---------- | ---------------- |
+| callback | id<Open_im_sdk_callbackBase>              | 是         | 回调或监听器。   |
+| line     | long                                      | 按方法原型 | 按方法原型传入。 |
+| ex       | NSString\*                                | 按方法原型 | 按方法原型传入。 |
+| progress | id<Open_im_sdk_callbackUploadLogProgress> | 按方法原型 | 按方法原型传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```objective-c showLineNumbers
+Open_im_sdkUploadLogs(callback, @"operationID", 0, @"ex", progress);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/ios/models/base)（`Base`）：core binding 异步结果回调，iOS 调用层通常映射为 Base。
+- [日志上传进度回调](/docs/chat/sdk/v4/ios/models/upload-log-progress)（`UploadLogProgress`）：日志上传进度回调接口。
+
+## 相关页面
+
+- [推送、日志与文件](/docs/chat/sdk/v4/ios/push-notifications/overview)

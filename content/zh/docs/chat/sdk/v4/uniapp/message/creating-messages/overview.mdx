@@ -1,0 +1,52 @@
+---
+title: '概述'
+description: '创建文本、图片、语音、视频、文件和业务消息体的 uni-app SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/message/creating-messages/overview'
+---
+
+创建消息用于在发送前构造消息对象。创建类方法通常同步返回 `Message`，随后交给发送方法发送。
+
+## 方法索引
+
+| 方法                                                                                                               | 说明                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| [获取 @ 所有人标记](/docs/chat/sdk/v4/uniapp/message/creating-messages/get-at-all-tag)                             | 获取群聊 @ 所有人使用的特殊标记。发送 @ 所有人消息时，应使用该标记而不是业务侧随意拼接字符串。 |
+| [创建文本消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-text-message)                             | 创建普通文本消息。适合纯文本聊天内容，发送前可由业务层先完成长度、空白和敏感词处理。           |
+| [创建高级文本消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-advanced-text-message)                | 创建带实体信息的文本消息。适合文本中需要携带链接、富文本实体或业务范围标记的场景。             |
+| [创建 @ 文本消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-text-at-message)                       | 创建群聊 @ 文本消息。可提醒指定成员，也可以配合引用消息展示上下文。                            |
+| [创建位置消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-location-message)                         | 创建位置消息。适合发送地图位置、门店位置或业务地点。                                           |
+| [创建自定义消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-custom-message)                         | 创建自定义消息。适合订单卡片、邀请卡片、审批状态等 SDK 没有内置内容类型的业务消息。            |
+| [创建引用消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-quote-message)                            | 创建引用消息。用于回复某条历史消息并携带新的文本内容。                                         |
+| [创建高级引用消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-advanced-quote-message)               | 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。                     |
+| [创建名片消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-card-message)                             | 创建名片消息。通常用于分享用户资料卡片或联系人卡片。                                           |
+| [创建表情消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-face-message)                             | 创建表情消息。适合业务自定义表情包或贴纸消息。                                                 |
+| [创建转发消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-forward-message)                          | 创建单条转发消息。用于把已有消息转发给另一个用户或群。                                         |
+| [创建合并转发消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-merger-message)                       | 创建合并转发消息。适合转发一组聊天记录，并展示标题和摘要。                                     |
+| [创建图片消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-image-message)                            | 通过图片路径创建图片消息。SDK 会根据本地图片路径生成消息体。                                   |
+| [通过完整路径创建图片消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-image-message-from-full-path) | 通过完整图片路径创建图片消息。适合调用方持有绝对路径的场景。                                   |
+| [通过 URL 创建图片消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-image-message-by-url)            | 通过已上传图片 URL 创建图片消息。适合资源已由业务侧上传完成的场景。                            |
+| [创建语音消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-sound-message)                            | 通过音频路径创建语音消息。                                                                     |
+| [通过完整路径创建语音消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-sound-message-from-full-path) | 通过完整音频路径创建语音消息。适合调用方已持有完整本地路径。                                   |
+| [通过 URL 创建语音消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-sound-message-by-url)            | 通过已上传音频 URL 信息创建语音消息。                                                          |
+| [创建视频消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-video-message)                            | 通过视频路径和快照路径创建视频消息。                                                           |
+| [通过完整路径创建视频消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-video-message-from-full-path) | 通过完整视频路径和完整快照路径创建视频消息。                                                   |
+| [通过 URL 创建视频消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-video-message-by-url)            | 通过已上传视频 URL 信息创建视频消息。                                                          |
+| [创建文件消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-file-message)                             | 通过文件路径创建普通文件消息。                                                                 |
+| [通过完整路径创建文件消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-file-message-from-full-path)  | 通过完整文件路径创建普通文件消息。                                                             |
+| [通过 URL 创建文件消息](/docs/chat/sdk/v4/uniapp/message/creating-messages/create-file-message-by-url)             | 通过已上传文件 URL 信息创建文件消息。                                                          |
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/uniapp/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [离线推送信息](/docs/chat/sdk/v4/uniapp/models/offline-push-info)（`OfflinePushInfo`）：发送消息时可附带的离线推送配置。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/uniapp/message/overview)

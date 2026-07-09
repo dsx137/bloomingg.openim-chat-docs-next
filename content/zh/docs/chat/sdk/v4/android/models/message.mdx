@@ -1,0 +1,97 @@
+---
+title: '消息对象'
+description: '说明 Android SDK Message 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/message'
+---
+
+`Message` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.Message`。消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 字段说明
+
+| 字段名称             | Java 类型        | 描述                                                                                                                                                                                                                                |
+| -------------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| clientMsgID          | String           | 消息唯一ID                                                                                                                                                                                                                          |
+| serverMsgID          | String           | 消息服务器ID，暂时不使用                                                                                                                                                                                                            |
+| createTime           | long             | 消息创建时间，单位纳秒                                                                                                                                                                                                              |
+| sendTime             | long             | 消息发送时间，单位ms                                                                                                                                                                                                                |
+| sessionType          | int              | 会话类型 1:单聊 2:群聊 ConversationType                                                                                                                                                                                             |
+| sendID               | String           | 发送者ID                                                                                                                                                                                                                            |
+| recvID               | String           | 接收者ID                                                                                                                                                                                                                            |
+| msgFrom              | int              | 标识消息是用户级别还是系统级别 100:用户 200:系统                                                                                                                                                                                    |
+| contentType          | int              | MessageType 消息类型：； 101:文本消息； 102:图片消息； 103:语音消息； 104:视频消息； 105:文件消息； 106:@消息； 107:合并消息； 108:转发消息； 109:位置消息； 110:自定义消息； 111:撤回消息回执； 112:C2C已读回执； 113:正在输入状态 |
+| platformID           | int              | Platform 平台类型 1:ios 2:android 3:windows 4:osx 5:web 6:mini 7:linux                                                                                                                                                              |
+| senderNickname       | String           | 发送者昵称                                                                                                                                                                                                                          |
+| senderFaceUrl        | String           | 发送者头像                                                                                                                                                                                                                          |
+| groupID              | String           | 群聊ID                                                                                                                                                                                                                              |
+| seq                  | int              | 消息唯一序列号                                                                                                                                                                                                                      |
+| isRead               | boolean          | 是否已读                                                                                                                                                                                                                            |
+| status               | int              | MessageStatus 消息状态 1:发送中 2:发送成功 3:发送失败 4:已删除 5:已撤回                                                                                                                                                             |
+| isReact              | boolean          | SDK 返回或提交的字段。                                                                                                                                                                                                              |
+| isExternalExtensions | boolean          | SDK 返回或提交的字段。                                                                                                                                                                                                              |
+| offlinePush          | OfflinePushInfo  | 离线消息推送内容                                                                                                                                                                                                                    |
+| attachedInfo         | String           | 附加信息                                                                                                                                                                                                                            |
+| ext                  | Object           | android 附加字段                                                                                                                                                                                                                    |
+| ex                   | Object           | go 附加字段                                                                                                                                                                                                                         |
+| localEx              | Object           | 本地消息拓展信息                                                                                                                                                                                                                    |
+| pictureElem          | PictureElem      | 图片信息                                                                                                                                                                                                                            |
+| soundElem            | SoundElem        | 语音信息                                                                                                                                                                                                                            |
+| videoElem            | VideoElem        | 视频信息                                                                                                                                                                                                                            |
+| fileElem             | FileElem         | 文件信息                                                                                                                                                                                                                            |
+| atTextElem           | AtTextElem       | \_@信息                                                                                                                                                                                                                             |
+| locationElem         | LocationElem     | 位置信息                                                                                                                                                                                                                            |
+| customElem           | CustomElem       | 自定义信息                                                                                                                                                                                                                          |
+| quoteElem            | QuoteElem        | 引用消息                                                                                                                                                                                                                            |
+| mergeElem            | MergeElem        | 合并信息                                                                                                                                                                                                                            |
+| notificationElem     | NotificationElem | 通知                                                                                                                                                                                                                                |
+| faceElem             | FaceElem         | 自定义表情                                                                                                                                                                                                                          |
+| attachedInfoElem     | AttachedInfoElem | 附加信息 如：群消息已读                                                                                                                                                                                                             |
+| textElem             | TextElem         | SDK 返回或提交的字段。                                                                                                                                                                                                              |
+| cardElem             | CardElem         | 个人名片                                                                                                                                                                                                                            |
+| advancedTextElem     | AdvancedTextElem | SDK 返回或提交的字段。                                                                                                                                                                                                              |
+| typingElem           | TypingElem       | SDK 返回或提交的字段。                                                                                                                                                                                                              |
+
+## 关联类型
+
+- [表情消息元素](/docs/chat/sdk/v4/android/models/face-elem)（`FaceElem`）：自定义表情消息元素。
+- [附加信息元素](/docs/chat/sdk/v4/android/models/attached-info-elem)（`AttachedInfoElem`）：消息附加信息元素，常用于携带群消息已读等扩展数据。
+- [高级文本元素](/docs/chat/sdk/v4/android/models/advanced-text-elem)（`AdvancedTextElem`）：高级文本消息的内容元素，用于描述富文本正文和片段。
+- [个人名片元素](/docs/chat/sdk/v4/android/models/card-elem)（`CardElem`）：个人名片消息元素。
+- [合并消息元素](/docs/chat/sdk/v4/android/models/merge-elem)（`MergeElem`）：合并消息元素，用于多条消息合并转发。
+- [会话类型](/docs/chat/sdk/v4/android/models/conversation-type)（`ConversationType`）：会话类型常量，用于区分单聊、群聊和通知会话。
+- [离线推送信息](/docs/chat/sdk/v4/android/models/offline-push-info)（`OfflinePushInfo`）：发送消息时携带的离线推送配置。
+- [平台类型](/docs/chat/sdk/v4/android/models/platform)（`Platform`）：客户端平台类型常量。
+- [视频消息元素](/docs/chat/sdk/v4/android/models/video-elem)（`VideoElem`）：视频消息元素。
+- [输入状态元素](/docs/chat/sdk/v4/android/models/typing-elem)（`TypingElem`）：正在输入状态消息元素。
+- [通知消息元素](/docs/chat/sdk/v4/android/models/notification-elem)（`NotificationElem`）：通知消息元素。
+- [图片消息元素](/docs/chat/sdk/v4/android/models/picture-elem)（`PictureElem`）：图片消息元素，包含图片路径、地址和多尺寸图片信息。
+- [位置消息元素](/docs/chat/sdk/v4/android/models/location-elem)（`LocationElem`）：位置消息元素。
+- [文本消息元素](/docs/chat/sdk/v4/android/models/text-elem)（`TextElem`）：文本消息元素。
+- [文件消息元素](/docs/chat/sdk/v4/android/models/file-elem)（`FileElem`）：文件消息元素，用于本地文件消息或 URL 文件消息。
+- [消息类型](/docs/chat/sdk/v4/android/models/message-type)（`MessageType`）：消息内容类型常量。
+- [消息状态](/docs/chat/sdk/v4/android/models/message-status)（`MessageStatus`）：消息发送状态常量。
+- [引用消息元素](/docs/chat/sdk/v4/android/models/quote-elem)（`QuoteElem`）：引用消息元素。
+- [语音消息元素](/docs/chat/sdk/v4/android/models/sound-elem)（`SoundElem`）：语音消息元素。
+- [自定义消息元素](/docs/chat/sdk/v4/android/models/custom-elem)（`CustomElem`）：自定义消息元素，用于携带业务自定义数据。
+- [At 文本元素](/docs/chat/sdk/v4/android/models/at-text-elem)（`AtTextElem`）：At 文本消息的内容元素，用于保存文本、被提及用户和引用信息。
+
+## 相关页面
+
+- [监听单条消息事件](/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener)
+- [创建高级引用消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-quote-message)
+- [创建高级文本消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-text-message)
+- [创建名片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-card-message)
+- [创建自定义消息](/docs/chat/sdk/v4/android/message/creating-messages/create-custom-message)
+- [创建表情消息](/docs/chat/sdk/v4/android/message/creating-messages/create-face-message)
+- [通过 URL 创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-by-url)
+- [通过完整路径创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-from-full-path)
+- [创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message)
+- [创建转发消息](/docs/chat/sdk/v4/android/message/creating-messages/create-forward-message)
+- [通过 URL 创建图片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-by-url)
+- [通过完整路径创建图片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-from-full-path)

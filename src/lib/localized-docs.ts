@@ -28,14 +28,38 @@ const localizedPageCache = new Map<string, LocalizedDocPage | undefined>();
 const zhLabelOverrides: Record<string, string> = {
   Chat: '聊天',
   Blacklist: '黑名单',
+  'Conversation state': '会话状态',
+  'Conversations and messages': '会话与消息',
+  'Creating messages': '创建消息',
+  'Delete message': '删除消息',
+  'Deleting messages': '删除消息',
+  'Event handlers': '监听器',
   Friend: '好友',
+  Friends: '好友',
   Group: '群组',
+  'Group applications': '入群申请',
+  'Group members': '群成员',
+  'Group membership': '用户入群关系',
+  'Group moderation': '群组禁言',
   Home: '首页',
+  'Initialization and login': '初始化与登录',
+  'Listing conversations': '查询会话',
+  'Local messages': '本地消息',
+  'Managing conversations': '管理会话',
+  'Managing groups': '管理群组',
+  'Managing messages': '管理消息',
   Methods: '方法',
+  Models: '类型说明',
   'OpenIM Platform API': 'OpenIM 平台 API',
+  Overview: '概述',
   'Platform API': '平台 API',
   'Push, logs, and files': '推送、日志与文件',
+  'Read status': '已读状态',
+  'Retrieving messages': '查询消息',
+  'Send message': '发送消息',
+  'Sending messages': '发送消息',
   'Server API': '服务端 API',
+  'Unsupported or unexposed capabilities': '未支持或未暴露能力',
   User: '用户',
 };
 
@@ -64,13 +88,18 @@ export function localizeRouteRecord(route: RouteRecord, locale: Locale): RouteRe
 }
 
 export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
+  const isOverviewNode = /^overview(?:-|$)/.test(node.segment);
   const isNestedOverview = node.segment === 'overview' && node.id.includes('/');
+  const isAndroidSdkOverview =
+    node.href?.startsWith('/docs/chat/sdk/v4/android/') && isOverviewNode;
   const isPlatformApiRootOverview = node.href === '/docs/chat/platform-api/v3/overview';
   const isPlatformApiNode = node.href?.startsWith('/docs/chat/platform-api/v3/');
+  if (node.title === '概述') return '概述';
+  if (isAndroidSdkOverview) return '概述';
+  if (locale !== 'zh') return isOverviewNode ? 'Overview' : node.title;
   if (isPlatformApiRootOverview) return '概述';
   if (isNestedOverview && isPlatformApiNode) return node.title;
-  if (locale !== 'zh') return isNestedOverview ? 'Overview' : node.title;
-  if (isNestedOverview) return '概述';
+  if (isOverviewNode) return '概述';
   if (node.href)
     return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
   const label =

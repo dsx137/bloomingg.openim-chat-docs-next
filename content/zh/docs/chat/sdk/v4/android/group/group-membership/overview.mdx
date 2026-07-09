@@ -1,0 +1,33 @@
+---
+title: '概述'
+description: '查询当前用户入群状态、已加入群组和指定用户是否在群内的 Android SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/group-membership/overview'
+---
+
+用户入群关系用于判断当前用户或指定用户与群组之间的加入关系，并查询当前用户已加入的群组。
+
+## 方法索引
+
+| 方法                                                                                              | 说明                                                                   |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [获取已加入群组](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list)          | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。         |
+| [分页获取已加入群组](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list-page) | 分页获取当前用户已加入群组，适合群数量较多的账号。                     |
+| [判断是否已入群](/docs/chat/sdk/v4/android/group/group-membership/is-join-group)                  | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。 |
+| [查询用户是否在群内](/docs/chat/sdk/v4/android/group/group-membership/get-users-in-group)         | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。               |
+| [退出群组](/docs/chat/sdk/v4/android/group/group-membership/quit-group)                           | 当前用户主动退出指定群组。                                             |
+
+## 相关类型
+
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+- [入群来源](/docs/chat/sdk/v4/android/models/join-source)（`JoinSource`）：描述用户进入群组的来源。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/group/overview)

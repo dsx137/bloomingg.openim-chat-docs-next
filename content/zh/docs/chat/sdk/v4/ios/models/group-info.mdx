@@ -1,0 +1,50 @@
+---
+title: '群组信息'
+description: '说明 iOS Core SDK GroupInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/models/group-info'
+---
+
+`GroupInfo` 是 iOS Core SDK 的数据模型，完整类名为 `io.openim.ios.sdk.models.GroupInfo`。群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 字段说明
+
+| 字段名称               | Objective-C 类型 | 描述                                                |
+| ---------------------- | ---------------- | --------------------------------------------------- |
+| groupID                | String           | 组ID                                                |
+| groupName              | String           | 群名                                                |
+| notification           | String           | 群公告                                              |
+| introduction           | String           | 群简介                                              |
+| faceURL                | String           | 群头像                                              |
+| ownerUserID            | String           | 群主id                                              |
+| createTime             | Long             | 创建时间                                            |
+| memberCount            | Integer          | 群成员数量                                          |
+| status                 | Integer          | 群状态： ok = 0 blocked = 1 Dismissed = 2 Muted = 3 |
+| creatorUserID          | String           | 创建者id                                            |
+| groupType              | Integer          | 群类型                                              |
+| ex                     | String           | 扩展字段                                            |
+| needVerification       | Integer          | 进群验证方式 GroupVerification                      |
+| lookMemberInfo         | Integer          | 不允许通过群获取成员资料 0：关闭，1：打开           |
+| applyMemberFriend      | Integer          | 不允许通过群添加好友 0：关闭，1：打开               |
+| notificationUpdateTime | Long             | 通知更新时间                                        |
+| notificationUserID     | String           | 通知更新人                                          |
+
+## 关联类型
+
+- [入群验证方式](/docs/chat/sdk/v4/ios/models/group-verification)（`GroupVerification`）：入群验证方式常量。
+
+## 相关页面
+
+- [创建群组](/docs/chat/sdk/v4/ios/group/managing-groups/create-group)
+- [分页获取已加入群组](/docs/chat/sdk/v4/ios/group/group-membership/get-joined-group-list-page)
+- [获取已加入群组](/docs/chat/sdk/v4/ios/group/group-membership/get-joined-group-list)
+- [获取指定群组资料](/docs/chat/sdk/v4/ios/group/managing-groups/get-specified-groups-info)
+- [搜索群组](/docs/chat/sdk/v4/ios/group/managing-groups/search-groups)
+- [更新群资料](/docs/chat/sdk/v4/ios/group/managing-groups/set-group-info)
+- [监听群组事件](/docs/chat/sdk/v4/ios/event-handler/methods/set-group-listener)

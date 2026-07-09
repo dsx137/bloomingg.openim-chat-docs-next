@@ -1,0 +1,56 @@
+---
+title: 'Get SDK Version'
+description: 'Explains the Get SDK Version method in uni-app SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/application/methods/get-sdk-version'
+---
+
+Use **Get SDK Version** when your application needs this OpenIM capability from uni-app SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `GetSdkVersion` through the platform wrapper to get sdk version. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                 |
+| ---------------- | --------------------------- |
+| Method signature | `GetSdkVersion() string`    |
+| Capability       | Initialization and login    |
+| Source location  | `open_im_sdk/init_login.go` |
+
+## uni-app Call Reference
+
+uni-app SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+```js showLineNumbers
+openIM.getSdkVersion(operationID, /* ... */, callback);
+```
+
+## Parameters
+
+| Parameter | Type                 | Required   | Description                                 |
+| --------- | -------------------- | ---------- | ------------------------------------------- |
+| Parameter | See method signature | As defined | Pass according to the call signature above. |
+
+## Return Value
+
+Synchronous creation methods return a value directly. Asynchronous methods report success or failure through the callback. Pass a traceable operationID for each call.
+
+## Code Example
+
+Add a platform-specific example based on the method signature above.
+
+## Related types
+
+- See the surrounding SDK section for related pages.
+
+## Related pages
+
+- [Initialization and login](/docs/chat/sdk/v4/uniapp/application/overview)

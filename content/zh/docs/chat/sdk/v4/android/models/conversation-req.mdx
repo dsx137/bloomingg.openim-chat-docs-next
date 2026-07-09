@@ -1,0 +1,37 @@
+---
+title: '会话设置请求'
+description: '说明 Android SDK ConversationReq 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/conversation-req'
+---
+
+`ConversationReq` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.ConversationReq`。会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。
+
+## 字段说明
+
+| 字段名称         | Java 类型 | 描述                                                                                                         |
+| ---------------- | --------- | ------------------------------------------------------------------------------------------------------------ |
+| conversationID   | String    | 会话id                                                                                                       |
+| conversationType | Integer   | 会话类型 1:单聊 2:群聊                                                                                       |
+| userID           | String    | 会话对象用户ID                                                                                               |
+| groupID          | String    | 会话群聊ID                                                                                                   |
+| recvMsgOpt       | Integer   | 接收消息选项：； 0:在线正常接收消息，离线时进行推送 ； 1:不会接收到消息； 2:在线正常接收消息，离线不会有推送 |
+| isPinned         | Boolean   | 是否置顶，1置顶                                                                                              |
+| isPrivateChat    | Boolean   | 是否开启私聊                                                                                                 |
+| ex               | String    | 扩展预留字段                                                                                                 |
+| burnDuration     | Integer   | 阅读时长 s，即超过了burnDuration秒触发销毁                                                                   |
+| groupAtType      | Integer   | 强提示 如at消息，公告 GroupAtType                                                                            |
+
+## 关联类型
+
+- [群提醒类型](/docs/chat/sdk/v4/android/models/group-at-type)（`GroupAtType`）：群会话强提醒类型常量。
+
+## 相关页面
+
+- [设置会话](/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation)

@@ -1,0 +1,32 @@
+---
+title: '概述'
+description: '设置、隐藏和维护会话展示状态的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/managing-conversations/overview'
+---
+
+管理会话用于更新会话属性、隐藏会话、隐藏全部会话，以及保存会话草稿。
+
+## 方法索引
+
+| 方法                                                                                                 | 说明                                                           |
+| ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| [设置会话](/docs/chat/sdk/v4/react-native/message/managing-conversations/set-conversation)           | 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。 |
+| [隐藏会话](/docs/chat/sdk/v4/react-native/message/managing-conversations/hide-conversation)          | 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。       |
+| [设置会话草稿](/docs/chat/sdk/v4/react-native/message/managing-conversations/set-conversation-draft) | 设置指定会话草稿文本，适合输入框内容离开页面后恢复。           |
+| [隐藏全部会话](/docs/chat/sdk/v4/react-native/message/managing-conversations/hide-all-conversations) | 隐藏当前用户的全部会话，适合清理聊天列表展示状态。             |
+
+## 相关类型
+
+- [会话信息](/docs/chat/sdk/v4/react-native/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+- [会话监听器](/docs/chat/sdk/v4/react-native/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

@@ -1,0 +1,49 @@
+---
+title: '错误码'
+description: '说明 React Native core binding 的回调错误、登录状态错误和排查流程。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/error-codes'
+---
+
+React Native core binding 通过 `Base.OnError(errCode int32, errMsg string)` 返回大多数异步错误。同步方法通常直接返回字符串、布尔值或状态值；如果创建消息失败，返回内容应按 wrapper 约定和日志一起判断。
+
+## 错误返回位置
+
+| 来源     | 错误形态                                                                                               | 说明                                                                           |
+| -------- | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| 异步 API | `OnError(errCode, errMsg)`                                                                             | 用户、好友、群组、会话、消息、第三方能力通用。                                 |
+| 发送消息 | [`SendMsgCallBack`](/docs/chat/sdk/v4/react-native/models/send-msg-call-back).OnError(errCode, errMsg) | 发送失败、上传失败或服务端拒绝。                                               |
+| 初始化   | `InitSDK(...) bool`                                                                                    | 配置 JSON 解析失败、平台 ID 缺失、地址格式错误或 listener 为空时返回 `false`。 |
+| 登录状态 | `GetLoginStatus(operationID) int`                                                                      | 未初始化时返回未初始化状态。                                                   |
+| 连接监听 | `OnConnectFailed(errCode, errMsg)`                                                                     | 长连接失败。                                                                   |
+
+## 常见场景
+
+| 场景               | 可能原因                                                                                    | 处理建议                                                            |
+| ------------------ | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| 初始化返回 `false` | `config` 不是合法 JSON、`platformID` 为 0、`apiAddr` / `wsAddr` 格式不正确、listener 为空。 | 修正初始化参数后重新初始化。                                        |
+| 调用 API 直接失败  | SDK 未初始化、未登录、`operationID` 为空或资源未加载。                                      | 检查初始化和登录顺序，记录 `operationID`。                          |
+| token 相关失败     | token 过期、无效或与用户 ID 不匹配。                                                        | 从服务端刷新 token 后重新登录。                                     |
+| 消息发送失败       | 会话目标错误、消息 JSON 不合法、上传失败或服务端拒绝。                                      | 检查 `recvID` / `groupID`、消息创建结果、离线推送参数和服务端日志。 |
+| JSON 参数解析失败  | 列表或结构体参数不是目标结构的 JSON。                                                       | 按对应结构重新序列化参数。                                          |
+
+## 排查流程
+
+| 步骤 | 操作                                                                          |
+| ---- | ----------------------------------------------------------------------------- |
+| 1    | 确认 `GetSdkVersion()`、`GetLoginStatus(operationID)` 和 `GetLoginUserID()`。 |
+| 2    | 收集失败 API 的 `operationID`、`errCode`、`errMsg`。                          |
+| 3    | 检查初始化配置中的 `apiAddr`、`wsAddr`、`platformID`、日志目录。              |
+| 4    | 对 JSON 字符串参数做反序列化校验。                                            |
+| 5    | 必要时调用 `UploadLogs` 上传日志。                                            |
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/react-native/models/base)（`Base`）：core binding 异步结果回调，React Native 调用层通常映射为 Promise。
+- [底层消息发送回调](/docs/chat/sdk/v4/react-native/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，React Native 调用层通常映射为 OnMsgSendCallback。

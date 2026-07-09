@@ -15,15 +15,15 @@ sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
 
 ## 调用顺序
 
-| 步骤       | 必要方法                                                                 | 说明                                                               |
-| ---------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------ |
-| 读取版本   | `GetSdkVersion()`                                                        | 可用于诊断当前 AAR 或 core binding 版本。                          |
-| 初始化     | `InitSDK(listener, operationID, config)`                                 | `config` 传入 `IMConfig` JSON；`listener` 处理连接生命周期。       |
-| 设置监听器 | `SetConversationListener`、`SetAdvancedMsgListener`、`SetFriendListener` | 建议在登录前设置，避免漏掉登录同步期间的事件。                     |
-| 登录       | `Login(callback, operationID, userID, token)`                            | token 应由业务服务端签发；登录成功后再调用会话、消息、群组等接口。 |
-| 创建消息   | `CreateTextMessage`、`CreateImageMessage` 等                             | 创建方法同步返回消息 JSON 字符串。                                 |
-| 发送消息   | `SendMessage` 或 `SendMessageNotOss`                                     | 单聊传 `recvID`，群聊传 `groupID`；发送结果走 `SendMsgCallBack`。  |
-| 退出或销毁 | `Logout`、`UnInitSDK`                                                    | 退出当前用户用 `Logout`；释放 SDK 全局资源用 `UnInitSDK`。         |
+| 步骤       | 必要方法                                                                 | 说明                                                                                                                     |
+| ---------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| 读取版本   | `GetSdkVersion()`                                                        | 可用于诊断当前 AAR 或 core binding 版本。                                                                                |
+| 初始化     | `InitSDK(listener, operationID, config)`                                 | `config` 传入 `IMConfig` JSON；`listener` 处理连接生命周期。                                                             |
+| 设置监听器 | `SetConversationListener`、`SetAdvancedMsgListener`、`SetFriendListener` | 建议在登录前设置，避免漏掉登录同步期间的事件。                                                                           |
+| 登录       | `Login(callback, operationID, userID, token)`                            | token 应由业务服务端签发；登录成功后再调用会话、消息、群组等接口。                                                       |
+| 创建消息   | `CreateTextMessage`、`CreateImageMessage` 等                             | 创建方法同步返回消息 JSON 字符串。                                                                                       |
+| 发送消息   | `SendMessage` 或 `SendMessageNotOss`                                     | 单聊传 `recvID`，群聊传 `groupID`；发送结果走 [`SendMsgCallBack`](/docs/chat/sdk/v4/android/models/send-msg-call-back)。 |
+| 退出或销毁 | `Logout`、`UnInitSDK`                                                    | 退出当前用户用 `Logout`；释放 SDK 全局资源用 `UnInitSDK`。                                                               |
 
 ## 初始化配置
 
@@ -49,8 +49,12 @@ sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
 | JSON 参数合法      | `userIDList`、`groupIDList`、`searchParam`、`req` 等字符串应是目标结构的 JSON。 |
 | 监听器不重复丢失   | `Set*Listener` 是替换式设置；应用层需要自行做分发时，应在 wrapper 层维护。      |
 
+## 相关类型
+
+- [底层消息发送回调](/docs/chat/sdk/v4/android/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，Android 调用层通常映射为 OnMsgSendCallback。
+
 ## 相关页面
 
 - [初始化与登录](/docs/chat/sdk/v4/android/application/overview)
 - [监听器](/docs/chat/sdk/v4/android/event-handler/overview)
-- [发送消息](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)
+- [发送消息](/docs/chat/sdk/v4/android/message/sending-messages/overview)

@@ -1,0 +1,65 @@
+---
+title: '创建名片消息'
+description: '说明 iOS core binding 方法 CreateCardMessage 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/message/creating-messages/create-card-message'
+---
+
+创建名片消息。通常用于分享用户资料卡片或联系人卡片。
+
+## 功能介绍
+
+创建名片消息。通常用于分享用户资料卡片或联系人卡片。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                            |
+| -------- | --------------------------------------------------------------- |
+| 方法签名 | `CreateCardMessage(operationID string, cardInfo string) string` |
+| 所属能力 | 会话与消息                                                      |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                               |
+
+## iOS 调用参考
+
+iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT NSString* _Nonnull Open_im_sdkCreateCardMessage(NSString* _Nullable operationID, NSString* _Nullable cardInfo);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型   | 是否必填   | 描述                                   |
+| -------- | ---------- | ---------- | -------------------------------------- |
+| cardInfo | NSString\* | 按方法原型 | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK 3.8.3-hotfix.14-dynamic.1 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```objective-c showLineNumbers
+Open_im_sdkCreateCardMessage(@"operationID", @"cardInfo");
+```
+
+## 相关类型
+
+- [个人名片元素](/docs/chat/sdk/v4/ios/models/card-elem)（`CardElem`）：个人名片消息元素。
+- [消息对象](/docs/chat/sdk/v4/ios/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/ios/message/overview)

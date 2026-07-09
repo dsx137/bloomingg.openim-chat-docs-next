@@ -1,0 +1,68 @@
+---
+title: '获取发出的入群申请'
+description: '说明 React Native core binding 方法 GetGroupApplicationListAsApplicant 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/group/group-applications/get-group-application-list-as-applicant'
+---
+
+获取当前用户自己提交的入群申请列表。
+
+## 功能介绍
+
+获取当前用户自己提交的入群申请列表。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                         |
+| -------- | ---------------------------------------------------------------------------- |
+| 方法签名 | `GetGroupApplicationListAsApplicant(callback Base, operationID, req string)` |
+| 所属能力 | 群组                                                                         |
+| 源码位置 | `open_im_sdk/group.go`                                                       |
+
+## React Native 调用参考
+
+React Native SDK v3.8.3-patch.12.4 的 TypeScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`src/sdk.ts`。
+
+```ts showLineNumbers
+getGroupApplicationListAsApplicant(req: GetGroupApplicationListAsApplicantParams = { groupIDs: [], handleResults: [], offset: 0, count: 20 }, operationID: string = id(),)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                 | 是否必填 | 描述                                   |
+| -------- | ---------------------------------------- | -------- | -------------------------------------- |
+| req      | GetGroupApplicationListAsApplicantParams | 否       | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+返回 `Promise`。调用失败时 Promise reject，错误会被封装为 OpenIMApiError。
+
+## 代码示例
+
+以下示例展示 React Native SDK v3.8.3-patch.12.4 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.getGroupApplicationListAsApplicant([]);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/react-native/models/base)（`Base`）：core binding 异步结果回调，React Native 调用层通常映射为 Promise。
+- [发出的群申请查询条件](/docs/chat/sdk/v4/react-native/models/get-group-application-list-as-applicant-req)（`GetGroupApplicationListAsApplicantReq`）：查询当前用户发出的入群申请时使用的分页和过滤条件。
+- [群申请信息](/docs/chat/sdk/v4/react-native/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，包含群资料、申请人、处理状态和来源。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/react-native/group/overview)

@@ -1,0 +1,61 @@
+---
+title: 'Set Conversation Listener'
+description: 'Explains the Set Conversation Listener method in Flutter SDK 3.8.3+hotfix.12, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/event-handler/methods/set-conversation-listener'
+---
+
+Use **Set Conversation Listener** when your application needs this OpenIM capability from Flutter SDK 3.8.3+hotfix.12. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `SetConversationListener` through the platform wrapper to set conversation listener. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                |
+| ---------------- | ---------------------------------------------------------- |
+| Method signature | `SetConversationListener(listener OnConversationListener)` |
+| Capability       | Event handlers                                             |
+| Source location  | `open_im_sdk/listener.go`                                  |
+
+## Flutter Call Reference
+
+Flutter SDK 3.8.3+hotfix.12 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+```dart showLineNumbers
+setConversationListener(/* ... */)
+```
+
+## Parameters
+
+| Parameter | Type                 | Required   | Description                                 |
+| --------- | -------------------- | ---------- | ------------------------------------------- |
+| Parameter | See method signature | As defined | Pass according to the call signature above. |
+
+## Return Value
+
+Returns `Future`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK 3.8.3+hotfix.12 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.conversationManager.setConversationListener();
+```
+
+## Related types
+
+- [Conversation listener](/docs/chat/sdk/v4/flutter/models/on-conversation-listener) (`OnConversationListener`)
+- [Conversation info](/docs/chat/sdk/v4/flutter/models/conversation-info) (`ConversationInfo`)
+
+## Related pages
+
+- [Event handlers](/docs/chat/sdk/v4/flutter/event-handler/overview)

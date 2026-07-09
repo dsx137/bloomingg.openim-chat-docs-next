@@ -1,0 +1,71 @@
+---
+title: '搜索群组'
+description: '说明 Flutter core binding 方法 SearchGroups 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/group/managing-groups/search-groups'
+---
+
+按关键字搜索群组，可按群 ID、群名称等字段搜索。
+
+## 功能介绍
+
+按关键字搜索群组，可按群 ID、群名称等字段搜索。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| 方法签名 | `SearchGroups(callback Base, operationID string, searchParam string)` |
+| 所属能力 | 群组                                                                  |
+| 源码位置 | `open_im_sdk/group.go`                                                |
+
+## Flutter 调用参考
+
+Flutter SDK 3.8.3+hotfix.12 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_group_manager.dart`。
+
+```dart showLineNumbers
+Future<List<GroupInfo>> searchGroups({ List<String> keywordList = const [], bool isSearchGroupID = false, bool isSearchGroupName = false, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称          | 参数类型     | 是否必填 | 描述                     |
+| ----------------- | ------------ | -------- | ------------------------ |
+| keywordList       | List<String> | 否       | 按方法原型传入。         |
+| isSearchGroupID   | bool         | 否       | 群组 ID 或群组 ID 列表。 |
+| isSearchGroupName | bool         | 否       | 按方法原型传入。         |
+
+## 返回结果
+
+返回 `Future<List<GroupInfo>>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK 3.8.3+hotfix.12 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.groupManager.searchGroups(
+  keywordList: [],
+  isSearchGroupID: false,
+  isSearchGroupName: false,
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [群组信息](/docs/chat/sdk/v4/flutter/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/flutter/group/overview)

@@ -1,0 +1,63 @@
+---
+title: 'Create a sound message from full path'
+description: 'Explains the Create a sound message from full path method in iOS Core SDK 3.8.3-hotfix.14-dynamic.1, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/message/creating-messages/create-sound-message-from-full-path'
+---
+
+Use **Create a sound message from full path** when your application needs this OpenIM capability from iOS Core SDK 3.8.3-hotfix.14-dynamic.1. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `CreateSoundMessageFromFullPath` through the platform wrapper to create a sound message from full path. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------- |
+| Method signature | `CreateSoundMessageFromFullPath(operationID string, soundPath string, duration int64) string` |
+| Capability       | Conversations and messages                                                                    |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                             |
+
+## iOS Call Reference
+
+iOS Core SDK 3.8.3-hotfix.14-dynamic.1 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`.
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT NSString* _Nonnull Open_im_sdkCreateSoundMessageFromFullPath(NSString* _Nullable operationID, NSString* _Nullable soundPath, int64_t duration);
+```
+
+## Parameters
+
+| Parameter | Type       | Required   | Description      |
+| --------- | ---------- | ---------- | ---------------- |
+| soundPath | NSString\* | As defined | Pass as defined. |
+| duration  | int64_t    | As defined | Pass as defined. |
+
+## Return Value
+
+Synchronous creation methods return a value directly. Asynchronous methods report success or failure through the callback. Pass a traceable operationID for each call.
+
+## Code Example
+
+The following example shows the iOS Core SDK 3.8.3-hotfix.14-dynamic.1 call shape. Replace placeholder values with real business data and add production error handling.
+
+```objective-c showLineNumbers
+Open_im_sdkCreateSoundMessageFromFullPath(@"operationID", @"soundPath", 0);
+```
+
+## Related types
+
+- [Message](/docs/chat/sdk/v4/ios/models/message) (`Message`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/ios/message/overview)

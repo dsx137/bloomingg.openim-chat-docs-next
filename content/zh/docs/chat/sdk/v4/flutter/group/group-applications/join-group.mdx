@@ -1,0 +1,73 @@
+---
+title: '申请加入群组'
+description: '说明 Flutter core binding 方法 JoinGroup 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/group/group-applications/join-group'
+---
+
+申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。
+
+## 功能介绍
+
+申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| 方法签名 | `JoinGroup(callback Base, operationID string, groupID string, reqMsg string, joinSource int32, ex string)` |
+| 所属能力 | 群组                                                                                                       |
+| 源码位置 | `open_im_sdk/group.go`                                                                                     |
+
+## Flutter 调用参考
+
+Flutter SDK 3.8.3+hotfix.12 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_group_manager.dart`。
+
+```dart showLineNumbers
+Future<dynamic> joinGroup({required String groupID, String? reason, String? operationID, int joinSource = 3, String? ex})
+```
+
+## 输入参数
+
+| 参数名称   | 参数类型 | 是否必填 | 描述                     |
+| ---------- | -------- | -------- | ------------------------ |
+| groupID    | String   | 是       | 群组 ID 或群组 ID 列表。 |
+| reason     | String?  | 否       | 按方法原型传入。         |
+| joinSource | int      | 否       | 按方法原型传入。         |
+| ex         | String?  | 否       | 按方法原型传入。         |
+
+## 返回结果
+
+返回 `Future<dynamic>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK 3.8.3+hotfix.12 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.groupManager.joinGroup(
+  groupID: 'groupID',
+  reason: 'reason',
+  joinSource: 0,
+  ex: 'ex',
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [入群来源](/docs/chat/sdk/v4/flutter/models/join-source)（`JoinSource`）：入群来源枚举。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/flutter/group/overview)

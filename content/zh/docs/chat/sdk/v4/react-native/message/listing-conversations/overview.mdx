@@ -1,0 +1,34 @@
+---
+title: '概述'
+description: '获取、分页、批量查询和搜索会话的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/listing-conversations/overview'
+---
+
+查询会话用于读取本地会话列表、按条件获取会话详情，并在跳转聊天页前生成会话 ID。
+
+## 方法索引
+
+| 方法                                                                                                            | 说明                                                                                           |
+| --------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| [获取全部会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-all-conversation-list)          | 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。                             |
+| [分页获取会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-conversation-list-split)        | 分页获取会话列表，适合会话数量较多时按页加载。                                                 |
+| [获取单个会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-one-conversation)               | 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。 |
+| [批量获取会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-multiple-conversation)          | 按会话 ID 批量获取多个会话，适合局部刷新或从推送跳转后补齐会话。                               |
+| [搜索会话](/docs/chat/sdk/v4/react-native/message/listing-conversations/search-conversation)                    | 搜索本地会话，适合聊天列表搜索入口。                                                           |
+| [生成会话 ID](/docs/chat/sdk/v4/react-native/message/listing-conversations/get-conversation-id-by-session-type) | 根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。            |
+
+## 相关类型
+
+- [会话信息](/docs/chat/sdk/v4/react-native/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+- [会话监听器](/docs/chat/sdk/v4/react-native/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

@@ -29,17 +29,18 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-applicatio
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
 ```java showLineNumbers
-public void getRecvFriendApplicationList(OnBase<List<FriendApplicationInfo>> callBack)
+public void getRecvFriendApplicationList(OnBase<List<FriendApplicationInfo>> base, GetFriendApplicationListAsRecipientReq recipientReq)
 ```
 
 ## 输入参数
 
-| 参数名称 | 参数类型                            | 是否必填 | 描述     |
-| -------- | ----------------------------------- | -------- | -------- |
-| callBack | OnBase<List<FriendApplicationInfo>> | 是       | 回调接口 |
+| 参数名称     | 参数类型                                                                                                                                                    | 是否必填 | 描述                 |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| base         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)&lt;List&lt;[`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info)&gt;&gt; | 是       | 查询结果回调。       |
+| recipientReq | [`GetFriendApplicationListAsRecipientReq`](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req)                                   | 是       | 分页和筛选请求参数。 |
 
 ## 返回结果
 
@@ -47,11 +48,32 @@ public void getRecvFriendApplicationList(OnBase<List<FriendApplicationInfo>> cal
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
-OpenIMClient.getInstance().friendshipManager.getRecvFriendApplicationList(new OnBase<List<FriendApplicationInfo>>(){...})
+OpenIMClient.getInstance().friendshipManager.getRecvFriendApplicationList(
+    new OnBase<List<FriendApplicationInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(List<FriendApplicationInfo> data) {
+        // TODO: 处理收到的好友申请列表
+    }
+},
+    recipientReq
+);
 ```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友申请信息](/docs/chat/sdk/v4/android/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+- [收到的好友申请查询条件](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req)（`GetFriendApplicationListAsRecipientReq`）：查询当前用户收到的好友申请时使用的分页和状态过滤条件。
 
 ## 相关页面
 

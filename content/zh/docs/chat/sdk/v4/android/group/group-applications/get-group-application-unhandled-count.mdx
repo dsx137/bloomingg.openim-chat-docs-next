@@ -1,0 +1,56 @@
+---
+title: '获取未处理入群申请数'
+description: '说明 Android core binding 方法 GetGroupApplicationUnhandledCount 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/group-applications/get-group-application-unhandled-count'
+---
+
+获取未处理入群申请数量，适合管理入口角标和后台同步。
+
+## 功能介绍
+
+获取未处理入群申请数量，适合管理入口角标和后台同步。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                               |
+| -------- | ---------------------------------------------------------------------------------- |
+| 方法签名 | `GetGroupApplicationUnhandledCount(callback Base, operationID string, req string)` |
+| 所属能力 | 群组                                                                               |
+| 源码位置 | `open_im_sdk/group.go`                                                             |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3.5 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
+
+## 输入参数
+
+| 参数名称      | 类型                                            | 描述                                                        |
+| ------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                         |
+| `req`         | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+
+## 返回结果
+
+通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+
+## 代码示例
+
+TODO: 当前 Android SDK v3.8.3.5 未提供公开 Java 调用示例。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/group/overview)

@@ -29,15 +29,15 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-applicatio
 
 ## Android 调用参考
 
-TODO: 补充当前 Android SDK 的函数原型。
+当前 Android SDK v3.8.3.5 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
 
 ## 输入参数
 
-| 参数名称      | 类型     | 描述                                                        |
-| ------------- | -------- | ----------------------------------------------------------- |
-| `callback`    | `Base`   | 异步结果回调。                                              |
-| `operationID` | `string` | 本次操作的追踪 ID。                                         |
-| `req`         | `string` | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称      | 类型                                            | 描述                                                        |
+| ------------- | ----------------------------------------------- | ----------------------------------------------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                         |
+| `req`         | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
 
 ## 返回结果
 
@@ -45,7 +45,12 @@ TODO: 补充当前 Android SDK 的函数原型。
 
 ## 代码示例
 
-TODO: 补充该方法的 Android 调用示例。
+TODO: 当前 Android SDK v3.8.3.5 未提供公开 Java 调用示例。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
 
 ## 相关页面
 

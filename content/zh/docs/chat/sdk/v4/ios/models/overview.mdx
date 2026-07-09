@@ -1,0 +1,126 @@
+---
+title: '概述'
+description: 'iOS Core SDK 常用类型索引。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/models/overview'
+---
+
+iOS Core SDK 的方法参数、返回值和监听器会使用 Objective-C 类型承载数据。本分组说明这些类型的用途、字段、常量和回调方法，方便从方法页跳转查看结构。
+
+## 数据模型
+
+| 中文名称                                                                                            | 类型                                     | 说明                                                               |
+| --------------------------------------------------------------------------------------------------- | ---------------------------------------- | ------------------------------------------------------------------ |
+| [被提及用户信息](/docs/chat/sdk/v4/ios/models/at-user-info)                                         | `AtUserInfo`                             | 被提及用户的 ID 与群昵称映射信息。                                 |
+| [表情消息元素](/docs/chat/sdk/v4/ios/models/face-elem)                                              | `FaceElem`                               | 自定义表情消息元素。                                               |
+| [初始化配置](/docs/chat/sdk/v4/ios/models/init-config)                                              | `InitConfig`                             | 初始化 SDK 时传入的基础配置。                                      |
+| [单类型扩展统计](/docs/chat/sdk/v4/ios/models/single-type-key-info-sum)                             | `SingleTypeKeyInfoSum`                   | 消息扩展中单个类型和 key 的统计信息。                              |
+| [单聊已读回执信息](/docs/chat/sdk/v4/ios/models/c2c-read-receipt-info)                              | `C2CReadReceiptInfo`                     | 单聊消息已读回执信息。                                             |
+| [发出的好友申请查询条件](/docs/chat/sdk/v4/ios/models/get-friend-application-list-as-applicant-req) | `GetFriendApplicationListAsApplicantReq` | 查询当前用户发出的好友申请时使用的分页条件。                       |
+| [发出的群申请查询条件](/docs/chat/sdk/v4/ios/models/get-group-application-list-as-applicant-req)    | `GetGroupApplicationListAsApplicantReq`  | 查询当前用户发出的入群申请时使用的分页和过滤条件。                 |
+| [附加信息元素](/docs/chat/sdk/v4/ios/models/attached-info-elem)                                     | `AttachedInfoElem`                       | 消息附加信息元素，常用于携带群消息已读等扩展数据。                 |
+| [富文本消息片段](/docs/chat/sdk/v4/ios/models/rich-message)                                         | `RichMessage`                            | 高级文本消息中的富文本片段。                                       |
+| [高级历史消息结果](/docs/chat/sdk/v4/ios/models/advanced-message)                                   | `AdvancedMessage`                        | 历史消息分页查询返回的结果对象，包含错误信息、分页游标和消息列表。 |
+| [高级文本元素](/docs/chat/sdk/v4/ios/models/advanced-text-elem)                                     | `AdvancedTextElem`                       | 高级文本消息的内容元素，用于描述富文本正文和片段。                 |
+| [高级消息片段](/docs/chat/sdk/v4/ios/models/message-entity)                                         | `MessageEntity`                          | 富文本消息中的片段信息。                                           |
+| [个人名片元素](/docs/chat/sdk/v4/ios/models/card-elem)                                              | `CardElem`                               | 个人名片消息元素。                                                 |
+| [公开用户信息](/docs/chat/sdk/v4/ios/models/public-user-info)                                       | `PublicUserInfo`                         | 公开用户资料。                                                     |
+| [好友关系校验结果](/docs/chat/sdk/v4/ios/models/friendship-info)                                    | `FriendshipInfo`                         | 好友关系校验结果。                                                 |
+| [好友申请信息](/docs/chat/sdk/v4/ios/models/friend-application-info)                                | `FriendApplicationInfo`                  | 好友申请记录，包含申请人、接收人、处理状态和备注。                 |
+| [好友信息](/docs/chat/sdk/v4/ios/models/friend-info)                                                | `FriendInfo`                             | 好友资料，包含昵称、头像、备注和添加来源等信息。                   |
+| [好友资料更新请求](/docs/chat/sdk/v4/ios/models/update-friends-req)                                 | `UpdateFriendsReq`                       | 批量更新好友备注或扩展信息的请求对象。                             |
+| [合并消息元素](/docs/chat/sdk/v4/ios/models/merge-elem)                                             | `MergeElem`                              | 合并消息元素，用于多条消息合并转发。                               |
+| [黑名单用户信息](/docs/chat/sdk/v4/ios/models/blacklist-info)                                       | `BlacklistInfo`                          | 黑名单用户资料，用于黑名单列表和黑名单事件回调。                   |
+| [会话设置请求](/docs/chat/sdk/v4/ios/models/conversation-req)                                       | `ConversationReq`                        | 会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。       |
+| [会话信息](/docs/chat/sdk/v4/ios/models/conversation-info)                                          | `ConversationInfo`                       | 会话资料对象，用于会话列表、会话详情和会话事件。                   |
+| [键值扩展项](/docs/chat/sdk/v4/ios/models/key-value)                                                | `KeyValue`                               | 消息扩展使用的键值项。                                             |
+| [离线推送信息](/docs/chat/sdk/v4/ios/models/offline-push-info)                                      | `OfflinePushInfo`                        | 发送消息时携带的离线推送配置。                                     |
+| [群成员设置请求](/docs/chat/sdk/v4/ios/models/set-group-member-info)                                | `SetGroupMemberInfo`                     | 设置群成员资料时使用的请求对象。                                   |
+| [群成员信息](/docs/chat/sdk/v4/ios/models/group-members-info)                                       | `GroupMembersInfo`                       | 群成员资料，包含群内昵称、角色、入群来源和禁言时间。               |
+| [群申请信息](/docs/chat/sdk/v4/ios/models/group-application-info)                                   | `GroupApplicationInfo`                   | 入群申请记录，包含群资料、申请人、处理状态和来源。                 |
+| [群消息已读回执](/docs/chat/sdk/v4/ios/models/group-message-receipt)                                | `GroupMessageReceipt`                    | 群消息已读回执。                                                   |
+| [群消息已读信息](/docs/chat/sdk/v4/ios/models/group-message-read-info)                              | `GroupMessageReadInfo`                   | 群消息已读与未读统计信息。                                         |
+| [群已读用户信息](/docs/chat/sdk/v4/ios/models/group-has-read-info)                                  | `GroupHasReadInfo`                       | 群消息已读成员信息。                                               |
+| [群组信息](/docs/chat/sdk/v4/ios/models/group-info)                                                 | `GroupInfo`                              | 群组资料对象，包含群名、公告、群主、成员数和入群设置。             |
+| [上传参数](/docs/chat/sdk/v4/ios/models/put-args)                                                   | `PutArgs`                                | 文件上传参数。                                                     |
+| [视频消息元素](/docs/chat/sdk/v4/ios/models/video-elem)                                             | `VideoElem`                              | 视频消息元素。                                                     |
+| [收到的好友申请查询条件](/docs/chat/sdk/v4/ios/models/get-friend-application-list-as-recipient-req) | `GetFriendApplicationListAsRecipientReq` | 查询当前用户收到的好友申请时使用的分页和状态过滤条件。             |
+| [收到的群申请查询条件](/docs/chat/sdk/v4/ios/models/get-group-application-list-as-recipient-req)    | `GetGroupApplicationListAsRecipientReq`  | 查询当前用户收到的入群申请时使用的分页和过滤条件。                 |
+| [输入状态元素](/docs/chat/sdk/v4/ios/models/typing-elem)                                            | `TypingElem`                             | 正在输入状态消息元素。                                             |
+| [搜索参数](/docs/chat/sdk/v4/ios/models/search-params)                                              | `SearchParams`                           | 搜索会话或好友时使用的搜索条件。                                   |
+| [通知消息元素](/docs/chat/sdk/v4/ios/models/notification-elem)                                      | `NotificationElem`                       | 通知消息元素。                                                     |
+| [图片消息元素](/docs/chat/sdk/v4/ios/models/picture-elem)                                           | `PictureElem`                            | 图片消息元素，包含图片路径、地址和多尺寸图片信息。                 |
+| [图片资源信息](/docs/chat/sdk/v4/ios/models/picture-info)                                           | `PictureInfo`                            | 图片资源信息，包含 UUID、URL、尺寸和大小。                         |
+| [位置消息元素](/docs/chat/sdk/v4/ios/models/location-elem)                                          | `LocationElem`                           | 位置消息元素。                                                     |
+| [文本消息元素](/docs/chat/sdk/v4/ios/models/text-elem)                                              | `TextElem`                               | 文本消息元素。                                                     |
+| [文件消息元素](/docs/chat/sdk/v4/ios/models/file-elem)                                              | `FileElem`                               | 文件消息元素，用于本地文件消息或 URL 文件消息。                    |
+| [消息撤回信息](/docs/chat/sdk/v4/ios/models/revoked-info)                                           | `RevokedInfo`                            | 消息撤回事件中的撤回详情。                                         |
+| [消息对象](/docs/chat/sdk/v4/ios/models/message)                                                    | `Message`                                | 消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。        |
+| [消息扩展键值](/docs/chat/sdk/v4/ios/models/message-kv)                                             | `MessageKv`                              | 消息扩展键值信息。                                                 |
+| [消息扩展设置结果](/docs/chat/sdk/v4/ios/models/type-key-set-result)                                | `TypeKeySetResult`                       | 设置消息扩展后的结果信息。                                         |
+| [消息搜索结果](/docs/chat/sdk/v4/ios/models/search-result)                                          | `SearchResult`                           | 本地消息搜索结果。                                                 |
+| [消息搜索结果项](/docs/chat/sdk/v4/ios/models/search-result-item)                                   | `SearchResultItem`                       | 本地消息搜索结果中的单个会话结果。                                 |
+| [引用消息元素](/docs/chat/sdk/v4/ios/models/quote-elem)                                             | `QuoteElem`                              | 引用消息元素。                                                     |
+| [用户扩展信息](/docs/chat/sdk/v4/ios/models/user-ex-info)                                           | `UserExInfo`                             | 用户资料中的扩展信息。                                             |
+| [用户信息](/docs/chat/sdk/v4/ios/models/user-info)                                                  | `UserInfo`                               | 用户资料对象。                                                     |
+| [用户在线状态](/docs/chat/sdk/v4/ios/models/users-online-status)                                    | `UsersOnlineStatus`                      | 用户在线状态信息。                                                 |
+| [用户资料更新请求](/docs/chat/sdk/v4/ios/models/user-info-req)                                      | `UserInfoReq`                            | 更新当前用户资料时使用的请求对象。                                 |
+| [语音消息元素](/docs/chat/sdk/v4/ios/models/sound-elem)                                             | `SoundElem`                              | 语音消息元素。                                                     |
+| [自定义消息元素](/docs/chat/sdk/v4/ios/models/custom-elem)                                          | `CustomElem`                             | 自定义消息元素，用于携带业务自定义数据。                           |
+| [At 文本元素](/docs/chat/sdk/v4/ios/models/at-text-elem)                                            | `AtTextElem`                             | At 文本消息的内容元素，用于保存文本、被提及用户和引用信息。        |
+
+## 枚举常量
+
+| 中文名称                                                           | 类型                | 说明                                         |
+| ------------------------------------------------------------------ | ------------------- | -------------------------------------------- |
+| [登录状态](/docs/chat/sdk/v4/ios/models/login-status)              | `LoginStatus`       | SDK 登录状态常量。                           |
+| [会话类型](/docs/chat/sdk/v4/ios/models/conversation-type)         | `ConversationType`  | 会话类型常量，用于区分单聊、群聊和通知会话。 |
+| [平台类型](/docs/chat/sdk/v4/ios/models/platform)                  | `Platform`          | 客户端平台类型常量。                         |
+| [群成员角色](/docs/chat/sdk/v4/ios/models/group-role)              | `GroupRole`         | 群成员角色常量。                             |
+| [群成员筛选类型](/docs/chat/sdk/v4/ios/models/group-member-filter) | `GroupMemberFilter` | 群成员列表筛选类型。                         |
+| [群提醒类型](/docs/chat/sdk/v4/ios/models/group-at-type)           | `GroupAtType`       | 群会话强提醒类型常量。                       |
+| [日志等级](/docs/chat/sdk/v4/ios/models/log-level)                 | `LogLevel`          | SDK 日志等级常量。                           |
+| [入群来源](/docs/chat/sdk/v4/ios/models/join-source)               | `JoinSource`        | 入群来源枚举。                               |
+| [入群验证方式](/docs/chat/sdk/v4/ios/models/group-verification)    | `GroupVerification` | 入群验证方式常量。                           |
+| [消息类型](/docs/chat/sdk/v4/ios/models/message-type)              | `MessageType`       | 消息内容类型常量。                           |
+| [消息视图类型](/docs/chat/sdk/v4/ios/models/view-type)             | `ViewType`          | 消息列表查询视图类型。                       |
+| [消息状态](/docs/chat/sdk/v4/ios/models/message-status)            | `MessageStatus`     | 消息发送状态常量。                           |
+
+## 监听器
+
+| 中文名称                                                                     | 类型                       | 说明                                                               |
+| ---------------------------------------------------------------------------- | -------------------------- | ------------------------------------------------------------------ |
+| [底层高级消息监听器](/docs/chat/sdk/v4/ios/models/on-advanced-msg-listener)  | `OnAdvancedMsgListener`    | core binding 高级消息监听器，iOS 调用层对应 OnAdvanceMsgListener。 |
+| [批量消息监听器](/docs/chat/sdk/v4/ios/models/on-batch-msg-listener)         | `OnBatchMsgListener`       | core binding 批量消息监听器，用于接收多条新消息和离线消息。        |
+| [高级消息监听器](/docs/chat/sdk/v4/ios/models/on-advance-msg-listener)       | `OnAdvanceMsgListener`     | 接收新消息、已读回执、撤回和消息扩展事件的监听器。                 |
+| [好友关系监听器](/docs/chat/sdk/v4/ios/models/on-friendship-listener)        | `OnFriendshipListener`     | 好友、好友申请和黑名单变化监听器。                                 |
+| [会话监听器](/docs/chat/sdk/v4/ios/models/on-conversation-listener)          | `OnConversationListener`   | 会话新增、变更、同步和未读数变化监听器。                           |
+| [连接状态监听器](/docs/chat/sdk/v4/ios/models/on-conn-listener)              | `OnConnListener`           | SDK 连接状态和登录票据状态监听器。                                 |
+| [群组监听器](/docs/chat/sdk/v4/ios/models/on-group-listener)                 | `OnGroupListener`          | 群组、入群申请和群成员变化监听器。                                 |
+| [消息扩展监听器](/docs/chat/sdk/v4/ios/models/on-message-kv-info-listener)   | `OnMessageKvInfoListener`  | 消息扩展键值变化监听器。                                           |
+| [用户状态监听器](/docs/chat/sdk/v4/ios/models/on-user-listener)              | `OnUserListener`           | 当前用户资料与用户在线状态变化监听器。                             |
+| [自定义业务监听器](/docs/chat/sdk/v4/ios/models/on-custom-business-listener) | `OnCustomBusinessListener` | 自定义业务消息监听器。                                             |
+
+## 回调接口
+
+| 中文名称                                                              | 类型                 | 说明                                                                |
+| --------------------------------------------------------------------- | -------------------- | ------------------------------------------------------------------- |
+| [底层通用回调](/docs/chat/sdk/v4/ios/models/base)                     | `Base`               | core binding 异步结果回调，iOS 调用层通常映射为 Base。              |
+| [底层消息发送回调](/docs/chat/sdk/v4/ios/models/send-msg-call-back)   | `SendMsgCallBack`    | core binding 消息发送回调，iOS 调用层通常映射为 OnMsgSendCallback。 |
+| [底层文件上传回调](/docs/chat/sdk/v4/ios/models/upload-file-callback) | `UploadFileCallback` | core binding 文件上传回调，iOS 调用层通常映射为 OnPutFileListener。 |
+| [日志上传进度回调](/docs/chat/sdk/v4/ios/models/upload-log-progress)  | `UploadLogProgress`  | 日志上传进度回调接口。                                              |
+| [通用回调](/docs/chat/sdk/v4/ios/models/on-base)                      | `Base`               | iOS Core SDK 异步方法的通用成功和失败回调。                         |
+| [文件上传回调](/docs/chat/sdk/v4/ios/models/on-put-file-listener)     | `OnPutFileListener`  | 上传文件时使用的阶段和进度回调。                                    |
+| [消息发送回调](/docs/chat/sdk/v4/ios/models/on-msg-send-callback)     | `OnMsgSendCallback`  | 发送消息时使用的进度、成功和失败回调。                              |
+
+## 相关页面
+
+- [OpenIM iOS Core SDK 概览](/docs/chat/sdk/v4/ios/overview)
+- [会话与消息](/docs/chat/sdk/v4/ios/message/overview)
+- [监听器](/docs/chat/sdk/v4/ios/event-handler/overview)

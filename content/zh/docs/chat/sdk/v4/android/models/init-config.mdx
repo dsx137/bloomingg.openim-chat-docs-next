@@ -1,0 +1,39 @@
+---
+title: '初始化配置'
+description: '说明 Android SDK InitConfig 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/init-config'
+---
+
+`InitConfig` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.InitConfig`。初始化 SDK 时传入的基础配置。
+
+## 类型说明
+
+apiUrl SDK的API接口地址。如：http:xxx:10000 wsUrl SDK的web socket地址。如： ws:xxx:17778 storageDir 数据存储目录路径 logLevel 日志等级，如：6 isLogStandardOutput 控制台是否输出日志 logFilePath 日志输出的路径
+
+## 字段说明
+
+| 字段名称            | Java 类型 | 描述                   |
+| ------------------- | --------- | ---------------------- |
+| platformID          | int       | SDK 返回或提交的字段。 |
+| apiAddr             | String    | SDK 返回或提交的字段。 |
+| wsAddr              | String    | SDK 返回或提交的字段。 |
+| dataDir             | String    | SDK 返回或提交的字段。 |
+| logLevel            | int       | SDK 返回或提交的字段。 |
+| isLogStandardOutput | boolean   | SDK 返回或提交的字段。 |
+| logFilePath         | String    | SDK 返回或提交的字段。 |
+
+## 关联类型
+
+- [平台类型](/docs/chat/sdk/v4/android/models/platform)（`Platform`）：客户端平台类型常量。
+- [日志等级](/docs/chat/sdk/v4/android/models/log-level)（`LogLevel`）：SDK 日志等级常量。
+
+## 相关页面
+
+- [初始化 SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)

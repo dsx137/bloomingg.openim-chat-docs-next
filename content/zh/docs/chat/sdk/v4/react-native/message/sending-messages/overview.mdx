@@ -1,0 +1,47 @@
+---
+title: '概述'
+description: '发送 SDK 消息对象和非 OSS 消息的 React Native SDK 方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/message/sending-messages/overview'
+---
+
+发送消息用于把创建好的消息对象发送给单聊或群聊目标，并通过发送回调接收进度、成功和失败结果。
+
+## 方法索引
+
+| 方法                                                                                            | 说明                                                                                                           |
+| ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| [发送消息](/docs/chat/sdk/v4/react-native/message/sending-messages/send-message)                | 发送由 Create 方法创建的消息，并使用 SDK 内置上传和发送链路。单聊与群聊只能选择一个目标字段。                  |
+| [发送非 OSS 消息](/docs/chat/sdk/v4/react-native/message/sending-messages/send-message-not-oss) | 发送不走 SDK OSS 上传链路的消息。适合业务自定义上传、资源 URL 已经准备好或使用 `Create*ByURL` 方法创建的消息。 |
+
+## 参数选择
+
+| 目标 | recvID      | groupID  | 说明                         |
+| ---- | ----------- | -------- | ---------------------------- |
+| 单聊 | 接收用户 ID | 空字符串 | 向一个用户发送消息。         |
+| 群聊 | 空字符串    | 群 ID    | 向一个 OpenIM 群组发送消息。 |
+
+## 结果事件
+
+| 事件     | 来源                                                                                                                                                              | 说明                                     |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| 发送成功 | [底层消息发送回调](/docs/chat/sdk/v4/react-native/models/send-msg-call-back).OnSuccess                                                                            | 返回服务端确认后的消息。                 |
+| 发送进度 | [底层消息发送回调](/docs/chat/sdk/v4/react-native/models/send-msg-call-back).OnProgress                                                                           | 文件、图片、视频等可能产生进度。         |
+| 新消息   | [高级消息监听器](/docs/chat/sdk/v4/react-native/models/on-advanced-msg-listener) 或 [批量消息监听器](/docs/chat/sdk/v4/react-native/models/on-batch-msg-listener) | 接收端通过监听器收到消息。               |
+| 会话变化 | [会话监听器](/docs/chat/sdk/v4/react-native/models/on-conversation-listener)                                                                                      | 发送或接收消息可能改变会话列表和未读数。 |
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/react-native/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+- [消息发送回调](/docs/chat/sdk/v4/react-native/models/on-msg-send-callback)（`OnMsgSendCallback`）：React Native SDK 消息发送进度、成功和失败回调。
+- [底层消息发送回调](/docs/chat/sdk/v4/react-native/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，React Native 调用层通常映射为 OnMsgSendCallback。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/react-native/message/overview)

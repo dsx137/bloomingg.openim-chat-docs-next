@@ -29,61 +29,51 @@ sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-li
 
 ## Android 调用参考
 
-当前 Android SDK 的方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+Android SDK v3.8.3.5 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
 
-```java
+```java showLineNumbers
 public void setOnConversationListener(OnConversationListener listener)
 ```
 
 ## 输入参数
 
-| 参数名称   | 类型                     | 描述             |
-| ---------- | ------------------------ | ---------------- |
-| `listener` | `OnConversationListener` | 事件监听器实例。 |
+| 参数名称   | 类型                                                                                  | 描述             |
+| ---------- | ------------------------------------------------------------------------------------- | ---------------- |
+| `listener` | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener) | 事件监听器实例。 |
 
 ## 返回结果
 
-| 参数名称 | 参数类型             | 描述 |
-| -------- | -------------------- | ---- |
-| listener | ConversationListener | 是   |
+| 参数名称 | 参数类型                                                                              | 描述 |
+| -------- | ------------------------------------------------------------------------------------- | ---- |
+| listener | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener) | 是   |
 
 ## 代码示例
 
-以下示例展示当前 Android SDK 的调用方式。
+以下示例展示 Android SDK v3.8.3.5 的调用方式。
 
 ```java showLineNumbers
 OpenIMClient.getInstance().conversationManager.setOnConversationListener(new OnConversationListener() {
-            @Override
-            public void onConversationChanged(List<ConversationInfo> list) {
+    @Override
+    public void onNewConversation(List<ConversationInfo> list) {
+        // TODO: 处理新增会话
+    }
 
-            }
+    @Override
+    public void onConversationChanged(List<ConversationInfo> list) {
+        // TODO: 处理会话变更
+    }
 
-            @Override
-            public void onNewConversation(List<ConversationInfo> list) {
-
-            }
-
-            @Override
-            public void onSyncServerFailed() {
-
-            }
-
-            @Override
-            public void onSyncServerFinish() {
-
-            }
-
-            @Override
-            public void onSyncServerStart() {
-
-            }
-
-            @Override
-            public void onTotalUnreadMessageCountChanged(int i) {
-
-            }
-        });
+    @Override
+    public void onTotalUnreadMessageCountChanged(int totalUnreadCount) {
+        // TODO: 更新未读总数
+    }
+});
 ```
+
+## 相关类型
+
+- [会话监听器](/docs/chat/sdk/v4/android/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+- [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
 
 ## 相关页面
 

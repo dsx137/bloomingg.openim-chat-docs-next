@@ -1,0 +1,31 @@
+---
+title: '文件上传回调'
+description: '说明 iOS Core SDK OnPutFileListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/models/on-put-file-listener'
+---
+
+`OnPutFileListener` 是 iOS Core SDK 的回调接口，完整类名为 `io.openim.ios.sdk.listener.OnPutFileListener`。上传文件时使用的阶段和进度回调。
+
+## 回调方法
+
+| 方法               | 参数                              | 描述                        |
+| ------------------ | --------------------------------- | --------------------------- |
+| complete           | long size；String url；long type  | 上传完成 - success callback |
+| hashPartComplete   | String var1；String var2          | 事件触发时回调。            |
+| hashPartProgress   | long var1；long var3；String var5 | 事件触发时回调。            |
+| open               | long var1                         | 事件触发时回调。            |
+| partSize           | long var1；long var3              | 事件触发时回调。            |
+| uploadComplete     | long size；long progress；long l2 | 上传进度                    |
+| uploadID           | String var1                       | 事件触发时回调。            |
+| uploadPartComplete | long var1；long var3；String var5 | 事件触发时回调。            |
+
+## 相关页面
+
+- [上传文件](/docs/chat/sdk/v4/ios/push-notifications/methods/upload-file)
