@@ -33,12 +33,12 @@ jobs:
       OMP_OPENAI_API_KEY: ${{ secrets.OMP_OPENAI_API_KEY }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: 'latest'
 
