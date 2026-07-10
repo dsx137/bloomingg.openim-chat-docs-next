@@ -89,14 +89,14 @@ jobs:
       - name: Apply docsets diffs with Agent
         id: pi
         if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
-        uses: shaftoe/pi-coding-agent-action@v2.25.1
+        uses: mcowger/pi-action@main
         with:
           github_token: ${{ github.token }}
           provider: openai
           model: ${{ env.MODEL }}
           token: ${{ env.OPENAI_API_KEY }}
           base_url: ${{ env.OPENAI_BASE_URL }}
-          prompt: Read and follow the instructions in .docsets-sync/prompt.md.
+          prompt_file: .docsets-sync/prompt.md
           extensions: npm:pi-exa@0.6.0
 
       - name: Refresh docs and verify
