@@ -1,18 +1,146 @@
 ---
 title: 'Send your first message'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'OpenIM iOS SDK guide for initializing the SDK, logging in, listening for messages, and sending a text message.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/getting-started/send-first-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/ios/getting-started/send-first-message"
-  context="SDKs · iOS · v4"
-  sourceTitle="Send your first message"
-/>
+## Overview
+
+This guide connects an iOS client, registers message callbacks, creates a text message, and sends it to either a user or a group.
+
+The iOS SDK creates `OIMMessageInfo` objects first, then sends those objects with `sendMessage`.
+
+## Prerequisites
+
+- Install the `OpenIMSDK` CocoaPod.
+- Initialize `OIMManager.manager` with an `OIMInitConfig` that includes the API address, WebSocket address, and local data directory.
+- Get a `userID` and user token from your trusted backend.
+- Have a target `recvID` for direct chat or `groupID` for group chat.
+
+## Initialize and log in
+
+Register connection callbacks before login.
+
+```objc
+OIMInitConfig *config = [OIMInitConfig new];
+config.apiAddr = @"https://api.example.com";
+config.wsAddr = @"wss://ws.example.com";
+
+BOOL ok = [OIMManager.manager initSDKWithConfig:config
+                                   onConnecting:^{
+                                       NSLog(@"OpenIM connecting");
+                                   }
+                               onConnectFailure:^(NSInteger code, NSString * _Nullable error) {
+                                   NSLog(@"OpenIM connect failed: %ld %@", (long)code, error);
+                               }
+                               onConnectSuccess:^{
+                                   NSLog(@"OpenIM connected");
+                               }
+                                onKickedOffline:^{
+                                    NSLog(@"OpenIM kicked offline");
+                                }
+                             onUserTokenExpired:^{
+                                 NSLog(@"OpenIM token expired");
+                             }
+                             onUserTokenInvalid:^(NSString * _Nullable error) {
+                                 NSLog(@"OpenIM token invalid: %@", error);
+                             }];
+```
+
+Then log in with the current user's token.
+
+```objc
+[OIMManager.manager login:userID
+                    token:token
+                onSuccess:^(NSString * _Nullable data) {
+                    NSLog(@"OpenIM login success");
+                }
+                onFailure:^(NSInteger code, NSString * _Nullable error) {
+                    NSLog(@"OpenIM login failed: %ld %@", (long)code, error);
+                }];
+```
+
+## Receive messages
+
+Register an advanced message listener before testing the send flow.
+
+```objc
+[OIMManager.callbacker setAdvancedMsgListenerWithOnRecvMessageRevoked:^(OIMMessageRevokedInfo * _Nullable revoked) {
+    // Handle revoked messages.
+} onRecvC2CReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable receiptList) {
+    // Handle one-to-one read receipts.
+} onRecvGroupReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable receiptList) {
+    // Handle group read receipts.
+} onRecvNewMessage:^(OIMMessageInfo * _Nullable message) {
+    renderIncomingMessage(message);
+}];
+```
+
+The SDK also supports protocol-based listeners such as `OIMAdvancedMsgListener` through `OIMCallbacker.callbacker`.
+
+## Send a text message
+
+Create a text message and send it. For a direct message, set `recvID` and leave `groupID` empty.
+
+```objc
+__block OIMMessageInfo *textMessage = [OIMMessageInfo createTextMessage:@"hello openim"];
+
+[OIMManager.manager sendMessage:textMessage
+                         recvID:recvID
+                        groupID:@""
+                offlinePushInfo:nil
+                      onSuccess:^(OIMMessageInfo * _Nullable sentMessage) {
+                          textMessage = sentMessage;
+                          renderOutgoingMessage(sentMessage);
+                      }
+                     onProgress:^(NSInteger progress) {
+                         NSLog(@"OpenIM send progress: %ld", (long)progress);
+                     }
+                      onFailure:^(NSInteger code, NSString * _Nullable error) {
+                          NSLog(@"OpenIM send failed: %ld %@", (long)code, error);
+                      }];
+```
+
+For a group message, pass an empty receiver user ID and the target `groupID`.
+
+```objc
+[OIMManager.manager sendMessage:textMessage
+                         recvID:@""
+                        groupID:groupID
+                offlinePushInfo:nil
+                      onSuccess:onSuccess
+                     onProgress:onProgress
+                      onFailure:onFailure];
+```
+
+Use `sendMessageNotOss` when your app has already uploaded media and should not use the SDK built-in object storage upload path.
+
+## Verify the result
+
+- Confirm `onConnectSuccess` fires before creating or sending messages.
+- Confirm `login` succeeds for the current `userID`.
+- Confirm `sendMessage` returns the sent message and the target signed-in client receives `onRecvNewMessage`.
+- Replace your local pending message with the returned `OIMMessageInfo` so message IDs and status fields stay current.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| ---- | ----- | -------- |
+| Send fails immediately | The client is not connected or logged in. | Wait for connection and login success before calling message APIs. |
+| The other client does not receive the message | Wrong `recvID` or `groupID`, or the receiver is not in the group. | Verify target IDs and group membership from your backend or SDK queries. |
+| Message callback does not fire | Listener was registered after the message arrived. | Register the advanced message listener before login during app startup. |
+| Media messages fail later | A relative path was passed to a full-path API, or the file was not copied to the SDK data directory. | Use the matching full-path or SDK-data-directory message creation method. |
+
+## Next steps
+
+- [iOS SDK overview](/docs/chat/sdk/v4/ios/overview)
+- [Message overview](/docs/chat/sdk/v4/ios/message/overview-message)
+- [Event delegate overview](/docs/chat/sdk/v4/ios/event-delegate/overview-event-delegate)
+- [Channel overview](/docs/chat/sdk/v4/ios/channel/overview-channel)

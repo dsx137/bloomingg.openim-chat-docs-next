@@ -3,27 +3,27 @@
     {
       "key": "chat/platform-api/v3",
       "repoUrl": "https://github.com/openimsdk/open-im-server",
-      "sourceRef": null,
+      "sourceRef": "v3.8.3-patch.16",
       "targetTagPattern": "^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:-patch\\.(?<build>\\d+))?$"
     },
     {
       "key": "chat/sdk/v4/ios",
       "repoUrl": "https://github.com/openimsdk/open-im-sdk-ios",
-      "sourceRef": null,
+      "sourceRef": "3.8.3-hotfix.12",
       "targetTagPattern": "^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:(?:-(?:hotfix|patch)\\.|\\+(?:hotfix\\.)?)(?<build>\\d+)(?:\\.(?<revision>\\d+))?)?$"
     },
     {
       "key": "chat/sdk/v4/android",
       "repoUrl": "https://github.com/openimsdk/open-im-sdk-android",
       "packageName": "io.openim:android-sdk",
-      "sourceRef": null,
+      "sourceRef": "v3.8.3.5",
       "targetTagPattern": "^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:\\.(?<build>\\d+))?$"
     },
     {
       "key": "chat/sdk/v4/wasm",
       "repoUrl": "https://github.com/openimsdk/openim-sdk-core",
       "packageName": "@openim/wasm-client-sdk",
-      "sourceRef": null,
+      "sourceRef": "v3.8.3-patch.14",
       "targetTagPattern": "^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:-patch\\.(?<build>\\d+))?$"
     }
   ]

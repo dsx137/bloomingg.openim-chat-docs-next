@@ -1,18 +1,142 @@
 ---
 title: 'OpenIM SDK for iOS'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for OpenIM SDK for iOS. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'OpenIM iOS SDK guide with CocoaPods installation, initialization, login, listener, and first API usage details.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/overview'
 ---
 
-<OverviewScaffold
-  route="/docs/chat/sdk/v4/ios/overview"
-  context="SDKs · iOS · v4"
-  sourceTitle="OpenIM SDK for iOS"
-/>
+## Overview
+
+Use the OpenIM iOS SDK to connect an iOS client to OpenIM Server, maintain the IM connection, receive SDK callbacks, and call conversation, message, group, friend, and user APIs.
+
+The upstream package is distributed as the `OpenIMSDK` CocoaPod and wraps the OpenIM core SDK for Objective-C and Swift apps. Use it with a compatible OpenIM Server in the 3.8.3 line.
+
+## Install
+
+Add the pod to your app target, then run `pod install`.
+
+```ruby
+target 'YourApp' do
+  pod 'OpenIMSDK'
+end
+```
+
+Import the umbrella header where you initialize or call the SDK.
+
+```objc
+#import <OpenIMSDK/OpenIMSDK.h>
+```
+
+## OpenIM client model
+
+Use `OIMManager.manager` for SDK operations. Callback and event delivery is handled through `OIMCallbacker.callbacker` and listener protocols.
+
+Common SDK areas include:
+
+- Connection and login through `OIMManager` and `OIMManager+Login`
+- Conversations through `OIMManager+Conversation`
+- Messages through `OIMManager+Message`
+- Groups through `OIMManager+Group`
+- Friends through `OIMManager+Friend`
+- Users through `OIMManager+User`
+
+Register listeners before login so connection, message, conversation, friend, group, and user events are not missed.
+
+## Initialize
+
+Initialize the SDK with your OpenIM API address, WebSocket address, and app storage path.
+
+```objc
+OIMInitConfig *config = [OIMInitConfig new];
+config.apiAddr = @"https://api.example.com";
+config.wsAddr = @"wss://ws.example.com";
+config.dataDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).firstObject;
+
+BOOL ok = [[OIMManager manager] initSDKWithConfig:config
+                                      onConnecting:^{
+                                          NSLog(@"OpenIM connecting");
+                                      }
+                                   onConnectFailure:^(NSInteger code, NSString * _Nullable error) {
+                                       NSLog(@"OpenIM connect failed: %ld %@", (long)code, error);
+                                   }
+                                   onConnectSuccess:^{
+                                       NSLog(@"OpenIM connected");
+                                   }
+                                    onKickedOffline:^{
+                                        NSLog(@"OpenIM kicked offline");
+                                    }
+                                 onUserTokenExpired:^{
+                                     NSLog(@"OpenIM token expired");
+                                 }];
+```
+
+## Login
+
+The application server should issue the user token. Pass the current user ID and token to the SDK after initialization succeeds.
+
+```objc
+[[OIMManager manager] login:userID
+                      token:token
+                  onSuccess:^(NSString * _Nullable data) {
+                      NSLog(@"OpenIM login success");
+                  }
+                  onFailure:^(NSInteger code, NSString * _Nullable error) {
+                      NSLog(@"OpenIM login failed: %ld %@", (long)code, error);
+                  }];
+```
+
+## Common callbacks
+
+The iOS SDK exposes listener protocols for the main OpenIM event domains:
+
+| Area | Listener |
+| ---- | -------- |
+| Connection | `OIMSDKListener` |
+| Messages | `OIMAdvancedMsgListener` |
+| Conversations | `OIMConversationListener` |
+| Friendship | `OIMFriendshipListener` |
+| Groups | `OIMGroupListener` |
+| Users | `OIMUserListener` |
+| Custom business messages | `OIMCustomBusinessListener` |
+
+You can also use closure-based helpers on `OIMCallbacker+Closure`, such as `setAdvancedMsgListenerWithOnRecvMessageRevoked` and `setConversationListenerWithOnSyncServerStart`.
+
+## Operational APIs
+
+Use the `OIMManager` category for the feature area you are implementing. Examples:
+
+```objc
+[[OIMManager manager] createTextMessage:@"hello openim"
+                              onSuccess:^(OIMMessageInfo * _Nullable message) {
+                                  // Send the created message next.
+                              }
+                              onFailure:nil];
+
+[[OIMManager manager] getAllConversationListWithOnSuccess:^(NSArray<OIMConversationInfo *> * _Nullable conversations) {
+    // Render conversations.
+} onFailure:nil];
+```
+
+Direct messages use a receiver user ID and an empty group ID. Group messages use an empty receiver user ID and the target group ID.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| ---- | ----- | -------- |
+| Initialization fails | Invalid config or native SDK startup failure. | Check API address, WebSocket address, local data directory, and app permissions. |
+| Login fails | Token, user ID, or server compatibility is wrong. | Reissue the token from your backend and verify the OpenIM Server version. |
+| Events are missing | Listener was registered after login or after the action. | Register listeners before calling `login`. |
+| Message send has no progress | The send callback is not retained or the client is not connected. | Keep the callback path alive and wait for connection and login success. |
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/ios/getting-started/send-first-message)
+- [Application overview](/docs/chat/sdk/v4/ios/application/overview-application)
+- [Message overview](/docs/chat/sdk/v4/ios/message/overview-message)
+- [Channel overview](/docs/chat/sdk/v4/ios/channel/overview-channel)

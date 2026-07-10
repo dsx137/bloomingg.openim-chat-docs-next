@@ -1,18 +1,152 @@
 ---
 title: 'Send your first message'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'OpenIM Android SDK guide for initializing the SDK, logging in, listening for messages, and sending a text message.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/getting-started/send-first-message"
-  context="SDKs · Android · v4"
-  sourceTitle="Send your first message"
-/>
+## Overview
+
+This guide connects an Android client, registers message callbacks, creates a text message, and sends it to either a user or a group.
+
+The Android SDK creates message objects first, then sends those objects through `messageManager.sendMessage`.
+
+## Prerequisites
+
+- Install `io.openim:android-sdk:3.8.3.5@aar` from the OpenIM Maven repository.
+- Initialize `OpenIMClient` with an `InitConfig` that includes the API address, WebSocket address, and local data directory.
+- Get a `userID` and user token from your trusted backend.
+- Have a target `recvID` for direct chat or `groupID` for group chat.
+
+## Initialize and log in
+
+Register connection and message listeners before login.
+
+```java
+OpenIMClient client = OpenIMClient.getInstance();
+
+InitConfig config = new InitConfig();
+config.setApiAddr("https://api.example.com");
+config.setWsAddr("wss://ws.example.com");
+config.setDataDir(getFilesDir().getAbsolutePath());
+
+client.initSDK(application, config, new OnConnListener() {
+    @Override
+    public void onConnectSuccess() {
+        Log.d("OpenIM", "connected");
+    }
+
+    @Override
+    public void onConnectFailed(long code, String error) {
+        Log.e("OpenIM", code + ": " + error);
+    }
+
+    @Override
+    public void onConnecting() {}
+
+    @Override
+    public void onKickedOffline() {}
+
+    @Override
+    public void onUserTokenExpired() {}
+});
+```
+
+Then log in with the current user's token.
+
+```java
+client.login(new OnBase<String>() {
+    @Override
+    public void onSuccess(String data) {
+        Log.d("OpenIM", "login success");
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        Log.e("OpenIM", code + ": " + error);
+    }
+}, userID, token);
+```
+
+## Receive messages
+
+Register an advanced message listener before testing the send flow.
+
+```java
+client.messageManager.setAdvancedMsgListener(new OnAdvanceMsgListener() {
+    @Override
+    public void onRecvNewMessage(Message message) {
+        renderIncomingMessage(message);
+    }
+});
+```
+
+The listener also reports read receipts, revoked messages, deleted messages, and online-only messages when those features are enabled by your app flow.
+
+## Send a text message
+
+Create a text message and send it. For a direct message, set `recvID` and leave `groupID` empty.
+
+```java
+client.messageManager.createTextMessage(new OnBase<Message>() {
+    @Override
+    public void onSuccess(Message message) {
+        client.messageManager.sendMessage(new OnMsgSendCallback() {
+            @Override
+            public void onProgress(long progress) {
+                Log.d("OpenIM", "send progress " + progress);
+            }
+
+            @Override
+            public void onSuccess(Message sentMessage) {
+                renderOutgoingMessage(sentMessage);
+            }
+
+            @Override
+            public void onError(int code, String error) {
+                Log.e("OpenIM", code + ": " + error);
+            }
+        }, message, recvID, "", null, false, null);
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        Log.e("OpenIM", code + ": " + error);
+    }
+}, "hello openim");
+```
+
+For a group message, pass an empty receiver user ID and the target `groupID`.
+
+```java
+client.messageManager.sendMessage(callback, message, "", groupID, null, false, null);
+```
+
+## Verify the result
+
+- Confirm `onConnectSuccess` fires before creating or sending messages.
+- Confirm `login` succeeds for the current `userID`.
+- Confirm `sendMessage` returns the sent message and the target signed-in client receives `onRecvNewMessage`.
+- Confirm the app stores the returned message IDs needed by receipts, revoke, delete, and history APIs.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| ---- | ----- | -------- |
+| Send fails immediately | The client is not connected or logged in. | Wait for connection and login success before calling message APIs. |
+| The other client does not receive the message | Wrong `recvID` or `groupID`, or the receiver is not in the group. | Verify target IDs and group membership from your backend or SDK queries. |
+| Message callback does not fire | Listener was registered after the message arrived. | Register `OnAdvanceMsgListener` before login during app startup. |
+| Media messages fail later | A relative path was passed to a full-path API, or the file was not copied to the SDK data directory. | Use the matching full-path or SDK-data-directory message creation method. |
+
+## Next steps
+
+- [Android SDK overview](/docs/chat/sdk/v4/android/overview)
+- [Message overview](/docs/chat/sdk/v4/android/message/overview-message)
+- [Event handler overview](/docs/chat/sdk/v4/android/event-handler/overview-event-handler)
+- [Channel overview](/docs/chat/sdk/v4/android/channel/overview-channel)

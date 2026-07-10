@@ -1,18 +1,147 @@
 ---
 title: 'OpenIM SDK for Android'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for OpenIM SDK for Android. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'OpenIM Android SDK guide with installation, initialization, login, listener, and first API usage details.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/overview'
 ---
 
-<OverviewScaffold
-  route="/docs/chat/sdk/v4/android/overview"
-  context="SDKs · Android · v4"
-  sourceTitle="OpenIM SDK for Android"
-/>
+## Overview
+
+Use the OpenIM Android SDK to connect an Android client to OpenIM Server, maintain the IM connection, receive SDK callbacks, and call conversation, message, group, friendship, and user APIs.
+
+The upstream Android SDK package is `io.openim:android-sdk`. The v4 docs track the OpenIM 3.8.3 Android SDK line and should be used with a compatible OpenIM Server.
+
+## Install
+
+Add the OpenIM Maven repository used by the Android SDK, then add the SDK package.
+
+```gradle
+repositories {
+    maven { url 'https://open-im-online.rentsoft.cn:51000/repository/maven2/' }
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.openim:android-sdk:3.8.3.5@aar'
+    compileOnly 'com.google.code.gson:gson:2.9.1'
+}
+```
+
+The SDK targets Android API 21+ and uses Java 11 compatibility in the upstream module.
+
+## OpenIM client model
+
+Access SDK features from the singleton `OpenIMClient.getInstance()`. The client exposes these managers:
+
+- `conversationManager`
+- `friendshipManager`
+- `groupManager`
+- `messageManager`
+- `userInfoManager`
+
+Register listeners before login so connection, message, conversation, friend, group, and user events are not missed.
+
+## Initialize
+
+Create an `InitConfig` with your OpenIM API address, WebSocket address, and local storage path, then call `initSDK` from the application process.
+
+```java
+OpenIMClient client = OpenIMClient.getInstance();
+
+InitConfig config = new InitConfig();
+config.setApiAddr("https://api.example.com");
+config.setWsAddr("wss://ws.example.com");
+config.setDataDir(getFilesDir().getAbsolutePath());
+
+boolean ok = client.initSDK(application, config, new OnConnListener() {
+    @Override
+    public void onConnectSuccess() {
+        Log.d("OpenIM", "connected");
+    }
+
+    @Override
+    public void onConnectFailed(long code, String error) {
+        Log.e("OpenIM", code + ": " + error);
+    }
+
+    @Override
+    public void onConnecting() {}
+
+    @Override
+    public void onKickedOffline() {}
+
+    @Override
+    public void onUserTokenExpired() {}
+});
+```
+
+## Login
+
+The application server should issue the user token. Pass the current `userID` and token to the SDK after initialization succeeds.
+
+```java
+client.login(new OnBase<String>() {
+    @Override
+    public void onSuccess(String data) {
+        Log.d("OpenIM", "login success");
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        Log.e("OpenIM", code + ": " + error);
+    }
+}, userID, token);
+```
+
+Use `getLoginStatus()` and `getLoginUserID()` when restoring an app session.
+
+## Common callbacks
+
+The Android SDK exposes listener interfaces for the main OpenIM event domains:
+
+| Area | Listener |
+| ---- | -------- |
+| Connection | `OnConnListener` |
+| Messages | `OnAdvanceMsgListener` |
+| Conversations | `OnConversationListener` |
+| Friendship | `OnFriendshipListener` |
+| Groups | `OnGroupListener` |
+| Users | `OnUserListener` |
+| Custom business messages | `OnCustomBusinessListener` |
+| Upload progress | `OnPutFileListener`, `OnFileUploadProgressListener` |
+
+## Operational APIs
+
+Use the manager for the feature area you are implementing. Examples:
+
+```java
+client.messageManager.createTextMessage(callback, "hello openim");
+client.messageManager.sendMessage(sendCallback, message, receiverUserID, "", null, false, null);
+client.conversationManager.getAllConversationList(callback);
+client.groupManager.createGroup(callback, groupInfo);
+client.userInfoManager.getUsersInfo(callback, userIDs);
+```
+
+Direct messages use a receiver user ID and an empty group ID. Group messages use an empty receiver user ID and the target group ID.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| ---- | ----- | -------- |
+| `initSDK` returns `false` | Invalid config or native SDK startup failure. | Check API address, WebSocket address, local data directory, and ABI packaging. |
+| Login fails | Token, user ID, or server compatibility is wrong. | Reissue the token from your backend and verify the OpenIM Server version. |
+| Events are missing | Listener was registered after login or after the action. | Register listeners before calling `login()`. |
+| Media messages fail | File path does not match the SDK path mode. | For non-full-path message creation APIs, copy the file under the SDK data directory and pass the relative path. |
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/android/getting-started/send-first-message)
+- [Application overview](/docs/chat/sdk/v4/android/application/overview-application)
+- [Message overview](/docs/chat/sdk/v4/android/message/overview-message)
+- [Channel overview](/docs/chat/sdk/v4/android/channel/overview-channel)
