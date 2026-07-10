@@ -235,30 +235,27 @@ function renderSummary(records: DiffRecord[], skipped: SkippedRecord[]): string 
 
 function renderPrompt(records: DiffRecord[]): string {
   const lines: string[] = [
-    '# Docsets update request',
+    '# Update synced docsets',
     '',
-    'Update this documentation repository using the upstream git diffs collected for configured docsets.',
+    'Apply all documentation-relevant upstream changes for every docset listed below.',
     '',
-    'Requirements:',
-    '- Edit only files that are needed to reflect the upstream changes in the local docs.',
-    '- Prefer existing docs style and frontmatter conventions.',
-    '- Preserve the original document structure, formatting, and writing style as much as possible.',
-    '- Keep generated files consistent by running the repository sync/check commands after edits when needed.',
-    '- Do not update data/structure/docsets.json; this workflow updates docsets baselines after the docs edits.',
-    '- Do not change unrelated pages or repository configuration.',
+    'Rules:',
+    '- Read each complete diff and update every affected page; do not stop after representative pages.',
+    '- Use subagents in parallel for independent docsets or verification tasks whenever available, then review and combine all results before finishing.',
+    "- Edit content only within that docset's local docs root. Do not edit other docs, generated files, data/structure/docsets.json, or repository configuration.",
+    '- Follow docs/CONTENT_AUTHORING.md and the matching docs/templates file. Preserve existing frontmatter, section order, MDX components, formatting, and tone.',
+    '- Keep the current information architecture. Add, remove, rename, or move pages only when the upstream diff requires it.',
+    '- Use only facts supported by the target upstream source. Do not invent APIs, signatures, parameters, examples, or compatibility claims.',
+    '- Before finishing, verify every listed docset is complete. A docset may remain unchanged only when its diff has no documentation impact; state that reason. Do not leave a partial update.',
     '',
-    'Changed docsets:',
+    'Docsets:',
     '',
   ];
   for (const record of records) {
     lines.push(`## ${record.key}`);
     lines.push(`- Local docs root: ${record.docsRoot}`);
-    lines.push(`- Upstream repo: ${record.repoUrl}`);
-    if (record.packageName) lines.push(`- Package: ${record.packageName}`);
-    lines.push(
-      `- Compare: ${renderSourceRef(record)} (${record.sourceSha}) -> ${record.targetRef} (${record.targetSha})`,
-    );
-    lines.push(`- Diff file: ${record.diffPath}`, '');
+    lines.push(`- Target source: ${record.repoUrl} at ${record.targetRef}`);
+    lines.push(`- Diff: ${record.diffPath}`, '');
   }
   return `${lines.join('\n')}\n`;
 }
