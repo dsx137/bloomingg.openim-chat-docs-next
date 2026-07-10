@@ -87,7 +87,7 @@ jobs:
         if: ${{ steps.collect.outputs.changed == 'true' }}
         run: git checkout -B "$PROPOSAL_BRANCH"
 
-      - name: Apply docsets diffs with Codex
+      - name: Apply docsets diffs with Agent
         id: codex
         if: ${{ steps.collect.outputs.changed == 'true' }}
         uses: openai/codex-action@v1
