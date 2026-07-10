@@ -87,6 +87,23 @@ jobs:
         if: ${{ steps.collect.outputs.changed == 'true' }}
         run: git checkout -B "$PROPOSAL_BRANCH"
 
+      - name: Configure Codex multi-agent
+        id: codex_config
+        if: ${{ steps.collect.outputs.changed == 'true' }}
+        run: |
+          codex_home="$RUNNER_TEMP/codex-home"
+          mkdir -p "$codex_home"
+          cat > "$codex_home/config.toml" <<'EOF'
+          [agents]
+          max_threads = 16
+          max_depth = 1
+
+          [features.multi_agent_v2]
+          enabled = true
+          max_concurrent_threads_per_session = 5
+          EOF
+          echo "home=$codex_home" >> "$GITHUB_OUTPUT"
+
       - name: Apply docsets diffs with Agent
         id: codex
         if: ${{ steps.collect.outputs.changed == 'true' }}
@@ -97,6 +114,7 @@ jobs:
           responses-api-endpoint: ${{ env.OPENAI_BASE_URL }}/responses
           prompt-file: .docsets-sync/prompt.md
           codex-version: latest
+          codex-home: ${{ steps.codex_config.outputs.home }}
 
       - name: Refresh docs and verify
         if: ${{ steps.collect.outputs.changed == 'true' }}
