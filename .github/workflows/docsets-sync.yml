@@ -92,10 +92,11 @@ jobs:
         if: ${{ steps.collect.outputs.changed == 'true' }}
         uses: openai/codex-action@v1
         with:
+          model: ${{ env.MODEL }}
           openai-api-key: ${{ env.OPENAI_API_KEY }}
           responses-api-endpoint: ${{ env.OPENAI_BASE_URL }}/responses
           prompt-file: .docsets-sync/prompt.md
-          model: ${{ env.MODEL }}
+          codex-version: latest
 
       - name: Refresh docs and verify
         if: ${{ steps.collect.outputs.changed == 'true' }}
@@ -132,6 +133,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          completed_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          printf '\n---\n\n- Completed at (UTC): `%s`\n- Workflow run: %s\n' \
+            "$completed_at" "$run_url" >> .docsets-sync/summary.md
+
           if [ "${{ steps.existing.outputs.exists }}" = "true" ]; then
             gh pr edit "${{ steps.existing.outputs.url }}" \
               --title "docs: update synced docsets" \
