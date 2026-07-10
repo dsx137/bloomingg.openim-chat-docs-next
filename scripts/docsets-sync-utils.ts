@@ -148,7 +148,7 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
   const summary: SyncSummary = { changed: records.length > 0, records, skipped };
   await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
   await writeFile(join(outputDir, 'summary.md'), renderSummary(records, skipped));
-  await writeFile(join(outputDir, 'omp-prompt.md'), renderPrompt(records));
+  await writeFile(join(outputDir, 'prompt.md'), renderPrompt(records));
   await writeGitHubOutputs(summary.changed);
 
   console.log(
@@ -201,7 +201,7 @@ async function writeGitHubOutputs(changed: boolean): Promise<void> {
     [
       `changed=${changed ? 'true' : 'false'}`,
       'summary_path=.docsets-sync/summary.md',
-      'prompt_path=.docsets-sync/omp-prompt.md',
+      'prompt_path=.docsets-sync/prompt.md',
       '',
     ].join('\n'),
   );
