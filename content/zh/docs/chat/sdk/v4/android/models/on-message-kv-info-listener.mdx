@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-message-kv-info-listener'
@@ -15,9 +15,9 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-message-kv-info-listener'
 
 ## 回调方法
 
-| 方法                   | 参数                 | 描述             |
-| ---------------------- | -------------------- | ---------------- |
-| onMessageKvInfoChanged | `List<MessageKv>list` | 事件触发时回调。 |
+| 方法                   | 参数                                                                      | 描述                                                                                                                                                                                                                                                   |
+| ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| onMessageKvInfoChanged | `List<`[`MessageKv`](/docs/chat/sdk/v4/android/models/message-kv)`> list` | 接口语义是消息聚合 KV 信息变化后返回受影响消息及其最新统计，`list` 中每项用 `clientMsgID` 标识消息，`changedKvList` 保存变化后的 key 统计。当前提供的 Go core 只有监听器注册和接口定义，没有发现实际触发调用；接入前应确认所用 core 构建已实现该事件。 |
 
 ## 关联类型
 

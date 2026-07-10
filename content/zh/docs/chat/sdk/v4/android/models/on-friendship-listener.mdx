@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-friendship-listener'
@@ -19,17 +19,17 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-friendship-listener'
 
 ## 回调方法
 
-| 方法                        | 参数                    | 描述             |
-| --------------------------- | ----------------------- | ---------------- |
-| onBlacklistAdded            | BlacklistInfo u         | 事件触发时回调。 |
-| onBlacklistDeleted          | BlacklistInfo u         | 事件触发时回调。 |
-| onFriendApplicationAccepted | FriendApplicationInfo u | 事件触发时回调。 |
-| onFriendApplicationAdded    | FriendApplicationInfo u | 事件触发时回调。 |
-| onFriendApplicationDeleted  | FriendApplicationInfo u | 事件触发时回调。 |
-| onFriendApplicationRejected | FriendApplicationInfo u | 事件触发时回调。 |
-| onFriendInfoChanged         | FriendInfo u            | 事件触发时回调。 |
-| onFriendAdded               | FriendInfo u            | 事件触发时回调。 |
-| onFriendDeleted             | FriendInfo u            | 事件触发时回调。 |
+| 方法                        | 参数                                                                                       | 描述                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onBlacklistAdded            | [`BlacklistInfo`](/docs/chat/sdk/v4/android/models/blacklist-info) `info`                  | 黑名单同步发现一条新增记录时触发，通常发生在当前用户把对方加入黑名单后。`info.userID` 标识被加入黑名单的用户，其他字段是该用户的资料和添加信息。           |
+| onBlacklistDeleted          | [`BlacklistInfo`](/docs/chat/sdk/v4/android/models/blacklist-info) `info`                  | 黑名单同步发现一条本地记录已被删除时触发，通常发生在当前用户把对方移出黑名单后。`info` 是删除前的黑名单用户资料，可通过 `userID` 定位用户。                |
+| onFriendApplicationAccepted | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到好友申请已同意通知时触发，随后 core 会同步好友列表。`info` 中的 `fromUserID`、`toUserID` 标识申请双方，`handleResult`、`handleTime` 表示处理结果。 |
+| onFriendApplicationAdded    | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到新的好友申请通知时触发。`info.fromUserID` 是申请人，`toUserID` 是接收人，`reqMsg` 和 `createTime` 分别是申请备注和申请时间。                       |
+| onFriendApplicationDeleted  | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | 当前 Go core 仅保留该接口，好友申请通知和同步流程中没有触发调用。业务代码不应依赖此回调删除申请记录，应在申请处理后重新查询申请列表。                      |
+| onFriendApplicationRejected | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到好友申请已拒绝通知时触发。`info.handleResult` 表示拒绝结果，`handlerUserID`、`handleMsg` 和 `handleTime` 分别是处理人、处理备注和处理时间。        |
+| onFriendInfoChanged         | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现现有好友资料变化时触发，例如昵称、头像、备注或扩展字段变化。`info` 是更新后的好友资料，`userID` 标识发生变化的好友。                           |
+| onFriendAdded               | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现一条新增好友记录时触发，常见于好友申请通过或服务端直接添加好友。`info` 是新增好友的完整资料。                                                  |
+| onFriendDeleted             | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现一条本地好友记录已被删除时触发。`info` 是删除前的好友资料，可通过 `userID` 更新好友列表和相关单聊界面。                                        |
 
 ## 关联类型
 

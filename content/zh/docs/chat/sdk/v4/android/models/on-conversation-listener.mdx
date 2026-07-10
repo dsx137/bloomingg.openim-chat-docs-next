@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-conversation-listener'
@@ -19,20 +19,21 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-conversation-listener'
 
 ## 回调方法
 
-| 方法                                 | 参数                        | 描述                              |
-| ------------------------------------ | --------------------------- | --------------------------------- |
-| onConversationChanged                | `List<ConversationInfo>list` | 会话列表有数据更新 可刷新会话列表 |
-| onNewConversation                    | `List<ConversationInfo>list` | 新增会话 可刷新会话列表           |
-| onSyncServerFailed                   | boolean reinstalled         | 事件触发时回调。                  |
-| onSyncServerFinish                   | boolean reinstalled         | 事件触发时回调。                  |
-| onSyncServerStart                    | boolean reinstalled         | 事件触发时回调。                  |
-| onSyncServerProgress                 | long progress               | 事件触发时回调。                  |
-| onTotalUnreadMessageCountChanged     | int i                       | 未读消息总数改变                  |
-| onConversationUserInputStatusChanged | String s                    | 事件触发时回调。                  |
+| 方法                                 | 参数                                                                                                                 | 描述                                                                                                                                                                                     |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onConversationChanged                | `List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`> list`                              | 本地已有会话的资料或状态更新后触发，例如最后一条消息、未读数、置顶、草稿、接收选项、会话名称或头像变化。`list` 只包含本次发生变化的会话，元素字段为更新后的值。                          |
+| onNewConversation                    | `List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`> list`                              | 收到消息或同步会话时，core 发现本地不存在对应会话并成功写入后触发。`list` 是本次新增的会话，可通过 `conversationID` 去重并加入会话列表。                                                 |
+| onSyncServerFailed                   | `boolean reinstalled`                                                                                                | 服务端消息增量同步失败时触发。当前 Go core 的失败路径传入 `false`；`true` 预留给完整应用数据同步失败场景。                                                                               |
+| onSyncServerFinish                   | `boolean reinstalled`                                                                                                | 一轮同步正常结束时触发。`true` 表示登录阶段的完整应用数据同步结束，`false` 表示消息增量同步结束。                                                                                        |
+| onSyncServerStart                    | `boolean reinstalled`                                                                                                | 一轮同步开始时触发。`true` 表示开始同步群组、好友、会话和已读序列等完整应用数据，`false` 表示开始消息增量同步。                                                                          |
+| onSyncServerProgress                 | `long progress`                                                                                                      | 同步进度变化时触发，`progress` 是 `1` 到 `100` 的百分比；完整应用数据同步开始时从 `1` 上报，结束前上报 `100`。                                                                           |
+| onTotalUnreadMessageCountChanged     | `int totalUnreadCount`                                                                                               | 会话未读数变化并重新汇总后触发。`totalUnreadCount` 是当前所有计入统计的会话未读消息总数，不是单个会话的未读数。                                                                          |
+| onConversationUserInputStatusChanged | `String change`（JSON，对应 [`InputStatesChangedData`](/docs/chat/sdk/v4/android/models/input-states-changed-data)） | 收到输入状态消息，且某用户在某会话的输入平台集合发生变化时触发。JSON 中 `conversationID`、`userID` 标识会话和用户，`platformIDs` 是仍处于输入状态的平台 ID；空列表表示该用户已停止输入。 |
 
 ## 关联类型
 
 - [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+- [输入状态变化信息](/docs/chat/sdk/v4/android/models/input-states-changed-data)（`InputStatesChangedData`）：会话内用户输入状态变化的 JSON 结构。
 
 ## 相关页面
 

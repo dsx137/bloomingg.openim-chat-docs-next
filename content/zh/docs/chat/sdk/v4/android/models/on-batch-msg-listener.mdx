@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-batch-msg-listener'
@@ -15,7 +15,9 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-batch-msg-listener'
 
 ## 回调方法
 
-| 方法                     | 参数                | 描述               |
-| ------------------------ | ------------------- | ------------------ |
-| OnRecvNewMessages        | messageList: string | 收到多条新消息。   |
-| OnRecvOfflineNewMessages | messageList: string | 收到多条离线消息。 |
+| 方法                     | 参数                          | 描述                                                                                                                                                                                                           |
+| ------------------------ | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnRecvNewMessages        | `messageList: string`（JSON） | SDK 在前台批量处理完新消息后触发。core 会过滤正在输入消息，并且只有待通知列表非空时才回调；`messageList` 是按发送顺序排列的 [`Message`](/docs/chat/sdk/v4/android/models/message) JSON 数组。                  |
+| OnRecvOfflineNewMessages | `messageList: string`（JSON） | SDK 处于后台时批量同步到新消息，且全局与对应会话接收选项允许接收后触发；被屏蔽或设置为不接收的消息会被过滤。`messageList` 是需要通知业务层的 [`Message`](/docs/chat/sdk/v4/android/models/message) JSON 数组。 |
+
+Go core 优先检查批量消息监听器：设置后，新消息只进入 `OnRecvNewMessages` 或 `OnRecvOfflineNewMessages`，不会再触发单条监听器的 `OnRecvNewMessage`、`OnRecvOfflineNewMessage` 和 `OnRecvOnlineOnlyMessage`。前台批量分支除正在输入消息外不会再区分仅在线消息，业务端不要期待两套新消息回调同时触发。

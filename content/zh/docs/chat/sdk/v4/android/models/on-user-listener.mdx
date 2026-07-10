@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-user-listener'
@@ -15,10 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-user-listener'
 
 ## 回调方法
 
-| 方法                | 参数                           | 描述                                                        |
-| ------------------- | ------------------------------ | ----------------------------------------------------------- |
-| onSelfInfoUpdated   | UserInfo info                  | 当前用户的资料发生了更新 可以在 UI 上更新自己的头像和昵称。 |
-| onUserStatusChanged | UsersOnlineStatus onlineStatus | When the user's online status changes, call                 |
+| 方法                | 参数                                                                                       | 描述                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onSelfInfoUpdated   | [`UserInfo`](/docs/chat/sdk/v4/android/models/user-info) `info`                            | 同步当前登录用户资料并发现服务端数据与本地数据不同时触发，例如调用资料更新接口后同步成功，或收到服务端资料变更通知。`info` 是更新后的当前用户资料，可用 `userID` 校验用户并刷新昵称、头像等字段。 |
+| onUserStatusChanged | [`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status) `onlineStatus` | 已订阅用户的在线平台集合发生变化时触发。`onlineStatus.userID` 标识用户，`status` 表示在线或离线，`platformIDs` 列出该用户当前在线的平台；空列表表示没有在线平台。                                 |
 
 ## 关联类型
 

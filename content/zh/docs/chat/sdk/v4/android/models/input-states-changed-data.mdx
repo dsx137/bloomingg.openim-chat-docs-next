@@ -1,0 +1,27 @@
+---
+title: '输入状态变化信息'
+description: '说明 Android SDK InputStatesChangedData 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/input-states-changed-data'
+---
+
+`InputStatesChangedData` 是 Android SDK 中描述会话输入状态变化的数据模型，完整类名为 `io.openim.android.sdk.models.InputStatesChangedData`。`OnConversationListener.onConversationUserInputStatusChanged` 当前以 JSON 字符串传递该结构。
+
+## 字段说明
+
+| 字段名称       | Java 类型    | 描述                                                                                                                                                     |
+| -------------- | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| conversationID | String       | 输入状态所属的会话 ID。应使用此字段定位需要更新的聊天页面，不要只按 `userID` 分发。                                                                      |
+| userID         | String       | 输入状态发生变化的用户 ID。                                                                                                                              |
+| platformIDs    | `List<Long>` | 该用户当前仍在此会话中输入的平台 ID 列表，取值对应 [`Platform`](/docs/chat/sdk/v4/android/models/platform)；列表为空表示该用户已没有处于输入状态的平台。 |
+
+## 相关页面
+
+- [会话监听器](/docs/chat/sdk/v4/android/models/on-conversation-listener)
+- [监听会话事件](/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener)

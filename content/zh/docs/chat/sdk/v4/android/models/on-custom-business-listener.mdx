@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-custom-business-listener'
@@ -15,9 +15,9 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-custom-business-listener'
 
 ## 回调方法
 
-| 方法                        | 参数     | 描述             |
-| --------------------------- | -------- | ---------------- |
-| onRecvCustomBusinessMessage | String s | 事件触发时回调。 |
+| 方法                        | 参数              | 描述                                                                                                                                                                                                                                             |
+| --------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| onRecvCustomBusinessMessage | `String business` | SDK 收到服务端下发的自定义业务通知时触发。`business` 是通知消息 [`NotificationElem`](/docs/chat/sdk/v4/android/models/notification-elem) 的 `detail` 字段原文，core 不解析其内部格式；请按发送方约定解析，并自行处理空值或格式不符合预期的情况。 |
 
 ## 相关页面
 

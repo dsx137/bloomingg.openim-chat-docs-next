@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-message-read-info'
@@ -15,12 +15,12 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-message-read-info'
 
 ## 字段说明
 
-| 字段名称     | Java 类型              | 描述                   |
-| ------------ | ---------------------- | ---------------------- |
-| clientMsgID  | String                 | SDK 返回或提交的字段。 |
-| hasReadCount | int                    | SDK 返回或提交的字段。 |
-| unreadCount  | int                    | SDK 返回或提交的字段。 |
-| readMembers  | `List<GroupMembersInfo>` | SDK 返回或提交的字段。 |
+| 字段名称     | Java 类型                                                                           | 描述                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| clientMsgID  | String                                                                              | 已读统计所属消息的客户端消息 ID。                                                      |
+| hasReadCount | int                                                                                 | 当前已经阅读该消息的群成员数量。                                                       |
+| unreadCount  | int                                                                                 | 当前尚未阅读该消息的群成员数量。                                                       |
+| readMembers  | `List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>` | 本次回执中可返回的已读群成员资料；可使用 `userID` 标识成员，列表内容以服务端回执为准。 |
 
 ## 关联类型
 

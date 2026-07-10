@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/notification-elem'
@@ -15,7 +15,11 @@ sourcePath: '/docs/chat/sdk/v4/android/models/notification-elem'
 
 ## 字段说明
 
-| 字段名称    | Java 类型 | 描述         |
-| ----------- | --------- | ------------ |
-| detail      | String    | 通知内容详情 |
-| defaultTips | String    | 默认提示内容 |
+| 字段名称    | Java 类型 | 描述                                                                                                                 |
+| ----------- | --------- | -------------------------------------------------------------------------------------------------------------------- |
+| detail      | String    | 通知的结构化或自定义详情。自定义业务通知会把该字段原样传给 `onRecvCustomBusinessMessage`；内部格式由通知发送方约定。 |
+| defaultTips | String    | 无需解析 `detail` 时可直接展示的默认提示文本；是否展示及本地化方式由业务层决定。                                     |
+
+## 相关页面
+
+- [自定义业务监听器](/docs/chat/sdk/v4/android/models/on-custom-business-listener)

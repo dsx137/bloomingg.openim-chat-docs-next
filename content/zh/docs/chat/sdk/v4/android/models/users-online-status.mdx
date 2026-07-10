@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/users-online-status'
@@ -15,11 +15,15 @@ sourcePath: '/docs/chat/sdk/v4/android/models/users-online-status'
 
 ## 字段说明
 
-| 字段名称    | Java 类型     | 描述                   |
-| ----------- | ------------- | ---------------------- |
-| userID      | String        | SDK 返回或提交的字段。 |
-| status      | int           | SDK 返回或提交的字段。 |
-| platformIDs | `List<Integer>` | SDK 返回或提交的字段。 |
+| 字段名称    | Java 类型       | 描述                                                                                                                           |
+| ----------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| userID      | String          | 在线状态所属的用户 ID。                                                                                                        |
+| status      | int             | 汇总在线状态：`0` 表示离线，`1` 表示在线。core 根据 `platformIDs` 是否为空生成该值。                                           |
+| platformIDs | `List<Integer>` | 用户当前在线的平台 ID 列表，取值对应 [`Platform`](/docs/chat/sdk/v4/android/models/platform)；空列表表示用户在所有平台均离线。 |
+
+## 关联类型
+
+- [平台类型](/docs/chat/sdk/v4/android/models/platform)（`Platform`）：客户端平台类型常量。
 
 ## 相关页面
 

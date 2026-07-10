@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/on-advance-msg-listener'
@@ -19,18 +19,18 @@ On Advance Msg Listener documentation for OpenIM Android SDK v3.8.3.
 
 ## Callback Methods
 
-| Method                           | Parameters                                | Description                            |
-| -------------------------------- | ----------------------------------------- | -------------------------------------- |
-| `onRecvNewMessage`               | `Message msg`                             | Called when a new message is received. |
-| `onRecvC2CReadReceipt`           | `List<C2CReadReceiptInfo>list`            | Called when this event is triggered.   |
-| `onRecvGroupMessageReadReceipt`  | `GroupMessageReceipt groupMessageReceipt` | Called when this event is triggered.   |
-| `onRecvMessageRevokedV2`         | `RevokedInfo info`                        | Called when this event is triggered.   |
-| `onRecvMessageExtensionsChanged` | String msgID; List<KeyValue>list          | Called when the event is triggered.    |
-| `onRecvMessageExtensionsDeleted` | String msgID; List<String>list            | Called when the event is triggered.    |
-| `onRecvMessageExtensionsAdded`   | String msgID; List<KeyValue>list          | Called when the event is triggered.    |
-| `onMsgDeleted`                   | `Message message`                         | Called when this event is triggered.   |
-| `onRecvOfflineNewMessage`        | `List<Message>msg`                        | Called when the event is triggered.    |
-| `onRecvOnlineOnlyMessage`        | `String s`                                | Called when the event is triggered.    |
+| Method                           | Parameters                                                                                          | Description                            |
+| -------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `onRecvNewMessage`               | [Message](/docs/chat/sdk/v4/android/models/message) msg                                             | Called when a new message is received. |
+| `onRecvC2CReadReceipt`           | List<[C2CReadReceiptInfo](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info)> list             | Called when this event is triggered.   |
+| `onRecvGroupMessageReadReceipt`  | [Group Message Receipt](/docs/chat/sdk/v4/android/models/group-message-receipt) groupMessageReceipt | Called when this event is triggered.   |
+| `onRecvMessageRevokedV2`         | [Revoked Info](/docs/chat/sdk/v4/android/models/revoked-info) info                                  | Called when this event is triggered.   |
+| `onRecvMessageExtensionsChanged` | String msgID; List<[KeyValue](/docs/chat/sdk/v4/android/models/key-value)> list                     | Called when this event is triggered.   |
+| `onRecvMessageExtensionsDeleted` | String msgID; List<String> keyList                                                                  | Called when this event is triggered.   |
+| `onRecvMessageExtensionsAdded`   | String msgID; List<[KeyValue](/docs/chat/sdk/v4/android/models/key-value)> list                     | Called when this event is triggered.   |
+| `onMsgDeleted`                   | [Message](/docs/chat/sdk/v4/android/models/message) message                                         | Called when this event is triggered.   |
+| `onRecvOfflineNewMessage`        | List<[Message](/docs/chat/sdk/v4/android/models/message)> messages                                  | Called when this event is triggered.   |
+| `onRecvOnlineOnlyMessage`        | String message（JSON，对应 [Message](/docs/chat/sdk/v4/android/models/message)）                         | Called when this event is triggered.   |
 
 ## Related Types
 

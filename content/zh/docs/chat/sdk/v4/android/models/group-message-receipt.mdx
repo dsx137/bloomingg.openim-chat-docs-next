@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-message-receipt'
@@ -15,10 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-message-receipt'
 
 ## 字段说明
 
-| 字段名称             | Java 类型                  | 描述                   |
-| -------------------- | -------------------------- | ---------------------- |
-| conversationID       | String                     | SDK 返回或提交的字段。 |
-| groupMessageReadInfo | `List<GroupMessageReadInfo>` | SDK 返回或提交的字段。 |
+| 字段名称             | Java 类型                                                                                    | 描述                                                                                              |
+| -------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| conversationID       | String                                                                                       | 已读回执所属的群会话 ID。一个回调对象只包含同一会话内的消息。                                     |
+| groupMessageReadInfo | `List<`[`GroupMessageReadInfo`](/docs/chat/sdk/v4/android/models/group-message-read-info)`>` | 本次已读数据发生变化的消息列表；每项通过 `clientMsgID` 标识消息，并给出最新已读、未读统计和成员。 |
 
 ## 关联类型
 

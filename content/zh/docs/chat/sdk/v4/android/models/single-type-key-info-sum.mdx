@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/single-type-key-info-sum'
@@ -15,12 +15,12 @@ sourcePath: '/docs/chat/sdk/v4/android/models/single-type-key-info-sum'
 
 ## 字段说明
 
-| 字段名称      | Java 类型        | 描述                   |
-| ------------- | ---------------- | ---------------------- |
-| typeKey       | String           | SDK 返回或提交的字段。 |
-| counter       | int              | SDK 返回或提交的字段。 |
-| infoList      | `List<UserExInfo>` | SDK 返回或提交的字段。 |
-| isContainSelf | boolean          | SDK 返回或提交的字段。 |
+| 字段名称      | Java 类型                                                               | 描述                                                                                   |
+| ------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| typeKey       | String                                                                  | 消息扩展的类型 key，用于区分不同的聚合项，例如不同表态或业务自定义类型。               |
+| counter       | int                                                                     | 当前 `typeKey` 对应的累计数量。                                                        |
+| infoList      | `List<`[`UserExInfo`](/docs/chat/sdk/v4/android/models/user-ex-info)`>` | 参与该 `typeKey` 的用户及用户级扩展数据列表。                                          |
+| isContainSelf | boolean                                                                 | 当前登录用户是否包含在 `infoList` 所代表的参与者中；可直接用于渲染当前用户的选中状态。 |
 
 ## 关联类型
 
