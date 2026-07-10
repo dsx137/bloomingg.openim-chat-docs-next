@@ -1,6 +1,6 @@
 import { spawnSync } from 'node:child_process';
 import { appendFile, mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, relative, resolve } from 'node:path';
 import { docsetsDataSchema, type DocsetRecord, type DocsetsData } from '../src/types/docs.js';
 
 interface DiffRecord {
@@ -24,7 +24,6 @@ interface SkippedRecord {
 }
 
 interface SyncSummary {
-  changed: boolean;
   records: DiffRecord[];
   skipped: SkippedRecord[];
 }
@@ -34,7 +33,6 @@ interface VersionParts {
   minor: number;
   patch: number;
   suffix: string;
-  suffixRank: number;
   build: number;
   revision: number;
 }
@@ -94,12 +92,13 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
 
   const records: DiffRecord[] = [];
   const skipped: SkippedRecord[] = [];
-  let matchedFilter = false;
+  const selectedDocsets = docsetKey
+    ? docsets.filter((docset) => docset.key === docsetKey)
+    : docsets;
+  if (docsetKey && selectedDocsets.length === 0)
+    throw new Error(`Unknown docset key: ${docsetKey}`);
 
-  for (const docset of docsets) {
-    if (docsetKey && docset.key !== docsetKey) continue;
-    matchedFilter = true;
-
+  for (const docset of selectedDocsets) {
     const target = resolveTargetRef(docset);
     if (!target) {
       skipped.push({ key: docset.key, reason: 'no target ref matched' });
@@ -120,7 +119,7 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
     }
 
     const diffPath = join(diffsDir, `${safeName(docset.key)}.diff`);
-    gitDiffToFile(repoDir, sourceSha, targetSha, diffPath);
+    git(['diff', '--binary', `--output=${diffPath}`, sourceSha, targetSha, '--'], repoDir);
     if ((await stat(diffPath)).size === 0) {
       await rm(diffPath, { force: true });
       skipped.push({ key: docset.key, reason: 'ref changed but no file diff was produced' });
@@ -138,21 +137,20 @@ async function collectDocsetDiffs(docsetKey: string | null): Promise<void> {
       targetTagPattern: docset.targetTagPattern,
       sourceSha,
       targetSha,
-      diffPath: relativeToRepo(diffPath),
+      diffPath: relative(repoRoot, diffPath),
       stat: git(['diff', '--stat', sourceSha, targetSha, '--'], repoDir),
     });
   }
 
-  if (docsetKey && !matchedFilter) throw new Error(`Unknown docset key: ${docsetKey}`);
-
-  const summary: SyncSummary = { changed: records.length > 0, records, skipped };
-  await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
+  const changed = records.length > 0;
+  const summary: SyncSummary = { records, skipped };
+  await writeFile(summaryPath, `${JSON.stringify({ changed, ...summary }, null, 2)}\n`);
   await writeFile(join(outputDir, 'summary.md'), renderSummary(records, skipped));
   await writeFile(join(outputDir, 'prompt.md'), renderPrompt(records));
-  await writeGitHubOutputs(summary.changed);
+  await writeGitHubOutputs(changed);
 
   console.log(
-    summary.changed ? `Collected ${records.length} upstream diff(s).` : 'No docsets updates found.',
+    changed ? `Collected ${records.length} upstream diff(s).` : 'No docsets updates found.',
   );
   if (skipped.length > 0) console.log(`Skipped ${skipped.length} docsets item(s).`);
 }
@@ -177,7 +175,7 @@ async function updateDocsetBaselines(): Promise<void> {
 
   console.log(`Updated ${records.length} docsets baseline(s).`);
   for (const record of records) {
-    console.log(`- ${record.key}: sourceRef ${docsetsByKey.get(record.key)!.sourceRef}`);
+    console.log(`- ${record.key}: sourceRef ${record.targetRef}`);
   }
 }
 
@@ -265,14 +263,7 @@ function renderSourceRef(record: DiffRecord): string {
 }
 
 function readStatSummary(statText: string): string {
-  return (
-    statText
-      .trim()
-      .split('\n')
-      .map((line) => line.trim())
-      .filter(Boolean)
-      .at(-1) ?? 'No stat summary was produced.'
-  );
+  return statText.trim().split('\n').at(-1)?.trim() || 'No stat summary was produced.';
 }
 
 function resolveTargetRef(docset: DocsetRecord): ResolvedTargetRef | null {
@@ -314,7 +305,6 @@ function readMatchedTag(tag: string, pattern: RegExp, patternText: string): Matc
     minor: parseVersionGroup(groups.minor, 'minor', patternText),
     patch: parseVersionGroup(groups.patch, 'patch', patternText),
     suffix: groups.suffix ?? '',
-    suffixRank: groups.suffix ? 1 : 0,
     build: groups.build ? parseVersionGroup(groups.build, 'build', patternText) : 0,
     revision: groups.revision ? parseVersionGroup(groups.revision, 'revision', patternText) : 0,
   };
@@ -352,24 +342,6 @@ function git(args: string[], cwd: string): string {
   return result.stdout;
 }
 
-function gitDiffToFile(
-  repoDir: string,
-  sourceSha: string,
-  targetSha: string,
-  outputPath: string,
-): void {
-  const result = spawnSync(
-    'git',
-    ['diff', '--binary', `--output=${outputPath}`, sourceSha, targetSha, '--'],
-    { cwd: repoDir, encoding: 'utf8', maxBuffer: 1024 * 1024 },
-  );
-  if (result.status !== 0) {
-    throw new Error(
-      `git diff ${sourceSha} ${targetSha} failed:\n${result.stderr || result.stdout}`,
-    );
-  }
-}
-
 function compareVersionParts(a: VersionParts, b: VersionParts): number {
   for (const field of ['major', 'minor', 'patch'] as const) {
     const diff = a[field] - b[field];
@@ -377,14 +349,10 @@ function compareVersionParts(a: VersionParts, b: VersionParts): number {
   }
   if (a.build !== b.build) return a.build - b.build;
   if (a.revision !== b.revision) return a.revision - b.revision;
-  if (a.suffixRank !== b.suffixRank) return a.suffixRank - b.suffixRank;
+  if (Boolean(a.suffix) !== Boolean(b.suffix)) return a.suffix ? 1 : -1;
   return a.suffix.localeCompare(b.suffix);
 }
 
 function safeName(value: string): string {
   return value.replace(/[^A-Za-z0-9_.-]+/g, '__');
-}
-
-function relativeToRepo(path: string): string {
-  return path.replace(`${repoRoot}/`, '');
 }
