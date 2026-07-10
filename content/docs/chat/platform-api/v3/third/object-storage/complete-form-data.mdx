@@ -1,6 +1,6 @@
 ---
-title: "完成表单直传"
-description: "OpenIM 第三方服务 REST API：完成表单直传。"
+title: "Complete form data"
+description: "Complete form data with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,43 +10,29 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/third/object-storage/complete-form-data"
 ---
 
-使用 **完成表单直传** 从可信后端调用 OpenIM 第三方服务 REST 接口。在表单直传成功后确认上传任务，写入对象记录并返回 OpenIM 可访问 URL。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+Complete form data is an OpenIM third-party service REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/object/complete_form_data
 ```
 
-### 请求示例
+### Request example
 
 ```bash
 curl --request POST "${API_ADDRESS}/object/complete_form_data" \
   --header "Content-Type: application/json; charset=utf-8" \
   --header "operationID: ${OPERATION_ID}" \
   --header "token: ${ADMIN_TOKEN}" \
-  --header "X-Request-Api: ${API_ADDRESS}" \
   --data-raw '{
   "id": "base64-form-data-id"
 }'
 ```
 
-> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
-
-### 请求头
-
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token 或具备对应权限的用户 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
-| X-Request-Api | 否 | string | 生成对象访问 URL 时使用的 API 外部地址；不传时服务端根据当前请求地址推导。 |
-
-## 请求体
+## Request body
 
 ```json
 {
@@ -54,14 +40,14 @@ curl --request POST "${API_ADDRESS}/object/complete_form_data" \
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
+| Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
-| id | 是 | string | 初始化表单直传返回的任务 ID。 |
-| urlPrefix | 否 | string | 服务端会根据 `X-Request-Api` 或当前请求地址自动补齐，通常不需要在请求体中传。 |
+| id | Yes | string | The id value. |
+| urlPrefix | No | string | The url prefix value. |
 
-## 响应
+## Response
 
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -74,19 +60,19 @@ curl --request POST "${API_ADDRESS}/object/complete_form_data" \
 }
 ```
 
-### 响应参数
+### Response fields
 
-| 参数名 | 类型 | 说明 |
+| Field | Type | Description |
 | --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
-| data | object | 接口返回数据。 |
-| data.url | string | 完成表单直传后 OpenIM 返回的对象访问 URL。 |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
+| data.url | string | Resource URL. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
@@ -96,21 +82,20 @@ curl --request POST "${API_ADDRESS}/object/complete_form_data" \
 }
 ```
 
-| 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-## 权限和限制
+## Permissions and limits
 
-- 校验第三方存储对象，写入 OpenIM 对象记录，并生成访问 URL。
-- `id` 必填。
-- 必须先使用初始化接口返回的凭证完成第三方存储直传。
-- 所有数组型请求参数建议控制在 1000 个元素以内。
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [认证接口](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [third-party service overview](/docs/chat/platform-api/v3/third/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

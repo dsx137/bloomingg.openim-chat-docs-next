@@ -1,6 +1,6 @@
 ---
-title: "跳转监控面板"
-description: "OpenIM 第三方服务 REST API：跳转监控面板。"
+title: "Open monitoring dashboard"
+description: "Open monitoring dashboard with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,46 +10,72 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/third/monitoring/prometheus"
 ---
 
-使用 **跳转监控面板** 调用 OpenIM 第三方服务 GET 接口。重定向到服务端配置的 Grafana 监控地址，用于查看 OpenIM 监控面板。
+Open monitoring dashboard is an OpenIM third-party service REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 GET {API_ADDRESS}/third/prometheus
 ```
 
-### 请求示例
+### Request example
 
 ```bash
-curl --request GET "${API_ADDRESS}/third/prometheus"
+curl --request GET "${API_ADDRESS}/third/prometheus" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}"
 ```
 
-## 参数
+## Request body
 
-此接口不使用 JSON 请求体。
+This endpoint does not require a JSON request body.
 
-此接口不需要请求体参数。
+## Response
 
-## 响应
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
-成功时返回 `302 Found`，并在 `Location` Header 中写入服务端配置项 `API.Prometheus.GrafanaURL`。
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
 
-| Header | 类型 | 说明 |
-| ------ | ---- | ---- |
-| Location | string | 重定向目标地址。 |
+### Response fields
 
-### 错误
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
 
-如果请求失败，服务端可能返回 `400 Bad Request`、`404 Not Found` 或 `500 Internal Server Error`，响应体为错误文本。
+### Error response
 
-## 权限和限制
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
-- 只读跳转，不改变业务数据。
-- 此接口由 API 服务直接返回 `302 Found`。
-- 如果 Grafana 地址未配置或不可访问，需要先检查服务端监控配置。
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
 
-## 相关页面
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [获取对象访问地址](/docs/chat/platform-api/v3/third/object-storage/access-url)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [third-party service overview](/docs/chat/platform-api/v3/third/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

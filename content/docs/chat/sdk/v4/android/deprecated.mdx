@@ -1,18 +1,30 @@
 ---
-title: 'Deprecated'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Deprecated. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+title: 'Unsupported or unexposed capabilities'
+description: 'Lists capabilities that are not currently exported as standalone OpenIM Android SDK APIs.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-08'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/deprecated'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/deprecated"
-  context="SDKs · Android · v4"
-  sourceTitle="Deprecated"
-/>
+The Android documentation only keeps capabilities that are exported by the current `open_im_sdk`. The following areas are not exposed as standalone OpenIM Android SDK core APIs right now.
+
+## Capabilities Not Exposed As Android Core APIs
+
+| Capability                  | Current status                                                |
+| --------------------------- | ------------------------------------------------------------- |
+| Open groups                 | No standalone Android core API is exposed in the current SDK. |
+| Polls                       | No standalone Android core API is exposed in the current SDK. |
+| Scheduled messages          | No standalone Android core API is exposed in the current SDK. |
+| Message threads             | No standalone Android core API is exposed in the current SDK. |
+| Translation                 | No standalone Android core API is exposed in the current SDK. |
+| Independent reporting       | No standalone Android core API is exposed in the current SDK. |
+| Group metadata and counters | No standalone Android core API is exposed in the current SDK. |
+
+## Documentation Policy
+
+Do not add API pages for capabilities that are not exported by Android SDK v3.8.3. Add pages only after the SDK exposes matching methods and the Android call prototype can be verified.

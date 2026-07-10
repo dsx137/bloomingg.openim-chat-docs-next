@@ -1,18 +1,60 @@
 ---
-title: 'Send your first message'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+title: 'Android integration flow'
+description: 'Android integration flow for the OpenIM Android SDK v3.8.3.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-08'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/getting-started/send-first-message"
-  context="SDKs · Android · v4"
-  sourceTitle="Send your first message"
-/>
+This page describes the integration order and the parameters you need to prepare. For exact API signatures, open the corresponding capability pages.
+
+## Call Order
+
+| Step              | Required method                                                          | Description                                                                                                           |
+| ----------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
+| Read version      | `GetSdkVersion()`                                                        | Use this for diagnosing the current AAR or core binding version.                                                      |
+| Initialize        | `InitSDK(listener, operationID, config)`                                 | `config` passes the `IMConfig` JSON, and `listener` handles connection lifecycle events.                              |
+| Set listeners     | `SetConversationListener`, `SetAdvancedMsgListener`, `SetFriendListener` | Set listeners before login to avoid missing events during login synchronization.                                      |
+| Login             | `Login(callback, operationID, userID, token)`                            | The token should be issued by your business server. Call conversation, message, and group APIs after login succeeds.  |
+| Create message    | `CreateTextMessage`, `CreateImageMessage`, and other creation methods    | Creation methods synchronously return a message JSON string.                                                          |
+| Send message      | `SendMessage` or `SendMessageNotOss`                                     | Use `recvID` for one-to-one chats and `groupID` for group chats. Send results are returned through `SendMsgCallBack`. |
+| Logout or release | `Logout`, `UnInitSDK`                                                    | Use `Logout` for the current user and `UnInitSDK` to release global SDK resources.                                    |
+
+## Initialization Config
+
+| Field                  | Type     | Description                                           |
+| ---------------------- | -------- | ----------------------------------------------------- |
+| `systemType`           | `string` | System type for logs and runtime identification.      |
+| `platformID`           | `int32`  | Platform ID. Android must pass a non-zero value.      |
+| `apiAddr`              | `string` | OpenIM HTTP API address. Include the HTTP scheme.     |
+| `wsAddr`               | `string` | OpenIM WebSocket address. Include the WS scheme.      |
+| `dataDir`              | `string` | Local database, cache, and SDK data directory.        |
+| `logLevel`             | `uint32` | SDK log level.                                        |
+| `isLogStandardOutput`  | `bool`   | Whether logs are printed to standard output.          |
+| `logFilePath`          | `string` | Directory for log files.                              |
+| `isExternalExtensions` | `bool`   | Whether external extension field handling is enabled. |
+
+## Integration Checklist
+
+| Check                      | Passing condition                                                                                                               |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| Initialize once            | Repeated initialization reuses the existing `UserForSDK`; do not rebuild it frequently in the same process.                     |
+| Non-empty operationID      | The core call chain validates `operationID`; generate a traceable ID for each business operation.                               |
+| Call user APIs after login | Most APIs return an error callback when the SDK is not initialized or the user is not logged in.                                |
+| Valid JSON parameters      | `userIDList`, `groupIDList`, `searchParam`, `req`, and similar string parameters should contain JSON for the target structure.  |
+| Listeners are not lost     | `Set*Listener` replaces the previous listener. Maintain distribution in your wrapper layer when multiple consumers need events. |
+
+## Related Types
+
+- [Send Msg Call Back](/docs/chat/sdk/v4/android/models/send-msg-call-back) (`SendMsgCallBack`): core binding message sending callback, usually mapped to `OnMsgSendCallback` in the Android call layer.
+
+## Related Pages
+
+- [Overview](/docs/chat/sdk/v4/android/application/overview)
+- [Overview](/docs/chat/sdk/v4/android/event-handler/overview)
+- [Send messages](/docs/chat/sdk/v4/android/message/overview#send-messages)

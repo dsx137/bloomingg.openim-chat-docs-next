@@ -1,6 +1,6 @@
 ---
-title: "概述"
-description: "OpenIM Platform API 认证模块概览，覆盖管理员 Token、用户 Token 和强制下线。"
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,29 +10,29 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/auth/overview"
 ---
 
-认证模块用于服务端获取管理端调用凭证、为客户端签发用户 Token，并在安全场景下强制用户下线。
+The authentication module lets backend services obtain management credentials, issue user login tokens, parse tokens, and force sessions offline when required.
 
-## 能力范围
+## Capability scope
 
-| 能力 | 说明 |
-| ---- | ---- |
-| 管理员 Token | 通过管理员凭据获取后端调用管理端 API 所需的 Token。 |
-| 用户 Token | 为指定用户和平台签发客户端登录 Token。 |
-| 强制下线 | 让指定用户端会话失效，适用于封禁、改密和风险处置。 |
+| Capability | Description |
+| --- | --- |
+| Administrator tokens | Issue tokens for trusted backend calls to management APIs. |
+| User tokens | Issue SDK login tokens for specific users and platforms. |
+| Session control | Force a user session offline for security or account-risk workflows. |
 
-## 常用接口
+## Common APIs
 
-- [获取管理员 Token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
-- [获取用户 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
-- [强制用户下线](/docs/chat/platform-api/v3/auth/sessions/force-logout)
+- [Get an administrator token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [Get a user token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
+- [Force logout](/docs/chat/platform-api/v3/auth/sessions/force-logout)
 
-## 接入建议
+## Integration advice
 
-管理员 Token 只应保存在可信后端服务中，不要写入前端环境变量、移动端包体或浏览器代码。
+Store administrator tokens only on trusted backend services.
 
-用户 Token 的签发应绑定业务登录态，并结合业务侧风控、封禁和权限校验。
+Bind user-token issuing to your business login state, risk controls, and account permissions.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

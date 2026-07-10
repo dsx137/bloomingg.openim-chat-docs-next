@@ -1,6 +1,6 @@
 ---
-title: "接入准备"
-description: "OpenIM Platform API 中文参考：接入准备。说明 OpenIM REST 支持情况、接口结构和后端实现边界。"
+title: "Prepare to use the API"
+description: "Prepare to use the API for the OpenIM Platform API."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,49 +10,40 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/prepare-to-use-api"
 ---
 
-在调用 OpenIM Platform API 前，先确认基础地址、公共请求头、鉴权 Token 和请求体约定。本文按照 Platform API 的接入准备结构组织，参数和认证方式以 OpenIM REST 文档为准。
+Before calling OpenIM Platform API endpoints, configure the base API address, common headers, authentication tokens, and JSON request conventions.
 
-## 基础地址
+## Base URL
 
-OpenIM REST 接口使用部署环境中的 API 地址作为基础地址。文档中的 `{API_ADDRESS}` 需要替换为你的 OpenIM API 网关或服务端地址。
+Use the API address from your OpenIM deployment as the base URL. Replace `{API_ADDRESS}` in endpoint examples with your gateway or server address.
 
 ```bash
 {API_ADDRESS}
 ```
 
-例如，接口页中的 `POST {API_ADDRESS}/user/get_users` 表示向当前环境的 `/user/get_users` 端点发起请求。生产环境建议只允许可信后端访问管理端接口，不要把管理员 Token 暴露给客户端。
+Production deployments should keep management endpoints reachable only from trusted backend services.
 
-## 请求头
+## Headers
 
-OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外，请求通常需要携带以下请求头。
+Most OpenIM management APIs use JSON request bodies and the following headers.
 
-| 请求头 | 必填 | 说明 |
-| ------ | ---- | ---- |
-| Content-Type | 是 | JSON 请求使用 `application/json; charset=utf-8`。 |
-| operationID | 是 | 全局链路追踪 ID。建议每次请求生成独立值，便于串联服务端日志。 |
-| token | 管理端接口必填 | APP 管理员 Token。创建用户等少数初始化接口可能不需要，具体以接口页为准。 |
+| Header | Required | Description |
+| ------ | -------- | ----------- |
+| Content-Type | Yes | Use `application/json; charset=utf-8` for JSON requests. |
+| operationID | Yes | Unique trace ID for the request. Generate a new value for each backend call. |
+| token | Management APIs | Administrator token issued by the OpenIM authentication API. |
 
-## 鉴权
+## Authentication
 
-Platform API 应由服务端调用。这个服务端可以是客户自己的业务服务器，也可以是 OpenIM 提供的 Chat Server；它负责配置 OpenIM API 地址、管理员账号和管理员凭据 `secret`，并在服务端完成 Token 获取、缓存、刷新和审计。
+Backend services should first obtain an administrator token, then pass it in the `token` header for user, group, message, conversation, and other management APIs. User tokens for SDK login should also be issued by the backend.
 
-### 管理端调用
+1. Configure the OpenIM API address and administrator credentials on the backend.
+2. Call the administrator token API.
+3. Use the administrator token to call management APIs.
+4. Issue user tokens when clients need to log in to the SDK.
 
-服务端先调用[获取管理员 Token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)，使用管理员账号和 `secret` 换取 APP 管理员 Token。后续创建用户、创建群组、发送服务端消息、导入关系或执行运营管理接口时，把管理员 Token 放在请求头 `token` 中调用对应 Platform API。
+- [Get an administrator token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [Get a user token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
 
-### 客户端登录
+## Request body
 
-当业务用户注册、密码登录或完成第三方登录后，客户端不应直接接触管理员 Token。业务服务器或 OpenIM Chat Server 在确认业务身份后，调用[获取用户 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)为该用户签发用户 Token，也就是客户端登录 OpenIM SDK 使用的 IM Token，并把它返回给客户端。
-
-常见接入顺序如下：
-
-1. 在业务服务器或 OpenIM Chat Server 中配置 OpenIM API 地址、管理员账号和 `secret`。
-2. 服务端调用[获取管理员 Token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)，换取 APP 管理员 Token。
-3. 服务端使用管理员 Token 调用用户、群组、消息、关系等管理端接口。
-4. 用户登录业务系统后，服务端调用[获取用户 Token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)，签发 IM Token 并返回给客户端。
-
-## 请求体
-
-当前保留的 OpenIM Platform API 页面均为 `POST` 到固定路径，业务参数放在 JSON 请求体中。不要把分页、用户 ID、群组 ID 或消息字段拼接到 URL query。
-
-如果字段值本身是 URL，例如头像地址、文件地址或对象存储地址，作为 JSON 字段提交时保留原始字符串即可。
+Current OpenIM Platform API pages use fixed endpoint paths and JSON request bodies. Do not move user IDs, group IDs, pagination fields, or message payloads into URL query strings unless a specific endpoint says so.

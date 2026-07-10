@@ -1,0 +1,47 @@
+---
+title: 'Get friend application unhandled count'
+description: 'Explains the Android core binding method GetFriendApplicationUnhandledCount, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count'
+---
+
+Use `GetFriendApplicationUnhandledCount` for get friend application unhandled count in the OpenIM Android SDK.
+
+## Feature
+
+Reads get friend application unhandled count from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Method signature | `GetFriendApplicationUnhandledCount(callback Base, operationID, req string)` |
+| Capability       | Users, friends, and blocklist                                                |
+| Source file      | `open_im_sdk/relation.go`                                                    |
+
+## Input Parameters
+
+| Parameter     | Type                                          | Description                                     |
+| ------------- | --------------------------------------------- | ----------------------------------------------- |
+| `callback`    | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
+| `operationID` | `string`                                      | Trace ID for this operation.                    |
+| `req`         | `string`                                      | Request parameters, usually encoded as JSON.    |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Friendship Listener](/docs/chat/sdk/v4/android/models/on-friendship-listener) (`OnFriendshipListener`): OnFriendshipListener used by this Android SDK type.

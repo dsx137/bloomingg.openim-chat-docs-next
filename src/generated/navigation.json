@@ -13,7 +13,7 @@
         {
           "id": "overview",
           "segment": "overview",
-          "title": "概述",
+          "title": "Overview",
           "href": "/docs/chat/platform-api/v3/overview",
           "type": "page",
           "children": [],
@@ -22,7 +22,7 @@
         {
           "id": "prepare-to-use-api",
           "segment": "prepare-to-use-api",
-          "title": "接入准备",
+          "title": "Prepare to use the API",
           "href": "/docs/chat/platform-api/v3/prepare-to-use-api",
           "type": "page",
           "children": [],
@@ -31,14 +31,14 @@
         {
           "id": "auth",
           "segment": "auth",
-          "title": "认证",
+          "title": "Authentication",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "auth/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/auth/overview",
               "type": "page",
               "children": [],
@@ -47,7 +47,7 @@
             {
               "id": "auth/tokens/get-admin-token",
               "segment": "get-admin-token",
-              "title": "获取管理员 Token",
+              "title": "Get an administrator token",
               "href": "/docs/chat/platform-api/v3/auth/tokens/get-admin-token",
               "type": "page",
               "children": [],
@@ -56,7 +56,7 @@
             {
               "id": "auth/tokens/get-user-token",
               "segment": "get-user-token",
-              "title": "获取用户 Token",
+              "title": "Get a user token",
               "href": "/docs/chat/platform-api/v3/auth/tokens/get-user-token",
               "type": "page",
               "children": [],
@@ -65,7 +65,7 @@
             {
               "id": "auth/sessions/force-logout",
               "segment": "force-logout",
-              "title": "强制用户下线",
+              "title": "Force logout",
               "href": "/docs/chat/platform-api/v3/auth/sessions/force-logout",
               "type": "page",
               "children": [],
@@ -77,14 +77,14 @@
         {
           "id": "user",
           "segment": "user",
-          "title": "用户",
+          "title": "User",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "user/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/user/overview",
               "type": "page",
               "children": [],
@@ -93,14 +93,14 @@
             {
               "id": "user/listing-users",
               "segment": "listing-users",
-              "title": "查询用户",
+              "title": "Listing users",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/listing-users/list-users",
                   "segment": "list-users",
-                  "title": "查询用户列表",
+                  "title": "List users",
                   "href": "/docs/chat/platform-api/v3/user/listing-users/list-users",
                   "type": "page",
                   "children": [],
@@ -109,7 +109,7 @@
                 {
                   "id": "user/listing-users/list-all-user-ids",
                   "segment": "list-all-user-ids",
-                  "title": "查询全部用户 ID",
+                  "title": "List all user IDs",
                   "href": "/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids",
                   "type": "page",
                   "children": [],
@@ -118,7 +118,7 @@
                 {
                   "id": "user/listing-users/check-user-accounts",
                   "segment": "check-user-accounts",
-                  "title": "校验用户账号",
+                  "title": "Check user accounts",
                   "href": "/docs/chat/platform-api/v3/user/listing-users/check-user-accounts",
                   "type": "page",
                   "children": [],
@@ -127,7 +127,7 @@
                 {
                   "id": "user/listing-users/get-a-user",
                   "segment": "get-a-user",
-                  "title": "获取用户",
+                  "title": "Get a user",
                   "href": "/docs/chat/platform-api/v3/user/listing-users/get-a-user",
                   "type": "page",
                   "children": [],
@@ -139,14 +139,14 @@
             {
               "id": "user/creating-users",
               "segment": "creating-users",
-              "title": "创建用户",
+              "title": "Creating users",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/creating-users/create-a-user",
                   "segment": "create-a-user",
-                  "title": "创建用户",
+                  "title": "Create a user",
                   "href": "/docs/chat/platform-api/v3/user/creating-users/create-a-user",
                   "type": "page",
                   "children": [],
@@ -158,14 +158,14 @@
             {
               "id": "user/managing-users",
               "segment": "managing-users",
-              "title": "管理用户",
+              "title": "Managing users",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/managing-users/update-a-user",
                   "segment": "update-a-user",
-                  "title": "更新用户",
+                  "title": "Update a user",
                   "href": "/docs/chat/platform-api/v3/user/managing-users/update-a-user",
                   "type": "page",
                   "children": [],
@@ -177,14 +177,14 @@
             {
               "id": "user/presence",
               "segment": "presence",
-              "title": "在线状态",
+              "title": "Presence",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/presence/get-users-online-status",
                   "segment": "get-users-online-status",
-                  "title": "查询用户在线状态",
+                  "title": "Get users' online status",
                   "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-status",
                   "type": "page",
                   "children": [],
@@ -193,7 +193,7 @@
                 {
                   "id": "user/presence/get-users-online-token-detail",
                   "segment": "get-users-online-token-detail",
-                  "title": "查询用户在线 Token 明细",
+                  "title": "Get users online token details",
                   "href": "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail",
                   "type": "page",
                   "children": [],
@@ -205,14 +205,14 @@
             {
               "id": "user/notification-accounts",
               "segment": "notification-accounts",
-              "title": "通知账号",
+              "title": "Notification accounts",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/notification-accounts/add-notification-account",
                   "segment": "add-notification-account",
-                  "title": "创建通知账号",
+                  "title": "Add a notification account",
                   "href": "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account",
                   "type": "page",
                   "children": [],
@@ -221,7 +221,7 @@
                 {
                   "id": "user/notification-accounts/update-notification-account",
                   "segment": "update-notification-account",
-                  "title": "更新通知账号",
+                  "title": "Update a notification account",
                   "href": "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account",
                   "type": "page",
                   "children": [],
@@ -230,7 +230,7 @@
                 {
                   "id": "user/notification-accounts/search-notification-account",
                   "segment": "search-notification-account",
-                  "title": "搜索通知账号",
+                  "title": "Search notification accounts",
                   "href": "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account",
                   "type": "page",
                   "children": [],
@@ -245,14 +245,14 @@
         {
           "id": "relation",
           "segment": "relation",
-          "title": "关系",
+          "title": "Relationships",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "relation/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/relation/overview",
               "type": "page",
               "children": [],
@@ -261,14 +261,14 @@
             {
               "id": "relation/managing-friend-requests",
               "segment": "managing-friend-requests",
-              "title": "好友申请",
+              "title": "Friend requests",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "relation/managing-friend-requests/apply-to-add-friend",
                   "segment": "apply-to-add-friend",
-                  "title": "申请添加好友",
+                  "title": "Apply to add a friend",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend",
                   "type": "page",
                   "children": [],
@@ -277,7 +277,7 @@
                 {
                   "id": "relation/managing-friend-requests/respond-friend-apply",
                   "segment": "respond-friend-apply",
-                  "title": "处理好友申请",
+                  "title": "Respond to a friend request",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply",
                   "type": "page",
                   "children": [],
@@ -286,7 +286,7 @@
                 {
                   "id": "relation/managing-friend-requests/list-received-friend-requests",
                   "segment": "list-received-friend-requests",
-                  "title": "查询收到的好友申请",
+                  "title": "List received friend requests",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests",
                   "type": "page",
                   "children": [],
@@ -295,7 +295,7 @@
                 {
                   "id": "relation/managing-friend-requests/list-sent-friend-requests",
                   "segment": "list-sent-friend-requests",
-                  "title": "查询发出的好友申请",
+                  "title": "List sent friend requests",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests",
                   "type": "page",
                   "children": [],
@@ -307,14 +307,14 @@
             {
               "id": "relation/listing-friends",
               "segment": "listing-friends",
-              "title": "查询好友",
+              "title": "Listing friends",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "relation/listing-friends/list-friends",
                   "segment": "list-friends",
-                  "title": "查询好友列表",
+                  "title": "List friends",
                   "href": "/docs/chat/platform-api/v3/relation/listing-friends/list-friends",
                   "type": "page",
                   "children": [],
@@ -323,7 +323,7 @@
                 {
                   "id": "relation/listing-friends/get-designated-friends",
                   "segment": "get-designated-friends",
-                  "title": "获取指定好友",
+                  "title": "Get designated friends",
                   "href": "/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends",
                   "type": "page",
                   "children": [],
@@ -335,14 +335,14 @@
             {
               "id": "relation/managing-friends",
               "segment": "managing-friends",
-              "title": "管理好友",
+              "title": "Managing friends",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "relation/managing-friends/delete-friend",
                   "segment": "delete-friend",
-                  "title": "删除好友",
+                  "title": "Delete a friend",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friends/delete-friend",
                   "type": "page",
                   "children": [],
@@ -351,7 +351,7 @@
                 {
                   "id": "relation/managing-friends/import-friends",
                   "segment": "import-friends",
-                  "title": "导入好友",
+                  "title": "Import friends",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friends/import-friends",
                   "type": "page",
                   "children": [],
@@ -360,7 +360,7 @@
                 {
                   "id": "relation/managing-friends/update-friends",
                   "segment": "update-friends",
-                  "title": "更新好友",
+                  "title": "Update friends",
                   "href": "/docs/chat/platform-api/v3/relation/managing-friends/update-friends",
                   "type": "page",
                   "children": [],
@@ -372,14 +372,14 @@
             {
               "id": "relation/blacklist",
               "segment": "blacklist",
-              "title": "黑名单",
+              "title": "Blacklist",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "relation/blacklist/add-black",
                   "segment": "add-black",
-                  "title": "加入黑名单",
+                  "title": "Add to blacklist",
                   "href": "/docs/chat/platform-api/v3/relation/blacklist/add-black",
                   "type": "page",
                   "children": [],
@@ -388,7 +388,7 @@
                 {
                   "id": "relation/blacklist/list-blacks",
                   "segment": "list-blacks",
-                  "title": "查询黑名单",
+                  "title": "List blacklisted users",
                   "href": "/docs/chat/platform-api/v3/relation/blacklist/list-blacks",
                   "type": "page",
                   "children": [],
@@ -397,7 +397,7 @@
                 {
                   "id": "relation/blacklist/remove-black",
                   "segment": "remove-black",
-                  "title": "移出黑名单",
+                  "title": "Remove from blacklist",
                   "href": "/docs/chat/platform-api/v3/relation/blacklist/remove-black",
                   "type": "page",
                   "children": [],
@@ -412,14 +412,14 @@
         {
           "id": "group",
           "segment": "group",
-          "title": "群组",
+          "title": "Groups",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "group/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/group/overview",
               "type": "page",
               "children": [],
@@ -428,14 +428,14 @@
             {
               "id": "group/managing-groups",
               "segment": "managing-groups",
-              "title": "管理群组",
+              "title": "Managing groups",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/managing-groups/create-group",
                   "segment": "create-group",
-                  "title": "创建群组",
+                  "title": "Create group",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/create-group",
                   "type": "page",
                   "children": [],
@@ -444,7 +444,7 @@
                 {
                   "id": "group/managing-groups/set-group-info",
                   "segment": "set-group-info",
-                  "title": "设置群组信息",
+                  "title": "Set group info",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/set-group-info",
                   "type": "page",
                   "children": [],
@@ -453,7 +453,7 @@
                 {
                   "id": "group/managing-groups/set-group-info-ex",
                   "segment": "set-group-info-ex",
-                  "title": "设置群组信息扩展",
+                  "title": "Set group info extension",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/set-group-info-ex",
                   "type": "page",
                   "children": [],
@@ -462,7 +462,7 @@
                 {
                   "id": "group/managing-groups/transfer-group-owner",
                   "segment": "transfer-group-owner",
-                  "title": "转让群主",
+                  "title": "Transfer group owner",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/transfer-group-owner",
                   "type": "page",
                   "children": [],
@@ -471,7 +471,7 @@
                 {
                   "id": "group/managing-groups/get-groups-info",
                   "segment": "get-groups-info",
-                  "title": "获取群组详情",
+                  "title": "Get groups info",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/get-groups-info",
                   "type": "page",
                   "children": [],
@@ -480,7 +480,7 @@
                 {
                   "id": "group/managing-groups/dismiss-group",
                   "segment": "dismiss-group",
-                  "title": "解散群组",
+                  "title": "Dismiss group",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/dismiss-group",
                   "type": "page",
                   "children": [],
@@ -489,7 +489,7 @@
                 {
                   "id": "group/managing-groups/get-group-abstract-info",
                   "segment": "get-group-abstract-info",
-                  "title": "获取群组摘要信息",
+                  "title": "Get group abstract info",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/get-group-abstract-info",
                   "type": "page",
                   "children": [],
@@ -498,7 +498,7 @@
                 {
                   "id": "group/managing-groups/get-groups",
                   "segment": "get-groups",
-                  "title": "分页查询群组",
+                  "title": "Get groups",
                   "href": "/docs/chat/platform-api/v3/group/managing-groups/get-groups",
                   "type": "page",
                   "children": [],
@@ -510,14 +510,14 @@
             {
               "id": "group/group-applications",
               "segment": "group-applications",
-              "title": "入群申请",
+              "title": "Group applications",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-applications/join-group",
                   "segment": "join-group",
-                  "title": "申请加入群组",
+                  "title": "Join group",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/join-group",
                   "type": "page",
                   "children": [],
@@ -526,7 +526,7 @@
                 {
                   "id": "group/group-applications/respond-group-application",
                   "segment": "respond-group-application",
-                  "title": "处理入群申请",
+                  "title": "Respond to a group application",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/respond-group-application",
                   "type": "page",
                   "children": [],
@@ -535,7 +535,7 @@
                 {
                   "id": "group/group-applications/list-received-group-applications",
                   "segment": "list-received-group-applications",
-                  "title": "查询收到的入群申请",
+                  "title": "List received group applications",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/list-received-group-applications",
                   "type": "page",
                   "children": [],
@@ -544,7 +544,7 @@
                 {
                   "id": "group/group-applications/list-user-requested-group-applications",
                   "segment": "list-user-requested-group-applications",
-                  "title": "查询用户发起的入群申请",
+                  "title": "List user requested group applications",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/list-user-requested-group-applications",
                   "type": "page",
                   "children": [],
@@ -553,7 +553,7 @@
                 {
                   "id": "group/group-applications/list-group-users-request-applications",
                   "segment": "list-group-users-request-applications",
-                  "title": "查询群内多个用户的入群申请",
+                  "title": "List group users request applications",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/list-group-users-request-applications",
                   "type": "page",
                   "children": [],
@@ -562,7 +562,7 @@
                 {
                   "id": "group/group-applications/get-specified-user-group-request-info",
                   "segment": "get-specified-user-group-request-info",
-                  "title": "查询指定用户入群申请",
+                  "title": "Get specified user group request info",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/get-specified-user-group-request-info",
                   "type": "page",
                   "children": [],
@@ -571,7 +571,7 @@
                 {
                   "id": "group/group-applications/get-group-application-unhandled-count",
                   "segment": "get-group-application-unhandled-count",
-                  "title": "获取未处理入群申请数量",
+                  "title": "Get group application unhandled count",
                   "href": "/docs/chat/platform-api/v3/group/group-applications/get-group-application-unhandled-count",
                   "type": "page",
                   "children": [],
@@ -583,14 +583,14 @@
             {
               "id": "group/group-membership",
               "segment": "group-membership",
-              "title": "用户入群关系",
+              "title": "Group membership",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-membership/quit-group",
                   "segment": "quit-group",
-                  "title": "退出群组",
+                  "title": "Quit group",
                   "href": "/docs/chat/platform-api/v3/group/group-membership/quit-group",
                   "type": "page",
                   "children": [],
@@ -599,7 +599,7 @@
                 {
                   "id": "group/group-membership/get-joined-group-list",
                   "segment": "get-joined-group-list",
-                  "title": "获取已加入群组列表",
+                  "title": "Get joined group list",
                   "href": "/docs/chat/platform-api/v3/group/group-membership/get-joined-group-list",
                   "type": "page",
                   "children": [],
@@ -608,7 +608,7 @@
                 {
                   "id": "group/group-membership/get-full-join-group-ids",
                   "segment": "get-full-join-group-ids",
-                  "title": "全量获取用户加入的群组 ID",
+                  "title": "Get full join group IDs",
                   "href": "/docs/chat/platform-api/v3/group/group-membership/get-full-join-group-ids",
                   "type": "page",
                   "children": [],
@@ -620,14 +620,14 @@
             {
               "id": "group/group-members",
               "segment": "group-members",
-              "title": "群成员",
+              "title": "Group members",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-members/kick-group-members",
                   "segment": "kick-group-members",
-                  "title": "移除群成员",
+                  "title": "Kick group members",
                   "href": "/docs/chat/platform-api/v3/group/group-members/kick-group-members",
                   "type": "page",
                   "children": [],
@@ -636,7 +636,7 @@
                 {
                   "id": "group/group-members/get-group-members-info",
                   "segment": "get-group-members-info",
-                  "title": "获取指定群成员",
+                  "title": "Get group members info",
                   "href": "/docs/chat/platform-api/v3/group/group-members/get-group-members-info",
                   "type": "page",
                   "children": [],
@@ -645,7 +645,7 @@
                 {
                   "id": "group/group-members/get-group-member-list",
                   "segment": "get-group-member-list",
-                  "title": "获取群成员列表",
+                  "title": "Get group member list",
                   "href": "/docs/chat/platform-api/v3/group/group-members/get-group-member-list",
                   "type": "page",
                   "children": [],
@@ -654,7 +654,7 @@
                 {
                   "id": "group/group-members/invite-users-to-group",
                   "segment": "invite-users-to-group",
-                  "title": "邀请用户进群",
+                  "title": "Invite users to group",
                   "href": "/docs/chat/platform-api/v3/group/group-members/invite-users-to-group",
                   "type": "page",
                   "children": [],
@@ -663,7 +663,7 @@
                 {
                   "id": "group/group-members/set-group-member-info",
                   "segment": "set-group-member-info",
-                  "title": "设置群成员信息",
+                  "title": "Set group member info",
                   "href": "/docs/chat/platform-api/v3/group/group-members/set-group-member-info",
                   "type": "page",
                   "children": [],
@@ -672,7 +672,7 @@
                 {
                   "id": "group/group-members/get-group-member-user-ids",
                   "segment": "get-group-member-user-ids",
-                  "title": "获取群成员用户 ID",
+                  "title": "Get group member user IDs",
                   "href": "/docs/chat/platform-api/v3/group/group-members/get-group-member-user-ids",
                   "type": "page",
                   "children": [],
@@ -681,7 +681,7 @@
                 {
                   "id": "group/group-members/get-full-group-member-user-ids",
                   "segment": "get-full-group-member-user-ids",
-                  "title": "全量获取群成员用户 ID",
+                  "title": "Get full group member user IDs",
                   "href": "/docs/chat/platform-api/v3/group/group-members/get-full-group-member-user-ids",
                   "type": "page",
                   "children": [],
@@ -693,14 +693,14 @@
             {
               "id": "group/group-moderation",
               "segment": "group-moderation",
-              "title": "群组禁言",
+              "title": "Group moderation",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-moderation/mute-group-member",
                   "segment": "mute-group-member",
-                  "title": "禁言群成员",
+                  "title": "Mute group member",
                   "href": "/docs/chat/platform-api/v3/group/group-moderation/mute-group-member",
                   "type": "page",
                   "children": [],
@@ -709,7 +709,7 @@
                 {
                   "id": "group/group-moderation/cancel-mute-group-member",
                   "segment": "cancel-mute-group-member",
-                  "title": "取消禁言群成员",
+                  "title": "Cancel mute group member",
                   "href": "/docs/chat/platform-api/v3/group/group-moderation/cancel-mute-group-member",
                   "type": "page",
                   "children": [],
@@ -718,7 +718,7 @@
                 {
                   "id": "group/group-moderation/mute-group",
                   "segment": "mute-group",
-                  "title": "禁言群组",
+                  "title": "Mute group",
                   "href": "/docs/chat/platform-api/v3/group/group-moderation/mute-group",
                   "type": "page",
                   "children": [],
@@ -727,7 +727,7 @@
                 {
                   "id": "group/group-moderation/cancel-mute-group",
                   "segment": "cancel-mute-group",
-                  "title": "取消群组禁言",
+                  "title": "Cancel mute group",
                   "href": "/docs/chat/platform-api/v3/group/group-moderation/cancel-mute-group",
                   "type": "page",
                   "children": [],
@@ -742,14 +742,14 @@
         {
           "id": "conversation",
           "segment": "conversation",
-          "title": "会话",
+          "title": "Conversations",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "conversation/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/conversation/overview",
               "type": "page",
               "children": [],
@@ -758,14 +758,14 @@
             {
               "id": "conversation/listing-conversations",
               "segment": "listing-conversations",
-              "title": "查询会话",
+              "title": "Listing conversations",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "conversation/listing-conversations/get-sorted-conversation-list",
                   "segment": "get-sorted-conversation-list",
-                  "title": "获取排序会话列表",
+                  "title": "Get sorted conversation list",
                   "href": "/docs/chat/platform-api/v3/conversation/listing-conversations/get-sorted-conversation-list",
                   "type": "page",
                   "children": [],
@@ -774,7 +774,7 @@
                 {
                   "id": "conversation/listing-conversations/get-all-conversations",
                   "segment": "get-all-conversations",
-                  "title": "获取全部会话",
+                  "title": "Get all conversations",
                   "href": "/docs/chat/platform-api/v3/conversation/listing-conversations/get-all-conversations",
                   "type": "page",
                   "children": [],
@@ -783,7 +783,7 @@
                 {
                   "id": "conversation/listing-conversations/get-conversation",
                   "segment": "get-conversation",
-                  "title": "获取单个会话",
+                  "title": "Get conversation",
                   "href": "/docs/chat/platform-api/v3/conversation/listing-conversations/get-conversation",
                   "type": "page",
                   "children": [],
@@ -792,7 +792,7 @@
                 {
                   "id": "conversation/listing-conversations/get-conversations",
                   "segment": "get-conversations",
-                  "title": "批量获取会话",
+                  "title": "Get conversations",
                   "href": "/docs/chat/platform-api/v3/conversation/listing-conversations/get-conversations",
                   "type": "page",
                   "children": [],
@@ -801,7 +801,7 @@
                 {
                   "id": "conversation/listing-conversations/get-owner-conversation",
                   "segment": "get-owner-conversation",
-                  "title": "分页获取用户会话",
+                  "title": "Get owner conversation",
                   "href": "/docs/chat/platform-api/v3/conversation/listing-conversations/get-owner-conversation",
                   "type": "page",
                   "children": [],
@@ -813,14 +813,14 @@
             {
               "id": "conversation/managing-conversations",
               "segment": "managing-conversations",
-              "title": "管理会话",
+              "title": "Managing conversations",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "conversation/managing-conversations/set-conversations",
                   "segment": "set-conversations",
-                  "title": "批量设置会话",
+                  "title": "Set conversations",
                   "href": "/docs/chat/platform-api/v3/conversation/managing-conversations/set-conversations",
                   "type": "page",
                   "children": [],
@@ -832,14 +832,14 @@
             {
               "id": "conversation/conversation-state",
               "segment": "conversation-state",
-              "title": "会话状态",
+              "title": "Conversation state",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "conversation/conversation-state/get-conversation-offline-push-user-ids",
                   "segment": "get-conversation-offline-push-user-ids",
-                  "title": "获取会话离线推送用户 ID",
+                  "title": "Get conversation offline push user IDs",
                   "href": "/docs/chat/platform-api/v3/conversation/conversation-state/get-conversation-offline-push-user-ids",
                   "type": "page",
                   "children": [],
@@ -848,7 +848,7 @@
                 {
                   "id": "conversation/conversation-state/get-full-conversation-ids",
                   "segment": "get-full-conversation-ids",
-                  "title": "全量获取会话 ID",
+                  "title": "Get full conversation IDs",
                   "href": "/docs/chat/platform-api/v3/conversation/conversation-state/get-full-conversation-ids",
                   "type": "page",
                   "children": [],
@@ -857,7 +857,7 @@
                 {
                   "id": "conversation/conversation-state/get-not-notify-conversation-ids",
                   "segment": "get-not-notify-conversation-ids",
-                  "title": "获取免打扰会话 ID",
+                  "title": "Get not notify conversation IDs",
                   "href": "/docs/chat/platform-api/v3/conversation/conversation-state/get-not-notify-conversation-ids",
                   "type": "page",
                   "children": [],
@@ -866,7 +866,7 @@
                 {
                   "id": "conversation/conversation-state/get-pinned-conversation-ids",
                   "segment": "get-pinned-conversation-ids",
-                  "title": "获取置顶会话 ID",
+                  "title": "Get pinned conversation IDs",
                   "href": "/docs/chat/platform-api/v3/conversation/conversation-state/get-pinned-conversation-ids",
                   "type": "page",
                   "children": [],
@@ -881,14 +881,14 @@
         {
           "id": "message",
           "segment": "message",
-          "title": "消息",
+          "title": "Messages",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "message/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/message/overview",
               "type": "page",
               "children": [],
@@ -897,14 +897,14 @@
             {
               "id": "message/retrieving-messages",
               "segment": "retrieving-messages",
-              "title": "查询消息",
+              "title": "Retrieving messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/retrieving-messages/newest-seq",
                   "segment": "newest-seq",
-                  "title": "获取最新序列号",
+                  "title": "Get latest sequence",
                   "href": "/docs/chat/platform-api/v3/message/retrieving-messages/newest-seq",
                   "type": "page",
                   "children": [],
@@ -913,7 +913,7 @@
                 {
                   "id": "message/retrieving-messages/search-msg",
                   "segment": "search-msg",
-                  "title": "搜索消息",
+                  "title": "Search message",
                   "href": "/docs/chat/platform-api/v3/message/retrieving-messages/search-msg",
                   "type": "page",
                   "children": [],
@@ -922,7 +922,7 @@
                 {
                   "id": "message/retrieving-messages/pull-msg-by-seq",
                   "segment": "pull-msg-by-seq",
-                  "title": "按序列号拉取消息",
+                  "title": "Pull messages by sequence",
                   "href": "/docs/chat/platform-api/v3/message/retrieving-messages/pull-msg-by-seq",
                   "type": "page",
                   "children": [],
@@ -931,7 +931,7 @@
                 {
                   "id": "message/retrieving-messages/get-server-time",
                   "segment": "get-server-time",
-                  "title": "获取服务器时间",
+                  "title": "Get server time",
                   "href": "/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time",
                   "type": "page",
                   "children": [],
@@ -943,14 +943,14 @@
             {
               "id": "message/sending-messages",
               "segment": "sending-messages",
-              "title": "发送消息",
+              "title": "Sending messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/sending-messages/send-msg",
                   "segment": "send-msg",
-                  "title": "发送单条消息",
+                  "title": "Send message",
                   "href": "/docs/chat/platform-api/v3/message/sending-messages/send-msg",
                   "type": "page",
                   "children": [],
@@ -959,7 +959,7 @@
                 {
                   "id": "message/sending-messages/send-business-notification",
                   "segment": "send-business-notification",
-                  "title": "发送业务通知",
+                  "title": "Send business notification",
                   "href": "/docs/chat/platform-api/v3/message/sending-messages/send-business-notification",
                   "type": "page",
                   "children": [],
@@ -968,7 +968,7 @@
                 {
                   "id": "message/sending-messages/batch-send-msg",
                   "segment": "batch-send-msg",
-                  "title": "批量发送消息",
+                  "title": "Batch send message",
                   "href": "/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg",
                   "type": "page",
                   "children": [],
@@ -977,7 +977,7 @@
                 {
                   "id": "message/sending-messages/check-msg-is-send-success",
                   "segment": "check-msg-is-send-success",
-                  "title": "检查消息发送状态",
+                  "title": "Check message is send success",
                   "href": "/docs/chat/platform-api/v3/message/sending-messages/check-msg-is-send-success",
                   "type": "page",
                   "children": [],
@@ -989,14 +989,14 @@
             {
               "id": "message/managing-messages",
               "segment": "managing-messages",
-              "title": "管理消息",
+              "title": "Managing messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/managing-messages/revoke-msg",
                   "segment": "revoke-msg",
-                  "title": "撤回消息",
+                  "title": "Revoke message",
                   "href": "/docs/chat/platform-api/v3/message/managing-messages/revoke-msg",
                   "type": "page",
                   "children": [],
@@ -1008,14 +1008,14 @@
             {
               "id": "message/read-status",
               "segment": "read-status",
-              "title": "已读状态",
+              "title": "Read status",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/read-status/mark-msgs-as-read",
                   "segment": "mark-msgs-as-read",
-                  "title": "标记多条消息已读",
+                  "title": "Mark messages as read",
                   "href": "/docs/chat/platform-api/v3/message/read-status/mark-msgs-as-read",
                   "type": "page",
                   "children": [],
@@ -1024,7 +1024,7 @@
                 {
                   "id": "message/read-status/mark-conversation-as-read",
                   "segment": "mark-conversation-as-read",
-                  "title": "标记会话已读",
+                  "title": "Mark conversation as read",
                   "href": "/docs/chat/platform-api/v3/message/read-status/mark-conversation-as-read",
                   "type": "page",
                   "children": [],
@@ -1033,7 +1033,7 @@
                 {
                   "id": "message/read-status/get-conversations-has-read-and-max-seq",
                   "segment": "get-conversations-has-read-and-max-seq",
-                  "title": "获取会话已读和最大序列号",
+                  "title": "Get conversation read and max sequence",
                   "href": "/docs/chat/platform-api/v3/message/read-status/get-conversations-has-read-and-max-seq",
                   "type": "page",
                   "children": [],
@@ -1042,7 +1042,7 @@
                 {
                   "id": "message/read-status/set-conversation-has-read-seq",
                   "segment": "set-conversation-has-read-seq",
-                  "title": "设置会话已读序列号",
+                  "title": "Set conversation read sequence",
                   "href": "/docs/chat/platform-api/v3/message/read-status/set-conversation-has-read-seq",
                   "type": "page",
                   "children": [],
@@ -1054,14 +1054,14 @@
             {
               "id": "message/deleting-messages",
               "segment": "deleting-messages",
-              "title": "删除消息",
+              "title": "Deleting messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/deleting-messages/clear-conversation-msg",
                   "segment": "clear-conversation-msg",
-                  "title": "清空会话消息",
+                  "title": "Clear conversation message",
                   "href": "/docs/chat/platform-api/v3/message/deleting-messages/clear-conversation-msg",
                   "type": "page",
                   "children": [],
@@ -1070,7 +1070,7 @@
                 {
                   "id": "message/deleting-messages/user-clear-all-msg",
                   "segment": "user-clear-all-msg",
-                  "title": "清空用户全部消息",
+                  "title": "User clear all message",
                   "href": "/docs/chat/platform-api/v3/message/deleting-messages/user-clear-all-msg",
                   "type": "page",
                   "children": [],
@@ -1079,7 +1079,7 @@
                 {
                   "id": "message/deleting-messages/delete-msgs",
                   "segment": "delete-msgs",
-                  "title": "删除指定消息",
+                  "title": "Delete messages",
                   "href": "/docs/chat/platform-api/v3/message/deleting-messages/delete-msgs",
                   "type": "page",
                   "children": [],
@@ -1088,7 +1088,7 @@
                 {
                   "id": "message/deleting-messages/delete-msg-physical-by-seq",
                   "segment": "delete-msg-physical-by-seq",
-                  "title": "按序列号物理删除消息",
+                  "title": "Physically delete messages by sequence",
                   "href": "/docs/chat/platform-api/v3/message/deleting-messages/delete-msg-physical-by-seq",
                   "type": "page",
                   "children": [],
@@ -1097,7 +1097,7 @@
                 {
                   "id": "message/deleting-messages/delete-msg-physical",
                   "segment": "delete-msg-physical",
-                  "title": "按时间物理删除消息",
+                  "title": "Physically delete messages by time",
                   "href": "/docs/chat/platform-api/v3/message/deleting-messages/delete-msg-physical",
                   "type": "page",
                   "children": [],
@@ -1112,14 +1112,14 @@
         {
           "id": "third",
           "segment": "third",
-          "title": "第三方服务",
+          "title": "Third-party services",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "third/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/third/overview",
               "type": "page",
               "children": [],
@@ -1128,14 +1128,14 @@
             {
               "id": "third/monitoring",
               "segment": "monitoring",
-              "title": "监控",
+              "title": "Monitoring",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "third/monitoring/prometheus",
                   "segment": "prometheus",
-                  "title": "跳转监控面板",
+                  "title": "Open monitoring dashboard",
                   "href": "/docs/chat/platform-api/v3/third/monitoring/prometheus",
                   "type": "page",
                   "children": [],
@@ -1147,14 +1147,14 @@
             {
               "id": "third/push",
               "segment": "push",
-              "title": "推送辅助",
+              "title": "Push",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "third/push/fcm-update-token",
                   "segment": "fcm-update-token",
-                  "title": "更新 FCM Token",
+                  "title": "FCM update token",
                   "href": "/docs/chat/platform-api/v3/third/push/fcm-update-token",
                   "type": "page",
                   "children": [],
@@ -1163,7 +1163,7 @@
                 {
                   "id": "third/push/set-app-badge",
                   "segment": "set-app-badge",
-                  "title": "设置应用角标",
+                  "title": "Set app badge",
                   "href": "/docs/chat/platform-api/v3/third/push/set-app-badge",
                   "type": "page",
                   "children": [],
@@ -1175,14 +1175,14 @@
             {
               "id": "third/logs",
               "segment": "logs",
-              "title": "日志",
+              "title": "Logs",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "third/logs/upload-logs",
                   "segment": "upload-logs",
-                  "title": "上传日志记录",
+                  "title": "Upload logs",
                   "href": "/docs/chat/platform-api/v3/third/logs/upload-logs",
                   "type": "page",
                   "children": [],
@@ -1191,7 +1191,7 @@
                 {
                   "id": "third/logs/delete-logs",
                   "segment": "delete-logs",
-                  "title": "删除日志记录",
+                  "title": "Delete logs",
                   "href": "/docs/chat/platform-api/v3/third/logs/delete-logs",
                   "type": "page",
                   "children": [],
@@ -1200,7 +1200,7 @@
                 {
                   "id": "third/logs/search-logs",
                   "segment": "search-logs",
-                  "title": "搜索日志记录",
+                  "title": "Search logs",
                   "href": "/docs/chat/platform-api/v3/third/logs/search-logs",
                   "type": "page",
                   "children": [],
@@ -1212,14 +1212,14 @@
             {
               "id": "third/object-storage",
               "segment": "object-storage",
-              "title": "对象存储",
+              "title": "Object storage",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "third/object-storage/part-limit",
                   "segment": "part-limit",
-                  "title": "获取分片上传限制",
+                  "title": "Get upload part limits",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/part-limit",
                   "type": "page",
                   "children": [],
@@ -1228,7 +1228,7 @@
                 {
                   "id": "third/object-storage/part-size",
                   "segment": "part-size",
-                  "title": "计算分片大小",
+                  "title": "Calculate upload part size",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/part-size",
                   "type": "page",
                   "children": [],
@@ -1237,7 +1237,7 @@
                 {
                   "id": "third/object-storage/initiate-multipart-upload",
                   "segment": "initiate-multipart-upload",
-                  "title": "初始化分片上传",
+                  "title": "Initiate multipart upload",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/initiate-multipart-upload",
                   "type": "page",
                   "children": [],
@@ -1246,7 +1246,7 @@
                 {
                   "id": "third/object-storage/auth-sign",
                   "segment": "auth-sign",
-                  "title": "刷新分片上传签名",
+                  "title": "Refresh multipart upload signature",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/auth-sign",
                   "type": "page",
                   "children": [],
@@ -1255,7 +1255,7 @@
                 {
                   "id": "third/object-storage/complete-multipart-upload",
                   "segment": "complete-multipart-upload",
-                  "title": "完成分片上传",
+                  "title": "Complete multipart upload",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/complete-multipart-upload",
                   "type": "page",
                   "children": [],
@@ -1264,7 +1264,7 @@
                 {
                   "id": "third/object-storage/access-url",
                   "segment": "access-url",
-                  "title": "获取对象访问地址",
+                  "title": "Get object access URL",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/access-url",
                   "type": "page",
                   "children": [],
@@ -1273,7 +1273,7 @@
                 {
                   "id": "third/object-storage/initiate-form-data",
                   "segment": "initiate-form-data",
-                  "title": "初始化表单直传",
+                  "title": "Initiate form data",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/initiate-form-data",
                   "type": "page",
                   "children": [],
@@ -1282,7 +1282,7 @@
                 {
                   "id": "third/object-storage/complete-form-data",
                   "segment": "complete-form-data",
-                  "title": "完成表单直传",
+                  "title": "Complete form data",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/complete-form-data",
                   "type": "page",
                   "children": [],
@@ -1291,7 +1291,7 @@
                 {
                   "id": "third/object-storage/object-redirect",
                   "segment": "object-redirect",
-                  "title": "对象访问重定向",
+                  "title": "Redirect object access",
                   "href": "/docs/chat/platform-api/v3/third/object-storage/object-redirect",
                   "type": "page",
                   "children": [],
@@ -1306,7 +1306,7 @@
         {
           "id": "migration-to-openim",
           "segment": "migration-to-openim",
-          "title": "迁移到 OpenIM",
+          "title": "Migrate to OpenIM",
           "href": "/docs/chat/platform-api/v3/migration-to-openim",
           "type": "page",
           "children": [],
@@ -1315,7 +1315,7 @@
         {
           "id": "error-codes",
           "segment": "error-codes",
-          "title": "错误码",
+          "title": "Error codes",
           "href": "/docs/chat/platform-api/v3/error-codes",
           "type": "page",
           "children": [],
@@ -3696,7 +3696,7 @@
         {
           "id": "overview",
           "segment": "overview",
-          "title": "OpenIM Android SDK 概览",
+          "title": "OpenIM Android SDK overview",
           "href": "/docs/chat/sdk/v4/android/overview",
           "type": "page",
           "children": [],
@@ -3705,7 +3705,7 @@
         {
           "id": "getting-started/send-first-message",
           "segment": "send-first-message",
-          "title": "Android 接入流程",
+          "title": "Android integration flow",
           "href": "/docs/chat/sdk/v4/android/getting-started/send-first-message",
           "type": "page",
           "children": [],
@@ -3714,14 +3714,14 @@
         {
           "id": "application",
           "segment": "application",
-          "title": "SDK 生命周期",
+          "title": "SDK lifecycle",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "application/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/application/overview",
               "type": "page",
               "children": [],
@@ -3730,7 +3730,7 @@
             {
               "id": "application/authenticating-a-user/authentication",
               "segment": "authentication",
-              "title": "认证流程",
+              "title": "Authentication flow",
               "href": "/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication",
               "type": "page",
               "children": [],
@@ -3739,7 +3739,7 @@
             {
               "id": "application/methods/get-sdk-version",
               "segment": "get-sdk-version",
-              "title": "获取 SDK 版本",
+              "title": "Get SDK version",
               "href": "/docs/chat/sdk/v4/android/application/methods/get-sdk-version",
               "type": "page",
               "children": [],
@@ -3748,7 +3748,7 @@
             {
               "id": "application/methods/init-sdk",
               "segment": "init-sdk",
-              "title": "初始化 SDK",
+              "title": "Init SDK",
               "href": "/docs/chat/sdk/v4/android/application/methods/init-sdk",
               "type": "page",
               "children": [],
@@ -3757,7 +3757,7 @@
             {
               "id": "application/methods/un-init-sdk",
               "segment": "un-init-sdk",
-              "title": "释放 SDK",
+              "title": "Uninitialize SDK",
               "href": "/docs/chat/sdk/v4/android/application/methods/un-init-sdk",
               "type": "page",
               "children": [],
@@ -3766,7 +3766,7 @@
             {
               "id": "application/methods/login",
               "segment": "login",
-              "title": "登录用户",
+              "title": "Login",
               "href": "/docs/chat/sdk/v4/android/application/methods/login",
               "type": "page",
               "children": [],
@@ -3775,7 +3775,7 @@
             {
               "id": "application/methods/logout",
               "segment": "logout",
-              "title": "退出登录",
+              "title": "Logout",
               "href": "/docs/chat/sdk/v4/android/application/methods/logout",
               "type": "page",
               "children": [],
@@ -3784,7 +3784,7 @@
             {
               "id": "application/methods/set-app-background-status",
               "segment": "set-app-background-status",
-              "title": "设置前后台状态",
+              "title": "Set foreground/background status",
               "href": "/docs/chat/sdk/v4/android/application/methods/set-app-background-status",
               "type": "page",
               "children": [],
@@ -3793,7 +3793,7 @@
             {
               "id": "application/methods/network-status-changed",
               "segment": "network-status-changed",
-              "title": "通知网络变化",
+              "title": "Notify network status change",
               "href": "/docs/chat/sdk/v4/android/application/methods/network-status-changed",
               "type": "page",
               "children": [],
@@ -3802,7 +3802,7 @@
             {
               "id": "application/methods/get-login-status",
               "segment": "get-login-status",
-              "title": "获取登录状态",
+              "title": "Get login status",
               "href": "/docs/chat/sdk/v4/android/application/methods/get-login-status",
               "type": "page",
               "children": [],
@@ -3811,7 +3811,7 @@
             {
               "id": "application/methods/get-login-user-id",
               "segment": "get-login-user-id",
-              "title": "获取登录用户 ID",
+              "title": "Get login user ID",
               "href": "/docs/chat/sdk/v4/android/application/methods/get-login-user-id",
               "type": "page",
               "children": [],
@@ -3823,14 +3823,14 @@
         {
           "id": "event-handler",
           "segment": "event-handler",
-          "title": "监听器",
+          "title": "Event handlers",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "event-handler/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/event-handler/overview",
               "type": "page",
               "children": [],
@@ -3839,7 +3839,7 @@
             {
               "id": "event-handler/methods/set-group-listener",
               "segment": "set-group-listener",
-              "title": "监听群组事件",
+              "title": "Set group listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener",
               "type": "page",
               "children": [],
@@ -3848,7 +3848,7 @@
             {
               "id": "event-handler/methods/set-conversation-listener",
               "segment": "set-conversation-listener",
-              "title": "监听会话事件",
+              "title": "Set conversation listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener",
               "type": "page",
               "children": [],
@@ -3857,7 +3857,7 @@
             {
               "id": "event-handler/methods/set-advanced-msg-listener",
               "segment": "set-advanced-msg-listener",
-              "title": "监听单条消息事件",
+              "title": "Set advanced msg listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener",
               "type": "page",
               "children": [],
@@ -3866,7 +3866,7 @@
             {
               "id": "event-handler/methods/set-batch-msg-listener",
               "segment": "set-batch-msg-listener",
-              "title": "监听批量消息事件",
+              "title": "Set batch msg listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener",
               "type": "page",
               "children": [],
@@ -3875,7 +3875,7 @@
             {
               "id": "event-handler/methods/set-user-listener",
               "segment": "set-user-listener",
-              "title": "监听用户事件",
+              "title": "Set user listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener",
               "type": "page",
               "children": [],
@@ -3884,7 +3884,7 @@
             {
               "id": "event-handler/methods/set-friend-listener",
               "segment": "set-friend-listener",
-              "title": "监听好友事件",
+              "title": "Set friend listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener",
               "type": "page",
               "children": [],
@@ -3893,7 +3893,7 @@
             {
               "id": "event-handler/methods/set-custom-business-listener",
               "segment": "set-custom-business-listener",
-              "title": "监听自定义业务事件",
+              "title": "Set custom business listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener",
               "type": "page",
               "children": [],
@@ -3902,7 +3902,7 @@
             {
               "id": "event-handler/methods/set-message-kv-info-listener",
               "segment": "set-message-kv-info-listener",
-              "title": "监听消息 KV 变化",
+              "title": "Set message KV info listener",
               "href": "/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener",
               "type": "page",
               "children": [],
@@ -3914,14 +3914,14 @@
         {
           "id": "user",
           "segment": "user",
-          "title": "用户",
+          "title": "Users",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "user/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/user/overview",
               "type": "page",
               "children": [],
@@ -3930,7 +3930,7 @@
             {
               "id": "user/methods/get-self-user-info",
               "segment": "get-self-user-info",
-              "title": "获取当前用户资料",
+              "title": "Get self user info",
               "href": "/docs/chat/sdk/v4/android/user/methods/get-self-user-info",
               "type": "page",
               "children": [],
@@ -3939,7 +3939,7 @@
             {
               "id": "user/methods/set-self-info",
               "segment": "set-self-info",
-              "title": "更新当前用户资料",
+              "title": "Set self info",
               "href": "/docs/chat/sdk/v4/android/user/methods/set-self-info",
               "type": "page",
               "children": [],
@@ -3948,7 +3948,7 @@
             {
               "id": "user/methods/get-users-info",
               "segment": "get-users-info",
-              "title": "批量获取用户资料",
+              "title": "Get users info",
               "href": "/docs/chat/sdk/v4/android/user/methods/get-users-info",
               "type": "page",
               "children": [],
@@ -3957,7 +3957,7 @@
             {
               "id": "user/methods/add-user-command",
               "segment": "add-user-command",
-              "title": "添加用户命令",
+              "title": "Add user command",
               "href": "/docs/chat/sdk/v4/android/user/methods/add-user-command",
               "type": "page",
               "children": [],
@@ -3966,7 +3966,7 @@
             {
               "id": "user/methods/delete-user-command",
               "segment": "delete-user-command",
-              "title": "删除用户命令",
+              "title": "Delete user command",
               "href": "/docs/chat/sdk/v4/android/user/methods/delete-user-command",
               "type": "page",
               "children": [],
@@ -3975,7 +3975,7 @@
             {
               "id": "user/methods/get-all-user-commands",
               "segment": "get-all-user-commands",
-              "title": "获取用户命令列表",
+              "title": "Get all user commands",
               "href": "/docs/chat/sdk/v4/android/user/methods/get-all-user-commands",
               "type": "page",
               "children": [],
@@ -3984,7 +3984,7 @@
             {
               "id": "user/methods/subscribe-users-status",
               "segment": "subscribe-users-status",
-              "title": "订阅用户在线状态",
+              "title": "Subscribe users status",
               "href": "/docs/chat/sdk/v4/android/user/methods/subscribe-users-status",
               "type": "page",
               "children": [],
@@ -3993,7 +3993,7 @@
             {
               "id": "user/methods/unsubscribe-users-status",
               "segment": "unsubscribe-users-status",
-              "title": "取消订阅在线状态",
+              "title": "Unsubscribe users status",
               "href": "/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status",
               "type": "page",
               "children": [],
@@ -4002,7 +4002,7 @@
             {
               "id": "user/methods/get-subscribe-users-status",
               "segment": "get-subscribe-users-status",
-              "title": "获取已订阅用户状态",
+              "title": "Get subscribe users status",
               "href": "/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status",
               "type": "page",
               "children": [],
@@ -4011,7 +4011,7 @@
             {
               "id": "user/methods/get-user-status",
               "segment": "get-user-status",
-              "title": "获取用户在线状态",
+              "title": "Get user status",
               "href": "/docs/chat/sdk/v4/android/user/methods/get-user-status",
               "type": "page",
               "children": [],
@@ -4020,14 +4020,14 @@
             {
               "id": "user/friend",
               "segment": "friend",
-              "title": "好友",
+              "title": "Friends",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/friend/methods/get-specified-friends-info",
                   "segment": "get-specified-friends-info",
-                  "title": "获取指定好友资料",
+                  "title": "Get specified friends info",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-specified-friends-info",
                   "type": "page",
                   "children": [],
@@ -4036,7 +4036,7 @@
                 {
                   "id": "user/friend/methods/get-friend-list",
                   "segment": "get-friend-list",
-                  "title": "获取好友列表",
+                  "title": "Get friend list",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list",
                   "type": "page",
                   "children": [],
@@ -4045,7 +4045,7 @@
                 {
                   "id": "user/friend/methods/get-friend-list-page",
                   "segment": "get-friend-list-page",
-                  "title": "分页获取好友列表",
+                  "title": "Get friend list page",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page",
                   "type": "page",
                   "children": [],
@@ -4054,7 +4054,7 @@
                 {
                   "id": "user/friend/methods/search-friends",
                   "segment": "search-friends",
-                  "title": "搜索好友",
+                  "title": "Search friends",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/search-friends",
                   "type": "page",
                   "children": [],
@@ -4063,7 +4063,7 @@
                 {
                   "id": "user/friend/methods/check-friend",
                   "segment": "check-friend",
-                  "title": "校验好友关系",
+                  "title": "Check friend",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/check-friend",
                   "type": "page",
                   "children": [],
@@ -4072,7 +4072,7 @@
                 {
                   "id": "user/friend/methods/add-friend",
                   "segment": "add-friend",
-                  "title": "发送好友申请",
+                  "title": "Add friend",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/add-friend",
                   "type": "page",
                   "children": [],
@@ -4081,7 +4081,7 @@
                 {
                   "id": "user/friend/methods/update-friends",
                   "segment": "update-friends",
-                  "title": "更新好友资料",
+                  "title": "Update friends",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/update-friends",
                   "type": "page",
                   "children": [],
@@ -4090,7 +4090,7 @@
                 {
                   "id": "user/friend/methods/delete-friend",
                   "segment": "delete-friend",
-                  "title": "删除好友",
+                  "title": "Delete friend",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/delete-friend",
                   "type": "page",
                   "children": [],
@@ -4099,7 +4099,7 @@
                 {
                   "id": "user/friend/methods/get-friend-application-list-as-recipient",
                   "segment": "get-friend-application-list-as-recipient",
-                  "title": "获取收到的好友申请",
+                  "title": "Get friend application list as recipient",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-recipient",
                   "type": "page",
                   "children": [],
@@ -4108,7 +4108,7 @@
                 {
                   "id": "user/friend/methods/get-friend-application-list-as-applicant",
                   "segment": "get-friend-application-list-as-applicant",
-                  "title": "获取发出的好友申请",
+                  "title": "Get friend application list as applicant",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant",
                   "type": "page",
                   "children": [],
@@ -4117,7 +4117,7 @@
                 {
                   "id": "user/friend/methods/accept-friend-application",
                   "segment": "accept-friend-application",
-                  "title": "同意好友申请",
+                  "title": "Accept friend application",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/accept-friend-application",
                   "type": "page",
                   "children": [],
@@ -4126,7 +4126,7 @@
                 {
                   "id": "user/friend/methods/refuse-friend-application",
                   "segment": "refuse-friend-application",
-                  "title": "拒绝好友申请",
+                  "title": "Refuse friend application",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/refuse-friend-application",
                   "type": "page",
                   "children": [],
@@ -4135,7 +4135,7 @@
                 {
                   "id": "user/friend/methods/get-friend-application-unhandled-count",
                   "segment": "get-friend-application-unhandled-count",
-                  "title": "获取未处理好友申请数",
+                  "title": "Get friend application unhandled count",
                   "href": "/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count",
                   "type": "page",
                   "children": [],
@@ -4147,14 +4147,14 @@
             {
               "id": "user/blacklist",
               "segment": "blacklist",
-              "title": "黑名单",
+              "title": "Blocklist",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "user/blacklist/methods/add-black",
                   "segment": "add-black",
-                  "title": "加入黑名单",
+                  "title": "Add black",
                   "href": "/docs/chat/sdk/v4/android/user/blacklist/methods/add-black",
                   "type": "page",
                   "children": [],
@@ -4163,7 +4163,7 @@
                 {
                   "id": "user/blacklist/methods/get-black-list",
                   "segment": "get-black-list",
-                  "title": "获取黑名单列表",
+                  "title": "Get black list",
                   "href": "/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list",
                   "type": "page",
                   "children": [],
@@ -4172,7 +4172,7 @@
                 {
                   "id": "user/blacklist/methods/remove-black",
                   "segment": "remove-black",
-                  "title": "移出黑名单",
+                  "title": "Remove black",
                   "href": "/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black",
                   "type": "page",
                   "children": [],
@@ -4187,14 +4187,14 @@
         {
           "id": "group",
           "segment": "group",
-          "title": "群组",
+          "title": "Groups",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "group/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/group/overview",
               "type": "page",
               "children": [],
@@ -4203,14 +4203,14 @@
             {
               "id": "group/managing-groups",
               "segment": "managing-groups",
-              "title": "管理群组",
+              "title": "Managing groups",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/managing-groups/create-group",
                   "segment": "create-group",
-                  "title": "创建群组",
+                  "title": "Create group",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/create-group",
                   "type": "page",
                   "children": [],
@@ -4219,7 +4219,7 @@
                 {
                   "id": "group/managing-groups/set-group-info",
                   "segment": "set-group-info",
-                  "title": "更新群资料",
+                  "title": "Set group info",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/set-group-info",
                   "type": "page",
                   "children": [],
@@ -4228,7 +4228,7 @@
                 {
                   "id": "group/managing-groups/get-specified-groups-info",
                   "segment": "get-specified-groups-info",
-                  "title": "获取群信息",
+                  "title": "Get specified groups info",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/get-specified-groups-info",
                   "type": "page",
                   "children": [],
@@ -4237,7 +4237,7 @@
                 {
                   "id": "group/managing-groups/search-groups",
                   "segment": "search-groups",
-                  "title": "搜索群组",
+                  "title": "Search groups",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/search-groups",
                   "type": "page",
                   "children": [],
@@ -4246,7 +4246,7 @@
                 {
                   "id": "group/managing-groups/transfer-group-owner",
                   "segment": "transfer-group-owner",
-                  "title": "转让群主",
+                  "title": "Transfer group owner",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/transfer-group-owner",
                   "type": "page",
                   "children": [],
@@ -4255,7 +4255,7 @@
                 {
                   "id": "group/managing-groups/dismiss-group",
                   "segment": "dismiss-group",
-                  "title": "解散群组",
+                  "title": "Dismiss group",
                   "href": "/docs/chat/sdk/v4/android/group/managing-groups/dismiss-group",
                   "type": "page",
                   "children": [],
@@ -4267,14 +4267,14 @@
             {
               "id": "group/group-applications",
               "segment": "group-applications",
-              "title": "入群申请",
+              "title": "Group join requests",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-applications/join-group",
                   "segment": "join-group",
-                  "title": "申请加入群组",
+                  "title": "Join group",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/join-group",
                   "type": "page",
                   "children": [],
@@ -4283,7 +4283,7 @@
                 {
                   "id": "group/group-applications/get-group-application-list-as-recipient",
                   "segment": "get-group-application-list-as-recipient",
-                  "title": "获取收到的入群申请",
+                  "title": "Get group application list as recipient",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-recipient",
                   "type": "page",
                   "children": [],
@@ -4292,7 +4292,7 @@
                 {
                   "id": "group/group-applications/get-group-application-list-as-applicant",
                   "segment": "get-group-application-list-as-applicant",
-                  "title": "获取发出的入群申请",
+                  "title": "Get group application list as applicant",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-applicant",
                   "type": "page",
                   "children": [],
@@ -4301,7 +4301,7 @@
                 {
                   "id": "group/group-applications/accept-group-application",
                   "segment": "accept-group-application",
-                  "title": "同意入群申请",
+                  "title": "Accept group application",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/accept-group-application",
                   "type": "page",
                   "children": [],
@@ -4310,7 +4310,7 @@
                 {
                   "id": "group/group-applications/refuse-group-application",
                   "segment": "refuse-group-application",
-                  "title": "拒绝入群申请",
+                  "title": "Refuse group application",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/refuse-group-application",
                   "type": "page",
                   "children": [],
@@ -4319,7 +4319,7 @@
                 {
                   "id": "group/group-applications/get-group-application-unhandled-count",
                   "segment": "get-group-application-unhandled-count",
-                  "title": "获取未处理入群申请数",
+                  "title": "Get group application unhandled count",
                   "href": "/docs/chat/sdk/v4/android/group/group-applications/get-group-application-unhandled-count",
                   "type": "page",
                   "children": [],
@@ -4331,14 +4331,14 @@
             {
               "id": "group/group-membership",
               "segment": "group-membership",
-              "title": "用户入群关系",
+              "title": "Group membership",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-membership/get-joined-group-list",
                   "segment": "get-joined-group-list",
-                  "title": "获取已加入群组",
+                  "title": "Get joined group list",
                   "href": "/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list",
                   "type": "page",
                   "children": [],
@@ -4347,7 +4347,7 @@
                 {
                   "id": "group/group-membership/get-joined-group-list-page",
                   "segment": "get-joined-group-list-page",
-                  "title": "分页获取已加入群组",
+                  "title": "Get joined group list page",
                   "href": "/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list-page",
                   "type": "page",
                   "children": [],
@@ -4356,7 +4356,7 @@
                 {
                   "id": "group/group-membership/is-join-group",
                   "segment": "is-join-group",
-                  "title": "判断是否已入群",
+                  "title": "Is join group",
                   "href": "/docs/chat/sdk/v4/android/group/group-membership/is-join-group",
                   "type": "page",
                   "children": [],
@@ -4365,7 +4365,7 @@
                 {
                   "id": "group/group-membership/get-users-in-group",
                   "segment": "get-users-in-group",
-                  "title": "查询用户是否在群内",
+                  "title": "Get users in group",
                   "href": "/docs/chat/sdk/v4/android/group/group-membership/get-users-in-group",
                   "type": "page",
                   "children": [],
@@ -4374,7 +4374,7 @@
                 {
                   "id": "group/group-membership/quit-group",
                   "segment": "quit-group",
-                  "title": "退出群组",
+                  "title": "Quit group",
                   "href": "/docs/chat/sdk/v4/android/group/group-membership/quit-group",
                   "type": "page",
                   "children": [],
@@ -4386,14 +4386,14 @@
             {
               "id": "group/group-members",
               "segment": "group-members",
-              "title": "群成员",
+              "title": "Group members",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-members/invite-user-to-group",
                   "segment": "invite-user-to-group",
-                  "title": "邀请用户入群",
+                  "title": "Invite user to group",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/invite-user-to-group",
                   "type": "page",
                   "children": [],
@@ -4402,7 +4402,7 @@
                 {
                   "id": "group/group-members/kick-group-member",
                   "segment": "kick-group-member",
-                  "title": "移出群成员",
+                  "title": "Kick group member",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/kick-group-member",
                   "type": "page",
                   "children": [],
@@ -4411,7 +4411,7 @@
                 {
                   "id": "group/group-members/set-group-member-info",
                   "segment": "set-group-member-info",
-                  "title": "更新群成员资料",
+                  "title": "Set group member info",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/set-group-member-info",
                   "type": "page",
                   "children": [],
@@ -4420,7 +4420,7 @@
                 {
                   "id": "group/group-members/get-group-member-list",
                   "segment": "get-group-member-list",
-                  "title": "获取群成员列表",
+                  "title": "Get group member list",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/get-group-member-list",
                   "type": "page",
                   "children": [],
@@ -4429,7 +4429,7 @@
                 {
                   "id": "group/group-members/get-group-member-list-by-join-time-filter",
                   "segment": "get-group-member-list-by-join-time-filter",
-                  "title": "按入群时间筛选成员",
+                  "title": "Get group member list by join time filter",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/get-group-member-list-by-join-time-filter",
                   "type": "page",
                   "children": [],
@@ -4438,7 +4438,7 @@
                 {
                   "id": "group/group-members/get-group-member-owner-and-admin",
                   "segment": "get-group-member-owner-and-admin",
-                  "title": "获取群主和管理员",
+                  "title": "Get group member owner and admin",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/get-group-member-owner-and-admin",
                   "type": "page",
                   "children": [],
@@ -4447,7 +4447,7 @@
                 {
                   "id": "group/group-members/get-specified-group-members-info",
                   "segment": "get-specified-group-members-info",
-                  "title": "获取指定群成员资料",
+                  "title": "Get specified group members info",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/get-specified-group-members-info",
                   "type": "page",
                   "children": [],
@@ -4456,7 +4456,7 @@
                 {
                   "id": "group/group-members/search-group-members",
                   "segment": "search-group-members",
-                  "title": "搜索群成员",
+                  "title": "Search group members",
                   "href": "/docs/chat/sdk/v4/android/group/group-members/search-group-members",
                   "type": "page",
                   "children": [],
@@ -4468,14 +4468,14 @@
             {
               "id": "group/group-moderation",
               "segment": "group-moderation",
-              "title": "群组禁言",
+              "title": "Group moderation",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "group/group-moderation/change-group-mute",
                   "segment": "change-group-mute",
-                  "title": "设置群禁言",
+                  "title": "Change group mute",
                   "href": "/docs/chat/sdk/v4/android/group/group-moderation/change-group-mute",
                   "type": "page",
                   "children": [],
@@ -4484,7 +4484,7 @@
                 {
                   "id": "group/group-moderation/change-group-member-mute",
                   "segment": "change-group-member-mute",
-                  "title": "设置成员禁言",
+                  "title": "Change group member mute",
                   "href": "/docs/chat/sdk/v4/android/group/group-moderation/change-group-member-mute",
                   "type": "page",
                   "children": [],
@@ -4499,14 +4499,14 @@
         {
           "id": "message",
           "segment": "message",
-          "title": "会话与消息",
+          "title": "Conversations and messages",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "message/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/message/overview",
               "type": "page",
               "children": [],
@@ -4515,14 +4515,14 @@
             {
               "id": "message/listing-conversations",
               "segment": "listing-conversations",
-              "title": "查询会话",
+              "title": "Listing conversations",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/listing-conversations/get-all-conversation-list",
                   "segment": "get-all-conversation-list",
-                  "title": "获取全部会话",
+                  "title": "Get all conversation list",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/get-all-conversation-list",
                   "type": "page",
                   "children": [],
@@ -4531,7 +4531,7 @@
                 {
                   "id": "message/listing-conversations/get-conversation-list-split",
                   "segment": "get-conversation-list-split",
-                  "title": "分页获取会话",
+                  "title": "Get conversation list split",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/get-conversation-list-split",
                   "type": "page",
                   "children": [],
@@ -4540,7 +4540,7 @@
                 {
                   "id": "message/listing-conversations/get-one-conversation",
                   "segment": "get-one-conversation",
-                  "title": "获取单个会话",
+                  "title": "Get one conversation",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/get-one-conversation",
                   "type": "page",
                   "children": [],
@@ -4549,7 +4549,7 @@
                 {
                   "id": "message/listing-conversations/get-multiple-conversation",
                   "segment": "get-multiple-conversation",
-                  "title": "批量获取会话",
+                  "title": "Get multiple conversation",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/get-multiple-conversation",
                   "type": "page",
                   "children": [],
@@ -4558,7 +4558,7 @@
                 {
                   "id": "message/listing-conversations/search-conversation",
                   "segment": "search-conversation",
-                  "title": "搜索会话",
+                  "title": "Search conversation",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/search-conversation",
                   "type": "page",
                   "children": [],
@@ -4567,7 +4567,7 @@
                 {
                   "id": "message/listing-conversations/get-conversation-id-by-session-type",
                   "segment": "get-conversation-id-by-session-type",
-                  "title": "生成会话 ID",
+                  "title": "Get conversation ID by session type",
                   "href": "/docs/chat/sdk/v4/android/message/listing-conversations/get-conversation-id-by-session-type",
                   "type": "page",
                   "children": [],
@@ -4579,14 +4579,14 @@
             {
               "id": "message/managing-conversations",
               "segment": "managing-conversations",
-              "title": "管理会话",
+              "title": "Managing conversations",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/managing-conversations/set-conversation",
                   "segment": "set-conversation",
-                  "title": "设置会话",
+                  "title": "Set conversation",
                   "href": "/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation",
                   "type": "page",
                   "children": [],
@@ -4595,7 +4595,7 @@
                 {
                   "id": "message/managing-conversations/hide-conversation",
                   "segment": "hide-conversation",
-                  "title": "隐藏会话",
+                  "title": "Hide conversation",
                   "href": "/docs/chat/sdk/v4/android/message/managing-conversations/hide-conversation",
                   "type": "page",
                   "children": [],
@@ -4604,7 +4604,7 @@
                 {
                   "id": "message/managing-conversations/set-conversation-draft",
                   "segment": "set-conversation-draft",
-                  "title": "设置会话草稿",
+                  "title": "Set conversation draft",
                   "href": "/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation-draft",
                   "type": "page",
                   "children": [],
@@ -4613,7 +4613,7 @@
                 {
                   "id": "message/managing-conversations/hide-all-conversations",
                   "segment": "hide-all-conversations",
-                  "title": "隐藏全部会话",
+                  "title": "Hide all conversations",
                   "href": "/docs/chat/sdk/v4/android/message/managing-conversations/hide-all-conversations",
                   "type": "page",
                   "children": [],
@@ -4625,14 +4625,14 @@
             {
               "id": "message/conversation-state",
               "segment": "conversation-state",
-              "title": "会话状态",
+              "title": "Conversation state",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/conversation-state/get-total-unread-msg-count",
                   "segment": "get-total-unread-msg-count",
-                  "title": "获取总未读数",
+                  "title": "Get total unread msg count",
                   "href": "/docs/chat/sdk/v4/android/message/conversation-state/get-total-unread-msg-count",
                   "type": "page",
                   "children": [],
@@ -4641,7 +4641,7 @@
                 {
                   "id": "message/conversation-state/change-input-states",
                   "segment": "change-input-states",
-                  "title": "更新输入状态",
+                  "title": "Change input states",
                   "href": "/docs/chat/sdk/v4/android/message/conversation-state/change-input-states",
                   "type": "page",
                   "children": [],
@@ -4650,7 +4650,7 @@
                 {
                   "id": "message/conversation-state/get-input-states",
                   "segment": "get-input-states",
-                  "title": "获取输入状态",
+                  "title": "Get input states",
                   "href": "/docs/chat/sdk/v4/android/message/conversation-state/get-input-states",
                   "type": "page",
                   "children": [],
@@ -4659,7 +4659,7 @@
                 {
                   "id": "message/conversation-state/typing-status-update",
                   "segment": "typing-status-update",
-                  "title": "发送输入提示",
+                  "title": "Typing status update",
                   "href": "/docs/chat/sdk/v4/android/message/conversation-state/typing-status-update",
                   "type": "page",
                   "children": [],
@@ -4671,14 +4671,14 @@
             {
               "id": "message/creating-messages",
               "segment": "creating-messages",
-              "title": "创建消息",
+              "title": "Creating messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/creating-messages/get-at-all-tag",
                   "segment": "get-at-all-tag",
-                  "title": "获取 @ 所有人标记",
+                  "title": "Get @all tag",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/get-at-all-tag",
                   "type": "page",
                   "children": [],
@@ -4687,7 +4687,7 @@
                 {
                   "id": "message/creating-messages/create-text-message",
                   "segment": "create-text-message",
-                  "title": "创建文本消息",
+                  "title": "Create text message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-text-message",
                   "type": "page",
                   "children": [],
@@ -4696,7 +4696,7 @@
                 {
                   "id": "message/creating-messages/create-advanced-text-message",
                   "segment": "create-advanced-text-message",
-                  "title": "创建高级文本消息",
+                  "title": "Create advanced text message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-text-message",
                   "type": "page",
                   "children": [],
@@ -4705,7 +4705,7 @@
                 {
                   "id": "message/creating-messages/create-text-at-message",
                   "segment": "create-text-at-message",
-                  "title": "创建 @ 文本消息",
+                  "title": "Create text at message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-text-at-message",
                   "type": "page",
                   "children": [],
@@ -4714,7 +4714,7 @@
                 {
                   "id": "message/creating-messages/create-location-message",
                   "segment": "create-location-message",
-                  "title": "创建位置消息",
+                  "title": "Create location message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-location-message",
                   "type": "page",
                   "children": [],
@@ -4723,7 +4723,7 @@
                 {
                   "id": "message/creating-messages/create-custom-message",
                   "segment": "create-custom-message",
-                  "title": "创建自定义消息",
+                  "title": "Create custom message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-custom-message",
                   "type": "page",
                   "children": [],
@@ -4732,7 +4732,7 @@
                 {
                   "id": "message/creating-messages/create-quote-message",
                   "segment": "create-quote-message",
-                  "title": "创建引用消息",
+                  "title": "Create quote message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-quote-message",
                   "type": "page",
                   "children": [],
@@ -4741,7 +4741,7 @@
                 {
                   "id": "message/creating-messages/create-advanced-quote-message",
                   "segment": "create-advanced-quote-message",
-                  "title": "创建高级引用消息",
+                  "title": "Create advanced quote message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-quote-message",
                   "type": "page",
                   "children": [],
@@ -4750,7 +4750,7 @@
                 {
                   "id": "message/creating-messages/create-card-message",
                   "segment": "create-card-message",
-                  "title": "创建名片消息",
+                  "title": "Create card message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-card-message",
                   "type": "page",
                   "children": [],
@@ -4759,7 +4759,7 @@
                 {
                   "id": "message/creating-messages/create-face-message",
                   "segment": "create-face-message",
-                  "title": "创建表情消息",
+                  "title": "Create face message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-face-message",
                   "type": "page",
                   "children": [],
@@ -4768,7 +4768,7 @@
                 {
                   "id": "message/creating-messages/create-forward-message",
                   "segment": "create-forward-message",
-                  "title": "创建转发消息",
+                  "title": "Create forward message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-forward-message",
                   "type": "page",
                   "children": [],
@@ -4777,7 +4777,7 @@
                 {
                   "id": "message/creating-messages/create-merger-message",
                   "segment": "create-merger-message",
-                  "title": "创建合并转发消息",
+                  "title": "Create merger message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-merger-message",
                   "type": "page",
                   "children": [],
@@ -4786,7 +4786,7 @@
                 {
                   "id": "message/creating-messages/create-image-message",
                   "segment": "create-image-message",
-                  "title": "创建图片消息",
+                  "title": "Create image message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-image-message",
                   "type": "page",
                   "children": [],
@@ -4795,7 +4795,7 @@
                 {
                   "id": "message/creating-messages/create-image-message-from-full-path",
                   "segment": "create-image-message-from-full-path",
-                  "title": "通过完整路径创建图片消息",
+                  "title": "Create image message from full path",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-from-full-path",
                   "type": "page",
                   "children": [],
@@ -4804,7 +4804,7 @@
                 {
                   "id": "message/creating-messages/create-image-message-by-url",
                   "segment": "create-image-message-by-url",
-                  "title": "通过 URL 创建图片消息",
+                  "title": "Create image message by URL",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-by-url",
                   "type": "page",
                   "children": [],
@@ -4813,7 +4813,7 @@
                 {
                   "id": "message/creating-messages/create-sound-message",
                   "segment": "create-sound-message",
-                  "title": "创建语音消息",
+                  "title": "Create sound message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-sound-message",
                   "type": "page",
                   "children": [],
@@ -4822,7 +4822,7 @@
                 {
                   "id": "message/creating-messages/create-sound-message-from-full-path",
                   "segment": "create-sound-message-from-full-path",
-                  "title": "通过完整路径创建语音消息",
+                  "title": "Create sound message from full path",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-sound-message-from-full-path",
                   "type": "page",
                   "children": [],
@@ -4831,7 +4831,7 @@
                 {
                   "id": "message/creating-messages/create-sound-message-by-url",
                   "segment": "create-sound-message-by-url",
-                  "title": "通过 URL 创建语音消息",
+                  "title": "Create sound message by URL",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-sound-message-by-url",
                   "type": "page",
                   "children": [],
@@ -4840,7 +4840,7 @@
                 {
                   "id": "message/creating-messages/create-video-message",
                   "segment": "create-video-message",
-                  "title": "创建视频消息",
+                  "title": "Create video message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-video-message",
                   "type": "page",
                   "children": [],
@@ -4849,7 +4849,7 @@
                 {
                   "id": "message/creating-messages/create-video-message-from-full-path",
                   "segment": "create-video-message-from-full-path",
-                  "title": "通过完整路径创建视频消息",
+                  "title": "Create video message from full path",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-video-message-from-full-path",
                   "type": "page",
                   "children": [],
@@ -4858,7 +4858,7 @@
                 {
                   "id": "message/creating-messages/create-video-message-by-url",
                   "segment": "create-video-message-by-url",
-                  "title": "通过 URL 创建视频消息",
+                  "title": "Create video message by URL",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-video-message-by-url",
                   "type": "page",
                   "children": [],
@@ -4867,7 +4867,7 @@
                 {
                   "id": "message/creating-messages/create-file-message",
                   "segment": "create-file-message",
-                  "title": "创建文件消息",
+                  "title": "Create file message",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-file-message",
                   "type": "page",
                   "children": [],
@@ -4876,7 +4876,7 @@
                 {
                   "id": "message/creating-messages/create-file-message-from-full-path",
                   "segment": "create-file-message-from-full-path",
-                  "title": "通过完整路径创建文件消息",
+                  "title": "Create file message from full path",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-from-full-path",
                   "type": "page",
                   "children": [],
@@ -4885,7 +4885,7 @@
                 {
                   "id": "message/creating-messages/create-file-message-by-url",
                   "segment": "create-file-message-by-url",
-                  "title": "通过 URL 创建文件消息",
+                  "title": "Create file message by URL",
                   "href": "/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-by-url",
                   "type": "page",
                   "children": [],
@@ -4897,14 +4897,14 @@
             {
               "id": "message/sending-messages",
               "segment": "sending-messages",
-              "title": "发送消息",
+              "title": "Sending messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/sending-messages/send-message",
                   "segment": "send-message",
-                  "title": "发送消息",
+                  "title": "Send message",
                   "href": "/docs/chat/sdk/v4/android/message/sending-messages/send-message",
                   "type": "page",
                   "children": [],
@@ -4913,7 +4913,7 @@
                 {
                   "id": "message/sending-messages/send-message-not-oss",
                   "segment": "send-message-not-oss",
-                  "title": "发送非 OSS 消息",
+                  "title": "Send non-OSS message",
                   "href": "/docs/chat/sdk/v4/android/message/sending-messages/send-message-not-oss",
                   "type": "page",
                   "children": [],
@@ -4925,14 +4925,14 @@
             {
               "id": "message/retrieving-messages",
               "segment": "retrieving-messages",
-              "title": "查询消息",
+              "title": "Retrieving messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/retrieving-messages/find-message-list",
                   "segment": "find-message-list",
-                  "title": "查找消息列表",
+                  "title": "Find message list",
                   "href": "/docs/chat/sdk/v4/android/message/retrieving-messages/find-message-list",
                   "type": "page",
                   "children": [],
@@ -4941,7 +4941,7 @@
                 {
                   "id": "message/retrieving-messages/get-advanced-history-message-list",
                   "segment": "get-advanced-history-message-list",
-                  "title": "获取历史消息",
+                  "title": "Get advanced history message list",
                   "href": "/docs/chat/sdk/v4/android/message/retrieving-messages/get-advanced-history-message-list",
                   "type": "page",
                   "children": [],
@@ -4950,7 +4950,7 @@
                 {
                   "id": "message/retrieving-messages/get-advanced-history-message-list-reverse",
                   "segment": "get-advanced-history-message-list-reverse",
-                  "title": "反向获取历史消息",
+                  "title": "Get advanced history message list reverse",
                   "href": "/docs/chat/sdk/v4/android/message/retrieving-messages/get-advanced-history-message-list-reverse",
                   "type": "page",
                   "children": [],
@@ -4959,7 +4959,7 @@
                 {
                   "id": "message/retrieving-messages/search-local-messages",
                   "segment": "search-local-messages",
-                  "title": "搜索本地消息",
+                  "title": "Search local messages",
                   "href": "/docs/chat/sdk/v4/android/message/retrieving-messages/search-local-messages",
                   "type": "page",
                   "children": [],
@@ -4971,14 +4971,14 @@
             {
               "id": "message/managing-messages",
               "segment": "managing-messages",
-              "title": "管理消息",
+              "title": "Managing messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/managing-messages/revoke-message",
                   "segment": "revoke-message",
-                  "title": "撤回消息",
+                  "title": "Revoke message",
                   "href": "/docs/chat/sdk/v4/android/message/managing-messages/revoke-message",
                   "type": "page",
                   "children": [],
@@ -4987,7 +4987,7 @@
                 {
                   "id": "message/managing-messages/set-message-local-ex",
                   "segment": "set-message-local-ex",
-                  "title": "设置消息本地扩展",
+                  "title": "Set message local ex",
                   "href": "/docs/chat/sdk/v4/android/message/managing-messages/set-message-local-ex",
                   "type": "page",
                   "children": [],
@@ -4999,14 +4999,14 @@
             {
               "id": "message/read-status",
               "segment": "read-status",
-              "title": "已读状态",
+              "title": "Read status",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/read-status/mark-conversation-message-as-read",
                   "segment": "mark-conversation-message-as-read",
-                  "title": "标记会话已读",
+                  "title": "Mark conversation message as read",
                   "href": "/docs/chat/sdk/v4/android/message/read-status/mark-conversation-message-as-read",
                   "type": "page",
                   "children": [],
@@ -5015,7 +5015,7 @@
                 {
                   "id": "message/read-status/mark-all-conversation-message-as-read",
                   "segment": "mark-all-conversation-message-as-read",
-                  "title": "标记全部会话已读",
+                  "title": "Mark all conversation message as read",
                   "href": "/docs/chat/sdk/v4/android/message/read-status/mark-all-conversation-message-as-read",
                   "type": "page",
                   "children": [],
@@ -5024,7 +5024,7 @@
                 {
                   "id": "message/read-status/mark-messages-as-read-by-msg-id",
                   "segment": "mark-messages-as-read-by-msg-id",
-                  "title": "按消息 ID 标记已读",
+                  "title": "Mark messages as read by msg ID",
                   "href": "/docs/chat/sdk/v4/android/message/read-status/mark-messages-as-read-by-msg-id",
                   "type": "page",
                   "children": [],
@@ -5036,14 +5036,14 @@
             {
               "id": "message/deleting-messages",
               "segment": "deleting-messages",
-              "title": "删除消息",
+              "title": "Deleting messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/deleting-messages/delete-message-from-local-storage",
                   "segment": "delete-message-from-local-storage",
-                  "title": "删除本地消息",
+                  "title": "Delete message from local storage",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/delete-message-from-local-storage",
                   "type": "page",
                   "children": [],
@@ -5052,7 +5052,7 @@
                 {
                   "id": "message/deleting-messages/delete-message",
                   "segment": "delete-message",
-                  "title": "删除消息",
+                  "title": "Delete message",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/delete-message",
                   "type": "page",
                   "children": [],
@@ -5061,7 +5061,7 @@
                 {
                   "id": "message/deleting-messages/delete-all-msg-from-local-and-svr",
                   "segment": "delete-all-msg-from-local-and-svr",
-                  "title": "清空本地和服务端消息",
+                  "title": "Delete all msg from local and svr",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/delete-all-msg-from-local-and-svr",
                   "type": "page",
                   "children": [],
@@ -5070,7 +5070,7 @@
                 {
                   "id": "message/deleting-messages/delete-all-msg-from-local",
                   "segment": "delete-all-msg-from-local",
-                  "title": "清空本地消息",
+                  "title": "Delete all msg from local",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/delete-all-msg-from-local",
                   "type": "page",
                   "children": [],
@@ -5079,7 +5079,7 @@
                 {
                   "id": "message/deleting-messages/clear-conversation-and-delete-all-msg",
                   "segment": "clear-conversation-and-delete-all-msg",
-                  "title": "清空会话消息",
+                  "title": "Clear conversation and delete all msg",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/clear-conversation-and-delete-all-msg",
                   "type": "page",
                   "children": [],
@@ -5088,7 +5088,7 @@
                 {
                   "id": "message/deleting-messages/delete-conversation-and-delete-all-msg",
                   "segment": "delete-conversation-and-delete-all-msg",
-                  "title": "删除会话及消息",
+                  "title": "Delete conversation and delete all msg",
                   "href": "/docs/chat/sdk/v4/android/message/deleting-messages/delete-conversation-and-delete-all-msg",
                   "type": "page",
                   "children": [],
@@ -5100,14 +5100,14 @@
             {
               "id": "message/local-messages",
               "segment": "local-messages",
-              "title": "本地消息",
+              "title": "Local messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/local-messages/insert-single-message-to-local-storage",
                   "segment": "insert-single-message-to-local-storage",
-                  "title": "插入单聊本地消息",
+                  "title": "Insert single message to local storage",
                   "href": "/docs/chat/sdk/v4/android/message/local-messages/insert-single-message-to-local-storage",
                   "type": "page",
                   "children": [],
@@ -5116,7 +5116,7 @@
                 {
                   "id": "message/local-messages/insert-group-message-to-local-storage",
                   "segment": "insert-group-message-to-local-storage",
-                  "title": "插入群聊本地消息",
+                  "title": "Insert group message to local storage",
                   "href": "/docs/chat/sdk/v4/android/message/local-messages/insert-group-message-to-local-storage",
                   "type": "page",
                   "children": [],
@@ -5131,14 +5131,14 @@
         {
           "id": "push-notifications",
           "segment": "push-notifications",
-          "title": "推送通知",
+          "title": "Push notifications",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "push-notifications/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/push-notifications/overview",
               "type": "page",
               "children": [],
@@ -5147,7 +5147,7 @@
             {
               "id": "push-notifications/methods/update-fcm-token",
               "segment": "update-fcm-token",
-              "title": "更新 FCM Token",
+              "title": "Update FCM token",
               "href": "/docs/chat/sdk/v4/android/push-notifications/methods/update-fcm-token",
               "type": "page",
               "children": [],
@@ -5156,7 +5156,7 @@
             {
               "id": "push-notifications/methods/set-app-badge",
               "segment": "set-app-badge",
-              "title": "设置应用角标",
+              "title": "Set app badge",
               "href": "/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge",
               "type": "page",
               "children": [],
@@ -5168,14 +5168,14 @@
         {
           "id": "logger",
           "segment": "logger",
-          "title": "日志",
+          "title": "Logging",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "logger/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/logger/overview",
               "type": "page",
               "children": [],
@@ -5184,7 +5184,7 @@
             {
               "id": "logger/methods/logs",
               "segment": "logs",
-              "title": "写入客户端日志",
+              "title": "Logs",
               "href": "/docs/chat/sdk/v4/android/logger/methods/logs",
               "type": "page",
               "children": [],
@@ -5193,7 +5193,7 @@
             {
               "id": "logger/methods/upload-logs",
               "segment": "upload-logs",
-              "title": "上传日志",
+              "title": "Upload logs",
               "href": "/docs/chat/sdk/v4/android/logger/methods/upload-logs",
               "type": "page",
               "children": [],
@@ -5205,14 +5205,14 @@
         {
           "id": "file",
           "segment": "file",
-          "title": "文件上传",
+          "title": "File upload",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "file/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/file/overview",
               "type": "page",
               "children": [],
@@ -5221,7 +5221,7 @@
             {
               "id": "file/methods/upload-file",
               "segment": "upload-file",
-              "title": "上传文件",
+              "title": "Upload file",
               "href": "/docs/chat/sdk/v4/android/file/methods/upload-file",
               "type": "page",
               "children": [],
@@ -5233,14 +5233,14 @@
         {
           "id": "models",
           "segment": "models",
-          "title": "类型说明",
+          "title": "Models",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "models/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/sdk/v4/android/models/overview",
               "type": "page",
               "children": [],
@@ -5249,7 +5249,7 @@
             {
               "id": "models/at-user-info",
               "segment": "at-user-info",
-              "title": "被提及用户信息",
+              "title": "At User Info",
               "href": "/docs/chat/sdk/v4/android/models/at-user-info",
               "type": "page",
               "children": [],
@@ -5258,7 +5258,7 @@
             {
               "id": "models/face-elem",
               "segment": "face-elem",
-              "title": "表情消息元素",
+              "title": "Face Elem",
               "href": "/docs/chat/sdk/v4/android/models/face-elem",
               "type": "page",
               "children": [],
@@ -5267,7 +5267,7 @@
             {
               "id": "models/init-config",
               "segment": "init-config",
-              "title": "初始化配置",
+              "title": "Init Config",
               "href": "/docs/chat/sdk/v4/android/models/init-config",
               "type": "page",
               "children": [],
@@ -5276,7 +5276,7 @@
             {
               "id": "models/single-type-key-info-sum",
               "segment": "single-type-key-info-sum",
-              "title": "单类型扩展统计",
+              "title": "Single Type Key Info Sum",
               "href": "/docs/chat/sdk/v4/android/models/single-type-key-info-sum",
               "type": "page",
               "children": [],
@@ -5285,7 +5285,7 @@
             {
               "id": "models/c2c-read-receipt-info",
               "segment": "c2c-read-receipt-info",
-              "title": "单聊已读回执信息",
+              "title": "C2 CRead Receipt Info",
               "href": "/docs/chat/sdk/v4/android/models/c2c-read-receipt-info",
               "type": "page",
               "children": [],
@@ -5294,7 +5294,7 @@
             {
               "id": "models/get-friend-application-list-as-applicant-req",
               "segment": "get-friend-application-list-as-applicant-req",
-              "title": "发出的好友申请查询条件",
+              "title": "Get Friend Application List As Applicant Req",
               "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req",
               "type": "page",
               "children": [],
@@ -5303,7 +5303,7 @@
             {
               "id": "models/get-group-application-list-as-applicant-req",
               "segment": "get-group-application-list-as-applicant-req",
-              "title": "发出的群申请查询条件",
+              "title": "Get Group Application List As Applicant Req",
               "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req",
               "type": "page",
               "children": [],
@@ -5312,7 +5312,7 @@
             {
               "id": "models/attached-info-elem",
               "segment": "attached-info-elem",
-              "title": "附加信息元素",
+              "title": "Attached Info Elem",
               "href": "/docs/chat/sdk/v4/android/models/attached-info-elem",
               "type": "page",
               "children": [],
@@ -5321,7 +5321,7 @@
             {
               "id": "models/rich-message",
               "segment": "rich-message",
-              "title": "富文本消息片段",
+              "title": "Rich Message",
               "href": "/docs/chat/sdk/v4/android/models/rich-message",
               "type": "page",
               "children": [],
@@ -5330,7 +5330,7 @@
             {
               "id": "models/advanced-message",
               "segment": "advanced-message",
-              "title": "高级历史消息结果",
+              "title": "Advanced Message",
               "href": "/docs/chat/sdk/v4/android/models/advanced-message",
               "type": "page",
               "children": [],
@@ -5339,7 +5339,7 @@
             {
               "id": "models/advanced-text-elem",
               "segment": "advanced-text-elem",
-              "title": "高级文本元素",
+              "title": "Advanced Text Elem",
               "href": "/docs/chat/sdk/v4/android/models/advanced-text-elem",
               "type": "page",
               "children": [],
@@ -5348,7 +5348,7 @@
             {
               "id": "models/message-entity",
               "segment": "message-entity",
-              "title": "高级消息片段",
+              "title": "Message Entity",
               "href": "/docs/chat/sdk/v4/android/models/message-entity",
               "type": "page",
               "children": [],
@@ -5357,7 +5357,7 @@
             {
               "id": "models/card-elem",
               "segment": "card-elem",
-              "title": "个人名片元素",
+              "title": "Card Elem",
               "href": "/docs/chat/sdk/v4/android/models/card-elem",
               "type": "page",
               "children": [],
@@ -5366,7 +5366,7 @@
             {
               "id": "models/public-user-info",
               "segment": "public-user-info",
-              "title": "公开用户信息",
+              "title": "Public User Info",
               "href": "/docs/chat/sdk/v4/android/models/public-user-info",
               "type": "page",
               "children": [],
@@ -5375,7 +5375,7 @@
             {
               "id": "models/friendship-info",
               "segment": "friendship-info",
-              "title": "好友关系校验结果",
+              "title": "Friendship Info",
               "href": "/docs/chat/sdk/v4/android/models/friendship-info",
               "type": "page",
               "children": [],
@@ -5384,7 +5384,7 @@
             {
               "id": "models/friend-application-info",
               "segment": "friend-application-info",
-              "title": "好友申请信息",
+              "title": "Friend Application Info",
               "href": "/docs/chat/sdk/v4/android/models/friend-application-info",
               "type": "page",
               "children": [],
@@ -5393,7 +5393,7 @@
             {
               "id": "models/friend-info",
               "segment": "friend-info",
-              "title": "好友信息",
+              "title": "Friend Info",
               "href": "/docs/chat/sdk/v4/android/models/friend-info",
               "type": "page",
               "children": [],
@@ -5402,7 +5402,7 @@
             {
               "id": "models/update-friends-req",
               "segment": "update-friends-req",
-              "title": "好友资料更新请求",
+              "title": "Update Friends Req",
               "href": "/docs/chat/sdk/v4/android/models/update-friends-req",
               "type": "page",
               "children": [],
@@ -5411,7 +5411,7 @@
             {
               "id": "models/merge-elem",
               "segment": "merge-elem",
-              "title": "合并消息元素",
+              "title": "Merge Elem",
               "href": "/docs/chat/sdk/v4/android/models/merge-elem",
               "type": "page",
               "children": [],
@@ -5420,7 +5420,7 @@
             {
               "id": "models/blacklist-info",
               "segment": "blacklist-info",
-              "title": "黑名单用户信息",
+              "title": "Blacklist Info",
               "href": "/docs/chat/sdk/v4/android/models/blacklist-info",
               "type": "page",
               "children": [],
@@ -5429,7 +5429,7 @@
             {
               "id": "models/conversation-req",
               "segment": "conversation-req",
-              "title": "会话设置请求",
+              "title": "Conversation Req",
               "href": "/docs/chat/sdk/v4/android/models/conversation-req",
               "type": "page",
               "children": [],
@@ -5438,7 +5438,7 @@
             {
               "id": "models/conversation-info",
               "segment": "conversation-info",
-              "title": "会话信息",
+              "title": "Conversation Info",
               "href": "/docs/chat/sdk/v4/android/models/conversation-info",
               "type": "page",
               "children": [],
@@ -5447,7 +5447,7 @@
             {
               "id": "models/key-value",
               "segment": "key-value",
-              "title": "键值扩展项",
+              "title": "Key Value",
               "href": "/docs/chat/sdk/v4/android/models/key-value",
               "type": "page",
               "children": [],
@@ -5456,7 +5456,7 @@
             {
               "id": "models/offline-push-info",
               "segment": "offline-push-info",
-              "title": "离线推送信息",
+              "title": "Offline Push Info",
               "href": "/docs/chat/sdk/v4/android/models/offline-push-info",
               "type": "page",
               "children": [],
@@ -5465,7 +5465,7 @@
             {
               "id": "models/set-group-member-info",
               "segment": "set-group-member-info",
-              "title": "群成员设置请求",
+              "title": "Set Group Member Info",
               "href": "/docs/chat/sdk/v4/android/models/set-group-member-info",
               "type": "page",
               "children": [],
@@ -5474,7 +5474,7 @@
             {
               "id": "models/group-members-info",
               "segment": "group-members-info",
-              "title": "群成员信息",
+              "title": "Group Members Info",
               "href": "/docs/chat/sdk/v4/android/models/group-members-info",
               "type": "page",
               "children": [],
@@ -5483,7 +5483,7 @@
             {
               "id": "models/group-application-info",
               "segment": "group-application-info",
-              "title": "群申请信息",
+              "title": "Group Application Info",
               "href": "/docs/chat/sdk/v4/android/models/group-application-info",
               "type": "page",
               "children": [],
@@ -5492,7 +5492,7 @@
             {
               "id": "models/group-message-receipt",
               "segment": "group-message-receipt",
-              "title": "群消息已读回执",
+              "title": "Group Message Receipt",
               "href": "/docs/chat/sdk/v4/android/models/group-message-receipt",
               "type": "page",
               "children": [],
@@ -5501,7 +5501,7 @@
             {
               "id": "models/group-message-read-info",
               "segment": "group-message-read-info",
-              "title": "群消息已读信息",
+              "title": "Group Message Read Info",
               "href": "/docs/chat/sdk/v4/android/models/group-message-read-info",
               "type": "page",
               "children": [],
@@ -5510,7 +5510,7 @@
             {
               "id": "models/group-has-read-info",
               "segment": "group-has-read-info",
-              "title": "群已读用户信息",
+              "title": "Group Has Read Info",
               "href": "/docs/chat/sdk/v4/android/models/group-has-read-info",
               "type": "page",
               "children": [],
@@ -5519,7 +5519,7 @@
             {
               "id": "models/group-info",
               "segment": "group-info",
-              "title": "群组信息",
+              "title": "Group Info",
               "href": "/docs/chat/sdk/v4/android/models/group-info",
               "type": "page",
               "children": [],
@@ -5528,7 +5528,7 @@
             {
               "id": "models/put-args",
               "segment": "put-args",
-              "title": "上传参数",
+              "title": "Put Args",
               "href": "/docs/chat/sdk/v4/android/models/put-args",
               "type": "page",
               "children": [],
@@ -5537,7 +5537,7 @@
             {
               "id": "models/video-elem",
               "segment": "video-elem",
-              "title": "视频消息元素",
+              "title": "Video Elem",
               "href": "/docs/chat/sdk/v4/android/models/video-elem",
               "type": "page",
               "children": [],
@@ -5546,7 +5546,7 @@
             {
               "id": "models/get-friend-application-list-as-recipient-req",
               "segment": "get-friend-application-list-as-recipient-req",
-              "title": "收到的好友申请查询条件",
+              "title": "Get Friend Application List As Recipient Req",
               "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req",
               "type": "page",
               "children": [],
@@ -5555,7 +5555,7 @@
             {
               "id": "models/get-group-application-list-as-recipient-req",
               "segment": "get-group-application-list-as-recipient-req",
-              "title": "收到的群申请查询条件",
+              "title": "Get Group Application List As Recipient Req",
               "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req",
               "type": "page",
               "children": [],
@@ -5564,7 +5564,7 @@
             {
               "id": "models/typing-elem",
               "segment": "typing-elem",
-              "title": "输入状态元素",
+              "title": "Typing Elem",
               "href": "/docs/chat/sdk/v4/android/models/typing-elem",
               "type": "page",
               "children": [],
@@ -5573,7 +5573,7 @@
             {
               "id": "models/search-params",
               "segment": "search-params",
-              "title": "搜索参数",
+              "title": "Search Params",
               "href": "/docs/chat/sdk/v4/android/models/search-params",
               "type": "page",
               "children": [],
@@ -5582,7 +5582,7 @@
             {
               "id": "models/notification-elem",
               "segment": "notification-elem",
-              "title": "通知消息元素",
+              "title": "Notification Elem",
               "href": "/docs/chat/sdk/v4/android/models/notification-elem",
               "type": "page",
               "children": [],
@@ -5591,7 +5591,7 @@
             {
               "id": "models/picture-elem",
               "segment": "picture-elem",
-              "title": "图片消息元素",
+              "title": "Picture Elem",
               "href": "/docs/chat/sdk/v4/android/models/picture-elem",
               "type": "page",
               "children": [],
@@ -5600,7 +5600,7 @@
             {
               "id": "models/picture-info",
               "segment": "picture-info",
-              "title": "图片资源信息",
+              "title": "Picture Info",
               "href": "/docs/chat/sdk/v4/android/models/picture-info",
               "type": "page",
               "children": [],
@@ -5609,7 +5609,7 @@
             {
               "id": "models/location-elem",
               "segment": "location-elem",
-              "title": "位置消息元素",
+              "title": "Location Elem",
               "href": "/docs/chat/sdk/v4/android/models/location-elem",
               "type": "page",
               "children": [],
@@ -5618,7 +5618,7 @@
             {
               "id": "models/text-elem",
               "segment": "text-elem",
-              "title": "文本消息元素",
+              "title": "Text Elem",
               "href": "/docs/chat/sdk/v4/android/models/text-elem",
               "type": "page",
               "children": [],
@@ -5627,7 +5627,7 @@
             {
               "id": "models/file-elem",
               "segment": "file-elem",
-              "title": "文件消息元素",
+              "title": "File Elem",
               "href": "/docs/chat/sdk/v4/android/models/file-elem",
               "type": "page",
               "children": [],
@@ -5636,7 +5636,7 @@
             {
               "id": "models/revoked-info",
               "segment": "revoked-info",
-              "title": "消息撤回信息",
+              "title": "Revoked Info",
               "href": "/docs/chat/sdk/v4/android/models/revoked-info",
               "type": "page",
               "children": [],
@@ -5645,7 +5645,7 @@
             {
               "id": "models/message",
               "segment": "message",
-              "title": "消息对象",
+              "title": "Message",
               "href": "/docs/chat/sdk/v4/android/models/message",
               "type": "page",
               "children": [],
@@ -5654,7 +5654,7 @@
             {
               "id": "models/message-kv",
               "segment": "message-kv",
-              "title": "消息扩展键值",
+              "title": "Message KV",
               "href": "/docs/chat/sdk/v4/android/models/message-kv",
               "type": "page",
               "children": [],
@@ -5663,7 +5663,7 @@
             {
               "id": "models/type-key-set-result",
               "segment": "type-key-set-result",
-              "title": "消息扩展设置结果",
+              "title": "Type Key Set Result",
               "href": "/docs/chat/sdk/v4/android/models/type-key-set-result",
               "type": "page",
               "children": [],
@@ -5672,7 +5672,7 @@
             {
               "id": "models/search-result",
               "segment": "search-result",
-              "title": "消息搜索结果",
+              "title": "Search Result",
               "href": "/docs/chat/sdk/v4/android/models/search-result",
               "type": "page",
               "children": [],
@@ -5681,7 +5681,7 @@
             {
               "id": "models/search-result-item",
               "segment": "search-result-item",
-              "title": "消息搜索结果项",
+              "title": "Search Result Item",
               "href": "/docs/chat/sdk/v4/android/models/search-result-item",
               "type": "page",
               "children": [],
@@ -5690,7 +5690,7 @@
             {
               "id": "models/quote-elem",
               "segment": "quote-elem",
-              "title": "引用消息元素",
+              "title": "Quote Elem",
               "href": "/docs/chat/sdk/v4/android/models/quote-elem",
               "type": "page",
               "children": [],
@@ -5699,7 +5699,7 @@
             {
               "id": "models/user-ex-info",
               "segment": "user-ex-info",
-              "title": "用户扩展信息",
+              "title": "User Ex Info",
               "href": "/docs/chat/sdk/v4/android/models/user-ex-info",
               "type": "page",
               "children": [],
@@ -5708,7 +5708,7 @@
             {
               "id": "models/user-info",
               "segment": "user-info",
-              "title": "用户信息",
+              "title": "User Info",
               "href": "/docs/chat/sdk/v4/android/models/user-info",
               "type": "page",
               "children": [],
@@ -5717,7 +5717,7 @@
             {
               "id": "models/users-online-status",
               "segment": "users-online-status",
-              "title": "用户在线状态",
+              "title": "Users Online Status",
               "href": "/docs/chat/sdk/v4/android/models/users-online-status",
               "type": "page",
               "children": [],
@@ -5726,7 +5726,7 @@
             {
               "id": "models/user-info-req",
               "segment": "user-info-req",
-              "title": "用户资料更新请求",
+              "title": "User Info Req",
               "href": "/docs/chat/sdk/v4/android/models/user-info-req",
               "type": "page",
               "children": [],
@@ -5735,7 +5735,7 @@
             {
               "id": "models/sound-elem",
               "segment": "sound-elem",
-              "title": "语音消息元素",
+              "title": "Sound Elem",
               "href": "/docs/chat/sdk/v4/android/models/sound-elem",
               "type": "page",
               "children": [],
@@ -5744,7 +5744,7 @@
             {
               "id": "models/custom-elem",
               "segment": "custom-elem",
-              "title": "自定义消息元素",
+              "title": "Custom Elem",
               "href": "/docs/chat/sdk/v4/android/models/custom-elem",
               "type": "page",
               "children": [],
@@ -5753,7 +5753,7 @@
             {
               "id": "models/at-text-elem",
               "segment": "at-text-elem",
-              "title": "At 文本元素",
+              "title": "At Text Elem",
               "href": "/docs/chat/sdk/v4/android/models/at-text-elem",
               "type": "page",
               "children": [],
@@ -5762,7 +5762,7 @@
             {
               "id": "models/login-status",
               "segment": "login-status",
-              "title": "登录状态",
+              "title": "Login Status",
               "href": "/docs/chat/sdk/v4/android/models/login-status",
               "type": "page",
               "children": [],
@@ -5771,7 +5771,7 @@
             {
               "id": "models/conversation-type",
               "segment": "conversation-type",
-              "title": "会话类型",
+              "title": "Conversation Type",
               "href": "/docs/chat/sdk/v4/android/models/conversation-type",
               "type": "page",
               "children": [],
@@ -5780,7 +5780,7 @@
             {
               "id": "models/platform",
               "segment": "platform",
-              "title": "平台类型",
+              "title": "Platform",
               "href": "/docs/chat/sdk/v4/android/models/platform",
               "type": "page",
               "children": [],
@@ -5789,7 +5789,7 @@
             {
               "id": "models/group-role",
               "segment": "group-role",
-              "title": "群成员角色",
+              "title": "Group Role",
               "href": "/docs/chat/sdk/v4/android/models/group-role",
               "type": "page",
               "children": [],
@@ -5798,7 +5798,7 @@
             {
               "id": "models/group-member-filter",
               "segment": "group-member-filter",
-              "title": "群成员筛选类型",
+              "title": "Group Member Filter",
               "href": "/docs/chat/sdk/v4/android/models/group-member-filter",
               "type": "page",
               "children": [],
@@ -5807,7 +5807,7 @@
             {
               "id": "models/group-at-type",
               "segment": "group-at-type",
-              "title": "群提醒类型",
+              "title": "Group At Type",
               "href": "/docs/chat/sdk/v4/android/models/group-at-type",
               "type": "page",
               "children": [],
@@ -5816,7 +5816,7 @@
             {
               "id": "models/log-level",
               "segment": "log-level",
-              "title": "日志等级",
+              "title": "Log Level",
               "href": "/docs/chat/sdk/v4/android/models/log-level",
               "type": "page",
               "children": [],
@@ -5825,7 +5825,7 @@
             {
               "id": "models/join-source",
               "segment": "join-source",
-              "title": "入群来源",
+              "title": "Join Source",
               "href": "/docs/chat/sdk/v4/android/models/join-source",
               "type": "page",
               "children": [],
@@ -5834,7 +5834,7 @@
             {
               "id": "models/group-verification",
               "segment": "group-verification",
-              "title": "入群验证方式",
+              "title": "Group Verification",
               "href": "/docs/chat/sdk/v4/android/models/group-verification",
               "type": "page",
               "children": [],
@@ -5843,7 +5843,7 @@
             {
               "id": "models/message-type",
               "segment": "message-type",
-              "title": "消息类型",
+              "title": "Message Type",
               "href": "/docs/chat/sdk/v4/android/models/message-type",
               "type": "page",
               "children": [],
@@ -5852,7 +5852,7 @@
             {
               "id": "models/view-type",
               "segment": "view-type",
-              "title": "消息视图类型",
+              "title": "View Type",
               "href": "/docs/chat/sdk/v4/android/models/view-type",
               "type": "page",
               "children": [],
@@ -5861,7 +5861,7 @@
             {
               "id": "models/message-status",
               "segment": "message-status",
-              "title": "消息状态",
+              "title": "Message Status",
               "href": "/docs/chat/sdk/v4/android/models/message-status",
               "type": "page",
               "children": [],
@@ -5870,7 +5870,7 @@
             {
               "id": "models/on-advance-msg-listener",
               "segment": "on-advance-msg-listener",
-              "title": "高级消息监听器",
+              "title": "On Advance Msg Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-advance-msg-listener",
               "type": "page",
               "children": [],
@@ -5879,7 +5879,7 @@
             {
               "id": "models/on-friendship-listener",
               "segment": "on-friendship-listener",
-              "title": "好友关系监听器",
+              "title": "On Friendship Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-friendship-listener",
               "type": "page",
               "children": [],
@@ -5888,7 +5888,7 @@
             {
               "id": "models/on-conversation-listener",
               "segment": "on-conversation-listener",
-              "title": "会话监听器",
+              "title": "On Conversation Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-conversation-listener",
               "type": "page",
               "children": [],
@@ -5897,7 +5897,7 @@
             {
               "id": "models/on-conn-listener",
               "segment": "on-conn-listener",
-              "title": "连接状态监听器",
+              "title": "On Conn Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-conn-listener",
               "type": "page",
               "children": [],
@@ -5906,7 +5906,7 @@
             {
               "id": "models/on-group-listener",
               "segment": "on-group-listener",
-              "title": "群组监听器",
+              "title": "On Group Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-group-listener",
               "type": "page",
               "children": [],
@@ -5915,7 +5915,7 @@
             {
               "id": "models/on-message-kv-info-listener",
               "segment": "on-message-kv-info-listener",
-              "title": "消息扩展监听器",
+              "title": "On Message KV Info Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-message-kv-info-listener",
               "type": "page",
               "children": [],
@@ -5924,7 +5924,7 @@
             {
               "id": "models/on-user-listener",
               "segment": "on-user-listener",
-              "title": "用户状态监听器",
+              "title": "On User Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-user-listener",
               "type": "page",
               "children": [],
@@ -5933,7 +5933,7 @@
             {
               "id": "models/on-custom-business-listener",
               "segment": "on-custom-business-listener",
-              "title": "自定义业务监听器",
+              "title": "On Custom Business Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-custom-business-listener",
               "type": "page",
               "children": [],
@@ -5942,7 +5942,7 @@
             {
               "id": "models/upload-log-progress",
               "segment": "upload-log-progress",
-              "title": "日志上传进度回调",
+              "title": "Upload Log Progress",
               "href": "/docs/chat/sdk/v4/android/models/upload-log-progress",
               "type": "page",
               "children": [],
@@ -5951,7 +5951,7 @@
             {
               "id": "models/on-base",
               "segment": "on-base",
-              "title": "通用回调",
+              "title": "On Base",
               "href": "/docs/chat/sdk/v4/android/models/on-base",
               "type": "page",
               "children": [],
@@ -5960,7 +5960,7 @@
             {
               "id": "models/on-put-file-listener",
               "segment": "on-put-file-listener",
-              "title": "文件上传回调",
+              "title": "On Put File Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-put-file-listener",
               "type": "page",
               "children": [],
@@ -5969,7 +5969,7 @@
             {
               "id": "models/on-msg-send-callback",
               "segment": "on-msg-send-callback",
-              "title": "消息发送回调",
+              "title": "On Msg Send Callback",
               "href": "/docs/chat/sdk/v4/android/models/on-msg-send-callback",
               "type": "page",
               "children": [],
@@ -5978,7 +5978,7 @@
             {
               "id": "models/base",
               "segment": "base",
-              "title": "底层通用回调",
+              "title": "Base",
               "href": "/docs/chat/sdk/v4/android/models/base",
               "type": "page",
               "children": [],
@@ -5987,7 +5987,7 @@
             {
               "id": "models/send-msg-call-back",
               "segment": "send-msg-call-back",
-              "title": "底层消息发送回调",
+              "title": "Send Msg Call Back",
               "href": "/docs/chat/sdk/v4/android/models/send-msg-call-back",
               "type": "page",
               "children": [],
@@ -5996,7 +5996,7 @@
             {
               "id": "models/on-advanced-msg-listener",
               "segment": "on-advanced-msg-listener",
-              "title": "底层高级消息监听器",
+              "title": "On Advanced Msg Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-advanced-msg-listener",
               "type": "page",
               "children": [],
@@ -6005,7 +6005,7 @@
             {
               "id": "models/on-batch-msg-listener",
               "segment": "on-batch-msg-listener",
-              "title": "批量消息监听器",
+              "title": "On Batch Msg Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-batch-msg-listener",
               "type": "page",
               "children": [],
@@ -6014,7 +6014,7 @@
             {
               "id": "models/upload-file-callback",
               "segment": "upload-file-callback",
-              "title": "底层文件上传回调",
+              "title": "Upload File Callback",
               "href": "/docs/chat/sdk/v4/android/models/upload-file-callback",
               "type": "page",
               "children": [],
@@ -6026,7 +6026,7 @@
         {
           "id": "error-codes",
           "segment": "error-codes",
-          "title": "错误码",
+          "title": "Error codes",
           "href": "/docs/chat/sdk/v4/android/error-codes",
           "type": "page",
           "children": [],
@@ -6035,7 +6035,7 @@
         {
           "id": "deprecated",
           "segment": "deprecated",
-          "title": "未支持或未暴露能力",
+          "title": "Unsupported or unexposed capabilities",
           "href": "/docs/chat/sdk/v4/android/deprecated",
           "type": "page",
           "children": [],

@@ -1,6 +1,6 @@
 ---
 title: 'Overview'
-description: 'Explains event handler registration timing, event scope, and app-layer dispatch guidance for Android SDK v3.8.3.'
+description: 'Overview for the OpenIM Android SDK v3.8.3.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
@@ -10,26 +10,27 @@ version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/event-handler/overview'
 ---
-Event handlers deliver connection, user, friend, group, conversation, message, custom business, and message KV changes to the app layer. Register them before login when possible so initial sync events are not missed.
 
-## Handler Index
+Overview documentation for OpenIM Android SDK v3.8.3.
 
-| Handler | Use case |
-| ------- | -------- |
-| [Listen for group events](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener) | Group info, members, applications, and permission changes. |
-| [Listen for conversation events](/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener) | Conversation creation, updates, deletion, unread counts, and drafts. |
-| [Listen for single-message events](/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener) | New messages, revocation, read status, and message extension changes. |
-| [Listen for batch message events](/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener) | Batched new messages or batched sync results. |
-| [Listen for user events](/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener) | Current user profile and user-related state changes. |
-| [Listen for friend events](/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener) | Friend list, friend info, friend applications, and blacklist changes. |
-| [Listen for custom business events](/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener) | Custom business events delivered by the server. |
-| [Listen for message KV changes](/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener) | Message extension key-value additions, updates, and deletion. |
+## Listener Index
 
-## Registration Guidance
+| Listeners | Overview details |
+| ------ | -------- |
+| [Set group listener](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener) | Overview details |
+| [Set conversation listener](/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener) | Overview details |
+| [Set advanced msg listener](/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener) | Overview details |
+| [Set batch msg listener](/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener) | Overview details |
+| [Set user listener](/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener) | Overview details |
+| [Set friend listener](/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener) | Overview details |
+| [Set custom business listener](/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener) | Overview details |
+| [Set message KV info listener](/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener) | Overview details |
 
-| Guidance | Description |
-| -------- | ----------- |
-| Register before login | Register connection, message, conversation, friend, group, and user listeners before login when possible. |
-| Fan out in app code | If multiple pages consume the same event type, dispatch it through an app-level event bus or state store. |
-| Avoid accidental replacement | Most `Set*Listener` calls replace the listener stored for that event category. Repeated registration can overwrite the previous listener. |
-| Keep cache in sync | Listener callbacks should update local cache and UI state, then notify screens that need to refresh. |
+## Registration Recommendations
+
+| Overview details | Description |
+| ---- | ---- |
+| Overview details | Overview details |
+| Overview details | Page |
+| Overview details | Overview details |
+| Overview details | Page |

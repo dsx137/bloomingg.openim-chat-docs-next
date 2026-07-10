@@ -1,6 +1,6 @@
 ---
-title: "初始化分片上传"
-description: "OpenIM 第三方服务 REST API：初始化分片上传。"
+title: "Initiate multipart upload"
+description: "Initiate multipart upload with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,22 +10,21 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/third/object-storage/initiate-multipart-upload"
 ---
 
-使用 **初始化分片上传** 从可信后端调用 OpenIM 第三方服务 REST 接口。创建对象存储分片上传任务，并返回 uploadID、分片大小和每个分片的上传签名。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
+Initiate multipart upload is an OpenIM third-party service REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/object/initiate_multipart_upload
 ```
 
-### 请求示例
+### Request example
 
 ```bash
 curl --request POST "${API_ADDRESS}/object/initiate_multipart_upload" \
   --header "Content-Type: application/json; charset=utf-8" \
   --header "operationID: ${OPERATION_ID}" \
   --header "token: ${ADMIN_TOKEN}" \
-  --header "X-Request-Api: ${API_ADDRESS}" \
   --data-raw '{
   "hash": "sha256_file_hash",
   "size": 10485760,
@@ -37,22 +36,9 @@ curl --request POST "${API_ADDRESS}/object/initiate_multipart_upload" \
 }'
 ```
 
-> 安全提示：管理端 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
-
-### 请求头
-
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token 或具备对应权限的用户 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
-| X-Request-Api | 否 | string | 生成对象访问 URL 时使用的 API 外部地址；不传时服务端根据当前请求地址推导。 |
-
-## 请求体
+## Request body
 
 ```json
 {
@@ -66,20 +52,20 @@ curl --request POST "${API_ADDRESS}/object/initiate_multipart_upload" \
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
+| Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
-| hash | 是 | string | 文件哈希，用于秒传或去重判断。 |
-| size | 是 | int | 文件总大小，单位字节。 |
-| partSize | 是 | int | 期望分片大小，单位字节。 |
-| maxParts | 是 | int | 允许的最大分片数量。 |
-| cause | 否 | string | 业务用途或对象分组，例如 `message`、`avatar`。 |
-| name | 是 | string | 对象名称，通常为业务侧保存的文件名或路径。 |
-| contentType | 否 | string | 文件 MIME 类型。 |
-| urlPrefix | 否 | string | 服务端会根据 `X-Request-Api` 或当前请求地址自动补齐，通常不需要在请求体中传。 |
+| hash | Yes | string | The hash value. |
+| size | Yes | int | The size value. |
+| partSize | Yes | int | Multipart upload part size. |
+| maxParts | Yes | int | The max parts value. |
+| cause | No | string | The cause value. |
+| name | Yes | string | Resource name. |
+| contentType | No | string | OpenIM message content type. |
+| urlPrefix | No | string | The url prefix value. |
 
-## 响应
+## Response
 
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -131,39 +117,39 @@ curl --request POST "${API_ADDRESS}/object/initiate_multipart_upload" \
 }
 ```
 
-### 响应参数
+### Response fields
 
-| 参数名 | 类型 | 说明 |
+| Field | Type | Description |
 | --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
-| data | object | 接口返回数据。 |
-| data.url | string | 如果同 hash 对象已存在，服务端可能直接返回对象访问 URL。 |
-| data.upload | object | 新建分片上传任务信息。 |
-| data.upload.uploadID | string | 上传任务 ID，后续签名和完成上传时使用。 |
-| data.upload.partSize | int | 实际分片大小，单位字节。 |
-| data.upload.sign | object | 上传签名信息。 |
-| data.upload.sign.query | array | 上传地址需要追加的 query 参数。 |
-| data.upload.sign.query[].key | string | Header 或 query 参数名。 |
-| data.upload.sign.query[].values | array | 该参数对应的一个或多个字符串值。 |
-| data.upload.sign.header | array | 上传请求需要携带的 Header。 |
-| data.upload.sign.header[].key | string | Header 或 query 参数名。 |
-| data.upload.sign.header[].values | array | 该参数对应的一个或多个字符串值。 |
-| data.upload.sign.parts | array | 分片上传签名列表。 |
-| data.upload.sign.parts[].partNumber | int | 分片序号。 |
-| data.upload.sign.parts[].url | string | 该分片上传地址。 |
-| data.upload.sign.parts[].query | array | 该分片上传地址需要追加的 query 参数。 |
-| data.upload.sign.parts[].query[].key | string | Header 或 query 参数名。 |
-| data.upload.sign.parts[].query[].values | array | 该参数对应的一个或多个字符串值。 |
-| data.upload.sign.parts[].header | array | 该分片上传请求需要携带的 Header。 |
-| data.upload.sign.parts[].header[].key | string | Header 或 query 参数名。 |
-| data.upload.sign.parts[].header[].values | array | 该参数对应的一个或多个字符串值。 |
-| data.upload.expireTime | int | 上传签名过期时间，Unix 毫秒时间戳。 |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
+| data.url | string | Resource URL. |
+| data.upload | object | The upload value. |
+| data.upload.uploadID | string | Multipart upload ID. |
+| data.upload.partSize | int | Multipart upload part size. |
+| data.upload.sign | object | The sign value. |
+| data.upload.sign.query | array | The query value. |
+| data.upload.sign.query[].key | string | The key value. |
+| data.upload.sign.query[].values | array | The values value. |
+| data.upload.sign.header | array | The header value. |
+| data.upload.sign.header[].key | string | The key value. |
+| data.upload.sign.header[].values | array | The values value. |
+| data.upload.sign.parts | array | The parts value. |
+| data.upload.sign.parts[].partNumber | int | The part number value. |
+| data.upload.sign.parts[].url | string | Resource URL. |
+| data.upload.sign.parts[].query | array | The query value. |
+| data.upload.sign.parts[].query[].key | string | The key value. |
+| data.upload.sign.parts[].query[].values | array | The values value. |
+| data.upload.sign.parts[].header | array | The header value. |
+| data.upload.sign.parts[].header[].key | string | The key value. |
+| data.upload.sign.parts[].header[].values | array | The values value. |
+| data.upload.expireTime | int | The expire time value. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
@@ -173,21 +159,20 @@ curl --request POST "${API_ADDRESS}/object/initiate_multipart_upload" \
 }
 ```
 
-| 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `token` 缺失、过期，或调用账号没有该接口权限。 | 重新获取有效 Token，并在可信后端调用接口。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-## 权限和限制
+## Permissions and limits
 
-- 创建分片上传任务；若文件 hash 已存在，可能直接复用已有对象。
-- `hash`、`size`、`partSize`、`maxParts` 和 `name` 必填。
-- `name` 需要通过服务端对象名称校验。
-- 所有数组型请求参数建议控制在 1000 个元素以内。
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [认证接口](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [third-party service overview](/docs/chat/platform-api/v3/third/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,6 +1,6 @@
 ---
-title: "概述"
-description: "OpenIM Platform API 第三方服务模块概览，覆盖监控、FCM、应用角标、日志和对象存储。"
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,33 +10,33 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/third/overview"
 ---
 
-第三方服务模块连接 OpenIM 周边能力，包括监控面板、推送 Token、应用角标、客户端日志和对象存储上传。
+The third-party services module connects OpenIM with monitoring, push helpers, client logs, and object storage upload flows.
 
-## 能力范围
+## Capability scope
 
-| 能力 | 说明 |
-| ---- | ---- |
-| 监控 | 跳转 Prometheus 或 Grafana 监控面板。 |
-| 推送辅助 | 更新 FCM Token，设置应用角标。 |
-| 日志管理 | 上传、删除和搜索客户端日志。 |
-| 对象上传 | 获取分片上传限制、初始化上传、刷新签名并完成上传。 |
-| 访问地址 | 获取对象访问 URL 或通过对象路径重定向访问。 |
+| Capability | Description |
+| --- | --- |
+| Monitoring | Open Prometheus or Grafana monitoring dashboards. |
+| Push helpers | Update FCM tokens and set application badge values. |
+| Logs | Upload, delete, and search client log records. |
+| Object upload | Get limits, initialize multipart or form uploads, refresh signatures, and complete uploads. |
+| Object access | Get object URLs or redirect by object path. |
 
-## 常用接口
+## Common APIs
 
-- [跳转监控面板](/docs/chat/platform-api/v3/third/monitoring/prometheus)
-- [更新 FCM Token](/docs/chat/platform-api/v3/third/push/fcm-update-token)
-- [上传日志记录](/docs/chat/platform-api/v3/third/logs/upload-logs)
-- [初始化分片上传](/docs/chat/platform-api/v3/third/object-storage/initiate-multipart-upload)
-- [获取对象访问地址](/docs/chat/platform-api/v3/third/object-storage/access-url)
+- [Open monitoring dashboard](/docs/chat/platform-api/v3/third/monitoring/prometheus)
+- [Update FCM token](/docs/chat/platform-api/v3/third/push/fcm-update-token)
+- [Upload logs](/docs/chat/platform-api/v3/third/logs/upload-logs)
+- [Initiate multipart upload](/docs/chat/platform-api/v3/third/object-storage/initiate-multipart-upload)
+- [Get object access URL](/docs/chat/platform-api/v3/third/object-storage/access-url)
 
-## 接入建议
+## Integration advice
 
-对象存储签名和日志接口通常需要结合业务侧权限校验，避免任意用户上传或读取非授权资源。
+Guard object-storage signatures and log access with backend authorization checks.
 
-监控入口和日志查询适合后台使用，不应直接暴露给普通客户端。
+Monitoring and log search endpoints are best suited for admin systems, not regular client applications.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

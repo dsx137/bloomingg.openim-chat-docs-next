@@ -1,6 +1,6 @@
 ---
-title: "迁移到 OpenIM"
-description: "OpenIM Platform API 迁移指南，说明如何把已有用户、好友关系、群组和历史消息迁移到 OpenIM。"
+title: "Migrate to OpenIM"
+description: "Migrate to OpenIM for the OpenIM Platform API."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,43 +10,39 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/migration-to-openim"
 ---
 
-迁移到 OpenIM 时，建议把已有系统的数据先整理成 OpenIM 的用户、关系、群组、会话和消息模型，再由可信后端按批次调用 Platform API。迁移过程不应该由客户端执行；管理员 Token、批量导入脚本、失败重试和审计日志都应保留在服务端。
+When migrating to OpenIM, normalize existing data into OpenIM users, relationships, groups, conversations, and messages, then import it from trusted backend jobs. Do not run migration workflows from client applications.
 
-## 能力范围
+## Capability scope
 
-| 原系统数据 | OpenIM 中的目标能力 | 说明 |
-| ---- | ---- | ---- |
-| 账号与资料 | 用户 | 先注册用户，再补齐昵称、头像和扩展字段。 |
-| 好友关系 | 关系 | 使用好友导入能力写入已有关系，黑名单按关系模块单独导入。 |
-| 群与成员 | 群组 | 先创建群组，再邀请或导入成员，并按需要设置群资料。 |
-| 历史消息 | 消息 | 按会话、发送者、时间和消息类型整理后，通过服务端消息能力写入或补发。 |
-| 会话状态 | 会话 | 迁移后再处理置顶、免打扰、未读和离线推送等用户会话状态。 |
+| Source data | OpenIM target | Description |
+| ----------- | ------------- | ----------- |
+| Accounts and profiles | Users | Register users first, then fill nickname, avatar, and extension fields. |
+| Friend relationships | Relationships | Import historical friends and migrate blacklist data separately. |
+| Groups and members | Groups | Create groups before importing or inviting members. |
+| Historical messages | Messages | Write historical records by conversation, sender, timestamp, and message type. |
+| Conversation state | Conversations | Rebuild pinned, muted, unread, and offline-push state after core data is imported. |
 
-## 常用接口
+## Common APIs
 
-| 迁移任务 | 主要接口 | 使用建议 |
-| ---- | ---- | ---- |
-| 注册用户 | [创建用户](/docs/chat/platform-api/v3/user/creating-users/create-a-user) | 用业务账号 ID 作为 OpenIM `userID`，避免迁移后再做 ID 映射。 |
-| 查询用户 | [查询用户列表](/docs/chat/platform-api/v3/user/listing-users/list-users) | 分批校验用户是否已经写入 OpenIM。 |
-| 导入好友 | [导入好友](/docs/chat/platform-api/v3/relation/managing-friends/import-friends) | 适合把历史好友关系直接写入，不建议逐个走好友申请流程。 |
-| 创建群组 | [创建群组](/docs/chat/platform-api/v3/group/managing-groups/create-group) | 迁移群时先确定群 ID、群主、群名称和初始成员策略。 |
-| 邀请成员 | [邀请用户进群](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group) | 已有群成员可按批次加入，注意控制单次请求规模。 |
-| 发送或导入消息 | [发送单条消息](/docs/chat/platform-api/v3/message/sending-messages/send-msg) | 历史消息迁移应由后端模拟原发送者写入，并保留原始发送时间。 |
-| 批量发送消息 | [批量发送消息](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg) | 适合系统通知或低风险批量补发，历史消息仍要先做顺序和幂等设计。 |
+- [Create a user](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [List users](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [Import friends](/docs/chat/platform-api/v3/relation/managing-friends/import-friends)
+- [Create a group](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [Invite users to a group](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
+- [Send a message](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
+- [Batch send messages](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg)
 
-## 接入建议
+## Integration advice
 
-推荐按用户、关系、群组、消息、会话校验的顺序迁移。先确保每个业务账号都有稳定的 OpenIM `userID`；导入好友关系和黑名单前，确认双方用户都已经存在；迁移群组时先创建群，再导入成员和群资料；迁移消息时按会话维度分批写入历史消息，并保留原始消息 ID、发送时间和迁移批次号。
+Run migration in repeatable batches. Record the source primary key, OpenIM target ID, operation time, `operationID`, response, and failure reason for each item.
 
-迁移脚本应设计为可重复执行。每批数据都应记录源系统主键、OpenIM 目标 ID、操作时间、`operationID`、返回结果和错误原因；失败后只重试失败记录，避免重复创建用户、重复导入好友或重复写入消息。
+Import users first, then relationships and groups, then historical messages, and finally conversation state. Before retrying failed writes, check whether the target resource already exists.
 
-历史消息迁移要特别关注顺序和幂等。建议按会话拆分批次，并在业务扩展字段中保留源消息 ID 或迁移批次号。迁移前先在测试环境验证消息类型映射、撤回状态、文件地址和离线推送策略。
+## Related pages
 
-## 相关页面
-
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [用户概述](/docs/chat/platform-api/v3/user/overview)
-- [关系概述](/docs/chat/platform-api/v3/relation/overview)
-- [群组概述](/docs/chat/platform-api/v3/group/overview)
-- [消息概述](/docs/chat/platform-api/v3/message/overview)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [User overview](/docs/chat/platform-api/v3/user/overview)
+- [Relationship overview](/docs/chat/platform-api/v3/relation/overview)
+- [Group overview](/docs/chat/platform-api/v3/group/overview)
+- [Message overview](/docs/chat/platform-api/v3/message/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

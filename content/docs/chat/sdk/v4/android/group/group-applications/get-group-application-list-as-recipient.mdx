@@ -1,0 +1,77 @@
+---
+title: 'Get group application list as recipient'
+description: 'Explains the Android core binding method GetGroupApplicationListAsRecipient, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-recipient'
+---
+
+Use `GetGroupApplicationListAsRecipient` for get group application list as recipient in the OpenIM Android SDK.
+
+## Feature
+
+Reads get group application list as recipient from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Method signature | `GetGroupApplicationListAsRecipient(callback Base, operationID, req string)` |
+| Capability       | Groups                                                                       |
+| Source file      | `open_im_sdk/group.go`                                                       |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void getRecvGroupApplicationList(OnBase<List<GroupApplicationInfo>> base, GetGroupApplicationListAsRecipientReq recipientReq)
+```
+
+## Input Parameters
+
+| Parameter      | Type                                                                                                                        | Description                                     |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `base`         | `OnBase<List<GroupApplicationInfo>>`                                                                                        | Async callback for success and failure results. |
+| `recipientReq` | [Get Group Application List As Recipient Req](/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req) | Request parameters, usually encoded as JSON.    |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.getRecvGroupApplicationList(
+    new OnBase<List<GroupApplicationInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(List<GroupApplicationInfo> data) {
+        // TODO: handle the callback result
+    }
+},
+    recipientReq
+);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Group Application Info](/docs/chat/sdk/v4/android/models/group-application-info) (`GroupApplicationInfo`): GroupApplicationInfo used by this Android SDK type.
+- [Get Group Application List As Recipient Req](/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req) (`GetGroupApplicationListAsRecipientReq`): GetGroupApplicationListAsRecipientReq used by this Android SDK type.

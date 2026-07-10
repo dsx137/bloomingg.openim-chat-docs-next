@@ -1,0 +1,56 @@
+---
+title: 'Get @all tag'
+description: 'Explains the Android core binding method GetAtAllTag, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/get-at-all-tag'
+---
+
+Use `GetAtAllTag` for get @all tag in the OpenIM Android SDK.
+
+## Feature
+
+Reads get @all tag from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                              |
+| ---------------- | ---------------------------------------- |
+| Method signature | `GetAtAllTag(operationID string) string` |
+| Capability       | Conversations and messages               |
+| Source file      | `open_im_sdk/conversation_msg.go`        |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public String getAtAllTag()
+```
+
+## Input Parameters
+
+| Parameter     | Type     | Description                  |
+| ------------- | -------- | ---------------------------- |
+| `operationID` | `string` | Trace ID for this operation. |
+
+
+
+## Return Value
+
+This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+String atAllTag = OpenIMClient.getInstance().conversationManager.getAtAllTag();
+```

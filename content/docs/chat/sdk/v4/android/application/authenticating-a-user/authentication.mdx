@@ -1,6 +1,6 @@
 ---
 title: 'Authentication flow'
-description: 'Explains the authentication flow, token boundaries, and login-state handling for Android SDK v3.8.3.'
+description: 'Authentication flow for the OpenIM Android SDK v3.8.3.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
@@ -10,40 +10,30 @@ version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication'
 ---
-Authentication uses a user token issued by your backend service. The client initializes the SDK, registers listeners, logs in with userID and token, and keeps UI state in sync with connection events and login status.
+
+Authentication is centered on the user token issued by your business server. The client initializes the SDK, registers listeners, logs in with `userID` and `token`, and keeps UI state aligned with connection events and login state.
 
 ## Authentication Order
 
-| Step | Action | Description |
-| ---- | ------ | ----------- |
-| 1 | Get userID and token | Request the current user's OpenIM userID and token from your backend service. |
-| 2 | Initialize the SDK | Call [Initialize the SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk) with API address, WebSocket address, platform information, and log settings. |
-| 3 | Register listeners | Register at least the connection listener. Register conversation, message, friend, group, and user listeners before login when those events are needed. |
-| 4 | Log in | Call [Login](/docs/chat/sdk/v4/android/application/methods/login) with userID and token. |
-| 5 | Handle state | Use connection callbacks, [Get login status](/docs/chat/sdk/v4/android/application/methods/get-login-status), and API results to decide when user-scoped APIs are available. |
-| 6 | Logout or refresh token | When the token expires, becomes invalid, or the user is kicked offline, call [Log out](/docs/chat/sdk/v4/android/application/methods/logout) and refresh the token before logging in again if needed. |
+| Step               | Description                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Prepare a token    | Issue an OpenIM user token from your trusted business backend. Do not hard-code tokens in the client.         |
+| Initialize the SDK | Call `InitSDK` with API, WebSocket, log, and local data configuration.                                        |
+| Register listeners | Set connection, message, conversation, friend, group, and user listeners before login.                        |
+| Login              | Call `Login` with the user ID and token. User-scoped APIs are reliable only after login succeeds.             |
+| Handle expiration  | When token expiration or invalid-token events arrive, request a new token from your backend and log in again. |
 
 ## Token Boundaries
 
-| Scenario | Handling |
-| -------- | -------- |
-| Token expired | Refresh the token through your backend, then call login again. |
-| Token invalid | Check userID, platform, issuing environment, and server time. |
-| Kicked offline | Notify the user through connection or login-state events, then follow your account-switch or re-login policy. |
-| User logs out | Call `Logout`, then clear app-level user state and page state. |
+- User tokens are issued by your backend and should be treated as sensitive credentials.
 
-## Related Error Codes
+- Token expiration, invalid-token, and kicked-offline events are delivered through the connection listener.
 
-| Code | Meaning |
-| ---- | ------- |
-| `1501` | Token expired. |
-| `1502` | Token invalid. |
-| `1503` | Token malformed. |
-| `1506` | Token account was kicked offline. |
-| `1507` | Token does not exist. |
+- Calling `Logout` clears the current user session but does not release the global SDK instance.
 
 ## Related Pages
 
-- [SDK lifecycle](/docs/chat/sdk/v4/android/application/overview)
-- [Event handlers](/docs/chat/sdk/v4/android/event-handler/overview)
-- [Error codes](/docs/chat/sdk/v4/android/error-codes)
+- [Init SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)
+- [Login](/docs/chat/sdk/v4/android/application/methods/login)
+- [Logout](/docs/chat/sdk/v4/android/application/methods/logout)
+- [On Conn Listener](/docs/chat/sdk/v4/android/models/on-conn-listener)

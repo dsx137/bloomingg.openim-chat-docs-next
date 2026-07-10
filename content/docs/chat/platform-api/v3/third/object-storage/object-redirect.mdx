@@ -1,6 +1,6 @@
 ---
-title: "对象访问重定向"
-description: "OpenIM 第三方服务 REST API：对象访问重定向。"
+title: "Redirect object access"
+description: "Redirect object access with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,60 +10,72 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/third/object-storage/object-redirect"
 ---
 
-使用 **对象访问重定向** 调用 OpenIM 第三方服务 GET 接口。按对象名称获取临时访问地址，并通过 `302 Found` 重定向到对象存储 URL。
+Redirect object access is an OpenIM third-party service REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 GET {API_ADDRESS}/object/{name}
 ```
 
-### 请求示例
+### Request example
 
 ```bash
-curl --request GET "${API_ADDRESS}/object/attachments/file.zip?operationID=${OPERATION_ID}"
+curl --request GET "${API_ADDRESS}/object/{name}" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}"
 ```
 
-## 参数
+## Request body
 
-此接口不使用 JSON 请求体。
+This endpoint does not require a JSON request body.
 
-### 路径变量
+## Response
 
-| 参数名 | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| name | 是 | string | 对象名称；路径中的 `{name}` 会作为对象名传给 `/object/access_url`。 |
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
-### Query 参数
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 否 | string | 链路追踪 ID；不传时服务端会生成随机值。 |
-| type | 否 | string | 处理类型；当前支持空值或 `image`。 |
-| format | 否 | string | 图片输出格式，仅 `type=image` 时使用。 |
-| width | 否 | string | 图片宽度，仅 `type=image` 时使用。 |
-| height | 否 | string | 图片高度，仅 `type=image` 时使用。 |
+### Response fields
 
-## 响应
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
 
-成功时返回 `302 Found`，并在 `Location` Header 中写入对象存储临时访问 URL。
+### Error response
 
-| Header | 类型 | 说明 |
-| ------ | ---- | ---- |
-| Location | string | 重定向目标地址。 |
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
-### 错误
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
 
-如果请求失败，服务端可能返回 `400 Bad Request`、`404 Not Found` 或 `500 Internal Server Error`，响应体为错误文本。
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-## 权限和限制
+## Permissions and limits
 
-- 只读生成访问 URL 并重定向，不修改对象记录。
-- `name` 必须存在且不能为空。
-- `type` 只能为空或 `image`。
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [获取对象访问地址](/docs/chat/platform-api/v3/third/object-storage/access-url)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [third-party service overview](/docs/chat/platform-api/v3/third/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,6 +1,6 @@
 ---
-title: "强制用户下线"
-description: "OpenIM 认证 REST API：强制用户下线。"
+title: "Force logout"
+description: "Force logout with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,15 +10,15 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/auth/sessions/force-logout"
 ---
 
-使用 **强制用户下线** 从可信后端调用 OpenIM 认证 REST 接口。强制指定用户从某个终端退出登录，客户端 SDK 会收到被踢下线回调。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址；管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+Force logout is an OpenIM authentication REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/auth/force_logout
 ```
 
-### 请求示例
+### Request example
 
 ```bash
 curl --request POST "${API_ADDRESS}/auth/force_logout" \
@@ -31,19 +31,9 @@ curl --request POST "${API_ADDRESS}/auth/force_logout" \
 }'
 ```
 
-## 参数
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
-此接口通过请求头传入链路追踪信息，通过 JSON 请求体传递业务参数。除 router 白名单接口外，管理端接口还需要在请求头中携带 APP 管理员 Token。
-
-### 请求头
-
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
-
-## 请求体
+## Request body
 
 ```json
 {
@@ -52,14 +42,14 @@ curl --request POST "${API_ADDRESS}/auth/force_logout" \
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
+| Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
-| platformID | 是 | int | 需要踢下线的终端类型。 |
-| userID | 是 | string | 需要强制下线的用户 ID。 |
+| platformID | Yes | int | Client platform ID. |
+| userID | Yes | string | OpenIM user ID. |
 
-## 响应
+## Response
 
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -69,17 +59,17 @@ curl --request POST "${API_ADDRESS}/auth/force_logout" \
 }
 ```
 
-### 响应参数
+### Response fields
 
-| 参数名 | 类型 | 说明 |
+| Field | Type | Description |
 | --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
@@ -89,20 +79,20 @@ curl --request POST "${API_ADDRESS}/auth/force_logout" \
 }
 ```
 
-| 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `secret` 不正确、`token` 缺失或 Token 已过期。 | 检查服务端配置，重新获取 APP 管理员 Token。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或终端类型不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-## 权限和限制
+## Permissions and limits
 
-- 将指定用户在指定终端的 Token 标记为 kicked，并通知网关断开对应连接。
-- 必须使用 APP 管理员 Token 调用。
-- `platformID` 和 `userID` 必填。
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [获取用户信息](/docs/chat/platform-api/v3/user/listing-users/get-users-info)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [authentication overview](/docs/chat/platform-api/v3/auth/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

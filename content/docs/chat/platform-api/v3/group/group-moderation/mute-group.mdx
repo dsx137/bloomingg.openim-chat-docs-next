@@ -1,6 +1,6 @@
 ---
-title: "禁言群组"
-description: "OpenIM 群组 REST API：禁言群组。"
+title: "Mute group"
+description: "Mute group with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,15 +10,15 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/group/group-moderation/mute-group"
 ---
 
-使用 **禁言群组** 从可信后端调用 OpenIM 群组 REST 接口。禁言整个群组；群主和管理员通常仍可发言。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+Mute group is an OpenIM group REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/group/mute_group
 ```
 
-### 请求示例
+### Request example
 
 ```bash
 curl --request POST "${API_ADDRESS}/group/mute_group" \
@@ -30,21 +30,9 @@ curl --request POST "${API_ADDRESS}/group/mute_group" \
 }'
 ```
 
-> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
-
-### 请求头
-
-| Header | 是否必填 | 类型 | 说明 |
-| --- | --- | --- | --- |
-| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token；仅保存在可信后端服务中。 |
-| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
-
-## 请求体
+## Request body
 
 ```json
 {
@@ -52,13 +40,13 @@ curl --request POST "${API_ADDRESS}/group/mute_group" \
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
+| Parameter | Required | Type | Description |
 | --- | --- | --- | --- |
-| groupID | 是 | string | 目标群 ID。 |
+| groupID | Yes | string | OpenIM group ID. |
 
-## 响应
+## Response
 
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -68,17 +56,17 @@ curl --request POST "${API_ADDRESS}/group/mute_group" \
 }
 ```
 
-### 响应参数
+### Response fields
 
-| 参数名 | 类型 | 说明 |
+| Field | Type | Description |
 | --- | --- | --- |
-| errCode | int | 业务错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时通常为空。 |
-| errDlt | string | 错误详细信息，成功时通常为空。 |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
@@ -88,21 +76,20 @@ curl --request POST "${API_ADDRESS}/group/mute_group" \
 }
 ```
 
-| 错误场景 | 可能原因 | 处理方式 |
-| -------- | -------- | -------- |
-| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
-| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
-| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
 
-## 权限和限制
+## Permissions and limits
 
-- 更新群禁言状态，并可能触发群禁言通知。
-- `groupID` 必填。
-- 所有数组型请求参数建议控制在 1000 个元素以内。
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [群组接口](/docs/chat/platform-api/v3/group/managing-groups/create-group)
-- [禁言群成员](/docs/chat/platform-api/v3/group/group-moderation/mute-group-member)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [group overview](/docs/chat/platform-api/v3/group/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

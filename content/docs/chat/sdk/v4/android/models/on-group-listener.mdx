@@ -1,0 +1,40 @@
+---
+title: 'On Group Listener'
+description: 'Explains the Android SDK OnGroupListener type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-group-listener'
+---
+
+`OnGroupListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnGroupListener`.
+
+## Notes
+
+On Group Listener documentation for OpenIM Android SDK v3.8.3.
+
+## Callback Methods
+
+| Method                       | Parameters                  | Description                         |
+| ---------------------------- | --------------------------- | ----------------------------------- |
+| `onGroupApplicationAccepted` | `GroupApplicationInfo info` | Called when the event is triggered. |
+| `onGroupApplicationAdded`    | `GroupApplicationInfo info` | Called when the event is triggered. |
+| `onGroupApplicationDeleted`  | `GroupApplicationInfo info` | Called when the event is triggered. |
+| `onGroupApplicationRejected` | `GroupApplicationInfo info` | Called when the event is triggered. |
+| `onGroupDismissed`           | `GroupInfo info`            | Called when the event is triggered. |
+| `onGroupInfoChanged`         | `GroupInfo info`            | Called when the event is triggered. |
+| `onGroupMemberAdded`         | `GroupMembersInfo info`     | Called when the event is triggered. |
+| `onGroupMemberDeleted`       | `GroupMembersInfo info`     | Called when the event is triggered. |
+| `onGroupMemberInfoChanged`   | `GroupMembersInfo info`     | Called when the event is triggered. |
+| `onJoinedGroupAdded`         | `GroupInfo info`            | Called when the event is triggered. |
+| `onJoinedGroupDeleted`       | `GroupInfo info`            | Called when the event is triggered. |
+
+## Related Types
+
+- [Group Members Info](/docs/chat/sdk/v4/android/models/group-members-info) (`GroupMembersInfo`): GroupMembersInfo used by this Android SDK type.
+- [Group Application Info](/docs/chat/sdk/v4/android/models/group-application-info) (`GroupApplicationInfo`): GroupApplicationInfo used by this Android SDK type.
+- [Group Info](/docs/chat/sdk/v4/android/models/group-info) (`GroupInfo`): GroupInfo used by this Android SDK type.

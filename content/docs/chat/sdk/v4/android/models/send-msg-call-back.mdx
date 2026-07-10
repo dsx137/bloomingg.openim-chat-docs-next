@@ -1,0 +1,22 @@
+---
+title: 'Send Msg Call Back'
+description: 'Explains the Android SDK SendMsgCallBack type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/send-msg-call-back'
+---
+
+`SendMsgCallBack` is an Android SDK callback interface. Full class name: `open_im_sdk_callback.SendMsgCallBack`.
+
+## Callback Methods
+
+| Method       | Parameters                     | Description                          |
+| ------------ | ------------------------------ | ------------------------------------ |
+| `OnError`    | errCode: int32; errMsg: string | Called when this event is triggered. |
+| `OnSuccess`  | data: string                   | Called when this event is triggered. |
+| `OnProgress` | progress: int                  | Called when this event is triggered. |

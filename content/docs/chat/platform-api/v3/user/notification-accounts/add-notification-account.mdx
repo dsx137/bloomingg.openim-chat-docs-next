@@ -1,6 +1,6 @@
 ---
-title: "创建通知账号"
-description: "OpenIM Platform API 中文参考：创建通知账号。说明系统通知发送账号的创建参数和返回结构。"
+title: "Add a notification account"
+description: "Add a notification account with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,71 +10,52 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account"
 ---
 
-使用 **创建通知账号** 从可信后端创建可用于发送系统通知或业务通知的 OpenIM 账号。通知账号本质上也是用户账号，但需要设置符合服务端要求的 `appMangerLevel`。
+Add a notification account is an OpenIM user REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
----
-
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/user/add_notification_account
 ```
 
-### 请求示例
+### Request example
 
-:::code-tabs
-```bash title="cURL"
+```bash
 curl --request POST "${API_ADDRESS}/user/add_notification_account" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: 1646445464564" \
+  --header "operationID: ${OPERATION_ID}" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "userID": "notice_001",
-  "nickName": "系统通知",
+  "nickName": "Alice",
   "faceURL": "https://cdn.example.com/avatar/notice.png",
   "appMangerLevel": 60
 }'
 ```
-:::
 
-> 安全提示：通知账号会参与服务端通知消息发送，请只在可信后端创建和维护，不要开放给普通用户自助创建。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
----
-
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递通知账号资料。
-
-### 请求头
-
-| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- | :--- |
-| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
-| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
-
-### 请求体参数
+## Request body
 
 ```json
 {
   "userID": "notice_001",
-  "nickName": "系统通知",
+  "nickName": "Alice",
   "faceURL": "https://cdn.example.com/avatar/notice.png",
   "appMangerLevel": 60
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- |
-| userID | 选填 | string | 通知账号 ID。不传时服务端会尝试自动生成。传入时不能与已有用户 ID 重复。 |
-| nickName | 必填 | string | 通知账号昵称。 |
-| faceURL | 选填 | string | 通知账号头像地址。 |
-| appMangerLevel | 必填 | int | 应用管理级别，必须满足服务端通知账号级别要求。 |
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| userID | No | string | OpenIM user ID. |
+| nickName | Yes | string | User nickname. |
+| faceURL | No | string | Avatar or icon URL. |
+| appMangerLevel | Yes | int | Application manager level returned by OpenIM. |
 
----
+## Response
 
-## 响应
-
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -84,46 +65,51 @@ curl --request POST "${API_ADDRESS}/user/add_notification_account" \
   "data": {
     "userID": "notice_001",
     "faceURL": "https://cdn.example.com/avatar/notice.png",
-    "nickName": "系统通知",
+    "nickName": "Alice",
     "appMangerLevel": 60
   }
 }
 ```
 
-#### 响应属性列表
+### Response fields
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时为空。 |
-| errDlt | errDlt | 错误详细信息，成功时为空。 |
-| data | object | 创建后的通知账号信息。 |
-| userID | string | 通知账号 ID。 |
-| faceURL | string | 通知账号头像地址。 |
-| nickName | string | 通知账号昵称。 |
-| appMangerLevel | int | 应用管理级别。 |
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
+| userID | string | OpenIM user ID. |
+| faceURL | string | Avatar or icon URL. |
+| nickName | string | User nickname. |
+| appMangerLevel | int | Application manager level returned by OpenIM. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
-  "errCode": 1001,
-  "errMsg": "ArgsError",
-  "errDlt": "userID is used"
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
 }
 ```
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，具体查看全局错误码文档。 |
-| errMsg | string | 错误简要信息。 |
-| errDlt | errDlt | 错误详细信息。 |
-
-**常见错误场景**
-
-| 错误场景 | 可能原因 | 处理方式 |
+| Scenario | Possible cause | Recommended action |
 | --- | --- | --- |
-| 通知级别不支持 | `appMangerLevel` 低于服务端通知账号要求。 | 使用符合部署配置和服务端常量要求的通知账号级别。 |
-| 用户 ID 已存在 | 请求中的 `userID` 已被注册。 | 更换通知账号 ID，或省略 `userID` 让服务端生成。 |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [user overview](/docs/chat/platform-api/v3/user/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

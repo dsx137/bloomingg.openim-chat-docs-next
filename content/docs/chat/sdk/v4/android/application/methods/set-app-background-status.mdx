@@ -1,0 +1,46 @@
+---
+title: 'Set foreground/background status'
+description: 'Explains the Android core binding method SetAppBackgroundStatus, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/set-app-background-status'
+---
+
+Use `SetAppBackgroundStatus` for set foreground/background status in the OpenIM Android SDK.
+
+## Feature
+
+SetAppBackgroundStatus provides the Android SDK operation for set foreground/background status.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Method signature | `SetAppBackgroundStatus(callback Base, operationID string, isBackground bool)` |
+| Capability       | SDK lifecycle                                                                  |
+| Source file      | `open_im_sdk/init_login.go`                                                    |
+
+## Input Parameters
+
+| Parameter      | Type                                          | Description                                     |
+| -------------- | --------------------------------------------- | ----------------------------------------------- |
+| `callback`     | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
+| `operationID`  | `string`                                      | Trace ID for this operation.                    |
+| `isBackground` | `bool`                                        | Pass according to the core binding signature.   |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.

@@ -1,0 +1,61 @@
+---
+title: 'Create image message'
+description: 'Explains the Android core binding method CreateImageMessage, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-image-message'
+---
+
+Use `CreateImageMessage` for create image message in the OpenIM Android SDK.
+
+## Feature
+
+Creates the local message payload for create image message. Pass the returned message JSON to a sending method when you are ready to send it.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                       |
+| ---------------- | ----------------------------------------------------------------- |
+| Method signature | `CreateImageMessage(operationID string, imagePath string) string` |
+| Capability       | Conversations and messages                                        |
+| Source file      | `open_im_sdk/conversation_msg.go`                                 |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public Message createImageMessage(String imagePath)
+```
+
+## Input Parameters
+
+| Parameter     | Type     | Description                  |
+| ------------- | -------- | ---------------------------- |
+| `operationID` | `string` | Trace ID for this operation. |
+| `imagePath`   | `string` | Local file path.             |
+
+
+
+## Return Value
+
+This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+Message imageMessage = OpenIMClient.getInstance().messageManager.createImageMessage(imagePath);
+```
+
+## Related Types
+
+- [Message](/docs/chat/sdk/v4/android/models/message) (`Message`): Message used by this Android SDK type.

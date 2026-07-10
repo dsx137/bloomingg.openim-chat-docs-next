@@ -1,0 +1,26 @@
+---
+title: 'On User Listener'
+description: 'Explains the Android SDK OnUserListener type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-user-listener'
+---
+
+`OnUserListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnUserListener`.
+
+## Callback Methods
+
+| Method                | Parameters                       | Description                                 |
+| --------------------- | -------------------------------- | ------------------------------------------- |
+| `onSelfInfoUpdated`   | `UserInfo info`                  | Called when this event is triggered.        |
+| `onUserStatusChanged` | `UsersOnlineStatus onlineStatus` | When the user's online status changes, call |
+
+## Related Types
+
+- [User Info](/docs/chat/sdk/v4/android/models/user-info) (`UserInfo`): User profile object.
+- [Users Online Status](/docs/chat/sdk/v4/android/models/users-online-status) (`UsersOnlineStatus`): UsersOnlineStatus used by this Android SDK type.

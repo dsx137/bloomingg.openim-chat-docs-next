@@ -1,6 +1,6 @@
 ---
-title: "移出黑名单"
-description: "OpenIM Platform API 中文参考：移出黑名单。说明如何解除用户黑名单关系。"
+title: "Remove from blacklist"
+description: "Remove from blacklist with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,47 +10,30 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/relation/blacklist/remove-black"
 ---
 
-使用 **移出黑名单** 从指定用户的黑名单中移除目标用户。
+Remove from blacklist is an OpenIM relationship REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
----
-
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/friend/remove_black
 ```
 
-### 请求示例
+### Request example
 
-:::code-tabs
-```bash title="cURL"
+```bash
 curl --request POST "${API_ADDRESS}/friend/remove_black" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: 1646445464564" \
+  --header "operationID: ${OPERATION_ID}" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "ownerUserID": "user_001",
   "blackUserID": "user_002"
 }'
 ```
-:::
 
-> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。好友关系接口通常应由业务后端在完成用户权限校验后调用。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
----
-
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
-
-### 请求头
-
-| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- | :--- |
-| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
-| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
-
-### 请求体参数
+## Request body
 
 ```json
 {
@@ -59,16 +42,14 @@ curl --request POST "${API_ADDRESS}/friend/remove_black" \
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- |
-| ownerUserID | 必填 | string | 黑名单所属用户 ID。 |
-| blackUserID | 必填 | string | 需要移出黑名单的用户 ID。 |
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| ownerUserID | Yes | string | Group owner user ID. |
+| blackUserID | Yes | string | The black user id value. |
 
----
+## Response
 
-## 响应
-
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -79,37 +60,42 @@ curl --request POST "${API_ADDRESS}/friend/remove_black" \
 }
 ```
 
-#### 响应属性列表
+### Response fields
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时为空。 |
-| errDlt | errDlt | 错误详细信息，成功时为空。 |
-| data | object | 通用数据对象，具体结构见下方。 |
-| data | object | 成功时为空对象。 |
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
+| data | object | Endpoint-specific response data. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
-  "errCode": 1001,
-  "errMsg": "ArgsError",
-  "errDlt": "invalid request parameters"
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
 }
 ```
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，具体查看全局错误码文档。 |
-| errMsg | string | 错误简要信息。 |
-| errDlt | errDlt | 错误详细信息。 |
-
-**常见错误场景**
-
-| 错误场景 | 可能原因 | 处理方式 |
+| Scenario | Possible cause | Recommended action |
 | --- | --- | --- |
-| 参数校验失败 | 必填用户 ID、分页参数或处理结果缺失。 | 对照请求体参数表检查字段名称和类型。 |
-| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [relationship overview](/docs/chat/platform-api/v3/relation/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

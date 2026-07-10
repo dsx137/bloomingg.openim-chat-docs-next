@@ -1,65 +1,97 @@
 ---
 title: 'Overview'
-description: 'Group method index for Android SDK v3.8.3.'
+description: 'Overview for the OpenIM Android SDK v3.8.3.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
 status: 'draft'
-lastUpdated: '2026-07-09'
+lastUpdated: '2026-07-08'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/group/overview'
 ---
-This page covers OpenIM group creation, group profile management, group applications, membership, members, moderation, and ownership transfer. Each method has its own page for parameters, returns, and usage boundaries.
 
-## Managing Groups
+Overview documentation for OpenIM Android SDK v3.8.3.
 
-| Method | Description |
-| ------ | ----------- |
-| [Create group](/docs/chat/sdk/v4/android/group/managing-groups/create-group) | Create a group and optionally set initial members and administrators. |
-| [Update group info](/docs/chat/sdk/v4/android/group/managing-groups/set-group-info) | Update group profile fields such as name, announcement, introduction, and verification mode. |
-| [Get group info](/docs/chat/sdk/v4/android/group/managing-groups/get-specified-groups-info) | Batch get group info for conversation lists or selected group refreshes. |
-| [Search groups](/docs/chat/sdk/v4/android/group/managing-groups/search-groups) | Search groups by keyword or group attributes. |
-| [Transfer group owner](/docs/chat/sdk/v4/android/group/managing-groups/transfer-group-owner) | Transfer group ownership to another member. |
-| [Dismiss group](/docs/chat/sdk/v4/android/group/managing-groups/dismiss-group) | Dismiss a group when the current user has permission. |
+Overview documentation for OpenIM Android SDK v3.8.3.
 
-## Group Applications
+## Module Index
 
-| Method | Description |
-| ------ | ----------- |
-| [Join group](/docs/chat/sdk/v4/android/group/group-applications/join-group) | Apply to join a group. |
-| [Get received group applications](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-recipient) | Get group applications received by groups managed by the current user. |
-| [Get sent group applications](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-applicant) | Get group applications sent by the current user. |
-| [Accept group application](/docs/chat/sdk/v4/android/group/group-applications/accept-group-application) | Approve a received group application. |
-| [Refuse group application](/docs/chat/sdk/v4/android/group/group-applications/refuse-group-application) | Refuse a received group application. |
-| [Get unhandled group application count](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-unhandled-count) | Get the number of unhandled group applications. |
+| Module | Description | Method count |
+| ---------------------------- | ---------------------------------------------------------------------------------------- | ------ |
+| [Managing Groups](#managing-groups) | Overview details | 6 |
+| [Group Join Requests](#group-join-requests) | Overview details | 6 |
+| [Group Membership](#group-membership) | Overview details | 5 |
+| [Group Members](#group-members) | Overview details | 8 |
+| [Group Moderation](#group-moderation) | Overview details | 2 |
 
-## Group Membership
+## Method Index
+
+### Managing Groups
 
 | Method | Description |
-| ------ | ----------- |
-| [Get joined groups](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list) | Get groups joined by the current user. |
-| [Get joined groups by page](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list-page) | Page through groups joined by the current user. |
-| [Check whether joined](/docs/chat/sdk/v4/android/group/group-membership/is-join-group) | Check whether the current user has joined a group. |
-| [Check users in group](/docs/chat/sdk/v4/android/group/group-membership/get-users-in-group) | Check whether specified users are in a group. |
-| [Quit group](/docs/chat/sdk/v4/android/group/group-membership/quit-group) | Leave a group. |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Create group](/docs/chat/sdk/v4/android/group/managing-groups/create-group) | Overview details |
+| [Set group info](/docs/chat/sdk/v4/android/group/managing-groups/set-group-info) | Overview details |
+| [Get specified groups info](/docs/chat/sdk/v4/android/group/managing-groups/get-specified-groups-info) | Overview details |
+| [Search groups](/docs/chat/sdk/v4/android/group/managing-groups/search-groups) | Overview details |
+| [Transfer group owner](/docs/chat/sdk/v4/android/group/managing-groups/transfer-group-owner) | Overview details |
+| [Dismiss group](/docs/chat/sdk/v4/android/group/managing-groups/dismiss-group) | Overview details |
 
-## Group Members
-
-| Method | Description |
-| ------ | ----------- |
-| [Invite users to group](/docs/chat/sdk/v4/android/group/group-members/invite-user-to-group) | Invite users to join a group. |
-| [Kick group members](/docs/chat/sdk/v4/android/group/group-members/kick-group-member) | Remove members from a group. |
-| [Update group member info](/docs/chat/sdk/v4/android/group/group-members/set-group-member-info) | Update member nickname, role, or other member profile fields. |
-| [Get group member list](/docs/chat/sdk/v4/android/group/group-members/get-group-member-list) | Get group members by role or pagination. |
-| [Filter members by join time](/docs/chat/sdk/v4/android/group/group-members/get-group-member-list-by-join-time-filter) | Filter group members by join time. |
-| [Get owner and administrators](/docs/chat/sdk/v4/android/group/group-members/get-group-member-owner-and-admin) | Get the group owner and administrators. |
-| [Get specified group member info](/docs/chat/sdk/v4/android/group/group-members/get-specified-group-members-info) | Get member profiles for specified group members. |
-| [Search group members](/docs/chat/sdk/v4/android/group/group-members/search-group-members) | Search members in a group. |
-
-## Group Moderation
+### Group Join Requests
 
 | Method | Description |
-| ------ | ----------- |
-| [Set group mute](/docs/chat/sdk/v4/android/group/group-moderation/change-group-mute) | Mute or unmute the whole group. |
-| [Set group member mute](/docs/chat/sdk/v4/android/group/group-moderation/change-group-member-mute) | Mute or unmute a specific group member. |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [Join group](/docs/chat/sdk/v4/android/group/group-applications/join-group) | Overview details |
+| [Get group application list as recipient](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-recipient) | Overview details |
+| [Get group application list as applicant](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-applicant) | Overview details |
+| [Accept group application](/docs/chat/sdk/v4/android/group/group-applications/accept-group-application) | Overview details |
+| [Refuse group application](/docs/chat/sdk/v4/android/group/group-applications/refuse-group-application) | Overview details |
+| [Get group application unhandled count](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-unhandled-count) | Overview details |
+
+### Group Membership
+
+| Method | Description |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Get joined group list](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list) | Overview details |
+| [Get joined group list page](/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-list-page) | Overview details |
+| [Is join group](/docs/chat/sdk/v4/android/group/group-membership/is-join-group) | Overview details |
+| [Get users in group](/docs/chat/sdk/v4/android/group/group-membership/get-users-in-group) | Overview details |
+| [Quit group](/docs/chat/sdk/v4/android/group/group-membership/quit-group) | Overview details |
+
+### Group Members
+
+| Method | Description |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [Invite user to group](/docs/chat/sdk/v4/android/group/group-members/invite-user-to-group) | Overview details |
+| [Kick group member](/docs/chat/sdk/v4/android/group/group-members/kick-group-member) | Overview details |
+| [Set group member info](/docs/chat/sdk/v4/android/group/group-members/set-group-member-info) | Overview details |
+| [Get group member list](/docs/chat/sdk/v4/android/group/group-members/get-group-member-list) | Overview details |
+| [Get group member list by join time filter](/docs/chat/sdk/v4/android/group/group-members/get-group-member-list-by-join-time-filter) | Overview details |
+| [Get group member owner and admin](/docs/chat/sdk/v4/android/group/group-members/get-group-member-owner-and-admin) | Overview details |
+| [Get specified group members info](/docs/chat/sdk/v4/android/group/group-members/get-specified-group-members-info) | Overview details |
+| [Search group members](/docs/chat/sdk/v4/android/group/group-members/search-group-members) | Overview details |
+
+### Group Moderation
+
+| Method | Description |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [Change group mute](/docs/chat/sdk/v4/android/group/group-moderation/change-group-mute) | Overview details |
+| [Change group member mute](/docs/chat/sdk/v4/android/group/group-moderation/change-group-member-mute) | Overview details |
+
+## Event Integration
+
+Overview documentation for OpenIM Android SDK v3.8.3.
+
+## Related Types
+
+- [Group Info](/docs/chat/sdk/v4/android/models/group-info)
+- [Group Members Info](/docs/chat/sdk/v4/android/models/group-members-info)
+- [Group Application Info](/docs/chat/sdk/v4/android/models/group-application-info)
+- [Get Group Application List As Recipient Req](/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req)
+- [Get Group Application List As Applicant Req](/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req)
+- [Join Source](/docs/chat/sdk/v4/android/models/join-source)
+- [Set Group Member Info](/docs/chat/sdk/v4/android/models/set-group-member-info)
+- [Group Member Filter](/docs/chat/sdk/v4/android/models/group-member-filter)
+- [On Group Listener](/docs/chat/sdk/v4/android/models/on-group-listener)
+- [On Base](/docs/chat/sdk/v4/android/models/on-base)

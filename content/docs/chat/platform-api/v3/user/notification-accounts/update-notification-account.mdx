@@ -1,6 +1,6 @@
 ---
-title: "更新通知账号"
-description: "OpenIM Platform API 中文参考：更新通知账号。说明如何修改通知账号昵称和头像。"
+title: "Update a notification account"
+description: "Update a notification account with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "api"
@@ -10,68 +10,49 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account"
 ---
 
-使用 **更新通知账号** 从可信后端修改通知账号的昵称或头像。请求中至少需要传入 `nickName` 或 `faceURL` 中的一个字段。
+Update a notification account is an OpenIM user REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
 
----
-
-## HTTP 请求
+## HTTP request
 
 ```bash
 POST {API_ADDRESS}/user/update_notification_account
 ```
 
-### 请求示例
+### Request example
 
-:::code-tabs
-```bash title="cURL"
+```bash
 curl --request POST "${API_ADDRESS}/user/update_notification_account" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: 1646445464564" \
+  --header "operationID: ${OPERATION_ID}" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "userID": "notice_001",
-  "nickName": "运营通知",
+  "nickName": "Alice",
   "faceURL": "https://cdn.example.com/avatar/notice-new.png"
 }'
 ```
-:::
 
-> 安全提示：通知账号资料会影响客户端展示，请在业务后台完成权限校验后再调用该接口。
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
 
----
-
-## 参数
-
-此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递通知账号资料。
-
-### 请求头
-
-| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- | :--- |
-| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
-| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
-
-### 请求体参数
+## Request body
 
 ```json
 {
   "userID": "notice_001",
-  "nickName": "运营通知",
+  "nickName": "Alice",
   "faceURL": "https://cdn.example.com/avatar/notice-new.png"
 }
 ```
 
-| 参数名 | 是否必填 | 类型 | 说明 |
-| :--- | :--- | :--- | :--- |
-| userID | 必填 | string | 需要更新的通知账号 ID。 |
-| nickName | 条件必填 | string | 新昵称。`nickName` 和 `faceURL` 至少传一个。 |
-| faceURL | 条件必填 | string | 新头像地址。`nickName` 和 `faceURL` 至少传一个。 |
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| userID | Yes | string | OpenIM user ID. |
+| nickName | Conditional | string | User nickname. |
+| faceURL | Conditional | string | Avatar or icon URL. |
 
----
+## Response
 
-## 响应
-
-请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
 
 ```json
 {
@@ -82,36 +63,41 @@ curl --request POST "${API_ADDRESS}/user/update_notification_account" \
 }
 ```
 
-#### 响应属性列表
+### Response fields
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，0 表示成功。 |
-| errMsg | string | 错误简要信息，成功时为空。 |
-| errDlt | errDlt | 错误详细信息，成功时为空。 |
-| data | object | 成功时为空对象。 |
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
 
-### 错误
+### Error response
 
-如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
 
 ```json
 {
-  "errCode": 1001,
-  "errMsg": "ArgsError",
-  "errDlt": "faceURL and nickName is empty at the same"
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
 }
 ```
 
-| 参数名 | 类型 | 说明 |
-| :--- | :--- | :--- |
-| errCode | int | 错误码，具体查看全局错误码文档。 |
-| errMsg | string | 错误简要信息。 |
-| errDlt | errDlt | 错误详细信息。 |
-
-**常见错误场景**
-
-| 错误场景 | 可能原因 | 处理方式 |
+| Scenario | Possible cause | Recommended action |
 | --- | --- | --- |
-| 参数为空 | `nickName` 和 `faceURL` 都为空。 | 至少传入一个需要更新的字段。 |
-| 账号不存在 | `userID` 不存在或不是可更新账号。 | 先通过[搜索通知账号](/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account)确认账号。 |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [user overview](/docs/chat/platform-api/v3/user/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,6 +1,6 @@
 ---
-title: "概述"
-description: "OpenIM Platform API 消息模块概览，覆盖后端发送消息、系统通知、消息查询、已读标记和消息删除。"
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,33 +10,33 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/message/overview"
 ---
 
-消息模块用于让可信后端发送消息、发送业务通知、查询消息、维护已读序列号，并在管理场景中撤回、清理或删除消息。
+The message module lets backend services send messages, deliver business notifications, query message state, mark reads, and delete or revoke messages.
 
-## 能力范围
+## Capability scope
 
-| 能力 | 说明 |
-| ---- | ---- |
-| 后端发送 | 发送单条消息、批量发送消息或发送业务通知。 |
-| 消息查询 | 按条件搜索消息，或按序列号拉取消息。 |
-| 已读维护 | 标记消息或会话已读，设置会话已读序列号。 |
-| 消息删除 | 清空会话消息、清空用户全部消息、逻辑删除或物理删除消息。 |
-| 状态辅助 | 获取最新序列号、检查发送结果和获取服务器时间。 |
+| Capability | Description |
+| --- | --- |
+| Backend sending | Send single messages, batch messages, and business notifications. |
+| Message retrieval | Search messages or pull messages by sequence. |
+| Read state | Mark messages or conversations as read and maintain read sequence values. |
+| Deletion | Clear conversation messages, clear all user messages, and delete messages logically or physically. |
+| Diagnostics | Read latest sequence numbers, send status, and server time. |
 
-## 常用接口
+## Common APIs
 
-- [发送单条消息](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
-- [批量发送消息](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg)
-- [搜索消息](/docs/chat/platform-api/v3/message/retrieving-messages/search-msg)
-- [撤回消息](/docs/chat/platform-api/v3/message/managing-messages/revoke-msg)
-- [获取服务器时间](/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time)
+- [Send a message](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
+- [Batch send messages](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg)
+- [Search messages](/docs/chat/platform-api/v3/message/retrieving-messages/search-msg)
+- [Revoke a message](/docs/chat/platform-api/v3/message/managing-messages/revoke-msg)
+- [Get server time](/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time)
 
-## 接入建议
+## Integration advice
 
-后端发送消息前，应确认发送身份、目标会话和消息内容都来自可信业务流程。
+Before backend message sending, verify sender identity, target conversation, and message content in trusted business logic.
 
-删除和物理删除消息属于高影响操作，建议先记录审计日志，并限制在后台管理或合规场景使用。
+Deletion and physical deletion are high-impact actions. Keep audit logs and restrict them to administrative or compliance workflows.
 
-## 相关页面
+## Related pages
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [错误码](/docs/chat/platform-api/v3/error-codes)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

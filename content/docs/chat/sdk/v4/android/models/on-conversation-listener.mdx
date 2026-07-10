@@ -1,0 +1,35 @@
+---
+title: 'On Conversation Listener'
+description: 'Explains the Android SDK OnConversationListener type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-conversation-listener'
+---
+
+`OnConversationListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnConversationListener`.
+
+## Notes
+
+On Conversation Listener documentation for OpenIM Android SDK v3.8.3.
+
+## Callback Methods
+
+| Method                                 | Parameters                   | Description                                 |
+| -------------------------------------- | ---------------------------- | ------------------------------------------- |
+| `onConversationChanged`                | `List<ConversationInfo>list` | Called when conversation data changes.      |
+| `onNewConversation`                    | `List<ConversationInfo>list` | Called when a new conversation is created.  |
+| `onSyncServerFailed`                   | `boolean reinstalled`        | Called when the event is triggered.         |
+| `onSyncServerFinish`                   | `boolean reinstalled`        | Called when the event is triggered.         |
+| `onSyncServerStart`                    | `boolean reinstalled`        | Called when the event is triggered.         |
+| `onSyncServerProgress`                 | `long progress`              | Called when the event is triggered.         |
+| `onTotalUnreadMessageCountChanged`     | `int i`                      | Called when the total unread count changes. |
+| `onConversationUserInputStatusChanged` | `String s`                   | Called when the event is triggered.         |
+
+## Related Types
+
+- [Conversation Info](/docs/chat/sdk/v4/android/models/conversation-info) (`ConversationInfo`): ConversationInfo used by this Android SDK type.

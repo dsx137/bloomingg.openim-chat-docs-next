@@ -1,0 +1,31 @@
+---
+title: 'On Msg Send Callback'
+description: 'Explains the Android SDK OnMsgSendCallback type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-msg-send-callback'
+---
+
+`OnMsgSendCallback` is an Android SDK callback interface. Full class name: `io.openim.android.sdk.listener.OnMsgSendCallback`.
+
+## Notes
+
+On Msg Send Callback documentation for OpenIM Android SDK v3.8.3.
+
+## Callback Methods
+
+| Method       | Parameters             | Description                         |
+| ------------ | ---------------------- | ----------------------------------- |
+| `onError`    | int code; String error | Called when the operation fails.    |
+| `onProgress` | `long progress`        | Called when progress changes.       |
+| `onSuccess`  | `Message s`            | Called when the operation succeeds. |
+
+## Related Types
+
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Message](/docs/chat/sdk/v4/android/models/message) (`Message`): Message used by this Android SDK type.

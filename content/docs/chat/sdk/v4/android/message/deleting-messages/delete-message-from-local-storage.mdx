@@ -1,0 +1,73 @@
+---
+title: 'Delete message from local storage'
+description: 'Explains the Android core binding method DeleteMessageFromLocalStorage, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/deleting-messages/delete-message-from-local-storage'
+---
+
+Use `DeleteMessageFromLocalStorage` for delete message from local storage in the OpenIM Android SDK.
+
+## Feature
+
+Removes or clears the target resource for delete message from local storage. Check the current resource state before retrying after an uncertain failure.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------------------- |
+| Method signature | `DeleteMessageFromLocalStorage(callback Base, operationID string, conversationID string, clientMsgID string)` |
+| Capability       | Conversations and messages                                                                                    |
+| Source file      | `open_im_sdk/conversation_msg.go`                                                                             |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void deleteMessageFromLocalStorage(String conversationID, String clientMsgID, OnBase<String> callBack)
+```
+
+## Input Parameters
+
+| Parameter        | Type             | Description                                               |
+| ---------------- | ---------------- | --------------------------------------------------------- |
+| `conversationID` | String           | Parameter passed according to the core binding signature. |
+| `clientMsgID`    | String           | Parameter passed according to the core binding signature. |
+| `callBack`       | `OnBase<String>` | Async callback for success and failure results.           |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.deleteMessageFromLocalStorage(conversationID, clientMsgID, new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: handle the callback result
+    }
+});
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
