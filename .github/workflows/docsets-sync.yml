@@ -31,6 +31,7 @@ jobs:
       MODEL: ${{ vars.MODEL }}
       OPENAI_BASE_URL: ${{ vars.OPENAI_BASE_URL }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      PROPOSAL_BRANCH: docsets-sync/proposal
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -71,9 +72,9 @@ jobs:
         run: |
           url="$(gh pr list \
             --state open \
-            --json headRefName,url \
-            --jq '.[] | select(.headRefName | startswith("docsets-sync/")) | .url' \
-            | head -n 1)"
+            --head "$PROPOSAL_BRANCH" \
+            --json url \
+            --jq '.[0].url // ""')"
           if [ -n "$url" ]; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
             echo "url=$url" >> "$GITHUB_OUTPUT"
@@ -82,25 +83,22 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create proposal branch
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
-        run: git checkout -b "docsets-sync/${GITHUB_RUN_ID}"
+      - name: Prepare proposal branch
+        if: ${{ steps.collect.outputs.changed == 'true' }}
+        run: git checkout -B "$PROPOSAL_BRANCH"
 
-      - name: Apply docsets diffs with Agent
-        id: pi
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
-        uses: mcowger/pi-action@main
+      - name: Apply docsets diffs with Codex
+        id: codex
+        if: ${{ steps.collect.outputs.changed == 'true' }}
+        uses: openai/codex-action@v1
         with:
-          github_token: ${{ github.token }}
-          provider: openai
+          openai-api-key: ${{ env.OPENAI_API_KEY }}
+          responses-api-endpoint: ${{ env.OPENAI_BASE_URL }}/responses
+          prompt-file: .docsets-sync/prompt.md
           model: ${{ env.MODEL }}
-          token: ${{ env.OPENAI_API_KEY }}
-          base_url: ${{ env.OPENAI_BASE_URL }}
-          prompt_file: .docsets-sync/prompt.md
-          extensions: npm:pi-exa@0.6.0
 
       - name: Refresh docs and verify
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' }}
+        if: ${{ steps.collect.outputs.changed == 'true' }}
         run: |
           pnpm run docsets-sync:baseline
           pnpm run content:sync
@@ -109,13 +107,13 @@ jobs:
           pnpm run build
 
       - name: Show dry-run diff
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && inputs.dry_run }}
+        if: ${{ steps.collect.outputs.changed == 'true' && inputs.dry_run }}
         run: |
           git status --short
           git diff --stat
 
       - name: Commit changes
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && !inputs.dry_run }}
+        if: ${{ steps.collect.outputs.changed == 'true' && !inputs.dry_run }}
         id: commit
         run: |
           if [ -z "$(git status --porcelain)" ]; then
@@ -126,16 +124,22 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add .
           git commit -m "docs: propose docsets sync"
-          git push --set-upstream origin "docsets-sync/${GITHUB_RUN_ID}"
+          git push --force-with-lease --set-upstream origin "$PROPOSAL_BRANCH"
           echo "committed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Open pull request
-        if: ${{ steps.collect.outputs.changed == 'true' && steps.existing.outputs.exists != 'true' && steps.commit.outputs.committed == 'true' }}
+      - name: Create or update pull request
+        if: ${{ steps.collect.outputs.changed == 'true' && steps.commit.outputs.committed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr create \
-            --base "${GITHUB_REF_NAME}" \
-            --head "docsets-sync/${GITHUB_RUN_ID}" \
-            --title "docs: update synced docsets" \
-            --body-file .docsets-sync/summary.md
+          if [ "${{ steps.existing.outputs.exists }}" = "true" ]; then
+            gh pr edit "${{ steps.existing.outputs.url }}" \
+              --title "docs: update synced docsets" \
+              --body-file .docsets-sync/summary.md
+          else
+            gh pr create \
+              --base "${GITHUB_REF_NAME}" \
+              --head "$PROPOSAL_BRANCH" \
+              --title "docs: update synced docsets" \
+              --body-file .docsets-sync/summary.md
+          fi
