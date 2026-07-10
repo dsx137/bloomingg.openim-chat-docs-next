@@ -1,18 +1,102 @@
 ---
 title: 'OpenIM SDK for iOS'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for OpenIM SDK for iOS. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Install and initialize the OpenIM iOS SDK 3.8.3-hotfix.12, then authenticate and send messages from an iOS app.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/overview'
 ---
 
-<OverviewScaffold
-  route="/docs/chat/sdk/v4/ios/overview"
-  context="SDKs · iOS · v4"
-  sourceTitle="OpenIM SDK for iOS"
-/>
+## Overview
+
+OpenIM iOS SDK `3.8.3-hotfix.12` adds OpenIM messaging to iOS applications. The Objective-C SDK is built on OpenIM SDK Core and exposes `OIMManager` APIs for connection management, login, conversations, friends, groups, messages, and users.
+
+The SDK supports iOS 11.0 and later.
+
+## Install with CocoaPods
+
+Add OpenIMSDK to your `Podfile`:
+
+```ruby
+pod 'OpenIMSDK', '3.8.3-hotfix.12'
+```
+
+Then install the dependency:
+
+```bash
+pod install
+```
+
+Import the SDK where it is used:
+
+```objc
+@import OpenIMSDK;
+```
+
+## Initialize and log in
+
+Initialize the SDK before logging in, and register connection callbacks at initialization time.
+
+```objc
+OIMInitConfig *config = [OIMInitConfig new];
+config.apiAddr = @"https://your-api-address";
+config.wsAddr = @"wss://your-websocket-address";
+config.objectStorage = @"";
+
+BOOL initialized = [OIMManager.manager initSDKWithConfig:config
+                                            onConnecting:^{
+  // The SDK is connecting.
+} onConnectFailure:^(NSInteger code, NSString * _Nullable message) {
+  // Handle a failed connection.
+} onConnectSuccess:^{
+  // The SDK is connected.
+} onKickedOffline:^{
+  // The current session was kicked offline.
+} onUserTokenExpired:^{
+  // Obtain a new user token and log in again.
+}];
+
+if (initialized) {
+  [OIMManager.manager login:userID
+                      token:token
+                  onSuccess:^(NSString * _Nullable data) {
+    // The user is logged in.
+  } onFailure:^(NSInteger code, NSString * _Nullable message) {
+    // Handle login failure.
+  }];
+}
+```
+
+Obtain the `userID` and `token` from a trusted business backend. Do not embed administrator credentials or token-generation secrets in the app.
+
+## Send a text message
+
+Create a message before sending it. For a direct message, set `recvID` and leave `groupID` empty. For a group message, set `groupID` and leave `recvID` empty.
+
+```objc
+OIMMessageInfo *message = [OIMMessageInfo createTextMessage:@"Hello, OpenIM!"];
+
+[OIMManager.manager sendMessage:message
+                          recvID:receiverUserID
+                         groupID:@""
+                 offlinePushInfo:nil
+                       onSuccess:^(OIMMessageInfo * _Nullable sentMessage) {
+  // Replace the local message with sentMessage.
+} onProgress:^(NSInteger progress) {
+  // Update upload progress when applicable.
+} onFailure:^(NSInteger code, NSString * _Nullable error) {
+  // Handle send failure.
+}];
+```
+
+Register the advanced message listener before login so the app can receive incoming messages and message-state callbacks.
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/ios/getting-started/send-first-message)
+- [Authentication](/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/ios/message/sending-a-message/send-a-message)

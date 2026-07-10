@@ -1,18 +1,114 @@
 ---
 title: 'OpenIM SDK for Android'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for OpenIM SDK for Android. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Install and initialize OpenIM Android SDK 3.8.3.5, authenticate a user, and send messages from an Android app.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/overview'
 ---
 
-<OverviewScaffold
-  route="/docs/chat/sdk/v4/android/overview"
-  context="SDKs · Android · v4"
-  sourceTitle="OpenIM SDK for Android"
-/>
+## Overview
+
+OpenIM Android SDK `3.8.3.5` provides the `OpenIMClient` API for integrating OpenIM messaging into Android applications. It wraps OpenIM SDK Core and includes managers for conversations, friends, groups, messages, and user information.
+
+The SDK module is built with `minSdkVersion 21`, `compileSdkVersion 33`, and Java 11.
+
+## Add dependencies
+
+Ensure the project uses Maven Central, then add the Android SDK package and Gson dependency to the app module:
+
+```gradle
+dependencies {
+    implementation 'io.openim:android-sdk:3.8.3.5'
+    implementation 'com.google.code.gson:gson:2.9.1'
+}
+```
+
+The Android SDK depends on OpenIM Core SDK `3.8.3-patch10`; add an explicit core dependency only when your dependency-resolution rules require it.
+
+## Initialize and log in
+
+Initialize the SDK with the application object, API address, WebSocket address, and a writable data directory. Register application listeners before the user logs in.
+
+```java
+InitConfig config = new InitConfig(
+    "https://your-api-address",
+    "wss://your-websocket-address",
+    getFilesDir().getAbsolutePath()
+);
+config.isLogStandardOutput = true;
+
+OpenIMClient.getInstance().initSDK(
+    getApplication(),
+    config,
+    new OnConnListener() {
+        // Implement connection callbacks.
+    }
+);
+
+OpenIMClient.getInstance().messageManager.setAdvancedMsgListener(
+    new OnAdvanceMsgListener() {
+        @Override
+        public void onRecvNewMessage(Message message) {
+            // Handle an incoming message.
+        }
+    }
+);
+
+OpenIMClient.getInstance().login(new OnBase<String>() {
+    @Override
+    public void onSuccess(String data) {
+        // The user is logged in.
+    }
+
+    @Override
+    public void onError(int code, String error) {
+        // Handle login failure.
+    }
+}, userID, token);
+```
+
+Get the `userID` and `token` from a trusted business backend. Do not include administrator credentials or token-generation secrets in the app.
+
+## Send a text message
+
+Create the message first, then send it. For a direct message, provide `userID` as the receiver and an empty group ID. For a group message, provide the group ID and an empty receiver ID.
+
+```java
+Message message = OpenIMClient.getInstance()
+    .messageManager
+    .createTextMessage("Hello, OpenIM!");
+
+OpenIMClient.getInstance().messageManager.sendMessage(
+    new OnMsgSendCallback() {
+        @Override
+        public void onSuccess(Message sentMessage) {
+            // Replace the local message with sentMessage.
+        }
+
+        @Override
+        public void onProgress(long progress) {
+            // Update upload progress when applicable.
+        }
+
+        @Override
+        public void onError(int code, String error) {
+            // Handle send failure.
+        }
+    },
+    message,
+    receiverUserID,
+    "",
+    null
+);
+```
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/android/getting-started/send-first-message)
+- [Authentication](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)

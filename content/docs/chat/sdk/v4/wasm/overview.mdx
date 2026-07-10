@@ -13,7 +13,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/overview'
 
 ## Overview
 
-Use this page as the entry point for the OpenIM WASM SDK. It explains the browser package, WASM assets, authentication flow, message flow, and where each Sendbird-style concept maps in OpenIM.
+Use this page as the entry point for the OpenIM WASM SDK `v3.8.3-patch.14`. It explains the browser package, WASM assets, authentication flow, message flow, and where each Sendbird-style concept maps in OpenIM.
 
 This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
 
@@ -135,11 +135,11 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 
 ## Troubleshooting
 
-| Case                           | Cause                                                                 | Handling                                                                                               |
-| ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
-| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
-| The SDK call rejects | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
+| Case                           | Cause                                                                 | Handling                                                                                                              |
+| ------------------------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.                        |
+| The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser.                |
+| The SDK call rejects           | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
 
 ## Next steps
 
