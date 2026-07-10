@@ -15,13 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/android/models/type-key-set-result'
 
 ## 字段说明
 
-| 字段名称         | Java 类型 | 描述                   |
-| ---------------- | --------- | ---------------------- |
-| errCode          | long      | 错误码。               |
-| errMsg           | String    | 错误信息。             |
-| typeKey          | String    | SDK 返回或提交的字段。 |
-| latestUpdateTime | long      | SDK 返回或提交的字段。 |
-| value            | String    | 枚举值。               |
+| 字段名称         | Java 类型 | 描述                                                             |
+| ---------------- | --------- | ---------------------------------------------------------------- |
+| errCode          | long      | 当前扩展项的设置结果错误码；`0` 表示该项设置成功。               |
+| errMsg           | String    | 当前扩展项设置失败时的错误信息。                                 |
+| typeKey          | String    | 被设置的消息扩展键。                                             |
+| latestUpdateTime | long      | 服务端记录的该扩展键最后更新时间，用于判断新旧值和处理并发更新。 |
+| value            | String    | `typeKey` 对应的扩展值，不是枚举常量。                           |
 
 ## 相关页面
 

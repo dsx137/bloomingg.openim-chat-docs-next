@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/check-friend'
 
 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。
 
-## 功能介绍
-
-检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,21 +33,14 @@ public void checkFriend(OnBase<List<FriendshipInfo>> base, List<String> uidList)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                               | 是否必填 | 描述         |
-| -------- | -------------------------------------------------------------------------------------- | -------- | ------------ |
-| callBack | `OnBase<List<`[`FriendshipInfo`](/docs/chat/sdk/v4/android/models/friendship-info)`>>` | 是       | 回调接口     |
-| uidList  | String                                                                                 | 是       | 用户 ID 集合 |
-
-#### FriendInfo
-
-| 字段名称 | 字段类型 | 描述                         |
-| -------- | -------- | ---------------------------- |
-| userID   | String   | 用户 UserID                  |
-| result   | int      | 1 表示好友（并且不是黑名单） |
+| 参数名称 | Java 类型                                                                                                                            | 是否必填 | 描述                       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------- |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`FriendshipInfo`](/docs/chat/sdk/v4/android/models/friendship-info)`>>` | 是       | 好友关系校验结果回调。     |
+| uidList  | `List<String>`                                                                                                                       | 是       | 要校验关系的用户 ID 列表。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 `List<`[`FriendshipInfo`](/docs/chat/sdk/v4/android/models/friendship-info)`>`，逐项说明输入用户是否为好友且未被拉黑；查询失败或结果反序列化失败时调用 `onError`。
 
 ## 代码示例
 

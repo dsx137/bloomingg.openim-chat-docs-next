@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/logger/methods/upload-logs'
 
 上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。
 
-## 功能介绍
-
-上传 SDK 日志，适合用户反馈、故障排查或线上问题定位。
-
 日志上传能力至少要求 SDK 已初始化；上传进度通过 `UploadLogProgress` 返回。
 
 ## Core Binding 方法
@@ -39,15 +35,15 @@ public void uploadLogs(OnBase<String> base, List<String> params, int line, Strin
 
 | 参数名称 | 参数类型                                                                    | 是否必填 | 描述                                                |
 | -------- | --------------------------------------------------------------------------- | -------- | --------------------------------------------------- |
-| base     | `OnBase<String>` | 是       | 上传结果回调。                                      |
-| params   | `List<String>` | 否       | 预留参数，当前 Android SDK 方法签名保留该参数。     |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>`              | 是       | 上传结果回调。                                      |
+| params   | `List<String>`                                                              | 否       | 预留参数，当前 Android SDK 方法签名保留该参数。     |
 | line     | int                                                                         | 是       | 上传日志的起始行或限制行数，由业务按 SDK 约定传入。 |
 | ex       | String                                                                      | 否       | 扩展信息。                                          |
 | progress | [`UploadLogProgress`](/docs/chat/sdk/v4/android/models/upload-log-progress) | 否       | 日志上传进度回调。                                  |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示日志已打包上传并在服务端登记，回调字符串不含文件 URL 等业务数据；`UploadLogProgress` 报告压缩包已上传字节数和总字节数。日志目录不可读、已有上传任务或网络请求失败时调用 `onError`。
 
 ## 代码示例
 

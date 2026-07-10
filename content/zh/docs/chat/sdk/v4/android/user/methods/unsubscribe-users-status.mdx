@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status'
 
 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。
 
-## 功能介绍
-
-取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。
-
 用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void unsubscribeOnlineUsersStatus(OnBase<String> callBack, List<String> u
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                           | 是否必填 | 描述                       |
-| -------- | ------------------------------------------------------------------ | -------- | -------------------------- |
-| callBack | `OnBase<String>` | 是       | 取消订阅结果回调。         |
-| uid      | `List<String>` | 是       | 要取消订阅的用户 ID 列表。 |
+| 参数名称 | 参数类型                                                       | 是否必填 | 描述                       |
+| -------- | -------------------------------------------------------------- | -------- | -------------------------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 取消订阅结果回调。         |
+| uid      | `List<String>`                                                 | 是       | 要取消订阅的用户 ID 列表。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示指定用户已从在线状态订阅集合移除，回调字符串不含业务数据；未登录、用户 ID 无效或网络请求失败时调用 `onError`。
 
 ## 代码示例
 

@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-applicatio
 
 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。
 
-## 功能介绍
-
-获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void getSendFriendApplicationList(OnBase<List<FriendApplicationInfo>> bas
 
 ## 输入参数
 
-| 参数名称     | 参数类型                                                                                                                  | 是否必填 | 描述                 |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
-| base         | `OnBase<List<`[`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info)`>>`                     | 是       | 查询结果回调。       |
-| applicantReq | [`GetFriendApplicationListAsApplicantReq`](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req) | 是       | 分页和筛选请求参数。 |
+| 参数名称     | 参数类型                                                                                                                                            | 是否必填 | 描述                 |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| base         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info)`>>` | 是       | 查询结果回调。       |
+| applicantReq | [`GetFriendApplicationListAsApplicantReq`](/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req)                           | 是       | 分页和筛选请求参数。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回当前页 `List<`[`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info)`>`，包含当前用户发出的且符合处理状态筛选的申请；查询或反序列化失败时调用 `onError`。
 
 ## 代码示例
 

@@ -1,4 +1,4 @@
-import { readFile, stat } from 'node:fs/promises';
+import { readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const root = process.cwd();
@@ -20,6 +20,21 @@ const expectedSdkPlatforms = [
   'miniprogram',
   'react-native',
 ];
+const androidContextKey = 'chat/sdk/v4/android';
+const androidPathPrefix = '/docs/chat/sdk/v4/android/';
+const androidZhRoot = resolve(root, 'content/zh/docs/chat/sdk/v4/android');
+const expectedAndroidZhPageCount = 232;
+const androidZhForbiddenPatterns = [
+  [/SDK 返回或提交的字段/, 'generic model field description'],
+  [/对应的 SDK 常量/, 'generic enum description'],
+  [/按 core binding 签名传入/, 'generic core binding parameter description'],
+  [/通过回调返回结果：成功走 `OnSuccess`/, 'generic callback result description'],
+  [/TODO: 当前 Android SDK/, 'unfinished Android SDK compatibility note'],
+  [/事件触发时回调/, 'generic listener callback description'],
+  [/id</, 'unescaped Objective-C generic syntax'],
+  [/List\\</, 'escaped Java generic syntax'],
+  [/\\_@/, 'escaped @ message label'],
+];
 
 const errors = [];
 const warnings = [];
@@ -31,6 +46,15 @@ try {
   );
 } catch {
   errors.push('Missing generated Platform API Chinese navigation data.');
+}
+
+let sdkZh = { navigationLabels: {} };
+try {
+  sdkZh = JSON.parse(
+    await readFile(resolve(root, 'src/generated/wasm-sdk-zh-content.json'), 'utf8'),
+  );
+} catch {
+  errors.push('Missing generated SDK Chinese navigation data.');
 }
 
 const pathSet = new Set();
@@ -119,7 +143,10 @@ const platformApiEnglishListUsersExpectedSnippets = [
 ];
 const platformApiListUsersForbiddenSnippets = ['123.321.1.1', '203.56.175.233'];
 const platformApiEnglishOverviewHeadingExpectations = new Map([
-  ['/docs/chat/platform-api/v3/overview', ['## Common tasks', '## Recommended modules', '## Resources']],
+  [
+    '/docs/chat/platform-api/v3/overview',
+    ['## Common tasks', '## Recommended modules', '## Resources'],
+  ],
   [
     '/docs/chat/platform-api/v3/prepare-to-use-api',
     ['## Base URL', '## Headers', '## Authentication', '## Request body'],
@@ -267,7 +294,9 @@ for (const route of routes) {
     warnings.push(`${route.contentFile}: title differs from generated route metadata`);
   }
   if (route.contentFile.startsWith('content/zh/')) {
-    errors.push(`${route.path}: English route must not point to Chinese content (${route.contentFile})`);
+    errors.push(
+      `${route.path}: English route must not point to Chinese content (${route.contentFile})`,
+    );
   }
   if (route.contentFile.startsWith('content/docs/')) {
     if (containsCjk(frontmatter.title ?? '') || containsCjk(frontmatter.description ?? '')) {
@@ -439,6 +468,12 @@ for (const route of routes) {
   }
 }
 
+await checkAndroidZhContent();
+
+if (sdkZh.navigationLabels.logger !== '日志') {
+  errors.push('Chinese SDK navigation label for "logger" must be “日志”.');
+}
+
 if (searchIndex.length !== routes.length) {
   errors.push(`Search index has ${searchIndex.length} records; expected ${routes.length}`);
 }
@@ -532,6 +567,95 @@ function parseFrontmatter(source) {
     }
   }
   return result;
+}
+
+async function checkAndroidZhContent() {
+  const androidRoutes = routes.filter((route) => route.contextKey === androidContextKey);
+  const androidRoutePaths = new Set(androidRoutes.map((route) => route.path));
+
+  if (androidRoutes.length !== expectedAndroidZhPageCount) {
+    errors.push(
+      `Android routes: expected ${expectedAndroidZhPageCount}, found ${androidRoutes.length}.`,
+    );
+  }
+
+  let relativeFiles = [];
+  try {
+    relativeFiles = (await readdir(androidZhRoot, { recursive: true })).filter((file) =>
+      file.endsWith('.mdx'),
+    );
+  } catch {
+    errors.push('Missing Android Chinese content directory.');
+    return;
+  }
+
+  if (relativeFiles.length !== expectedAndroidZhPageCount) {
+    errors.push(
+      `Android Chinese MDX files: expected ${expectedAndroidZhPageCount}, found ${relativeFiles.length}.`,
+    );
+  }
+
+  const androidContext = navigation.contexts.find((context) => context.key === androidContextKey);
+  if (!androidContext) {
+    errors.push('Missing Android SDK navigation context.');
+  } else {
+    const androidNavigationHrefs = [...flattenNavigation(androidContext.nodes)].filter((href) =>
+      href.startsWith(androidPathPrefix),
+    );
+    const uniqueAndroidNavigationHrefs = new Set(androidNavigationHrefs);
+    if (androidNavigationHrefs.length !== expectedAndroidZhPageCount) {
+      errors.push(
+        `Android navigation hrefs: expected ${expectedAndroidZhPageCount}, found ${androidNavigationHrefs.length}.`,
+      );
+    }
+    if (uniqueAndroidNavigationHrefs.size !== androidNavigationHrefs.length) {
+      errors.push('Android navigation contains duplicate hrefs.');
+    }
+    for (const routePath of androidRoutePaths) {
+      if (!uniqueAndroidNavigationHrefs.has(routePath)) {
+        errors.push(`Android route is missing from navigation: ${routePath}`);
+      }
+    }
+  }
+
+  const localizedSourcePaths = new Set();
+  for (const relativeFile of relativeFiles) {
+    const absoluteFile = resolve(androidZhRoot, relativeFile);
+    const contentLabel = `content/zh/docs/chat/sdk/v4/android/${relativeFile}`;
+    const source = await readFile(absoluteFile, 'utf8');
+    const frontmatter = parseFrontmatter(source);
+    const sourcePath = frontmatter.sourcePath;
+
+    if (!sourcePath) {
+      errors.push(`${contentLabel}: missing sourcePath.`);
+    } else if (!androidRoutePaths.has(sourcePath)) {
+      errors.push(`${contentLabel}: sourcePath is not an Android route (${sourcePath}).`);
+    } else {
+      if (localizedSourcePaths.has(sourcePath)) {
+        errors.push(`${contentLabel}: duplicate Android Chinese sourcePath (${sourcePath}).`);
+      }
+      localizedSourcePaths.add(sourcePath);
+
+      const expectedRelativeFile = `${sourcePath.slice(androidPathPrefix.length)}.mdx`;
+      if (relativeFile !== expectedRelativeFile) {
+        errors.push(
+          `${contentLabel}: file path does not match sourcePath; expected ${expectedRelativeFile}.`,
+        );
+      }
+    }
+
+    for (const [pattern, description] of androidZhForbiddenPatterns) {
+      if (pattern.test(source)) {
+        errors.push(`${contentLabel}: contains ${description} (${pattern}).`);
+      }
+    }
+  }
+
+  for (const routePath of androidRoutePaths) {
+    if (!localizedSourcePaths.has(routePath)) {
+      errors.push(`Missing Android Chinese page for route: ${routePath}`);
+    }
+  }
 }
 
 function collectFolderSegments(nodes) {

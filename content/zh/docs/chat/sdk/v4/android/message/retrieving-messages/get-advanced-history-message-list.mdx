@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/retrieving-messages/get-advanced-
 
 获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。
 
-## 功能介绍
-
-获取指定会话的历史消息，适合聊天页向上翻页或首次加载历史记录。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,17 +33,17 @@ public void getAdvancedHistoryMessageList(OnBase<AdvancedMessage> callBack, Stri
 
 ## 输入参数
 
-| 参数名称       | 参数类型                                                                                                                           | 是否必填 | 描述                                                                                                           |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
-| callBack       | `OnBase<AdvancedMessage>` | 是       | 回调接口                                                                                                       |
-| conversationID | String                                                                                                                             | 是       | 会话 ID                                                                                                        |
-| startMsg       | [`Message`](/docs/chat/sdk/v4/android/models/message)                                                                              | 是       | 从这条消息开始查询[count]条，获取的列表 index==length-1 为最新消息，所以获取下一页历史记录 startMsg=list.first |
-| count          | int                                                                                                                                | 是       | 数量                                                                                                           |
-| viewType       | [`ViewType`](/docs/chat/sdk/v4/android/models/view-type)                                                                           | 是       | 为History时表示当前在获取历史消息，为Search时表示在执行搜索消息操作                                            |
+| 参数名称       | 参数类型                                                                                                                         | 是否必填 | 描述                                                                                                           |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------- |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<`[`AdvancedMessage`](/docs/chat/sdk/v4/android/models/advanced-message)`>` | 是       | 历史消息分页结果回调。                                                                                         |
+| conversationID | String                                                                                                                           | 是       | 会话 ID                                                                                                        |
+| startMsg       | [`Message`](/docs/chat/sdk/v4/android/models/message)                                                                            | 是       | 从这条消息开始查询[count]条，获取的列表 index==length-1 为最新消息，所以获取下一页历史记录 startMsg=list.first |
+| count          | int                                                                                                                              | 是       | 数量                                                                                                           |
+| viewType       | [`ViewType`](/docs/chat/sdk/v4/android/models/view-type)                                                                         | 是       | 为History时表示当前在获取历史消息，为Search时表示在执行搜索消息操作                                            |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 [`AdvancedMessage`](/docs/chat/sdk/v4/android/models/advanced-message)，其中 `messageList` 是当前页历史消息，`lastMinSeq`、`isEnd` 等字段用于继续分页；会话、游标或本地查询失败时调用 `onError`。
 
 ## 代码示例
 

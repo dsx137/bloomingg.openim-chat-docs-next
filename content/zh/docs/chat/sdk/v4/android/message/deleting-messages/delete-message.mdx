@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/deleting-messages/delete-message'
 
 删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。
 
-## 功能介绍
-
-删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,11 +33,11 @@ public void deleteMessageFromLocalAndSvr(String conversationID, String clientMsg
 
 ## 输入参数
 
-| 参数名称       | 参数类型                                                           | 是否必填 | 描述            |
-| -------------- | ------------------------------------------------------------------ | -------- | --------------- |
-| conversationID | String                                                             | 是       | 会话 ID。       |
-| clientMsgID    | String                                                             | 是       | 客户端消息 ID。 |
-| callBack       | `OnBase<String>` | 是       | 删除结果回调。  |
+| 参数名称       | 参数类型                                                       | 是否必填 | 描述            |
+| -------------- | -------------------------------------------------------------- | -------- | --------------- |
+| conversationID | String                                                         | 是       | 会话 ID。       |
+| clientMsgID    | String                                                         | 是       | 客户端消息 ID。 |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 删除结果回调。  |
 
 ## 返回结果
 

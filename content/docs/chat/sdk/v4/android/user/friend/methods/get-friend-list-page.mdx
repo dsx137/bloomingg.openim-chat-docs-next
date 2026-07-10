@@ -37,11 +37,12 @@ public void getFriendListPage(OnBase<List<UserInfo>> base, int offset, int count
 
 ## Input Parameters
 
-| Parameter     | Type    | Description                                               |
-| ------------- | ------- | --------------------------------------------------------- |
-| `offset`      | int     | Pagination offset.                                        |
-| `count`       | int     | Number of records to return.                              |
-| `filterBlack` | Boolean | Parameter passed according to the core binding signature. |
+| Parameter     | Type                                                                                                                   | Description                                               |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`        | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[User Info](/docs/chat/sdk/v4/android/models/user-info)`>>` | Async callback for success and failure results.           |
+| `offset`      | `int`                                                                                                                  | Pagination offset.                                        |
+| `count`       | `int`                                                                                                                  | Number of records to return.                              |
+| `filterBlack` | `Boolean`                                                                                                              | Parameter passed according to the core binding signature. |
 
 
 

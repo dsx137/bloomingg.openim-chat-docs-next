@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/set-self-info'
 
 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。
 
-## 功能介绍
-
-更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。
-
 用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
 
 ## Core Binding 方法
@@ -40,19 +36,18 @@ public void setSelfInfo(OnBase<String> base, String nickname, String faceURL, in
 
 ## 输入参数
 
-请求结构体UserInfoReq属性如下所示：
+推荐使用接收 `UserInfoReq` 的重载；Android SDK 只会序列化其中非空字段。
 
-| 参数名称         | 参数类型 | 是否必填 | 描述                                               |
-| ---------------- | -------- | -------- | -------------------------------------------------- |
-| userID           | String   | 是       | 用户id                                             |
-| nickname         | String   | 否       | 用户昵称                                           |
-| faceURL          | String   | 否       | 用户头像                                           |
-| ex               | String   | 否       | 扩展参数                                           |
-| globalRecvMsgOpt | Integer  | 否       | 全局免打扰，1:屏蔽消息; 2:接收消息但不提示; 0:正常 |
+| 参数名称    | Java 类型                                                       | 是否必填 | 描述                     |
+| ----------- | --------------------------------------------------------------- | -------- | ------------------------ |
+| base        | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>`  | 是       | 用户资料更新结果回调。   |
+| userInfoReq | [`UserInfoReq`](/docs/chat/sdk/v4/android/models/user-info-req) | 是       | 本次需要更新的资料字段。 |
+
+另一个重载会序列化 `nickname`、`faceURL`、`gender`、`appMangerLevel`、`phoneNumber`、`birth`、`email` 和 `ex`。但当前 core 的 `UserInfoWithEx` 只接收 `nickname`、`faceURL`、`ex` 和 `globalRecvMsgOpt`，其中 `gender`、`appMangerLevel`、`phoneNumber`、`birth`、`email` 会作为未知 JSON 字段被忽略；新代码应使用 `UserInfoReq` 重载，并只依赖当前 core 明确支持的字段。
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示当前 core 支持的用户资料字段已提交并完成本地自身资料同步，回调字符串不含业务数据；字段无效或服务端请求失败时调用 `onError`。资料变化会通过用户监听器继续通知业务层。
 
 ## 代码示例
 

@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-advance-msg-listener'
 
 `OnAdvanceMsgListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnAdvanceMsgListener`.
 
-## Notes
-
-On Advance Msg Listener documentation for OpenIM Android SDK v3.8.3.
-
 ## Callback Methods
 
 | Method                           | Parameters                                                                                          | Description                            |
@@ -25,9 +21,9 @@ On Advance Msg Listener documentation for OpenIM Android SDK v3.8.3.
 | `onRecvC2CReadReceipt`           | List<[C2CReadReceiptInfo](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info)> list             | Called when this event is triggered.   |
 | `onRecvGroupMessageReadReceipt`  | [Group Message Receipt](/docs/chat/sdk/v4/android/models/group-message-receipt) groupMessageReceipt | Called when this event is triggered.   |
 | `onRecvMessageRevokedV2`         | [Revoked Info](/docs/chat/sdk/v4/android/models/revoked-info) info                                  | Called when this event is triggered.   |
-| `onRecvMessageExtensionsChanged` | String msgID; [KeyValue](/docs/chat/sdk/v4/android/models/key-value) list (List)                    | Called when this event is triggered.   |
-| `onRecvMessageExtensionsDeleted` | String msgID; String keyList (List)                                                                 | Called when this event is triggered.   |
-| `onRecvMessageExtensionsAdded`   | String msgID; [KeyValue](/docs/chat/sdk/v4/android/models/key-value) list (List)                    | Called when this event is triggered.   |
+| `onRecvMessageExtensionsChanged` | String msgID; List<[KeyValue](/docs/chat/sdk/v4/android/models/key-value)> list                     | Called when this event is triggered.   |
+| `onRecvMessageExtensionsDeleted` | String msgID; List<String> keyList                                                                  | Called when this event is triggered.   |
+| `onRecvMessageExtensionsAdded`   | String msgID; List<[KeyValue](/docs/chat/sdk/v4/android/models/key-value)> list                     | Called when this event is triggered.   |
 | `onMsgDeleted`                   | [Message](/docs/chat/sdk/v4/android/models/message) message                                         | Called when this event is triggered.   |
 | `onRecvOfflineNewMessage`        | List<[Message](/docs/chat/sdk/v4/android/models/message)> messages                                  | Called when this event is triggered.   |
 | `onRecvOnlineOnlyMessage`        | String message (JSON); [Message](/docs/chat/sdk/v4/android/models/message)                          | Called when this event is triggered.   |

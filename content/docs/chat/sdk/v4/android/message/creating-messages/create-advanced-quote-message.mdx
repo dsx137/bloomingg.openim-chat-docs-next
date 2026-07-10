@@ -37,18 +37,21 @@ public Message createAdvancedQuoteMessage(String text, Message message, List<Ric
 
 ## Input Parameters
 
-| Parameter           | Type     | Description                                   |
-| ------------------- | -------- | --------------------------------------------- |
-| `operationID`       | `string` | Trace ID for this operation.                  |
-| `text`              | `string` | Pass according to the core binding signature. |
-| `message`           | `string` | Message payload or message JSON.              |
-| `messageEntityList` | `string` | Message payload or message JSON.              |
+| Parameter  | Type                                                                    | Description                                               |
+| ---------- | ----------------------------------------------------------------------- | --------------------------------------------------------- |
+| `text`     | `String`                                                                | Parameter passed according to the core binding signature. |
+| `message`  | [Message](/docs/chat/sdk/v4/android/models/message)                     | Message payload or message JSON.                          |
+| `richList` | `List<`[Rich Message](/docs/chat/sdk/v4/android/models/rich-message)`>` | Parameter passed according to the core binding signature. |
 
 
 
 ## Return Value
 
 This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+| Name | Type                                                | Description                           |
+| ---- | --------------------------------------------------- | ------------------------------------- |
+| ~    | [Message](/docs/chat/sdk/v4/android/models/message) | Returned when the operation succeeds. |
 
 ## Code Example
 

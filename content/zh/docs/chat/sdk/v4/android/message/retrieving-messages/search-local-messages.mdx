@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/retrieving-messages/search-local-
 
 搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。
 
-## 功能介绍
-
-搜索本地消息，适合聊天记录搜索和按关键字查找历史内容。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -41,18 +37,18 @@ public void searchLocalMessages(OnBase<SearchResult> base, String conversationID
 
 ## 输入参数
 
-| 参数名称             | 参数类型               | 是否必填 | 描述                                                                                            |
-| -------------------- | ---------------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| callBack             | `OnBase<SearchResult>` | 是       | 回调接口                                                                                        |
-| conversationID       | String                 | 否       | 根据会话查询，如果是全局搜索传 null                                                             |
-| keywordList          | `List<String>`         | 是       | 搜索关键词列表，目前仅支持一个关键词搜索                                                        |
-| keywordListMatchType | int                    | 否       | 关键词匹配模式，1 代表与，2 代表或，暂时未用                                                    |
-| senderUserIDList     | `List<String>`         | 否       | 指定消息发送的 uid 列表 暂时未用                                                                |
-| messageTypeList      | `List<Integer>`        | 是       | [`MessageType`](/docs/chat/sdk/v4/android/models/message-type) 消息类型列表                     |
-| searchTimePosition   | int                    | 是       | 搜索的起始时间点。默认为 0 即代表从现在开始搜索。UTC 时间戳，单位：秒                           |
-| searchTimePeriod     | int                    | 是       | 从起始时间点开始的过去时间范围，单位秒。默认为 0 即代表不限制时间范围，传 24x60x60 代表过去一天 |
-| pageIndex            | int                    | 是       | 当前页数                                                                                        |
-| count                | int                    | 是       | 每页数量                                                                                        |
+| 参数名称             | 参数类型                                                                                                                   | 是否必填 | 描述                                                                                            |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
+| callBack             | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<`[`SearchResult`](/docs/chat/sdk/v4/android/models/search-result)`>` | 是       | 本地消息搜索结果回调。                                                                          |
+| conversationID       | String                                                                                                                     | 否       | 根据会话查询，如果是全局搜索传 null                                                             |
+| keywordList          | `List<String>`                                                                                                             | 是       | 搜索关键词列表，目前仅支持一个关键词搜索                                                        |
+| keywordListMatchType | int                                                                                                                        | 否       | 关键词匹配模式，1 代表与，2 代表或，暂时未用                                                    |
+| senderUserIDList     | `List<String>`                                                                                                             | 否       | 指定消息发送的 uid 列表 暂时未用                                                                |
+| messageTypeList      | `List<Integer>`                                                                                                            | 是       | [`MessageType`](/docs/chat/sdk/v4/android/models/message-type) 消息类型列表                     |
+| searchTimePosition   | int                                                                                                                        | 是       | 搜索的起始时间点。默认为 0 即代表从现在开始搜索。UTC 时间戳，单位：秒                           |
+| searchTimePeriod     | int                                                                                                                        | 是       | 从起始时间点开始的过去时间范围，单位秒。默认为 0 即代表不限制时间范围，传 24x60x60 代表过去一天 |
+| pageIndex            | int                                                                                                                        | 是       | 当前页数                                                                                        |
+| count                | int                                                                                                                        | 是       | 每页数量                                                                                        |
 
 ## 返回结果
 

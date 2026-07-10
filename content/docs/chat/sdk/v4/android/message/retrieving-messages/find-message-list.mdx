@@ -37,20 +37,16 @@ public void findMessageList(OnBase<SearchResult> base, List<SearchParams> search
 
 ## Input Parameters
 
-| Parameter                                                       | Type                                                                      | Description                                     |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------- |
-| `callBack`                                                      | `OnBase<TypeKeySetResult>`                                                | Async callback for success and failure results. |
-| [Search Params](/docs/chat/sdk/v4/android/models/search-params) | `List<`[Search Params](/docs/chat/sdk/v4/android/models/search-params)`>` | Request parameters, usually encoded as JSON.    |
+| Parameter      | Type                                                                                                                     | Description                                     |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `base`         | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<`[Search Result](/docs/chat/sdk/v4/android/models/search-result)`>` | Async callback for success and failure results. |
+| `searchParams` | `List<`[Search Params](/docs/chat/sdk/v4/android/models/search-params)`>`                                                | Request parameters, usually encoded as JSON.    |
 
 
 
 ## Return Value
 
 The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
-
-| Name | Type                                                                        | Description                           |
-| ---- | --------------------------------------------------------------------------- | ------------------------------------- |
-| ~    | [Type Key Set Result](/docs/chat/sdk/v4/android/models/type-key-set-result) | Returned when the operation succeeds. |
 
 ## Code Example
 
@@ -75,5 +71,4 @@ OpenIMClient.getInstance().messageManager.findMessageList(new OnBase<SearchResul
 - [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
 - [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
 - [Search Params](/docs/chat/sdk/v4/android/models/search-params) (`SearchParams`): SearchParams used by this Android SDK type.
-- [Type Key Set Result](/docs/chat/sdk/v4/android/models/type-key-set-result) (`TypeKeySetResult`): TypeKeySetResult used by this Android SDK type.
 - [Search Result](/docs/chat/sdk/v4/android/models/search-result) (`SearchResult`): SearchResult used by this Android SDK type.

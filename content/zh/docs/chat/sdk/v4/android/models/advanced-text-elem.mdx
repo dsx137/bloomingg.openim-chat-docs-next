@@ -15,10 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/advanced-text-elem'
 
 ## 字段说明
 
-| 字段名称          | Java 类型                                                                    | 描述                   |
-| ----------------- | ---------------------------------------------------------------------------- | ---------------------- |
-| text              | String                                                                       | SDK 返回或提交的字段。 |
-| messageEntityList | `List<`[`MessageEntity`](/docs/chat/sdk/v4/android/models/message-entity)`>` | SDK 返回或提交的字段。 |
+| 字段名称          | Java 类型                                                                    | 描述                                                                         |
+| ----------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| text              | String                                                                       | 完整的高级文本正文；`messageEntityList` 中的偏移量和长度都以该字符串为基准。 |
+| messageEntityList | `List<`[`MessageEntity`](/docs/chat/sdk/v4/android/models/message-entity)`>` | 正文中的富文本片段列表，每项描述片段类型、位置、长度、URL 和扩展数据。       |
 
 ## 关联类型
 

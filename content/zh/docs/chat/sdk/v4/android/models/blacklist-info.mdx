@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/blacklist-info'
@@ -13,22 +13,18 @@ sourcePath: '/docs/chat/sdk/v4/android/models/blacklist-info'
 
 `BlacklistInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.BlacklistInfo`。黑名单用户资料，用于黑名单列表和黑名单事件回调。
 
-## 类型说明
-
-黑名单详细
-
 ## 字段说明
 
-| 字段名称       | Java 类型 | 描述     |
-| -------------- | --------- | -------- |
-| userID         | String    | 用户id   |
-| nickname       | String    | 昵称     |
-| faceURL        | String    | 头像     |
-| gender         | int       | 性别     |
-| createTime     | long      | 创建时间 |
-| addSource      | int       | 添加方式 |
-| operatorUserID | String    | 操作者   |
-| ex             | String    | 附加信息 |
+| 字段名称       | Java 类型 | 描述                                                                                                     |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| userID         | String    | 被当前用户加入黑名单的用户 ID。                                                                          |
+| nickname       | String    | 该用户的昵称快照。                                                                                       |
+| faceURL        | String    | 该用户的头像 URL 快照。                                                                                  |
+| gender         | int       | 性别兼容字段：`1` 男，`2` 女，`0` 或其他值表示未设置。当前提供的 core 本地转换未填充该字段，通常为 `0`。 |
+| createTime     | long      | 黑名单关系创建时间，当前 core 使用 Unix 毫秒时间戳。                                                     |
+| addSource      | int       | 黑名单关系的添加来源值，由服务端关系记录返回；当前 Android SDK 未提供对应公开枚举。                      |
+| operatorUserID | String    | 执行加入黑名单操作的用户 ID，通常是当前登录用户。                                                        |
+| ex             | String    | 黑名单关系的业务扩展字符串，格式由业务约定。                                                             |
 
 ## 相关页面
 

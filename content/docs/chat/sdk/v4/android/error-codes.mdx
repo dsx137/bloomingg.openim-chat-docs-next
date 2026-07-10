@@ -16,7 +16,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Common Errors
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | ------------------------------ | ------------------------------------ | ---------------------- |
 | `10000` | `NetworkError` | `Network error` | Network error. |
 | `10001` | `NetworkTimeoutError` | `Network timeout error` | Network timeout. |
 | `10002` | `ArgsError` | `Invalid input arguments` | Invalid input arguments. |
@@ -29,7 +29,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Users and Login
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | --------------------- | ------------------------------- | ------------------------ |
 | `10100` | `UserIDNotFoundError` | `User ID not found` | User ID does not exist or is not registered. |
 | `10101` | `LoginOutError` | `User has logged out` | The user has logged out. |
 | `10102` | `LoginRepeatError` | `User has logged in repeatedly` | The user has logged in repeatedly. |
@@ -37,7 +37,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Messages
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | ------------------------------- | ------------------------------------------ | ---------------------------------------- |
 | `10200` | `FileNotFoundError` | `File not found` | File or record does not exist. |
 | `10201` | `MsgDeCompressionError` | `Message decompression failed` | Message decompression failed. |
 | `10202` | `MsgDecodeBinaryWsError` | `Message binary WebSocket decoding failed` | Error codes details |
@@ -50,7 +50,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Conversations
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | --------------------- | ---------------------------------------- | ------------ |
 | `10301` | `NotSupportOptError` | `Operation not supported for supergroup` | Operation is not supported. |
 | `10302` | `NotSupportTypeError` | `Only supergroup type supported` | Type is not supported. |
 | `10303` | `UnreadCountError` | `Unread count is zero` | Unread count is zero. |
@@ -58,7 +58,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Groups
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | ---------------------- | -------------------- | ---------------- |
 | `10400` | `GroupIDNotFoundError` | `Group ID not found` | Group ID does not exist. |
 | `10401` | `GroupTypeErr` | `Invalid group type` | Invalid group type. |
 
@@ -67,14 +67,14 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Success and Unknown Errors
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ------------- | -------------------------------- | ------------ |
 | `0` | `NoError` | `No error` | Success. |
 | `1000` | `UnknownCode` | Error codes details | Unknown error code. |
 
 ### Account Authentication Extension Errors
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | ---------------------- | --------------------------------- | -------------------- |
 | `10001` | `FormattingError` | `Error in formatting` | Formatting error. |
 | `10002` | `HasRegistered` | `user has already registered` | User has already registered. |
 | `10003` | `NotRegistered` | `user is not registered` | User is not registered. |
@@ -93,7 +93,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Common and Infrastructure
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------- | --------------------- | --------------------------------------- | --------------------------- |
 | `500` | `ServerInternalError` | `ServerInternalError` | Error codes details |
 | `1001` | `ArgsError` | `ArgsError` | Error codes details |
 | `1002` | `NoPermissionError` | `NoPermissionError` | Permission denied. |
@@ -107,14 +107,14 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Accounts
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ------------------------ | ------------------------ | ------------------------ |
 | `1101` | `UserIDNotFoundError` | `UserIDNotFoundError` | User ID does not exist or is not registered. |
 | `1102` | `RegisteredAlreadyError` | `RegisteredAlreadyError` | User has already registered. |
 
 ### Groups
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ----------------------- | ----------------------- | ------------------ |
 | `1201` | `GroupIDNotFoundError` | `GroupIDNotFoundError` | Group ID does not exist. |
 | `1202` | `GroupIDExisted` | `GroupIDExisted` | Error codes details |
 | `1203` | `NotInGroupYetError` | `NotInGroupYetError` | Error codes details |
@@ -125,7 +125,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Friends and Relationships
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | -------------------------- | -------------------------- | -------------------- |
 | `1301` | `CanNotAddYourselfError` | `CanNotAddYourselfError` | Cannot add yourself as a friend. |
 | `1302` | `BlockedByPeer` | `BlockedByPeer` | Blocked by the peer. |
 | `1303` | `NotPeersFriend` | `NotPeersFriend` | Not a friend of the peer. |
@@ -135,7 +135,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Messages
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ----------------------- | ----------------------- | -------------------- |
 | `1401` | `MessageHasReadDisable` | `MessageHasReadDisable` | Message read capability is unavailable. |
 | `1402` | `MutedInGroup` | `MutedInGroup` | The member is muted in the group. |
 | `1403` | `MutedGroup` | `MutedGroup` | The group is muted. |
@@ -144,7 +144,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Token
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ----------------------- | ----------------------- | ------------------------ |
 | `1501` | `TokenExpiredError` | `TokenExpiredError` | Token has expired. |
 | `1502` | `TokenInvalidError` | `TokenInvalidError` | Token is invalid. |
 | `1503` | `TokenMalformedError` | `TokenMalformedError` | Token is malformed. |
@@ -156,7 +156,7 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Long Connection Gateway and Push
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | ---------------------- | ------------------------------------------ | -------------------------------------------------- |
 | `1601` | `ConnOverMaxNumLimit` | `ConnOverMaxNumLimit` | Connection count exceeds the limit. |
 | `1602` | `ConnArgsErr` | `args err, need token, sendID, platformID` | Error codes details |
 | `1603` | `PushMsgErr` | `push msg err` | Failed to push the message. |
@@ -165,11 +165,11 @@ sourcePath: '/docs/chat/sdk/v4/android/error-codes'
 ### Object Storage
 
 | Error code | Constant | Default message or source note | Description |
-| ------ | ---- | ------------------ | ---- |
+| ------ | -------------------------- | -------------------------- | ---------------- |
 | `1701` | `FileUploadedExpiredError` | `FileUploadedExpiredError` | Error codes details |
 
 ## WebSocket Protocol Identifiers
 
 | Identifier | Constant | Description |
-| ------ | ---- | ---- |
+| ------ | ------------- | ---------------------------- |
 | `3001` | `WSDataError` | WebSocket data error protocol identifier. |

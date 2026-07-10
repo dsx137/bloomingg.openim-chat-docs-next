@@ -121,7 +121,8 @@ export async function renderDocumentationPage(
     platform: page?.data.platform ?? route.platform,
   };
 
-  const loaded = page ? await page.data.load() : undefined;
+  const shouldLoadMdx = effectiveRoute.template === 'landing' || (!localizedPage && !routeFilePage);
+  const loaded = page && shouldLoadMdx ? await page.data.load() : undefined;
   const MdxContent = loaded?.body;
   const sourceMarkdownPage =
     !localizedPage && effectiveRoute.product === 'platform-api'

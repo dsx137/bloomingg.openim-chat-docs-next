@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/listing-conversations/get-one-con
 
 按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。
 
-## 功能介绍
-
-按会话类型和目标 ID 获取单个会话。单聊 `sourceID` 通常是用户 ID，群聊 `sourceID` 通常是群 ID。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,15 +33,15 @@ public void getOneConversation(OnBase<ConversationInfo> base, String sourceId, i
 
 ## 输入参数
 
-| 参数名称    | 参数类型                                                                                                                             | 是否必填 | 描述                                   |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------------------------------- |
-| base        | `OnBase<ConversationInfo>` | 是       | 查询结果回调。                         |
-| sourceId    | String                                                                                                                               | 是       | 单聊为用户 ID，群聊为群 ID。           |
-| sessionType | int                                                                                                                                  | 是       | 会话类型，单聊通常为 1，群聊通常为 2。 |
+| 参数名称    | 参数类型                                                                                                                           | 是否必填 | 描述                                   |
+| ----------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------------------- |
+| base        | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>` | 是       | 单个会话资料回调。                     |
+| sourceId    | String                                                                                                                             | 是       | 单聊为用户 ID，群聊为群 ID。           |
+| sessionType | int                                                                                                                                | 是       | 会话类型，单聊通常为 1，群聊通常为 2。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回目标 [`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)；若本地尚无该会话，core 会根据单聊用户或群资料尝试构造会话。目标无效或资料查询失败时调用 `onError`。
 
 ## 代码示例
 

@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-moderation/change-group-membe
 
 设置指定群成员禁言时长。适合临时限制单个成员发言。
 
-## 功能介绍
-
-设置指定群成员禁言时长。适合临时限制单个成员发言。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -46,7 +42,7 @@ public void changeGroupMemberMute(OnBase<String> base, String gid, String uid, l
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标成员的禁言截止时间已更新并同步到本地成员资料，回调字符串不含业务数据；权限不足、成员不存在或时长无效时调用 `onError`。
 
 ## 代码示例
 

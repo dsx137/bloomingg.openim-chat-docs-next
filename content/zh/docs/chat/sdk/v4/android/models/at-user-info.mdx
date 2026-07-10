@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/at-user-info'
@@ -13,16 +13,16 @@ sourcePath: '/docs/chat/sdk/v4/android/models/at-user-info'
 
 `AtUserInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.AtUserInfo`。被提及用户的 ID 与群昵称映射信息。
 
-## 类型说明
-
-at消息 userID跟nickname映射关系
-
 ## 字段说明
 
-| 字段名称      | Java 类型 | 描述             |
-| ------------- | --------- | ---------------- |
-| atUserID      | String    | 被at的用户的id   |
-| groupNickname | String    | 被at的用户的昵称 |
+| 字段名称      | Java 类型 | 描述                                                                                                               |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------ |
+| atUserID      | String    | 被提及用户的 ID，用于识别提醒目标和匹配 [`AtTextElem.atUserList`](/docs/chat/sdk/v4/android/models/at-text-elem)。 |
+| groupNickname | String    | 发送 @ 消息时记录的群内昵称快照，用于稳定展示原始 @ 文本；用户后续改名不会自动改写历史消息。                       |
+
+## 关联类型
+
+- [At 文本元素](/docs/chat/sdk/v4/android/models/at-text-elem)（`AtTextElem`）：保存 @ 文本、目标用户和可选引用消息。
 
 ## 相关页面
 

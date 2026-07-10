@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-applications/get-group-applic
 
 获取当前用户作为群管理者收到的入群申请列表。
 
-## 功能介绍
-
-获取当前用户作为群管理者收到的入群申请列表。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void getRecvGroupApplicationList(OnBase<List<GroupApplicationInfo>> base,
 
 ## 输入参数
 
-| 参数名称     | 参数类型                                                                                                                | 是否必填 | 描述                 |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
-| base         | `OnBase<List<`[`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info)`>>`                     | 是       | 查询结果回调。       |
-| recipientReq | [`GetGroupApplicationListAsRecipientReq`](/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req) | 是       | 分页和筛选请求参数。 |
+| 参数名称     | 参数类型                                                                                                                                          | 是否必填 | 描述                 |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------- |
+| base         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info)`>>` | 是       | 查询结果回调。       |
+| recipientReq | [`GetGroupApplicationListAsRecipientReq`](/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req)                           | 是       | 分页和筛选请求参数。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 `List<`[`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info)`>`，只包含当前页需要当前用户查看或处理的收到申请；查询或反序列化失败时调用 `onError`。
 
 ## 代码示例
 

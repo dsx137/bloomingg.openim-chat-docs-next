@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/delete-friend'
 
 删除指定好友关系，适合用户主动解除好友。
 
-## 功能介绍
-
-删除指定好友关系，适合用户主动解除好友。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -44,7 +40,7 @@ public void deleteFriend(OnBase<String> base, String uid)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示与目标用户的好友关系已删除并完成本地同步，回调字符串不含业务数据；目标不是好友或服务端请求失败时调用 `onError`。好友删除事件会同步通知业务层。
 
 ## 代码示例
 

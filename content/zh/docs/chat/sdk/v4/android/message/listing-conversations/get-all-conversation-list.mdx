@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/listing-conversations/get-all-con
 
 获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。
 
-## 功能介绍
-
-获取当前用户的全部本地会话列表，适合聊天列表全量加载或登录后刷新。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,13 +33,13 @@ public void getAllConversationList(OnBase<List<ConversationInfo>> base)
 
 ## 输入参数
 
-| 名称     | 类型                                                                                       | 是否必填 | 描述     |
-| -------- | ------------------------------------------------------------------------------------------ | -------- | -------- |
-| callBack | `OnBase<List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>>` | 是       | 回调接口 |
+| 名称     | 类型                                                                                                                                     | 是否必填 | 描述     |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>>` | 是       | 回调接口 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回全部可见的 `List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>`；被隐藏/重置且没有最后消息的会话不会进入普通列表，没有会话时返回空列表。查询失败时调用 `onError`。
 
 ## 代码示例
 

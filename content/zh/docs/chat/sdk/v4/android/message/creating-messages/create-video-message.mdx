@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-video-me
 
 通过视频路径和快照路径创建视频消息。
 
-## 功能介绍
-
-通过视频路径和快照路径创建视频消息。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,17 +33,18 @@ public Message createVideoMessage(String videoPath, String videoType, long durat
 
 ## 输入参数
 
-| 参数名称       | 类型     | 描述                       |
-| -------------- | -------- | -------------------------- |
-| `operationID`  | `string` | 本次操作的追踪 ID。        |
-| `videoPath`    | `string` | 按 core binding 签名传入。 |
-| `videoType`    | `string` | 按 core binding 签名传入。 |
-| `duration`     | `int64`  | 按 core binding 签名传入。 |
-| `snapshotPath` | `string` | 按 core binding 签名传入。 |
+| 参数名称     | Java 类型 | 是否必填 | 描述                                         |
+| ------------ | --------- | -------- | -------------------------------------------- |
+| videoPath    | `String`  | 是       | 视频相对于 `InitConfig.dataDir` 的路径。     |
+| videoType    | `String`  | 是       | 视频 MIME 类型，例如 `video/mp4`。           |
+| duration     | `long`    | 是       | 视频时长，单位为秒。                         |
+| snapshotPath | `String`  | 是       | 视频封面相对于 `InitConfig.dataDir` 的路径。 |
 
 ## 返回结果
 
-同步返回 `string`。
+| 名称 | 类型                                                  | 描述                                   |
+| ---- | ----------------------------------------------------- | -------------------------------------- |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 创建完成的本地视频消息对象，尚未发送。 |
 
 ## 代码示例
 

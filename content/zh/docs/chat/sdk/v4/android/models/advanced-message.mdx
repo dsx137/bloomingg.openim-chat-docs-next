@@ -15,13 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/android/models/advanced-message'
 
 ## 字段说明
 
-| 字段名称    | Java 类型                                                       | 描述                   |
-| ----------- | --------------------------------------------------------------- | ---------------------- |
-| errCode     | int                                                             | 错误码。               |
-| errMsg      | String                                                          | 错误信息。             |
-| lastMinSeq  | int                                                             | SDK 返回或提交的字段。 |
-| isEnd       | boolean                                                         | SDK 返回或提交的字段。 |
-| messageList | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` | SDK 返回或提交的字段。 |
+| 字段名称    | Java 类型                                                       | 描述                                                                                       |
+| ----------- | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| errCode     | int                                                             | 本次历史消息查询的错误码；`0` 表示查询成功。                                               |
+| errMsg      | String                                                          | 查询失败时的错误信息；成功时通常为空。                                                     |
+| lastMinSeq  | int                                                             | 本页结果覆盖到的最小消息序列号，可作为继续向更早消息分页时的边界游标。                     |
+| isEnd       | boolean                                                         | 是否已经到达当前查询方向的历史消息末端；为 `true` 时继续使用相同方向查询不会得到更早结果。 |
+| messageList | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` | 本页返回的消息对象列表；空列表表示当前分页范围内没有可返回的消息。                         |
 
 ## 关联类型
 

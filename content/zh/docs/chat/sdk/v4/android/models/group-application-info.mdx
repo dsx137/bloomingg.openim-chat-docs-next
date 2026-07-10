@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-application-info'
@@ -15,32 +15,36 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-application-info'
 
 ## 字段说明
 
-| 字段名称      | Java 类型 | 描述                                     |
-| ------------- | --------- | ---------------------------------------- |
-| groupID       | String    | 群id                                     |
-| groupName     | String    | 群名                                     |
-| notification  | String    | 群公告                                   |
-| introduction  | String    | 群简介                                   |
-| groupFaceURL  | String    | 群头像                                   |
-| createTime    | long      | 创建时间                                 |
-| status        | int       | 状态                                     |
-| creatorUserID | String    | 创建者id                                 |
-| groupType     | int       | 群类型                                   |
-| ownerUserID   | String    | 拥有者id                                 |
-| memberCount   | int       | 成员数量                                 |
-| userID        | String    | 申请者的id                               |
-| nickname      | String    | 申请者的昵称                             |
-| userFaceURL   | String    | 申请者的头像                             |
-| gender        | int       | 申请者的性别                             |
-| handleResult  | int       | REFUSE = -1, AGREE = 1 -1：拒绝，1：同意 |
-| reqMsg        | String    | 申请原因                                 |
-| handledMsg    | String    | 处理结果描述                             |
-| reqTime       | long      | 申请时间                                 |
-| handleUserID  | String    | 处理者的id                               |
-| handledTime   | long      | 处理时间                                 |
-| ex            | String    | 扩展字段                                 |
-| joinSource    | int       | 2：通过邀请 3：通过搜索 4：通过二维码    |
-| inviterUserID | String    | 邀请进群用户ID                           |
+| 字段名称      | Java 类型 | 描述                                                                                                            |
+| ------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| groupID       | String    | 申请加入或被邀请加入的群 ID。                                                                                   |
+| groupName     | String    | 申请记录生成时的群名称快照。                                                                                    |
+| notification  | String    | 申请记录携带的群公告快照。                                                                                      |
+| introduction  | String    | 申请记录携带的群简介快照。                                                                                      |
+| groupFaceURL  | String    | 申请记录携带的群头像 URL 快照。                                                                                 |
+| createTime    | long      | 该群的创建时间，当前 core 使用 Unix 毫秒时间戳；它不是本次申请时间。                                            |
+| status        | int       | 当前群状态：`0` 正常、`1` 全群禁言、`2` 已解散、`3` 群状态静默。                                                |
+| creatorUserID | String    | 最初创建该群的用户 ID。                                                                                         |
+| groupType     | int       | core 群类型：`0` 普通群、`1` 超级群、`2` 工作群。                                                               |
+| ownerUserID   | String    | 当前群主用户 ID。                                                                                               |
+| memberCount   | int       | 申请记录同步时的群成员数量快照。                                                                                |
+| userID        | String    | 提交入群申请或被邀请入群的用户 ID。                                                                             |
+| nickname      | String    | 该用户的昵称快照。                                                                                              |
+| userFaceURL   | String    | 该用户的头像 URL 快照。                                                                                         |
+| gender        | int       | 性别兼容字段：`1` 男、`2` 女、`0` 或其他值未设置。当前提供的 core 本地转换未填充该字段，通常为 `0`。            |
+| handleResult  | int       | 申请处理状态：`-1` 已拒绝、`0` 未处理、`1` 已同意。Android 类注释未列出 `0`，应以当前 core 常量为准。           |
+| reqMsg        | String    | 申请人提交的入群原因或邀请附言。                                                                                |
+| handledMsg    | String    | 管理员同意或拒绝申请时填写的处理说明；未处理时通常为空。                                                        |
+| reqTime       | long      | 本次申请或邀请创建时间，当前 core 使用 Unix 毫秒时间戳。                                                        |
+| handleUserID  | String    | 执行同意或拒绝操作的群主/管理员用户 ID；未处理时通常为空。                                                      |
+| handledTime   | long      | 申请处理时间，当前 core 使用 Unix 毫秒时间戳；未处理时通常为 `0`。                                              |
+| ex            | String    | 申请记录的业务扩展字符串。                                                                                      |
+| joinSource    | int       | 入群来源，取值见 [`JoinSource`](/docs/chat/sdk/v4/android/models/join-source)：`2` 邀请、`3` 搜索、`4` 二维码。 |
+| inviterUserID | String    | 邀请入群场景中的邀请人用户 ID；主动申请入群时通常为空。                                                         |
+
+## 关联类型
+
+- [入群来源](/docs/chat/sdk/v4/android/models/join-source)（`JoinSource`）：邀请、搜索和二维码入群来源。
 
 ## 相关页面
 

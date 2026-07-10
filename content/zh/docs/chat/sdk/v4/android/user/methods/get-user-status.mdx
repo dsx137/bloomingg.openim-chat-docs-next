@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-user-status'
 
 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。
 
-## 功能介绍
-
-获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。
-
 用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
 
 ## Core Binding 方法
@@ -37,15 +33,14 @@ public void getUserStatus(OnBase<List<UsersOnlineStatus>> callback, List<String>
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                |
-| ------------- | ----------------------------------------------- | ------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。      |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
-| `userIDs`     | `string`                                        | 业务标识参数。      |
+| 参数名称 | Java 类型                                                                                                                                   | 是否必填 | 描述                       |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------- |
+| callback | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status)`>>` | 是       | 用户在线状态查询结果回调。 |
+| ids      | `List<String>`                                                                                                                              | 是       | 要查询的用户 ID 列表。     |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 `List<`[`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status)`>`，每项给出用户当前在线平台；当前 core 实现会同时订阅这些用户的状态，查询或订阅失败时调用 `onError`。
 
 ## 代码示例
 

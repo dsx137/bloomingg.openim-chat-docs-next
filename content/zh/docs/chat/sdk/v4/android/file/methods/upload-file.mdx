@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/file/methods/upload-file'
 
 上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。
 
-## 功能介绍
-
-上传文件到 SDK 配置的对象存储链路，适合发送文件、图片、音视频前先完成资源上传。
-
 文件上传能力至少要求 SDK 已初始化；上传进度通过文件上传回调返回。
 
 ## Core Binding 方法
@@ -37,16 +33,23 @@ public void uploadFile(OnBase<String> base, OnPutFileListener listener, PutArgs 
 
 ## 输入参数
 
-PutArgs 实体必传下面两个参数
+| 参数名称 | Java 类型                                                                    | 是否必填 | 描述                                 |
+| -------- | ---------------------------------------------------------------------------- | -------- | ------------------------------------ |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>`               | 是       | 上传结果回调。                       |
+| listener | [`OnPutFileListener`](/docs/chat/sdk/v4/android/models/on-put-file-listener) | 是       | 上传阶段、进度和完成结果监听器。     |
+| putArgs  | [`PutArgs`](/docs/chat/sdk/v4/android/models/put-args)                       | 是       | 本地文件路径、文件名和上传用途配置。 |
 
-| 参数名称 | 参数类型 | 是否必填 | 描述                 |
-| -------- | -------- | -------- | -------------------- |
-| fullPath | String   | 是       | 文件在本机的完整路径 |
-| putID    | String   | 否       | 上传的唯一ID         |
+### `PutArgs` 字段
+
+| 字段名称 | Java 类型 | 是否必填 | 描述                                                                         |
+| -------- | --------- | -------- | ---------------------------------------------------------------------------- |
+| filepath | `String`  | 是       | 本地文件完整路径；构造 `PutArgs` 时传入。                                    |
+| name     | `String`  | 是       | 上传文件名；构造函数默认与 `filepath` 相同，可按需改写。                     |
+| cuase    | `String`  | 否       | Android v3.8.3 的拼写错误兼容字段；core 实际读取 `cause`，因此该值会被忽略。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 core 的 JSON 字符串，结构为 `{"url":"..."}`；其中 `url` 是上传后文件地址。分片阶段和字节进度由 `OnPutFileListener` 返回，任一读取、哈希、上传或服务端登记阶段失败时调用 `onError`。
 
 ## 代码示例
 

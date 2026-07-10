@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/picture-info'
@@ -15,14 +15,14 @@ sourcePath: '/docs/chat/sdk/v4/android/models/picture-info'
 
 ## 字段说明
 
-| 字段名称 | Java 类型 | 描述        |
-| -------- | --------- | ----------- |
-| uuid     | String    | 唯一ID      |
-| type     | String    | 图片类型    |
-| size     | long      | 图片大小    |
-| width    | int       | 图片宽度    |
-| height   | int       | 图片高度    |
-| url      | String    | 图片oss地址 |
+| 字段名称 | Java 类型 | 描述                                            |
+| -------- | --------- | ----------------------------------------------- |
+| uuid     | String    | 图片资源标识，用于上传、缓存或资源去重。        |
+| type     | String    | 图片 MIME 类型或格式字符串，例如 `image/jpeg`。 |
+| size     | long      | 图片文件大小，单位为字节。                      |
+| width    | int       | 图片像素宽度。                                  |
+| height   | int       | 图片像素高度。                                  |
+| url      | String    | 图片上传后的远程 URL；不限定为某一家 OSS 服务。 |
 
 ## 相关页面
 

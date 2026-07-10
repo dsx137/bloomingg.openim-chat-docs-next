@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-members/search-group-members'
 
 搜索群成员，适合按用户 ID 或群昵称查找成员。
 
-## 功能介绍
-
-搜索群成员，适合按用户 ID 或群昵称查找成员。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -39,19 +35,19 @@ public void searchGroupMembers(OnBase<List<GroupMembersInfo>> base, String group
 
 ## 输入参数
 
-| 参数名称               | 参数类型                                                                                    | 是否必填 | 描述           |
-| ---------------------- | ------------------------------------------------------------------------------------------- | -------- | -------------- |
-| callBack               | `OnBase<List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | 是       | 回调接口       |
-| groupID                | String                                                                                      | 是       | 群ID           |
-| keywordList            | `List<String>`                                                                              | 是       | 关键字         |
-| isSearchUserID         | Boolean                                                                                     | 是       | 检索用户 ID    |
-| isSearchMemberNickname | Boolean                                                                                     | 是       | 检索用户昵称   |
-| offset                 | int                                                                                         | 是       | 起始偏移量     |
-| count                  | int                                                                                         | 是       | 每次查询的总数 |
+| 参数名称               | 参数类型                                                                                                                                  | 是否必填 | 描述           |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------- |
+| callBack               | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | 是       | 回调接口       |
+| groupID                | String                                                                                                                                    | 是       | 群ID           |
+| keywordList            | `List<String>`                                                                                                                            | 是       | 关键字         |
+| isSearchUserID         | Boolean                                                                                                                                   | 是       | 检索用户 ID    |
+| isSearchMemberNickname | Boolean                                                                                                                                   | 是       | 检索用户昵称   |
+| offset                 | int                                                                                                                                       | 是       | 起始偏移量     |
+| count                  | int                                                                                                                                       | 是       | 每次查询的总数 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 `List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>`，按启用的用户 ID/群昵称字段匹配并应用分页；关键词或群参数无效、查询失败时调用 `onError`。
 
 ## 代码示例
 

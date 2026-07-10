@@ -15,19 +15,19 @@ sourcePath: '/docs/chat/sdk/v4/android/models/init-config'
 
 ## 类型说明
 
-apiUrl SDK的API接口地址。如：http:xxx:10000 wsUrl SDK的web socket地址。如： ws:xxx:17778 storageDir 数据存储目录路径 logLevel 日志等级，如：6 isLogStandardOutput 控制台是否输出日志 logFilePath 日志输出的路径
+构造 `InitConfig` 时必须传入 API 地址、WebSocket 地址和本地数据目录。Android 平台 ID 固定为 `Platform.ANDROID`；日志等级默认为 `LogLevel.Debug`，其余日志选项可按运行环境配置。
 
 ## 字段说明
 
-| 字段名称            | Java 类型 | 描述                   |
-| ------------------- | --------- | ---------------------- |
-| platformID          | int       | SDK 返回或提交的字段。 |
-| apiAddr             | String    | SDK 返回或提交的字段。 |
-| wsAddr              | String    | SDK 返回或提交的字段。 |
-| dataDir             | String    | SDK 返回或提交的字段。 |
-| logLevel            | int       | SDK 返回或提交的字段。 |
-| isLogStandardOutput | boolean   | SDK 返回或提交的字段。 |
-| logFilePath         | String    | SDK 返回或提交的字段。 |
+| 字段名称            | Java 类型 | 描述                                                                                                            |
+| ------------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| platformID          | int       | 客户端平台 ID。Android SDK 中该只读字段固定为 [`Platform.ANDROID`](/docs/chat/sdk/v4/android/models/platform)。 |
+| apiAddr             | String    | OpenIM HTTP API 地址，需包含 `http://` 或 `https://` 协议。                                                     |
+| wsAddr              | String    | OpenIM WebSocket 地址，需包含 `ws://` 或 `wss://` 协议。                                                        |
+| dataDir             | String    | SDK 本地数据库和缓存的存储目录；应用必须对该目录具有读写权限。                                                  |
+| logLevel            | int       | SDK 日志等级，取值见 [`LogLevel`](/docs/chat/sdk/v4/android/models/log-level)，默认值为 `Debug`。               |
+| isLogStandardOutput | boolean   | 是否同时把 SDK 日志输出到标准输出。                                                                             |
+| logFilePath         | String    | SDK 日志文件的存储路径；启用文件日志时应传入应用可写目录。                                                      |
 
 ## 关联类型
 

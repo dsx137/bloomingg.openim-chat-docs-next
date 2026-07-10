@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/add-friend'
 
 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。
 
-## 功能介绍
-
-向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -45,7 +41,7 @@ public void addFriend(OnBase<String> base, String uid, String reqMessage)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示好友申请已提交给服务端，尚不代表双方已经成为好友；建立关系后应以好友新增事件或好友列表为准。参数、重复申请或服务端策略校验失败时调用 `onError`。
 
 ## 代码示例
 

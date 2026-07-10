@@ -15,14 +15,14 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-member-filter'
 
 ## 取值说明
 
-| 常量          | 值  | 描述                            |
-| ------------- | --- | ------------------------------- |
-| All           | 0   | All 对应的 SDK 常量。           |
-| Owner         | 1   | Owner 对应的 SDK 常量。         |
-| Admin         | 2   | Admin 对应的 SDK 常量。         |
-| Nomal         | 3   | Nomal 对应的 SDK 常量。         |
-| AdminAndNomal | 4   | AdminAndNomal 对应的 SDK 常量。 |
-| AdminAndOwner | 5   | AdminAndOwner 对应的 SDK 常量。 |
+| 常量          | 值  | 描述                                                                 |
+| ------------- | --- | -------------------------------------------------------------------- |
+| All           | 0   | 返回群主、管理员和普通成员。                                         |
+| Owner         | 1   | 只返回群主。                                                         |
+| Admin         | 2   | 只返回群管理员。                                                     |
+| Nomal         | 3   | 只返回普通成员；`Nomal` 是 Android v3.8.3 公共枚举中的原始拼写。     |
+| AdminAndNomal | 4   | 返回管理员和普通成员，不包含群主；常量名沿用 SDK 中的 `Nomal` 拼写。 |
+| AdminAndOwner | 5   | 返回群主和管理员，不包含普通成员。                                   |
 
 ## 相关页面
 

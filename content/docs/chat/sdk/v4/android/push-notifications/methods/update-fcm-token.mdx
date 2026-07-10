@@ -37,12 +37,11 @@ public void updateFcmToken(OnBase<String> base, String fcmToken, long expireTime
 
 ## Input Parameters
 
-| Parameter     | Type                                          | Description                                     |
-| ------------- | --------------------------------------------- | ----------------------------------------------- |
-| `callback`    | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
-| `operationID` | `string`                                      | Trace ID for this operation.                    |
-| `fcmToken`    | `string`                                      | Pass according to the core binding signature.   |
-| `expireTime`  | `int64`                                       | Pass according to the core binding signature.   |
+| Parameter    | Type                                                          | Description                                               |
+| ------------ | ------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`       | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>` | Async callback for success and failure results.           |
+| `fcmToken`   | `String`                                                      | Firebase Cloud Messaging token.                           |
+| `expireTime` | `long`                                                        | Parameter passed according to the core binding signature. |
 
 
 

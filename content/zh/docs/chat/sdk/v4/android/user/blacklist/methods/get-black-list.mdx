@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list'
 
 获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。
 
-## 功能介绍
-
-获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。
-
 黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
 
 ## Core Binding 方法
@@ -37,13 +33,13 @@ public void getBlacklist(OnBase<List<UserInfo>> base)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                   | 是否必填 | 描述     |
-| -------- | -------------------------------------------------------------------------- | -------- | -------- |
-| callBack | `OnBase<List<`[`UserInfo`](/docs/chat/sdk/v4/android/models/user-info)`>>` | 是       | 回调接口 |
+| 参数名称 | 参数类型                                                                                                                 | 是否必填 | 描述     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`UserInfo`](/docs/chat/sdk/v4/android/models/user-info)`>>` | 是       | 回调接口 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回黑名单用户的 `List<`[`UserInfo`](/docs/chat/sdk/v4/android/models/user-info)`>`；每项的 `blackInfo` 保存黑名单关系资料，没有记录时返回空列表。查询或反序列化失败时调用 `onError`。
 
 ## 代码示例
 

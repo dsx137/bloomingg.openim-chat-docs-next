@@ -37,11 +37,13 @@ public void getAdvancedHistoryMessageListReverse(OnBase<AdvancedMessage> callBac
 
 ## Input Parameters
 
-| Parameter           | Type                                          | Description                                     |
-| ------------------- | --------------------------------------------- | ----------------------------------------------- |
-| `callback`          | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
-| `operationID`       | `string`                                      | Trace ID for this operation.                    |
-| `getMessageOptions` | `string`                                      | Message payload or message JSON.                |
+| Parameter        | Type                                                                                                                           | Description                                               |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `callBack`       | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<`[Advanced Message](/docs/chat/sdk/v4/android/models/advanced-message)`>` | Async callback for success and failure results.           |
+| `conversationID` | `String`                                                                                                                       | Parameter passed according to the core binding signature. |
+| `startMsg`       | [Message](/docs/chat/sdk/v4/android/models/message)                                                                            | Parameter passed according to the core binding signature. |
+| `count`          | `int`                                                                                                                          | Number of records to return.                              |
+| `viewType`       | [View Type](/docs/chat/sdk/v4/android/models/view-type)                                                                        | Parameter passed according to the core binding signature. |
 
 
 

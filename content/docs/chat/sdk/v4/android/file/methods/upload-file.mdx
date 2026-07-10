@@ -37,12 +37,19 @@ public void uploadFile(OnBase<String> base, OnPutFileListener listener, PutArgs 
 
 ## Input Parameters
 
-| Parameter  | Type   | Description                                               |
-| ---------- | ------ | --------------------------------------------------------- |
-| `fullPath` | String | Local file path.                                          |
-| `putID`    | String | Parameter passed according to the core binding signature. |
+| Parameter  | Type                                                                          | Description                                               |
+| ---------- | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`     | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>`                 | Async callback for success and failure results.           |
+| `listener` | [On Put File Listener](/docs/chat/sdk/v4/android/models/on-put-file-listener) | Parameter passed according to the core binding signature. |
+| `putArgs`  | [Put Args](/docs/chat/sdk/v4/android/models/put-args)                         | Parameter passed according to the core binding signature. |
 
+### `PutArgs` 字段
 
+| Field      | Type     | Description                                 |
+| ---------- | -------- | ------------------------------------------- |
+| `filepath` | `String` | SDK field returned or submitted by the SDK. |
+| `name`     | `String` | SDK field returned or submitted by the SDK. |
+| `cuase`    | `String` | SDK field returned or submitted by the SDK. |
 
 ## Return Value
 

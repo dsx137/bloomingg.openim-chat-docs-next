@@ -37,17 +37,20 @@ public Message createFileMessage(String filePath, String fileName)
 
 ## Input Parameters
 
-| Parameter     | Type     | Description                                   |
-| ------------- | -------- | --------------------------------------------- |
-| `operationID` | `string` | Trace ID for this operation.                  |
-| `filePath`    | `string` | Local file path.                              |
-| `fileName`    | `string` | Pass according to the core binding signature. |
+| Parameter  | Type     | Description                                               |
+| ---------- | -------- | --------------------------------------------------------- |
+| `filePath` | `String` | Local file path.                                          |
+| `fileName` | `String` | Parameter passed according to the core binding signature. |
 
 
 
 ## Return Value
 
 This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+| Name | Type                                                | Description                           |
+| ---- | --------------------------------------------------- | ------------------------------------- |
+| ~    | [Message](/docs/chat/sdk/v4/android/models/message) | Returned when the operation succeeds. |
 
 ## Code Example
 

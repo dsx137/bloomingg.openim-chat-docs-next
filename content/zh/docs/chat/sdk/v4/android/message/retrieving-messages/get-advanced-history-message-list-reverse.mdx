@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/retrieving-messages/get-advanced-
 
 按反向方向获取历史消息，适合围绕游标向另一方向加载。
 
-## 功能介绍
-
-按反向方向获取历史消息，适合围绕游标向另一方向加载。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,15 +33,17 @@ public void getAdvancedHistoryMessageListReverse(OnBase<AdvancedMessage> callBac
 
 ## 输入参数
 
-| 参数名称            | 类型                                            | 描述                                                        |
-| ------------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| `callback`          | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
-| `operationID`       | `string`                                        | 本次操作的追踪 ID。                                         |
-| `getMessageOptions` | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称       | Java 类型                                                                                                                        | 是否必填 | 描述                                                            |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------------------------------------------------- |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<`[`AdvancedMessage`](/docs/chat/sdk/v4/android/models/advanced-message)`>` | 是       | 历史消息查询结果回调。                                          |
+| conversationID | `String`                                                                                                                         | 是       | 目标会话 ID。                                                   |
+| startMsg       | [`Message`](/docs/chat/sdk/v4/android/models/message)                                                                            | 否       | 查询起点；首次查询可传 `null`，继续查询时传上一页最后一条消息。 |
+| count          | `int`                                                                                                                            | 是       | 本次最多返回的消息数量。                                        |
+| viewType       | [`ViewType`](/docs/chat/sdk/v4/android/models/view-type)                                                                         | 是       | 查询视图方向，Android SDK 会转换为 core 使用的数值。            |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 [`AdvancedMessage`](/docs/chat/sdk/v4/android/models/advanced-message)，其中 `messageList` 是反向游标方向的一页消息，`lastMinSeq` 和 `isEnd` 用于判断后续分页；查询或结果解析失败时调用 `onError`。
 
 ## 代码示例
 

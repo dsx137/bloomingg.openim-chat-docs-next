@@ -5,15 +5,11 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/message/listing-conversations/search-conversation'
 ---
-
-搜索本地会话，适合聊天列表搜索入口。
-
-## 功能介绍
 
 搜索本地会话，适合聊天列表搜索入口。
 
@@ -29,27 +25,24 @@ sourcePath: '/docs/chat/sdk/v4/android/message/listing-conversations/search-conv
 
 ## Android 调用参考
 
-当前 Android SDK v3.8.3 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。底层只查询本地会话数据库，不向服务端发起搜索；下列参数用于说明 core 行为，不能作为该版本可直接调用的 Java 方法。
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                                                        |
-| ------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。                                         |
-| `searchParam` | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称      | 类型                                            | 描述                                                                            |
+| ------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                                                  |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                                             |
+| `searchParam` | `string`                                        | 非空搜索文本。core 对本地会话的 `showName` 字段执行包含匹配，不是 JSON 字符串。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
-
-## 代码示例
-
-TODO: 当前 Android SDK v3.8.3 未提供公开 Java 调用示例。
+成功时底层 `OnSuccess` 返回 `List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>` 对应的 JSON 数组，并按 `latestMsgSendTime` 倒序排列；没有匹配项时返回空数组。`searchParam` 为空或数据库查询失败时调用 `OnError`。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例。
 
 ## 相关类型
 
 - [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：搜索结果中的本地会话信息。
 
 ## 相关页面
 

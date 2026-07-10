@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-info'
@@ -15,25 +15,25 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-info'
 
 ## 字段说明
 
-| 字段名称               | Java 类型 | 描述                                                |
-| ---------------------- | --------- | --------------------------------------------------- |
-| groupID                | String    | 组ID                                                |
-| groupName              | String    | 群名                                                |
-| notification           | String    | 群公告                                              |
-| introduction           | String    | 群简介                                              |
-| faceURL                | String    | 群头像                                              |
-| ownerUserID            | String    | 群主id                                              |
-| createTime             | Long      | 创建时间                                            |
-| memberCount            | Integer   | 群成员数量                                          |
-| status                 | Integer   | 群状态： ok = 0 blocked = 1 Dismissed = 2 Muted = 3 |
-| creatorUserID          | String    | 创建者id                                            |
-| groupType              | Integer   | 群类型                                              |
-| ex                     | String    | 扩展字段                                            |
-| needVerification       | Integer   | 进群验证方式 GroupVerification                      |
-| lookMemberInfo         | Integer   | 不允许通过群获取成员资料 0：关闭，1：打开           |
-| applyMemberFriend      | Integer   | 不允许通过群添加好友 0：关闭，1：打开               |
-| notificationUpdateTime | Long      | 通知更新时间                                        |
-| notificationUserID     | String    | 通知更新人                                          |
+| 字段名称               | Java 类型 | 描述                                                                                              |
+| ---------------------- | --------- | ------------------------------------------------------------------------------------------------- |
+| groupID                | String    | 群组唯一 ID，查询群资料、成员和发送群消息时使用。                                                 |
+| groupName              | String    | 群名称。                                                                                          |
+| notification           | String    | 当前群公告正文。                                                                                  |
+| introduction           | String    | 群简介。                                                                                          |
+| faceURL                | String    | 群头像 URL。                                                                                      |
+| ownerUserID            | String    | 当前群主的用户 ID。                                                                               |
+| createTime             | Long      | 群创建时间，当前 core 使用 Unix 毫秒时间戳。                                                      |
+| memberCount            | Integer   | 当前群成员总数。                                                                                  |
+| status                 | Integer   | 群状态：`0` 正常，`1` 全群禁言，`2` 已解散，`3` 群状态静默。                                      |
+| creatorUserID          | String    | 最初创建该群的用户 ID；群主转让后它不会随 `ownerUserID` 一起改变。                                |
+| groupType              | Integer   | core 群类型：`0` 普通群，`1` 超级群，`2` 工作群。不同群类型对应的会话类型可能不同。               |
+| ex                     | String    | 业务自定义扩展字符串，格式由使用方约定。                                                          |
+| needVerification       | Integer   | 入群验证方式，取值见 [`GroupVerification`](/docs/chat/sdk/v4/android/models/group-verification)。 |
+| lookMemberInfo         | Integer   | 是否禁止普通成员通过群查看其他成员资料：`0` 不禁止，`1` 禁止。                                    |
+| applyMemberFriend      | Integer   | 是否禁止普通成员通过群申请添加其他成员为好友：`0` 不禁止，`1` 禁止。                              |
+| notificationUpdateTime | Long      | 群公告最后更新时间，当前 core 使用 Unix 毫秒时间戳。                                              |
+| notificationUserID     | String    | 最后更新群公告的用户 ID。                                                                         |
 
 ## 关联类型
 

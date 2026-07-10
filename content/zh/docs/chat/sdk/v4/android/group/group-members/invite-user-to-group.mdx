@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-members/invite-user-to-group'
 
 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。
 
-## 功能介绍
-
-邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -37,16 +33,16 @@ public void inviteUserToGroup(OnBase<String> base, String groupId, List<String> 
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                           | 是否必填 | 描述             |
-| -------- | ------------------------------------------------------------------ | -------- | ---------------- |
-| callBack | `OnBase<String>` | 是       | 操作结果回调     |
-| groupId  | String                                                             | 是       | 群ID             |
-| reason   | String                                                             | 是       | 邀请信息         |
-| uidList  | `List<String>` | 是       | 被邀请人 ID 集合 |
+| 参数名称 | 参数类型                                                       | 是否必填 | 描述             |
+| -------- | -------------------------------------------------------------- | -------- | ---------------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 操作结果回调     |
+| groupId  | String                                                         | 是       | 群ID             |
+| reason   | String                                                         | 是       | 邀请信息         |
+| uidList  | `List<String>`                                                 | 是       | 被邀请人 ID 集合 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示邀请请求已被服务端接受并完成群成员增量同步，回调字符串不含业务数据；具体用户是否直接入群取决于群验证策略，权限或参数校验失败时调用 `onError`。
 
 ## 代码示例
 

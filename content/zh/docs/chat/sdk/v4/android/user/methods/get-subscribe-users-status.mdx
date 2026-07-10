@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status'
 
 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。
 
-## 功能介绍
-
-获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。
-
 用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
 
 ## Core Binding 方法
@@ -37,13 +33,13 @@ public void getSubscribeOnlineUsersStatus(OnBase<List<UsersOnlineStatus>> callBa
 
 ## 输入参数
 
-无
+| 参数名称 | Java 类型                                                                                                                                   | 是否必填 | 描述                     |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status)`>>` | 是       | 已订阅用户状态结果回调。 |
 
 ## 返回结果
 
-| 参数名称 | 参数类型                                                                                      | 描述         |
-| -------- | --------------------------------------------------------------------------------------------- | ------------ |
-| callBack | `OnBase<List<`[`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status)`>>` | 调用成功回调 |
+成功时通过 `callBack.onSuccess` 返回 `List<`[`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status)`>`；失败时调用 `onError`。
 
 ## 代码示例
 

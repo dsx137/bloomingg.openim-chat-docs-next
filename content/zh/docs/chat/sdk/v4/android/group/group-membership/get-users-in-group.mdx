@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-membership/get-users-in-group
 
 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。
 
-## 功能介绍
-
-查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -37,15 +33,15 @@ public void getUsersInGroup(OnBase<List<String>> base, String groupID, List<Stri
 
 ## 输入参数
 
-| 参数名称   | 参数类型                                                                       | 是否必填 | 描述                   |
-| ---------- | ------------------------------------------------------------------------------ | -------- | ---------------------- |
-| base       | `OnBase<List<String>>` | 是       | 查询结果回调。         |
-| groupID    | String                                                                         | 是       | 群 ID。                |
-| userIdList | `List<String>` | 是       | 待检查的用户 ID 列表。 |
+| 参数名称   | 参数类型                                                             | 是否必填 | 描述                   |
+| ---------- | -------------------------------------------------------------------- | -------- | ---------------------- |
+| base       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<String>>` | 是       | 查询结果回调。         |
+| groupID    | String                                                               | 是       | 群 ID。                |
+| userIdList | `List<String>`                                                       | 是       | 待检查的用户 ID 列表。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回输入 `userIdList` 中实际存在于目标群的用户 ID 列表，并保持输入遍历顺序；不在群内的用户不会返回，当前用户本身不在该群时底层可能返回 `null`。查询失败时调用 `onError`。
 
 ## 代码示例
 

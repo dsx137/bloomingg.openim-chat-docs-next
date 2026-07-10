@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list'
 
 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。
 
-## 功能介绍
-
-获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,9 +33,10 @@ public void getFriendList(OnBase<List<UserInfo>> base, Boolean filterBlack)
 
 ## 输入参数
 
-| 参数名称    | 参数类型 | 是否必填 | 描述             |
-| ----------- | -------- | -------- | ---------------- |
-| filterBlack | Boolean  | 否       | 是否过滤掉黑名单 |
+| 参数名称    | Java 类型                                                                                                                | 是否必填 | 描述                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------- |
+| base        | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`UserInfo`](/docs/chat/sdk/v4/android/models/user-info)`>>` | 是       | 好友列表查询结果回调。       |
+| filterBlack | `Boolean`                                                                                                                | 否       | 是否过滤已加入黑名单的用户。 |
 
 ## 返回结果
 

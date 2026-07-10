@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-advance-msg-listener'
 
 `OnAdvanceMsgListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnAdvanceMsgListener`。接收新消息、已读回执、撤回和消息扩展事件的监听器。
 
-## 类型说明
-
-消息监听
-
 ## 回调方法
 
 | 方法                           | 参数                                                                                                  | 描述                                                                                                                                                                                                                                          |
@@ -25,9 +21,9 @@ sourcePath: '/docs/chat/sdk/v4/android/models/on-advance-msg-listener'
 | onRecvC2CReadReceipt           | `List<`[`C2CReadReceiptInfo`](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info)`>` `list`       | 收到单聊已读通知并把对应本地消息标记为已读后触发。每项的 `userID` 是执行已读操作的用户，`msgIDList` 是已读消息 ID，`readTime` 是已读时间；应据此更新消息气泡和会话最后一条消息的已读状态。                                                    |
 | onRecvGroupMessageReadReceipt  | [`GroupMessageReceipt`](/docs/chat/sdk/v4/android/models/group-message-receipt) `groupMessageReceipt` | 群消息的已读人数或已读成员发生变化时触发。`conversationID` 标识群会话，`groupMessageReadInfo` 按 `clientMsgID` 给出 `hasReadCount`、`unreadCount` 和已读成员列表。                                                                            |
 | onRecvMessageRevokedV2         | [`RevokedInfo`](/docs/chat/sdk/v4/android/models/revoked-info) `info`                                 | 收到单聊或群聊撤回通知，且 core 已更新本地原消息和会话最后一条消息后触发；群管理员撤回他人消息也会进入此回调。`info.clientMsgID` 标识原消息，`revokerID`、`revokerRole`、`revokeTime` 描述撤回人、角色和时间；不会再触发 `onRecvNewMessage`。 |
-| onRecvMessageExtensionsChanged | `String msgID`；[`KeyValue`](/docs/chat/sdk/v4/android/models/key-value) `list (List)`                | 目标消息已有扩展 key 的值或更新时间发生变化时使用。`msgID` 是目标消息的客户端消息 ID，`list` 是变化后的扩展项，每项包含 `typeKey`、`value` 和 `latestUpdateTime`。                                                                            |
-| onRecvMessageExtensionsDeleted | `String msgID`；`String keyList (List)`                                                               | 目标消息的扩展项被删除时使用。`msgID` 是目标消息的客户端消息 ID，`keyList` 是被删除的 `typeKey` 列表；业务端应按 key 从本地扩展状态中移除对应项。                                                                                             |
-| onRecvMessageExtensionsAdded   | `String msgID`；[`KeyValue`](/docs/chat/sdk/v4/android/models/key-value) `list (List)`                | 目标消息新增扩展项时使用。`msgID` 是目标消息的客户端消息 ID，`list` 是新增的扩展项，每项包含扩展 key、值和服务端最后更新时间。                                                                                                                |
+| onRecvMessageExtensionsChanged | `String msgID`；`List<`[`KeyValue`](/docs/chat/sdk/v4/android/models/key-value)`>` `list`             | 目标消息已有扩展 key 的值或更新时间发生变化时使用。`msgID` 是目标消息的客户端消息 ID，`list` 是变化后的扩展项，每项包含 `typeKey`、`value` 和 `latestUpdateTime`。                                                                            |
+| onRecvMessageExtensionsDeleted | `String msgID`；`List<String>` `keyList`                                                              | 目标消息的扩展项被删除时使用。`msgID` 是目标消息的客户端消息 ID，`keyList` 是被删除的 `typeKey` 列表；业务端应按 key 从本地扩展状态中移除对应项。                                                                                             |
+| onRecvMessageExtensionsAdded   | `String msgID`；`List<`[`KeyValue`](/docs/chat/sdk/v4/android/models/key-value)`>` `list`             | 目标消息新增扩展项时使用。`msgID` 是目标消息的客户端消息 ID，`list` 是新增的扩展项，每项包含扩展 key、值和服务端最后更新时间。                                                                                                                |
 | onMsgDeleted                   | [`Message`](/docs/chat/sdk/v4/android/models/message) `message`                                       | 消息在本地被标记为已删除后触发，包括本端删除操作和同步到的跨端删除通知。`message` 是删除前读取到的消息对象；可用 `clientMsgID` 从列表移除该消息，若它原本是会话最后一条消息，会话变更回调也会更新。                                           |
 | onRecvOfflineNewMessage        | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` `messages`                            | 未设置批量消息监听器时，SDK 处于后台同步到新消息，且全局与对应会话的接收选项都允许接收后触发。Go core 对每条符合条件的消息分别调用一次；被屏蔽或设置为不接收的会话消息不会进入此回调。                                                        |
 | onRecvOnlineOnlyMessage        | `String message (JSON)`；[`Message`](/docs/chat/sdk/v4/android/models/message)                        | 未设置批量消息监听器且 SDK 在前台收到仅在线消息时触发。这类消息与普通新消息分流，不走 `onRecvNewMessage`；Android 接口保留 core 返回的消息 JSON 字符串，应先反序列化为 `Message`，再按 `clientMsgID`、`contentType` 和会话字段处理。          |

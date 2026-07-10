@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black'
 
 将指定用户移出黑名单，恢复与该用户的普通关系能力。
 
-## 功能介绍
-
-将指定用户移出黑名单，恢复与该用户的普通关系能力。
-
 黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
 
 ## Core Binding 方法
@@ -44,7 +40,7 @@ public void removeBlacklist(OnBase<String> base, String uid)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标用户已移出当前用户黑名单并完成本地关系同步，回调字符串不含业务数据；目标不存在或服务端请求失败时调用 `onError`。关系变化也会通过好友监听器通知。
 
 ## 代码示例
 

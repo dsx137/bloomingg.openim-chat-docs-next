@@ -10,6 +10,7 @@ version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener'
 ---
+
 接收自定义业务消息，用于处理业务侧通过 OpenIM 自定义通道下发的扩展事件。
 
 ## 功能介绍
@@ -36,9 +37,9 @@ public void setCustomBusinessListener(OnCustomBusinessListener customBusinessLis
 
 ## 输入参数
 
-| 参数名称   | 类型                                                                                       | 描述             |
-| ---------- | ------------------------------------------------------------------------------------------ | ---------------- |
-| `listener` | [`OnCustomBusinessListener`](/docs/chat/sdk/v4/android/models/on-custom-business-listener) | 事件监听器实例。 |
+| 参数名称               | Java 类型                                                                                  | 是否必填 | 描述                       |
+| ---------------------- | ------------------------------------------------------------------------------------------ | -------- | -------------------------- |
+| customBusinessListener | [`OnCustomBusinessListener`](/docs/chat/sdk/v4/android/models/on-custom-business-listener) | 是       | 自定义业务消息监听器实例。 |
 
 ## 返回结果
 

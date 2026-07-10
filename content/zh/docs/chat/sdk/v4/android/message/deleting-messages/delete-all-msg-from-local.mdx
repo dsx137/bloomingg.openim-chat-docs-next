@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/deleting-messages/delete-all-msg-
 
 仅删除当前用户本地全部消息数据，适合本地缓存清理。
 
-## 功能介绍
-
-仅删除当前用户本地全部消息数据，适合本地缓存清理。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,13 +33,13 @@ public void deleteAllMsgFromLocal(OnBase<String> base)
 
 ## 输入参数
 
-| 名称     | 类型             | 是否必填 | 描述     |
-| -------- | ---------------- | -------- | -------- |
-| callBack | `OnBase<String>` | 是       | 回调接口 |
+| 名称     | 类型                                                           | 是否必填 | 描述     |
+| -------- | -------------------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 回调接口 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示本地消息表已清空并更新相关会话状态，不会主动删除服务端历史；本地数据库操作失败时调用 `onError`。后续同步是否重新拉取消息取决于 core 的删除标记。
 
 ## 代码示例
 

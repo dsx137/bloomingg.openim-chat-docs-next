@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/update-friends-req'
@@ -15,13 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/android/models/update-friends-req'
 
 ## 字段说明
 
-| 字段名称      | Java 类型 | 描述           |
-| ------------- | --------- | -------------- |
-| ownerUserID   | String    | 操作者Uid      |
-| friendUserIDs | String[]  | 待更新的用户id |
-| isPinned      | Boolean   | 是否置顶       |
-| remark        | String    | 备注名         |
-| ex            | String    | 扩展参数       |
+| 字段名称      | Java 类型 | 描述                                                                                                                           |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ownerUserID   | String    | 好友关系所属用户 ID。Android setter 为受保护方法，且 core 会强制改为当前登录用户 ID，业务端无需也不能指定其他用户。            |
+| friendUserIDs | String[]  | 要批量更新的好友用户 ID 数组；每一项都必须已经是当前用户的好友。                                                               |
+| isPinned      | Boolean   | 是否在好友列表中置顶这些好友。使用包装类型是为了区分“不修改”与显式设置 `true/false`；为 `null` 时 Android 序列化会省略该字段。 |
+| remark        | String    | 当前用户为这些好友设置的备注名；为 `null` 时不修改，传空字符串表示清空备注。                                                   |
+| ex            | String    | 好友关系级业务扩展字符串；为 `null` 时不修改，格式由业务约定。                                                                 |
 
 ## 相关页面
 

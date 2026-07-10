@@ -118,10 +118,7 @@ function localizeBody(body, route, title) {
     '',
   );
   parts.push('## 使用方式', '', '相关接口：', '');
-  parts.push(
-    ...translateApiSection(sections.get('API signatures') ?? '', route),
-    '',
-  );
+  parts.push(...translateApiSection(sections.get('API signatures') ?? '', route), '');
   parts.push('调用流程：', '');
   parts.push(
     ...translateImplementationSection(sections.get('Implementation') ?? '', route, title),
@@ -134,15 +131,9 @@ function localizeBody(body, route, title) {
     '',
   );
   parts.push('## 验证与排查', '', '验证时重点检查：', '');
-  parts.push(
-    ...translateVerifySection(sections.get('Verify the result') ?? '', route),
-    '',
-  );
+  parts.push(...translateVerifySection(sections.get('Verify the result') ?? '', route), '');
   parts.push('常见问题：', '');
-  parts.push(
-    ...translateTroubleshootingSection(sections.get('Troubleshooting') ?? ''),
-    '',
-  );
+  parts.push(...translateTroubleshootingSection(sections.get('Troubleshooting') ?? ''), '');
   parts.push('## 下一步', '', ...translateNextSteps(sections.get('Next steps') ?? ''), '');
 
   return parts
@@ -249,7 +240,11 @@ function applicationUserListGuide(title) {
       ['字段', '类型', '说明'],
       [
         ['`event`', '`string`', 'SDK 返回的事件名或方法标识。'],
-        ['`errCode`', '`number`', '错误码。通常为 `0` 表示成功，非零时应读取 `errMsg` 并进入错误处理。'],
+        [
+          '`errCode`',
+          '`number`',
+          '错误码。通常为 `0` 表示成功，非零时应读取 `errMsg` 并进入错误处理。',
+        ],
         ['`errMsg`', '`string`', '错误描述。'],
         ['`operationID`', '`string`', '本次调用的链路追踪 ID。'],
         ['`data`', '`PublicUserItem[]`', '按用户 ID 返回的公开用户资料列表。'],
@@ -419,18 +414,8 @@ function friendListGuide(title) {
     ...renderMarkdownTable(
       ['参数名', '类型', '是否必填', '说明'],
       [
-        [
-          '`offset`',
-          '`number`',
-          '必填',
-          '分页起始偏移量。第一页传 `0`。',
-        ],
-        [
-          '`count`',
-          '`number`',
-          '必填',
-          '本次读取数量。',
-        ],
+        ['`offset`', '`number`', '必填', '分页起始偏移量。第一页传 `0`。'],
+        ['`count`', '`number`', '必填', '本次读取数量。'],
         [
           '`filterBlack`',
           '`boolean`',
@@ -454,7 +439,11 @@ function friendListGuide(title) {
       ['字段', '类型', '说明'],
       [
         ['`event`', '`string`', 'SDK 返回的事件名或方法标识。'],
-        ['`errCode`', '`number`', '错误码。通常为 `0` 表示成功，非零时应读取 `errMsg` 并进入错误处理。'],
+        [
+          '`errCode`',
+          '`number`',
+          '错误码。通常为 `0` 表示成功，非零时应读取 `errMsg` 并进入错误处理。',
+        ],
         ['`errMsg`', '`string`', '错误描述。'],
         ['`operationID`', '`string`', '本次调用的链路追踪 ID。'],
         ['`data`', '`FriendUserItem[]`', '当前登录用户的好友关系列表。'],
@@ -469,7 +458,11 @@ function friendListGuide(title) {
         ['`userID`', '`string`', '好友用户的 OpenIM 用户 ID。'],
         ['`nickname`', '`string`', '好友账号级公开昵称。'],
         ['`faceURL`', '`string`', '好友账号级公开头像地址。'],
-        ['`remark`', '`string`', '当前用户为该好友设置的备注。联系人页展示名称通常优先使用该字段。'],
+        [
+          '`remark`',
+          '`string`',
+          '当前用户为该好友设置的备注。联系人页展示名称通常优先使用该字段。',
+        ],
         ['`isPinned`', '`boolean`', '该好友是否被当前用户置顶。'],
         ['`attachedInfo`', '`string`', 'SDK 返回的附加信息，通常由服务端或 SDK 内部写入。'],
         ['`ex`', '`string`', '好友关系扩展字段，格式由业务约定。'],
@@ -591,10 +584,7 @@ function localizeFormalSdkGuide(body, route, title) {
   parts.push('', ...formalInstallAndConfigure(), '');
   parts.push('', ...formalInitializeSdk(), '');
   parts.push('## 使用方式', '', '相关接口：', '');
-  parts.push(
-    ...translateApiSection(sections.get('API signatures') ?? '', route),
-    '',
-  );
+  parts.push(...translateApiSection(sections.get('API signatures') ?? '', route), '');
   parts.push('## 实现流程', '');
   parts.push(
     `下面的步骤以${title}为目标，代码中的用户、群组、会话和消息 ID 需要替换为你业务中的真实值。`,
@@ -614,15 +604,9 @@ function localizeFormalSdkGuide(body, route, title) {
   );
   parts.push('## 状态同步', '', ...formalHandleResult(route), '');
   parts.push('## 验证与排查', '', '验证时重点检查：', '');
-  parts.push(
-    ...formalVerify(route, sections.get('Verify the result') ?? ''),
-    '',
-  );
+  parts.push(...formalVerify(route, sections.get('Verify the result') ?? ''), '');
   parts.push('常见问题：', '');
-  parts.push(
-    ...translateTroubleshootingSection(sections.get('Troubleshooting') ?? ''),
-    '',
-  );
+  parts.push(...translateTroubleshootingSection(sections.get('Troubleshooting') ?? ''), '');
   parts.push('## 下一步', '', ...translateNextSteps(sections.get('Next steps') ?? ''), '');
 
   return parts
@@ -662,7 +646,10 @@ function normalizeOpenImTerminology(value) {
     .replaceAll('按名称、URL 或', '按名称、ID 或')
     .replaceAll('URL 或自定义类型', 'ID 或自定义类型')
     .replaceAll('URL 或多种过滤条件', 'ID 或多种过滤条件')
-    .replaceAll('Do not port Sendbird open-channel calls one for one. Model public rooms as groups or own discovery in your 后端.', '不要照搬外部文档中的公开聊天室模型；在 OpenIM 中请使用群组，或由业务后端维护发现和加入规则。')
+    .replaceAll(
+      'Do not port Sendbird open-channel calls one for one. Model public rooms as groups or own discovery in your 后端.',
+      '不要照搬外部文档中的公开聊天室模型；在 OpenIM 中请使用群组，或由业务后端维护发现和加入规则。',
+    )
     .replaceAll('Join public room', '申请加入群组')
     .replaceAll('public room', 'group')
     .replaceAll('public rooms', 'groups');
@@ -1528,6 +1515,7 @@ const navigationLabels = {
   'joining-and-leaving-a-channel': '加入和离开频道',
   'listing-changelogs': '变更日志',
   'local-caching': '本地缓存',
+  logger: '日志',
   'managing-a-message': '管理消息',
   'managing-channel-event-handlers': '管理频道事件处理器',
   'managing-channel-metacounters': '管理频道计数器',
@@ -1682,7 +1670,7 @@ const phraseTranslations = [
     '确认 `login()` 成功，并且在调用目标 API 前触发 `CbEvents.OnConnectSuccess`。',
   ],
   [
-    "Confirm the OpenIM call resolves and the returned data or follow-up SDK event matches the expected state.",
+    'Confirm the OpenIM call resolves and the returned data or follow-up SDK event matches the expected state.',
     '确认 SDK 调用成功 resolve，并且返回数据或后续事件符合预期。',
   ],
   [

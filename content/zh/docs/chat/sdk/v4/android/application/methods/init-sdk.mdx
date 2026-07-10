@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/application/methods/init-sdk'
 
 初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
 
-## 功能介绍
-
-初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
-
 初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
 
 ## Core Binding 方法
@@ -37,15 +33,15 @@ public boolean initSDK(Application application, InitConfig initConfig, @NotNull 
 
 ## 输入参数
 
-| 参数名称      | 类型                                                                  | 描述                       |
-| ------------- | --------------------------------------------------------------------- | -------------------------- |
-| `listener`    | [`OnConnListener`](/docs/chat/sdk/v4/android/models/on-conn-listener) | 事件监听器实例。           |
-| `operationID` | `string`                                                              | 本次操作的追踪 ID。        |
-| `config`      | `string`                                                              | 按 core binding 签名传入。 |
+| 参数名称    | Java 类型                                                             | 是否必填 | 描述                                                           |
+| ----------- | --------------------------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| application | `Application`                                                         | 是       | Android 应用对象，SDK 用它注册进程生命周期监听并获取运行环境。 |
+| initConfig  | [`InitConfig`](/docs/chat/sdk/v4/android/models/init-config)          | 是       | API、WebSocket、本地存储和日志配置。                           |
+| listener    | [`OnConnListener`](/docs/chat/sdk/v4/android/models/on-conn-listener) | 是       | 接收连接成功、失败、被踢下线和 token 失效等事件。              |
 
 ## 返回结果
 
-同步返回 `bool`。
+返回 `boolean`：`true` 表示初始化请求已成功提交；后续连接状态仍应以 `OnConnListener` 回调为准。
 
 ## 代码示例
 

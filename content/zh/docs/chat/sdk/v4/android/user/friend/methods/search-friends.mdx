@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/search-friends'
 
 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。
 
-## 功能介绍
-
-搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,17 +33,17 @@ public void searchFriends(OnBase<List<FriendInfo>> base, List<String> keywordLis
 
 ## 输入参数
 
-| 参数名称         | 参数类型                                                                       | 是否必填 | 描述                                           |
-| ---------------- | ------------------------------------------------------------------------------ | -------- | ---------------------------------------------- |
-| callBack         | `OnBase<List<`[`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info)`>>` | 是       | 回调接口                                       |
-| keywordList      | `List<String>`                                                                 | 是       | 搜索关键词，目前仅支持一个关键词搜索，不能为空 |
-| isSearchUserID   | Boolean                                                                        | 是       | 是否以关键词搜索 UserID                        |
-| isSearchNickname | Boolean                                                                        | 是       | 是否以关键词搜索昵称，默认 false               |
-| isSearchRemark   | Boolean                                                                        | 是       | 是否以关键词搜索备注，默认 false               |
+| 参数名称         | 参数类型                                                                                                                     | 是否必填 | 描述                                           |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------- | ---------------------------------------------- |
+| callBack         | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info)`>>` | 是       | 回调接口                                       |
+| keywordList      | `List<String>`                                                                                                               | 是       | 搜索关键词，目前仅支持一个关键词搜索，不能为空 |
+| isSearchUserID   | Boolean                                                                                                                      | 是       | 是否以关键词搜索 UserID                        |
+| isSearchNickname | Boolean                                                                                                                      | 是       | 是否以关键词搜索昵称，默认 false               |
+| isSearchRemark   | Boolean                                                                                                                      | 是       | 是否以关键词搜索备注，默认 false               |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回匹配启用字段的 `List<`[`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info)`>`；没有匹配项时返回空列表，关键词或本地查询失败时调用 `onError`。
 
 ## 代码示例
 

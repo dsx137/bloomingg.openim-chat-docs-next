@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-conversation-mes
 
 将指定会话中的消息标记为已读，适合进入会话页后清理未读。
 
-## 功能介绍
-
-将指定会话中的消息标记为已读，适合进入会话页后清理未读。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void markConversationMessageAsRead(String conversationID, OnBase<String> 
 
 ## 输入参数
 
-| 参数名称       | 参数类型                                                           | 是否必填 | 描述     |
-| -------------- | ------------------------------------------------------------------ | -------- | -------- |
-| callBack       | `OnBase<String>` | 是       | 回调接口 |
-| conversationID | String                                                             | 是       | 会话 ID  |
+| 参数名称       | 参数类型                                                       | 是否必填 | 描述     |
+| -------------- | -------------------------------------------------------------- | -------- | -------- |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 回调接口 |
+| conversationID | String                                                         | 是       | 会话 ID  |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标会话未读消息已完成本地已读更新，并按会话类型发送必要的已读回执；会话不存在或任一更新/回执步骤失败时调用 `onError`。
 
 ## 代码示例
 

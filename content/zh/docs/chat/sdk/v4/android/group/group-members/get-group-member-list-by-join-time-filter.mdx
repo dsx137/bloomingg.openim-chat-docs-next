@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-members/get-group-member-list
 
 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。
 
-## 功能介绍
-
-按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -39,19 +35,19 @@ public void getGroupMemberListByJoinTime(OnBase<List<GroupMembersInfo>> base, St
 
 ## 输入参数
 
-| 参数名称          | 参数类型                                                                                    | 是否必填 | 描述                  |
-| ----------------- | ------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| callBack          | `OnBase<List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | 是       | 回调接口              |
-| groupID           | String                                                                                      | 是       | 群ID                  |
-| offset            | int                                                                                         | 是       | 开始下标              |
-| count             | int                                                                                         | 是       | 总数                  |
-| joinTimeBegin     | int                                                                                         | 是       | 加入开始时间          |
-| joinTimeEnd       | int                                                                                         | 是       | 加入结束时间          |
-| excludeUserIDList | `List<String>`                                                                              | 否       | 剔除不被查询的成员 ID |
+| 参数名称          | 参数类型                                                                                                                                  | 是否必填 | 描述                  |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
+| callBack          | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | 是       | 回调接口              |
+| groupID           | String                                                                                                                                    | 是       | 群ID                  |
+| offset            | int                                                                                                                                       | 是       | 开始下标              |
+| count             | int                                                                                                                                       | 是       | 总数                  |
+| joinTimeBegin     | int                                                                                                                                       | 是       | 加入开始时间          |
+| joinTimeEnd       | int                                                                                                                                       | 是       | 加入结束时间          |
+| excludeUserIDList | `List<String>`                                                                                                                            | 否       | 剔除不被查询的成员 ID |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 `List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>`，内容同时满足入群时间、排除用户和分页条件；群不存在、时间范围无效或查询失败时调用 `onError`。
 
 ## 代码示例
 

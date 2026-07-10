@@ -40,13 +40,10 @@ public void setSelfInfo(OnBase<String> base, String nickname, String faceURL, in
 
 ## Input Parameters
 
-| Parameter          | Type    | Description                                               |
-| ------------------ | ------- | --------------------------------------------------------- |
-| `userID`           | String  | User ID.                                                  |
-| `nickname`         | String  | Parameter passed according to the core binding signature. |
-| `faceURL`          | String  | Resource URL.                                             |
-| `ex`               | String  | Parameter passed according to the core binding signature. |
-| `globalRecvMsgOpt` | Integer | Parameter passed according to the core binding signature. |
+| Parameter     | Type                                                            | Description                                     |
+| ------------- | --------------------------------------------------------------- | ----------------------------------------------- |
+| `base`        | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>`   | Async callback for success and failure results. |
+| `userInfoReq` | [User Info Req](/docs/chat/sdk/v4/android/models/user-info-req) | Request parameters, usually encoded as JSON.    |
 
 
 

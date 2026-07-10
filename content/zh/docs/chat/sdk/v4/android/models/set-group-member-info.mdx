@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/set-group-member-info'
@@ -15,14 +15,20 @@ sourcePath: '/docs/chat/sdk/v4/android/models/set-group-member-info'
 
 ## 字段说明
 
-| 字段名称  | Java 类型 | 描述                                     |
-| --------- | --------- | ---------------------------------------- |
-| groupID   | String    | 群ID                                     |
-| userID    | String    | 群成员 ID                                |
-| nickname  | String    | 群成员昵称                               |
-| faceURL   | String    | 群成员头像                               |
-| roleLevel | Integer   | 群成员角色，1 普通成员；2 群主；3 管理员 |
-| ex        | String    | 扩展参数                                 |
+| 字段名称  | Java 类型 | 描述                                                                                                                                                                           |
+| --------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| groupID   | String    | 要修改成员所属的群 ID，必填。                                                                                                                                                  |
+| userID    | String    | 要修改的群成员用户 ID，必填。                                                                                                                                                  |
+| nickname  | String    | 新的群内昵称；为 `null` 时不修改，传空字符串表示清空。                                                                                                                         |
+| faceURL   | String    | 新的群成员头像 URL；为 `null` 时不修改。                                                                                                                                       |
+| roleLevel | Integer   | 新的群内角色，取值见 [`GroupRole`](/docs/chat/sdk/v4/android/models/group-role)：`20` 普通成员、`60` 管理员、`100` 群主。Android 源码注释中的 `1/2/3` 与当前 core 常量不一致。 |
+| ex        | String    | 群成员级业务扩展字符串；为 `null` 时不修改。                                                                                                                                   |
+
+Android 使用 `toStringWithoutNull` 序列化此对象，因此可选字段保持 `null` 才表示“不更新”；权限及角色变更是否合法由服务端校验。
+
+## 关联类型
+
+- [群成员角色](/docs/chat/sdk/v4/android/models/group-role)（`GroupRole`）：群主、管理员和普通成员的角色值。
 
 ## 相关页面
 

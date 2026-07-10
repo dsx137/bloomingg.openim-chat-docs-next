@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/listing-conversations/get-convers
 
 分页获取会话列表，适合会话数量较多时按页加载。
 
-## 功能介绍
-
-分页获取会话列表，适合会话数量较多时按页加载。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,15 +33,15 @@ public void getConversationListSplit(OnBase<List<ConversationInfo>> base, long o
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                                   | 是否必填 | 描述       |
-| -------- | ------------------------------------------------------------------------------------------ | -------- | ---------- |
-| base     | `OnBase<List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>>` | 是       | 回调接口   |
-| offset   | int                                                                                        | 是       | 起始偏移量 |
-| count    | int                                                                                        | 是       | 数量       |
+| 参数名称 | 参数类型                                                                                                                                 | 是否必填 | 描述       |
+| -------- | ---------------------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>>` | 是       | 回调接口   |
+| offset   | int                                                                                                                                      | 是       | 起始偏移量 |
+| count    | int                                                                                                                                      | 是       | 数量       |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回当前页 `List<`[`ConversationInfo`](/docs/chat/sdk/v4/android/models/conversation-info)`>`，会话按 SDK 列表规则排序；没有更多数据时返回空列表，偏移量或本地查询失败时调用 `onError`。
 
 ## 代码示例
 

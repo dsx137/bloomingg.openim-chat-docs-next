@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/update-fcm-tok
 
 更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。
 
-## 功能介绍
-
-更新当前设备的 FCM token，用于服务端向 Android 设备发送离线推送。
-
 推送通知能力至少要求 SDK 已初始化。
 
 ## Core Binding 方法
@@ -37,16 +33,15 @@ public void updateFcmToken(OnBase<String> base, String fcmToken, long expireTime
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                       |
-| ------------- | ----------------------------------------------- | -------------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。             |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。        |
-| `fcmToken`    | `string`                                        | 按 core binding 签名传入。 |
-| `expireTime`  | `int64`                                         | 按 core binding 签名传入。 |
+| 参数名称   | Java 类型                                                      | 是否必填 | 描述                             |
+| ---------- | -------------------------------------------------------------- | -------- | -------------------------------- |
+| base       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | FCM token 更新结果回调。         |
+| fcmToken   | `String`                                                       | 是       | Firebase Cloud Messaging token。 |
+| expireTime | `long`                                                         | 是       | 该 token 的过期时间戳。          |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示 FCM token、当前用户、平台和过期时间已提交给服务端，回调字符串不含业务数据；token 为空、未登录或网络请求失败时调用 `onError`。该方法不负责向 Firebase 申请 token。
 
 ## 代码示例
 

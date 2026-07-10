@@ -35,13 +35,17 @@ The Java method prototype in Android SDK v3.8.3 is shown below. The core binding
 public void getSubscribeOnlineUsersStatus(OnBase<List<UsersOnlineStatus>> callBack)
 ```
 
+## Input Parameters
+
+| Parameter  | Type                                                                                                                                       | Description                                     |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `callBack` | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[Users Online Status](/docs/chat/sdk/v4/android/models/users-online-status)`>>` | Async callback for success and failure results. |
+
+
+
 ## Return Value
 
 The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
-
-| Name       | Type                                                                                          | Description                           |
-| ---------- | --------------------------------------------------------------------------------------------- | ------------------------------------- |
-| `callBack` | `OnBase<List<`[Users Online Status](/docs/chat/sdk/v4/android/models/users-online-status)`>>` | Returned when the operation succeeds. |
 
 ## Code Example
 

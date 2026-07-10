@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/application/methods/login'
 
 使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。
 
-## 功能介绍
-
-使用业务服务端签发的 token 登录指定用户。登录成功后才能可靠调用会话、消息、群组、好友等用户态接口。
-
 初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
 
 ## Core Binding 方法
@@ -37,16 +33,15 @@ public void login(@NotNull OnBase<String> base, String uid, String token)
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                       |
-| ------------- | ----------------------------------------------- | -------------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。             |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。        |
-| `userID`      | `string`                                        | 业务标识参数。             |
-| `token`       | `string`                                        | 按 core binding 签名传入。 |
+| 参数名称 | Java 类型                                                      | 是否必填 | 描述                                         |
+| -------- | -------------------------------------------------------------- | -------- | -------------------------------------------- |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 登录结果回调；成功时返回 core 的结果字符串。 |
+| uid      | `String`                                                       | 是       | 要登录的 OpenIM 用户 ID。                    |
+| token    | `String`                                                       | 是       | 业务服务端为该用户签发的 OpenIM 登录 token。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示当前用户登录流程完成，回调字符串不含业务数据；随后可结合连接和同步监听器更新界面。认证、连接或初始化失败时，`onError` 返回错误码和描述。
 
 ## 代码示例
 

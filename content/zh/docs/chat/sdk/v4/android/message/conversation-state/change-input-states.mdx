@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/conversation-state/change-input-s
 
 更新当前用户在指定会话中的输入状态。
 
-## 功能介绍
-
-更新当前用户在指定会话中的输入状态。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,15 @@ public void changeInputStates(OnBase<String> base, String conversationId, boolea
 
 ## 输入参数
 
-| 参数名称       | 参数类型 | 是否必填 | 描述         |
-| -------------- | -------- | -------- | ------------ |
-| conversationID | String   | 是       | 会话 ID      |
-| focus          | boolean  | 是       | 是否正在输入 |
+| 参数名称       | Java 类型                                                      | 是否必填 | 描述                                        |
+| -------------- | -------------------------------------------------------------- | -------- | ------------------------------------------- |
+| base           | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 输入状态更新结果回调。                      |
+| conversationId | `String`                                                       | 是       | 输入状态所属的会话 ID。                     |
+| hasFocus       | `boolean`                                                      | 是       | `true` 表示正在输入，`false` 表示停止输入。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示本次开始或停止输入状态已发送，回调字符串不含业务数据；会话不存在、会话 ID 为空或发送超时时调用 `onError`。对同一状态的重复调用可能直接成功而不重复发送。
 
 ## 代码示例
 

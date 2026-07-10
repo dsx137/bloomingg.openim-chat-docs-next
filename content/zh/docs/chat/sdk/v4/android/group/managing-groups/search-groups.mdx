@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/managing-groups/search-groups'
 
 按关键字搜索群组，可按群 ID、群名称等字段搜索。
 
-## 功能介绍
-
-按关键字搜索群组，可按群 ID、群名称等字段搜索。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -37,16 +33,16 @@ public void searchGroups(OnBase<List<GroupInfo>> base, List<String> keywordList,
 
 ## 输入参数
 
-| 参数名称          | 参数类型                                                                     | 是否必填 | 描述       |
-| ----------------- | ---------------------------------------------------------------------------- | -------- | ---------- |
-| callBack          | `OnBase<List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>>` | 是       | 回调接口   |
-| keywordList       | `List<String>`                                                               | 是       | 关键字     |
-| isSearchGroupID   | Boolean                                                                      | 是       | 检索群ID   |
-| isSearchGroupName | Boolean                                                                      | 是       | 检索群昵称 |
+| 参数名称          | 参数类型                                                                                                                   | 是否必填 | 描述       |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- | ---------- |
+| callBack          | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>>` | 是       | 回调接口   |
+| keywordList       | `List<String>`                                                                                                             | 是       | 关键字     |
+| isSearchGroupID   | Boolean                                                                                                                    | 是       | 检索群ID   |
+| isSearchGroupName | Boolean                                                                                                                    | 是       | 检索群昵称 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回匹配启用搜索字段的 `List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>`；没有匹配项时返回空列表，关键词或本地查询失败时调用 `onError`。
 
 ## 代码示例
 

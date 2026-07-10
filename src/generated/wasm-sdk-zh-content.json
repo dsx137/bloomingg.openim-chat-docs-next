@@ -18,6 +18,7 @@
     "joining-and-leaving-a-channel": "加入和离开频道",
     "listing-changelogs": "变更日志",
     "local-caching": "本地缓存",
+    "logger": "日志",
     "managing-a-message": "管理消息",
     "managing-channel-event-handlers": "管理频道事件处理器",
     "managing-channel-metacounters": "管理频道计数器",

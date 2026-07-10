@@ -5,18 +5,18 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/location-elem'
 ---
 
-`LocationElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.LocationElem`。位置消息元素。
+`LocationElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.LocationElem`。位置消息元素，只保存位置文字和坐标，不负责地图逆地理编码或坐标系转换。
 
 ## 字段说明
 
-| 字段名称    | Java 类型 | 描述     |
-| ----------- | --------- | -------- |
-| description | String    | 位置描述 |
-| longitude   | double    | 经度     |
-| latitude    | double    | 纬度     |
+| 字段名称    | Java 类型 | 描述                                                                                               |
+| ----------- | --------- | -------------------------------------------------------------------------------------------------- |
+| description | String    | 位置的可读名称或地址文本，例如门店名和街道地址，用于消息气泡展示。                                 |
+| longitude   | double    | 经度，合法地理范围通常为 `-180` 到 `180`。SDK 不校验坐标系，发送端和接收端必须约定使用相同坐标系。 |
+| latitude    | double    | 纬度，合法地理范围通常为 `-90` 到 `90`。SDK 不校验坐标系，接入地图前应按地图服务要求转换。         |

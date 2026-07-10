@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-membership/get-joined-group-l
 
 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。
 
-## 功能介绍
-
-获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -37,13 +33,13 @@ public void getJoinedGroupList(OnBase<List<GroupInfo>> base)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                     | 是否必填 | 描述     |
-| -------- | ---------------------------------------------------------------------------- | -------- | -------- |
-| callBack | `OnBase<List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>>` | 是       | 回调接口 |
+| 参数名称 | 参数类型                                                                                                                   | 是否必填 | 描述     |
+| -------- | -------------------------------------------------------------------------------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>>` | 是       | 回调接口 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回当前用户已加入的全部 `List<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>`；没有已加入群组时返回空列表，本地查询或反序列化失败时调用 `onError`。
 
 ## 代码示例
 

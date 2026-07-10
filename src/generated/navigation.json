@@ -5247,463 +5247,13 @@
               "minIndex": 143
             },
             {
-              "id": "models/at-user-info",
-              "segment": "at-user-info",
-              "title": "At User Info",
-              "href": "/docs/chat/sdk/v4/android/models/at-user-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 144
-            },
-            {
-              "id": "models/face-elem",
-              "segment": "face-elem",
-              "title": "Face Elem",
-              "href": "/docs/chat/sdk/v4/android/models/face-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 145
-            },
-            {
               "id": "models/init-config",
               "segment": "init-config",
               "title": "Init Config",
               "href": "/docs/chat/sdk/v4/android/models/init-config",
               "type": "page",
               "children": [],
-              "minIndex": 146
-            },
-            {
-              "id": "models/single-type-key-info-sum",
-              "segment": "single-type-key-info-sum",
-              "title": "Single Type Key Info Sum",
-              "href": "/docs/chat/sdk/v4/android/models/single-type-key-info-sum",
-              "type": "page",
-              "children": [],
-              "minIndex": 147
-            },
-            {
-              "id": "models/c2c-read-receipt-info",
-              "segment": "c2c-read-receipt-info",
-              "title": "C2 CRead Receipt Info",
-              "href": "/docs/chat/sdk/v4/android/models/c2c-read-receipt-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 148
-            },
-            {
-              "id": "models/get-friend-application-list-as-applicant-req",
-              "segment": "get-friend-application-list-as-applicant-req",
-              "title": "Get Friend Application List As Applicant Req",
-              "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 149
-            },
-            {
-              "id": "models/get-group-application-list-as-applicant-req",
-              "segment": "get-group-application-list-as-applicant-req",
-              "title": "Get Group Application List As Applicant Req",
-              "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 150
-            },
-            {
-              "id": "models/attached-info-elem",
-              "segment": "attached-info-elem",
-              "title": "Attached Info Elem",
-              "href": "/docs/chat/sdk/v4/android/models/attached-info-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 151
-            },
-            {
-              "id": "models/rich-message",
-              "segment": "rich-message",
-              "title": "Rich Message",
-              "href": "/docs/chat/sdk/v4/android/models/rich-message",
-              "type": "page",
-              "children": [],
-              "minIndex": 152
-            },
-            {
-              "id": "models/advanced-message",
-              "segment": "advanced-message",
-              "title": "Advanced Message",
-              "href": "/docs/chat/sdk/v4/android/models/advanced-message",
-              "type": "page",
-              "children": [],
-              "minIndex": 153
-            },
-            {
-              "id": "models/advanced-text-elem",
-              "segment": "advanced-text-elem",
-              "title": "Advanced Text Elem",
-              "href": "/docs/chat/sdk/v4/android/models/advanced-text-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 154
-            },
-            {
-              "id": "models/message-entity",
-              "segment": "message-entity",
-              "title": "Message Entity",
-              "href": "/docs/chat/sdk/v4/android/models/message-entity",
-              "type": "page",
-              "children": [],
-              "minIndex": 155
-            },
-            {
-              "id": "models/card-elem",
-              "segment": "card-elem",
-              "title": "Card Elem",
-              "href": "/docs/chat/sdk/v4/android/models/card-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 156
-            },
-            {
-              "id": "models/public-user-info",
-              "segment": "public-user-info",
-              "title": "Public User Info",
-              "href": "/docs/chat/sdk/v4/android/models/public-user-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 157
-            },
-            {
-              "id": "models/friendship-info",
-              "segment": "friendship-info",
-              "title": "Friendship Info",
-              "href": "/docs/chat/sdk/v4/android/models/friendship-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 158
-            },
-            {
-              "id": "models/friend-application-info",
-              "segment": "friend-application-info",
-              "title": "Friend Application Info",
-              "href": "/docs/chat/sdk/v4/android/models/friend-application-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 159
-            },
-            {
-              "id": "models/friend-info",
-              "segment": "friend-info",
-              "title": "Friend Info",
-              "href": "/docs/chat/sdk/v4/android/models/friend-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 160
-            },
-            {
-              "id": "models/update-friends-req",
-              "segment": "update-friends-req",
-              "title": "Update Friends Req",
-              "href": "/docs/chat/sdk/v4/android/models/update-friends-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 161
-            },
-            {
-              "id": "models/merge-elem",
-              "segment": "merge-elem",
-              "title": "Merge Elem",
-              "href": "/docs/chat/sdk/v4/android/models/merge-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 162
-            },
-            {
-              "id": "models/blacklist-info",
-              "segment": "blacklist-info",
-              "title": "Blacklist Info",
-              "href": "/docs/chat/sdk/v4/android/models/blacklist-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 163
-            },
-            {
-              "id": "models/conversation-req",
-              "segment": "conversation-req",
-              "title": "Conversation Req",
-              "href": "/docs/chat/sdk/v4/android/models/conversation-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 164
-            },
-            {
-              "id": "models/conversation-info",
-              "segment": "conversation-info",
-              "title": "Conversation Info",
-              "href": "/docs/chat/sdk/v4/android/models/conversation-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 165
-            },
-            {
-              "id": "models/key-value",
-              "segment": "key-value",
-              "title": "Key Value",
-              "href": "/docs/chat/sdk/v4/android/models/key-value",
-              "type": "page",
-              "children": [],
-              "minIndex": 166
-            },
-            {
-              "id": "models/offline-push-info",
-              "segment": "offline-push-info",
-              "title": "Offline Push Info",
-              "href": "/docs/chat/sdk/v4/android/models/offline-push-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 167
-            },
-            {
-              "id": "models/set-group-member-info",
-              "segment": "set-group-member-info",
-              "title": "Set Group Member Info",
-              "href": "/docs/chat/sdk/v4/android/models/set-group-member-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 168
-            },
-            {
-              "id": "models/group-members-info",
-              "segment": "group-members-info",
-              "title": "Group Members Info",
-              "href": "/docs/chat/sdk/v4/android/models/group-members-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 169
-            },
-            {
-              "id": "models/group-application-info",
-              "segment": "group-application-info",
-              "title": "Group Application Info",
-              "href": "/docs/chat/sdk/v4/android/models/group-application-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 170
-            },
-            {
-              "id": "models/group-message-receipt",
-              "segment": "group-message-receipt",
-              "title": "Group Message Receipt",
-              "href": "/docs/chat/sdk/v4/android/models/group-message-receipt",
-              "type": "page",
-              "children": [],
-              "minIndex": 171
-            },
-            {
-              "id": "models/group-message-read-info",
-              "segment": "group-message-read-info",
-              "title": "Group Message Read Info",
-              "href": "/docs/chat/sdk/v4/android/models/group-message-read-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 172
-            },
-            {
-              "id": "models/group-has-read-info",
-              "segment": "group-has-read-info",
-              "title": "Group Has Read Info",
-              "href": "/docs/chat/sdk/v4/android/models/group-has-read-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 173
-            },
-            {
-              "id": "models/group-info",
-              "segment": "group-info",
-              "title": "Group Info",
-              "href": "/docs/chat/sdk/v4/android/models/group-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 174
-            },
-            {
-              "id": "models/put-args",
-              "segment": "put-args",
-              "title": "Put Args",
-              "href": "/docs/chat/sdk/v4/android/models/put-args",
-              "type": "page",
-              "children": [],
-              "minIndex": 175
-            },
-            {
-              "id": "models/video-elem",
-              "segment": "video-elem",
-              "title": "Video Elem",
-              "href": "/docs/chat/sdk/v4/android/models/video-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 176
-            },
-            {
-              "id": "models/get-friend-application-list-as-recipient-req",
-              "segment": "get-friend-application-list-as-recipient-req",
-              "title": "Get Friend Application List As Recipient Req",
-              "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 177
-            },
-            {
-              "id": "models/get-group-application-list-as-recipient-req",
-              "segment": "get-group-application-list-as-recipient-req",
-              "title": "Get Group Application List As Recipient Req",
-              "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req",
-              "type": "page",
-              "children": [],
-              "minIndex": 178
-            },
-            {
-              "id": "models/typing-elem",
-              "segment": "typing-elem",
-              "title": "Typing Elem",
-              "href": "/docs/chat/sdk/v4/android/models/typing-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 179
-            },
-            {
-              "id": "models/search-params",
-              "segment": "search-params",
-              "title": "Search Params",
-              "href": "/docs/chat/sdk/v4/android/models/search-params",
-              "type": "page",
-              "children": [],
-              "minIndex": 180
-            },
-            {
-              "id": "models/notification-elem",
-              "segment": "notification-elem",
-              "title": "Notification Elem",
-              "href": "/docs/chat/sdk/v4/android/models/notification-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 181
-            },
-            {
-              "id": "models/picture-elem",
-              "segment": "picture-elem",
-              "title": "Picture Elem",
-              "href": "/docs/chat/sdk/v4/android/models/picture-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 182
-            },
-            {
-              "id": "models/picture-info",
-              "segment": "picture-info",
-              "title": "Picture Info",
-              "href": "/docs/chat/sdk/v4/android/models/picture-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 183
-            },
-            {
-              "id": "models/location-elem",
-              "segment": "location-elem",
-              "title": "Location Elem",
-              "href": "/docs/chat/sdk/v4/android/models/location-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 184
-            },
-            {
-              "id": "models/text-elem",
-              "segment": "text-elem",
-              "title": "Text Elem",
-              "href": "/docs/chat/sdk/v4/android/models/text-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 185
-            },
-            {
-              "id": "models/file-elem",
-              "segment": "file-elem",
-              "title": "File Elem",
-              "href": "/docs/chat/sdk/v4/android/models/file-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 186
-            },
-            {
-              "id": "models/revoked-info",
-              "segment": "revoked-info",
-              "title": "Revoked Info",
-              "href": "/docs/chat/sdk/v4/android/models/revoked-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 187
-            },
-            {
-              "id": "models/message",
-              "segment": "message",
-              "title": "Message",
-              "href": "/docs/chat/sdk/v4/android/models/message",
-              "type": "page",
-              "children": [],
-              "minIndex": 188
-            },
-            {
-              "id": "models/message-kv",
-              "segment": "message-kv",
-              "title": "Message KV",
-              "href": "/docs/chat/sdk/v4/android/models/message-kv",
-              "type": "page",
-              "children": [],
-              "minIndex": 189
-            },
-            {
-              "id": "models/type-key-set-result",
-              "segment": "type-key-set-result",
-              "title": "Type Key Set Result",
-              "href": "/docs/chat/sdk/v4/android/models/type-key-set-result",
-              "type": "page",
-              "children": [],
-              "minIndex": 190
-            },
-            {
-              "id": "models/search-result",
-              "segment": "search-result",
-              "title": "Search Result",
-              "href": "/docs/chat/sdk/v4/android/models/search-result",
-              "type": "page",
-              "children": [],
-              "minIndex": 191
-            },
-            {
-              "id": "models/search-result-item",
-              "segment": "search-result-item",
-              "title": "Search Result Item",
-              "href": "/docs/chat/sdk/v4/android/models/search-result-item",
-              "type": "page",
-              "children": [],
-              "minIndex": 192
-            },
-            {
-              "id": "models/quote-elem",
-              "segment": "quote-elem",
-              "title": "Quote Elem",
-              "href": "/docs/chat/sdk/v4/android/models/quote-elem",
-              "type": "page",
-              "children": [],
-              "minIndex": 193
-            },
-            {
-              "id": "models/user-ex-info",
-              "segment": "user-ex-info",
-              "title": "User Ex Info",
-              "href": "/docs/chat/sdk/v4/android/models/user-ex-info",
-              "type": "page",
-              "children": [],
-              "minIndex": 194
+              "minIndex": 144
             },
             {
               "id": "models/user-info",
@@ -5712,16 +5262,16 @@
               "href": "/docs/chat/sdk/v4/android/models/user-info",
               "type": "page",
               "children": [],
-              "minIndex": 195
+              "minIndex": 145
             },
             {
-              "id": "models/users-online-status",
-              "segment": "users-online-status",
-              "title": "Users Online Status",
-              "href": "/docs/chat/sdk/v4/android/models/users-online-status",
+              "id": "models/public-user-info",
+              "segment": "public-user-info",
+              "title": "Public User Info",
+              "href": "/docs/chat/sdk/v4/android/models/public-user-info",
               "type": "page",
               "children": [],
-              "minIndex": 196
+              "minIndex": 146
             },
             {
               "id": "models/user-info-req",
@@ -5730,25 +5280,178 @@
               "href": "/docs/chat/sdk/v4/android/models/user-info-req",
               "type": "page",
               "children": [],
-              "minIndex": 197
+              "minIndex": 147
             },
             {
-              "id": "models/sound-elem",
-              "segment": "sound-elem",
-              "title": "Sound Elem",
-              "href": "/docs/chat/sdk/v4/android/models/sound-elem",
+              "id": "models/users-online-status",
+              "segment": "users-online-status",
+              "title": "Users Online Status",
+              "href": "/docs/chat/sdk/v4/android/models/users-online-status",
               "type": "page",
               "children": [],
-              "minIndex": 198
+              "minIndex": 148
             },
             {
-              "id": "models/custom-elem",
-              "segment": "custom-elem",
-              "title": "Custom Elem",
-              "href": "/docs/chat/sdk/v4/android/models/custom-elem",
+              "id": "models/friend-info",
+              "segment": "friend-info",
+              "title": "Friend Info",
+              "href": "/docs/chat/sdk/v4/android/models/friend-info",
               "type": "page",
               "children": [],
-              "minIndex": 199
+              "minIndex": 149
+            },
+            {
+              "id": "models/friendship-info",
+              "segment": "friendship-info",
+              "title": "Friendship Info",
+              "href": "/docs/chat/sdk/v4/android/models/friendship-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 150
+            },
+            {
+              "id": "models/friend-application-info",
+              "segment": "friend-application-info",
+              "title": "Friend Application Info",
+              "href": "/docs/chat/sdk/v4/android/models/friend-application-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 151
+            },
+            {
+              "id": "models/update-friends-req",
+              "segment": "update-friends-req",
+              "title": "Update Friends Req",
+              "href": "/docs/chat/sdk/v4/android/models/update-friends-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 152
+            },
+            {
+              "id": "models/blacklist-info",
+              "segment": "blacklist-info",
+              "title": "Blacklist Info",
+              "href": "/docs/chat/sdk/v4/android/models/blacklist-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 153
+            },
+            {
+              "id": "models/get-friend-application-list-as-applicant-req",
+              "segment": "get-friend-application-list-as-applicant-req",
+              "title": "Get Friend Application List As Applicant Req",
+              "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 154
+            },
+            {
+              "id": "models/get-friend-application-list-as-recipient-req",
+              "segment": "get-friend-application-list-as-recipient-req",
+              "title": "Get Friend Application List As Recipient Req",
+              "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 155
+            },
+            {
+              "id": "models/group-info",
+              "segment": "group-info",
+              "title": "Group Info",
+              "href": "/docs/chat/sdk/v4/android/models/group-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 156
+            },
+            {
+              "id": "models/group-members-info",
+              "segment": "group-members-info",
+              "title": "Group Members Info",
+              "href": "/docs/chat/sdk/v4/android/models/group-members-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 157
+            },
+            {
+              "id": "models/set-group-member-info",
+              "segment": "set-group-member-info",
+              "title": "Set Group Member Info",
+              "href": "/docs/chat/sdk/v4/android/models/set-group-member-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 158
+            },
+            {
+              "id": "models/group-application-info",
+              "segment": "group-application-info",
+              "title": "Group Application Info",
+              "href": "/docs/chat/sdk/v4/android/models/group-application-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 159
+            },
+            {
+              "id": "models/get-group-application-list-as-applicant-req",
+              "segment": "get-group-application-list-as-applicant-req",
+              "title": "Get Group Application List As Applicant Req",
+              "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 160
+            },
+            {
+              "id": "models/get-group-application-list-as-recipient-req",
+              "segment": "get-group-application-list-as-recipient-req",
+              "title": "Get Group Application List As Recipient Req",
+              "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 161
+            },
+            {
+              "id": "models/conversation-info",
+              "segment": "conversation-info",
+              "title": "Conversation Info",
+              "href": "/docs/chat/sdk/v4/android/models/conversation-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 162
+            },
+            {
+              "id": "models/conversation-req",
+              "segment": "conversation-req",
+              "title": "Conversation Req",
+              "href": "/docs/chat/sdk/v4/android/models/conversation-req",
+              "type": "page",
+              "children": [],
+              "minIndex": 163
+            },
+            {
+              "id": "models/message",
+              "segment": "message",
+              "title": "Message",
+              "href": "/docs/chat/sdk/v4/android/models/message",
+              "type": "page",
+              "children": [],
+              "minIndex": 164
+            },
+            {
+              "id": "models/text-elem",
+              "segment": "text-elem",
+              "title": "Text Elem",
+              "href": "/docs/chat/sdk/v4/android/models/text-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 165
+            },
+            {
+              "id": "models/at-user-info",
+              "segment": "at-user-info",
+              "title": "At User Info",
+              "href": "/docs/chat/sdk/v4/android/models/at-user-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 166
             },
             {
               "id": "models/at-text-elem",
@@ -5757,22 +5460,310 @@
               "href": "/docs/chat/sdk/v4/android/models/at-text-elem",
               "type": "page",
               "children": [],
+              "minIndex": 167
+            },
+            {
+              "id": "models/picture-info",
+              "segment": "picture-info",
+              "title": "Picture Info",
+              "href": "/docs/chat/sdk/v4/android/models/picture-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 168
+            },
+            {
+              "id": "models/picture-elem",
+              "segment": "picture-elem",
+              "title": "Picture Elem",
+              "href": "/docs/chat/sdk/v4/android/models/picture-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 169
+            },
+            {
+              "id": "models/sound-elem",
+              "segment": "sound-elem",
+              "title": "Sound Elem",
+              "href": "/docs/chat/sdk/v4/android/models/sound-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 170
+            },
+            {
+              "id": "models/video-elem",
+              "segment": "video-elem",
+              "title": "Video Elem",
+              "href": "/docs/chat/sdk/v4/android/models/video-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 171
+            },
+            {
+              "id": "models/file-elem",
+              "segment": "file-elem",
+              "title": "File Elem",
+              "href": "/docs/chat/sdk/v4/android/models/file-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 172
+            },
+            {
+              "id": "models/location-elem",
+              "segment": "location-elem",
+              "title": "Location Elem",
+              "href": "/docs/chat/sdk/v4/android/models/location-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 173
+            },
+            {
+              "id": "models/custom-elem",
+              "segment": "custom-elem",
+              "title": "Custom Elem",
+              "href": "/docs/chat/sdk/v4/android/models/custom-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 174
+            },
+            {
+              "id": "models/face-elem",
+              "segment": "face-elem",
+              "title": "Face Elem",
+              "href": "/docs/chat/sdk/v4/android/models/face-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 175
+            },
+            {
+              "id": "models/card-elem",
+              "segment": "card-elem",
+              "title": "Card Elem",
+              "href": "/docs/chat/sdk/v4/android/models/card-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 176
+            },
+            {
+              "id": "models/quote-elem",
+              "segment": "quote-elem",
+              "title": "Quote Elem",
+              "href": "/docs/chat/sdk/v4/android/models/quote-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 177
+            },
+            {
+              "id": "models/merge-elem",
+              "segment": "merge-elem",
+              "title": "Merge Elem",
+              "href": "/docs/chat/sdk/v4/android/models/merge-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 178
+            },
+            {
+              "id": "models/rich-message",
+              "segment": "rich-message",
+              "title": "Rich Message",
+              "href": "/docs/chat/sdk/v4/android/models/rich-message",
+              "type": "page",
+              "children": [],
+              "minIndex": 179
+            },
+            {
+              "id": "models/message-entity",
+              "segment": "message-entity",
+              "title": "Message Entity",
+              "href": "/docs/chat/sdk/v4/android/models/message-entity",
+              "type": "page",
+              "children": [],
+              "minIndex": 180
+            },
+            {
+              "id": "models/advanced-text-elem",
+              "segment": "advanced-text-elem",
+              "title": "Advanced Text Elem",
+              "href": "/docs/chat/sdk/v4/android/models/advanced-text-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 181
+            },
+            {
+              "id": "models/typing-elem",
+              "segment": "typing-elem",
+              "title": "Typing Elem",
+              "href": "/docs/chat/sdk/v4/android/models/typing-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 182
+            },
+            {
+              "id": "models/notification-elem",
+              "segment": "notification-elem",
+              "title": "Notification Elem",
+              "href": "/docs/chat/sdk/v4/android/models/notification-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 184
+            },
+            {
+              "id": "models/attached-info-elem",
+              "segment": "attached-info-elem",
+              "title": "Attached Info Elem",
+              "href": "/docs/chat/sdk/v4/android/models/attached-info-elem",
+              "type": "page",
+              "children": [],
+              "minIndex": 185
+            },
+            {
+              "id": "models/offline-push-info",
+              "segment": "offline-push-info",
+              "title": "Offline Push Info",
+              "href": "/docs/chat/sdk/v4/android/models/offline-push-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 186
+            },
+            {
+              "id": "models/advanced-message",
+              "segment": "advanced-message",
+              "title": "Advanced Message",
+              "href": "/docs/chat/sdk/v4/android/models/advanced-message",
+              "type": "page",
+              "children": [],
+              "minIndex": 187
+            },
+            {
+              "id": "models/revoked-info",
+              "segment": "revoked-info",
+              "title": "Revoked Info",
+              "href": "/docs/chat/sdk/v4/android/models/revoked-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 188
+            },
+            {
+              "id": "models/c2c-read-receipt-info",
+              "segment": "c2c-read-receipt-info",
+              "title": "C2 CRead Receipt Info",
+              "href": "/docs/chat/sdk/v4/android/models/c2c-read-receipt-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 189
+            },
+            {
+              "id": "models/group-message-receipt",
+              "segment": "group-message-receipt",
+              "title": "Group Message Receipt",
+              "href": "/docs/chat/sdk/v4/android/models/group-message-receipt",
+              "type": "page",
+              "children": [],
+              "minIndex": 190
+            },
+            {
+              "id": "models/group-message-read-info",
+              "segment": "group-message-read-info",
+              "title": "Group Message Read Info",
+              "href": "/docs/chat/sdk/v4/android/models/group-message-read-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 191
+            },
+            {
+              "id": "models/group-has-read-info",
+              "segment": "group-has-read-info",
+              "title": "Group Has Read Info",
+              "href": "/docs/chat/sdk/v4/android/models/group-has-read-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 192
+            },
+            {
+              "id": "models/search-params",
+              "segment": "search-params",
+              "title": "Search Params",
+              "href": "/docs/chat/sdk/v4/android/models/search-params",
+              "type": "page",
+              "children": [],
+              "minIndex": 193
+            },
+            {
+              "id": "models/search-result-item",
+              "segment": "search-result-item",
+              "title": "Search Result Item",
+              "href": "/docs/chat/sdk/v4/android/models/search-result-item",
+              "type": "page",
+              "children": [],
+              "minIndex": 194
+            },
+            {
+              "id": "models/search-result",
+              "segment": "search-result",
+              "title": "Search Result",
+              "href": "/docs/chat/sdk/v4/android/models/search-result",
+              "type": "page",
+              "children": [],
+              "minIndex": 195
+            },
+            {
+              "id": "models/key-value",
+              "segment": "key-value",
+              "title": "Key Value",
+              "href": "/docs/chat/sdk/v4/android/models/key-value",
+              "type": "page",
+              "children": [],
+              "minIndex": 196
+            },
+            {
+              "id": "models/user-ex-info",
+              "segment": "user-ex-info",
+              "title": "User Ex Info",
+              "href": "/docs/chat/sdk/v4/android/models/user-ex-info",
+              "type": "page",
+              "children": [],
+              "minIndex": 197
+            },
+            {
+              "id": "models/single-type-key-info-sum",
+              "segment": "single-type-key-info-sum",
+              "title": "Single Type Key Info Sum",
+              "href": "/docs/chat/sdk/v4/android/models/single-type-key-info-sum",
+              "type": "page",
+              "children": [],
+              "minIndex": 198
+            },
+            {
+              "id": "models/message-kv",
+              "segment": "message-kv",
+              "title": "Message KV",
+              "href": "/docs/chat/sdk/v4/android/models/message-kv",
+              "type": "page",
+              "children": [],
+              "minIndex": 199
+            },
+            {
+              "id": "models/type-key-set-result",
+              "segment": "type-key-set-result",
+              "title": "Type Key Set Result",
+              "href": "/docs/chat/sdk/v4/android/models/type-key-set-result",
+              "type": "page",
+              "children": [],
               "minIndex": 200
+            },
+            {
+              "id": "models/put-args",
+              "segment": "put-args",
+              "title": "Put Args",
+              "href": "/docs/chat/sdk/v4/android/models/put-args",
+              "type": "page",
+              "children": [],
+              "minIndex": 201
             },
             {
               "id": "models/login-status",
               "segment": "login-status",
               "title": "Login Status",
               "href": "/docs/chat/sdk/v4/android/models/login-status",
-              "type": "page",
-              "children": [],
-              "minIndex": 201
-            },
-            {
-              "id": "models/conversation-type",
-              "segment": "conversation-type",
-              "title": "Conversation Type",
-              "href": "/docs/chat/sdk/v4/android/models/conversation-type",
               "type": "page",
               "children": [],
               "minIndex": 202
@@ -5787,58 +5778,22 @@
               "minIndex": 203
             },
             {
-              "id": "models/group-role",
-              "segment": "group-role",
-              "title": "Group Role",
-              "href": "/docs/chat/sdk/v4/android/models/group-role",
-              "type": "page",
-              "children": [],
-              "minIndex": 204
-            },
-            {
-              "id": "models/group-member-filter",
-              "segment": "group-member-filter",
-              "title": "Group Member Filter",
-              "href": "/docs/chat/sdk/v4/android/models/group-member-filter",
-              "type": "page",
-              "children": [],
-              "minIndex": 205
-            },
-            {
-              "id": "models/group-at-type",
-              "segment": "group-at-type",
-              "title": "Group At Type",
-              "href": "/docs/chat/sdk/v4/android/models/group-at-type",
-              "type": "page",
-              "children": [],
-              "minIndex": 206
-            },
-            {
               "id": "models/log-level",
               "segment": "log-level",
               "title": "Log Level",
               "href": "/docs/chat/sdk/v4/android/models/log-level",
               "type": "page",
               "children": [],
-              "minIndex": 207
+              "minIndex": 204
             },
             {
-              "id": "models/join-source",
-              "segment": "join-source",
-              "title": "Join Source",
-              "href": "/docs/chat/sdk/v4/android/models/join-source",
+              "id": "models/conversation-type",
+              "segment": "conversation-type",
+              "title": "Conversation Type",
+              "href": "/docs/chat/sdk/v4/android/models/conversation-type",
               "type": "page",
               "children": [],
-              "minIndex": 208
-            },
-            {
-              "id": "models/group-verification",
-              "segment": "group-verification",
-              "title": "Group Verification",
-              "href": "/docs/chat/sdk/v4/android/models/group-verification",
-              "type": "page",
-              "children": [],
-              "minIndex": 209
+              "minIndex": 205
             },
             {
               "id": "models/message-type",
@@ -5847,16 +5802,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message-type",
               "type": "page",
               "children": [],
-              "minIndex": 210
-            },
-            {
-              "id": "models/view-type",
-              "segment": "view-type",
-              "title": "View Type",
-              "href": "/docs/chat/sdk/v4/android/models/view-type",
-              "type": "page",
-              "children": [],
-              "minIndex": 211
+              "minIndex": 206
             },
             {
               "id": "models/message-status",
@@ -5865,40 +5811,85 @@
               "href": "/docs/chat/sdk/v4/android/models/message-status",
               "type": "page",
               "children": [],
+              "minIndex": 207
+            },
+            {
+              "id": "models/view-type",
+              "segment": "view-type",
+              "title": "View Type",
+              "href": "/docs/chat/sdk/v4/android/models/view-type",
+              "type": "page",
+              "children": [],
+              "minIndex": 208
+            },
+            {
+              "id": "models/group-role",
+              "segment": "group-role",
+              "title": "Group Role",
+              "href": "/docs/chat/sdk/v4/android/models/group-role",
+              "type": "page",
+              "children": [],
+              "minIndex": 209
+            },
+            {
+              "id": "models/group-member-filter",
+              "segment": "group-member-filter",
+              "title": "Group Member Filter",
+              "href": "/docs/chat/sdk/v4/android/models/group-member-filter",
+              "type": "page",
+              "children": [],
+              "minIndex": 210
+            },
+            {
+              "id": "models/group-at-type",
+              "segment": "group-at-type",
+              "title": "Group At Type",
+              "href": "/docs/chat/sdk/v4/android/models/group-at-type",
+              "type": "page",
+              "children": [],
+              "minIndex": 211
+            },
+            {
+              "id": "models/join-source",
+              "segment": "join-source",
+              "title": "Join Source",
+              "href": "/docs/chat/sdk/v4/android/models/join-source",
+              "type": "page",
+              "children": [],
               "minIndex": 212
             },
             {
-              "id": "models/on-advance-msg-listener",
-              "segment": "on-advance-msg-listener",
-              "title": "On Advance Msg Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-advance-msg-listener",
+              "id": "models/group-verification",
+              "segment": "group-verification",
+              "title": "Group Verification",
+              "href": "/docs/chat/sdk/v4/android/models/group-verification",
               "type": "page",
               "children": [],
               "minIndex": 213
-            },
-            {
-              "id": "models/on-friendship-listener",
-              "segment": "on-friendship-listener",
-              "title": "On Friendship Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-friendship-listener",
-              "type": "page",
-              "children": [],
-              "minIndex": 214
-            },
-            {
-              "id": "models/on-conversation-listener",
-              "segment": "on-conversation-listener",
-              "title": "On Conversation Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-conversation-listener",
-              "type": "page",
-              "children": [],
-              "minIndex": 215
             },
             {
               "id": "models/on-conn-listener",
               "segment": "on-conn-listener",
               "title": "On Conn Listener",
               "href": "/docs/chat/sdk/v4/android/models/on-conn-listener",
+              "type": "page",
+              "children": [],
+              "minIndex": 214
+            },
+            {
+              "id": "models/on-user-listener",
+              "segment": "on-user-listener",
+              "title": "On User Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-user-listener",
+              "type": "page",
+              "children": [],
+              "minIndex": 215
+            },
+            {
+              "id": "models/on-friendship-listener",
+              "segment": "on-friendship-listener",
+              "title": "On Friendship Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-friendship-listener",
               "type": "page",
               "children": [],
               "minIndex": 216
@@ -5913,19 +5904,19 @@
               "minIndex": 217
             },
             {
-              "id": "models/on-message-kv-info-listener",
-              "segment": "on-message-kv-info-listener",
-              "title": "On Message KV Info Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-message-kv-info-listener",
+              "id": "models/on-conversation-listener",
+              "segment": "on-conversation-listener",
+              "title": "On Conversation Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-conversation-listener",
               "type": "page",
               "children": [],
               "minIndex": 218
             },
             {
-              "id": "models/on-user-listener",
-              "segment": "on-user-listener",
-              "title": "On User Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-user-listener",
+              "id": "models/on-advance-msg-listener",
+              "segment": "on-advance-msg-listener",
+              "title": "On Advance Msg Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-advance-msg-listener",
               "type": "page",
               "children": [],
               "minIndex": 219
@@ -5940,58 +5931,13 @@
               "minIndex": 220
             },
             {
-              "id": "models/upload-log-progress",
-              "segment": "upload-log-progress",
-              "title": "Upload Log Progress",
-              "href": "/docs/chat/sdk/v4/android/models/upload-log-progress",
+              "id": "models/on-message-kv-info-listener",
+              "segment": "on-message-kv-info-listener",
+              "title": "On Message KV Info Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-message-kv-info-listener",
               "type": "page",
               "children": [],
               "minIndex": 221
-            },
-            {
-              "id": "models/on-base",
-              "segment": "on-base",
-              "title": "On Base",
-              "href": "/docs/chat/sdk/v4/android/models/on-base",
-              "type": "page",
-              "children": [],
-              "minIndex": 222
-            },
-            {
-              "id": "models/on-put-file-listener",
-              "segment": "on-put-file-listener",
-              "title": "On Put File Listener",
-              "href": "/docs/chat/sdk/v4/android/models/on-put-file-listener",
-              "type": "page",
-              "children": [],
-              "minIndex": 223
-            },
-            {
-              "id": "models/on-msg-send-callback",
-              "segment": "on-msg-send-callback",
-              "title": "On Msg Send Callback",
-              "href": "/docs/chat/sdk/v4/android/models/on-msg-send-callback",
-              "type": "page",
-              "children": [],
-              "minIndex": 224
-            },
-            {
-              "id": "models/base",
-              "segment": "base",
-              "title": "Base",
-              "href": "/docs/chat/sdk/v4/android/models/base",
-              "type": "page",
-              "children": [],
-              "minIndex": 225
-            },
-            {
-              "id": "models/send-msg-call-back",
-              "segment": "send-msg-call-back",
-              "title": "Send Msg Call Back",
-              "href": "/docs/chat/sdk/v4/android/models/send-msg-call-back",
-              "type": "page",
-              "children": [],
-              "minIndex": 226
             },
             {
               "id": "models/on-advanced-msg-listener",
@@ -6000,7 +5946,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-advanced-msg-listener",
               "type": "page",
               "children": [],
-              "minIndex": 227
+              "minIndex": 222
             },
             {
               "id": "models/on-batch-msg-listener",
@@ -6009,7 +5955,61 @@
               "href": "/docs/chat/sdk/v4/android/models/on-batch-msg-listener",
               "type": "page",
               "children": [],
+              "minIndex": 223
+            },
+            {
+              "id": "models/on-base",
+              "segment": "on-base",
+              "title": "On Base",
+              "href": "/docs/chat/sdk/v4/android/models/on-base",
+              "type": "page",
+              "children": [],
+              "minIndex": 224
+            },
+            {
+              "id": "models/on-msg-send-callback",
+              "segment": "on-msg-send-callback",
+              "title": "On Msg Send Callback",
+              "href": "/docs/chat/sdk/v4/android/models/on-msg-send-callback",
+              "type": "page",
+              "children": [],
+              "minIndex": 225
+            },
+            {
+              "id": "models/on-put-file-listener",
+              "segment": "on-put-file-listener",
+              "title": "On Put File Listener",
+              "href": "/docs/chat/sdk/v4/android/models/on-put-file-listener",
+              "type": "page",
+              "children": [],
+              "minIndex": 226
+            },
+            {
+              "id": "models/upload-log-progress",
+              "segment": "upload-log-progress",
+              "title": "Upload Log Progress",
+              "href": "/docs/chat/sdk/v4/android/models/upload-log-progress",
+              "type": "page",
+              "children": [],
+              "minIndex": 227
+            },
+            {
+              "id": "models/base",
+              "segment": "base",
+              "title": "Base",
+              "href": "/docs/chat/sdk/v4/android/models/base",
+              "type": "page",
+              "children": [],
               "minIndex": 228
+            },
+            {
+              "id": "models/send-msg-call-back",
+              "segment": "send-msg-call-back",
+              "title": "Send Msg Call Back",
+              "href": "/docs/chat/sdk/v4/android/models/send-msg-call-back",
+              "type": "page",
+              "children": [],
+              "minIndex": 229
             },
             {
               "id": "models/upload-file-callback",
@@ -6018,7 +6018,7 @@
               "href": "/docs/chat/sdk/v4/android/models/upload-file-callback",
               "type": "page",
               "children": [],
-              "minIndex": 229
+              "minIndex": 230
             }
           ],
           "minIndex": 143
@@ -6030,7 +6030,7 @@
           "href": "/docs/chat/sdk/v4/android/error-codes",
           "type": "page",
           "children": [],
-          "minIndex": 230
+          "minIndex": 231
         },
         {
           "id": "deprecated",
@@ -6039,7 +6039,7 @@
           "href": "/docs/chat/sdk/v4/android/deprecated",
           "type": "page",
           "children": [],
-          "minIndex": 231
+          "minIndex": 232
         }
       ],
       "pageCount": 232

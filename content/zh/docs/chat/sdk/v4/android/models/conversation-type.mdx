@@ -15,9 +15,9 @@ sourcePath: '/docs/chat/sdk/v4/android/models/conversation-type'
 
 ## 取值说明
 
-| 常量             | 值  | 描述                           |
-| ---------------- | --- | ------------------------------ |
-| SINGLE_CHAT      | 1   | 当前会话是单聊                 |
-| GROUP_CHAT       | 2   | GROUP_CHAT 对应的 SDK 常量。   |
-| SUPER_GROUP_CHAT | 3   | 当前会话是群聊                 |
-| NOTIFICATION     | 4   | NOTIFICATION 对应的 SDK 常量。 |
+| 常量             | 值  | 描述                                                                                                             |
+| ---------------- | --- | ---------------------------------------------------------------------------------------------------------------- |
+| SINGLE_CHAT      | 1   | 单聊会话，目标由用户 ID 标识。                                                                                   |
+| GROUP_CHAT       | 2   | 普通写群聊会话。当前 Go core 将其命名为 `WriteGroupChatType`，并标注为暂未启用；不要把所有群聊都固定判断为该值。 |
+| SUPER_GROUP_CHAT | 3   | 读扩散群聊会话。当前 Go core 将其命名为 `ReadGroupChatType`，超级群和工作群的消息、会话通常使用该值。            |
+| NOTIFICATION     | 4   | 系统通知会话，用于承载内部通知消息；业务端通常通过好友、群组、会话或消息监听器消费处理后的事件。                 |

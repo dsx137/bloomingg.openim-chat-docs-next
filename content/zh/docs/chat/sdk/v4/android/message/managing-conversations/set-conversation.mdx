@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/managing-conversations/set-conver
 
 设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
 
-## 功能介绍
-
-设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,15 @@ public void setConversation(OnBase<String> base, String conversationID, Conversa
 
 ## 输入参数
 
-| 参数名称        | 参数类型                                                               | 是否必填 | 描述         |
-| --------------- | ---------------------------------------------------------------------- | -------- | ------------ |
-| conversationID  | String                                                                 | 是       | 会话 ID      |
-| conversationReq | [`ConversationReq`](/docs/chat/sdk/v4/android/models/conversation-req) | 是       | 变更的结构体 |
+| 参数名称        | Java 类型                                                              | 是否必填 | 描述                     |
+| --------------- | ---------------------------------------------------------------------- | -------- | ------------------------ |
+| base            | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>`         | 是       | 会话设置更新结果回调。   |
+| conversationID  | `String`                                                               | 是       | 要更新的会话 ID。        |
+| conversationReq | [`ConversationReq`](/docs/chat/sdk/v4/android/models/conversation-req) | 是       | 需要修改的会话设置字段。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示 `ConversationReq` 中提交的会话属性已更新并完成本地同步，回调字符串不含业务数据；会话不存在、字段值无效或服务端拒绝时调用 `onError`。
 
 ## 代码示例
 

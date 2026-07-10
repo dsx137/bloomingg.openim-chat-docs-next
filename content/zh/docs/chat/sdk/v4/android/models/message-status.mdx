@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/message-status'
@@ -15,9 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/message-status'
 
 ## 取值说明
 
-| 常量      | 值  | 描述     |
-| --------- | --- | -------- |
-| SENDING   | 1   | 发送中   |
-| SUCCEEDED | 2   | 发送成功 |
-| FAILED    | 3   | 发送失败 |
-| DELETED   | 4   | 发送取消 |
+| 常量                | 值  | 描述                                                                                                                      |
+| ------------------- | --- | ------------------------------------------------------------------------------------------------------------------------- |
+| SENDING             | 1   | 消息已写入本地发送队列，仍在上传附件或等待服务端确认。                                                                    |
+| SUCCEEDED           | 2   | 服务端已确认发送成功，消息通常已取得 `serverMsgID` 和最终发送时间。                                                       |
+| FAILED              | 3   | 上传或发送流程失败，可结合发送回调错误码提供重试。                                                                        |
+| DELETED             | 4   | 消息已被标记为删除。Android 注释写作“发送取消”，当前 core 常量实际名为 `MsgStatusHasDeleted`。                            |
+| （无 Android 常量） | 5   | 当前 core 的 `MsgStatusFiltered`，表示消息被过滤；Android v3.8.3 类未声明对应常量，但反序列化的 `status` 仍可能出现该值。 |

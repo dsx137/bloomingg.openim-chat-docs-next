@@ -5,15 +5,11 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count'
 ---
-
-获取未处理好友申请数量，适合好友入口角标和后台同步。
-
-## 功能介绍
 
 获取未处理好友申请数量，适合好友入口角标和后台同步。
 
@@ -29,23 +25,19 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-applicatio
 
 ## Android 调用参考
 
-当前 Android SDK v3.8.3 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。下列参数描述的是底层 JSON 契约，用于核对版本能力，不能作为该版本可直接调用的 Java 方法。
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                                                        |
-| ------------- | ----------------------------------------------- | ----------------------------------------------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                              |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。                                         |
-| `req`         | `string`                                        | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称      | 类型                                            | 描述                                                                                                             |
+| ------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                                                                                   |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                                                                              |
+| `req`         | `string`                                        | JSON 字符串，结构为 `{"time": long}`；`time` 是统计未处理好友申请的起算时间，core 会将该整数值原样提交给服务端。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
-
-## 代码示例
-
-TODO: 当前 Android SDK v3.8.3 未提供公开 Java 调用示例。
+成功时底层 `OnSuccess` 返回 `int32` 对应的 JSON 整数，即从 `time` 起仍未处理的好友申请数量；失败时调用 `OnError`。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例。
 
 ## 相关类型
 

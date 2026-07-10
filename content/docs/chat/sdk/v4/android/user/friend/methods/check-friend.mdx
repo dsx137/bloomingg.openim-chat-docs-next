@@ -37,17 +37,12 @@ public void checkFriend(OnBase<List<FriendshipInfo>> base, List<String> uidList)
 
 ## Input Parameters
 
-| Parameter  | Type                                                                                  | Description                                     |
-| ---------- | ------------------------------------------------------------------------------------- | ----------------------------------------------- |
-| `callBack` | `OnBase<List<`[Friendship Info](/docs/chat/sdk/v4/android/models/friendship-info)`>>` | Async callback for success and failure results. |
-| `uidList`  | String                                                                                | List of user IDs, usually encoded as JSON.      |
+| Parameter | Type                                                                                                                               | Description                                     |
+| --------- | ---------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `base`    | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[Friendship Info](/docs/chat/sdk/v4/android/models/friendship-info)`>>` | Async callback for success and failure results. |
+| `uidList` | `List<String>`                                                                                                                     | List of user IDs, usually encoded as JSON.      |
 
-### FriendInfo
 
-| Field    | Type   | Description                                 |
-| -------- | ------ | ------------------------------------------- |
-| `userID` | String | User ID.                                    |
-| `result` | int    | SDK field returned or submitted by the SDK. |
 
 ## Return Value
 

@@ -15,13 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/android/models/offline-push-info'
 
 ## 字段说明
 
-| 字段名称      | Java 类型 | 描述                   |
-| ------------- | --------- | ---------------------- |
-| title         | String    | SDK 返回或提交的字段。 |
-| desc          | String    | SDK 返回或提交的字段。 |
-| ex            | String    | 扩展字段。             |
-| iOSPushSound  | String    | SDK 返回或提交的字段。 |
-| iOSBadgeCount | boolean   | SDK 返回或提交的字段。 |
+| 字段名称      | Java 类型 | 描述                                                                                            |
+| ------------- | --------- | ----------------------------------------------------------------------------------------------- |
+| title         | String    | 离线推送通知标题。                                                                              |
+| desc          | String    | 离线推送通知正文或摘要。                                                                        |
+| ex            | String    | 透传给推送接收端的业务扩展数据，格式由发送方与接收方约定。                                      |
+| iOSPushSound  | String    | iOS 推送使用的声音资源名；为空时由 iOS 推送配置决定是否播放声音。                               |
+| iOSBadgeCount | boolean   | 该推送是否计入 iOS 应用角标；字段名保留 `Count`，但 Android v3.8.3 中的实际 Java 类型是布尔值。 |
 
 ## 相关页面
 

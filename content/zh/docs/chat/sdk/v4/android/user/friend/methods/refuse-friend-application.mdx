@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/refuse-friend-applica
 
 拒绝指定好友申请。
 
-## 功能介绍
-
-拒绝指定好友申请。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -45,7 +41,7 @@ public void refuseFriendApplication(OnBase<String> base, String uid, String hand
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示好友申请已拒绝并完成本地申请记录同步，回调字符串不含业务数据；申请不存在、已处理或服务端请求失败时调用 `onError`。
 
 ## 代码示例
 

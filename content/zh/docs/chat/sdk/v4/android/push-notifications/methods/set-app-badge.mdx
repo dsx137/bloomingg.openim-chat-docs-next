@@ -1,21 +1,17 @@
 ---
 title: '设置应用角标'
-description: '说明 Android core binding 方法 SetAppBadge 的用途、参数、返回和使用边界。'
+description: '说明 Android core binding 方法 SetAppBadge 的服务端角标同步行为、参数和使用边界。'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge'
 ---
 
-设置应用角标未读数，适合未读数变化后同步系统角标。
-
-## 功能介绍
-
-设置应用角标未读数，适合未读数变化后同步系统角标。
+向 OpenIM 服务端同步当前用户的应用未读数，供后续推送角标策略使用；该方法不直接修改 Android launcher 图标角标。
 
 推送通知能力至少要求 SDK 已初始化。
 
@@ -29,23 +25,19 @@ sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge'
 
 ## Android 调用参考
 
-当前 Android SDK v3.8.3 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。底层请求会自动带上当前登录用户 ID，并把 `appUnreadCount` 提交到 `/third/set_app_badge`；它只更新服务端状态，不调用 Android 厂商桌面角标 API。
 
 ## 输入参数
 
-| 参数名称         | 类型                                            | 描述                       |
-| ---------------- | ----------------------------------------------- | -------------------------- |
-| `callback`       | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。             |
-| `operationID`    | `string`                                        | 本次操作的追踪 ID。        |
-| `appUnreadCount` | `int32`                                         | 按 core binding 签名传入。 |
+| 参数名称         | 类型                                            | 描述                                                           |
+| ---------------- | ----------------------------------------------- | -------------------------------------------------------------- |
+| `callback`       | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                                 |
+| `operationID`    | `string`                                        | 本次操作的追踪 ID。                                            |
+| `appUnreadCount` | `int32`                                         | 应用当前希望同步到服务端的总未读数。应传非负值，清零时传 `0`。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
-
-## 代码示例
-
-TODO: 当前 Android SDK v3.8.3 未提供公开 Java 调用示例。
+服务端接受未读数后调用底层 `OnSuccess`，请求失败时调用 `OnError`，没有业务返回数据。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例；launcher 角标仍需由应用使用目标厂商或系统支持的 Android API 单独处理。
 
 ## 相关类型
 

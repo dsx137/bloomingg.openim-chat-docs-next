@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/update-friends'
 
 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。
 
-## 功能介绍
-
-更新好友关系资料，例如备注、扩展字段或其他好友关系字段。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,13 +33,14 @@ public void updateFriendsReq(OnBase<String> base, UpdateFriendsReq updateFriends
 
 ## 输入参数
 
-| 参数名称         | 参数类型                                                                  | 是否必填 | 描述         |
-| ---------------- | ------------------------------------------------------------------------- | -------- | ------------ |
-| updateFriendsReq | [`UpdateFriendsReq`](/docs/chat/sdk/v4/android/models/update-friends-req) | 是       | 变更的结构体 |
+| 参数名称         | Java 类型                                                                 | 是否必填 | 描述                   |
+| ---------------- | ------------------------------------------------------------------------- | -------- | ---------------------- |
+| base             | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>`            | 是       | 好友资料更新结果回调。 |
+| updateFriendsReq | [`UpdateFriendsReq`](/docs/chat/sdk/v4/android/models/update-friends-req) | 是       | 要更新的好友及字段。   |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示非空好友关系字段已提交并完成本地好友同步，回调字符串不含业务数据；目标不是好友、字段无效或服务端请求失败时调用 `onError`。
 
 ## 代码示例
 

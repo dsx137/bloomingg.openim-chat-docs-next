@@ -15,10 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/quote-elem'
 
 ## 字段说明
 
-| 字段名称     | Java 类型 | 描述         |
-| ------------ | --------- | ------------ |
-| text         | String    | 回复内容     |
-| quoteMessage | Message   | 被回复的消息 |
+| 字段名称     | Java 类型                                             | 描述                                            |
+| ------------ | ----------------------------------------------------- | ----------------------------------------------- |
+| text         | String                                                | 当前回复消息的正文。                            |
+| quoteMessage | [`Message`](/docs/chat/sdk/v4/android/models/message) | 被回复消息的快照；core 会避免继续嵌套引用消息。 |
 
 ## 关联类型
 

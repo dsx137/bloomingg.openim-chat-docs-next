@@ -37,12 +37,11 @@ public void typingStatusUpdate(OnBase<String> base, String userID, String msgTip
 
 ## Input Parameters
 
-| Parameter     | Type                                          | Description                                     |
-| ------------- | --------------------------------------------- | ----------------------------------------------- |
-| `callback`    | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
-| `operationID` | `string`                                      | Trace ID for this operation.                    |
-| `recvID`      | `string`                                      | Receiver user ID for one-to-one chats.          |
-| `msgTip`      | `string`                                      | Pass according to the core binding signature.   |
+| Parameter | Type                                                          | Description                                               |
+| --------- | ------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`    | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>` | Async callback for success and failure results.           |
+| `userID`  | `String`                                                      | User ID.                                                  |
+| `msgTip`  | `String`                                                      | Parameter passed according to the core binding signature. |
 
 
 

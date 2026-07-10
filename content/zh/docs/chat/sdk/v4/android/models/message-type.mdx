@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/models/message-type'
 
 `MessageType` 是 Android SDK 的枚举常量，完整类名为 `io.openim.android.sdk.enums.MessageType`。消息内容类型常量。
 
-## 类型说明
-
-消息类型
-
 ## 取值说明
 
 `101` 至 `120` 是用户消息类型；`1000` 以上的值主要是 SDK 内部通知，不是业务端创建消息时选择的普通消息类型。core 收到内部通知后会同步本地数据并触发相应监听器。名称以 `_BEGIN` 或 `_END` 结尾的常量只是通知区间边界，不代表一个可处理的通知事件。

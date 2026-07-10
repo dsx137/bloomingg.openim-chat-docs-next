@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/conversation-state/get-input-stat
 
 获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。
 
-## 功能介绍
-
-获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,15 @@ public void getInputStates(OnBase<String> base, String conversationID, String us
 
 ## 输入参数
 
-| 参数名称       | 参数类型 | 是否必填 | 描述    |
-| -------------- | -------- | -------- | ------- |
-| conversationID | String   | 是       | 会话 ID |
-| userId         | String   | 是       | 用户ID  |
+| 参数名称       | Java 类型                                                      | 是否必填 | 描述                      |
+| -------------- | -------------------------------------------------------------- | -------- | ------------------------- |
+| base           | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 输入状态查询结果回调。    |
+| conversationID | `String`                                                       | 是       | 要查询的会话 ID。         |
+| userId         | `String`                                                       | 是       | 要查询输入状态的用户 ID。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回 JSON 整数数组，元素是目标用户当前仍在该会话中输入的平台 ID，取值见 [`Platform`](/docs/chat/sdk/v4/android/models/platform)；空数组表示没有活跃输入状态，查询失败时调用 `onError`。
 
 ## 代码示例
 

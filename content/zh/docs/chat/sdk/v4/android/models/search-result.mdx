@@ -15,11 +15,11 @@ sourcePath: '/docs/chat/sdk/v4/android/models/search-result'
 
 ## 字段说明
 
-| 字段名称          | Java 类型                                                                           | 描述                   |
-| ----------------- | ----------------------------------------------------------------------------------- | ---------------------- |
-| totalCount        | int                                                                                 | 获取到的总的消息数量   |
-| searchResultItems | `List<`[`SearchResultItem`](/docs/chat/sdk/v4/android/models/search-result-item)`>` | SDK 返回或提交的字段。 |
-| findResultItems   | `List<`[`SearchResultItem`](/docs/chat/sdk/v4/android/models/search-result-item)`>` | SDK 返回或提交的字段。 |
+| 字段名称          | Java 类型                                                                           | 描述                                                                                            |
+| ----------------- | ----------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| totalCount        | int                                                                                 | 命中条件的消息总数，不等同于结果分组数量。                                                      |
+| searchResultItems | `List<`[`SearchResultItem`](/docs/chat/sdk/v4/android/models/search-result-item)`>` | `searchLocalMessages` 的结果，按会话聚合关键词、发送者、消息类型和时间范围等条件命中的消息。    |
+| findResultItems   | `List<`[`SearchResultItem`](/docs/chat/sdk/v4/android/models/search-result-item)`>` | `findMessageList` 的结果，按 `conversationID` 和 `clientMsgIDList` 返回找到的消息并按会话聚合。 |
 
 ## 关联类型
 

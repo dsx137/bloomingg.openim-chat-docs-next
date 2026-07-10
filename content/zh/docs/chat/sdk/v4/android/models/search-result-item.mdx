@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/search-result-item'
@@ -15,13 +15,15 @@ sourcePath: '/docs/chat/sdk/v4/android/models/search-result-item'
 
 ## 字段说明
 
-| 字段名称       | Java 类型                                                       | 描述                 |
-| -------------- | --------------------------------------------------------------- | -------------------- |
-| conversationID | String                                                          | 会话ID               |
-| messageCount   | int                                                             | 这个会话下的消息数量 |
-| showName       | String                                                          | 显示名               |
-| faceURL        | String                                                          | 头像                 |
-| messageList    | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` | Message的列表        |
+| 字段名称       | Java 类型                                                       | 描述                                                                    |
+| -------------- | --------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| conversationID | String                                                          | 匹配消息所属的会话 ID，用于进入会话或继续按会话筛选。                   |
+| messageCount   | int                                                             | 本结果项中匹配并返回的消息数量；当前 core 会按 `messageList` 长度计算。 |
+| showName       | String                                                          | 会话显示名称快照，单聊通常是对端显示名，群聊通常是群名称。              |
+| faceURL        | String                                                          | 会话头像 URL 快照。                                                     |
+| messageList    | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` | 该会话内本页匹配到的消息列表，每项可通过 `clientMsgID` 定位原消息。     |
+
+core 搜索结构还包含 `conversationType` 和 `latestMsgSendTime`，并用后者对会话结果倒序排列；Android v3.8.3 的 `SearchResultItem` 未公开这两个字段，反序列化时会忽略它们。
 
 ## 关联类型
 

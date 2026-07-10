@@ -5,15 +5,11 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-all-conversation-message-as-read'
 ---
-
-将全部会话消息标记为已读，适合一键清除全部未读。
-
-## 功能介绍
 
 将全部会话消息标记为已读，适合一键清除全部未读。
 
@@ -29,7 +25,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-all-conversation
 
 ## Android 调用参考
 
-当前 Android SDK v3.8.3 未提供该 core 方法对应的公开 Java 调用方法。Core binding 方法签名仅用于说明底层 `open_im_sdk` 能力。
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。底层会先找出所有未读数大于 `0` 的本地会话，再逐个执行单会话已读流程；任一会话失败即停止并通过错误回调返回，因此它不是一次单独的服务端批量请求。
 
 ## 输入参数
 
@@ -40,11 +36,7 @@ sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-all-conversation
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
-
-## 代码示例
-
-TODO: 当前 Android SDK v3.8.3 未提供公开 Java 调用示例。
+所有未读会话均完成标记，或当前没有未读会话时，底层调用 `OnSuccess`；查询会话或逐个标记失败时调用 `OnError`，没有业务返回数据。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例。
 
 ## 相关类型
 

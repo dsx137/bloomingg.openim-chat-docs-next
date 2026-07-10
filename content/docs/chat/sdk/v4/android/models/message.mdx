@@ -11,51 +11,51 @@ platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/message'
 ---
 
-`Message` is an Android SDK data model. Full class name: `io.openim.android.sdk.models.Message`.
+`Message` is an Android SDK listener. Full class name: `io.openim.android.sdk.models.Message`.
 
 ## Fields
 
-| Field                  | Java type          | Description                                 |
-| ---------------------- | ------------------ | ------------------------------------------- |
-| `clientMsgID`          | `String`           | Client message ID.                          |
-| `serverMsgID`          | `String`           | SDK field returned or submitted by the SDK. |
-| `createTime`           | `long`             | Creation time.                              |
-| `sendTime`             | `long`             | SDK field returned or submitted by the SDK. |
-| `sessionType`          | `int`              | SDK field returned or submitted by the SDK. |
-| `sendID`               | `String`           | Sender user ID.                             |
-| `recvID`               | `String`           | Receiver user ID for one-to-one chats.      |
-| `msgFrom`              | `int`              | SDK field returned or submitted by the SDK. |
-| `contentType`          | `int`              | SDK field returned or submitted by the SDK. |
-| `platformID`           | `int`              | SDK field returned or submitted by the SDK. |
-| `senderNickname`       | `String`           | SDK field returned or submitted by the SDK. |
-| `senderFaceUrl`        | `String`           | SDK field returned or submitted by the SDK. |
-| `groupID`              | `String`           | Group ID.                                   |
-| `seq`                  | `int`              | SDK field returned or submitted by the SDK. |
-| `isRead`               | `boolean`          | SDK field returned or submitted by the SDK. |
-| `status`               | `int`              | Status value.                               |
-| `isReact`              | `boolean`          | SDK field returned or submitted by the SDK. |
-| `isExternalExtensions` | `boolean`          | SDK field returned or submitted by the SDK. |
-| `offlinePush`          | `OfflinePushInfo`  | SDK field returned or submitted by the SDK. |
-| `attachedInfo`         | `String`           | SDK field returned or submitted by the SDK. |
-| `ext`                  | `Object`           | SDK field returned or submitted by the SDK. |
-| `ex`                   | `Object`           | Extension field.                            |
-| `localEx`              | `Object`           | SDK field returned or submitted by the SDK. |
-| `pictureElem`          | `PictureElem`      | SDK field returned or submitted by the SDK. |
-| `soundElem`            | `SoundElem`        | SDK field returned or submitted by the SDK. |
-| `videoElem`            | `VideoElem`        | SDK field returned or submitted by the SDK. |
-| `fileElem`             | `FileElem`         | SDK field returned or submitted by the SDK. |
-| `atTextElem`           | `AtTextElem`       | SDK field returned or submitted by the SDK. |
-| `locationElem`         | `LocationElem`     | SDK field returned or submitted by the SDK. |
-| `customElem`           | `CustomElem`       | SDK field returned or submitted by the SDK. |
-| `quoteElem`            | `QuoteElem`        | SDK field returned or submitted by the SDK. |
-| `mergeElem`            | `MergeElem`        | SDK field returned or submitted by the SDK. |
-| `notificationElem`     | `NotificationElem` | SDK field returned or submitted by the SDK. |
-| `faceElem`             | `FaceElem`         | SDK field returned or submitted by the SDK. |
-| `attachedInfoElem`     | `AttachedInfoElem` | SDK field returned or submitted by the SDK. |
-| `textElem`             | `TextElem`         | SDK field returned or submitted by the SDK. |
-| `cardElem`             | `CardElem`         | SDK field returned or submitted by the SDK. |
-| `advancedTextElem`     | `AdvancedTextElem` | SDK field returned or submitted by the SDK. |
-| `typingElem`           | `TypingElem`       | SDK field returned or submitted by the SDK. |
+| Field                  | Java type                                                                 | Description                                 |
+| ---------------------- | ------------------------------------------------------------------------- | ------------------------------------------- |
+| `clientMsgID`          | `String`                                                                  | Client message ID.                          |
+| `serverMsgID`          | `String`                                                                  | SDK field returned or submitted by the SDK. |
+| `createTime`           | `long`                                                                    | Creation time.                              |
+| `sendTime`             | `long`                                                                    | SDK field returned or submitted by the SDK. |
+| `sessionType`          | `int`                                                                     | SDK field returned or submitted by the SDK. |
+| `sendID`               | `String`                                                                  | Sender user ID.                             |
+| `recvID`               | `String`                                                                  | Receiver user ID for one-to-one chats.      |
+| `msgFrom`              | `int`                                                                     | SDK field returned or submitted by the SDK. |
+| `contentType`          | `int`                                                                     | SDK field returned or submitted by the SDK. |
+| `platformID`           | `int`                                                                     | SDK field returned or submitted by the SDK. |
+| `senderNickname`       | `String`                                                                  | SDK field returned or submitted by the SDK. |
+| `senderFaceUrl`        | `String`                                                                  | SDK field returned or submitted by the SDK. |
+| `groupID`              | `String`                                                                  | Group ID.                                   |
+| `seq`                  | `int`                                                                     | SDK field returned or submitted by the SDK. |
+| `isRead`               | `boolean`                                                                 | SDK field returned or submitted by the SDK. |
+| `status`               | `int`                                                                     | Status value.                               |
+| `isReact`              | `boolean`                                                                 | SDK field returned or submitted by the SDK. |
+| `isExternalExtensions` | `boolean`                                                                 | SDK field returned or submitted by the SDK. |
+| `offlinePush`          | [Offline Push Info](/docs/chat/sdk/v4/android/models/offline-push-info)   | SDK field returned or submitted by the SDK. |
+| `attachedInfo`         | `String`                                                                  | SDK field returned or submitted by the SDK. |
+| `ext`                  | `Object`                                                                  | SDK field returned or submitted by the SDK. |
+| `ex`                   | `Object`                                                                  | Extension field.                            |
+| `localEx`              | `Object`                                                                  | SDK field returned or submitted by the SDK. |
+| `pictureElem`          | [Picture Elem](/docs/chat/sdk/v4/android/models/picture-elem)             | SDK field returned or submitted by the SDK. |
+| `soundElem`            | [Sound Elem](/docs/chat/sdk/v4/android/models/sound-elem)                 | SDK field returned or submitted by the SDK. |
+| `videoElem`            | [Video Elem](/docs/chat/sdk/v4/android/models/video-elem)                 | SDK field returned or submitted by the SDK. |
+| `fileElem`             | [File Elem](/docs/chat/sdk/v4/android/models/file-elem)                   | SDK field returned or submitted by the SDK. |
+| `atTextElem`           | [At Text Elem](/docs/chat/sdk/v4/android/models/at-text-elem)             | SDK field returned or submitted by the SDK. |
+| `locationElem`         | [Location Elem](/docs/chat/sdk/v4/android/models/location-elem)           | SDK field returned or submitted by the SDK. |
+| `customElem`           | [Custom Elem](/docs/chat/sdk/v4/android/models/custom-elem)               | SDK field returned or submitted by the SDK. |
+| `quoteElem`            | [Quote Elem](/docs/chat/sdk/v4/android/models/quote-elem)                 | SDK field returned or submitted by the SDK. |
+| `mergeElem`            | [Merge Elem](/docs/chat/sdk/v4/android/models/merge-elem)                 | SDK field returned or submitted by the SDK. |
+| `notificationElem`     | [Notification Elem](/docs/chat/sdk/v4/android/models/notification-elem)   | SDK field returned or submitted by the SDK. |
+| `faceElem`             | [Face Elem](/docs/chat/sdk/v4/android/models/face-elem)                   | SDK field returned or submitted by the SDK. |
+| `attachedInfoElem`     | [Attached Info Elem](/docs/chat/sdk/v4/android/models/attached-info-elem) | SDK field returned or submitted by the SDK. |
+| `textElem`             | [Text Elem](/docs/chat/sdk/v4/android/models/text-elem)                   | SDK field returned or submitted by the SDK. |
+| `cardElem`             | [Card Elem](/docs/chat/sdk/v4/android/models/card-elem)                   | SDK field returned or submitted by the SDK. |
+| `advancedTextElem`     | [Advanced Text Elem](/docs/chat/sdk/v4/android/models/advanced-text-elem) | SDK field returned or submitted by the SDK. |
+| `typingElem`           | [Typing Elem](/docs/chat/sdk/v4/android/models/typing-elem)               | SDK field returned or submitted by the SDK. |
 
 ## Related Types
 

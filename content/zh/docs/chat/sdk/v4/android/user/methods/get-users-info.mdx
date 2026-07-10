@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-users-info'
 
 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。
 
-## 功能介绍
-
-批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。
-
 用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void getUsersInfo(OnBase<List<PublicUserInfo>> base, List<String> uidList
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                                | 是否必填 | 描述         |
-| -------- | --------------------------------------------------------------------------------------- | -------- | ------------ |
-| callBack | `OnBase<List<`[`PublicUserInfo`](/docs/chat/sdk/v4/android/models/public-user-info)`>>` | 是       | 回调接口     |
-| uidList  | `List<String>`                                                                          | 是       | 用户 ID 集合 |
+| 参数名称 | 参数类型                                                                                                                              | 是否必填 | 描述         |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`PublicUserInfo`](/docs/chat/sdk/v4/android/models/public-user-info)`>>` | 是       | 回调接口     |
+| uidList  | `List<String>`                                                                                                                        | 是       | 用户 ID 集合 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 返回输入用户 ID 中服务端可查询到的 `List<`[`PublicUserInfo`](/docs/chat/sdk/v4/android/models/public-user-info)`>`；不存在的用户不产生占位项，网络、缓存或反序列化失败时调用 `onError`。
 
 ## 代码示例
 

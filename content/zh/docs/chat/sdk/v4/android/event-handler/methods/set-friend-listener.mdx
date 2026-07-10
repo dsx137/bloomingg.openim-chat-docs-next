@@ -10,6 +10,7 @@ version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener'
 ---
+
 接收好友和黑名单相关事件，用于更新通讯录、好友申请入口、好友资料和屏蔽关系状态。
 
 ## 功能介绍
@@ -36,9 +37,9 @@ public void setOnFriendshipListener(OnFriendshipListener listener)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                                                                     | 是否必填 | 描述 |
-| -------- | -------------------------------------------------------------------------------------------- | -------- | ---- |
-| listener | `id<OnFriendshipListener>` | 是       |      |
+| 参数名称 | Java 类型                                                                         | 是否必填 | 描述                           |
+| -------- | --------------------------------------------------------------------------------- | -------- | ------------------------------ |
+| listener | [`OnFriendshipListener`](/docs/chat/sdk/v4/android/models/on-friendship-listener) | 是       | 好友、好友申请和黑名单监听器。 |
 
 ## 返回结果
 

@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/deleting-messages/clear-conversat
 
 清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。
 
-## 功能介绍
-
-清空指定会话并删除其消息，但保留或删除会话展示由 SDK 行为决定。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -44,7 +40,7 @@ public void clearConversationAndDeleteAllMsg(String conversationID, OnBase<Strin
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标会话的本地与服务端历史消息已清理，并清空最后消息和未读状态但保留会话记录；任一服务端或本地清理步骤失败时调用 `onError`。
 
 ## 代码示例
 

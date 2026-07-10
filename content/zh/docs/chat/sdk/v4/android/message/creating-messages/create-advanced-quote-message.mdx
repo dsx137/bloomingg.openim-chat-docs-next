@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-advanced
 
 创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。
 
-## 功能介绍
-
-创建带实体信息的引用消息。适合引用回复中仍需要链接、富文本实体或业务标记。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,16 +33,17 @@ public Message createAdvancedQuoteMessage(String text, Message message, List<Ric
 
 ## 输入参数
 
-| 参数名称            | 类型     | 描述                                                        |
-| ------------------- | -------- | ----------------------------------------------------------- |
-| `operationID`       | `string` | 本次操作的追踪 ID。                                         |
-| `text`              | `string` | 按 core binding 签名传入。                                  |
-| `message`           | `string` | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
-| `messageEntityList` | `string` | 通常为 JSON 字符串或上层封装对象，具体结构以 SDK 定义为准。 |
+| 参数名称 | Java 类型                                                                | 是否必填 | 描述                                                 |
+| -------- | ------------------------------------------------------------------------ | -------- | ---------------------------------------------------- |
+| text     | `String`                                                                 | 是       | 引用消息正文。                                       |
+| message  | [`Message`](/docs/chat/sdk/v4/android/models/message)                    | 是       | 被引用的原消息。                                     |
+| richList | `List<`[`RichMessage`](/docs/chat/sdk/v4/android/models/rich-message)`>` | 是       | 正文中的富文本片段列表，包含类型、位置和长度等信息。 |
 
 ## 返回结果
 
-同步返回 `string`。
+| 名称 | 类型                                                  | 描述                                       |
+| ---- | ----------------------------------------------------- | ------------------------------------------ |
+| ~    | [`Message`](/docs/chat/sdk/v4/android/models/message) | 创建完成的本地高级引用消息对象，尚未发送。 |
 
 ## 代码示例
 

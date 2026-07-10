@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/conversation-info'
@@ -23,29 +23,29 @@ sourcePath: '/docs/chat/sdk/v4/android/models/conversation-info'
 
 ## 字段说明
 
-| 字段名称          | Java 类型 | 描述                                                               |
-| ----------------- | --------- | ------------------------------------------------------------------ |
-| conversationID    | String    | 会话 ID。                                                          |
-| conversationType  | int       | 会话类型，Android SDK 注释中 1 表示单聊，2 表示群聊。              |
-| userID            | String    | 单聊会话对应的用户 ID。                                            |
-| groupID           | String    | 群聊会话对应的群 ID。                                              |
-| showName          | String    | 会话展示名称，通常来自用户昵称或群名称。                           |
-| faceURL           | String    | 会话头像 URL，通常来自用户头像或群头像。                           |
-| recvMsgOpt        | int       | 接收消息选项：0 正常接收并离线推送；1 不接收；2 接收但离线不推送。 |
-| unreadCount       | int       | 当前会话未读消息数。                                               |
-| groupAtType       | int       | 群聊强提醒类型，例如 @ 消息或公告提醒。                            |
-| latestMsg         | String    | 最后一条消息的 JSON 字符串。                                       |
-| latestMsgSendTime | long      | 最后一条消息发送时间，单位毫秒。                                   |
-| draftText         | String    | 会话草稿文本。                                                     |
-| draftTextTime     | long      | 草稿设置时间。                                                     |
-| isPinned          | boolean   | 是否置顶。                                                         |
-| isPrivateChat     | boolean   | 是否开启私聊。                                                     |
-| ext               | String    | 扩展预留字段。                                                     |
-| ex                | String    | 扩展预留字段。                                                     |
-| isNotInGroup      | boolean   | 当前用户是否已不在该群内。                                         |
-| burnDuration      | int       | 阅后即焚阅读时长，单位秒。                                         |
-| msgDestructTime   | long      | 定期删除时间。                                                     |
-| isMsgDestruct     | boolean   | 是否开启定期删除。                                                 |
+| 字段名称          | Java 类型 | 描述                                                                                                                                                           |
+| ----------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| conversationID    | String    | 会话唯一 ID，是查询消息、更新会话和已读操作的主键。                                                                                                            |
+| conversationType  | int       | 会话类型，取值见 [`ConversationType`](/docs/chat/sdk/v4/android/models/conversation-type)。当前 core 中普通群可为 `2`，超级群/工作群可为 `3`，不能只判断 `2`。 |
+| userID            | String    | 单聊会话对应的对端用户 ID；群聊会话通常为空。                                                                                                                  |
+| groupID           | String    | 群聊会话对应的群 ID；单聊会话通常为空。                                                                                                                        |
+| showName          | String    | 会话展示名称，单聊通常来自对端昵称或好友备注，群聊通常来自群名称。                                                                                             |
+| faceURL           | String    | 会话头像 URL，单聊通常来自对端头像，群聊通常来自群头像。                                                                                                       |
+| recvMsgOpt        | int       | 接收选项：`0` 正常接收且允许离线推送，`1` 不接收消息（当前 core 标注暂未启用），`2` 在线接收但不产生离线推送。                                                 |
+| unreadCount       | int       | 当前会话本地未读消息数；进入会话并标记已读后会更新。                                                                                                           |
+| groupAtType       | int       | 群会话强提醒状态，取值见 [`GroupAtType`](/docs/chat/sdk/v4/android/models/group-at-type)，例如 @ 我、@ 所有人或群公告。                                        |
+| latestMsg         | String    | 最后一条消息的 JSON 字符串，可反序列化为 [`Message`](/docs/chat/sdk/v4/android/models/message)；隐藏会话等操作会将其清空。                                     |
+| latestMsgSendTime | long      | 最后一条消息发送时间，当前 core 使用 Unix 毫秒时间戳，也是普通会话列表排序的主要依据。                                                                         |
+| draftText         | String    | 当前会话草稿文本，只用于本地会话列表和输入框恢复。                                                                                                             |
+| draftTextTime     | long      | 草稿更新时间字段。当前提供的 core `SetConversationDraft` 实现写入 `0`，不要依赖它对草稿排序。                                                                  |
+| isPinned          | boolean   | 是否置顶；置顶会话通常在普通时间排序之前展示。                                                                                                                 |
+| isPrivateChat     | boolean   | 是否开启私聊/阅后即焚会话模式。                                                                                                                                |
+| ext               | String    | Android 兼容字段；当前 core 会话结构没有对应 JSON 字段，通常为空。实际业务扩展应读取 `ex`。                                                                    |
+| ex                | String    | 服务端同步的会话业务扩展字符串，格式由业务约定。                                                                                                               |
+| isNotInGroup      | boolean   | 当前用户是否已经不在该群；为 `true` 时不应继续发送群消息。                                                                                                     |
+| burnDuration      | int       | 私聊消息被读取后的保留时长，单位为秒。                                                                                                                         |
+| msgDestructTime   | long      | 会话定期销毁消息的时间配置值。当前源码默认值和服务端时间计算存在单位差异，必须与所部署服务端版本约定一致，不能在客户端自行换算。                               |
+| isMsgDestruct     | boolean   | 是否启用会话级定期消息销毁；关闭时不应使用 `msgDestructTime` 判断删除。                                                                                        |
 
 ## 使用建议
 
@@ -53,6 +53,12 @@ sourcePath: '/docs/chat/sdk/v4/android/models/conversation-info'
 - 单聊会话关注 `userID`，群聊会话关注 `groupID`；不要只根据展示名称判断会话目标。
 - `latestMsg` 是消息 JSON 字符串，如需展示摘要，应按业务已有的消息解析逻辑处理。
 - 修改置顶、免打扰、扩展字段等会话属性时，应通过会话设置方法提交，不要只修改本地对象字段。
+
+## 关联类型
+
+- [会话类型](/docs/chat/sdk/v4/android/models/conversation-type)（`ConversationType`）：单聊、普通群、超级群和通知会话类型。
+- [群提醒类型](/docs/chat/sdk/v4/android/models/group-at-type)（`GroupAtType`）：群会话的 @ 与公告提醒状态。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：`latestMsg` 对应的消息结构。
 
 ## 相关页面
 

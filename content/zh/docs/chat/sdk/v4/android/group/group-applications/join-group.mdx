@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-applications/join-group'
 
 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。
 
-## 功能介绍
-
-申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -38,16 +34,17 @@ public void joinGroup(OnBase<String> base, String gid, String reason, int joinSo
 
 ## 输入参数
 
-| 参数名称   | 参数类型                                             | 是否必填 | 描述                                                                  |
-| ---------- | ---------------------------------------------------- | -------- | --------------------------------------------------------------------- |
-| callBack   | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口                                                              |
-| gid        | String                                               | 是       | 群ID                                                                  |
-| reason     | String                                               | 否       | 请求信息                                                              |
-| joinSource | int                                                  | 是       | [`JoinSource`](/docs/chat/sdk/v4/android/models/join-source) 请求来源 |
+| 参数名称   | Java 类型                                                      | 是否必填 | 描述                                                                            |
+| ---------- | -------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------- |
+| base       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 入群申请提交结果回调。                                                          |
+| gid        | `String`                                                       | 是       | 目标群 ID。                                                                     |
+| reason     | `String`                                                       | 否       | 入群申请说明。                                                                  |
+| joinSource | `int`                                                          | 是       | 入群来源，取值见 [`JoinSource`](/docs/chat/sdk/v4/android/models/join-source)。 |
+| ex         | `String`                                                       | 否       | 扩展信息；仅带 `ex` 的重载需要传入。                                            |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示入群请求已被服务端接受；是否已经成为成员取决于群验证方式，需要审核时仍应等待群申请或入群事件。参数、群状态或服务端校验失败时调用 `onError`。
 
 ## 代码示例
 

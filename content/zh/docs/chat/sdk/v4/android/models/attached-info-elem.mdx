@@ -15,15 +15,15 @@ sourcePath: '/docs/chat/sdk/v4/android/models/attached-info-elem'
 
 ## 字段说明
 
-| 字段名称                  | Java 类型        | 描述                                                             |
-| ------------------------- | ---------------- | ---------------------------------------------------------------- |
-| groupHasReadInfo          | GroupHasReadInfo | 组信息已读详细                                                   |
-| isPrivateChat             | boolean          | 是否是私聊消息（阅后即焚消息）                                   |
-| hasReadTime               | long             | 消息已读时间                                                     |
-| burnDuration              | int              | 阅读时长 s 即从hasReadTime时间算起，超过了burnDuration秒触发销毁 |
-| notSenderNotificationPush | boolean          | SDK 返回或提交的字段。                                           |
-| isEncryption              | boolean          | SDK 返回或提交的字段。                                           |
-| inEncryptStatus           | boolean          | SDK 返回或提交的字段。                                           |
+| 字段名称                  | Java 类型                                                                  | 描述                                                                                                                     |
+| ------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| groupHasReadInfo          | [`GroupHasReadInfo`](/docs/chat/sdk/v4/android/models/group-has-read-info) | 群消息的已读统计，包含已读数和未读数。                                                                                   |
+| isPrivateChat             | boolean                                                                    | 是否为阅后即焚消息。                                                                                                     |
+| hasReadTime               | long                                                                       | 消息被标记为已读的时间戳，是计算阅后即焚到期时间的起点。                                                                 |
+| burnDuration              | int                                                                        | 阅后即焚保留时长，单位为秒；从 `hasReadTime` 起经过该时长后消息进入销毁流程。                                            |
+| notSenderNotificationPush | boolean                                                                    | 是否禁止向消息发送者发送通知推送。该字段仅存在于 Android v3.8.3 兼容模型，当前开源 Go core 未提供对应处理分支。          |
+| isEncryption              | boolean                                                                    | 是否为启用消息加密链路时生成的消息。该字段属于加密能力兼容标记，当前开源 Go core 只保留数据字段，不据此公开加解密接口。  |
+| inEncryptStatus           | boolean                                                                    | 消息当前是否处于加密状态。该字段属于加密能力兼容标记，具体取值由集成的 core 构建写入；未启用对应加密能力时不应自行设置。 |
 
 ## 关联类型
 

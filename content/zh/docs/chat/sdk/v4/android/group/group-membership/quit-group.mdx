@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-membership/quit-group'
 
 当前用户主动退出指定群组。
 
-## 功能介绍
-
-当前用户主动退出指定群组。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -44,7 +40,7 @@ public void quitGroup(OnBase<String> base, String gid)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示当前用户已退出目标群并完成本地群列表同步，回调字符串不含业务数据；群主未先转让群组、用户不在群内或服务端拒绝时调用 `onError`。
 
 ## 代码示例
 

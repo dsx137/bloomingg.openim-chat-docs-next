@@ -5,23 +5,23 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/sound-elem'
 ---
 
-`SoundElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.SoundElem`。语音消息元素。
+`SoundElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.SoundElem`。语音消息元素，包含发送前本地路径和上传后的远程地址。
 
 ## 字段说明
 
-| 字段名称  | Java 类型 | 描述         |
-| --------- | --------- | ------------ |
-| uuid      | String    | 唯一ID       |
-| soundPath | String    | 本地资源地址 |
-| sourceUrl | String    | oss地址      |
-| dataSize  | long      | 音频大小     |
-| duration  | long      | 音频时长 s   |
+| 字段名称  | Java 类型 | 描述                                                                          |
+| --------- | --------- | ----------------------------------------------------------------------------- |
+| uuid      | String    | 语音资源标识，用于上传、缓存或资源去重；使用 URL 创建消息时由调用方提供。     |
+| soundPath | String    | 发送前语音文件的本地路径；使用 URL 创建消息时可以为空，接收端不应依赖该路径。 |
+| sourceUrl | String    | 上传完成后的远程语音 URL；本地创建消息后由发送流程补齐。                      |
+| dataSize  | long      | 语音文件大小，单位为字节。                                                    |
+| duration  | long      | 语音时长，单位为秒，由调用方创建消息时传入。                                  |
 
 ## 相关页面
 

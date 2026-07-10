@@ -37,9 +37,11 @@ public void getJoinedGroupListPage(OnBase<List<GroupInfo>> base, int offset, int
 
 ## Input Parameters
 
-| Parameter  | Type                                                                        | Description                                     |
-| ---------- | --------------------------------------------------------------------------- | ----------------------------------------------- |
-| `callBack` | `OnBase<List<`[Group Info](/docs/chat/sdk/v4/android/models/group-info)`>>` | Async callback for success and failure results. |
+| Parameter | Type                                                                                                                     | Description                                     |
+| --------- | ------------------------------------------------------------------------------------------------------------------------ | ----------------------------------------------- |
+| `base`    | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[Group Info](/docs/chat/sdk/v4/android/models/group-info)`>>` | Async callback for success and failure results. |
+| `offset`  | `int`                                                                                                                    | Pagination offset.                              |
+| `count`   | `int`                                                                                                                    | Number of records to return.                    |
 
 
 

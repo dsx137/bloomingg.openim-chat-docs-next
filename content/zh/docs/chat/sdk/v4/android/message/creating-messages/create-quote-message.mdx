@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-quote-me
 
 创建引用消息。用于回复某条历史消息并携带新的文本内容。
 
-## 功能介绍
-
-创建引用消息。用于回复某条历史消息并携带新的文本内容。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,10 +33,10 @@ public Message createQuoteMessage(String text, Message message)
 
 ## 输入参数
 
-| 参数名称 | 参数类型                                              | 是否必填 | 描述         |
-| -------- | ----------------------------------------------------- | -------- | ------------ |
-| text     | String                                                | 是       | 文本内容     |
-| quoteMsg | [`Message`](/docs/chat/sdk/v4/android/models/message) | 是       | 被引用的消息 |
+| 参数名称 | Java 类型                                             | 是否必填 | 描述             |
+| -------- | ----------------------------------------------------- | -------- | ---------------- |
+| text     | `String`                                              | 是       | 引用消息正文。   |
+| message  | [`Message`](/docs/chat/sdk/v4/android/models/message) | 是       | 被引用的原消息。 |
 
 ## 返回结果
 

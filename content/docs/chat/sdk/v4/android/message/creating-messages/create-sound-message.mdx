@@ -37,17 +37,20 @@ public Message createSoundMessage(String soundPath, long duration)
 
 ## Input Parameters
 
-| Parameter     | Type     | Description                                   |
-| ------------- | -------- | --------------------------------------------- |
-| `operationID` | `string` | Trace ID for this operation.                  |
-| `soundPath`   | `string` | Local file path.                              |
-| `duration`    | `int64`  | Pass according to the core binding signature. |
+| Parameter   | Type     | Description                                               |
+| ----------- | -------- | --------------------------------------------------------- |
+| `soundPath` | `String` | Local file path.                                          |
+| `duration`  | `long`   | Parameter passed according to the core binding signature. |
 
 
 
 ## Return Value
 
 This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+| Name | Type                                                | Description                           |
+| ---- | --------------------------------------------------- | ------------------------------------- |
+| ~    | [Message](/docs/chat/sdk/v4/android/models/message) | Returned when the operation succeeds. |
 
 ## Code Example
 

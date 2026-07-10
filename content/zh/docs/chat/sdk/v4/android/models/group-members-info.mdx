@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-members-info'
@@ -15,19 +15,24 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-members-info'
 
 ## 字段说明
 
-| 字段名称       | Java 类型 | 描述                                               |
-| -------------- | --------- | -------------------------------------------------- |
-| groupID        | String    | 群id                                               |
-| userID         | String    | 用户id                                             |
-| nickname       | String    | 群内昵称                                           |
-| faceURL        | String    | 头像                                               |
-| roleLevel      | int       | 群角色                                             |
-| joinTime       | long      | 入群时间                                           |
-| joinSource     | int       | 加入方式 2：邀请加入 3：搜索加入 4：通过二维码加入 |
-| operatorUserID | String    | 操作者id                                           |
-| ex             | String    | 扩展字段                                           |
-| muteEndTime    | long      | 禁言结束时间                                       |
-| inviterUserID  | String    | 邀请人id                                           |
+| 字段名称       | Java 类型 | 描述                                                                                                                  |
+| -------------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
+| groupID        | String    | 该成员所属的群 ID。                                                                                                   |
+| userID         | String    | 群成员的用户 ID，与 `groupID` 共同唯一标识一条群成员记录。                                                            |
+| nickname       | String    | 成员在该群内使用的昵称，不一定等于用户全局昵称。                                                                      |
+| faceURL        | String    | 成员在群资料中的头像 URL。                                                                                            |
+| roleLevel      | int       | 群内角色，取值见 [`GroupRole`](/docs/chat/sdk/v4/android/models/group-role)：`20` 普通成员、`60` 管理员、`100` 群主。 |
+| joinTime       | long      | 加入该群的时间，当前 core 使用 Unix 毫秒时间戳。                                                                      |
+| joinSource     | int       | 入群来源，取值见 [`JoinSource`](/docs/chat/sdk/v4/android/models/join-source)：`2` 邀请、`3` 搜索、`4` 二维码。       |
+| operatorUserID | String    | 执行本次入群或成员变更操作的用户 ID；自动加入等场景可能为空。                                                         |
+| ex             | String    | 该成员在此群中的业务扩展字符串，格式由业务约定。                                                                      |
+| muteEndTime    | long      | 成员禁言结束时间，当前 core 使用 Unix 毫秒时间戳；`0` 表示没有有效的单人禁言截止时间。                                |
+| inviterUserID  | String    | 通过邀请入群时的邀请人用户 ID；非邀请入群时通常为空。                                                                 |
+
+## 关联类型
+
+- [群成员角色](/docs/chat/sdk/v4/android/models/group-role)（`GroupRole`）：群主、管理员和普通成员的角色值。
+- [入群来源](/docs/chat/sdk/v4/android/models/join-source)（`JoinSource`）：邀请、搜索和二维码入群来源。
 
 ## 相关页面
 

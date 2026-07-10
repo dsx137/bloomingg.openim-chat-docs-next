@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/message/managing-conversations/hide-conve
 
 隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。
 
-## 功能介绍
-
-隐藏指定会话，让它从会话列表中消失但不一定删除历史消息。
-
 创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
 
 ## Core Binding 方法
@@ -37,14 +33,14 @@ public void hideConversation(OnBase<String> base, String conversationID)
 
 ## 输入参数
 
-| 参数名称       | 参数类型                                                           | 是否必填 | 描述     |
-| -------------- | ------------------------------------------------------------------ | -------- | -------- |
-| base           | `OnBase<String>` | 是       | 回调接口 |
-| conversationID | String                                                             | 是       | 会话 ID  |
+| 参数名称       | 参数类型                                                       | 是否必填 | 描述     |
+| -------------- | -------------------------------------------------------------- | -------- | -------- |
+| base           | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 回调接口 |
+| conversationID | String                                                         | 是       | 会话 ID  |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标会话的未读数、最后消息和草稿已重置，使其退出普通会话列表；历史消息仍保留，后续有新消息时会话可重新出现。会话不存在或数据库更新失败时调用 `onError`。
 
 ## 代码示例
 

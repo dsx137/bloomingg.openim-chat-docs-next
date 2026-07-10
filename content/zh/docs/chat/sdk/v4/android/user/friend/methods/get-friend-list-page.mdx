@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page'
 
 分页获取好友列表，适合好友数量较多时按页加载。
 
-## 功能介绍
-
-分页获取好友列表，适合好友数量较多时按页加载。
-
 好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
 
 ## Core Binding 方法
@@ -37,11 +33,12 @@ public void getFriendListPage(OnBase<List<UserInfo>> base, int offset, int count
 
 ## 输入参数
 
-| 参数名称    | 参数类型 | 是否必填 | 描述             |
-| ----------- | -------- | -------- | ---------------- |
-| offset      | int      | 是       | 分页拉取起始下标 |
-| count       | int      | 是       | 一页拉取的数量   |
-| filterBlack | Boolean  | 否       | 是否过滤掉黑名单 |
+| 参数名称    | Java 类型                                                                                                                | 是否必填 | 描述                         |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ---------------------------- |
+| base        | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`UserInfo`](/docs/chat/sdk/v4/android/models/user-info)`>>` | 是       | 好友列表分页结果回调。       |
+| offset      | `int`                                                                                                                    | 是       | 从零开始的分页偏移量。       |
+| count       | `int`                                                                                                                    | 是       | 本次最多返回的好友数量。     |
+| filterBlack | `Boolean`                                                                                                                | 否       | 是否过滤已加入黑名单的用户。 |
 
 ## 返回结果
 

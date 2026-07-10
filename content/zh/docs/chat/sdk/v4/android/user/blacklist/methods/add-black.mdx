@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/add-black'
 
 将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。
 
-## 功能介绍
-
-将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。
-
 黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
 
 ## Core Binding 方法
@@ -45,7 +41,7 @@ public void addBlacklist(OnBase<String> base, String uid)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示目标用户已加入当前用户黑名单并完成本地关系同步，回调字符串不含业务数据；目标无效、重复操作或服务端拒绝时调用 `onError`。关系变化也会通过好友监听器通知。
 
 ## 代码示例
 

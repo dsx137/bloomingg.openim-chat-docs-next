@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/application/methods/logout'
 
 退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。
 
-## 功能介绍
-
-退出当前登录用户，断开当前用户态会话并清理登录相关状态。它不等同于销毁 SDK 全局实例。
-
 初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
 
 ## Core Binding 方法
@@ -37,14 +33,13 @@ public void logout(OnBase<String> base)
 
 ## 输入参数
 
-| 参数名称      | 类型                                            | 描述                |
-| ------------- | ----------------------------------------------- | ------------------- |
-| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。      |
-| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
+| 参数名称 | Java 类型                                                      | 是否必填 | 描述               |
+| -------- | -------------------------------------------------------------- | -------- | ------------------ |
+| base     | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 退出登录结果回调。 |
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示当前账号已退出并结束用户态连接，回调字符串不含业务数据；退出失败时，`onError` 返回错误码和描述。退出成功后如需销毁全局 SDK，还应单独调用 `unInit`。
 
 ## 代码示例
 

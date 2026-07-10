@@ -13,10 +13,6 @@ sourcePath: '/docs/chat/sdk/v4/android/group/group-moderation/change-group-mute'
 
 开启或关闭全群禁言。适合群管理者控制群内发言状态。
 
-## 功能介绍
-
-开启或关闭全群禁言。适合群管理者控制群内发言状态。
-
 群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
 
 ## Core Binding 方法
@@ -45,7 +41,7 @@ public void changeGroupMute(OnBase<String> base, String gid, boolean mute)
 
 ## 返回结果
 
-通过回调返回结果：成功走 `OnSuccess`，失败走 `OnError`；发送或上传类方法还可能通过进度回调返回进度。
+`onSuccess` 表示全群禁言状态已更新并同步到本地群资料，回调字符串不含业务数据；当前用户无管理权限或群状态不允许修改时调用 `onError`。
 
 ## 代码示例
 

@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/friend-application-info'
@@ -15,23 +15,23 @@ sourcePath: '/docs/chat/sdk/v4/android/models/friend-application-info'
 
 ## 字段说明
 
-| 字段名称      | Java 类型 | 描述                                     |
-| ------------- | --------- | ---------------------------------------- |
-| fromUserID    | String    | 请求用户id                               |
-| fromNickname  | String    | 请求用户昵称                             |
-| fromFaceURL   | String    | 请求用户头像                             |
-| fromGender    | int       | 请求用户性别                             |
-| toUserID      | String    | 接受用户id                               |
-| toNickname    | String    | 接受用户昵称                             |
-| toFaceURL     | String    | 接受用户头像                             |
-| toGender      | int       | 接受用户性别                             |
-| handleResult  | int       | 处理结果 0 等待处理，1 已同意， 2 已拒绝 |
-| reqMsg        | String    | 请求备注                                 |
-| createTime    | long      | 创建时间                                 |
-| handlerUserID | String    | 处理者id                                 |
-| handleMsg     | String    | 处理备注                                 |
-| handleTime    | long      | 处理时间                                 |
-| ex            | String    | 扩展字段                                 |
+| 字段名称      | Java 类型 | 描述                                                                                                   |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------ |
+| fromUserID    | String    | 发起好友申请的用户 ID。                                                                                |
+| fromNickname  | String    | 申请发起方的昵称快照。                                                                                 |
+| fromFaceURL   | String    | 申请发起方的头像 URL 快照。                                                                            |
+| fromGender    | int       | 发起方性别兼容字段：`1` 男、`2` 女、`0` 或其他值未设置。当前提供的 core 转换未填充该字段，通常为 `0`。 |
+| toUserID      | String    | 好友申请接收方的用户 ID。                                                                              |
+| toNickname    | String    | 申请接收方的昵称快照。                                                                                 |
+| toFaceURL     | String    | 申请接收方的头像 URL 快照。                                                                            |
+| toGender      | int       | 接收方性别兼容字段：`1` 男、`2` 女、`0` 或其他值未设置。当前提供的 core 转换未填充该字段，通常为 `0`。 |
+| handleResult  | int       | 处理状态：`-1` 已拒绝、`0` 未处理、`1` 已同意。Android 类注释把拒绝写成 `2`，与当前 core 常量不一致。  |
+| reqMsg        | String    | 申请发起方填写的验证信息或附言。                                                                       |
+| createTime    | long      | 申请创建时间，当前 core 使用 Unix 毫秒时间戳。                                                         |
+| handlerUserID | String    | 执行同意或拒绝操作的用户 ID，通常是申请接收方；未处理时为空。                                          |
+| handleMsg     | String    | 处理申请时填写的回复说明；未处理时通常为空。                                                           |
+| handleTime    | long      | 申请处理时间，当前 core 使用 Unix 毫秒时间戳；未处理时通常为 `0`。                                     |
+| ex            | String    | 好友申请记录的业务扩展字符串。                                                                         |
 
 ## 相关页面
 

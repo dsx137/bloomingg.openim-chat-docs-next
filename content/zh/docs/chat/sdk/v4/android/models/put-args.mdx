@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/put-args'
@@ -15,11 +15,13 @@ sourcePath: '/docs/chat/sdk/v4/android/models/put-args'
 
 ## 字段说明
 
-| 字段名称 | Java 类型 | 描述         |
-| -------- | --------- | ------------ |
-| filepath | String    | 本地文件路径 |
-| name     | String    | 文件名       |
-| cuase    | String    | 类型         |
+| 字段名称 | Java 类型 | 描述                                                                                                                           |
+| -------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| filepath | String    | 要上传文件的本地完整路径，文件必须存在且当前进程可读。构造 `PutArgs(filepath)` 时会同时把该值赋给 `name`。                     |
+| name     | String    | 提交给文件服务的对象名称。构造函数默认使用完整路径，业务通常应改为不含本地目录的文件名，避免把设备路径作为远程名称。           |
+| cuase    | String    | Android v3.8.3 中拼写错误的兼容字段。当前 core 请求字段名是 `cause`，因此序列化后的 `cuase` 会被忽略，不能依赖它设置上传用途。 |
+
+当前 Android `PutArgs` 还没有公开 core 支持的 `contentType`、`cause` 和 `uuid` 字段；需要这些上传元数据时，应升级到模型已对齐底层 `UploadFileReq` 的 SDK 版本。
 
 ## 相关页面
 

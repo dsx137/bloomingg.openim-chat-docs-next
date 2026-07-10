@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-07-08'
+lastUpdated: '2026-07-10'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/models/group-at-type'
@@ -15,10 +15,10 @@ sourcePath: '/docs/chat/sdk/v4/android/models/group-at-type'
 
 ## 取值说明
 
-| 常量               | 值  | 描述           |
-| ------------------ | --- | -------------- |
-| AT_NORMAL          | 0   | 清除所有       |
-| AT_ME              | 1   | at我           |
-| AT_ALL             | 2   | at所有人       |
-| AT_ALL_AT_ME       | 3   | at所有人，at我 |
-| GROUP_NOTIFICATION | 4   | 群公告提示     |
+| 常量               | 值  | 描述                                                                        |
+| ------------------ | --- | --------------------------------------------------------------------------- |
+| AT_NORMAL          | 0   | 当前会话没有待展示的 @ 或群公告强提醒，通常在用户读取相关消息后恢复为该值。 |
+| AT_ME              | 1   | 存在明确提及当前用户的未读 @ 消息。                                         |
+| AT_ALL             | 2   | 存在 @ 所有人的未读消息，但没有单独 @ 当前用户。                            |
+| AT_ALL_AT_ME       | 3   | 同时存在 @ 所有人和单独 @ 当前用户的未读提醒。                              |
+| GROUP_NOTIFICATION | 4   | 存在需要在会话列表提示的群公告更新。                                        |
