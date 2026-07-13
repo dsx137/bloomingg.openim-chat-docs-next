@@ -1,18 +1,98 @@
 ---
 title: 'Authentication'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Authentication. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Initialize OpenIM and authenticate an Android user with a user ID and token.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication"
-  context="SDKs · Android · v4"
-  sourceTitle="Authentication"
-/>
+## Overview
+
+Initialize the client, register listeners, and call `login` with the user ID and token issued for that user.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| Signed-in user | `uid` | Passed to `login`. |
+| Login credential | `token` | Passed to `login`. |
+| Connection state | `OnConnListener` | Its callbacks begin after `login` is called. |
+
+## Prerequisites
+
+- An initialized `OpenIMClient` with `InitConfig`.
+- A user ID and token.
+- Listeners registered before login when the app needs their events.
+
+## Install and configure
+
+Add the Android and Core SDK dependencies described in the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+```java
+OpenIMClient client = OpenIMClient.getInstance();
+boolean initialized = client.initSDK(getApplication(), initConfig, new OnConnListener() {
+    @Override public void onUserTokenExpired() {
+        // Obtain a new token before attempting another login.
+    }
+});
+```
+
+## Implement the task
+
+### 1. Register listeners
+
+Register application listeners before login so the app can receive state changes as the session starts.
+
+```java
+client.messageManager.setAdvancedMsgListener(new OnAdvanceMsgListener() {});
+client.conversationManager.setOnConversationListener(new OnConversationListener() {});
+client.groupManager.setOnGroupListener(new OnGroupListener() {});
+```
+
+### 2. Log in
+
+```java
+client.login(new OnBase<String>() {
+    @Override public void onSuccess(String data) {
+        // The SDK accepted the login request.
+    }
+
+    @Override public void onError(int code, String error) {
+        // Display or record the login failure.
+    }
+}, userId, token);
+```
+
+### 3. End the session
+
+```java
+client.logout(new OnBase<String>() {
+    @Override public void onSuccess(String data) {}
+    @Override public void onError(int code, String error) {}
+});
+```
+
+## Verify the result
+
+- Confirm the login callback succeeds.
+- Confirm `OnConnListener.onConnectSuccess()` is received.
+- Confirm `getLoginUserID()` returns the expected user ID.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Token expired or invalid | The credential cannot establish a session. | Obtain a new token and log in again. |
+| No connection event | The listener is only called after `login`. | Initialize and call `login` after registering the listener. |
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/android/getting-started/send-first-message)
+- [Event handler](/docs/chat/sdk/v4/android/event-handler/overview-event-handler)

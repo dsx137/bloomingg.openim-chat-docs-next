@@ -1,18 +1,71 @@
 ---
 title: 'Send a message'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Send a message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Create and send messages to OpenIM users or groups from Android.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message"
-  context="SDKs · Android · v4"
-  sourceTitle="Send a message"
-/>
+## Overview
+
+Use `messageManager` to create a message and send it to a user or group. The SDK also exposes creators for image, sound, video, file, location, custom, quote, card, face, and advanced text messages.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| Outgoing content | `Message` | Create it before sending. |
+| Send operation | `sendMessage` | Uses an `OnMsgSendCallback`. |
+| Offline notification | `OfflinePushInfo` | Pass `null` when no offline push information is needed. |
+
+## Prerequisites
+
+- An initialized, logged-in client.
+- A `Message` and either a recipient user ID or group ID.
+
+## Install and configure
+
+Use the SDK dependencies in the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+Initialize and log in before sending messages.
+
+## Implement the task
+
+### 1. Create a message
+
+```java
+Message message = OpenIMClient.getInstance().messageManager.createTextMessage(text);
+```
+
+### 2. Send it
+
+```java
+OpenIMClient.getInstance().messageManager.sendMessage(callback, message, recvUid, recvGid, offlinePushInfo);
+```
+
+### 3. Handle the result
+
+Implement `onSuccess(Message)`, `onError(int, String)`, and `onProgress(long)` on `OnMsgSendCallback`.
+
+## Verify the result
+
+- Confirm the send callback succeeds.
+- Confirm a signed-in recipient receives the message event.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| File path cannot be resolved | A relative-path creator expects content under the configured SDK data path. | Copy the file below that path or use the corresponding full-path creator. |
+
+## Next steps
+
+- [Receive messages in a group channel](/docs/chat/sdk/v4/android/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel)
+- [Send your first message](/docs/chat/sdk/v4/android/getting-started/send-first-message)

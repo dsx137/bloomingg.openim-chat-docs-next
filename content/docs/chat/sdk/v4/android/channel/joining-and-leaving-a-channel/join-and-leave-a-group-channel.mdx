@@ -1,18 +1,73 @@
 ---
 title: 'Join and leave a group channel'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Join and leave a group channel. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Join or leave an OpenIM group from an Android client.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/channel/joining-and-leaving-a-channel/join-and-leave-a-group-channel"
-  context="SDKs · Android · v4"
-  sourceTitle="Join and leave a group channel"
-/>
+## Overview
+
+Use `joinGroup` to request membership and `quitGroup` to leave an OpenIM group.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM API | Notes |
+| --- | --- | --- |
+| Group channel | `gid` | The group ID. |
+| Join | `joinGroup` | Includes a reason and join source. |
+| Leave | `quitGroup` | Requires only the group ID. |
+
+## Prerequisites
+
+- An initialized, logged-in client.
+- The target group ID.
+
+## Install and configure
+
+Follow the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+Initialize and log in before calling group APIs.
+
+## Implement the task
+
+### 1. Join a group
+
+```java
+OpenIMClient.getInstance().groupManager.joinGroup(callback, groupId, reason, joinSource);
+```
+
+The SDK source documents join source values `2` for invitation, `3` for search, and `4` for QR code.
+
+### 2. Leave a group
+
+```java
+OpenIMClient.getInstance().groupManager.quitGroup(callback, groupId);
+```
+
+### 3. Handle the result
+
+Handle `OnBase<String>.onSuccess` and `onError` for both operations.
+
+## Verify the result
+
+- Refresh the joined group list after a successful operation.
+- Confirm group membership from another signed-in client when applicable.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Join fails | The server did not accept the membership request. | Handle `onError` and verify the group ID and join source. |
+
+## Next steps
+
+- [Create a channel](/docs/chat/sdk/v4/android/channel/creating-a-channel/create-a-channel)
+- [Send a message](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)

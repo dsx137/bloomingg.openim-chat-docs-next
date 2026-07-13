@@ -1,18 +1,78 @@
 ---
 title: 'Send your first message'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Create and send a text message with the OpenIM Android SDK.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/getting-started/send-first-message"
-  context="SDKs · Android · v4"
-  sourceTitle="Send your first message"
-/>
+## Overview
+
+Create a text `Message` and send it to a recipient user or group after the user is logged in.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| Text content | `Message` | Created by `createTextMessage`. |
+| Direct recipient | `recvUid` | Supply a user ID. |
+| Group recipient | `recvGid` | Supply a group ID. |
+
+## Prerequisites
+
+- An initialized and logged-in `OpenIMClient`.
+- The recipient user ID or group ID.
+
+## Install and configure
+
+Install and initialize the SDK as described in the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+Register an `OnAdvanceMsgListener` before login when the app needs to receive messages.
+
+## Implement the task
+
+### 1. Prepare the message
+
+```java
+Message message = OpenIMClient.getInstance()
+    .messageManager
+    .createTextMessage("Hello, OpenIM");
+```
+
+### 2. Send to a user
+
+```java
+OpenIMClient.getInstance().messageManager.sendMessage(new OnMsgSendCallback() {
+    @Override public void onProgress(long progress) {}
+    @Override public void onSuccess(Message sentMessage) {}
+    @Override public void onError(int code, String error) {}
+}, message, recipientUserId, "", null);
+```
+
+### 3. Handle the result
+
+`onSuccess` receives the sent `Message`. `onProgress` reports upload progress for messages that upload content, and `onError` reports a failed send.
+
+## Verify the result
+
+- Confirm `onSuccess` receives a message.
+- Confirm the recipient receives `OnAdvanceMsgListener.onRecvNewMessage`.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Send callback fails | The request could not be completed. | Handle `onError` and retain enough UI state to retry. |
+| No receive event | The recipient has not registered a message listener. | Register `OnAdvanceMsgListener` before login. |
+
+## Next steps
+
+- [Send a message](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)
+- [Authentication](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication)

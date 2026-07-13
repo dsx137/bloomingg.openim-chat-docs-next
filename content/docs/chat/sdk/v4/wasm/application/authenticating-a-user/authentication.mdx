@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/wasm'
 template: 'guide'
 status: 'draft'
-lastUpdated: '2026-06-26'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'wasm'
 sourcePath: '/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication'
@@ -13,13 +13,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentica
 
 ## Overview
 
-Authenticate a WASM user by creating the SDK instance, registering connection listeners, calling `login()`, and handling token lifecycle events.
+Authenticate a WASM user by registering the global callback, initializing the module, calling `login()`, and handling token lifecycle events.
 
 This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
 
 ## OpenIM model
 
-Browser clients should receive `userID` and token from a trusted backend. `login()` starts the session; the connection callbacks tell the UI when the WebSocket is actually ready.
+Browser clients should receive `userID` and token from a trusted backend. `login()` starts the session; events sent to `commonEventFunc` tell the UI when the WebSocket is ready.
 
 Support status: public WASM SDK APIs cover this workflow.
 
@@ -34,97 +34,73 @@ Key concepts to keep straight:
 ## Prerequisites
 
 - Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
-- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
-- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Serve `openIM.wasm` and the Go `wasm_exec.js` runtime from the browser app public path.
+- Register `commonEventFunc`, call `initSDK()` with configuration JSON, then call `login()` with an operation ID, user ID, and token.
 
 ## API signatures
 
 Relevant public signatures:
 
 ```ts
-function getSDK(config?: WasmPathConfig): SDK;
-login: (params: InitAndLoginConfig, operationID?: string) => Promise<any>;
-logout: <T>(operationID?: string) => Promise<WsResponse<T>>;
-getLoginStatus: (operationID?: string) => Promise<WsResponse<LoginStatus>>;
-getLoginUserID: (operationID?: string) => Promise<WsResponse<string>>;
+initSDK(operationID: string, config: string): unknown;
+login(operationID: string, userID: string, token: string): Promise<string>;
+logout(operationID: string): Promise<string>;
+getLoginStatus(operationID: string): Promise<number>;
 ```
 
 Relevant events:
 
 ```ts
-on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
-off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
-CbEvents.OnConnecting
-CbEvents.OnConnectSuccess
-CbEvents.OnConnectFailed
-CbEvents.OnKickedOffline
-CbEvents.OnUserTokenExpired
-CbEvents.OnUserTokenInvalid
+commonEventFunc(callback: (event: string) => void): boolean;
+// Event names: OnConnecting, OnConnectSuccess, OnConnectFailed,
+// OnKickedOffline, OnUserTokenExpired, and OnUserTokenInvalid.
 ```
 
 Response and event payloads use these common shapes:
 
 ```ts
-type WsResponse<T> = {
+type CallbackEvent = {
   event: string;
   errCode: number;
   errMsg: string;
-  data: T;
-  operationID: string;
-};
-type WSEvent<T = unknown> = {
-  event: CbEvents;
-  data: T;
-  errCode: number;
-  errMsg: string;
+  data?: unknown;
   operationID: string;
 };
 ```
 
 ## Implementation
 
-Create and reuse one SDK instance in the browser session.
+Register the callback and initialize the module before logging in.
 
 ```ts
-import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
-
-const OpenIM = getSDK({
-  coreWasmPath: '/openIM.wasm',
-  sqlWasmPath: '/sql-wasm.wasm',
+globalThis.commonEventFunc((serializedEvent: string) => {
+  const event = JSON.parse(serializedEvent);
+  if (event.event === 'OnConnectSuccess') console.info('OpenIM connected');
 });
-
-OpenIM.on(CbEvents.OnConnectSuccess, () => {
-  console.info('OpenIM connected');
-});
-
-await OpenIM.login({
-  userID,
-  token,
-  platformID: 5,
-  apiAddr,
-  wsAddr,
-});
+globalThis.initSDK(operationID, JSON.stringify({ platformID: 5, apiAddr, wsAddr }));
+await globalThis.login(operationID, userID, token);
 ```
 
 Register token and kick-offline handlers before calling `login()`.
 
 ```ts
-OpenIM.on(CbEvents.OnUserTokenExpired, requestFreshToken);
-OpenIM.on(CbEvents.OnUserTokenInvalid, forceSignOut);
-OpenIM.on(CbEvents.OnKickedOffline, showSignedInElsewhereDialog);
+globalThis.commonEventFunc((serializedEvent: string) => {
+  const event = JSON.parse(serializedEvent);
+  if (event.event === 'OnUserTokenExpired') requestFreshToken();
+  if (event.event === 'OnUserTokenInvalid') forceSignOut();
+  if (event.event === 'OnKickedOffline') showSignedInElsewhereDialog();
+});
 
-await OpenIM.login({ userID, token, platformID: 5, apiAddr, wsAddr });
-
-const { data: loginStatus } = await OpenIM.getLoginStatus();
+const loginStatus = await globalThis.getLoginStatus(operationID);
 ```
 
 Call `logout()` before switching accounts in the same browser session.
 
 ## Returned data and events
 
-The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+Promise calls resolve their raw result, commonly a JSON string. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` after parsing the returned result.
 
-Watch these callbacks while testing: `CbEvents.OnConnecting`, `CbEvents.OnConnectSuccess`, `CbEvents.OnConnectFailed`, `CbEvents.OnKickedOffline`, `CbEvents.OnUserTokenExpired`, `CbEvents.OnUserTokenInvalid`.
+Watch these callback event names while testing: `OnConnecting`, `OnConnectSuccess`, `OnConnectFailed`, `OnKickedOffline`, `OnUserTokenExpired`, and `OnUserTokenInvalid`.
 
 Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
 
@@ -138,7 +114,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 
 | Case                           | Cause                                                                 | Handling                                                                                               |
 | ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm` and the Go `wasm_exec.js` runtime to the browser public path.         |
 | The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
 | The SDK call rejects | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
 
