@@ -75,12 +75,18 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
     "FriendRequests": [
       {
         "fromUserID": "user_001",
+        "fromNickname": "Alice",
+        "fromFaceURL": "https://example.com/avatar-alice.png",
         "toUserID": "user_002",
+        "toNickname": "Bob",
+        "toFaceURL": "https://example.com/avatar-bob.png",
         "handleResult": 0,
         "reqMsg": "Example value",
-        "handleMsg": "",
         "createTime": 1710000000000,
-        "handlerUserID": ""
+        "handlerUserID": "",
+        "handleMsg": "",
+        "handleTime": 0,
+        "ex": ""
       }
     ],
     "total": 1
@@ -96,8 +102,8 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
 | errMsg | string | Short error message. |
 | errDlt | string | Detailed error information for troubleshooting. |
 | data | object | Endpoint-specific response data. |
-| FriendRequests | array | The friend requests value. |
-| total | int | Total number of matching records. |
+| data.FriendRequests | array | The friend requests value. |
+| data.total | int | Total number of matching records. |
 
 ### Error response
 

@@ -66,7 +66,7 @@ curl --request POST "${API_ADDRESS}/group/set_group_member_info" \
 
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| members | 是 | array | 要修改的群成员对象列表，字段说明见[群组模块的 `GroupMemberFullInfo`](/docs/chat/platform-api/v3/group/overview#groupmemberfullinfo)，最多 1000 个。 |
+| members | 是 | array | 要修改的群成员对象列表，字段说明见[群组模块的 `GroupMemberInfo`](/docs/chat/platform-api/v3/group/overview#groupmemberinfo)，最多 1000 个。 |
 | members.groupID | 是 | string | 目标群 ID。 |
 | members.userID | 是 | string | 目标成员用户 ID。 |
 | members.nickname | 否 | string | 新的群内昵称。 |

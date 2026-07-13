@@ -1,29 +1,36 @@
 ---
-title: "消息内容类型"
-description: "说明 OpenIM Platform API 发送消息时 contentType 与 content 的对应关系。"
-product: "platform-api"
-context: "chat/platform-api/v3"
-template: "guide"
-status: "published"
-lastUpdated: "2026-07-10"
-version: "v3"
-sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
+title: '消息内容类型'
+description: '说明 OpenIM Platform API 发送消息时 contentType 与 content 的对应关系和字段结构。'
+product: 'platform-api'
+context: 'chat/platform-api/v3'
+template: 'guide'
+status: 'published'
+lastUpdated: '2026-07-13'
+version: 'v3'
+sourcePath: '/docs/chat/platform-api/v3/message/message-content-types'
 ---
 
-发送消息时，`contentType` 决定 `content` 的结构。服务端不会把文件、图片、音视频二进制内容直接写入消息体；媒体类消息通常先通过上传服务得到 URL、快照、大小、时长等信息，再把这些元数据作为消息内容发送。
+发送消息时，`contentType` 决定 `content` 的 JSON 结构。`contentType` 与 `content` 必须匹配，否则客户端可能无法解析或渲染消息。
 
-## 常用类型
+图片、语音、视频和文件消息只在消息体中保存资源地址和元数据。调用发送消息接口前，应先把文件上传到对象存储或业务文件服务，再将可访问的 URL 写入对应字段。
 
-| contentType | 类型 | content 结构 | 说明 |
-| ----------- | ---- | ------------ | ---- |
-| `101` | 文本消息 | `{ "content": "hello" }` | 普通文本内容。 |
-| `102` | 图片消息 | `sourcePicture`、`bigPicture`、`snapshotPicture` | 图片资源信息，通常包含 URL、宽高和大小。 |
-| `103` | 语音消息 | `sourceUrl`、`dataSize`、`duration` | 语音文件地址、大小和时长。 |
-| `104` | 视频消息 | `videoUrl`、`videoSize`、`duration`、`snapshotUrl` | 视频文件和封面图信息。 |
-| `105` | 文件消息 | `fileName`、`fileSize`、`sourceUrl` | 普通文件名称、大小和下载地址。 |
-| `106` | 位置消息 | `description`、`longitude`、`latitude` | 地理位置描述和坐标。 |
-| `109` | 自定义消息 | `data`、`description`、`extension` | 业务自定义消息，客户端按业务协议解析。 |
-| `110` | 引用消息 | `text`、`quoteMessage` | 回复或引用另一条消息。 |
+## contentType 对照
+
+| contentType | 消息类型     | content 结构       |
+| ----------- | ------------ | ------------------ |
+| `101`       | 文本消息     | `TextElem`         |
+| `102`       | 图片消息     | `PictureElem`      |
+| `103`       | 语音消息     | `SoundElem`        |
+| `104`       | 视频消息     | `VideoElem`        |
+| `105`       | 文件消息     | `FileElem`         |
+| `106`       | @ 消息       | `AtTextElem`       |
+| `107`       | 合并消息     | `MergeElem`        |
+| `108`       | 名片消息     | `CardElem`         |
+| `109`       | 位置消息     | `LocationElem`     |
+| `110`       | 自定义消息   | `CustomElem`       |
+| `114`       | 引用消息     | `QuoteElem`        |
+| `115`       | 表情消息     | `FaceElem`         |
+| `117`       | 高级文本消息 | `AdvancedTextElem` |
 
 ## 文本消息
 
@@ -36,12 +43,17 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 }
 ```
 
+| 字段    | 必填 | 类型   | 说明           |
+| ------- | ---- | ------ | -------------- |
+| content | 是   | string | 文本消息内容。 |
+
 ## 图片消息
 
 ```json
 {
   "contentType": 102,
   "content": {
+    "sourcePath": "",
     "sourcePicture": {
       "uuid": "image_001",
       "type": "png",
@@ -70,6 +82,24 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 }
 ```
 
+| 字段            | 必填 | 类型   | 说明                                   |
+| --------------- | ---- | ------ | -------------------------------------- |
+| sourcePath      | 否   | string | 图片本地路径。服务端发送时通常为空。   |
+| sourcePicture   | 是   | object | 原图信息，结构为 `PictureBaseInfo`。   |
+| bigPicture      | 是   | object | 大图信息，结构为 `PictureBaseInfo`。   |
+| snapshotPicture | 是   | object | 缩略图信息，结构为 `PictureBaseInfo`。 |
+
+### PictureBaseInfo
+
+| 字段   | 必填 | 类型   | 说明                              |
+| ------ | ---- | ------ | --------------------------------- |
+| uuid   | 否   | string | 图片文件唯一 ID。                 |
+| type   | 是   | string | 图片文件类型，例如 `png`、`jpg`。 |
+| size   | 否   | int64  | 图片文件大小，单位为字节。        |
+| width  | 是   | int    | 图片宽度，单位为像素。            |
+| height | 是   | int    | 图片高度，单位为像素。            |
+| url    | 是   | string | 图片文件的可访问地址。            |
+
 ## 语音消息
 
 ```json
@@ -80,10 +110,20 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
     "soundPath": "",
     "sourceUrl": "https://example.com/audio/voice.m4a",
     "dataSize": 24576,
-    "duration": 12
+    "duration": 12,
+    "soundType": "m4a"
   }
 }
 ```
+
+| 字段      | 必填 | 类型   | 说明                                        |
+| --------- | ---- | ------ | ------------------------------------------- |
+| uuid      | 否   | string | 语音文件唯一 ID。                           |
+| soundPath | 否   | string | 语音文件本地路径。服务端发送时通常为空。    |
+| sourceUrl | 是   | string | 语音文件的可访问地址。                      |
+| dataSize  | 否   | int64  | 语音文件大小，单位为字节。                  |
+| duration  | 是   | int64  | 语音时长，单位应与客户端 SDK 约定保持一致。 |
+| soundType | 否   | string | 语音文件类型，例如 `m4a`。                  |
 
 ## 视频消息
 
@@ -92,18 +132,35 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
   "contentType": 104,
   "content": {
     "videoPath": "",
+    "videoUUID": "video_001",
     "videoUrl": "https://example.com/video/demo.mp4",
     "videoType": "mp4",
     "videoSize": 5242880,
     "duration": 30,
     "snapshotPath": "",
-    "snapshotUrl": "https://example.com/video/demo-cover.jpg",
+    "snapshotUUID": "snapshot_001",
     "snapshotSize": 65536,
+    "snapshotUrl": "https://example.com/video/demo-cover.jpg",
     "snapshotWidth": 640,
     "snapshotHeight": 360
   }
 }
 ```
+
+| 字段           | 必填 | 类型   | 说明                                        |
+| -------------- | ---- | ------ | ------------------------------------------- |
+| videoPath      | 否   | string | 视频本地路径。服务端发送时通常为空。        |
+| videoUUID      | 否   | string | 视频文件唯一 ID。                           |
+| videoUrl       | 是   | string | 视频文件的可访问地址。                      |
+| videoType      | 是   | string | 视频文件类型，例如 `mp4`。                  |
+| videoSize      | 是   | int64  | 视频文件大小，单位为字节。                  |
+| duration       | 是   | int64  | 视频时长，单位应与客户端 SDK 约定保持一致。 |
+| snapshotPath   | 否   | string | 视频封面图本地路径。服务端发送时通常为空。  |
+| snapshotUUID   | 否   | string | 视频封面图唯一 ID。                         |
+| snapshotSize   | 否   | int64  | 视频封面图大小，单位为字节。                |
+| snapshotUrl    | 是   | string | 视频封面图的可访问地址。                    |
+| snapshotWidth  | 是   | int    | 视频封面图宽度，单位为像素。                |
+| snapshotHeight | 是   | int    | 视频封面图高度，单位为像素。                |
 
 ## 文件消息
 
@@ -111,19 +168,90 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 {
   "contentType": 105,
   "content": {
-    "fileName": "report.pdf",
     "filePath": "",
+    "uuid": "file_001",
     "sourceUrl": "https://example.com/files/report.pdf",
-    "fileSize": 1048576
+    "fileName": "report.pdf",
+    "fileSize": 1048576,
+    "fileType": "pdf"
   }
 }
 ```
+
+| 字段      | 必填 | 类型   | 说明                                 |
+| --------- | ---- | ------ | ------------------------------------ |
+| filePath  | 否   | string | 文件本地路径。服务端发送时通常为空。 |
+| uuid      | 否   | string | 文件唯一 ID。                        |
+| sourceUrl | 是   | string | 文件的可访问地址。                   |
+| fileName  | 是   | string | 文件名称。                           |
+| fileSize  | 是   | int64  | 文件大小，单位为字节。               |
+| fileType  | 否   | string | 文件类型，例如 `pdf`。               |
+
+## @ 消息
+
+```json
+{
+  "contentType": 106,
+  "content": {
+    "text": "@Tom 请查看",
+    "atUserList": ["user_002"],
+    "isAtSelf": false
+  }
+}
+```
+
+| 字段         | 必填 | 类型     | 说明                                                       |
+| ------------ | ---- | -------- | ---------------------------------------------------------- |
+| text         | 否   | string   | 消息文本内容。                                             |
+| atUserList   | 是   | string[] | 被提及用户的 ID 列表。使用 `AtAllTag` 时表示提及全部成员。 |
+| isAtSelf     | 否   | boolean  | 当前消息是否提及消息接收方自身，通常由客户端使用。         |
+| quoteMessage | 否   | object   | @ 消息附带的引用消息。没有引用内容时可不传。               |
+
+## 合并消息
+
+```json
+{
+  "contentType": 107,
+  "content": {
+    "title": "聊天记录",
+    "abstractList": ["Tom: hello", "Jerry: received"],
+    "multiMessage": []
+  }
+}
+```
+
+| 字段         | 必填 | 类型     | 说明                                                                         |
+| ------------ | ---- | -------- | ---------------------------------------------------------------------------- |
+| title        | 是   | string   | 合并消息标题。                                                               |
+| abstractList | 是   | string[] | 合并消息摘要列表，用于会话界面预览。                                         |
+| multiMessage | 是   | object[] | 被合并的消息列表。元素为完整消息对象，字段应与当前 OpenIM 消息结构保持一致。 |
+
+## 名片消息
+
+```json
+{
+  "contentType": 108,
+  "content": {
+    "userID": "user_002",
+    "nickname": "Tom",
+    "faceURL": "https://example.com/avatar/tom.png",
+    "ex": ""
+  }
+}
+```
+
+| 字段     | 必填 | 类型   | 说明                        |
+| -------- | ---- | ------ | --------------------------- |
+| userID   | 是   | string | 名片对应的 OpenIM 用户 ID。 |
+| nickname | 是   | string | 名片展示名称。              |
+| faceURL  | 是   | string | 名片头像地址。              |
+| ex       | 否   | string | 业务扩展字段。              |
 
 ## 位置消息
 
 ```json
 {
-  "contentType": 106,
+  "contentType": 109,
   "content": {
     "description": "OpenIM office",
     "longitude": 113.93041,
@@ -132,11 +260,17 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 }
 ```
 
+| 字段        | 必填 | 类型   | 说明       |
+| ----------- | ---- | ------ | ---------- |
+| description | 否   | string | 位置描述。 |
+| longitude   | 是   | double | 经度。     |
+| latitude    | 是   | double | 纬度。     |
+
 ## 自定义消息
 
 ```json
 {
-  "contentType": 109,
+  "contentType": 110,
   "content": {
     "data": "{\"type\":\"order_paid\",\"orderID\":\"order_001\"}",
     "description": "Order paid",
@@ -145,11 +279,17 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 }
 ```
 
+| 字段        | 必填 | 类型   | 说明                                                           |
+| ----------- | ---- | ------ | -------------------------------------------------------------- |
+| data        | 是   | string | 业务自定义消息内容。通常使用 JSON 字符串，并由业务客户端解析。 |
+| description | 否   | string | 自定义消息的描述信息。                                         |
+| extension   | 否   | string | 自定义扩展字段。                                               |
+
 ## 引用消息
 
 ```json
 {
-  "contentType": 110,
+  "contentType": 114,
   "content": {
     "text": "收到",
     "quoteMessage": {
@@ -163,12 +303,52 @@ sourcePath: "/docs/chat/platform-api/v3/message/message-content-types"
 }
 ```
 
+| 字段         | 必填 | 类型   | 说明                                                                                 |
+| ------------ | ---- | ------ | ------------------------------------------------------------------------------------ |
+| text         | 是   | string | 回复文本。                                                                           |
+| quoteMessage | 是   | object | 被引用的完整消息对象。示例只展示常用字段，实际结构应与当前 OpenIM 消息对象保持一致。 |
+
+## 表情消息
+
+```json
+{
+  "contentType": 115,
+  "content": {
+    "index": 1,
+    "data": "{\"name\":\"smile\"}"
+  }
+}
+```
+
+| 字段  | 必填 | 类型   | 说明                                 |
+| ----- | ---- | ------ | ------------------------------------ |
+| index | 是   | int    | 表情索引。                           |
+| data  | 否   | string | 表情自定义数据，通常为 JSON 字符串。 |
+
+## 高级文本消息
+
+```json
+{
+  "contentType": 117,
+  "content": {
+    "text": "请查看附件",
+    "messageEntityList": []
+  }
+}
+```
+
+| 字段              | 必填 | 类型     | 说明                                                                            |
+| ----------------- | ---- | -------- | ------------------------------------------------------------------------------- |
+| text              | 是   | string   | 高级文本消息正文。                                                              |
+| messageEntityList | 是   | object[] | 正文中的实体列表，例如文件、图片或其他业务片段。实体结构由当前客户端 SDK 定义。 |
+
 ## 使用建议
 
-- `contentType` 和 `content` 必须匹配，否则客户端可能无法正确渲染消息。
-- 媒体类消息应先上传资源，再把资源 URL 和元数据写入 `content`。
-- 自定义消息需要在客户端和业务服务端之间约定 `data`、`description` 和 `extension` 的协议。
-- 导入历史消息时，保持原始 `contentType` 和 `content` 结构，并在发送接口中传入原始 `sendTime`。
+- `contentType` 和 `content` 必须严格匹配。不要只修改类型编号而复用其他类型的内容结构。
+- 媒体类消息应先上传资源，再把资源 URL 和元数据写入 `content`。Platform API 不直接接收媒体二进制内容。
+- `sourcePath`、`soundPath`、`videoPath`、`snapshotPath` 和 `filePath` 是客户端本地路径，服务端发送时通常留空。
+- 自定义消息需要在客户端和业务服务端之间约定 `data`、`description` 和 `extension` 的业务协议。
+- 导入历史消息时，应保留原始 `contentType`、`content` 和 `sendTime`，并确认旧系统消息结构能够被当前客户端识别。
 
 ## 相关页面
 

@@ -24,7 +24,7 @@
     "structure:report": "node scripts/structure-report.mjs && prettier --write docs/STRUCTURE_REPORT.md",
     "check": "eslint . && tsc --noEmit && node scripts/check-content.mjs && node scripts/check-localized-sdk-content.mjs && node scripts/check-wasm-sdk-examples.mjs",
     "postbuild": "node scripts/prepare-standalone.mjs",
-    "content:sync": "node scripts/sync-openim-platform-api-english.mjs && node scripts/sync-openim-android-sdk-english.mjs && node scripts/sync-content-metadata.mjs && node scripts/build-wasm-sdk-zh-content.mjs && node scripts/build-search-index.mjs",
+    "content:sync": "node scripts/build-wasm-sdk-zh-content.mjs && node scripts/build-search-index.mjs",
     "guides:sync": "node scripts/import-openim-guides.mjs",
     "platform-api:sync": "node scripts/import-openim-platform-api.mjs && node scripts/sync-openim-user-api.mjs && node scripts/sync-openim-friend-api.mjs && node scripts/sync-openim-group-api.mjs && node scripts/sync-openim-auth-api.mjs && node scripts/sync-openim-third-api.mjs && node scripts/sync-openim-msg-api.mjs && node scripts/sync-openim-conversation-api.mjs && node scripts/sync-openim-platform-api-order.mjs && node scripts/sync-openim-platform-api-english.mjs && node scripts/build-search-index.mjs",
     "user-api:sync": "node scripts/sync-openim-user-api.mjs",

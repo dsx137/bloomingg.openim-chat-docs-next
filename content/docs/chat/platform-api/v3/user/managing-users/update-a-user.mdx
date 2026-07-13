@@ -30,7 +30,8 @@ curl --request POST "${API_ADDRESS}/user/update_user_info_ex" \
     "userID": "2",
     "nickname": "alantestuid3",
     "faceURL": "",
-    "ex": "123"
+    "ex": "123",
+    "globalRecvMsgOpt": 0
   }
 }'
 ```
@@ -45,7 +46,8 @@ curl --request POST "${API_ADDRESS}/user/update_user_info_ex" \
     "userID": "2",
     "nickname": "alantestuid3",
     "faceURL": "",
-    "ex": "123"
+    "ex": "123",
+    "globalRecvMsgOpt": 0
   }
 }
 ```
@@ -56,7 +58,8 @@ curl --request POST "${API_ADDRESS}/user/update_user_info_ex" \
 | userInfo.userID | Yes | string | OpenIM user ID. |
 | userInfo.nickname | No | string | User nickname. |
 | userInfo.faceURL | No | string | Avatar or icon URL. |
-| ex | No | string | Business extension field. |
+| userInfo.ex | No | string | Business extension field. |
+| userInfo.globalRecvMsgOpt | No | int | Global message receiving option. |
 
 ## Response
 

@@ -68,8 +68,13 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
     "blacks": [
       {
         "ownerUserID": "user_001",
-        "blackUserID": "user_002",
         "createTime": 1710000000000,
+        "blackUserInfo": {
+          "userID": "user_002",
+          "nickname": "Bob",
+          "faceURL": "https://example.com/avatar-bob.png",
+          "ex": ""
+        },
         "addSource": 1,
         "operatorUserID": "user_001",
         "ex": ""
@@ -88,8 +93,8 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
 | errMsg | string | Short error message. |
 | errDlt | string | Detailed error information for troubleshooting. |
 | data | object | Endpoint-specific response data. |
-| blacks | array | The blacks value. |
-| total | int | Total number of matching records. |
+| data.blacks | array | The blacks value. |
+| data.total | int | Total number of matching records. |
 
 ### Error response
 

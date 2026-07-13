@@ -779,7 +779,7 @@
             {
               "id": "message/message-content-types",
               "segment": "message-content-types",
-              "title": "消息内容类型",
+              "title": "Message content types",
               "href": "/docs/chat/platform-api/v3/message/message-content-types",
               "type": "page",
               "children": [],
@@ -813,7 +813,7 @@
                 {
                   "id": "message/sending-messages/send-business-notification",
                   "segment": "send-business-notification",
-                  "title": "发送业务通知",
+                  "title": "Send business notification",
                   "href": "/docs/chat/platform-api/v3/message/sending-messages/send-business-notification",
                   "type": "page",
                   "children": [],
@@ -844,14 +844,14 @@
             {
               "id": "message/retrieving-messages",
               "segment": "retrieving-messages",
-              "title": "工具",
+              "title": "Retrieving messages",
               "href": null,
               "type": "folder",
               "children": [
                 {
                   "id": "message/retrieving-messages/get-server-time",
                   "segment": "get-server-time",
-                  "title": "获取服务器时间",
+                  "title": "Get server time",
                   "href": "/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time",
                   "type": "page",
                   "children": [],
@@ -866,14 +866,14 @@
         {
           "id": "logs",
           "segment": "logs",
-          "title": "日志",
+          "title": "Logs",
           "href": null,
           "type": "folder",
           "children": [
             {
               "id": "logs/overview",
               "segment": "overview",
-              "title": "概述",
+              "title": "Overview",
               "href": "/docs/chat/platform-api/v3/logs/overview",
               "type": "page",
               "children": [],
@@ -882,7 +882,7 @@
             {
               "id": "logs/upload-logs",
               "segment": "upload-logs",
-              "title": "上传日志记录",
+              "title": "Upload logs",
               "href": "/docs/chat/platform-api/v3/logs/upload-logs",
               "type": "page",
               "children": [],
@@ -891,7 +891,7 @@
             {
               "id": "logs/search-logs",
               "segment": "search-logs",
-              "title": "搜索日志记录",
+              "title": "Search logs",
               "href": "/docs/chat/platform-api/v3/logs/search-logs",
               "type": "page",
               "children": [],
@@ -900,7 +900,7 @@
             {
               "id": "logs/delete-logs",
               "segment": "delete-logs",
-              "title": "删除日志记录",
+              "title": "Delete logs",
               "href": "/docs/chat/platform-api/v3/logs/delete-logs",
               "type": "page",
               "children": [],
@@ -4859,7 +4859,7 @@
               "href": "/docs/chat/sdk/v4/android/models/init-config",
               "type": "page",
               "children": [],
-              "minIndex": 144
+              "minIndex": 146
             },
             {
               "id": "models/user-info",
@@ -4868,7 +4868,7 @@
               "href": "/docs/chat/sdk/v4/android/models/user-info",
               "type": "page",
               "children": [],
-              "minIndex": 145
+              "minIndex": 195
             },
             {
               "id": "models/public-user-info",
@@ -4877,7 +4877,7 @@
               "href": "/docs/chat/sdk/v4/android/models/public-user-info",
               "type": "page",
               "children": [],
-              "minIndex": 146
+              "minIndex": 157
             },
             {
               "id": "models/user-info-req",
@@ -4886,7 +4886,7 @@
               "href": "/docs/chat/sdk/v4/android/models/user-info-req",
               "type": "page",
               "children": [],
-              "minIndex": 147
+              "minIndex": 197
             },
             {
               "id": "models/users-online-status",
@@ -4895,7 +4895,7 @@
               "href": "/docs/chat/sdk/v4/android/models/users-online-status",
               "type": "page",
               "children": [],
-              "minIndex": 148
+              "minIndex": 196
             },
             {
               "id": "models/friend-info",
@@ -4904,7 +4904,7 @@
               "href": "/docs/chat/sdk/v4/android/models/friend-info",
               "type": "page",
               "children": [],
-              "minIndex": 149
+              "minIndex": 160
             },
             {
               "id": "models/friendship-info",
@@ -4913,7 +4913,7 @@
               "href": "/docs/chat/sdk/v4/android/models/friendship-info",
               "type": "page",
               "children": [],
-              "minIndex": 150
+              "minIndex": 158
             },
             {
               "id": "models/friend-application-info",
@@ -4922,7 +4922,7 @@
               "href": "/docs/chat/sdk/v4/android/models/friend-application-info",
               "type": "page",
               "children": [],
-              "minIndex": 151
+              "minIndex": 159
             },
             {
               "id": "models/update-friends-req",
@@ -4931,7 +4931,7 @@
               "href": "/docs/chat/sdk/v4/android/models/update-friends-req",
               "type": "page",
               "children": [],
-              "minIndex": 152
+              "minIndex": 161
             },
             {
               "id": "models/blacklist-info",
@@ -4940,7 +4940,7 @@
               "href": "/docs/chat/sdk/v4/android/models/blacklist-info",
               "type": "page",
               "children": [],
-              "minIndex": 153
+              "minIndex": 163
             },
             {
               "id": "models/get-friend-application-list-as-applicant-req",
@@ -4949,7 +4949,7 @@
               "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-applicant-req",
               "type": "page",
               "children": [],
-              "minIndex": 154
+              "minIndex": 149
             },
             {
               "id": "models/get-friend-application-list-as-recipient-req",
@@ -4958,7 +4958,7 @@
               "href": "/docs/chat/sdk/v4/android/models/get-friend-application-list-as-recipient-req",
               "type": "page",
               "children": [],
-              "minIndex": 155
+              "minIndex": 177
             },
             {
               "id": "models/group-info",
@@ -4967,7 +4967,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-info",
               "type": "page",
               "children": [],
-              "minIndex": 156
+              "minIndex": 174
             },
             {
               "id": "models/group-members-info",
@@ -4976,7 +4976,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-members-info",
               "type": "page",
               "children": [],
-              "minIndex": 157
+              "minIndex": 169
             },
             {
               "id": "models/set-group-member-info",
@@ -4985,7 +4985,7 @@
               "href": "/docs/chat/sdk/v4/android/models/set-group-member-info",
               "type": "page",
               "children": [],
-              "minIndex": 158
+              "minIndex": 168
             },
             {
               "id": "models/group-application-info",
@@ -4994,7 +4994,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-application-info",
               "type": "page",
               "children": [],
-              "minIndex": 159
+              "minIndex": 170
             },
             {
               "id": "models/get-group-application-list-as-applicant-req",
@@ -5003,7 +5003,7 @@
               "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-applicant-req",
               "type": "page",
               "children": [],
-              "minIndex": 160
+              "minIndex": 150
             },
             {
               "id": "models/get-group-application-list-as-recipient-req",
@@ -5012,7 +5012,7 @@
               "href": "/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req",
               "type": "page",
               "children": [],
-              "minIndex": 161
+              "minIndex": 178
             },
             {
               "id": "models/conversation-info",
@@ -5021,7 +5021,7 @@
               "href": "/docs/chat/sdk/v4/android/models/conversation-info",
               "type": "page",
               "children": [],
-              "minIndex": 162
+              "minIndex": 165
             },
             {
               "id": "models/conversation-req",
@@ -5030,7 +5030,7 @@
               "href": "/docs/chat/sdk/v4/android/models/conversation-req",
               "type": "page",
               "children": [],
-              "minIndex": 163
+              "minIndex": 164
             },
             {
               "id": "models/message",
@@ -5039,7 +5039,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message",
               "type": "page",
               "children": [],
-              "minIndex": 164
+              "minIndex": 188
             },
             {
               "id": "models/text-elem",
@@ -5048,7 +5048,7 @@
               "href": "/docs/chat/sdk/v4/android/models/text-elem",
               "type": "page",
               "children": [],
-              "minIndex": 165
+              "minIndex": 186
             },
             {
               "id": "models/at-user-info",
@@ -5057,7 +5057,7 @@
               "href": "/docs/chat/sdk/v4/android/models/at-user-info",
               "type": "page",
               "children": [],
-              "minIndex": 166
+              "minIndex": 144
             },
             {
               "id": "models/at-text-elem",
@@ -5066,7 +5066,7 @@
               "href": "/docs/chat/sdk/v4/android/models/at-text-elem",
               "type": "page",
               "children": [],
-              "minIndex": 167
+              "minIndex": 200
             },
             {
               "id": "models/picture-info",
@@ -5075,7 +5075,7 @@
               "href": "/docs/chat/sdk/v4/android/models/picture-info",
               "type": "page",
               "children": [],
-              "minIndex": 168
+              "minIndex": 184
             },
             {
               "id": "models/picture-elem",
@@ -5084,7 +5084,7 @@
               "href": "/docs/chat/sdk/v4/android/models/picture-elem",
               "type": "page",
               "children": [],
-              "minIndex": 169
+              "minIndex": 182
             },
             {
               "id": "models/sound-elem",
@@ -5093,7 +5093,7 @@
               "href": "/docs/chat/sdk/v4/android/models/sound-elem",
               "type": "page",
               "children": [],
-              "minIndex": 170
+              "minIndex": 198
             },
             {
               "id": "models/video-elem",
@@ -5102,7 +5102,7 @@
               "href": "/docs/chat/sdk/v4/android/models/video-elem",
               "type": "page",
               "children": [],
-              "minIndex": 171
+              "minIndex": 176
             },
             {
               "id": "models/file-elem",
@@ -5111,7 +5111,7 @@
               "href": "/docs/chat/sdk/v4/android/models/file-elem",
               "type": "page",
               "children": [],
-              "minIndex": 172
+              "minIndex": 187
             },
             {
               "id": "models/location-elem",
@@ -5120,7 +5120,7 @@
               "href": "/docs/chat/sdk/v4/android/models/location-elem",
               "type": "page",
               "children": [],
-              "minIndex": 173
+              "minIndex": 185
             },
             {
               "id": "models/custom-elem",
@@ -5129,7 +5129,7 @@
               "href": "/docs/chat/sdk/v4/android/models/custom-elem",
               "type": "page",
               "children": [],
-              "minIndex": 174
+              "minIndex": 199
             },
             {
               "id": "models/face-elem",
@@ -5138,7 +5138,7 @@
               "href": "/docs/chat/sdk/v4/android/models/face-elem",
               "type": "page",
               "children": [],
-              "minIndex": 175
+              "minIndex": 145
             },
             {
               "id": "models/card-elem",
@@ -5147,7 +5147,7 @@
               "href": "/docs/chat/sdk/v4/android/models/card-elem",
               "type": "page",
               "children": [],
-              "minIndex": 176
+              "minIndex": 156
             },
             {
               "id": "models/quote-elem",
@@ -5156,7 +5156,7 @@
               "href": "/docs/chat/sdk/v4/android/models/quote-elem",
               "type": "page",
               "children": [],
-              "minIndex": 177
+              "minIndex": 193
             },
             {
               "id": "models/merge-elem",
@@ -5165,7 +5165,7 @@
               "href": "/docs/chat/sdk/v4/android/models/merge-elem",
               "type": "page",
               "children": [],
-              "minIndex": 178
+              "minIndex": 162
             },
             {
               "id": "models/rich-message",
@@ -5174,7 +5174,7 @@
               "href": "/docs/chat/sdk/v4/android/models/rich-message",
               "type": "page",
               "children": [],
-              "minIndex": 179
+              "minIndex": 152
             },
             {
               "id": "models/message-entity",
@@ -5183,7 +5183,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message-entity",
               "type": "page",
               "children": [],
-              "minIndex": 180
+              "minIndex": 155
             },
             {
               "id": "models/advanced-text-elem",
@@ -5192,7 +5192,7 @@
               "href": "/docs/chat/sdk/v4/android/models/advanced-text-elem",
               "type": "page",
               "children": [],
-              "minIndex": 181
+              "minIndex": 154
             },
             {
               "id": "models/typing-elem",
@@ -5201,7 +5201,7 @@
               "href": "/docs/chat/sdk/v4/android/models/typing-elem",
               "type": "page",
               "children": [],
-              "minIndex": 182
+              "minIndex": 179
             },
             {
               "id": "models/notification-elem",
@@ -5210,7 +5210,7 @@
               "href": "/docs/chat/sdk/v4/android/models/notification-elem",
               "type": "page",
               "children": [],
-              "minIndex": 184
+              "minIndex": 181
             },
             {
               "id": "models/attached-info-elem",
@@ -5219,7 +5219,7 @@
               "href": "/docs/chat/sdk/v4/android/models/attached-info-elem",
               "type": "page",
               "children": [],
-              "minIndex": 185
+              "minIndex": 151
             },
             {
               "id": "models/offline-push-info",
@@ -5228,7 +5228,7 @@
               "href": "/docs/chat/sdk/v4/android/models/offline-push-info",
               "type": "page",
               "children": [],
-              "minIndex": 186
+              "minIndex": 167
             },
             {
               "id": "models/advanced-message",
@@ -5237,7 +5237,7 @@
               "href": "/docs/chat/sdk/v4/android/models/advanced-message",
               "type": "page",
               "children": [],
-              "minIndex": 187
+              "minIndex": 153
             },
             {
               "id": "models/revoked-info",
@@ -5246,7 +5246,7 @@
               "href": "/docs/chat/sdk/v4/android/models/revoked-info",
               "type": "page",
               "children": [],
-              "minIndex": 188
+              "minIndex": 187
             },
             {
               "id": "models/c2c-read-receipt-info",
@@ -5255,7 +5255,7 @@
               "href": "/docs/chat/sdk/v4/android/models/c2c-read-receipt-info",
               "type": "page",
               "children": [],
-              "minIndex": 189
+              "minIndex": 148
             },
             {
               "id": "models/group-message-receipt",
@@ -5264,7 +5264,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-message-receipt",
               "type": "page",
               "children": [],
-              "minIndex": 190
+              "minIndex": 171
             },
             {
               "id": "models/group-message-read-info",
@@ -5273,7 +5273,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-message-read-info",
               "type": "page",
               "children": [],
-              "minIndex": 191
+              "minIndex": 172
             },
             {
               "id": "models/group-has-read-info",
@@ -5282,7 +5282,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-has-read-info",
               "type": "page",
               "children": [],
-              "minIndex": 192
+              "minIndex": 173
             },
             {
               "id": "models/search-params",
@@ -5291,7 +5291,7 @@
               "href": "/docs/chat/sdk/v4/android/models/search-params",
               "type": "page",
               "children": [],
-              "minIndex": 193
+              "minIndex": 180
             },
             {
               "id": "models/search-result-item",
@@ -5300,7 +5300,7 @@
               "href": "/docs/chat/sdk/v4/android/models/search-result-item",
               "type": "page",
               "children": [],
-              "minIndex": 194
+              "minIndex": 192
             },
             {
               "id": "models/search-result",
@@ -5309,7 +5309,7 @@
               "href": "/docs/chat/sdk/v4/android/models/search-result",
               "type": "page",
               "children": [],
-              "minIndex": 195
+              "minIndex": 191
             },
             {
               "id": "models/key-value",
@@ -5318,7 +5318,7 @@
               "href": "/docs/chat/sdk/v4/android/models/key-value",
               "type": "page",
               "children": [],
-              "minIndex": 196
+              "minIndex": 166
             },
             {
               "id": "models/user-ex-info",
@@ -5327,7 +5327,7 @@
               "href": "/docs/chat/sdk/v4/android/models/user-ex-info",
               "type": "page",
               "children": [],
-              "minIndex": 197
+              "minIndex": 194
             },
             {
               "id": "models/single-type-key-info-sum",
@@ -5336,7 +5336,7 @@
               "href": "/docs/chat/sdk/v4/android/models/single-type-key-info-sum",
               "type": "page",
               "children": [],
-              "minIndex": 198
+              "minIndex": 147
             },
             {
               "id": "models/message-kv",
@@ -5345,7 +5345,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message-kv",
               "type": "page",
               "children": [],
-              "minIndex": 199
+              "minIndex": 189
             },
             {
               "id": "models/type-key-set-result",
@@ -5354,7 +5354,7 @@
               "href": "/docs/chat/sdk/v4/android/models/type-key-set-result",
               "type": "page",
               "children": [],
-              "minIndex": 200
+              "minIndex": 190
             },
             {
               "id": "models/put-args",
@@ -5363,7 +5363,7 @@
               "href": "/docs/chat/sdk/v4/android/models/put-args",
               "type": "page",
               "children": [],
-              "minIndex": 201
+              "minIndex": 175
             },
             {
               "id": "models/login-status",
@@ -5372,7 +5372,7 @@
               "href": "/docs/chat/sdk/v4/android/models/login-status",
               "type": "page",
               "children": [],
-              "minIndex": 202
+              "minIndex": 201
             },
             {
               "id": "models/platform",
@@ -5390,7 +5390,7 @@
               "href": "/docs/chat/sdk/v4/android/models/log-level",
               "type": "page",
               "children": [],
-              "minIndex": 204
+              "minIndex": 207
             },
             {
               "id": "models/conversation-type",
@@ -5399,7 +5399,7 @@
               "href": "/docs/chat/sdk/v4/android/models/conversation-type",
               "type": "page",
               "children": [],
-              "minIndex": 205
+              "minIndex": 202
             },
             {
               "id": "models/message-type",
@@ -5408,7 +5408,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message-type",
               "type": "page",
               "children": [],
-              "minIndex": 206
+              "minIndex": 210
             },
             {
               "id": "models/message-status",
@@ -5417,7 +5417,7 @@
               "href": "/docs/chat/sdk/v4/android/models/message-status",
               "type": "page",
               "children": [],
-              "minIndex": 207
+              "minIndex": 212
             },
             {
               "id": "models/view-type",
@@ -5426,7 +5426,7 @@
               "href": "/docs/chat/sdk/v4/android/models/view-type",
               "type": "page",
               "children": [],
-              "minIndex": 208
+              "minIndex": 211
             },
             {
               "id": "models/group-role",
@@ -5435,7 +5435,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-role",
               "type": "page",
               "children": [],
-              "minIndex": 209
+              "minIndex": 204
             },
             {
               "id": "models/group-member-filter",
@@ -5444,7 +5444,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-member-filter",
               "type": "page",
               "children": [],
-              "minIndex": 210
+              "minIndex": 205
             },
             {
               "id": "models/group-at-type",
@@ -5453,7 +5453,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-at-type",
               "type": "page",
               "children": [],
-              "minIndex": 211
+              "minIndex": 206
             },
             {
               "id": "models/join-source",
@@ -5462,7 +5462,7 @@
               "href": "/docs/chat/sdk/v4/android/models/join-source",
               "type": "page",
               "children": [],
-              "minIndex": 212
+              "minIndex": 208
             },
             {
               "id": "models/group-verification",
@@ -5471,7 +5471,7 @@
               "href": "/docs/chat/sdk/v4/android/models/group-verification",
               "type": "page",
               "children": [],
-              "minIndex": 213
+              "minIndex": 209
             },
             {
               "id": "models/on-conn-listener",
@@ -5480,7 +5480,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-conn-listener",
               "type": "page",
               "children": [],
-              "minIndex": 214
+              "minIndex": 216
             },
             {
               "id": "models/on-user-listener",
@@ -5489,7 +5489,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-user-listener",
               "type": "page",
               "children": [],
-              "minIndex": 215
+              "minIndex": 219
             },
             {
               "id": "models/on-friendship-listener",
@@ -5498,7 +5498,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-friendship-listener",
               "type": "page",
               "children": [],
-              "minIndex": 216
+              "minIndex": 214
             },
             {
               "id": "models/on-group-listener",
@@ -5516,7 +5516,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-conversation-listener",
               "type": "page",
               "children": [],
-              "minIndex": 218
+              "minIndex": 215
             },
             {
               "id": "models/on-advance-msg-listener",
@@ -5525,7 +5525,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-advance-msg-listener",
               "type": "page",
               "children": [],
-              "minIndex": 219
+              "minIndex": 213
             },
             {
               "id": "models/on-custom-business-listener",
@@ -5543,7 +5543,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-message-kv-info-listener",
               "type": "page",
               "children": [],
-              "minIndex": 221
+              "minIndex": 218
             },
             {
               "id": "models/on-advanced-msg-listener",
@@ -5552,7 +5552,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-advanced-msg-listener",
               "type": "page",
               "children": [],
-              "minIndex": 222
+              "minIndex": 227
             },
             {
               "id": "models/on-batch-msg-listener",
@@ -5561,7 +5561,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-batch-msg-listener",
               "type": "page",
               "children": [],
-              "minIndex": 223
+              "minIndex": 228
             },
             {
               "id": "models/on-base",
@@ -5570,7 +5570,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-base",
               "type": "page",
               "children": [],
-              "minIndex": 224
+              "minIndex": 222
             },
             {
               "id": "models/on-msg-send-callback",
@@ -5579,7 +5579,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-msg-send-callback",
               "type": "page",
               "children": [],
-              "minIndex": 225
+              "minIndex": 224
             },
             {
               "id": "models/on-put-file-listener",
@@ -5588,7 +5588,7 @@
               "href": "/docs/chat/sdk/v4/android/models/on-put-file-listener",
               "type": "page",
               "children": [],
-              "minIndex": 226
+              "minIndex": 223
             },
             {
               "id": "models/upload-log-progress",
@@ -5597,7 +5597,7 @@
               "href": "/docs/chat/sdk/v4/android/models/upload-log-progress",
               "type": "page",
               "children": [],
-              "minIndex": 227
+              "minIndex": 221
             },
             {
               "id": "models/base",
@@ -5606,7 +5606,7 @@
               "href": "/docs/chat/sdk/v4/android/models/base",
               "type": "page",
               "children": [],
-              "minIndex": 228
+              "minIndex": 225
             },
             {
               "id": "models/send-msg-call-back",
