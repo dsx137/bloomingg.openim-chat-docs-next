@@ -30,7 +30,7 @@ OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外
 | ------ | ---- | ---- |
 | Content-Type | 是 | JSON 请求使用 `application/json; charset=utf-8`。 |
 | operationID | 是 | 全局链路追踪 ID。建议每次请求生成独立值，便于串联服务端日志。 |
-| token | 管理端接口必填 | APP 管理员 Token。创建用户等少数初始化接口可能不需要，具体以接口页为准。 |
+| token | 除认证例外外必填 | 已通过 OpenIM 校验的 Token。当前服务端仅对 `/auth/get_admin_token` 和 `/auth/parse_token` 跳过 Token 解析；管理端操作通常应使用 APP 管理员 Token。 |
 
 ## Multipart 请求
 
@@ -40,7 +40,7 @@ OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外
 
 ## 鉴权
 
-后端服务需要先通过 OpenIM 管理端认证能力获取 APP 管理员 Token，再把该 Token 放入后续管理端接口的 `token` 请求头。Token 应在服务端保存、刷新和轮换，客户端只应拿到为当前用户签发的登录 Token。
+后端服务需要先通过 OpenIM 管理端认证能力获取 APP 管理员 Token，再把该 Token 放入后续管理端接口的 `token` 请求头。对于 `POST` 请求，当前服务端只将 `/auth/get_admin_token` 和 `/auth/parse_token` 作为无需解析 Token 的例外；不要假定创建用户等其他接口可以省略 `token`。Token 应在服务端保存、刷新和轮换，客户端只应拿到为当前用户签发的登录 Token。
 
 常见接入顺序如下：
 

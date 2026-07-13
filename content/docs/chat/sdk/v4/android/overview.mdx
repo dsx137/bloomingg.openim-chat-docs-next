@@ -1,18 +1,65 @@
 ---
 title: 'OpenIM SDK for Android'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for OpenIM SDK for Android. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Build Android instant messaging features with the OpenIM Android SDK.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/overview'
 ---
 
-<OverviewScaffold
-  route="/docs/chat/sdk/v4/android/overview"
-  context="SDKs · Android · v4"
-  sourceTitle="OpenIM SDK for Android"
-/>
+## What you can build
+
+The OpenIM Android SDK provides client APIs for login, conversations, friends, groups, messages, user profiles, and connection events. It wraps the OpenIM SDK Core and stores client data through the core SDK.
+
+## Install
+
+The upstream README publishes the Android and Core AAR artifacts through Maven Central.
+
+```gradle
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'io.openim:android-sdk:3.4.1@aar'
+    implementation 'io.openim:core-sdk:3.4.1-alpha.4@aar'
+    implementation 'com.google.code.gson:gson:2.9.0'
+}
+```
+
+## Initialize
+
+Create an `InitConfig` with the IM API address, WebSocket address, and storage directory. Initialize before login.
+
+```java
+InitConfig config = new InitConfig(apiUrl, wsUrl, storageDir);
+config.isLogStandardOutput = true;
+
+boolean initialized = OpenIMClient.getInstance().initSDK(
+    getApplication(),
+    config,
+    new OnConnListener() {}
+);
+```
+
+## Core workflows
+
+- Register message, conversation, group, friend, and user listeners before login.
+- Log in with a user ID and token.
+- Create a `Message` with `messageManager` and send it to a user or group.
+- Use `logout` when the signed-in session ends and `unInit` when the SDK is no longer needed.
+
+## Compatibility
+
+This documentation tracks the Android SDK source at `v3.8.3.5`. The SDK depends on the OpenIM SDK Core; use the artifacts and versions supplied by your release channel.
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/android/getting-started/send-first-message)
+- [Authentication](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication)
+- [Event handler](/docs/chat/sdk/v4/android/event-handler/overview-event-handler)

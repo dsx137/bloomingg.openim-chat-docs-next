@@ -1,18 +1,129 @@
 ---
 title: 'Authentication'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for Authentication. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Initialize OpenIMSDK and log an iOS user in with an OpenIM user ID and token.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication"
-  context="SDKs · iOS · v4"
-  sourceTitle="Authentication"
-/>
+## Overview
+
+Authenticate an iOS client after SDK initialization by passing the OpenIM user ID and token to `OIMManager`. The token is issued through your business server's OpenIM integration.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| SDK client | `OIMManager.manager` | Shared manager used to initialize, log in, inspect status, and log out. |
+| Connection configuration | `OIMInitConfig` | Provides the API and WebSocket addresses for the OpenIM Server. |
+| Authenticated user | `userID` and `token` | Both are passed to `login:token:onSuccess:onFailure:`. |
+
+## Prerequisites
+
+- OpenIM Server: deployed and reachable from the app.
+- SDK package: `OpenIMSDK` `3.8.3-hotfix.12`.
+- Runtime: iOS 11.0 or later.
+- Server configuration: OpenIM Server API and WebSocket addresses.
+- User state: an OpenIM user ID and token obtained through your application server.
+
+## API signatures
+
+```objc
+- (BOOL)initSDKWithConfig:(OIMInitConfig *)config
+             onConnecting:(OIMVoidCallback)onConnecting
+         onConnectFailure:(OIMFailureCallback)onConnectFailure
+         onConnectSuccess:(OIMVoidCallback)onConnectSuccess
+          onKickedOffline:(OIMVoidCallback)onKickedOffline
+       onUserTokenExpired:(OIMVoidCallback)onUserTokenExpired
+       onUserTokenInvalid:(OIMStringCallback)onUserTokenInvalid;
+
+- (void)login:(NSString *)userID
+        token:(NSString *)token
+    onSuccess:(nullable OIMSuccessCallback)onSuccess
+    onFailure:(nullable OIMFailureCallback)onFailure;
+
+- (OIMLoginStatus)getLoginStatus;
+- (void)logoutWithOnSuccess:(nullable OIMSuccessCallback)onSuccess
+                  onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+## Install and configure
+
+Add the SDK to the app's `Podfile` and import it in the implementation that owns authentication.
+
+```ruby
+pod 'OpenIMSDK', '3.8.3-hotfix.12'
+```
+
+```objc
+@import OpenIMSDK;
+```
+
+## Initialize the SDK
+
+Initialize once with the OpenIM Server addresses before calling `login`.
+
+```objc
+OIMInitConfig *config = [OIMInitConfig new];
+config.apiAddr = @"<OpenIM Server API address>";
+config.wsAddr = @"<OpenIM Server WebSocket address>";
+
+BOOL initialized = [OIMManager.manager initSDKWithConfig:config
+    onConnecting:^{}
+    onConnectFailure:^(NSInteger code, NSString * _Nullable message) {}
+    onConnectSuccess:^{}
+    onKickedOffline:^{}
+    onUserTokenExpired:^{}
+    onUserTokenInvalid:^(NSString * _Nullable message) {}];
+```
+
+## Implement the task
+
+### 1. Prepare the app state
+
+Obtain the current user's OpenIM user ID and token from your application server. Do not call `login` when SDK initialization returned `NO`.
+
+### 2. Call the SDK API
+
+```objc
+if (initialized) {
+    [OIMManager.manager login:@"<user ID>"
+                         token:@"<token>"
+                     onSuccess:^(NSString * _Nullable data) {
+                         // The user is logged in.
+                     }
+                     onFailure:^(NSInteger code, NSString * _Nullable message) {
+                         // Handle the login failure.
+                     }];
+}
+```
+
+### 3. Handle the result
+
+On successful login, the SDK stores the token on `OIMManager.manager` and registers its listeners. If the `onUserTokenExpired` initialization callback runs, obtain a new token and call `login` again. Use `getLoginStatus` when the app needs the current SDK login state.
+
+## Verify the result
+
+- Confirm the login success callback runs.
+- Confirm `getLoginStatus` reports the expected login state.
+- Confirm the connection success callback runs when the client connects to the IM server.
+- Renew the token and log in again after a token-expiry callback.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Initialization returns `NO` | The SDK did not initialize successfully. | Do not call `login`; review the server addresses and initialization configuration. |
+| Login failure callback runs | The user ID or token was not accepted. | Obtain valid credentials through the application server and retry. |
+| Token-expiry callback runs | The online token has expired. | Generate a new token and call `login` again. |
+| Forced offline callback runs | The current session was kicked offline. | Notify the user and update the app's signed-in state. |
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/ios/getting-started/send-first-message)
+- [Error codes](/docs/chat/sdk/v4/ios/error-codes)

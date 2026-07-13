@@ -1,18 +1,87 @@
 ---
 title: 'Event handler'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Event handler. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Register OpenIM Android listeners for connection, messages, conversations, groups, friends, and users.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/event-handler/overview-event-handler'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/event-handler/overview-event-handler"
-  context="SDKs · Android · v4"
-  sourceTitle="Event handler"
-/>
+## Overview
+
+The SDK delivers asynchronous state changes through listener interfaces. Register the listeners your app needs before login.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM API | Notes |
+| --- | --- | --- |
+| Connection state | `OnConnListener` | Provided to `initSDK`; its callbacks begin after login. |
+| Messages | `OnAdvanceMsgListener` | Receives new messages, read receipts, revocations, and deletions. |
+| Conversations | `OnConversationListener` | Receives conversation and unread-count changes. |
+
+## Prerequisites
+
+- An initialized `OpenIMClient`.
+- Listener implementations registered before login.
+
+## Install and configure
+
+Use the dependencies in the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+Pass an `OnConnListener` to `initSDK`.
+
+## Implement the task
+
+### 1. Register listeners
+
+```java
+OpenIMClient client = OpenIMClient.getInstance();
+client.messageManager.setAdvancedMsgListener(new OnAdvanceMsgListener() {
+    @Override public void onRecvNewMessage(Message message) {
+        // Add the message to the displayed conversation.
+    }
+});
+client.conversationManager.setOnConversationListener(new OnConversationListener() {
+    @Override public void onTotalUnreadMessageCountChanged(int count) {}
+});
+client.groupManager.setOnGroupListener(new OnGroupListener() {});
+client.friendshipManager.setOnFriendshipListener(new OnFriendshipListener() {});
+client.userInfoManager.setOnUserListener(new OnUserListener() {});
+```
+
+### 2. Handle connection changes
+
+```java
+new OnConnListener() {
+    @Override public void onConnectSuccess() {}
+    @Override public void onConnectFailed(int code, String error) {}
+    @Override public void onKickedOffline() {}
+    @Override public void onUserTokenExpired() {}
+}
+```
+
+### 3. Update app state
+
+Use the callback data to update the local UI. For example, add messages in `onRecvNewMessage` and refresh a conversation list after `onConversationChanged`.
+
+## Verify the result
+
+- Confirm registered callbacks run after login.
+- Send a message from another client and confirm `onRecvNewMessage` runs.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| No callbacks | Listener was registered after the relevant event. | Register it before login. |
+
+## Next steps
+
+- [Authentication](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication)
+- [Send a message](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)

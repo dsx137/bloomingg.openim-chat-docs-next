@@ -1,18 +1,116 @@
 ---
 title: 'Send your first message'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for Send your first message. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Create and send a text message from an authenticated iOS OpenIMSDK client.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/getting-started/send-first-message'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/ios/getting-started/send-first-message"
-  context="SDKs · iOS · v4"
-  sourceTitle="Send your first message"
-/>
+## Overview
+
+Create a text `OIMMessageInfo` and send it from an authenticated client. A one-to-one message uses `recvID`; a group message uses `groupID`.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| Text message | `OIMMessageInfo` | Create it with `createTextMessage:`. |
+| One-to-one recipient | `recvID` | Set `groupID` to an empty string. |
+| Group recipient | `groupID` | Set `recvID` to an empty string. |
+| Sent message result | `OIMMessageInfo` | The success callback receives the returned message. |
+
+## Prerequisites
+
+- OpenIM Server: deployed and reachable from the app.
+- SDK package: `OpenIMSDK` `3.8.3-hotfix.12`.
+- Runtime: iOS 11.0 or later.
+- Required server configuration: API and WebSocket addresses configured during SDK initialization.
+- Required user state: an initialized and logged-in OpenIM user, plus the target user ID or group ID.
+
+## API signatures
+
+```objc
++ (OIMMessageInfo *)createTextMessage:(NSString *)text;
+
+- (void)sendMessage:(OIMMessageInfo *)message
+             recvID:(NSString * _Nullable)recvID
+            groupID:(NSString * _Nullable)groupID
+    offlinePushInfo:(OIMOfflinePushInfo * _Nullable)offlinePushInfo
+          onSuccess:(nullable OIMMessageInfoCallback)onSuccess
+         onProgress:(nullable OIMNumberCallback)onProgress
+          onFailure:(nullable OIMFailureCallback)onFailure;
+```
+
+## Install and configure
+
+```ruby
+pod 'OpenIMSDK', '3.8.3-hotfix.12'
+```
+
+```objc
+@import OpenIMSDK;
+```
+
+## Initialize the SDK
+
+Initialize the SDK and log in before sending. See [Authentication](/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication) for the configuration and login flow.
+
+## Implement the task
+
+### 1. Prepare the app state
+
+Use the recipient's OpenIM user ID for a one-to-one message. Keep `groupID` empty for that flow.
+
+```objc
+NSString *recipientUserID = @"<recipient user ID>";
+OIMMessageInfo *message = [OIMMessageInfo createTextMessage:@"Hello!"];
+```
+
+### 2. Call the SDK API
+
+```objc
+[OIMManager.manager sendMessage:message
+                          recvID:recipientUserID
+                         groupID:@""
+                 offlinePushInfo:nil
+                       onSuccess:^(OIMMessageInfo * _Nullable sentMessage) {
+                           // Replace the local message with sentMessage.
+                       }
+                      onProgress:^(NSInteger progress) {
+                          // Observe send progress when applicable.
+                      }
+                       onFailure:^(NSInteger code, NSString * _Nullable error) {
+                           // Handle the send failure.
+                       }];
+```
+
+For a group message, pass an empty `recvID` and the target group ID as `groupID`.
+
+### 3. Handle the result
+
+Use the `OIMMessageInfo` returned by the success callback to replace the local message data. The callback provides an error code and message when sending fails.
+
+## Verify the result
+
+- Confirm the send success callback receives a message.
+- Confirm the returned message replaces the local message data.
+- Confirm the recipient can receive the one-to-one message.
+- Send with an empty `recvID` and a group ID to verify the group flow.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Send failure callback runs | The client is not authenticated, cannot reach the server, or the send was rejected. | Check initialization and login state, then inspect the callback code and message. |
+| Message is sent to the wrong conversation type | Both recipient arguments were not assigned for the intended flow. | Use `recvID` for one-to-one messages or `groupID` for group messages; leave the other argument empty. |
+| Local message does not reflect the sent result | The success callback result was ignored. | Replace the local message with the `OIMMessageInfo` returned by the callback. |
+
+## Next steps
+
+- [Authentication](/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication)
+- [Receive messages in a group channel](/docs/chat/sdk/v4/ios/message/receiving-messages-through-event-delegate/receive-messages-in-a-group-channel)

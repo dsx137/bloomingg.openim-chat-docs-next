@@ -1,18 +1,103 @@
 ---
 title: 'Receive messages in a group channel'
-description: 'OpenIM · SDK · iOS · v4 documentation scaffold for Receive messages in a group channel. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Register an OpenIMSDK advanced-message listener to receive messages and group read receipts in an iOS app.'
 product: 'sdk'
 context: 'chat/sdk/v4/ios'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'ios'
 sourcePath: '/docs/chat/sdk/v4/ios/message/receiving-messages-through-event-delegate/receive-messages-in-a-group-channel'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/ios/message/receiving-messages-through-event-delegate/receive-messages-in-a-group-channel"
-  context="SDKs · iOS · v4"
-  sourceTitle="Receive messages in a group channel"
-/>
+## Overview
+
+Register an advanced-message listener to receive new messages, group read receipts, and message retractions from OpenIMSDK. Set the listener after SDK initialization and before login so the app can receive events for the authenticated session.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM object | Notes |
+| --- | --- | --- |
+| Message event listener | `OIMManager.callbacker` | Owns advanced-message callbacks. |
+| Incoming message | `OIMMessageInfo` | Provided to the new-message callback. |
+| Group read receipt | `NSArray<OIMReceiptInfo *>` | Provided to the group read-receipt callback. |
+| Message retraction | `OIMMessageRevokedInfo` | Provided to the retraction callback. |
+
+## Prerequisites
+
+- OpenIM Server: deployed and reachable from the app.
+- SDK package: `OpenIMSDK` `3.8.3-hotfix.12`.
+- Runtime: iOS 11.0 or later.
+- Required user state: SDK initialized before login.
+
+## API signatures
+
+```objc
+- (void)setAdvancedMsgListenerWithOnRecvMessageRevoked:(OIMRevokedCallback)onRecvMessageRevoked
+                              onRecvC2CReadReceipt:(OIMReceiptCallback)onRecvC2CReadReceipt
+                            onRecvGroupReadReceipt:(OIMReceiptCallback)onRecvGroupReadReceipt
+                                  onRecvNewMessage:(OIMMessageInfoCallback)onRecvNewMessage;
+```
+
+## Install and configure
+
+```ruby
+pod 'OpenIMSDK', '3.8.3-hotfix.12'
+```
+
+```objc
+@import OpenIMSDK;
+```
+
+## Initialize the SDK
+
+Initialize the SDK before registering listeners, then log in after the listener is in place. See [Authentication](/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication).
+
+## Implement the task
+
+### 1. Prepare the app state
+
+Prepare the UI data source that will store incoming `OIMMessageInfo` objects and any group read-receipt state.
+
+### 2. Call the SDK API
+
+```objc
+[OIMManager.callbacker setAdvancedMsgListenerWithOnRecvMessageRevoked:
+    ^(OIMMessageRevokedInfo * _Nullable revokedMessage) {
+        // Update the message that was retracted.
+    }
+    onRecvC2CReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable receipts) {
+        // Handle one-to-one read receipts.
+    }
+    onRecvGroupReadReceipt:^(NSArray<OIMReceiptInfo *> * _Nullable receipts) {
+        // Update group read-receipt state.
+    }
+    onRecvNewMessage:^(OIMMessageInfo * _Nullable message) {
+        // Add the incoming message to the local data source.
+    }];
+```
+
+### 3. Handle the result
+
+Update the conversation UI from the callback payloads. New messages arrive as `OIMMessageInfo` objects; group read receipts arrive as `OIMReceiptInfo` arrays.
+
+## Verify the result
+
+- Log in on two clients that can exchange messages.
+- Send a group message from one client and confirm the other client's new-message callback receives it.
+- Mark the group message as read and confirm the group read-receipt callback runs.
+- Retract a message and confirm the retraction callback runs.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| No message callbacks arrive | The listener was registered too late or the client is not logged in. | Register it after initialization and before login, then confirm authentication succeeds. |
+| UI does not reflect a retraction | The retraction callback payload was not applied to the data source. | Update the affected message when `onRecvMessageRevoked` runs. |
+| Group read state is stale | Group receipts were not processed. | Update local receipt state from `onRecvGroupReadReceipt`. |
+
+## Next steps
+
+- [Send your first message](/docs/chat/sdk/v4/ios/getting-started/send-first-message)
+- [Authentication](/docs/chat/sdk/v4/ios/application/authenticating-a-user/authentication)

@@ -1,18 +1,76 @@
 ---
 title: 'Receive messages in a group channel'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Receive messages in a group channel. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+description: 'Receive OpenIM messages on Android with the advanced message listener.'
 product: 'sdk'
 context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'android'
 sourcePath: '/docs/chat/sdk/v4/android/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel'
 ---
 
-<DocScaffold
-  route="/docs/chat/sdk/v4/android/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel"
-  context="SDKs · Android · v4"
-  sourceTitle="Receive messages in a group channel"
-/>
+## Overview
+
+Receive incoming messages through `OnAdvanceMsgListener`. The listener provides a `Message` for every new received message; use its conversation and group data to route it in your UI.
+
+## How this maps to OpenIM
+
+| Concept | OpenIM API | Notes |
+| --- | --- | --- |
+| Incoming message | `onRecvNewMessage(Message)` | Add it to the appropriate conversation UI. |
+| Revocation | `onRecvMessageRevokedV2(RevokedInfo)` | Update the affected displayed message. |
+
+## Prerequisites
+
+- An initialized client.
+- The listener registered before login.
+
+## Install and configure
+
+Follow the [Android overview](/docs/chat/sdk/v4/android/overview).
+
+## Initialize the SDK
+
+Initialize the client and log in after registering the listener.
+
+## Implement the task
+
+### 1. Register the listener
+
+```java
+OpenIMClient.getInstance().messageManager.setAdvancedMsgListener(new OnAdvanceMsgListener() {
+    @Override public void onRecvNewMessage(Message message) {
+        // Route and render the message using its conversation data.
+    }
+
+    @Override public void onRecvMessageRevokedV2(RevokedInfo info) {
+        // Replace or refresh the revoked message in the UI.
+    }
+});
+```
+
+### 2. Log in
+
+Call `login` after registering the listener.
+
+### 3. Handle the result
+
+The SDK also reports C2C read receipts, group read receipts, deleted messages, offline messages, and online-only messages through this listener.
+
+## Verify the result
+
+- Send a message to the logged-in user from another client.
+- Confirm `onRecvNewMessage` receives the `Message`.
+
+## Troubleshooting
+
+| Case | Cause | Handling |
+| --- | --- | --- |
+| Message not displayed | The callback does not update UI state. | Add the received message to the correct conversation and refresh the UI. |
+
+## Next steps
+
+- [Event handler](/docs/chat/sdk/v4/android/event-handler/overview-event-handler)
+- [Send a message](/docs/chat/sdk/v4/android/message/sending-a-message/send-a-message)

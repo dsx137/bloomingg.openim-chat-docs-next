@@ -5,7 +5,7 @@ product: 'sdk'
 context: 'chat/sdk/v4/wasm'
 template: 'overview'
 status: 'draft'
-lastUpdated: '2026-06-26'
+lastUpdated: '2026-07-13'
 version: 'v4'
 platform: 'wasm'
 sourcePath: '/docs/chat/sdk/v4/wasm/overview'
@@ -13,13 +13,13 @@ sourcePath: '/docs/chat/sdk/v4/wasm/overview'
 
 ## Overview
 
-Use this page as the entry point for the OpenIM WASM SDK. It explains the browser package, WASM assets, authentication flow, message flow, and where each Sendbird-style concept maps in OpenIM.
+Use this page as the entry point for the OpenIM WASM SDK. The target exposes browser functions from the compiled WASM module, rather than an SDK instance imported from a JavaScript package.
 
 This guide uses public OpenIM WASM SDK signatures and assumes the SDK version is compatible with OpenIM Server.
 
 ## OpenIM model
 
-OpenIM WASM SDK uses a single SDK instance returned by `getSDK()`. Conversations are addressed by `conversationID`; direct messages use `recvID`; group messages use `groupID`; groups cover the Sendbird group-channel style workflow. The browser package is backed by WASM and persists local state in IndexedDB through sql.js.
+Conversations are addressed by `conversationID`; direct messages use `recvID`; group messages use `groupID`; groups cover the Sendbird group-channel style workflow. The compiled module registers functions such as `initSDK`, `login`, `createTextMessage`, and `sendMessage` on the browser global object.
 
 Support status: public WASM SDK APIs cover this workflow.
 
@@ -34,81 +34,57 @@ Key concepts to keep straight:
 ## Prerequisites
 
 - Install an OpenIM WASM SDK version that is compatible with OpenIM Server.
-- Serve `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the browser app public path.
-- Create one SDK instance with `getSDK()` and call `login()` with `userID`, token, `platformID: 5`, `apiAddr`, and `wsAddr`.
+- Serve `openIM.wasm` and the Go `wasm_exec.js` runtime from the browser app public path.
+- Register `commonEventFunc`, call `initSDK()` with an OpenIM configuration JSON string, then call `login()` with an operation ID, user ID, and token.
 
 ## API signatures
 
 Relevant public signatures:
 
 ```ts
-function getSDK(config?: WasmPathConfig): SDK;
-login: (params: InitAndLoginConfig, operationID?: string) => Promise<any>;
-logout: <T>(operationID?: string) => Promise<WsResponse<T>>;
-createTextMessage: (text: string, operationID?: string) => Promise<WsResponse<MessageItem>>;
-sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>;
-getAllConversationList: (operationID?: string) => Promise<WsResponse<ConversationItem[]>>;
-getAdvancedHistoryMessageList: (params: GetAdvancedHistoryMsgParams, operationID?: string) =>
-  Promise<WsResponse<AdvancedGetMessageResult>>;
-createGroup: (data: CreateGroupParams, operationID?: string) => Promise<WsResponse<GroupItem>>;
-getUsersInfo: (data: string[], operationID?: string) => Promise<WsResponse<PublicUserItem[]>>;
+initSDK(operationID: string, config: string): unknown;
+login(operationID: string, userID: string, token: string): Promise<string>;
+logout(operationID: string): Promise<string>;
+createTextMessage(operationID: string, text: string): Promise<string>;
+sendMessage(operationID: string, message: string, recvID: string, groupID: string, offlinePushInfo: string, isOnlineOnly: boolean): Promise<string>;
+getAllConversationList(operationID: string): Promise<string>;
+getAdvancedHistoryMessageList(operationID: string, request: string): Promise<string>;
+createGroup(operationID: string, request: string): Promise<string>;
+getUsersInfo(operationID: string, userIDs: string): Promise<string>;
 ```
 
 Relevant events:
 
 ```ts
-on<E extends CbEvents>(event: E, fn: Cbfn<E>): this;
-off<E extends CbEvents>(event: E, fn: Cbfn<E>): this | undefined;
-CbEvents.OnConnecting
-CbEvents.OnConnectSuccess
-CbEvents.OnConnectFailed
-CbEvents.OnRecvNewMessages
-CbEvents.OnConversationChanged
-CbEvents.OnUserStatusChanged
+commonEventFunc(callback: (event: string) => void): boolean;
+// Callback event names include OnConnecting, OnConnectSuccess,
+// OnConnectFailed, OnRecvNewMessages, OnConversationChanged, and OnUserStatusChanged.
 ```
 
 Response and event payloads use these common shapes:
 
 ```ts
-type WsResponse<T> = {
+type CallbackEvent = {
   event: string;
   errCode: number;
   errMsg: string;
-  data: T;
-  operationID: string;
-};
-type WSEvent<T = unknown> = {
-  event: CbEvents;
-  data: T;
-  errCode: number;
-  errMsg: string;
+  data?: unknown;
   operationID: string;
 };
 ```
 
 ## Implementation
 
-Create and reuse one SDK instance in the browser session.
+Register the global event receiver before initialization. Parse `data` when the callback payload contains a JSON string.
 
 ```ts
-import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
-
-const OpenIM = getSDK({
-  coreWasmPath: '/openIM.wasm',
-  sqlWasmPath: '/sql-wasm.wasm',
+globalThis.commonEventFunc((serializedEvent: string) => {
+  const event = JSON.parse(serializedEvent);
+  if (event.event === 'OnConnectSuccess') console.info('OpenIM connected');
 });
 
-OpenIM.on(CbEvents.OnConnectSuccess, () => {
-  console.info('OpenIM connected');
-});
-
-await OpenIM.login({
-  userID,
-  token,
-  platformID: 5,
-  apiAddr,
-  wsAddr,
-});
+globalThis.initSDK(operationID, JSON.stringify({ platformID: 5, apiAddr, wsAddr }));
+await globalThis.login(operationID, userID, token);
 ```
 
 Use these SDK areas as the main navigation model for WASM docs:
@@ -121,9 +97,9 @@ Use these SDK areas as the main navigation model for WASM docs:
 
 ## Returned data and events
 
-The SDK response `data` field contains the updated OpenIM object or operation result. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` in your application state.
+Promise calls resolve their raw result, commonly a JSON string. Persist IDs such as `conversationID`, `groupID`, and `clientMsgID` after parsing the returned result.
 
-Watch these callbacks while testing: `CbEvents.OnConnecting`, `CbEvents.OnConnectSuccess`, `CbEvents.OnConnectFailed`, `CbEvents.OnRecvNewMessages`, `CbEvents.OnConversationChanged`, `CbEvents.OnUserStatusChanged`.
+Watch these callback event names while testing: `OnConnecting`, `OnConnectSuccess`, `OnConnectFailed`, `OnRecvNewMessages`, `OnConversationChanged`, and `OnUserStatusChanged`.
 
 Always log `operationID` with failures. It is the fastest way to match browser behavior with OpenIM server logs.
 
@@ -137,7 +113,7 @@ Always log `operationID` with failures. It is the fastest way to match browser b
 
 | Case                           | Cause                                                                 | Handling                                                                                               |
 | ------------------------------ | --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` from the npm package assets directory.         |
+| WASM asset requests return 404 | The SDK assets were not copied to the app public path.                | Copy `openIM.wasm` and the Go `wasm_exec.js` runtime to the browser public path.         |
 | The client never connects      | `apiAddr`, `wsAddr`, token, platform ID, or network routing is wrong. | Register connection events before `login()` and test the API and WebSocket URLs from the same browser. |
 | The SDK call rejects | The server rejected the request or the current user lacks permission. | Handle the error in `catch`, log the rejected error with `operationID`, and verify group role, token, and target IDs. |
 
