@@ -1,0 +1,67 @@
+---
+title: '加入黑名单'
+description: '说明 React Native core binding 方法 AddBlack 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/user/blacklist/methods/add-black'
+---
+
+将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。
+
+## 功能介绍
+
+将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。
+
+黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                         |
+| -------- | ---------------------------------------------------------------------------- |
+| 方法签名 | `AddBlack(callback Base, operationID string, blackUserID string, ex string)` |
+| 所属能力 | 黑名单                                                                       |
+| 源码位置 | `open_im_sdk/relation.go`                                                    |
+
+## React Native 调用参考
+
+React Native SDK v3.8.3 的 TypeScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`src/sdk.ts`。
+
+```ts showLineNumbers
+addBlack(params: AddBlackParams, operationID: string = id())
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型       | 是否必填 | 描述                                   |
+| -------- | -------------- | -------- | -------------------------------------- |
+| params   | AddBlackParams | 是       | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+返回 `Promise`。调用失败时 Promise reject，错误会被封装为 OpenIMApiError。
+
+## 代码示例
+
+以下示例展示 React Native SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.addBlack({});
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/react-native/models/base)（`Base`）：core binding 异步结果回调，React Native 调用层通常映射为 Promise。
+- [好友关系监听器](/docs/chat/sdk/v4/react-native/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+
+## 相关页面
+
+- [黑名单](/docs/chat/sdk/v4/react-native/user/overview#blacklist)

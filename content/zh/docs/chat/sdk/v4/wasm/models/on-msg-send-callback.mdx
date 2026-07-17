@@ -1,0 +1,36 @@
+---
+title: '消息发送回调'
+description: '说明 WASM SDK OnMsgSendCallback 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/models/on-msg-send-callback'
+---
+
+`OnMsgSendCallback` 是 WASM SDK 的回调接口，完整类名为 `io.openim.react-native.sdk.listener.OnMsgSendCallback`。发送消息时使用的进度、成功和失败回调。
+
+## 类型说明
+
+消息发送监听
+
+## 回调方法
+
+| 方法       | 参数                   | 描述     |
+| ---------- | ---------------------- | -------- |
+| catch      | int code；String error | 发送失败 |
+| onProgress | long progress          | 上传进度 |
+| then       | Message s              | 发送成功 |
+
+## 关联类型
+
+- [通用回调](/docs/chat/sdk/v4/wasm/models/on-base)（`Promise`）：WASM SDK 异步方法的通用成功和失败回调。
+- [消息对象](/docs/chat/sdk/v4/wasm/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [发送非 OSS 消息](/docs/chat/sdk/v4/wasm/message/sending-messages/send-message-not-oss)
+- [发送消息](/docs/chat/sdk/v4/wasm/message/sending-messages/send-message)

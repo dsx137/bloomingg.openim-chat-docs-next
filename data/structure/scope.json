@@ -14,8 +14,7 @@
         "wasm",
         "electron",
         "miniprogram",
-        "react-native",
-        "unity"
+        "react-native"
       ]
     },
     "platform-api": {

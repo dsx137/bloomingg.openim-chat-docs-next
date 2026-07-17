@@ -1,0 +1,73 @@
+---
+title: '更新当前用户资料'
+description: '说明 Flutter core binding 方法 SetSelfInfo 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/user/methods/set-self-info'
+---
+
+更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。
+
+## 功能介绍
+
+更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                              |
+| -------- | ----------------------------------------------------------------- |
+| 方法签名 | `SetSelfInfo(callback Base, operationID string, userInfo string)` |
+| 所属能力 | 用户                                                              |
+| 源码位置 | `open_im_sdk/user.go`                                             |
+
+## Flutter 调用参考
+
+Flutter SDK v3.8.3 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_user_manager.dart`。
+
+```dart showLineNumbers
+Future<String?> setSelfInfo({ String? nickname, String? faceURL, int? globalRecvMsgOpt, String? ex, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称         | 参数类型 | 是否必填 | 描述                          |
+| ---------------- | -------- | -------- | ----------------------------- |
+| nickname         | String?  | 否       | 按方法原型传入。              |
+| faceURL          | String?  | 否       | 按方法原型传入。              |
+| globalRecvMsgOpt | int?     | 否       | 消息对象、消息内容或消息 ID。 |
+| ex               | String?  | 否       | 按方法原型传入。              |
+
+## 返回结果
+
+返回 `Future<String?>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.userManager.setSelfInfo(
+  nickname: 'nickname',
+  faceURL: 'faceURL',
+  globalRecvMsgOpt: 0,
+  ex: 'ex',
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [用户资料更新请求](/docs/chat/sdk/v4/flutter/models/user-info-req)（`UserInfoReq`）：更新当前用户资料时使用的请求对象。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/flutter/user/overview)

@@ -1,0 +1,35 @@
+---
+title: '概述'
+description: '说明监听器的注册时机、事件范围和业务层分发建议。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/event-handler/overview'
+---
+监听器用于把连接、用户、好友、群组、会话、消息、自定义业务和消息 KV 变化推送给业务层。建议在登录前完成注册，避免登录后的同步事件被遗漏。
+
+## 监听器索引
+
+| 监听器 | 适用场景 |
+| ------ | -------- |
+| [监听群组事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-group-listener) | 群资料、群成员、入群申请和群权限变化。 |
+| [监听会话事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-conversation-listener) | 会话新增、更新、删除、未读数和草稿变化。 |
+| [监听单条消息事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-advanced-msg-listener) | 新消息、消息撤回、消息已读和消息扩展变化。 |
+| [监听批量消息事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-batch-msg-listener) | 批量新消息或批量同步结果。 |
+| [监听用户事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-user-listener) | 当前用户资料和用户相关状态变化。 |
+| [监听好友事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-friend-listener) | 好友列表、好友资料、好友申请和黑名单变化。 |
+| [监听自定义业务事件](/docs/chat/sdk/v4/electron/event-handler/methods/set-custom-business-listener) | 服务端下发的自定义业务事件。 |
+| [监听消息 KV 变化](/docs/chat/sdk/v4/electron/event-handler/methods/set-message-kv-info-listener) | 消息扩展字段新增、更新和删除。 |
+
+## 注册建议
+
+| 建议 | 说明 |
+| ---- | ---- |
+| 登录前注册 | 连接、消息、会话、好友、群组和用户监听器建议在登录前注册。 |
+| 业务层统一分发 | 如果多个页面需要消费同一类事件，建议在业务层封装统一事件总线或状态仓库。 |
+| 避免重复覆盖 | 多数 `Set*Listener` 是同类监听器的替换式注册，重复调用会覆盖之前保存的监听器。 |
+| 及时同步缓存 | 监听器回调应更新本地缓存和 UI 状态，再按页面需要触发刷新。 |

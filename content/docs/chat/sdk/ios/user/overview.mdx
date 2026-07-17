@@ -1,0 +1,54 @@
+---
+title: 'Overview'
+description: 'User, friends, blacklist, and presence method index for iOS Core SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/user/overview'
+---
+This page covers user profile, user command, presence subscription, friend, and blacklist APIs. Each method has its own page for parameters, returns, and usage boundaries.
+
+## User Profile And Presence
+
+| Method | Description |
+| ------ | ----------- |
+| [Get self user info](/docs/chat/sdk/v4/ios/user/methods/get-self-user-info) | Get the current user's profile for profile pages, startup refresh, or account switching. |
+| [Update self info](/docs/chat/sdk/v4/ios/user/methods/set-self-info) | Update the current user's profile, such as nickname, avatar, or extension fields. |
+| [Get users info](/docs/chat/sdk/v4/ios/user/methods/get-users-info) | Batch query public user profiles for conversation lists, message sender info, or friend refresh. |
+| [Add user command](/docs/chat/sdk/v4/ios/user/methods/add-user-command) | Add a lightweight user-side command or marker. |
+| [Delete user command](/docs/chat/sdk/v4/ios/user/methods/delete-user-command) | Delete a user command by type and UUID. |
+| [Get all user commands](/docs/chat/sdk/v4/ios/user/methods/get-all-user-commands) | Get all user commands under a specified type. |
+| [Subscribe users status](/docs/chat/sdk/v4/ios/user/methods/subscribe-users-status) | Subscribe to online status for a group of users. |
+| [Unsubscribe users status](/docs/chat/sdk/v4/ios/user/methods/unsubscribe-users-status) | Stop receiving online status for specified users. |
+| [Get subscribed user status](/docs/chat/sdk/v4/ios/user/methods/get-subscribe-users-status) | Get the current status snapshot for subscribed users. |
+| [Get user status](/docs/chat/sdk/v4/ios/user/methods/get-user-status) | Query online status for specified users. |
+
+## Friends
+
+| Method | Description |
+| ------ | ----------- |
+| [Get specified friends info](/docs/chat/sdk/v4/ios/user/friend/methods/get-specified-friends-info) | Get profile details for specified friends. |
+| [Get friend list](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-list) | Get the current user's full friend list. |
+| [Get friend list by page](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-list-page) | Page through the current user's friend list. |
+| [Search friends](/docs/chat/sdk/v4/ios/user/friend/methods/search-friends) | Search friends by keyword. |
+| [Check friendship](/docs/chat/sdk/v4/ios/user/friend/methods/check-friend) | Check friend relationship status. |
+| [Add friend](/docs/chat/sdk/v4/ios/user/friend/methods/add-friend) | Send a friend request. |
+| [Update friends](/docs/chat/sdk/v4/ios/user/friend/methods/update-friends) | Update friend profile fields controlled by the current user. |
+| [Delete friend](/docs/chat/sdk/v4/ios/user/friend/methods/delete-friend) | Delete a friend relationship. |
+| [Get received friend applications](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-application-list-as-recipient) | Get friend requests received by the current user. |
+| [Get sent friend applications](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-application-list-as-applicant) | Get friend requests sent by the current user. |
+| [Accept friend application](/docs/chat/sdk/v4/ios/user/friend/methods/accept-friend-application) | Accept a received friend request. |
+| [Refuse friend application](/docs/chat/sdk/v4/ios/user/friend/methods/refuse-friend-application) | Refuse a received friend request. |
+| [Get unhandled friend application count](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-application-unhandled-count) | Get the number of unhandled friend requests. |
+
+## Blacklist
+
+| Method | Description |
+| ------ | ----------- |
+| [Add to blacklist](/docs/chat/sdk/v4/ios/user/blacklist/methods/add-black) | Add a user to the blacklist. |
+| [Get blacklist](/docs/chat/sdk/v4/ios/user/blacklist/methods/get-black-list) | Get the current blacklist. |
+| [Remove from blacklist](/docs/chat/sdk/v4/ios/user/blacklist/methods/remove-black) | Remove a user from the blacklist. |

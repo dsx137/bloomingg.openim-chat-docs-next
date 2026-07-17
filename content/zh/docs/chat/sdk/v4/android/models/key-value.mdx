@@ -1,0 +1,22 @@
+---
+title: '键值扩展项'
+description: '说明 Android SDK KeyValue 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/key-value'
+---
+
+`KeyValue` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.KeyValue`。消息扩展使用的键值项。
+
+## 字段说明
+
+| 字段名称         | Java 类型 | 描述                                                                         |
+| ---------------- | --------- | ---------------------------------------------------------------------------- |
+| typeKey          | String    | 消息扩展项的唯一 key，用于区分同一消息上的不同扩展或表态类型。               |
+| value            | String    | 该 key 对应的业务值；内容格式由写入方约定，SDK 不把它限制为固定枚举。        |
+| latestUpdateTime | long      | 服务端记录的该扩展项最后更新时间，用于比较新旧值并避免较旧事件覆盖较新状态。 |

@@ -1,0 +1,25 @@
+---
+title: '搜索参数'
+description: '说明 Android SDK SearchParams 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/search-params'
+---
+
+`SearchParams` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.SearchParams`。按会话和客户端消息 ID 查找本地消息时使用的查询条件。
+
+## 字段说明
+
+| 字段名称        | Java 类型      | 描述                                                                                                     |
+| --------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| conversationID  | String         | 目标会话 ID；查找范围限定在该会话的本地消息记录中。                                                      |
+| clientMsgIDList | `List<String>` | 要查找的客户端消息 ID 列表；每项对应 [`Message.clientMsgID`](/docs/chat/sdk/v4/android/models/message)。 |
+
+## 相关页面
+
+- [查找消息列表](/docs/chat/sdk/v4/android/message/retrieving-messages/find-message-list)

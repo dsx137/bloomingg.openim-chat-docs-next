@@ -1,0 +1,39 @@
+---
+title: '好友信息'
+description: '说明 Android SDK FriendInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/friend-info'
+---
+
+`FriendInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.FriendInfo`。好友资料，包含昵称、头像、备注和添加来源等信息。
+
+## 字段说明
+
+| 字段名称       | Java 类型 | 描述                                                                                                     |
+| -------------- | --------- | -------------------------------------------------------------------------------------------------------- |
+| userID         | String    | 好友的用户 ID。                                                                                          |
+| nickname       | String    | 好友的全局昵称快照；会话或好友列表展示时通常优先使用 `remark`，备注为空再使用该字段。                    |
+| faceURL        | String    | 好友头像 URL 快照。                                                                                      |
+| gender         | int       | 性别兼容字段：`1` 男、`2` 女、`0` 或其他值未设置。当前提供的 core 好友转换未填充该字段，通常为 `0`。     |
+| phoneNumber    | String    | 手机号兼容字段。当前提供的 core 好友关系结构不返回该字段，通常为空；不要把它作为好友联系信息的可靠来源。 |
+| birth          | long      | 出生日期兼容字段。当前提供的 core 好友关系结构不返回该字段，通常为 `0`。                                 |
+| email          | String    | 邮箱兼容字段。当前提供的 core 好友关系结构不返回该字段，通常为空。                                       |
+| remark         | String    | 当前用户为该好友设置的备注名，仅当前用户可见。                                                           |
+| ex             | String    | 好友关系级业务扩展字符串，不等同于用户资料的 `ex`。                                                      |
+| createTime     | long      | 好友关系创建时间，当前 core 使用 Unix 毫秒时间戳。                                                       |
+| addSource      | int       | 建立好友关系的来源值，由服务端关系记录返回；当前 Android SDK 未提供对应公开枚举。                        |
+| operatorUserID | String    | 促成或执行建立好友关系操作的用户 ID。                                                                    |
+
+Android 类中没有暴露当前 core `LocalFriend.isPinned` 字段，因此通过该类型接收好友搜索或事件数据时无法读取好友置顶状态。
+
+## 相关页面
+
+- [监听好友事件](/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener)
+- [校验好友关系](/docs/chat/sdk/v4/android/user/friend/methods/check-friend)
+- [搜索好友](/docs/chat/sdk/v4/android/user/friend/methods/search-friends)

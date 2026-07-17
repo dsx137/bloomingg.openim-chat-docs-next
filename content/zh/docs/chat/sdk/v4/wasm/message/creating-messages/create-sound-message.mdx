@@ -1,0 +1,52 @@
+---
+title: '创建语音消息'
+description: '说明 WASM OpenIM core 方法 CreateSoundMessage 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/message/creating-messages/create-sound-message'
+---
+
+通过音频路径创建语音消息。
+
+## 功能介绍
+
+通过音频路径创建语音消息。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## 底层能力
+
+| 项目     | 说明                                                                              |
+| -------- | --------------------------------------------------------------------------------- |
+| 方法签名 | `CreateSoundMessage(operationID string, soundPath string, duration int64) string` |
+| 所属能力 | 会话与消息                                                                        |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                 |
+
+## WASM 调用参考
+
+WASM SDK v3.8.3 当前未暴露 `createSoundMessage` 这个独立平台方法。此页保留底层能力说明，避免把其他平台或旧封装层的调用方式误写成当前 WASM API。
+
+## 输入参数
+
+当前平台未暴露独立方法，因此没有可调用的平台参数。
+
+## 返回结果
+
+当前平台未暴露独立方法，因此没有平台返回值。
+
+## 代码示例
+
+当前 WASM SDK v3.8.3 未暴露 `createSoundMessage` 独立方法，暂无平台代码示例。
+
+## 相关类型
+
+- [消息对象](/docs/chat/sdk/v4/wasm/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/wasm/message/overview)

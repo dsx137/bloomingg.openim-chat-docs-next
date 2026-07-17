@@ -1,0 +1,150 @@
+---
+title: "查询发出的好友申请"
+description: "OpenIM Platform API 中文参考：查询发出的好友申请。说明如何分页读取用户发出的好友申请。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests"
+---
+
+使用 **查询发出的好友申请** 分页读取指定用户发出的好友申请。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/friend/get_self_friend_apply_list
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/friend/get_self_friend_apply_list" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "userID": "user_001",
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 20
+  },
+  "handleResults": [
+    0
+  ]
+}'
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。好友关系接口通常应由业务后端在完成用户权限校验后调用。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
+
+### 请求体参数
+
+```json
+{
+  "userID": "user_001",
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 20
+  },
+  "handleResults": [
+    0
+  ]
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| userID | 必填 | string | 目标用户 ID。 |
+| pagination | 必填 | object | 分页参数结构体。 |
+| pagination.pageNumber | 必填 | int | 当前页码，从 1 开始。 |
+| pagination.showNumber | 必填 | int | 当前页请求数量。 |
+| handleResults | 选填 | array | 按处理结果筛选，不传时由服务端返回默认范围。 |
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "friendRequests": [
+      {
+        "fromUserID": "user_001",
+        "fromNickname": "Alice",
+        "fromFaceURL": "https://example.com/avatar-alice.png",
+        "toUserID": "user_002",
+        "toNickname": "Bob",
+        "toFaceURL": "https://example.com/avatar-bob.png",
+        "handleResult": 0,
+        "reqMsg": "我是 Alice",
+        "createTime": 1710000000000,
+        "handlerUserID": "",
+        "handleMsg": "",
+        "handleTime": 0,
+        "ex": ""
+      }
+    ],
+    "total": 1
+  }
+}
+```
+
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| data.friendRequests | array | 发出的好友申请列表，结构为[关系模块的 `FriendRequestInfo`](/docs/chat/platform-api/v3/relation/overview#friendrequestinfo)。 |
+| data.total | int | 匹配到的申请总数。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "invalid request parameters"
+}
+```
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 参数校验失败 | 必填用户 ID、分页参数或处理结果缺失。 | 对照请求体参数表检查字段名称和类型。 |
+| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |

@@ -1,0 +1,137 @@
+---
+title: "查询用户在线 Token 明细"
+description: "OpenIM Platform API 中文参考：查询用户在线 Token 明细。说明如何按终端聚合在线连接使用的 Token。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail"
+---
+
+使用 **查询用户在线 Token 明细** 从可信后端获取在线用户在各终端上的 Token 聚合结果。接口只返回在线用户；如果某个用户离线，该用户不会出现在 `data` 数组中。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/user/get_users_online_token_detail
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/user/get_users_online_token_detail" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "userIDs": ["user_001", "user_002"]
+}'
+```
+:::
+
+> 安全提示：响应中包含用户在线 Token，只能在可信后端或受控管理后台使用，不应暴露给普通客户端。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递用户 ID 列表。
+
+### 请求头
+
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
+
+### 请求体参数
+
+```json
+{
+  "userIDs": ["user_001", "user_002"]
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| userIDs | 必填 | array | 需要查询在线 Token 明细的用户 ID 列表。 |
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": [
+    {
+      "userID": "user_001",
+      "status": 1,
+      "singlePlatformToken": [
+        {
+          "platformID": 1,
+          "total": 2,
+          "token": [
+            "eyJhbGciOiJIUzI1Ni...",
+            "eyJhbGciOiJIUzI1Ni..."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | array | 在线用户的 Token 聚合明细。 |
+
+#### data[] 属性
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| data[].userID | string | 用户 ID。 |
+| data[].status | int | 在线状态，当前返回项通常为 `1`。 |
+| data[].singlePlatformToken | array | 按终端类型聚合的 Token 列表。 |
+| data[].singlePlatformToken[].platformID | int | 在线终端类型。 |
+| data[].singlePlatformToken[].total | int | 当前终端下在线 Token 数量。 |
+| data[].singlePlatformToken[].token | array | 当前终端下的 Token 列表。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "invalid request body"
+}
+```
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 用户未返回 | 用户当前离线，接口只返回在线用户。 | 需要离线结果时改用[查询用户在线状态](/docs/chat/platform-api/v3/user/presence/get-users-online-status)。 |
+| 鉴权失败 | `token` 缺失、过期，或不是管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |

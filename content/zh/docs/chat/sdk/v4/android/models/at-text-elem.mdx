@@ -1,0 +1,29 @@
+---
+title: 'At 文本元素'
+description: '说明 Android SDK AtTextElem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/at-text-elem'
+---
+
+`AtTextElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.AtTextElem`。At 文本消息的内容元素，用于保存文本、被提及用户和引用信息。
+
+## 字段说明
+
+| 字段名称     | Java 类型                                                               | 描述                                                                                                             |
+| ------------ | ----------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| text         | String                                                                  | @ 消息的完整文本正文，用于消息气泡展示；正文中 @ 名称的位置由业务编辑器生成。                                    |
+| atUserList   | `List<String>`                                                          | 被提及用户 ID 列表。@ 所有人时会包含 SDK 返回的特殊标记，不应把显示文本自行当作用户 ID。                         |
+| atUsersInfo  | `List<`[`AtUserInfo`](/docs/chat/sdk/v4/android/models/at-user-info)`>` | 被提及用户的 ID 与群昵称快照，用于按发送时昵称渲染 @ 片段；列表项应与 `atUserList` 中的真实用户 ID 对应。        |
+| isAtSelf     | boolean                                                                 | 当前登录用户是否属于本条消息的提醒目标，由接收端根据用户 ID 和 @ 所有人标记计算；可用于展示“有人@我”等会话提示。 |
+| quoteMessage | [`Message`](/docs/chat/sdk/v4/android/models/message)                   | 与 @ 文本一起携带的被引用消息快照；未引用其他消息时为空。                                                        |
+
+## 关联类型
+
+- [被提及用户信息](/docs/chat/sdk/v4/android/models/at-user-info)（`AtUserInfo`）：被提及用户的 ID 与群昵称映射信息。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。

@@ -1,0 +1,97 @@
+---
+title: '概述'
+description: '群组方法目录，汇总管理群组、入群申请、用户入群关系、群成员和群组禁言能力。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/group/overview'
+---
+
+OpenIM React Native SDK 使用群组承载多人聊天能力。本节说明群组创建、资料维护、入群申请、成员管理、入群关系和禁言等能力。
+
+本页是群组能力的统一概述。二级功能目录不再单独保留概述页，具体接口直接查看对应方法页。
+
+## 模块索引
+
+| 模块                         | 说明                                                                                     | 方法数 |
+| ---------------------------- | ---------------------------------------------------------------------------------------- | ------ |
+| [管理群组](#管理群组)        | 管理群组用于创建群组、维护群资料、查询群资料、搜索群组、转让群主和解散群组。             | 6      |
+| [入群申请](#入群申请)        | 入群申请用于处理用户主动申请加入群组，以及群主或管理员审核申请的流程。                   | 6      |
+| [用户入群关系](#用户入群关系) | 用户入群关系用于判断当前用户或指定用户与群组之间的加入关系，并查询当前用户已加入的群组。 | 5      |
+| [群成员](#群成员)            | 群成员用于邀请或移出成员、维护成员资料，以及按条件查询和搜索群成员。                     | 8      |
+| [群组禁言](#群组禁言)        | 群组禁言用于控制群内发言状态，包括开启或关闭全群禁言，以及为指定成员设置禁言时长。       | 2      |
+
+## 方法索引
+
+### 管理群组
+
+| 方法                                                                                          | 说明                                                                   |
+| --------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [创建群组](/docs/chat/sdk/v4/react-native/group/managing-groups/create-group)                      | 创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。 |
+| [更新群资料](/docs/chat/sdk/v4/react-native/group/managing-groups/set-group-info)                  | 更新群资料，例如群名称、头像、公告或扩展字段。                         |
+| [获取群信息](/docs/chat/sdk/v4/react-native/group/managing-groups/get-specified-groups-info)       | 批量获取群信息，适合会话列表补齐群资料或刷新部分群资料。               |
+| [搜索群组](/docs/chat/sdk/v4/react-native/group/managing-groups/search-groups)                     | 按关键字搜索群组，可按群 ID、群名称等字段搜索。                        |
+| [转让群主](/docs/chat/sdk/v4/react-native/group/managing-groups/transfer-group-owner)              | 将群主转让给指定成员，通常只允许当前群主执行。                         |
+| [解散群组](/docs/chat/sdk/v4/react-native/group/managing-groups/dismiss-group)                     | 解散指定群组，通常要求当前用户具备群主或管理权限。                     |
+
+### 入群申请
+
+| 方法                                                                                                             | 说明                                                         |
+| ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| [申请加入群组](/docs/chat/sdk/v4/react-native/group/group-applications/join-group)                                    | 申请加入指定群组。是否直接入群取决于群设置和服务端审核策略。 |
+| [获取收到的入群申请](/docs/chat/sdk/v4/react-native/group/group-applications/get-group-application-list-as-recipient) | 获取当前用户作为群管理者收到的入群申请列表。                 |
+| [获取发出的入群申请](/docs/chat/sdk/v4/react-native/group/group-applications/get-group-application-list-as-applicant) | 获取当前用户自己提交的入群申请列表。                         |
+| [同意入群申请](/docs/chat/sdk/v4/react-native/group/group-applications/accept-group-application)                      | 同意指定用户的入群申请。                                     |
+| [拒绝入群申请](/docs/chat/sdk/v4/react-native/group/group-applications/refuse-group-application)                      | 拒绝指定用户的入群申请。                                     |
+| [获取未处理入群申请数](/docs/chat/sdk/v4/react-native/group/group-applications/get-group-application-unhandled-count) | 获取未处理入群申请数量，适合管理入口角标和后台同步。         |
+
+### 用户入群关系
+
+| 方法                                                                                              | 说明                                                                   |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [获取已加入群组](/docs/chat/sdk/v4/react-native/group/group-membership/get-joined-group-list)          | 获取当前用户已加入的全部群组，适合群列表首屏加载或登录后同步。         |
+| [分页获取已加入群组](/docs/chat/sdk/v4/react-native/group/group-membership/get-joined-group-list-page) | 分页获取当前用户已加入群组，适合群数量较多的账号。                     |
+| [判断是否已入群](/docs/chat/sdk/v4/react-native/group/group-membership/is-join-group)                  | 判断当前用户是否已经加入指定群组，适合展示入群按钮或发送群消息前校验。 |
+| [查询用户是否在群内](/docs/chat/sdk/v4/react-native/group/group-membership/get-users-in-group)         | 查询一批用户是否在指定群组内，适合邀请前过滤已入群用户。               |
+| [退出群组](/docs/chat/sdk/v4/react-native/group/group-membership/quit-group)                           | 当前用户主动退出指定群组。                                             |
+
+### 群成员
+
+| 方法                                                                                                          | 说明                                                                     |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| [邀请用户入群](/docs/chat/sdk/v4/react-native/group/group-members/invite-user-to-group)                            | 邀请一批用户加入群组。是否直接加入取决于群设置和服务端策略。             |
+| [移出群成员](/docs/chat/sdk/v4/react-native/group/group-members/kick-group-member)                                 | 将一批成员移出群组，通常要求操作者具备管理权限。                         |
+| [更新群成员资料](/docs/chat/sdk/v4/react-native/group/group-members/set-group-member-info)                         | 更新群成员资料，例如群昵称、角色相关扩展或其他成员字段。                 |
+| [获取群成员列表](/docs/chat/sdk/v4/react-native/group/group-members/get-group-member-list)                         | 按成员类型筛选并分页获取群成员列表。                                     |
+| [按入群时间筛选成员](/docs/chat/sdk/v4/react-native/group/group-members/get-group-member-list-by-join-time-filter) | 按入群时间范围和用户过滤条件获取群成员，适合审计、成员管理和增量查看。   |
+| [获取群主和管理员](/docs/chat/sdk/v4/react-native/group/group-members/get-group-member-owner-and-admin)            | 获取指定群的群主和管理员列表，适合管理页、权限判断和群成员列表顶部展示。 |
+| [获取指定群成员资料](/docs/chat/sdk/v4/react-native/group/group-members/get-specified-group-members-info)          | 获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。   |
+| [搜索群成员](/docs/chat/sdk/v4/react-native/group/group-members/search-group-members)                              | 搜索群成员，适合按用户 ID 或群昵称查找成员。                             |
+
+### 群组禁言
+
+| 方法                                                                                      | 说明                                               |
+| ----------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| [设置群禁言](/docs/chat/sdk/v4/react-native/group/group-moderation/change-group-mute)          | 开启或关闭全群禁言。适合群管理者控制群内发言状态。 |
+| [设置成员禁言](/docs/chat/sdk/v4/react-native/group/group-moderation/change-group-member-mute) | 设置指定群成员禁言时长。适合临时限制单个成员发言。 |
+
+## 事件联动
+
+群组相关变化通过 `SetGroupListener` 注册的 `OnGroupListener` 接收，包括群新增/删除、群资料变化、成员新增/删除、成员资料变化、群申请新增/删除/接受/拒绝等。
+
+## 相关类型
+
+- [群组信息](/docs/chat/sdk/v4/react-native/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+- [群成员信息](/docs/chat/sdk/v4/react-native/models/group-members-info)（`GroupMembersInfo`）：群成员资料对象，包含角色、入群时间和群昵称等信息。
+- [群申请信息](/docs/chat/sdk/v4/react-native/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，用于申请列表和审核流程。
+- [收到的群申请查询条件](/docs/chat/sdk/v4/react-native/models/get-group-application-list-as-recipient-req)（`GetGroupApplicationListAsRecipientReq`）：查询收到的入群申请时使用的分页条件。
+- [发出的群申请查询条件](/docs/chat/sdk/v4/react-native/models/get-group-application-list-as-applicant-req)（`GetGroupApplicationListAsApplicantReq`）：查询当前用户发出的入群申请时使用的分页条件。
+- [入群来源](/docs/chat/sdk/v4/react-native/models/join-source)（`JoinSource`）：描述用户进入群组的来源。
+- [群成员设置请求](/docs/chat/sdk/v4/react-native/models/set-group-member-info)（`SetGroupMemberInfo`）：更新群成员资料时使用的请求对象。
+- [群成员筛选类型](/docs/chat/sdk/v4/react-native/models/group-member-filter)（`GroupMemberFilter`）：获取群成员列表时使用的成员筛选类型。
+- [群组监听器](/docs/chat/sdk/v4/react-native/models/on-group-listener)（`OnGroupListener`）：群组、入群申请和群成员变化监听器。
+- [通用回调](/docs/chat/sdk/v4/react-native/models/on-base)（`OnBase`）：React Native SDK 异步方法的通用成功和失败回调。

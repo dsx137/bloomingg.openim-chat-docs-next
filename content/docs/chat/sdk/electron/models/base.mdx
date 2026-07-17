@@ -1,0 +1,32 @@
+---
+title: 'Base callback'
+description: 'Describes the Base callback type used by Electron SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/models/base'
+---
+
+`Base` is a common type used by Electron SDK v3.8.3. Use this page to understand where the type appears and how it connects to method parameters, return values, and event callbacks.
+
+## Usage
+
+| Scenario          | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| Method parameters | Some SDK methods accept this type or a request object with the same shape. |
+| Return values     | Query methods and callbacks may return this type or a list of this type.   |
+| Event handling    | Listener callbacks may include this type when related data changes.        |
+
+## Usage Notes
+
+- Treat ID fields such as `userID`, `groupID`, `conversationID`, and `clientMsgID` as stable identifiers.
+- Optional extension fields are usually JSON strings or platform-specific maps. Validate them before using them in UI logic.
+- Prefer SDK update methods instead of mutating local objects only.
+
+## Related Pages
+
+- [Models overview](/docs/chat/sdk/v4/electron/models/overview)

@@ -1,0 +1,76 @@
+---
+title: '初始化 SDK'
+description: '说明 Android core binding 方法 InitSDK 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/init-sdk'
+---
+
+初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                       |
+| -------- | -------------------------------------------------------------------------- |
+| 方法签名 | `InitSDK(listener OnConnListener, operationID string, config string) bool` |
+| 所属能力 | SDK 生命周期                                                               |
+| 源码位置 | `open_im_sdk/init_login.go`                                                |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public boolean initSDK(Application application, InitConfig initConfig, @NotNull OnConnListener listener)
+```
+
+## 输入参数
+
+| 参数名称    | Java 类型                                                             | 是否必填 | 描述                                                           |
+| ----------- | --------------------------------------------------------------------- | -------- | -------------------------------------------------------------- |
+| application | `Application`                                                         | 是       | Android 应用对象，SDK 用它注册进程生命周期监听并获取运行环境。 |
+| initConfig  | [`InitConfig`](/docs/chat/sdk/v4/android/models/init-config)          | 是       | API、WebSocket、本地存储和日志配置。                           |
+| listener    | [`OnConnListener`](/docs/chat/sdk/v4/android/models/on-conn-listener) | 是       | 接收连接成功、失败、被踢下线和 token 失效等事件。              |
+
+## 返回结果
+
+返回 `boolean`：`true` 表示初始化请求已成功提交；后续连接状态仍应以 `OnConnListener` 回调为准。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+boolean initialized = OpenIMClient.getInstance().initSDK(application, initConfig, new OnConnListener() {
+    @Override
+    public void onConnectSuccess() {
+        // TODO: SDK 已连接
+    }
+
+    @Override
+    public void onConnectFailed(int code, String error) {
+        // TODO: 处理连接失败
+    }
+
+    @Override
+    public void onUserTokenExpired() {
+        // TODO: 处理登录票据过期
+    }
+});
+```
+
+## 相关类型
+
+- [初始化配置](/docs/chat/sdk/v4/android/models/init-config)（`InitConfig`）：初始化 SDK 时传入的基础配置。
+- [连接状态监听器](/docs/chat/sdk/v4/android/models/on-conn-listener)（`OnConnListener`）：SDK 连接状态和登录票据状态监听器。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)

@@ -1,0 +1,174 @@
+---
+title: '错误码'
+description: '枚举 Electron SDK v3.8.3 对应 SDK core 和 server 源码中定义的错误码。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/error-codes'
+---
+## SDK core 错误码
+
+### 通用错误
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10000` | `NetworkError` | `Network error` | 网络错误。 |
+| `10001` | `NetworkTimeoutError` | `Network timeout error` | 网络超时。 |
+| `10002` | `ArgsError` | `Invalid input arguments` | 输入参数无效。 |
+| `10003` | `CtxDeadlineExceededError` | `Context deadline exceeded` | 上下文超时。 |
+| `10004` | `ResourceLoadNotCompleteError` | `Resource initialization incomplete` | SDK 资源初始化未完成。 |
+| `10005` | `UnknownCode` | `Unrecognized code` | 未识别的错误码。 |
+| `10006` | `SdkInternalError` | `Internal SDK error` | SDK 内部错误。 |
+| `10007` | `NoUpdateError` | `No updates available` | 没有可更新内容。 |
+
+### 用户和登录
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10100` | `UserIDNotFoundError` | `User ID not found` | 用户 ID 不存在或未注册。 |
+| `10101` | `LoginOutError` | `User has logged out` | 用户已退出登录。 |
+| `10102` | `LoginRepeatError` | `User has logged in repeatedly` | 用户重复登录。 |
+
+### 消息
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10200` | `FileNotFoundError` | `File not found` | 文件或记录不存在。 |
+| `10201` | `MsgDeCompressionError` | `Message decompression failed` | 消息解压失败。 |
+| `10202` | `MsgDecodeBinaryWsError` | `Message binary WebSocket decoding failed` | WebSocket 二进制消息解码失败。 |
+| `10203` | `MsgBinaryTypeNotSupportError` | `Message type not supported` | 二进制消息类型不支持。 |
+| `10204` | `MsgRepeatError` | `Only failed messages can be resent` | 消息重复，通常只有发送失败的消息可重发。 |
+| `10205` | `MsgContentTypeNotSupportError` | `Message content type not supported` | 消息内容类型不支持。 |
+| `10206` | `MsgHasNoSeqError` | `Message has no sequence number` | 消息没有 seq。 |
+| `10207` | `MsgHasDeletedError` | `Message has been deleted` | 消息已删除。 |
+
+### 会话
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10301` | `NotSupportOptError` | `Operation not supported for supergroup` | 操作不支持。 |
+| `10302` | `NotSupportTypeError` | `Only supergroup type supported` | 类型不支持。 |
+| `10303` | `UnreadCountError` | `Unread count is zero` | 未读数为 0。 |
+
+### 群组
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10400` | `GroupIDNotFoundError` | `Group ID not found` | 群组 ID 不存在。 |
+| `10401` | `GroupTypeErr` | `Invalid group type` | 群组类型无效。 |
+
+## Server 错误码
+
+### 成功和未知错误
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `0` | `NoError` | `No error` | 成功。 |
+| `1000` | `UnknownCode` | code 未解析或解析后等于 0 时使用 | 未知错误码。 |
+
+### 账号认证扩展错误
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `10001` | `FormattingError` | `Error in formatting` | 格式化错误。 |
+| `10002` | `HasRegistered` | `user has already registered` | 用户已注册。 |
+| `10003` | `NotRegistered` | `user is not registered` | 用户未注册。 |
+| `10004` | `PasswordErr` | `Password error` | 密码错误。 |
+| `10005` | `GetIMTokenErr` | `Error in getting IM token` | 获取 IM token 失败。 |
+| `10006` | `RepeatSendCode` | `Repeat sending code` | 重复发送验证码。 |
+| `10007` | `MailSendCodeErr` | `Error in sending code via email` | 邮件发送验证码失败。 |
+| `10008` | `SmsSendCodeErr` | `Error in sending code via SMS` | 短信发送验证码失败。 |
+| `10009` | `CodeInvalidOrExpired` | `Code is invalid or expired` | 验证码无效或已过期。 |
+| `10010` | `RegisterFailed` | `Registration failed` | 注册失败。 |
+| `10011` | `ResetPasswordFailed` | `Resetting password failed` | 重置密码失败。 |
+| `10012` | `RegisterLimit` | `Registration limit exceeded` | 注册次数或频率超限。 |
+| `10013` | `LoginLimit` | `Login limit exceeded` | 登录次数或频率超限。 |
+| `10014` | `InvitationError` | `Error in invitation` | 邀请错误。 |
+
+### 通用和基础设施
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `500` | `ServerInternalError` | `ServerInternalError` | 服务端内部错误。 |
+| `1001` | `ArgsError` | `ArgsError` | 输入参数错误。 |
+| `1002` | `NoPermissionError` | `NoPermissionError` | 权限不足。 |
+| `1003` | `DuplicateKeyError` | `DuplicateKeyError` | 唯一键冲突或重复数据。 |
+| `1004` | `RecordNotFoundError` | `RecordNotFoundError` | 记录不存在。 |
+| `80000` | `CallbackError` | `CallbackError` / `ErrCallbackContinue` | 回调错误或回调继续处理。 |
+| `90002` | `DatabaseError` | `DatabaseError` | 数据库或 Redis 等存储错误。 |
+| `90004` | `NetworkError` | `NetworkError` | 网络错误。 |
+| `90007` | `DataError` | `DataError` | 数据错误。 |
+
+### 账号
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1101` | `UserIDNotFoundError` | `UserIDNotFoundError` | 用户 ID 不存在或未注册。 |
+| `1102` | `RegisteredAlreadyError` | `RegisteredAlreadyError` | 用户已注册。 |
+
+### 群组
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1201` | `GroupIDNotFoundError` | `GroupIDNotFoundError` | 群组 ID 不存在。 |
+| `1202` | `GroupIDExisted` | `GroupIDExisted` | 群组 ID 已存在。 |
+| `1203` | `NotInGroupYetError` | `NotInGroupYetError` | 用户尚未加入该群。 |
+| `1204` | `DismissedAlreadyError` | `DismissedAlreadyError` | 群组已解散。 |
+| `1205` | `GroupTypeNotSupport` | 空字符串 | 群组类型不支持。 |
+| `1206` | `GroupRequestHandled` | `GroupRequestHandled` | 入群申请已处理。 |
+
+### 好友和关系
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1301` | `CanNotAddYourselfError` | `CanNotAddYourselfError` | 不能添加自己为好友。 |
+| `1302` | `BlockedByPeer` | `BlockedByPeer` | 已被对方拉黑。 |
+| `1303` | `NotPeersFriend` | `NotPeersFriend` | 不是对方好友。 |
+| `1304` | `RelationshipAlreadyError` | `RelationshipAlreadyError` | 好友关系已存在。 |
+| `1305` | `FriendRequestHandled` | `FriendRequestHandled` | 好友申请已处理。 |
+
+### 消息
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1401` | `MessageHasReadDisable` | `MessageHasReadDisable` | 消息已读能力不可用。 |
+| `1402` | `MutedInGroup` | `MutedInGroup` | 成员在群内被禁言。 |
+| `1403` | `MutedGroup` | `MutedGroup` | 群组被禁言。 |
+| `1404` | `MsgAlreadyRevoke` | `MsgAlreadyRevoke` | 消息已撤回。 |
+
+### token
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1501` | `TokenExpiredError` | `TokenExpiredError` | token 已过期。 |
+| `1502` | `TokenInvalidError` | `TokenInvalidError` | token 无效。 |
+| `1503` | `TokenMalformedError` | `TokenMalformedError` | token 格式错误。 |
+| `1504` | `TokenNotValidYetError` | `TokenNotValidYetError` | token 尚未生效。 |
+| `1505` | `TokenUnknownError` | `TokenUnknownError` | token 未知错误。 |
+| `1506` | `TokenKickedError` | `TokenKickedError` | token 对应账号被踢下线。 |
+| `1507` | `TokenNotExistError` | `TokenNotExistError` | token 不存在。 |
+
+### 长连接网关和推送
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1601` | `ConnOverMaxNumLimit` | `ConnOverMaxNumLimit` | 连接数超过上限。 |
+| `1602` | `ConnArgsErr` | `args err, need token, sendID, platformID` | 长连接参数错误，缺少 token、sendID 或 platformID。 |
+| `1603` | `PushMsgErr` | `push msg err` | 推送消息失败。 |
+| `1604` | `IOSBackgroundPushErr` | `ios background push err` | iOS 后台推送失败。 |
+
+### 对象存储
+
+| 错误码 | 常量 | 默认消息或源码说明 | 说明 |
+| ------ | ---- | ------------------ | ---- |
+| `1701` | `FileUploadedExpiredError` | `FileUploadedExpiredError` | 文件上传已过期。 |
+
+## WebSocket 协议标识
+
+| 标识值 | 常量 | 说明 |
+| ------ | ---- | ---- |
+| `3001` | `WSDataError` | WebSocket 数据错误协议标识。 |

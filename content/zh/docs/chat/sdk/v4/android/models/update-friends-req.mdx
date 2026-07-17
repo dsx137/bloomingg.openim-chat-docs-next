@@ -1,0 +1,28 @@
+---
+title: '好友资料更新请求'
+description: '说明 Android SDK UpdateFriendsReq 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/update-friends-req'
+---
+
+`UpdateFriendsReq` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.UpdateFriendsReq`。批量更新好友备注或扩展信息的请求对象。
+
+## 字段说明
+
+| 字段名称      | Java 类型 | 描述                                                                                                                           |
+| ------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| ownerUserID   | String    | 好友关系所属用户 ID。Android setter 为受保护方法，且 core 会强制改为当前登录用户 ID，业务端无需也不能指定其他用户。            |
+| friendUserIDs | String[]  | 要批量更新的好友用户 ID 数组；每一项都必须已经是当前用户的好友。                                                               |
+| isPinned      | Boolean   | 是否在好友列表中置顶这些好友。使用包装类型是为了区分“不修改”与显式设置 `true/false`；为 `null` 时 Android 序列化会省略该字段。 |
+| remark        | String    | 当前用户为这些好友设置的备注名；为 `null` 时不修改，传空字符串表示清空备注。                                                   |
+| ex            | String    | 好友关系级业务扩展字符串；为 `null` 时不修改，格式由业务约定。                                                                 |
+
+## 相关页面
+
+- [更新好友资料](/docs/chat/sdk/v4/android/user/friend/methods/update-friends)

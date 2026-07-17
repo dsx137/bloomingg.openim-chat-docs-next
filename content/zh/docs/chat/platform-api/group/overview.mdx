@@ -1,0 +1,106 @@
+---
+title: "概述"
+description: "OpenIM Platform API 群组模块概览，覆盖建群、入群申请、成员管理、禁言和群资料维护。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/group/overview"
+---
+
+群组模块用于由服务端创建和管理群聊，包括群资料、群成员、入群申请、群主转让、解散群组和禁言控制。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 群组管理 | 创建群组、更新群资料、解散群组和转让群主。 |
+| 入群流程 | 申请入群、处理入群申请、查询收到或发出的申请。 |
+| 成员管理 | 邀请成员、移除成员、查询成员资料和成员列表。 |
+| 禁言控制 | 禁言群成员、取消成员禁言、禁言群组和取消群组禁言。 |
+
+## 常用接口
+
+- [创建群组](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [邀请用户进群](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
+- [获取群成员列表](/docs/chat/platform-api/v3/group/group-members/get-group-member-list)
+- [禁言群成员](/docs/chat/platform-api/v3/group/group-moderation/mute-group-member)
+- [查询收到的入群申请](/docs/chat/platform-api/v3/group/group-applications/list-received-group-applications)
+
+## 资源表示
+
+群组模块的资源对象描述群资料、群成员资料和入群申请。接口页只展开关键字段，完整对象语义以这里为准。
+
+### GroupInfo
+
+`GroupInfo` 表示一个 OpenIM 群组。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| groupID | string | 群 ID；创建群组时可由业务传入，也可由服务端生成。 |
+| groupName | string | 群名称。 |
+| notification | string | 群公告。 |
+| introduction | string | 群介绍。 |
+| faceURL | string | 群头像 URL。 |
+| ownerUserID | string | 群主用户 ID。 |
+| creatorUserID | string | 创建者用户 ID。 |
+| createTime | int64 | 群创建时间，通常为 Unix 毫秒时间戳。 |
+| memberCount | int | 群成员数量。 |
+| status | int | 群状态。 |
+| groupType | int | 群类型；当前服务端常用工作群类型。 |
+| needVerification | int | 入群验证策略。 |
+| lookMemberInfo | int | 是否允许查看群成员资料。 |
+| applyMemberFriend | int | 是否允许从群成员处添加好友。 |
+| notificationUpdateTime | int64 | 群公告更新时间。 |
+| notificationUserID | string | 更新群公告的用户 ID。 |
+| ex | string | 群扩展字段。 |
+
+### GroupMemberInfo
+
+`GroupMemberInfo` 表示用户在某个群组中的完整成员资料。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| groupID | string | 群 ID。 |
+| userID | string | 成员用户 ID。 |
+| nickname | string | 用户昵称。 |
+| faceURL | string | 用户头像 URL。 |
+| appMangerLevel | int | 应用管理级别字段，字段名以服务端响应为准。 |
+| roleLevel | int | 成员角色，例如群主、管理员或普通成员。 |
+| joinTime | int64 | 入群时间。 |
+| joinSource | int | 入群来源。 |
+| operatorUserID | string | 邀请、导入或处理入群的操作者用户 ID。 |
+| muteEndTime | int64 | 成员禁言结束时间。 |
+| inviterUserID | string | 邀请者用户 ID。 |
+| ex | string | 群成员扩展字段。 |
+
+### GroupRequestInfo
+
+`GroupRequestInfo` 表示一条入群申请记录，包含申请用户资料和群资料两个嵌套对象。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| userInfo | object | 申请用户公开资料，结构为[用户模块的 `PublicUserInfo`](/docs/chat/platform-api/v3/user/overview#publicuserinfo)。 |
+| groupInfo | object | 群资料，结构为本页 `GroupInfo`。 |
+| handleResult | int | 处理结果，例如待处理、同意或拒绝。 |
+| reqMsg | string | 入群申请说明。 |
+| handleMsg | string | 处理说明。 |
+| reqTime | int64 | 申请时间。 |
+| handleUserID | string | 处理申请的用户 ID。 |
+| handleTime | int64 | 申请处理时间。 |
+| ex | string | 入群申请扩展字段。 |
+| joinSource | int | 入群来源。 |
+| inviterUserID | string | 邀请者用户 ID。 |
+
+## 接入建议
+
+群组操作通常影响多个用户，建议后端记录 `operationID`、操作人、目标群组和成员列表。
+
+禁言、踢人和解散群组属于高影响操作，应结合业务权限和审计流程使用。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

@@ -7,6 +7,7 @@ import { MarkdownContent } from '@/src/components/docs/markdown-content';
 import { Pagination } from '@/src/components/docs/pagination';
 import { PlatformApiOverviewPage } from '@/src/components/docs/platform-api-overview-page';
 import { SdkOverviewPage } from '@/src/components/docs/sdk-overview-page';
+import { TocGithubLink } from '@/src/components/docs/toc-github-link';
 import { getMDXComponents } from '@/src/components/mdx-components';
 import type { ContextOption } from '@/src/components/docs/context-picker';
 import { getNavigationContext, getNavigationContexts } from '@/src/lib/navigation';
@@ -28,6 +29,7 @@ import {
   getLocalizedDocTitle,
   localizeRouteRecord,
 } from '@/src/lib/localized-docs';
+import { getOpenIMServerVersionLink } from '@/src/lib/openim-server-version';
 import { getSourceDocPage } from '@/src/lib/source-docs';
 import {
   getPublishedWasmLocales,
@@ -50,11 +52,24 @@ export async function generateDocumentationMetadata(
   const path = routePath ?? pathFromSlug(slug);
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
-  if (!route || !page) return {};
 
+  if (!route) return {};
   const localized = getLocalizedDocPage(route.path, locale);
-  const title = localizeDocLabel(localized?.title ?? page.data.title ?? route.title, locale);
-  const description = localized?.description ?? page.data.description ?? route.description;
+  const routeFilePage =
+    !page && route.contentFile.startsWith('content/zh/')
+      ? getSourceDocPage(route.contentFile)
+      : undefined;
+  if (!page && !localized && !routeFilePage) return {};
+
+  const title = localizeDocLabel(
+    localized?.title ?? routeFilePage?.title ?? page?.data.title ?? route.title,
+    locale,
+  );
+  const description =
+    localized?.description ??
+    routeFilePage?.description ??
+    page?.data.description ??
+    route.description;
   const url = toLocalizedPath(route.path, locale);
   const wasmRoute = isWasmRoute(route.path);
   const languages = wasmRoute
@@ -98,34 +113,49 @@ export async function renderDocumentationPage(
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
 
-  if (!route || !page) notFound();
+  if (!route) notFound();
 
   const localizedPage = getLocalizedDocPage(route.path, locale);
+  const routeFilePage =
+    !page && route.contentFile.startsWith('content/zh/')
+      ? getSourceDocPage(route.contentFile)
+      : undefined;
+  if (!page && !localizedPage && !routeFilePage) notFound();
 
   const effectiveRoute = {
     ...route,
-    title: localizeDocLabel(localizedPage?.title ?? page.data.title ?? route.title, locale),
-    description: localizedPage?.description ?? page.data.description ?? route.description,
-    product: page.data.product ?? route.product,
-    template: page.data.template ?? route.template,
-    status: page.data.status ?? route.status,
-    version: page.data.version ?? route.version,
-    platform: page.data.platform ?? route.platform,
+    title: localizeDocLabel(
+      localizedPage?.title ?? routeFilePage?.title ?? page?.data.title ?? route.title,
+      locale,
+    ),
+    description:
+      localizedPage?.description ??
+      routeFilePage?.description ??
+      page?.data.description ??
+      route.description,
+    product: page?.data.product ?? route.product,
+    template: page?.data.template ?? route.template,
+    status: page?.data.status ?? route.status,
+    version: page?.data.version ?? route.version,
+    platform: page?.data.platform ?? route.platform,
   };
 
-  const loaded = await page.data.load();
-  const MdxContent = loaded.body;
+  const shouldLoadMdx = effectiveRoute.template === 'landing' || (!localizedPage && !routeFilePage);
+  const loaded = page && shouldLoadMdx ? await page.data.load() : undefined;
+  const MdxContent = loaded?.body;
   const sourceMarkdownPage =
     !localizedPage && effectiveRoute.product === 'platform-api'
       ? getSourceDocPage(effectiveRoute.contentFile)
       : undefined;
-  const markdownPage = localizedPage ?? sourceMarkdownPage;
-  const toc = markdownPage?.headings ?? ((loaded.toc ?? []) as TocItem[]);
+  const markdownPage = localizedPage ?? routeFilePage ?? sourceMarkdownPage;
+  const toc = markdownPage?.headings ?? ((loaded?.toc ?? []) as TocItem[]);
 
   if (effectiveRoute.template === 'landing') {
+    if (!MdxContent) notFound();
+    const LandingContent = MdxContent;
     return (
       <div className="chat-landing">
-        <MdxContent components={getMDXComponents(locale)} />
+        <LandingContent components={getMDXComponents(locale)} />
       </div>
     );
   }
@@ -157,6 +187,13 @@ export async function renderDocumentationPage(
     .map((item) => item.version);
   const showVersion = shouldShowVersion(effectiveRoute.version, routeVersions);
   const breadcrumbs = localizeBreadcrumbs(getBreadcrumbs(effectiveRoute, { showVersion }), locale);
+  const platformApiServerVersion =
+    effectiveRoute.path === '/docs/chat/platform-api/v3/overview'
+      ? await getOpenIMServerVersionLink()
+      : undefined;
+  const tocFooter = platformApiServerVersion ? (
+    <TocGithubLink version={platformApiServerVersion} />
+  ) : undefined;
 
   if (effectiveRoute.path === '/sdk/wasm/overview' && locale === 'zh') {
     return (
@@ -188,6 +225,7 @@ export async function renderDocumentationPage(
         locale={locale}
         overview
         showVersion={showVersion}
+        tocFooter={tocFooter}
         toc={getPlatformApiOverviewToc(locale)}
       >
         <PlatformApiOverviewPage breadcrumbs={breadcrumbs} locale={locale} route={effectiveRoute} />
@@ -214,9 +252,9 @@ export async function renderDocumentationPage(
       <div className="prose-docs">
         {markdownPage ? (
           <MarkdownContent body={markdownPage.body} locale={locale} />
-        ) : (
+        ) : MdxContent ? (
           <MdxContent components={getMDXComponents(locale)} />
-        )}
+        ) : null}
       </div>
       <Feedback locale={locale} path={toLocalizedPath(effectiveRoute.path, locale)} />
       <Pagination locale={locale} next={neighbors.next} previous={neighbors.previous} />

@@ -1,0 +1,64 @@
+---
+title: 'Set foreground/background status'
+description: 'Explains the Set foreground/background status method in React Native SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/application/methods/set-app-background-status'
+---
+
+Use **Set foreground/background status** when your application needs this OpenIM capability from React Native SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `SetAppBackgroundStatus` through the platform wrapper to set foreground/background status. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| Method signature | `SetAppBackgroundStatus(callback Base, operationID string, isBackground bool)` |
+| Capability       | SDK lifecycle                                                       |
+| Source location  | `open_im_sdk/init_login.go`                                                    |
+
+## React Native Call Reference
+
+React Native SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`src/sdk.ts`.
+
+```ts showLineNumbers
+setAppBackgroundStatus(isBackground: boolean, operationID: string = id())
+```
+
+## Parameters
+
+| Parameter    | Type    | Required | Description      |
+| ------------ | ------- | -------- | ---------------- |
+| isBackground | boolean | Yes      | Pass as defined. |
+
+## Return Value
+
+Returns `Promise`. If the call fails, the Promise rejects and the error is wrapped as OpenIMApiError.
+
+## Code Example
+
+The following example shows the React Native SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.setAppBackgroundStatus(false);
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/react-native/models/base) (`Base`)
+
+## Related pages
+
+- [SDK lifecycle](/docs/chat/sdk/v4/react-native/application/overview)

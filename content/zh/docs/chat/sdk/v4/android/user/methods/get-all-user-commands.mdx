@@ -1,0 +1,48 @@
+---
+title: '获取用户命令列表'
+description: '说明 Android core binding 方法 GetAllUserCommands 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/methods/get-all-user-commands'
+---
+
+获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                |
+| -------- | ------------------------------------------------------------------- |
+| 方法签名 | `GetAllUserCommands(callback Base, operationID string, Type int32)` |
+| 所属能力 | 用户                                                                |
+| 源码位置 | `open_im_sdk/user.go`                                               |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 未公开该方法的 Java 包装。提供的 Go core 源码还存在调用契约不一致：导出函数向内部 `ProcessUserCommandGetAll` 传入 `Type`，但内部函数不接收分类参数，而是直接读取全部本地命令。按当前源码调用会在反射参数校验阶段失败，不能据此编写可运行的 Android 示例。
+
+## 输入参数
+
+| 参数名称      | 类型                                            | 描述                                                                                                               |
+| ------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                                                                                     |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                                                                                |
+| `Type`        | `int32`                                         | 导出签名将其定义为命令分类值，但当前内部函数没有对应参数，也不会按该值筛选；这是源码契约缺陷，不应依赖其过滤语义。 |
+
+## 返回结果
+
+按内部函数的实际返回结构，成功结果是命令对象数组，每项包含 `type`（业务分类）、`createTime`（创建时间）、`uuid`（记录标识）和 `value`（业务值）；失败时调用 `OnError`。但当前导出签名多传了 `Type`，且 Android v3.8.3 没有公开 Java 包装；应使用已修复该契约的 SDK 版本后再接入。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/android/user/overview)

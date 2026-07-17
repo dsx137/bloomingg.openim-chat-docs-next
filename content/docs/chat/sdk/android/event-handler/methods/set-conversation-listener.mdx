@@ -1,0 +1,76 @@
+---
+title: 'Set conversation listener'
+description: 'Explains the Android core binding method SetConversationListener, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener'
+---
+
+Use `SetConversationListener` for set conversation listener in the OpenIM Android SDK.
+
+## Feature
+
+Registers or replaces the listener used to receive set conversation listener. Register listeners before login when you need login-time synchronization events.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                |
+| ---------------- | ---------------------------------------------------------- |
+| Method signature | `SetConversationListener(listener OnConversationListener)` |
+| Capability       | Event listeners                                            |
+| Source file      | `open_im_sdk/listener.go`                                  |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void setOnConversationListener(OnConversationListener listener)
+```
+
+## Input Parameters
+
+| Parameter  | Type                                                                                  | Description              |
+| ---------- | ------------------------------------------------------------------------------------- | ------------------------ |
+| `listener` | [On Conversation Listener](/docs/chat/sdk/v4/android/models/on-conversation-listener) | Event listener instance. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().conversationManager.setOnConversationListener(new OnConversationListener() {
+    @Override
+    public void onNewConversation(List<ConversationInfo> list) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onConversationChanged(List<ConversationInfo> list) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onTotalUnreadMessageCountChanged(int totalUnreadCount) {
+        // TODO: handle the callback result
+    }
+});
+```
+
+## Related Types
+
+- [On Conversation Listener](/docs/chat/sdk/v4/android/models/on-conversation-listener) (`OnConversationListener`): OnConversationListener used by this Android SDK type.
+- [Conversation Info](/docs/chat/sdk/v4/android/models/conversation-info) (`ConversationInfo`): ConversationInfo used by this Android SDK type.

@@ -1,0 +1,45 @@
+---
+title: '高级消息监听器'
+description: '说明 WASM SDK OnAdvanceMsgListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/models/on-advance-msg-listener'
+---
+
+`OnAdvanceMsgListener` 是 WASM SDK 的监听器，完整类名为 `io.openim.react-native.sdk.listener.OnAdvanceMsgListener`。接收新消息、已读回执、撤回和消息扩展事件的监听器。
+
+## 类型说明
+
+消息监听
+
+## 回调方法
+
+| 方法                           | 参数                                    | 描述                                                                                                                                 |
+| ------------------------------ | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| onRecvNewMessage               | Message msg                             | 收到新消息 需要添加到列表，然后刷新界面                                                                                              |
+| onRecvC2CReadReceipt           | List<C2CReadReceiptInfo> list           | 对方已阅读消息回执 需更新界面已读状态                                                                                                |
+| onRecvGroupMessageReadReceipt  | GroupMessageReceipt groupMessageReceipt | 群成员已阅读消息回执 需更新界面已读状态                                                                                              |
+| onRecvMessageRevokedV2         | RevokedInfo info                        | 对方撤回了消息 单聊撤回，群聊测回以及群组管理员撤回其他人消息 新版本只会通过此回调回传被撤回的详细信息，不会触发onRecvNewMessage回调 |
+| onRecvMessageExtensionsChanged | String msgID；List<KeyValue> list       | 事件触发时回调。                                                                                                                     |
+| onRecvMessageExtensionsDeleted | String msgID；List<String> list         | 事件触发时回调。                                                                                                                     |
+| onRecvMessageExtensionsAdded   | String msgID；List<KeyValue> list       | 事件触发时回调。                                                                                                                     |
+| onMsgDeleted                   | Message message                         | 消息被删除                                                                                                                           |
+| onRecvOfflineNewMessage        | List<Message> msg                       | 事件触发时回调。                                                                                                                     |
+| onRecvOnlineOnlyMessage        | String s                                | 事件触发时回调。                                                                                                                     |
+
+## 关联类型
+
+- [单聊已读回执信息](/docs/chat/sdk/v4/wasm/models/c2c-read-receipt-info)（`C2CReadReceiptInfo`）：单聊消息已读回执信息。
+- [键值扩展项](/docs/chat/sdk/v4/wasm/models/key-value)（`KeyValue`）：消息扩展使用的键值项。
+- [群消息已读回执](/docs/chat/sdk/v4/wasm/models/group-message-receipt)（`GroupMessageReceipt`）：群消息已读回执。
+- [消息撤回信息](/docs/chat/sdk/v4/wasm/models/revoked-info)（`RevokedInfo`）：消息撤回事件中的撤回详情。
+- [消息对象](/docs/chat/sdk/v4/wasm/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [监听单条消息事件](/docs/chat/sdk/v4/wasm/event-handler/methods/set-advanced-msg-listener)

@@ -1,0 +1,71 @@
+---
+title: '获取输入状态'
+description: '说明 Android core binding 方法 GetInputStates 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/conversation-state/get-input-states'
+---
+
+获取指定用户在会话中的输入状态，适合恢复页面时查询当前状态。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                      |
+| -------- | ----------------------------------------------------------------------------------------- |
+| 方法签名 | `GetInputStates(callback Base, operationID string, conversationID string, userID string)` |
+| 所属能力 | 会话与消息                                                                                |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                         |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void getInputStates(OnBase<String> base, String conversationID, String userId)
+```
+
+## 输入参数
+
+| 参数名称       | Java 类型                                                      | 是否必填 | 描述                      |
+| -------------- | -------------------------------------------------------------- | -------- | ------------------------- |
+| base           | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 输入状态查询结果回调。    |
+| conversationID | `String`                                                       | 是       | 要查询的会话 ID。         |
+| userId         | `String`                                                       | 是       | 要查询输入状态的用户 ID。 |
+
+## 返回结果
+
+`onSuccess` 返回 JSON 整数数组，元素是目标用户当前仍在该会话中输入的平台 ID，取值见 [`Platform`](/docs/chat/sdk/v4/android/models/platform)；空数组表示没有活跃输入状态，查询失败时调用 `onError`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().conversationManager.getInputStates(new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理输入状态结果
+    }
+}, conversationID, userId);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview)

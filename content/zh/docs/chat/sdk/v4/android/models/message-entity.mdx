@@ -1,0 +1,24 @@
+---
+title: '高级消息片段'
+description: '说明 Android SDK MessageEntity 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/message-entity'
+---
+
+`MessageEntity` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.MessageEntity`。富文本消息中的片段信息。
+
+## 字段说明
+
+| 字段名称 | Java 类型 | 描述                                                                                                   |
+| -------- | --------- | ------------------------------------------------------------------------------------------------------ |
+| type     | String    | 文本片段类型，例如链接、提及或业务自定义类型；core 原样保存，不限定取值集合。                          |
+| offset   | int       | 片段在 [`AdvancedTextElem.text`](/docs/chat/sdk/v4/android/models/advanced-text-elem) 中的起始偏移量。 |
+| length   | int       | 从 `offset` 开始覆盖的文本长度；发送端和渲染端须使用相同的字符计数规则。                               |
+| url      | String    | 片段关联的 URL；非链接类片段可留空。                                                                   |
+| ex       | String    | 片段业务扩展数据，例如提及用户或样式信息，格式由业务双方约定。                                         |

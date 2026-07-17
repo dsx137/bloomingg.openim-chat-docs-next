@@ -1,0 +1,30 @@
+---
+title: '用户资料更新请求'
+description: '说明 Android SDK UserInfoReq 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/user-info-req'
+---
+
+`UserInfoReq` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.UserInfoReq`。更新当前用户资料时使用的请求对象。
+
+## 字段说明
+
+| 字段名称         | Java 类型 | 描述                                                                                                                      |
+| ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------- |
+| userID           | String    | 资料所属用户 ID。core 在提交更新前会强制改为当前登录用户 ID，不能通过该字段修改其他用户资料。                             |
+| nickname         | String    | 要设置的当前用户昵称；只填写需要更新的字段。                                                                              |
+| faceURL          | String    | 要设置的当前用户头像 URL。                                                                                                |
+| ex               | String    | 当前用户的业务扩展字符串，格式由业务约定。                                                                                |
+| globalRecvMsgOpt | Integer   | 全局消息接收选项：`0` 正常接收并允许提醒，`1` 不接收消息，`2` 接收但不提醒。当前 core 注明值 `1` 的“不接收”能力暂未启用。 |
+
+该请求会被序列化后发送给 core。业务应只设置需要修改的字段，避免用空字符串或默认整数意外覆盖现有资料。
+
+## 相关页面
+
+- [更新当前用户资料](/docs/chat/sdk/v4/android/user/methods/set-self-info)

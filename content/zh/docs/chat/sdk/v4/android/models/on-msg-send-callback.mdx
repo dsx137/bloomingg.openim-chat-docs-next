@@ -1,0 +1,34 @@
+---
+title: '消息发送回调'
+description: '说明 Android SDK OnMsgSendCallback 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-msg-send-callback'
+---
+
+`OnMsgSendCallback` 是 Android SDK 的回调接口，完整类名为 `io.openim.android.sdk.listener.OnMsgSendCallback`。发送消息时使用的进度、成功和失败回调。
+
+## 回调方法
+
+| 方法         | 参数                                                            | 触发时机和字段含义                                                                                                                                                                                                                                   |
+| ------------ | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `onError`    | `int code`；`String error`                                      | 消息发送流程失败时触发，包括参数校验、本地消息写入、媒体文件读取或上传、服务端发送等阶段。`code` 是 SDK 错误码，`error` 是对应的错误信息；失败消息会被 core 更新为发送失败状态，业务应停止进度展示并提供重试入口。                                   |
+| `onProgress` | `long progress`                                                 | 图片、语音、视频或文件等消息上传媒体数据时触发，`progress` 是 `0–100` 的整数百分比，由已上传字节数除以文件总字节数计算；纯文本等不需要上传文件的消息通常不会触发。完成上传时会确保报告 `100`，但这不代表消息已被服务端确认，应继续等待 `onSuccess`。 |
+| `onSuccess`  | [`Message`](/docs/chat/sdk/v4/android/models/message) `message` | 服务端确认消息发送成功，且 Android SDK 已把 core 返回的 JSON 反序列化为 [`Message`](/docs/chat/sdk/v4/android/models/message) 后触发。返回对象包含服务端消息 ID、发送时间、发送状态及上传后补齐的媒体 URL，应以该对象替换本地发送中的消息。          |
+
+三个方法都会由 Android SDK 切换到主线程后调用。若成功结果无法反序列化为 [`Message`](/docs/chat/sdk/v4/android/models/message)，Android 包装层会改为触发 `onError(-1, error)`。
+
+## 关联类型
+
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [发送非 OSS 消息](/docs/chat/sdk/v4/android/message/sending-messages/send-message-not-oss)
+- [发送消息](/docs/chat/sdk/v4/android/message/sending-messages/send-message)

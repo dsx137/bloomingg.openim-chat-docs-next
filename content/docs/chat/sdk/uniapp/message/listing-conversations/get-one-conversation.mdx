@@ -1,0 +1,66 @@
+---
+title: 'Get one conversation'
+description: 'Explains the Get one conversation method in uni-app SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/message/listing-conversations/get-one-conversation'
+---
+
+Use **Get one conversation** when your application needs this OpenIM capability from uni-app SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `GetOneConversation` through the platform wrapper to get one conversation. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| Method signature | `GetOneConversation(callback Base, operationID string, sessionType int32, sourceID string)` |
+| Capability       | Conversations and messages                                                                  |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                           |
+
+## uni-app Call Reference
+
+uni-app SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`.
+
+```js showLineNumbers
+openIM.getOneConversation(operationID, options, callback);
+```
+
+## Parameters
+
+| Parameter | Type     | Required   | Description                                         |
+| --------- | -------- | ---------- | --------------------------------------------------- |
+| options   | Object   | As defined | Pass according to the uni-app native plugin export. |
+| callback  | Function | Yes        | Pass according to the uni-app native plugin export. |
+
+## Return Value
+
+Synchronous creation methods return a value directly. Asynchronous methods report success or failure through the callback. Pass a traceable operationID for each call.
+
+## Code Example
+
+The following example shows the uni-app SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.getOneConversation('operationID', {}, callback);
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/uniapp/models/base) (`Base`)
+- [Conversation info](/docs/chat/sdk/v4/uniapp/models/conversation-info) (`ConversationInfo`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/uniapp/message/overview)

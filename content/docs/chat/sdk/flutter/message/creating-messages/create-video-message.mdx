@@ -1,0 +1,70 @@
+---
+title: 'Create a video message'
+description: 'Explains the Create a video message method in Flutter SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/creating-messages/create-video-message'
+---
+
+Use **Create a video message** when your application needs this OpenIM capability from Flutter SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `CreateVideoMessage` through the platform wrapper to create a video message. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                              |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Method signature | `CreateVideoMessage(operationID string, videoPath string, videoType string, duration int64, snapshotPath string) string` |
+| Capability       | Conversations and messages                                                                                               |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                                                        |
+
+## Flutter Call Reference
+
+Flutter SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`lib/src/manager/im_message_manager.dart`.
+
+```dart showLineNumbers
+Future<Message> createVideoMessage({ required String videoPath, required String videoType, required int duration, required String snapshotPath, String? operationID, })
+```
+
+## Parameters
+
+| Parameter    | Type   | Required | Description      |
+| ------------ | ------ | -------- | ---------------- |
+| videoPath    | String | Yes      | Pass as defined. |
+| videoType    | String | Yes      | Pass as defined. |
+| duration     | int    | Yes      | Pass as defined. |
+| snapshotPath | String | Yes      | Pass as defined. |
+
+## Return Value
+
+Returns `Future<Message>`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.createVideoMessage(
+  videoPath: 'videoPath',
+  videoType: 'videoType',
+  duration: 0,
+  snapshotPath: 'snapshotPath',
+);
+```
+
+## Related types
+
+- [Message](/docs/chat/sdk/v4/flutter/models/message) (`Message`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/flutter/message/overview)

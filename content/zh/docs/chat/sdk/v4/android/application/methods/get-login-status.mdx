@@ -1,0 +1,58 @@
+---
+title: '获取登录状态'
+description: '说明 Android core binding 方法 GetLoginStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/get-login-status'
+---
+
+查询 SDK 当前登录状态，用于业务层判断是否可以继续调用用户态 API。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## Core Binding 方法
+
+| 项目     | 说明                                     |
+| -------- | ---------------------------------------- |
+| 方法签名 | `GetLoginStatus(operationID string) int` |
+| 所属能力 | SDK 生命周期                             |
+| 源码位置 | `open_im_sdk/init_login.go`              |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public int getLoginStatus()
+```
+
+## 输入参数
+
+无。
+
+## 返回结果
+
+| 参数名称 | 参数类型 | 描述                                                                    |
+| -------- | -------- | ----------------------------------------------------------------------- |
+| ~        | int      | [`LoginStatus`](/docs/chat/sdk/v4/android/models/login-status) 登录状态 |
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+int loginStatus = OpenIMClient.getInstance().getLoginStatus();
+```
+
+## 相关类型
+
+- [登录状态](/docs/chat/sdk/v4/android/models/login-status)（`LoginStatus`）：SDK 登录状态常量。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)

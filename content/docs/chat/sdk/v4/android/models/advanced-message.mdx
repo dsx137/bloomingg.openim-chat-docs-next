@@ -1,0 +1,28 @@
+---
+title: 'Advanced Message'
+description: 'Explains the Android SDK AdvancedMessage type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/advanced-message'
+---
+
+`AdvancedMessage` is an Android SDK data model. Full class name: `io.openim.android.sdk.models.AdvancedMessage`.
+
+## Fields
+
+| Field         | Java type                                                 | Description                                 |
+| ------------- | --------------------------------------------------------- | ------------------------------------------- |
+| `errCode`     | `int`                                                     | Error code.                                 |
+| `errMsg`      | `String`                                                  | Error message.                              |
+| `lastMinSeq`  | `int`                                                     | SDK field returned or submitted by the SDK. |
+| `isEnd`       | `boolean`                                                 | SDK field returned or submitted by the SDK. |
+| `messageList` | List<[Message](/docs/chat/sdk/v4/android/models/message)> | SDK field returned or submitted by the SDK. |
+
+## Related Types
+
+- [Message](/docs/chat/sdk/v4/android/models/message) (`Message`): Message used by this Android SDK type.

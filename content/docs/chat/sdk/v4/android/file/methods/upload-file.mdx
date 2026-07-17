@@ -1,0 +1,64 @@
+---
+title: 'Upload file'
+description: 'Explains the Android core binding method UploadFile, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/file/methods/upload-file'
+---
+
+Use `UploadFile` for upload file in the OpenIM Android SDK.
+
+## Feature
+
+UploadFile provides the Android SDK operation for upload file.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                              |
+| ---------------- | ---------------------------------------------------------------------------------------- |
+| Method signature | `UploadFile(callback Base, operationID string, req string, progress UploadFileCallback)` |
+| Capability       | File upload                                                                              |
+| Source file      | `open_im_sdk/third.go`                                                                   |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void uploadFile(OnBase<String> base, OnPutFileListener listener, PutArgs putArgs)
+```
+
+## Input Parameters
+
+| Parameter  | Type                                                                          | Description                                               |
+| ---------- | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`     | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>`                 | Async callback for success and failure results.           |
+| `listener` | [On Put File Listener](/docs/chat/sdk/v4/android/models/on-put-file-listener) | Parameter passed according to the core binding signature. |
+| `putArgs`  | [Put Args](/docs/chat/sdk/v4/android/models/put-args)                         | Parameter passed according to the core binding signature. |
+
+### `PutArgs` 字段
+
+| Field      | Type     | Description                                 |
+| ---------- | -------- | ------------------------------------------- |
+| `filepath` | `String` | SDK field returned or submitted by the SDK. |
+| `name`     | `String` | SDK field returned or submitted by the SDK. |
+| `cuase`    | `String` | SDK field returned or submitted by the SDK. |
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [Upload File Callback](/docs/chat/sdk/v4/android/models/upload-file-callback) (`UploadFileCallback`): UploadFileCallback used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Put Args](/docs/chat/sdk/v4/android/models/put-args) (`PutArgs`): PutArgs used by this Android SDK type.
+- [On Put File Listener](/docs/chat/sdk/v4/android/models/on-put-file-listener) (`OnPutFileListener`): OnPutFileListener used by this Android SDK type.

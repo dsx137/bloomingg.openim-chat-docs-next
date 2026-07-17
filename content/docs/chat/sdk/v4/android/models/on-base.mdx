@@ -1,0 +1,21 @@
+---
+title: 'On Base'
+description: 'Explains the Android SDK OnBase type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-base'
+---
+
+`OnBase` is an Android SDK callback interface. Full class name: `io.openim.android.sdk.listener.OnBase`.
+
+## Callback Methods
+
+| Method      | Parameters             | Description                         |
+| ----------- | ---------------------- | ----------------------------------- |
+| `onError`   | int code; String error | Called when the operation fails.    |
+| `onSuccess` | `T data`               | Called when the operation succeeds. |

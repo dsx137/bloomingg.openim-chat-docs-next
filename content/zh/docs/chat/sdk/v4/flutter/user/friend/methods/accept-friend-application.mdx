@@ -1,0 +1,69 @@
+---
+title: '同意好友申请'
+description: '说明 Flutter core binding 方法 AcceptFriendApplication 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/user/friend/methods/accept-friend-application'
+---
+
+同意指定好友申请，建立好友关系。
+
+## 功能介绍
+
+同意指定好友申请，建立好友关系。
+
+好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                 |
+| -------- | ------------------------------------------------------------------------------------ |
+| 方法签名 | `AcceptFriendApplication(callback Base, operationID string, userIDHandleMsg string)` |
+| 所属能力 | 好友                                                                                 |
+| 源码位置 | `open_im_sdk/relation.go`                                                            |
+
+## Flutter 调用参考
+
+Flutter SDK v3.8.3 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_friendship_manager.dart`。
+
+```dart showLineNumbers
+Future<dynamic> acceptFriendApplication({ required String userID, String? handleMsg, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称  | 参数类型 | 是否必填 | 描述                          |
+| --------- | -------- | -------- | ----------------------------- |
+| userID    | String   | 是       | 用户 ID 或用户 ID 列表。      |
+| handleMsg | String?  | 否       | 消息对象、消息内容或消息 ID。 |
+
+## 返回结果
+
+返回 `Future<dynamic>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.friendshipManager.acceptFriendApplication(
+  userID: 'userID',
+  handleMsg: 'handleMsg',
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [好友关系监听器](/docs/chat/sdk/v4/flutter/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+
+## 相关页面
+
+- [好友](/docs/chat/sdk/v4/flutter/user/overview#friends)

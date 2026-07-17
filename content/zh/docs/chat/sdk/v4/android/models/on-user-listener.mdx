@@ -1,0 +1,30 @@
+---
+title: '用户状态监听器'
+description: '说明 Android SDK OnUserListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-user-listener'
+---
+
+`OnUserListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnUserListener`。当前用户资料与用户在线状态变化监听器。
+
+## 回调方法
+
+| 方法                | 参数                                                                                       | 描述                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onSelfInfoUpdated   | [`UserInfo`](/docs/chat/sdk/v4/android/models/user-info) `info`                            | 同步当前登录用户资料并发现服务端数据与本地数据不同时触发，例如调用资料更新接口后同步成功，或收到服务端资料变更通知。`info` 是更新后的当前用户资料，可用 `userID` 校验用户并刷新昵称、头像等字段。 |
+| onUserStatusChanged | [`UsersOnlineStatus`](/docs/chat/sdk/v4/android/models/users-online-status) `onlineStatus` | 已订阅用户的在线平台集合发生变化时触发。`onlineStatus.userID` 标识用户，`status` 表示在线或离线，`platformIDs` 列出该用户当前在线的平台；空列表表示没有在线平台。                                 |
+
+## 关联类型
+
+- [用户信息](/docs/chat/sdk/v4/android/models/user-info)（`UserInfo`）：用户资料对象。
+- [用户在线状态](/docs/chat/sdk/v4/android/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+
+## 相关页面
+
+- [监听用户事件](/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener)

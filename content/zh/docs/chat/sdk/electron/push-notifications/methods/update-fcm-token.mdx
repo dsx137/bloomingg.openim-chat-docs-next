@@ -1,0 +1,52 @@
+---
+title: '更新 FCM Token'
+description: '说明 Electron OpenIM core 方法 UpdateFcmToken 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/push-notifications/methods/update-fcm-token'
+---
+
+更新当前设备的 FCM token，用于服务端向 Electron 设备发送离线推送。
+
+## 功能介绍
+
+更新当前设备的 FCM token，用于服务端向 Electron 设备发送离线推送。
+
+第三方能力至少要求 SDK 已初始化；日志和文件上传的进度通过对应 progress callback 返回。
+
+## 底层能力
+
+| 项目     | 说明                                                                            |
+| -------- | ------------------------------------------------------------------------------- |
+| 方法签名 | `UpdateFcmToken(callback Base, operationID, fcmToken string, expireTime int64)` |
+| 所属能力 | 推送通知                                                                |
+| 源码位置 | `open_im_sdk/third.go`                                                          |
+
+## Electron 调用参考
+
+Electron SDK v3.8.3 当前未暴露 `updateFcmToken` 这个独立平台方法。此页保留底层能力说明，避免把其他平台或旧封装层的调用方式误写成当前 Electron API。
+
+## 输入参数
+
+当前平台未暴露独立方法，因此没有可调用的平台参数。
+
+## 返回结果
+
+当前平台未暴露独立方法，因此没有平台返回值。
+
+## 代码示例
+
+当前 Electron SDK v3.8.3 未暴露 `updateFcmToken` 独立方法，暂无平台代码示例。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/electron/models/base)（`Base`）：OpenIM core 异步结果回调，Electron 调用层通常映射为 Promise。
+
+## 相关页面
+
+- [推送通知](/docs/chat/sdk/v4/electron/push-notifications/overview)

@@ -1,0 +1,61 @@
+---
+title: '监听批量消息事件'
+description: '说明 Flutter SDK 监听批量消息事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/event-handler/methods/set-batch-msg-listener'
+---
+设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。
+
+## 功能介绍
+
+设置批量消息监听器，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。
+
+`Set*Listener` 会替换当前 SDK 保存的同类监听器；如果多个模块都要消费事件，应在业务层封装统一分发。
+
+## Core Binding 方法
+
+| 项目     | 说明                                               |
+| -------- | -------------------------------------------------- |
+| 方法签名 | `SetBatchMsgListener(listener OnBatchMsgListener)` |
+| 所属能力 | 监听器                                             |
+| 源码位置 | `open_im_sdk/listener.go`                          |
+
+## Flutter 调用参考
+
+Flutter SDK v3.8.3 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+```dart showLineNumbers
+setBatchMsgListener(/* ... */)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型   | 是否必填   | 描述                 |
+| -------- | ---------- | ---------- | -------------------- |
+| 参数     | 见方法原型 | 按方法原型 | 按上方调用原型传入。 |
+
+## 返回结果
+
+返回 `Future`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.setBatchMsgListener();
+```
+
+## 相关类型
+
+- [批量消息监听器](/docs/chat/sdk/v4/flutter/models/on-batch-msg-listener)（`OnBatchMsgListener`）：core binding 批量消息监听器，用于接收多条新消息和离线消息。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/flutter/event-handler/overview)

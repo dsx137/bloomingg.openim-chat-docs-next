@@ -1,0 +1,74 @@
+---
+title: 'Set conversation'
+description: 'Explains the Android core binding method SetConversation, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation'
+---
+
+Use `SetConversation` for set conversation in the OpenIM Android SDK.
+
+## Feature
+
+SetConversation provides the Android SDK operation for set conversation.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                             |
+| ---------------- | --------------------------------------------------------------------------------------- |
+| Method signature | `SetConversation(callback Base, operationID string, conversationID string, req string)` |
+| Capability       | Conversations and messages                                                              |
+| Source file      | `open_im_sdk/conversation_msg.go`                                                       |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void setConversation(OnBase<String> base, String conversationID, ConversationReq conversationReq)
+```
+
+## Input Parameters
+
+| Parameter         | Type                                                                  | Description                                               |
+| ----------------- | --------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`            | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<String>`         | Async callback for success and failure results.           |
+| `conversationID`  | `String`                                                              | Parameter passed according to the core binding signature. |
+| `conversationReq` | [Conversation Req](/docs/chat/sdk/v4/android/models/conversation-req) | Request parameters, usually encoded as JSON.              |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().conversationManager.setConversation(new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: handle the callback result
+    }
+}, conversationID, conversationReq);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Conversation Req](/docs/chat/sdk/v4/android/models/conversation-req) (`ConversationReq`): ConversationReq used by this Android SDK type.

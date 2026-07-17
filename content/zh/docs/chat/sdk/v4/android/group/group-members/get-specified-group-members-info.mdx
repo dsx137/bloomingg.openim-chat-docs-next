@@ -1,0 +1,76 @@
+---
+title: '获取指定群成员资料'
+description: '说明 Android core binding 方法 GetSpecifiedGroupMembersInfo 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/group-members/get-specified-group-members-info'
+---
+
+获取指定群内指定用户的群成员资料，适合查看成员详情或刷新少量成员信息。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                 |
+| -------- | ---------------------------------------------------------------------------------------------------- |
+| 方法签名 | `GetSpecifiedGroupMembersInfo(callback Base, operationID string, groupID string, userIDList string)` |
+| 所属能力 | 群组                                                                                                 |
+| 源码位置 | `open_im_sdk/group.go`                                                                               |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void getGroupMembersInfo(OnBase<List<GroupMembersInfo>> base, String groupId, List<String> uidList)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                                                                                                                  | 是否必填 | 描述         |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------- | -------- | ------------ |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | 是       | 回调接口     |
+| groupId  | String                                                                                                                                    | 是       | 群ID         |
+| uidList  | `List<String>`                                                                                                                            | 是       | 成员 ID 列表 |
+
+## 返回结果
+
+`onSuccess` 返回 `List<`[`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info)`>`，包含输入用户 ID 中当前可查询到的群成员；不在群内的 ID 不会产生占位项，查询失败时调用 `onError`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.getGroupMembersInfo(
+    new OnBase<List<GroupMembersInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(List<GroupMembersInfo> data) {
+        // TODO: 处理指定群成员资料
+    }
+},
+    groupId,
+    uidList
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/group/overview)

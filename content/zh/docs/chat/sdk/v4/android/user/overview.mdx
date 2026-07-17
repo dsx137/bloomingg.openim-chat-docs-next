@@ -1,0 +1,75 @@
+---
+title: '概述'
+description: '用户方法目录，汇总用户资料、用户命令、在线状态、好友和黑名单能力。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/overview'
+---
+
+本页覆盖 `open_im_sdk/user.go`、`online.go` 和 `relation.go` 中与用户资料、用户命令、在线状态、好友关系和黑名单相关的方法。
+
+本页是用户能力的统一概述。好友和黑名单不再单独保留概述页，具体接口直接查看对应方法页。
+
+## 方法索引
+
+### 用户资料、命令和在线状态
+
+| 方法                                                                                    | 说明                                                                                             |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [获取当前用户资料](/docs/chat/sdk/v4/android/user/methods/get-self-user-info)           | 获取当前登录用户自己的资料，适合进入个人资料页、启动后刷新当前用户信息或账号切换后校验本地缓存。 |
+| [更新当前用户资料](/docs/chat/sdk/v4/android/user/methods/set-self-info)                | 更新当前登录用户资料，例如昵称、头像或扩展字段。只应修改当前账号允许自行修改的字段。             |
+| [批量获取用户资料](/docs/chat/sdk/v4/android/user/methods/get-users-info)               | 批量获取指定用户公开资料，常用于会话列表、消息发送者资料补齐和好友资料刷新。                     |
+| [添加用户命令](/docs/chat/sdk/v4/android/user/methods/add-user-command)                 | 新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。     |
+| [删除用户命令](/docs/chat/sdk/v4/android/user/methods/delete-user-command)              | 删除指定类型和 UUID 的用户命令数据，用于撤销收藏、移除用户侧命令或清理本地同步数据。             |
+| [获取用户命令列表](/docs/chat/sdk/v4/android/user/methods/get-all-user-commands)        | 获取指定类型下的全部用户命令数据，适合恢复收藏列表或同步用户侧命令状态。                         |
+| [订阅用户在线状态](/docs/chat/sdk/v4/android/user/methods/subscribe-users-status)       | 订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。                   |
+| [取消订阅在线状态](/docs/chat/sdk/v4/android/user/methods/unsubscribe-users-status)     | 取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。                         |
+| [获取已订阅用户状态](/docs/chat/sdk/v4/android/user/methods/get-subscribe-users-status) | 获取当前已订阅用户的在线状态快照，适合页面进入时先拉一次状态，再等待事件更新。                   |
+| [获取用户在线状态](/docs/chat/sdk/v4/android/user/methods/get-user-status)              | 获取指定用户在线状态。当前源码实现复用订阅状态接口，因此调用后也可能产生订阅效果。               |
+
+### 好友
+
+好友方法来自 `open_im_sdk/relation.go` 中的好友关系部分，用于好友资料读取、好友列表分页、好友搜索、申请处理和好友关系更新。
+
+| 方法                                                                                                         | 说明                                                                             |
+| ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| [获取指定好友资料](/docs/chat/sdk/v4/android/user/friend/methods/get-specified-friends-info)                 | 批量获取指定好友的关系资料，适合好友详情页、会话资料补齐或局部刷新好友信息。     |
+| [获取好友列表](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list)                                | 获取当前用户全部好友列表，适合好友通讯录首屏加载或登录后全量同步。               |
+| [分页获取好友列表](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page)                       | 分页获取好友列表，适合好友数量较多时按页加载。                                   |
+| [搜索好友](/docs/chat/sdk/v4/android/user/friend/methods/search-friends)                                     | 搜索好友，适合按用户 ID、昵称、备注等当前搜索结构支持的字段查找好友。            |
+| [校验好友关系](/docs/chat/sdk/v4/android/user/friend/methods/check-friend)                                   | 检查一批用户与当前用户是否为好友关系，适合展示添加好友按钮或发起关系操作前校验。 |
+| [发送好友申请](/docs/chat/sdk/v4/android/user/friend/methods/add-friend)                                     | 向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。                 |
+| [更新好友资料](/docs/chat/sdk/v4/android/user/friend/methods/update-friends)                                 | 更新好友关系资料，例如备注、扩展字段或其他好友关系字段。                         |
+| [删除好友](/docs/chat/sdk/v4/android/user/friend/methods/delete-friend)                                      | 删除指定好友关系，适合用户主动解除好友。                                         |
+| [获取收到的好友申请](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-recipient) | 获取当前用户收到的好友申请列表，适合好友申请入口和审核页。                       |
+| [获取发出的好友申请](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant) | 获取当前用户发出的好友申请列表，适合查看申请进度或历史申请。                     |
+| [同意好友申请](/docs/chat/sdk/v4/android/user/friend/methods/accept-friend-application)                      | 同意指定好友申请，建立好友关系。                                                 |
+| [拒绝好友申请](/docs/chat/sdk/v4/android/user/friend/methods/refuse-friend-application)                      | 拒绝指定好友申请。                                                               |
+| [获取未处理好友申请数](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count) | 获取未处理好友申请数量，适合好友入口角标和后台同步。                             |
+
+### 黑名单
+
+黑名单方法来自 `open_im_sdk/relation.go` 中的黑名单部分，用于维护当前用户的屏蔽关系；具体屏蔽效果仍以 SDK 和服务端策略为准。
+
+| 方法                                                                              | 说明                                                                                        |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| [加入黑名单](/docs/chat/sdk/v4/android/user/blacklist/methods/add-black)          | 将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。 |
+| [获取黑名单列表](/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list) | 获取当前用户黑名单列表，适合隐私设置页、拦截列表或关系状态恢复。                            |
+| [移出黑名单](/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black)       | 将指定用户移出黑名单，恢复与该用户的普通关系能力。                                          |
+
+## 事件联动
+
+好友申请、新增好友、删除好友、好友资料变化、黑名单新增和黑名单移除通过 `SetFriendListener` 注册的 `OnFriendshipListener` 接收。
+
+## 相关类型
+
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+- [好友申请信息](/docs/chat/sdk/v4/android/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/android/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
+- [用户信息](/docs/chat/sdk/v4/android/models/user-info)（`UserInfo`）：用户资料对象。

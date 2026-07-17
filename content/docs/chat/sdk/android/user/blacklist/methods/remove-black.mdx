@@ -1,0 +1,73 @@
+---
+title: 'Remove black'
+description: 'Explains the Android core binding method RemoveBlack, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black'
+---
+
+Use `RemoveBlack` for remove black in the OpenIM Android SDK.
+
+## Feature
+
+RemoveBlack provides the Android SDK operation for remove black.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                           |
+| ---------------- | --------------------------------------------------------------------- |
+| Method signature | `RemoveBlack(callback Base, operationID string, removeUserID string)` |
+| Capability       | Users, friends, and blocklist                                         |
+| Source file      | `open_im_sdk/relation.go`                                             |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void removeBlacklist(OnBase<String> base, String uid)
+```
+
+## Input Parameters
+
+| Parameter  | Type                                                | Description                                     |
+| ---------- | --------------------------------------------------- | ----------------------------------------------- |
+| `callBack` | [On Base](/docs/chat/sdk/v4/android/models/on-base) | Async callback for success and failure results. |
+| `uid`      | String                                              | User ID.                                        |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.removeBlacklist(new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: handle the callback result
+    }
+}, uid);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [On Friendship Listener](/docs/chat/sdk/v4/android/models/on-friendship-listener) (`OnFriendshipListener`): OnFriendshipListener used by this Android SDK type.

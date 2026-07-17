@@ -1,0 +1,52 @@
+---
+title: '用户信息'
+description: '说明 iOS Core SDK UserInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/models/user-info'
+---
+
+`UserInfo` 是 iOS Core SDK 的数据模型，完整类名为 `io.openim.ios.sdk.models.UserInfo`。用户资料对象。
+
+## 字段说明
+
+| 字段名称         | Objective-C 类型 | 描述                   |
+| ---------------- | ---------------- | ---------------------- |
+| userID           | String           | 用户id                 |
+| nickname         | String           | 用户名                 |
+| faceURL          | String           | 用户头像               |
+| gender           | Integer          | 性别：1男，2女         |
+| phoneNumber      | String           | 手机号                 |
+| birth            | Long             | 生日                   |
+| email            | String           | 邮箱                   |
+| ex               | String           | 扩展字段               |
+| remark           | String           | 备注                   |
+| publicInfo       | PublicUserInfo   | 公开的信息             |
+| friendInfo       | FriendInfo       | 仅好友可见的信息       |
+| blackInfo        | BlacklistInfo    | 黑名单信息             |
+| globalRecvMsgOpt | Integer          | 全局免打扰             |
+| allowAddFriend   | Integer          | SDK 返回或提交的字段。 |
+| allowBeep        | Integer          | SDK 返回或提交的字段。 |
+| allowVibration   | Integer          | SDK 返回或提交的字段。 |
+| forbidden        | Integer          | SDK 返回或提交的字段。 |
+| createTime       | Long             | SDK 返回或提交的字段。 |
+
+## 关联类型
+
+- [公开用户信息](/docs/chat/sdk/v4/ios/models/public-user-info)（`PublicUserInfo`）：公开用户资料。
+- [好友信息](/docs/chat/sdk/v4/ios/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/ios/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
+
+## 相关页面
+
+- [监听用户事件](/docs/chat/sdk/v4/ios/event-handler/methods/set-user-listener)
+- [获取黑名单列表](/docs/chat/sdk/v4/ios/user/blacklist/methods/get-black-list)
+- [分页获取好友列表](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-list-page)
+- [获取好友列表](/docs/chat/sdk/v4/ios/user/friend/methods/get-friend-list)
+- [获取指定好友资料](/docs/chat/sdk/v4/ios/user/friend/methods/get-specified-friends-info)
+- [获取当前用户资料](/docs/chat/sdk/v4/ios/user/methods/get-self-user-info)

@@ -1,0 +1,68 @@
+---
+title: '监听消息 KV 变化'
+description: '说明 Android SDK 监听消息 KV 变化 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-message-kv-info-listener'
+---
+
+接收消息扩展键值变化，用于同步消息级扩展状态，例如反应、标记或业务自定义扩展。
+
+## 功能介绍
+
+消息 KV 事件适合处理消息级扩展字段的增量变化。业务可以用它刷新消息上的反应、标记、扩展统计或自定义状态。
+
+该监听器是单实例替换式注册。建议根据 `clientMsgID` 或会话 ID 定位本地消息，再做局部刷新，避免全量重拉消息列表。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                         |
+| -------- | ------------------------------------------------------------ |
+| 方法签名 | `SetMessageKvInfoListener(listener OnMessageKvInfoListener)` |
+| 所属能力 | 监听器                                                       |
+| 源码位置 | `open_im_sdk/listener.go`                                    |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void setMessageKvInfoListener(OnMessageKvInfoListener listener)
+```
+
+## 输入参数
+
+| 参数名称   | 类型                                                                                      | 描述             |
+| ---------- | ----------------------------------------------------------------------------------------- | ---------------- |
+| `listener` | [`OnMessageKvInfoListener`](/docs/chat/sdk/v4/android/models/on-message-kv-info-listener) | 事件监听器实例。 |
+
+## 返回结果
+
+无直接返回值。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.setMessageKvInfoListener(new OnMessageKvInfoListener() {
+    @Override
+    public void onMessageKvInfoChanged(List<MessageKv> list) {
+        // TODO: 处理消息扩展信息变更
+    }
+});
+```
+
+## 相关类型
+
+- [消息扩展监听器](/docs/chat/sdk/v4/android/models/on-message-kv-info-listener)（`OnMessageKvInfoListener`）：消息扩展键值变化监听器。
+- [消息扩展键值](/docs/chat/sdk/v4/android/models/message-kv)（`MessageKv`）：消息扩展键值信息。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)

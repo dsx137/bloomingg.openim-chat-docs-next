@@ -1,0 +1,39 @@
+---
+title: '初始化配置'
+description: '说明 Android SDK InitConfig 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/init-config'
+---
+
+`InitConfig` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.InitConfig`。初始化 SDK 时传入的基础配置。
+
+## 类型说明
+
+构造 `InitConfig` 时必须传入 API 地址、WebSocket 地址和本地数据目录。Android 平台 ID 固定为 `Platform.ANDROID`；日志等级默认为 `LogLevel.Debug`，其余日志选项可按运行环境配置。
+
+## 字段说明
+
+| 字段名称            | Java 类型 | 描述                                                                                                            |
+| ------------------- | --------- | --------------------------------------------------------------------------------------------------------------- |
+| platformID          | int       | 客户端平台 ID。Android SDK 中该只读字段固定为 [`Platform.ANDROID`](/docs/chat/sdk/v4/android/models/platform)。 |
+| apiAddr             | String    | OpenIM HTTP API 地址，需包含 `http://` 或 `https://` 协议。                                                     |
+| wsAddr              | String    | OpenIM WebSocket 地址，需包含 `ws://` 或 `wss://` 协议。                                                        |
+| dataDir             | String    | SDK 本地数据库和缓存的存储目录；应用必须对该目录具有读写权限。                                                  |
+| logLevel            | int       | SDK 日志等级，取值见 [`LogLevel`](/docs/chat/sdk/v4/android/models/log-level)，默认值为 `Debug`。               |
+| isLogStandardOutput | boolean   | 是否同时把 SDK 日志输出到标准输出。                                                                             |
+| logFilePath         | String    | SDK 日志文件的存储路径；启用文件日志时应传入应用可写目录。                                                      |
+
+## 关联类型
+
+- [平台类型](/docs/chat/sdk/v4/android/models/platform)（`Platform`）：客户端平台类型常量。
+- [日志等级](/docs/chat/sdk/v4/android/models/log-level)（`LogLevel`）：SDK 日志等级常量。
+
+## 相关页面
+
+- [初始化 SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)

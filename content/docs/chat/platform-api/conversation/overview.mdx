@@ -1,0 +1,41 @@
+---
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/conversation/overview"
+---
+
+The conversation module lets backend services inspect and maintain user conversation data, including pinned, muted, and offline-push state.
+
+## Capability scope
+
+| Capability | Description |
+| --- | --- |
+| Conversation reads | Get sorted, all, single, or batch conversation records. |
+| Conversation settings | Set conversation attributes and extension data in batches. |
+| Offline push | Read users associated with conversation offline push. |
+| Full sync | Read all conversation IDs for a user. |
+| State filters | Read pinned and do-not-notify conversation IDs. |
+
+## Common APIs
+
+- [Get sorted conversations](/docs/chat/platform-api/v3/conversation/listing-conversations/get-sorted-conversation-list)
+- [Get all conversations](/docs/chat/platform-api/v3/conversation/listing-conversations/get-all-conversations)
+- [Set conversations](/docs/chat/platform-api/v3/conversation/managing-conversations/set-conversations)
+- [Get pinned conversation IDs](/docs/chat/platform-api/v3/conversation/conversation-state/get-pinned-conversation-ids)
+
+## Integration advice
+
+Use conversation APIs for admin tooling, data repair, and synchronization support rather than direct client calls.
+
+Validate ownership before batch updates to avoid changing another user's conversation state.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

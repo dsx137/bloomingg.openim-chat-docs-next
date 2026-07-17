@@ -1,0 +1,83 @@
+---
+title: 'Create group'
+description: 'Explains the Android core binding method CreateGroup, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/managing-groups/create-group'
+---
+
+Use `CreateGroup` for create group in the OpenIM Android SDK.
+
+## Feature
+
+Creates the local message payload for create group. Pass the returned message JSON to a sending method when you are ready to send it.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                           |
+| ---------------- | --------------------------------------------------------------------- |
+| Method signature | `CreateGroup(callback Base, operationID string, groupReqInfo string)` |
+| Capability       | Groups                                                                |
+| Source file      | `open_im_sdk/group.go`                                                |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void createGroup(List<String> memberUserIDs, List<String> adminUserIDs,
+                        GroupInfo groupInfo, String ownerUserID, OnBase<GroupInfo> callBack)
+```
+
+## Input Parameters
+
+| Parameter       | Type                                                                                                               | Description                                               |
+| --------------- | ------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `memberUserIDs` | `List<String>`                                                                                                     | Parameter passed according to the core binding signature. |
+| `adminUserIDs`  | `List<String>`                                                                                                     | Parameter passed according to the core binding signature. |
+| `groupInfo`     | [Group Info](/docs/chat/sdk/v4/android/models/group-info)                                                          | Parameter passed according to the core binding signature. |
+| `ownerUserID`   | String                                                                                                             | Parameter passed according to the core binding signature. |
+| `callBack`      | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<`[Group Info](/docs/chat/sdk/v4/android/models/group-info)`>` | Async callback for success and failure results.           |
+
+
+
+## Return Value
+
+This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.createGroup(
+    memberUserIDs,
+    adminUserIDs,
+    groupInfo,
+    ownerUserID,
+    new OnBase<GroupInfo>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(GroupInfo data) {
+        // TODO: handle the callback result
+    }
+}
+);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Group Info](/docs/chat/sdk/v4/android/models/group-info) (`GroupInfo`): GroupInfo used by this Android SDK type.

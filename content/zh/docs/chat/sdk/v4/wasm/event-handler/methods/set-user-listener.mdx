@@ -1,0 +1,73 @@
+---
+title: '监听用户事件'
+description: '说明 WASM SDK 监听用户事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/event-handler/methods/set-user-listener'
+---
+接收当前用户资料和用户相关状态变化。
+
+## 功能介绍
+
+用户事件应更新个人资料页、账号状态以及依赖当前用户资料的界面。建议通过该监听器同步本地用户缓存。
+
+## 底层能力
+
+| 项目     | 说明                                       |
+| -------- | ------------------------------------------ |
+| 方法签名 | `SetUserListener(listener OnUserListener)` |
+| 所属能力 | 监听器                                     |
+| 源码位置 | `open_im_sdk/listener.go`                  |
+
+## WASM 调用参考
+
+WASM SDK v3.8.3 暴露以下平台方法原型。底层能力表用于说明 OpenIM core 能力和参数映射。
+
+源码位置：`src/sdk/index.ts`。
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                   |
+| -------- | -------- | -------- | ---------------------- |
+| event    | CbEvents | 是       | 需要订阅的事件名称。   |
+| listener | Function | 是       | 事件触发时执行的回调。 |
+
+## 返回结果
+
+返回 `Promise` 或注册回调结果。调用失败时 Promise reject；建议在业务层使用 `try/catch` 或 `.catch()` 处理错误。
+
+## 代码示例
+
+WASM 使用事件订阅方式接收回调。按需要替换事件名和处理函数。
+
+```ts showLineNumbers
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const openIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## 相关类型
+
+- [用户信息](/docs/chat/sdk/v4/wasm/models/user-info)（`UserInfo`）：用户资料对象。
+- [用户在线状态](/docs/chat/sdk/v4/wasm/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+- [用户状态监听器](/docs/chat/sdk/v4/wasm/models/on-user-listener)（`OnUserListener`）：当前用户资料与用户在线状态变化监听器。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/wasm/event-handler/overview)

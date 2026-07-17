@@ -1,0 +1,41 @@
+---
+title: '群组监听器'
+description: '说明 Android SDK OnGroupListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-group-listener'
+---
+
+`OnGroupListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnGroupListener`。群组、入群申请和群成员变化监听器。
+
+## 回调方法
+
+| 方法                       | 参数                                                                                     | 描述                                                                                                                                                                                               |
+| -------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onGroupApplicationAccepted | [`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info) `info` | SDK 收到某条入群申请已被同意的通知时触发。`info` 包含 `groupID`、申请人 `userID`、处理人 `handleUserID`、处理结果 `handleResult` 和处理时间 `handledTime`。                                        |
+| onGroupApplicationAdded    | [`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info) `info` | SDK 收到新的入群申请通知时触发，通常由群主或管理员处理。`info` 中的 `groupID` 标识目标群，`userID`、`reqMsg`、`reqTime` 分别标识申请人、申请理由和申请时间。                                       |
+| onGroupApplicationDeleted  | [`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info) `info` | 当前 Go core 仅保留该接口，群申请通知和同步流程中没有触发调用。业务代码不应依赖此回调删除申请记录，应在申请处理后重新查询申请列表。                                                                |
+| onGroupApplicationRejected | [`GroupApplicationInfo`](/docs/chat/sdk/v4/android/models/group-application-info) `info` | SDK 收到某条入群申请已被拒绝的通知时触发。`info` 中的 `handleResult`、`handledMsg`、`handleUserID` 和 `handledTime` 描述拒绝结果、处理说明、处理人和处理时间。                                     |
+| onGroupDismissed           | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info) `info`                        | 收到群解散通知时触发；同步已加入群列表时，如果发现群的 `status` 变为已解散也会触发。`info.groupID` 标识被解散的群，`status` 表示群当前状态。                                                       |
+| onGroupInfoChanged         | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info) `info`                        | 同步已加入群列表并发现现有群资料发生变化且群未解散时触发，例如群名、头像、公告、群主、禁言状态或入群设置变化。`info` 是同步后的最新群资料。                                                        |
+| onGroupMemberAdded         | [`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info) `info`         | 群成员同步发现一条新增成员记录时触发，例如成员受邀入群或申请通过后入群。`info.groupID` 和 `info.userID` 标识群与新成员，`joinSource`、`inviterUserID` 说明入群来源和邀请人。                       |
+| onGroupMemberDeleted       | [`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info) `info`         | 群成员同步发现一条本地成员记录已被删除时触发，例如其他成员主动退群或被移出群。`info` 是删除前的成员资料，可通过 `groupID` 和 `userID` 定位成员；当前用户离群主要通过 `onJoinedGroupDeleted` 通知。 |
+| onGroupMemberInfoChanged   | [`GroupMembersInfo`](/docs/chat/sdk/v4/android/models/group-members-info) `info`         | 群成员同步发现成员资料变化时触发，例如群昵称、头像、角色或禁言截止时间变化。`info` 是更新后的成员资料，重点关注 `roleLevel`、`muteEndTime`、`nickname` 和 `faceURL`。                              |
+| onJoinedGroupAdded         | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info) `info`                        | 同步已加入群列表并发现一个本地不存在的群时触发，常见于当前用户的入群申请通过或受邀入群。`info` 是新加入群的完整资料。                                                                              |
+| onJoinedGroupDeleted       | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info) `info`                        | 同步已加入群列表并发现当前用户已不在某群时触发，常见于主动退群或被移出群。`info` 是删除前的群资料；当前 Go core 会先把回调对象的 `memberCount` 置为 `0`。                                          |
+
+## 关联类型
+
+- [群成员信息](/docs/chat/sdk/v4/android/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+- [群申请信息](/docs/chat/sdk/v4/android/models/group-application-info)（`GroupApplicationInfo`）：入群申请记录，包含群资料、申请人、处理状态和来源。
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [概述](/docs/chat/sdk/v4/android/group/overview)
+- [监听群组事件](/docs/chat/sdk/v4/android/event-handler/methods/set-group-listener)

@@ -1,0 +1,47 @@
+---
+title: '隐藏全部会话'
+description: '说明 Android core binding 方法 HideAllConversations 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/managing-conversations/hide-all-conversations'
+---
+
+重置当前用户的全部本地会话，使它们退出普通会话列表，但不删除历史消息。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                      |
+| -------- | --------------------------------------------------------- |
+| 方法签名 | `HideAllConversations(callback Base, operationID string)` |
+| 所属能力 | 会话与消息                                                |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                         |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。底层操作会把所有会话的 `unreadCount`、`latestMsg`、`latestMsgSendTime`、`draftText` 和 `draftTextTime` 重置为零值；普通会话列表查询因此不再返回这些会话，但本地历史消息仍然保留，后续收到或发送新消息时会话可以重新出现。
+
+## 输入参数
+
+| 参数名称      | 类型                                            | 描述                |
+| ------------- | ----------------------------------------------- | ------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 底层异步结果回调。  |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
+
+## 返回结果
+
+全部会话重置成功时调用底层 `OnSuccess`，数据库更新失败或本地没有可更新会话时调用 `OnError`，没有业务返回数据。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview)

@@ -1,0 +1,72 @@
+---
+title: '加入黑名单'
+description: '说明 Android core binding 方法 AddBlack 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/blacklist/methods/add-black'
+---
+
+将指定用户加入黑名单，适合屏蔽对方消息或限制关系互动。具体业务影响由 SDK 和服务端策略决定。
+
+黑名单新增和移除通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；屏蔽后的业务效果以当前服务端策略为准。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                         |
+| -------- | ---------------------------------------------------------------------------- |
+| 方法签名 | `AddBlack(callback Base, operationID string, blackUserID string, ex string)` |
+| 所属能力 | 黑名单                                                                       |
+| 源码位置 | `open_im_sdk/relation.go`                                                    |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void addBlacklist(OnBase<String> base, String uid, String ex)
+public void addBlacklist(OnBase<String> base, String uid)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                             | 是否必填 | 描述     |
+| -------- | ---------------------------------------------------- | -------- | -------- |
+| callBack | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口 |
+| uid      | String                                               | 是       | 用户 ID  |
+
+## 返回结果
+
+`onSuccess` 表示目标用户已加入当前用户黑名单并完成本地关系同步，回调字符串不含业务数据；目标无效、重复操作或服务端拒绝时调用 `onError`。关系变化也会通过好友监听器通知。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.addBlacklist(new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理成功结果
+    }
+}, uid, ex);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+
+## 相关页面
+
+- [黑名单](/docs/chat/sdk/v4/android/user/overview#黑名单)

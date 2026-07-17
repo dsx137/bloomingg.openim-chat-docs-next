@@ -1,0 +1,55 @@
+---
+title: '概述'
+description: '说明 SDK 生命周期，包括初始化、登录、退出、登录状态和运行态边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/application/overview'
+---
+SDK 生命周期覆盖初始化、登录、退出、登录状态、前后台状态和网络变化通知。业务层应先完成初始化并注册必要监听器，再进入登录和用户态 API 调用。
+
+## 生命周期顺序
+
+| 阶段 | 方法 | 说明 |
+| ---- | ---- | ---- |
+| 版本记录 | [获取 SDK 版本](/docs/chat/sdk/v4/wasm/application/methods/get-sdk-version) | 在启动日志、反馈信息和兼容性判断中记录当前 SDK 版本。 |
+| 初始化 | [初始化 SDK](/docs/chat/sdk/v4/wasm/application/methods/init-sdk) | 创建 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。 |
+| 监听器 | [监听器](/docs/chat/sdk/v4/wasm/event-handler/overview) | 登录前注册连接、消息、会话、好友、群组和用户监听器，减少事件遗漏。 |
+| 登录 | [登录用户](/docs/chat/sdk/v4/wasm/application/methods/login) | 使用业务服务端签发的 token 登录指定用户。 |
+| 状态查询 | [获取登录状态](/docs/chat/sdk/v4/wasm/application/methods/get-login-status) / [获取登录用户 ID](/docs/chat/sdk/v4/wasm/application/methods/get-login-user-id) | 判断当前用户态是否可继续调用会话、消息、群组和好友 API。 |
+| 运行态 | [设置前后台状态](/docs/chat/sdk/v4/wasm/application/methods/set-app-background-status) / [通知网络变化](/docs/chat/sdk/v4/wasm/application/methods/network-status-changed) | 通知 SDK 应用状态和网络状态变化。 |
+| 退出 | [退出登录](/docs/chat/sdk/v4/wasm/application/methods/logout) | 退出当前用户态会话，不等同于销毁 SDK。 |
+| 释放 | [释放 SDK](/docs/chat/sdk/v4/wasm/application/methods/un-init-sdk) | 应用完全退出 IM 能力或测试环境重建实例时释放全局资源。 |
+
+## 调用边界
+
+| 边界 | 说明 |
+| ---- | ---- |
+| 初始化只负责创建 SDK 运行环境 | 初始化成功不代表用户已登录。用户资料、好友、群组、会话和消息 API 通常需要登录后调用。 |
+| 登录依赖业务服务端 token | 客户端不应自行生成 token。token 过期或失效后，应从业务服务端刷新再重新登录。 |
+| 退出登录不等于释放 SDK | `Logout` 退出当前用户，`UnInitSDK` 才释放 SDK 全局资源。 |
+| operationID 应可追踪 | 每次关键调用都应生成可关联客户端日志、服务端日志和问题反馈的 operationID。 |
+
+## 方法索引
+
+| 方法 | 说明 |
+| ---- | ---- |
+| [获取 SDK 版本](/docs/chat/sdk/v4/wasm/application/methods/get-sdk-version) | 获取当前 core SDK 的版本号。 |
+| [初始化 SDK](/docs/chat/sdk/v4/wasm/application/methods/init-sdk) | 初始化 SDK 全局实例和基础资源。 |
+| [释放 SDK](/docs/chat/sdk/v4/wasm/application/methods/un-init-sdk) | 释放当前 SDK 全局实例。 |
+| [登录用户](/docs/chat/sdk/v4/wasm/application/methods/login) | 使用业务服务端签发的 token 登录指定用户。 |
+| [退出登录](/docs/chat/sdk/v4/wasm/application/methods/logout) | 退出当前登录用户。 |
+| [设置前后台状态](/docs/chat/sdk/v4/wasm/application/methods/set-app-background-status) | 通知 SDK 应用进入前台或后台。 |
+| [通知网络变化](/docs/chat/sdk/v4/wasm/application/methods/network-status-changed) | 通知 SDK 网络状态已变化。 |
+| [获取登录状态](/docs/chat/sdk/v4/wasm/application/methods/get-login-status) | 查询 SDK 当前登录状态。 |
+| [获取登录用户 ID](/docs/chat/sdk/v4/wasm/application/methods/get-login-user-id) | 获取当前 SDK 实例记录的登录用户 ID。 |
+
+## 相关页面
+
+- [认证流程](/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication)
+- [监听器](/docs/chat/sdk/v4/wasm/event-handler/overview)
+- [错误码](/docs/chat/sdk/v4/wasm/error-codes)

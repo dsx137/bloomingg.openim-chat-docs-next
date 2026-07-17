@@ -1,0 +1,38 @@
+---
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-08"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/auth/overview"
+---
+
+The authentication module lets backend services obtain management credentials, issue user login tokens, parse tokens, and force sessions offline when required.
+
+## Capability scope
+
+| Capability | Description |
+| --- | --- |
+| Administrator tokens | Issue tokens for trusted backend calls to management APIs. |
+| User tokens | Issue SDK login tokens for specific users and platforms. |
+| Session control | Force a user session offline for security or account-risk workflows. |
+
+## Common APIs
+
+- [Get an administrator token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [Get a user token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
+- [Force logout](/docs/chat/platform-api/v3/auth/sessions/force-logout)
+
+## Integration advice
+
+Store administrator tokens only on trusted backend services.
+
+Bind user-token issuing to your business login state, risk controls, and account permissions.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

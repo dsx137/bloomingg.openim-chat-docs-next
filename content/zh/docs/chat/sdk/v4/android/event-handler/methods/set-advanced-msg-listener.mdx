@@ -1,0 +1,87 @@
+---
+title: '监听单条消息事件'
+description: '说明 Android SDK 监听单条消息事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener'
+---
+
+接收单条消息相关事件，用于驱动聊天页消息流、会话未读数、已读回执、撤回提示和在线消息处理。
+
+## 功能介绍
+
+单条消息事件适合处理需要逐条更新 UI 或本地状态的场景，例如当前会话收到新消息、离线消息补偿、单聊或群聊已读回执、消息撤回和消息删除。
+
+该监听器是单实例替换式注册。多个页面都需要消费消息事件时，建议在业务层做统一分发，避免后注册的页面覆盖全局消息处理。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                     |
+| -------- | -------------------------------------------------------- |
+| 方法签名 | `SetAdvancedMsgListener(listener OnAdvancedMsgListener)` |
+| 所属能力 | 监听器                                                   |
+| 源码位置 | `open_im_sdk/listener.go`                                |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void setAdvancedMsgListener(OnAdvanceMsgListener listener)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                                                           | 是否必填 | 描述             |
+| -------- | ---------------------------------------------------------------------------------- | -------- | ---------------- |
+| listener | [`OnAdvanceMsgListener`](/docs/chat/sdk/v4/android/models/on-advance-msg-listener) | 是       | 事件监听器实例。 |
+
+## 返回结果
+
+无直接返回值。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.setAdvancedMsgListener(new OnAdvanceMsgListener() {
+    @Override
+    public void onRecvNewMessage(Message msg) {
+        // TODO: 处理新消息
+    }
+
+    @Override
+    public void onRecvC2CReadReceipt(List<C2CReadReceiptInfo> list) {
+        // TODO: 处理单聊已读回执
+    }
+
+    @Override
+    public void onRecvGroupMessageReadReceipt(GroupMessageReceipt groupMessageReceipt) {
+        // TODO: 处理群聊已读回执
+    }
+
+    @Override
+    public void onRecvMessageRevokedV2(RevokedInfo info) {
+        // TODO: 处理消息撤回
+    }
+});
+```
+
+## 相关类型
+
+- [底层高级消息监听器](/docs/chat/sdk/v4/android/models/on-advanced-msg-listener)（`OnAdvancedMsgListener`）：core binding 高级消息监听器，Android 调用层对应 OnAdvanceMsgListener。
+- [单聊已读回执信息](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info)（`C2CReadReceiptInfo`）：单聊消息已读回执信息。
+- [高级消息监听器](/docs/chat/sdk/v4/android/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）：接收新消息、已读回执、撤回和消息扩展事件的监听器。
+- [群消息已读回执](/docs/chat/sdk/v4/android/models/group-message-receipt)（`GroupMessageReceipt`）：群消息已读回执。
+- [消息撤回信息](/docs/chat/sdk/v4/android/models/revoked-info)（`RevokedInfo`）：消息撤回事件中的撤回详情。
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)

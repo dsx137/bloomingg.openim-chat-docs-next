@@ -1,0 +1,25 @@
+---
+title: '好友关系校验结果'
+description: '说明 Android SDK FriendshipInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/friendship-info'
+---
+
+`FriendshipInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.FriendshipInfo`。好友关系校验结果。
+
+## 字段说明
+
+| 字段名称 | Java 类型 | 描述                                                                                                                  |
+| -------- | --------- | --------------------------------------------------------------------------------------------------------------------- |
+| userID   | String    | 本条校验结果对应的目标用户 ID。                                                                                       |
+| result   | int       | 关系结果：`1` 表示双方是好友且目标用户不在当前用户黑名单中，`0` 表示条件不成立；仅凭 `0` 不能区分“非好友”和“已拉黑”。 |
+
+## 相关页面
+
+- [校验好友关系](/docs/chat/sdk/v4/android/user/friend/methods/check-friend)

@@ -1,0 +1,71 @@
+---
+title: '监听群组事件'
+description: '说明 Electron SDK 监听群组事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/event-handler/methods/set-group-listener'
+---
+接收群组相关事件，用于更新群列表、群资料、群成员、入群申请和群权限变化。
+
+## 功能介绍
+
+群组事件适合驱动群聊资料页、群成员列表和入群申请入口。已加入群变化、群资料更新、成员加入或移出、群申请处理结果，都应通过该监听器进入业务层。多数 SDK 对同类监听器采用替换式注册，如多个模块都要消费事件，应在业务层统一分发。
+
+## 底层能力
+
+| 项目     | 说明                                         |
+| -------- | -------------------------------------------- |
+| 方法签名 | `SetGroupListener(listener OnGroupListener)` |
+| 所属能力 | 监听器                                       |
+| 源码位置 | `open_im_sdk/listener.go`                    |
+
+## Electron 调用参考
+
+Electron SDK v3.8.3 暴露以下平台方法原型。底层能力表用于说明 OpenIM core 能力和参数映射。
+
+源码位置：`src/render.ts`。
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                   |
+| -------- | -------- | -------- | ---------------------- |
+| event    | CbEvents | 是       | 需要订阅的事件名称。   |
+| listener | Function | 是       | 事件触发时执行的回调。 |
+
+## 返回结果
+
+返回 `Promise` 或注册回调结果。调用失败时 Promise reject；建议在业务层使用 `try/catch` 或 `.catch()` 处理错误。
+
+## 代码示例
+
+Electron 使用事件订阅方式接收回调。按需要替换事件名和处理函数。
+
+```ts showLineNumbers
+import { getWithRenderProcess } from '@openim/electron-client-sdk/lib/render';
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const { instance: openIM } = getWithRenderProcess();
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## 相关类型
+
+- [群成员信息](/docs/chat/sdk/v4/electron/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+- [群组监听器](/docs/chat/sdk/v4/electron/models/on-group-listener)（`OnGroupListener`）：群组、入群申请和群成员变化监听器。
+- [群组信息](/docs/chat/sdk/v4/electron/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/electron/event-handler/overview)

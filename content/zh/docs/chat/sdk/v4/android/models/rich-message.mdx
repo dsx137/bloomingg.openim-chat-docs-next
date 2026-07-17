@@ -1,0 +1,29 @@
+---
+title: '富文本消息片段'
+description: '说明 Android SDK RichMessage 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/rich-message'
+---
+
+`RichMessage` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.RichMessage`。高级文本消息中的富文本片段。
+
+## 字段说明
+
+| 字段名称 | Java 类型 | 描述                                                                                       |
+| -------- | --------- | ------------------------------------------------------------------------------------------ |
+| type     | String    | 富文本片段类型，例如链接、提及或其他业务自定义类型；SDK 原样保存，不限定取值集合。         |
+| offset   | int       | 片段在完整 `text` 中的起始偏移量，不是分页偏移量；发送端和渲染端须使用相同的字符计数规则。 |
+| length   | int       | 从 `offset` 开始覆盖的文本长度。                                                           |
+| url      | String    | 片段关联的 URL；非链接类片段可留空。                                                       |
+| info     | String    | 片段的业务扩展数据，用于保存提及用户、样式或其他渲染信息，格式由业务双方约定。             |
+
+## 相关页面
+
+- [创建高级引用消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-quote-message)
+- [创建高级文本消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-text-message)

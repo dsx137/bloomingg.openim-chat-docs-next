@@ -1,0 +1,66 @@
+---
+title: '取消订阅在线状态'
+description: '说明 React Native core binding 方法 UnsubscribeUsersStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/user/methods/unsubscribe-users-status'
+---
+
+取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。
+
+## 功能介绍
+
+取消订阅指定用户在线状态，适合离开页面、好友列表卸载或减少无用状态推送。
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                        |
+| -------- | --------------------------------------------------------------------------- |
+| 方法签名 | `UnsubscribeUsersStatus(callback Base, operationID string, userIDs string)` |
+| 所属能力 | 用户                                                                        |
+| 源码位置 | `open_im_sdk/online.go`                                                     |
+
+## React Native 调用参考
+
+React Native SDK v3.8.3 的 TypeScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`src/sdk.ts`。
+
+```ts showLineNumbers
+unsubscribeUsersStatus(userIDs: string[], operationID: string = id())
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                     |
+| -------- | -------- | -------- | ------------------------ |
+| userIDs  | string[] | 是       | 用户 ID 或用户 ID 列表。 |
+
+## 返回结果
+
+返回 `Promise`。调用失败时 Promise reject，错误会被封装为 OpenIMApiError。
+
+## 代码示例
+
+以下示例展示 React Native SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.unsubscribeUsersStatus([]);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/react-native/models/base)（`Base`）：core binding 异步结果回调，React Native 调用层通常映射为 Promise。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/react-native/user/overview)

@@ -1,0 +1,78 @@
+---
+title: '监听会话事件'
+description: '说明 Android SDK 监听会话事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-conversation-listener'
+---
+
+接收会话相关事件，用于更新会话列表、同步进度、会话属性、总未读数和输入状态。
+
+## 功能介绍
+
+会话事件适合驱动首页会话列表和未读角标。登录后，服务端同步、新会话创建、会话字段变化、总未读数变化和输入状态变化都应通过该监听器进入业务层。
+
+该监听器是单实例替换式注册。建议由会话模块统一维护会话状态，再通知具体页面刷新。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                       |
+| -------- | ---------------------------------------------------------- |
+| 方法签名 | `SetConversationListener(listener OnConversationListener)` |
+| 所属能力 | 监听器                                                     |
+| 源码位置 | `open_im_sdk/listener.go`                                  |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void setOnConversationListener(OnConversationListener listener)
+```
+
+## 输入参数
+
+| 参数名称   | 类型                                                                                  | 描述             |
+| ---------- | ------------------------------------------------------------------------------------- | ---------------- |
+| `listener` | [`OnConversationListener`](/docs/chat/sdk/v4/android/models/on-conversation-listener) | 事件监听器实例。 |
+
+## 返回结果
+
+无直接返回值。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().conversationManager.setOnConversationListener(new OnConversationListener() {
+    @Override
+    public void onNewConversation(List<ConversationInfo> list) {
+        // TODO: 处理新增会话
+    }
+
+    @Override
+    public void onConversationChanged(List<ConversationInfo> list) {
+        // TODO: 处理会话变更
+    }
+
+    @Override
+    public void onTotalUnreadMessageCountChanged(int totalUnreadCount) {
+        // TODO: 更新未读总数
+    }
+});
+```
+
+## 相关类型
+
+- [会话监听器](/docs/chat/sdk/v4/android/models/on-conversation-listener)（`OnConversationListener`）：会话新增、变更、同步和未读数变化监听器。
+- [会话信息](/docs/chat/sdk/v4/android/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)

@@ -1,0 +1,74 @@
+---
+title: '监听用户事件'
+description: '说明 Android SDK 监听用户事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener'
+---
+
+接收用户相关事件，用于更新当前用户资料、用户在线状态和用户命令变化。
+
+## 功能介绍
+
+用户事件适合驱动个人资料、在线状态角标和用户侧轻量命令数据的刷新。当前用户资料更新、订阅用户在线状态变化和用户命令增删改，都应通过该监听器进入业务层。
+
+该监听器是单实例替换式注册。建议由用户模块统一维护当前用户和在线状态缓存，再通知页面刷新。
+
+## Core Binding 方法
+
+| 项目     | 说明                                       |
+| -------- | ------------------------------------------ |
+| 方法签名 | `SetUserListener(listener OnUserListener)` |
+| 所属能力 | 监听器                                     |
+| 源码位置 | `open_im_sdk/listener.go`                  |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void setOnUserListener(OnUserListener listener)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                                              | 是否必填 | 描述             |
+| -------- | --------------------------------------------------------------------- | -------- | ---------------- |
+| listener | [`OnUserListener`](/docs/chat/sdk/v4/android/models/on-user-listener) | 是       | 用户事件监听器。 |
+
+## 返回结果
+
+无直接返回值。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().userInfoManager.setOnUserListener(new OnUserListener() {
+    @Override
+    public void onSelfInfoUpdated(UserInfo info) {
+        // TODO: 处理当前用户资料变更
+    }
+
+    @Override
+    public void onUserStatusChanged(UsersOnlineStatus onlineStatus) {
+        // TODO: 处理用户在线状态变更
+    }
+});
+```
+
+## 相关类型
+
+- [用户信息](/docs/chat/sdk/v4/android/models/user-info)（`UserInfo`）：用户资料对象。
+- [用户在线状态](/docs/chat/sdk/v4/android/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+- [用户状态监听器](/docs/chat/sdk/v4/android/models/on-user-listener)（`OnUserListener`）：当前用户资料与用户在线状态变化监听器。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)

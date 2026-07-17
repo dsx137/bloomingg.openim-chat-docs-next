@@ -1,0 +1,97 @@
+---
+title: '消息对象'
+description: '说明 Android SDK Message 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/message'
+---
+
+`Message` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.Message`。消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 字段说明
+
+| 字段名称             | Java 类型                                                                 | 描述                                                                                                                                         |
+| -------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| clientMsgID          | String                                                                    | 客户端生成的消息唯一 ID，也是本地查询、去重、撤回和已读处理时使用的主要标识。                                                                |
+| serverMsgID          | String                                                                    | 服务端为消息分配的 ID；业务端通常仍使用 `clientMsgID` 定位消息。                                                                             |
+| createTime           | long                                                                      | 消息对象在客户端创建的 Unix 时间戳，当前 Go core 以毫秒写入。                                                                                |
+| sendTime             | long                                                                      | 服务端确认的消息发送时间戳，单位为毫秒；未发送或尚未确认时可能为 `0`。                                                                       |
+| sessionType          | int                                                                       | 消息所属会话类型，取值见 [`ConversationType`](/docs/chat/sdk/v4/android/models/conversation-type)。                                          |
+| sendID               | String                                                                    | 消息发送者的用户 ID。                                                                                                                        |
+| recvID               | String                                                                    | 单聊接收者用户 ID；群聊主要使用 `groupID` 标识目标群。                                                                                       |
+| msgFrom              | int                                                                       | 消息来源级别：`100` 为用户消息，`200` 为系统通知消息。                                                                                       |
+| contentType          | int                                                                       | 消息内容类型，取值和对应消息元素见 [`MessageType`](/docs/chat/sdk/v4/android/models/message-type)。                                          |
+| platformID           | int                                                                       | 发送端平台 ID，取值见 [`Platform`](/docs/chat/sdk/v4/android/models/platform)。                                                              |
+| senderNickname       | String                                                                    | 发送消息时记录的发送者昵称快照。                                                                                                             |
+| senderFaceUrl        | String                                                                    | 发送消息时记录的发送者头像 URL 快照。                                                                                                        |
+| groupID              | String                                                                    | 群聊目标群 ID；单聊消息中通常为空。                                                                                                          |
+| seq                  | int                                                                       | 服务端分配的会话内消息序列号，用于同步和历史消息排序；本地新建消息在发送前通常为 `0`。                                                       |
+| isRead               | boolean                                                                   | 当前消息在本地是否已被标记为已读。                                                                                                           |
+| status               | int                                                                       | 本地消息状态，取值见 [`MessageStatus`](/docs/chat/sdk/v4/android/models/message-status)。                                                    |
+| isReact              | boolean                                                                   | 消息扩展的 reaction 兼容标记。当前开源 core 只在 WASM 本地缓存结构中保留该字段，没有公开 reaction 处理分支，不能据此推导具体 reaction 内容。 |
+| isExternalExtensions | boolean                                                                   | 是否采用外部消息扩展模式的兼容标记。该模式由 core 初始化配置决定，Android v3.8.3 的公开 `InitConfig` 未提供对应开关。                        |
+| offlinePush          | [`OfflinePushInfo`](/docs/chat/sdk/v4/android/models/offline-push-info)   | 发送该消息时使用的离线推送标题、摘要和扩展配置。                                                                                             |
+| attachedInfo         | String                                                                    | core 携带的原始附加信息字符串；结构化后可在 `attachedInfoElem` 中读取群已读、阅后即焚等字段。                                                |
+| ext                  | Object                                                                    | Android 调用层保留的本地扩展对象，不属于当前 Go core 的 `MsgStruct` 字段。                                                                   |
+| ex                   | Object                                                                    | 随消息同步的业务扩展数据；当前 Go core 中对应字符串字段，使用时应保持可序列化。                                                              |
+| localEx              | Object                                                                    | 仅保存在本地消息记录中的业务扩展数据，不随消息发送到对端。                                                                                   |
+| pictureElem          | [`PictureElem`](/docs/chat/sdk/v4/android/models/picture-elem)            | 图片消息元素；仅图片类消息有值。                                                                                                             |
+| soundElem            | [`SoundElem`](/docs/chat/sdk/v4/android/models/sound-elem)                | 语音消息元素；仅语音类消息有值。                                                                                                             |
+| videoElem            | [`VideoElem`](/docs/chat/sdk/v4/android/models/video-elem)                | 视频消息元素；仅视频类消息有值。                                                                                                             |
+| fileElem             | [`FileElem`](/docs/chat/sdk/v4/android/models/file-elem)                  | 文件消息元素；仅文件类消息有值。                                                                                                             |
+| atTextElem           | [`AtTextElem`](/docs/chat/sdk/v4/android/models/at-text-elem)             | @ 消息元素，包含正文、被提及用户和可选引用消息。                                                                                             |
+| locationElem         | [`LocationElem`](/docs/chat/sdk/v4/android/models/location-elem)          | 位置消息元素；仅位置类消息有值。                                                                                                             |
+| customElem           | [`CustomElem`](/docs/chat/sdk/v4/android/models/custom-elem)              | 自定义消息元素，内容格式由业务双方约定。                                                                                                     |
+| quoteElem            | [`QuoteElem`](/docs/chat/sdk/v4/android/models/quote-elem)                | 引用消息元素，包含当前回复正文和被引用消息快照。                                                                                             |
+| mergeElem            | [`MergeElem`](/docs/chat/sdk/v4/android/models/merge-elem)                | 合并转发消息元素，包含标题、摘要和被合并消息列表。                                                                                           |
+| notificationElem     | [`NotificationElem`](/docs/chat/sdk/v4/android/models/notification-elem)  | 系统通知消息元素；业务端通常通过对应监听器消费 core 处理后的事件。                                                                           |
+| faceElem             | [`FaceElem`](/docs/chat/sdk/v4/android/models/face-elem)                  | 自定义表情消息元素。                                                                                                                         |
+| attachedInfoElem     | [`AttachedInfoElem`](/docs/chat/sdk/v4/android/models/attached-info-elem) | 解析后的消息附加信息，例如群消息已读统计和阅后即焚配置。                                                                                     |
+| textElem             | [`TextElem`](/docs/chat/sdk/v4/android/models/text-elem)                  | 普通文本消息元素；仅文本类消息有值。                                                                                                         |
+| cardElem             | [`CardElem`](/docs/chat/sdk/v4/android/models/card-elem)                  | 个人名片消息元素。                                                                                                                           |
+| advancedTextElem     | [`AdvancedTextElem`](/docs/chat/sdk/v4/android/models/advanced-text-elem) | 高级文本消息元素，包含完整正文和富文本片段列表。                                                                                             |
+| typingElem           | [`TypingElem`](/docs/chat/sdk/v4/android/models/typing-elem)              | 正在输入状态消息元素；该消息不进入普通历史消息列表。                                                                                         |
+
+## 关联类型
+
+- [表情消息元素](/docs/chat/sdk/v4/android/models/face-elem)（`FaceElem`）：自定义表情消息元素。
+- [附加信息元素](/docs/chat/sdk/v4/android/models/attached-info-elem)（`AttachedInfoElem`）：消息附加信息元素，常用于携带群消息已读等扩展数据。
+- [高级文本元素](/docs/chat/sdk/v4/android/models/advanced-text-elem)（`AdvancedTextElem`）：高级文本消息的内容元素，用于描述富文本正文和片段。
+- [个人名片元素](/docs/chat/sdk/v4/android/models/card-elem)（`CardElem`）：个人名片消息元素。
+- [合并消息元素](/docs/chat/sdk/v4/android/models/merge-elem)（`MergeElem`）：合并消息元素，用于多条消息合并转发。
+- [会话类型](/docs/chat/sdk/v4/android/models/conversation-type)（`ConversationType`）：会话类型常量，用于区分单聊、群聊和通知会话。
+- [离线推送信息](/docs/chat/sdk/v4/android/models/offline-push-info)（`OfflinePushInfo`）：发送消息时携带的离线推送配置。
+- [平台类型](/docs/chat/sdk/v4/android/models/platform)（`Platform`）：客户端平台类型常量。
+- [视频消息元素](/docs/chat/sdk/v4/android/models/video-elem)（`VideoElem`）：视频消息元素。
+- [输入状态元素](/docs/chat/sdk/v4/android/models/typing-elem)（`TypingElem`）：正在输入状态消息元素。
+- [通知消息元素](/docs/chat/sdk/v4/android/models/notification-elem)（`NotificationElem`）：通知消息元素。
+- [图片消息元素](/docs/chat/sdk/v4/android/models/picture-elem)（`PictureElem`）：图片消息元素，包含图片路径、地址和多尺寸图片信息。
+- [位置消息元素](/docs/chat/sdk/v4/android/models/location-elem)（`LocationElem`）：位置消息元素。
+- [文本消息元素](/docs/chat/sdk/v4/android/models/text-elem)（`TextElem`）：文本消息元素。
+- [文件消息元素](/docs/chat/sdk/v4/android/models/file-elem)（`FileElem`）：文件消息元素，用于本地文件消息或 URL 文件消息。
+- [消息类型](/docs/chat/sdk/v4/android/models/message-type)（`MessageType`）：消息内容类型常量。
+- [消息状态](/docs/chat/sdk/v4/android/models/message-status)（`MessageStatus`）：消息发送状态常量。
+- [引用消息元素](/docs/chat/sdk/v4/android/models/quote-elem)（`QuoteElem`）：引用消息元素。
+- [语音消息元素](/docs/chat/sdk/v4/android/models/sound-elem)（`SoundElem`）：语音消息元素。
+- [自定义消息元素](/docs/chat/sdk/v4/android/models/custom-elem)（`CustomElem`）：自定义消息元素，用于携带业务自定义数据。
+- [At 文本元素](/docs/chat/sdk/v4/android/models/at-text-elem)（`AtTextElem`）：At 文本消息的内容元素，用于保存文本、被提及用户和引用信息。
+
+## 相关页面
+
+- [监听单条消息事件](/docs/chat/sdk/v4/android/event-handler/methods/set-advanced-msg-listener)
+- [创建高级引用消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-quote-message)
+- [创建高级文本消息](/docs/chat/sdk/v4/android/message/creating-messages/create-advanced-text-message)
+- [创建名片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-card-message)
+- [创建自定义消息](/docs/chat/sdk/v4/android/message/creating-messages/create-custom-message)
+- [创建表情消息](/docs/chat/sdk/v4/android/message/creating-messages/create-face-message)
+- [通过 URL 创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-by-url)
+- [通过完整路径创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-from-full-path)
+- [创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message)
+- [创建转发消息](/docs/chat/sdk/v4/android/message/creating-messages/create-forward-message)
+- [通过 URL 创建图片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-by-url)
+- [通过完整路径创建图片消息](/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-from-full-path)

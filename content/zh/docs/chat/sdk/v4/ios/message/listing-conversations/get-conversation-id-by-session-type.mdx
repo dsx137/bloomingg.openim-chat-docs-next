@@ -1,0 +1,61 @@
+---
+title: '生成会话 ID'
+description: '说明 iOS core binding 方法 GetConversationIDBySessionType 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/message/listing-conversations/get-conversation-id-by-session-type'
+---
+
+根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。
+
+## 功能介绍
+
+根据目标 ID 和会话类型生成 OpenIM 会话 ID，适合从用户或群跳转到会话前构造会话标识。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                          |
+| -------- | --------------------------------------------------------------------------------------------- |
+| 方法签名 | `GetConversationIDBySessionType(operationID string, sourceID string, sessionType int) string` |
+| 所属能力 | 会话与消息                                                                                    |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                             |
+
+## iOS 调用参考
+
+iOS Core SDK v3.8.3 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT NSString* _Nonnull Open_im_sdkGetConversationIDBySessionType(NSString* _Nullable operationID, NSString* _Nullable sourceID, long sessionType);
+```
+
+## 输入参数
+
+| 参数名称    | 参数类型   | 是否必填   | 描述             |
+| ----------- | ---------- | ---------- | ---------------- |
+| sourceID    | NSString\* | 按方法原型 | 按方法原型传入。 |
+| sessionType | long       | 按方法原型 | 按方法原型传入。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+String conversationID = OpenIMClient.getInstance().conversationManager.getConversationIDBySessionType(sourceId, sessionType);
+```
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/ios/message/overview)

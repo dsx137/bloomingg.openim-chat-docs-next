@@ -1,0 +1,72 @@
+---
+title: '发送好友申请'
+description: '说明 Android core binding 方法 AddFriend 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/add-friend'
+---
+
+向指定用户发送好友申请。是否自动通过取决于服务端策略和对方设置。
+
+好友关系变化通过 `SetFriendListener` 设置的 `OnFriendshipListener` 接收；涉及列表和请求对象的字符串参数应传入对应结构的 JSON。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                |
+| -------- | ------------------------------------------------------------------- |
+| 方法签名 | `AddFriend(callback Base, operationID string, userIDReqMsg string)` |
+| 所属能力 | 好友                                                                |
+| 源码位置 | `open_im_sdk/relation.go`                                           |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void addFriend(OnBase<String> base, String uid, String reqMessage)
+```
+
+## 输入参数
+
+| 参数名称   | 参数类型                                             | 是否必填 | 描述                         |
+| ---------- | ---------------------------------------------------- | -------- | ---------------------------- |
+| callBack   | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base) | 是       | 回调接口                     |
+| uid        | String                                               | 是       | 用户 ID                      |
+| reqMessage | String                                               | 是       | 请求添加好友时对方看到的消息 |
+
+## 返回结果
+
+`onSuccess` 表示好友申请已提交给服务端，尚不代表双方已经成为好友；建立关系后应以好友新增事件或好友列表为准。参数、重复申请或服务端策略校验失败时调用 `onError`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.addFriend(new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理成功结果
+    }
+}, uid, reqMessage);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [好友关系监听器](/docs/chat/sdk/v4/android/models/on-friendship-listener)（`OnFriendshipListener`）：好友、好友申请和黑名单变化监听器。
+
+## 相关页面
+
+- [好友](/docs/chat/sdk/v4/android/user/overview#好友)

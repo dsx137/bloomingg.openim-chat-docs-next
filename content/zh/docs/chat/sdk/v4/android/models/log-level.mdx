@@ -1,0 +1,32 @@
+---
+title: '日志等级'
+description: '说明 Android SDK LogLevel 类型的用途和取值。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/log-level'
+---
+
+`LogLevel` 是 Android SDK 的枚举常量，完整类名为 `io.openim.android.sdk.enums.LogLevel`。SDK 日志等级常量。
+
+## 取值说明
+
+日志等级的数值越大，输出的信息越详细。生产环境通常使用 `Info`、`Warn` 或 `Error`，排查本地数据库问题时再临时启用 `DebugWithSQL`。
+
+| 常量         | 值  | 描述                                                                                  |
+| ------------ | --- | ------------------------------------------------------------------------------------- |
+| Fatal        | 0   | 只记录导致 SDK 无法继续正常运行的致命错误。                                           |
+| Panic        | 1   | 记录 panic 级问题以及更严重的致命错误。                                               |
+| Error        | 2   | 记录接口、网络、存储等失败信息，同时包含更严重等级。                                  |
+| Warn         | 3   | 记录可恢复的异常或风险提示，同时包含错误和致命等级。                                  |
+| Info         | 4   | 记录主要生命周期、同步和接口调用信息，同时包含警告及以上等级。                        |
+| Debug        | 5   | 输出详细调试日志；Android `InitConfig` 默认使用该等级。                               |
+| DebugWithSQL | 6   | 在 Debug 日志基础上启用本地数据库 SQL 日志；当前 core 在该值下把 GORM 日志设为 Info。 |
+
+## 相关页面
+
+- [写入客户端日志](/docs/chat/sdk/v4/android/logger/methods/logs)

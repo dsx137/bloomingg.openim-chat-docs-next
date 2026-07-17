@@ -1,0 +1,77 @@
+---
+title: "概述"
+description: "OpenIM Platform API 用户模块概览，覆盖用户创建、资料查询、在线状态和通知账号。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/overview"
+---
+
+用户模块面向可信后端服务，用于把业务系统中的账号映射为 OpenIM 用户，并管理用户资料、用户查询、在线状态和通知账号。管理员 Token 只能保存在后端，浏览器、移动端或桌面客户端不应直接调用这些管理端接口。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 用户创建 | 在 OpenIM 中注册业务用户 ID，并写入昵称、头像和扩展字段。 |
+| 用户查询 | 按分页读取用户列表、用户 ID 列表，或按用户 ID 批量获取用户资料和注册状态。 |
+| 用户资料更新 | 由后端同步业务资料变更，例如昵称、头像和扩展信息。 |
+| 在线状态 | 查询用户是否在线、在线终端连接信息和在线 Token 聚合明细。 |
+| 通知账号 | 创建、更新和搜索用于系统通知或业务通知的服务端账号。 |
+
+## 常用接口
+
+- [创建用户](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [查询用户列表](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [查询全部用户 ID](/docs/chat/platform-api/v3/user/listing-users/list-all-user-ids)
+- [校验用户账号](/docs/chat/platform-api/v3/user/listing-users/check-user-accounts)
+- [获取用户](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
+- [更新用户](/docs/chat/platform-api/v3/user/managing-users/update-a-user)
+- [查询用户在线状态](/docs/chat/platform-api/v3/user/presence/get-users-online-status)
+- [查询用户在线 Token 明细](/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail)
+- [创建通知账号](/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account)
+- [更新通知账号](/docs/chat/platform-api/v3/user/notification-accounts/update-notification-account)
+- [搜索通知账号](/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account)
+
+## 资源表示
+
+用户模块中出现的 `Info` 对象都表示 OpenIM 服务端保存或返回的用户资料。接口页会保留本接口需要关注的字段，完整字段语义以这里为准。
+
+### UserInfo
+
+`UserInfo` 表示 OpenIM 用户资料，常用于用户创建、用户查询和用户资料更新。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| userID | string | OpenIM 用户 ID，应与业务系统账号建立稳定映射。 |
+| nickname | string | 用户昵称。 |
+| faceURL | string | 用户头像 URL。 |
+| ex | string | 业务扩展字段，通常由业务服务端写入和解析。 |
+| createTime | int64 | 用户创建时间，通常为 Unix 毫秒时间戳。 |
+| appMangerLevel | int | 应用管理级别字段，字段名以服务端响应为准。 |
+| globalRecvMsgOpt | int | 用户全局消息接收选项。 |
+
+### PublicUserInfo
+
+`PublicUserInfo` 表示可被其他用户或业务场景读取的公开资料。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| userID | string | OpenIM 用户 ID。 |
+| nickname | string | 用户昵称。 |
+| faceURL | string | 用户头像 URL。 |
+| ex | string | 公开扩展字段。 |
+
+## 接入建议
+
+用户 ID 应以业务系统为权威来源。创建 OpenIM 用户前，先确认业务账号已经完成注册、风控和权限校验；创建完成后，把 OpenIM 用户 ID 与业务账号关系保存在你的后端数据库中。
+
+客户端登录时，应先向你的业务后端请求登录凭证，再由后端调用认证模块签发用户 Token。不要把 APP 管理员 Token 写入客户端代码、前端环境变量或移动端包体。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

@@ -1,0 +1,53 @@
+---
+title: 'React Native 接入流程'
+description: '按当前 open_im_sdk 导出方法说明 React Native SDK 从初始化、监听器、登录到消息调用前的接入顺序，不包含示例代码。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/getting-started/send-first-message'
+---
+
+本页说明 React Native 端从初始化、监听器、登录到发送第一条消息前需要完成的顺序。具体 API 签名见各能力页。
+
+## 调用顺序
+
+| 步骤       | 必要方法                                     | 说明                                                               |
+| ---------- | -------------------------------------------- | ------------------------------------------------------------------ |
+| 初始化     | `OpenIM.initSDK(...)`                        | 配置 `apiAddr`、`wsAddr`、本地数据目录和连接监听器。               |
+| 设置监听器 | 会话、消息、好友、群组、用户监听器           | 建议在登录前设置，避免漏掉登录同步期间的事件。                     |
+| 登录       | `OpenIM.login(...)`                          | token 应由业务服务端签发；登录成功后再调用会话、消息、群组等接口。 |
+| 创建消息   | `createTextMessage` / `CreateTextMessage` 等 | 创建方法返回本地消息对象或消息 JSON。                              |
+| 发送消息   | `sendMessage` / `SendMessage`                | 单聊传用户 ID，群聊传群组 ID；发送进度和结果按平台回调模型处理。   |
+| 退出或销毁 | `logout` / `unInitSDK`                       | 退出当前用户用 logout；释放 SDK 全局资源用 unInitSDK。             |
+
+## 初始化配置
+
+| 字段                  | 类型    | 说明                                      |
+| --------------------- | ------- | ----------------------------------------- |
+| `platformID`          | number  | 平台 ID，按 React Native 调用层要求传入。 |
+| `apiAddr`             | string  | OpenIM HTTP API 地址，必须包含协议。      |
+| `wsAddr`              | string  | OpenIM WebSocket 地址，必须包含协议。     |
+| `dataDir`             | string  | 本地数据库、缓存和 SDK 数据目录。         |
+| `logLevel`            | number  | SDK 日志等级。                            |
+| `isLogStandardOutput` | boolean | 是否输出到标准输出。                      |
+| `logFilePath`         | string  | 日志文件目录。                            |
+
+## 接入检查
+
+| 检查项             | 通过标准                                               |
+| ------------------ | ------------------------------------------------------ |
+| 初始化只执行一次   | 不应在同一进程内频繁重建 SDK 实例。                    |
+| operationID 非空   | 建议每次业务操作生成可追踪 ID。                        |
+| 登录后调用业务接口 | 未初始化或未登录时，多数接口会返回错误。               |
+| 参数结构合法       | 列表、请求对象和消息对象应符合 React Native 类型定义。 |
+| 监听器不重复丢失   | 监听器通常是替换式设置；需要多处分发时由业务层维护。   |
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/react-native/application/overview)
+- [监听器](/docs/chat/sdk/v4/react-native/event-handler/overview)
+- [发送消息](/docs/chat/sdk/v4/react-native/message/sending-messages/send-message)

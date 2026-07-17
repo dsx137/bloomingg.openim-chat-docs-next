@@ -1,0 +1,38 @@
+---
+title: '会话设置请求'
+description: '说明 Android SDK ConversationReq 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/conversation-req'
+---
+
+`ConversationReq` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.ConversationReq`。会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。
+
+## 字段说明
+
+| 字段名称         | Java 类型 | 描述                                                                                                                                           |
+| ---------------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| conversationID   | String    | 要更新的会话 ID。Android 模型中的 setter 为受保护方法，通常由 SDK 根据目标用户或群组创建对象时填入。                                           |
+| conversationType | Integer   | 会话类型，取值见 [`ConversationType`](/docs/chat/sdk/v4/android/models/conversation-type)；当前 core 的普通群和超级群可能分别使用 `2` 与 `3`。 |
+| userID           | String    | 单聊对端用户 ID；群聊会话通常为空。                                                                                                            |
+| groupID          | String    | 群聊群 ID；单聊会话通常为空。                                                                                                                  |
+| recvMsgOpt       | Integer   | 接收选项：`0` 正常接收且允许离线推送，`1` 不接收消息（当前 core 注明该选项暂未启用），`2` 在线接收但不产生离线推送。                           |
+| isPinned         | Boolean   | 是否将会话置顶。                                                                                                                               |
+| isPrivateChat    | Boolean   | 是否开启私聊/阅后即焚会话模式。                                                                                                                |
+| ex               | String    | 会话业务扩展字符串，只更新本地/服务端会话扩展，不等同于消息内容。                                                                              |
+| burnDuration     | Integer   | 私聊消息被读取后的保留时长，单位为秒；超过该时长后进入销毁流程。                                                                               |
+| groupAtType      | Integer   | 群会话强提醒状态，取值见 [`GroupAtType`](/docs/chat/sdk/v4/android/models/group-at-type)，由 @ 消息或群公告等事件更新。                        |
+
+## 关联类型
+
+- [群提醒类型](/docs/chat/sdk/v4/android/models/group-at-type)（`GroupAtType`）：群会话强提醒类型常量。
+- [会话类型](/docs/chat/sdk/v4/android/models/conversation-type)（`ConversationType`）：单聊、普通群、超级群和通知会话类型。
+
+## 相关页面
+
+- [设置会话](/docs/chat/sdk/v4/android/message/managing-conversations/set-conversation)

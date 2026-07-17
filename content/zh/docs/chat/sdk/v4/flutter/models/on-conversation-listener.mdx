@@ -1,0 +1,40 @@
+---
+title: '会话监听器'
+description: '说明 Flutter SDK OnConversationListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/on-conversation-listener'
+---
+
+`OnConversationListener` 是 Flutter SDK 的监听器，完整类名为 `io.openim.flutter.sdk.listener.OnConversationListener`。会话新增、变更、同步和未读数变化监听器。
+
+## 类型说明
+
+会话监听
+
+## 回调方法
+
+| 方法                                 | 参数                        | 描述                              |
+| ------------------------------------ | --------------------------- | --------------------------------- |
+| onConversationChanged                | List<ConversationInfo> list | 会话列表有数据更新 可刷新会话列表 |
+| onNewConversation                    | List<ConversationInfo> list | 新增会话 可刷新会话列表           |
+| onSyncServerFailed                   | boolean reinstalled         | 事件触发时回调。                  |
+| onSyncServerFinish                   | boolean reinstalled         | 事件触发时回调。                  |
+| onSyncServerStart                    | boolean reinstalled         | 事件触发时回调。                  |
+| onSyncServerProgress                 | long progress               | 事件触发时回调。                  |
+| onTotalUnreadMessageCountChanged     | int i                       | 未读消息总数改变                  |
+| onConversationUserInputStatusChanged | String s                    | 事件触发时回调。                  |
+
+## 关联类型
+
+- [会话信息](/docs/chat/sdk/v4/flutter/models/conversation-info)（`ConversationInfo`）：会话资料对象，用于会话列表、会话详情和会话事件。
+
+## 相关页面
+
+- [监听会话事件](/docs/chat/sdk/v4/flutter/event-handler/methods/set-conversation-listener)
+- [发送消息](/docs/chat/sdk/v4/flutter/message/sending-messages/send-message)

@@ -1,0 +1,41 @@
+---
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/relation/overview"
+---
+
+The relationship module manages friend relationships, friend requests, friend profile updates, and user blacklists from trusted backend services.
+
+## Capability scope
+
+| Capability | Description |
+| --- | --- |
+| Friends | Add, delete, import, check, and list friend relationships. |
+| Friend requests | List received or sent requests and process request decisions. |
+| Blacklists | Add users to a blacklist, remove them, or list blocked users. |
+| Friend metadata | Update remarks and extension fields for friend records. |
+
+## Common APIs
+
+- [Apply to add a friend](/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend)
+- [Respond to a friend request](/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply)
+- [List friends](/docs/chat/platform-api/v3/relation/listing-friends/list-friends)
+- [Add to blacklist](/docs/chat/platform-api/v3/relation/blacklist/add-black)
+- [Delete a friend](/docs/chat/platform-api/v3/relation/managing-friends/delete-friend)
+
+## Integration advice
+
+Apply privacy, risk, and notification rules in your backend before changing relationships.
+
+Record blacklist operations with source and operator information for auditability.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,41 +1,49 @@
 ---
-title: 'OpenIM SDK for Electron'
-description: 'OpenIM Electron SDK entry point for planning WASM and FFI usage across web-compatible UI and packaged desktop apps.'
+title: 'OpenIM Electron SDK overview'
+description: 'Electron SDK v3.8.3 documentation organized by OpenIM SDK capabilities.'
 product: 'sdk'
-context: 'chat/sdk/electron'
+context: 'chat/sdk/v4/electron'
 template: 'overview'
 status: 'draft'
-lastUpdated: '2026-06-30'
+lastUpdated: '2026-07-09'
 version: 'v4'
 platform: 'electron'
-sourcePath: '/sdk/electron/overview'
+sourcePath: '/docs/chat/sdk/v4/electron/overview'
 ---
+This documentation set follows the current OpenIM SDK capability model and the public methods exposed by Electron SDK v3.8.3. Each method page covers the platform call shape, parameters, return value, and usage boundaries.
 
-## Overview
+The pages describe how the platform wrapper maps to OpenIM core capabilities. Platform method names and parameter wrappers can differ; when the wrapper differs from the core export, follow the platform SDK v3.8.3 signature shown on the method page.
 
-OpenIM Electron SDK can use both WASM and FFI integration modes. They are not always an either-or choice: if the same product supports a web client and a packaged Electron app, you typically need to plan for both.
+## Integration Model
 
-Use WASM for browser pages, renderer processes, WebViews, or UI layers that should stay aligned with the web client. Use FFI for the desktop application side, packaged app behavior, native runtime integration, and boundaries that should live outside a browser-like page.
+| Model | Description |
+| ----- | ----------- |
+| Initialization | Configure the API address, WebSocket address, local data directory, logging, and connection listener. |
+| Login state | Register listeners before login when possible, then call the login API with a backend-issued token. |
+| Async result | Platform methods return results through Promise, Future, or callback patterns depending on the SDK. |
+| Message creation | Create local message objects with `Create*Message` methods before sending them. |
+| operationID | Generate a traceable operationID for each business operation so client and server logs can be correlated. |
 
-## SDK mode responsibilities
+## Capability Pages
 
-| Mode       | Applies to                                             | Notes                                                                                                                       |
-| ---------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
-| WASM       | Web pages, Electron renderer processes, WebViews       | Initialize like the web SDK and publish `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` where the page can load them.    |
-| FFI        | Electron application-side capabilities and native apps | Follow the Electron FFI SDK installation, packaging, and initialization rules. Do not use browser WASM asset paths for FFI. |
-| WASM + FFI | Products that support both web and packaged Electron   | Wrap IM access behind an app-level adapter, select the runtime implementation per environment, and avoid competing logins.  |
+| Page | Scope |
+| ---- | ----- |
+| [Integration flow](/docs/chat/sdk/v4/electron/getting-started/send-first-message) | Initialization, listeners, login, and the first-message sequence. |
+| [SDK lifecycle](/docs/chat/sdk/v4/electron/application/overview) | SDK initialization, login, logout, login status, and foreground/background state. |
+| [Authentication flow](/docs/chat/sdk/v4/electron/application/authenticating-a-user/authentication) | Token handling, connection listener behavior, login status, and logout boundaries. |
+| [Event handlers](/docs/chat/sdk/v4/electron/event-handler/overview) | Connection, user, friend, group, conversation, message, custom business, and message KV callbacks. |
+| [User](/docs/chat/sdk/v4/electron/user/overview) | User profiles, user commands, and presence subscription. |
+| [Friends](/docs/chat/sdk/v4/electron/user/overview#friends) | Friend list, friend info, friend search, friend applications, and relationship updates. |
+| [Blacklist](/docs/chat/sdk/v4/electron/user/overview#blacklist) | Add, list, and remove blacklist entries. |
+| [Group](/docs/chat/sdk/v4/electron/group/overview) | Group creation, applications, membership, members, moderation, and ownership. |
+| [Conversations and messages](/docs/chat/sdk/v4/electron/message/overview) | Conversation lists, message creation, sending, history, read status, deletion, search, and typing state. |
+| [Push notifications](/docs/chat/sdk/v4/electron/push-notifications/overview) | FCM token and application badge updates. |
+| [Logger](/docs/chat/sdk/v4/electron/logger/overview) | SDK log configuration, writing client logs, and uploading logs. |
+| [File upload](/docs/chat/sdk/v4/electron/file/overview) | Upload files through the object storage path configured for the SDK. |
+| [Models](/docs/chat/sdk/v4/electron/models/overview) | Common models, enums, listeners, and callbacks. |
+| [Error codes](/docs/chat/sdk/v4/electron/error-codes) | SDK core, server, and WebSocket protocol marker error-code enumeration. |
+| [Unsupported or unexposed capabilities](/docs/chat/sdk/v4/electron/deprecated) | Capability boundaries that are not exposed by the current SDK. |
 
-## Desktop integration notes
+## Currently Unavailable Capabilities
 
-- If the product supports both web and Electron, define an app-level IM adapter before wiring SDK calls into UI code.
-- Use WASM in renderer or web-compatible layers, and verify packaged builds can load `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js`.
-- Use FFI for application-side integration, and design installation, permission, packaging, and update behavior around the packaged desktop app.
-- If both the main process and renderer process need IM state, define an IPC boundary and decide which side owns login, connection, message events, and local state.
-- Keep tokens out of preload scripts and main-process logs.
-- Validate websocket connectivity in packaged builds, not only in local dev mode.
-
-## Next steps
-
-- [WASM SDK overview](/sdk/wasm/overview)
-- [Environment-specific implementation](/sdk/wasm/getting-started/environment-specific-implementation)
-- [Send your first message](/sdk/wasm/getting-started/send-first-message)
+Electron SDK v3.8.3 does not expose standalone methods for public group variants, polls, scheduled messages, message threads, translation, independent reports, group metadata, or metacounters. Add these pages only after the platform SDK exposes corresponding methods.

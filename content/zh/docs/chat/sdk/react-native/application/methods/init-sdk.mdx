@@ -1,0 +1,67 @@
+---
+title: '初始化 SDK'
+description: '说明 React Native core binding 方法 InitSDK 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/application/methods/init-sdk'
+---
+
+初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
+
+## 功能介绍
+
+初始化 SDK 全局实例、日志、长连接管理、本地数据目录和基础资源。应用进程内通常只调用一次。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                       |
+| -------- | -------------------------------------------------------------------------- |
+| 方法签名 | `InitSDK(listener OnConnListener, operationID string, config string) bool` |
+| 所属能力 | SDK 生命周期                                                               |
+| 源码位置 | `open_im_sdk/init_login.go`                                                |
+
+## React Native 调用参考
+
+React Native SDK v3.8.3 的 TypeScript 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`src/sdk.ts`。
+
+```ts showLineNumbers
+initSDK(params: InitOptions, operationID: string = id())
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                                                         | 是否必填 | 描述                                   |
+| -------- | ---------------------------------------------------------------- | -------- | -------------------------------------- |
+| params   | [InitOptions](/docs/chat/sdk/v4/react-native/models/init-config) | 是       | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+返回 `Promise`。调用失败时 Promise reject，错误会被封装为 OpenIMApiError。
+
+## 代码示例
+
+以下示例展示 React Native SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```ts showLineNumbers
+import OpenIMSDK from '@openim/rn-client-sdk';
+
+const result = await OpenIMSDK.initSDK({});
+```
+
+## 相关类型
+
+- [初始化配置](/docs/chat/sdk/v4/react-native/models/init-config)（`InitConfig`）：初始化 SDK 时传入的基础配置。
+- [连接状态监听器](/docs/chat/sdk/v4/react-native/models/on-conn-listener)（`OnConnListener`）：SDK 连接状态和登录票据状态监听器。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/react-native/application/overview)

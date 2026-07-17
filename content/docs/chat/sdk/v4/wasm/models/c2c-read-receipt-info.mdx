@@ -1,0 +1,44 @@
+---
+title: 'C2c Read Receipt Info'
+description: 'Describes the C2c Read Receipt Info type used by WASM SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/models/c2c-read-receipt-info'
+---
+
+`C2CReadReceiptInfo` is a common type used by WASM SDK v3.8.3. Use this page to understand where the type appears and how it connects to method parameters, return values, and event callbacks.
+
+## Usage
+
+| Scenario          | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| Method parameters | Some SDK methods accept this type or a request object with the same shape. |
+| Return values     | Query methods and callbacks may return this type or a list of this type.   |
+| Event handling    | Listener callbacks may include this type when related data changes.        |
+
+## Fields
+
+| Field       | Type               | Description                        |
+| ----------- | ------------------ | ---------------------------------- |
+| userID      | String             | Defined by the platform SDK model. |
+| groupID     | String             | Defined by the platform SDK model. |
+| msgIDList   | `List<String>` | Defined by the platform SDK model. |
+| readTime    | long               | Defined by the platform SDK model. |
+| msgFrom     | int                | Defined by the platform SDK model. |
+| contentType | int                | Defined by the platform SDK model. |
+| sessionType | int                | Defined by the platform SDK model. |
+
+## Usage Notes
+
+- Treat ID fields such as `userID`, `groupID`, `conversationID`, and `clientMsgID` as stable identifiers.
+- Optional extension fields are usually JSON strings or platform-specific maps. Validate them before using them in UI logic.
+- Prefer SDK update methods instead of mutating local objects only.
+
+## Related Pages
+
+- [Models overview](/docs/chat/sdk/v4/wasm/models/overview)

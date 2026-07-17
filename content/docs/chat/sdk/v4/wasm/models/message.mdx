@@ -1,0 +1,76 @@
+---
+title: 'Message'
+description: 'Describes the Message type used by WASM SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/models/message'
+---
+
+`Message` is a common type used by WASM SDK v3.8.3. Use this page to understand where the type appears and how it connects to method parameters, return values, and event callbacks.
+
+## Usage
+
+| Scenario          | Description                                                                |
+| ----------------- | -------------------------------------------------------------------------- |
+| Method parameters | Some SDK methods accept this type or a request object with the same shape. |
+| Return values     | Query methods and callbacks may return this type or a list of this type.   |
+| Event handling    | Listener callbacks may include this type when related data changes.        |
+
+## Fields
+
+| Field                | Type             | Description                        |
+| -------------------- | ---------------- | ---------------------------------- |
+| clientMsgID          | String           | Defined by the platform SDK model. |
+| serverMsgID          | String           | Defined by the platform SDK model. |
+| createTime           | long             | Defined by the platform SDK model. |
+| sendTime             | long             | Defined by the platform SDK model. |
+| sessionType          | int              | Defined by the platform SDK model. |
+| sendID               | String           | Defined by the platform SDK model. |
+| recvID               | String           | Defined by the platform SDK model. |
+| msgFrom              | int              | Defined by the platform SDK model. |
+| contentType          | int              | Defined by the platform SDK model. |
+| platformID           | int              | Defined by the platform SDK model. |
+| senderNickname       | String           | Defined by the platform SDK model. |
+| senderFaceUrl        | String           | Defined by the platform SDK model. |
+| groupID              | String           | Defined by the platform SDK model. |
+| seq                  | int              | Defined by the platform SDK model. |
+| isRead               | boolean          | Defined by the platform SDK model. |
+| status               | int              | Defined by the platform SDK model. |
+| isReact              | boolean          | Defined by the platform SDK model. |
+| isExternalExtensions | boolean          | Defined by the platform SDK model. |
+| offlinePush          | OfflinePushInfo  | Defined by the platform SDK model. |
+| attachedInfo         | String           | Defined by the platform SDK model. |
+| ext                  | Object           | Defined by the platform SDK model. |
+| ex                   | Object           | Defined by the platform SDK model. |
+| localEx              | Object           | Defined by the platform SDK model. |
+| pictureElem          | PictureElem      | Defined by the platform SDK model. |
+| soundElem            | SoundElem        | Defined by the platform SDK model. |
+| videoElem            | VideoElem        | Defined by the platform SDK model. |
+| fileElem             | FileElem         | Defined by the platform SDK model. |
+| atTextElem           | AtTextElem       | Defined by the platform SDK model. |
+| locationElem         | LocationElem     | Defined by the platform SDK model. |
+| customElem           | CustomElem       | Defined by the platform SDK model. |
+| quoteElem            | QuoteElem        | Defined by the platform SDK model. |
+| mergeElem            | MergeElem        | Defined by the platform SDK model. |
+| notificationElem     | NotificationElem | Defined by the platform SDK model. |
+| faceElem             | FaceElem         | Defined by the platform SDK model. |
+| attachedInfoElem     | AttachedInfoElem | Defined by the platform SDK model. |
+| textElem             | TextElem         | Defined by the platform SDK model. |
+| cardElem             | CardElem         | Defined by the platform SDK model. |
+| advancedTextElem     | AdvancedTextElem | Defined by the platform SDK model. |
+| typingElem           | TypingElem       | Defined by the platform SDK model. |
+
+## Usage Notes
+
+- Treat ID fields such as `userID`, `groupID`, `conversationID`, and `clientMsgID` as stable identifiers.
+- Optional extension fields are usually JSON strings or platform-specific maps. Validate them before using them in UI logic.
+- Prefer SDK update methods instead of mutating local objects only.
+
+## Related Pages
+
+- [Models overview](/docs/chat/sdk/v4/wasm/models/overview)

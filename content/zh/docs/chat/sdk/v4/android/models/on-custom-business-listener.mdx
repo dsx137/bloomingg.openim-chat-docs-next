@@ -1,0 +1,24 @@
+---
+title: '自定义业务监听器'
+description: '说明 Android SDK OnCustomBusinessListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-custom-business-listener'
+---
+
+`OnCustomBusinessListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnCustomBusinessListener`。自定义业务消息监听器。
+
+## 回调方法
+
+| 方法                        | 参数              | 描述                                                                                                                                                                                                                                             |
+| --------------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| onRecvCustomBusinessMessage | `String business` | SDK 收到服务端下发的自定义业务通知时触发。`business` 是通知消息 [`NotificationElem`](/docs/chat/sdk/v4/android/models/notification-elem) 的 `detail` 字段原文，core 不解析其内部格式；请按发送方约定解析，并自行处理空值或格式不符合预期的情况。 |
+
+## 相关页面
+
+- [监听自定义业务事件](/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener)

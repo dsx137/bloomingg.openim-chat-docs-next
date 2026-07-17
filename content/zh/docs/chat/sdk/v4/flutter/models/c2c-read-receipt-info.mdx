@@ -1,0 +1,35 @@
+---
+title: '单聊已读回执信息'
+description: '说明 Flutter SDK C2CReadReceiptInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/models/c2c-read-receipt-info'
+---
+
+`C2CReadReceiptInfo` 是 Flutter SDK 的数据模型，完整类名为 `io.openim.flutter.sdk.models.C2CReadReceiptInfo`。单聊消息已读回执信息。
+
+## 字段说明
+
+| 字段名称    | Dart 类型    | 描述                                                                                                                                                                                                      |
+| ----------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| userID      | String       | 用户id                                                                                                                                                                                                    |
+| groupID     | String       | 组id                                                                                                                                                                                                      |
+| msgIDList   | List<String> | 已读消息id                                                                                                                                                                                                |
+| readTime    | long         | 阅读时间                                                                                                                                                                                                  |
+| msgFrom     | int          | 标识消息是用户级别还是系统级别 100:用户 200:系统                                                                                                                                                          |
+| contentType | int          | MessageType 消息类型： 101:文本消息 102:图片消息 103:语音消息 104:视频消息 105:文件消息 106:@消息 107:合并消息 108:转发消息 109:位置消息 110:自定义消息 111:撤回消息回执 112:C2C已读回执 113:正在输入状态 |
+| sessionType | int          | ConversationType 会话类型 1:单聊 2:群聊                                                                                                                                                                   |
+
+## 关联类型
+
+- [会话类型](/docs/chat/sdk/v4/flutter/models/conversation-type)（`ConversationType`）：会话类型常量，用于区分单聊、群聊和通知会话。
+- [消息类型](/docs/chat/sdk/v4/flutter/models/message-type)（`MessageType`）：消息内容类型常量。
+
+## 相关页面
+
+- [监听单条消息事件](/docs/chat/sdk/v4/flutter/event-handler/methods/set-advanced-msg-listener)

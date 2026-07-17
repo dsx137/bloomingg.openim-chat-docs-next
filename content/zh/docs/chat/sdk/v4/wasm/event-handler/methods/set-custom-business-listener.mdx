@@ -1,0 +1,71 @@
+---
+title: '监听自定义业务事件'
+description: '说明 WASM SDK 监听自定义业务事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/event-handler/methods/set-custom-business-listener'
+---
+接收服务端通过 SDK 通道下发的自定义业务事件。
+
+## 功能介绍
+
+自定义业务事件适合承载不属于内置用户、群组、会话或消息回调的业务载荷。业务层应按自定义协议解析并分发。
+
+## 底层能力
+
+| 项目     | 说明                                                           |
+| -------- | -------------------------------------------------------------- |
+| 方法签名 | `SetCustomBusinessListener(listener OnCustomBusinessListener)` |
+| 所属能力 | 监听器                                                         |
+| 源码位置 | `open_im_sdk/listener.go`                                      |
+
+## WASM 调用参考
+
+WASM SDK v3.8.3 暴露以下平台方法原型。底层能力表用于说明 OpenIM core 能力和参数映射。
+
+源码位置：`src/sdk/index.ts`。
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                   |
+| -------- | -------- | -------- | ---------------------- |
+| event    | CbEvents | 是       | 需要订阅的事件名称。   |
+| listener | Function | 是       | 事件触发时执行的回调。 |
+
+## 返回结果
+
+返回 `Promise` 或注册回调结果。调用失败时 Promise reject；建议在业务层使用 `try/catch` 或 `.catch()` 处理错误。
+
+## 代码示例
+
+WASM 使用事件订阅方式接收回调。按需要替换事件名和处理函数。
+
+```ts showLineNumbers
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const openIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## 相关类型
+
+- [自定义业务监听器](/docs/chat/sdk/v4/wasm/models/on-custom-business-listener)（`OnCustomBusinessListener`）：自定义业务消息监听器。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/wasm/event-handler/overview)

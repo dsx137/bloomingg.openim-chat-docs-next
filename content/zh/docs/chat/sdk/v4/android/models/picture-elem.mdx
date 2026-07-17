@@ -1,0 +1,27 @@
+---
+title: '图片消息元素'
+description: '说明 Android SDK PictureElem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/picture-elem'
+---
+
+`PictureElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.PictureElem`。图片消息元素，包含图片路径、地址和多尺寸图片信息。
+
+## 字段说明
+
+| 字段名称        | Java 类型                                                      | 描述                             |
+| --------------- | -------------------------------------------------------------- | -------------------------------- |
+| sourcePath      | String                                                         | 原始图片的本地资源路径。         |
+| sourcePicture   | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 原始图片的尺寸、大小和访问地址。 |
+| bigPicture      | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 大图版本的尺寸、大小和访问地址。 |
+| snapshotPicture | [`PictureInfo`](/docs/chat/sdk/v4/android/models/picture-info) | 缩略图版本的尺寸、大小和地址。   |
+
+## 关联类型
+
+- [图片资源信息](/docs/chat/sdk/v4/android/models/picture-info)（`PictureInfo`）：图片资源信息，包含 UUID、URL、尺寸和大小。

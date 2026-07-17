@@ -1,0 +1,34 @@
+---
+title: '连接状态监听器'
+description: '说明 Android SDK OnConnListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-conn-listener'
+---
+
+`OnConnListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnConnListener`。SDK 连接状态和登录票据状态监听器。
+
+## 类型说明
+
+只有调用 `login` 后，SDK 才会建立长连接并开始触发连接状态回调。初次连接和断线重连使用同一组回调。
+
+## 回调方法
+
+| 方法               | 参数                       | 描述                                                                                                                                                                                          |
+| ------------------ | -------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onConnectFailed    | `int code`；`String error` | WebSocket 建连或建连后的首次订阅信息发送失败时触发。`code` 是 SDK [错误码](/docs/chat/sdk/v4/android/error-codes)，当前网络失败路径返回网络错误码；`error` 是底层错误信息，可用于日志和诊断。 |
+| onConnectSuccess   | 无                         | WebSocket 建连成功并完成首次订阅信息发送后触发，初次登录连接和断线重连成功都会进入此回调。此时才可把连接状态标记为可用。                                                                      |
+| onConnecting       | 无                         | 每次准备发起 WebSocket 初次连接或重连尝试时触发，早于成功或失败回调。可据此展示连接中状态，但不要把它当作登录成功。                                                                           |
+| onKickedOffline    | 无                         | 服务端返回 token 被踢错误时触发，通常表示同一账号在其他端登录或服务端执行了踢下线。core 对同一登录周期只通知一次，并随后执行登出流程。                                                        |
+| onUserTokenExpired | 无                         | 服务端返回 token 已过期错误时触发。core 对同一登录周期只通知一次，并随后执行登出流程；业务端应重新获取 token 后再登录。                                                                       |
+| onUserTokenInvalid | `String error`             | 服务端判定 token 无效、格式错误、尚未生效、不存在或无法识别时触发。`error` 是 core 返回的具体错误文本；core 对同一登录周期只通知一次，并随后执行登出流程。                                    |
+
+## 相关页面
+
+- [初始化 SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)
+- [错误码](/docs/chat/sdk/v4/android/error-codes)

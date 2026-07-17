@@ -1,0 +1,88 @@
+---
+title: 'Get group member list by join time filter'
+description: 'Explains the Android core binding method GetGroupMemberListByJoinTimeFilter, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/group-members/get-group-member-list-by-join-time-filter'
+---
+
+Use `GetGroupMemberListByJoinTimeFilter` for get group member list by join time filter in the OpenIM Android SDK.
+
+## Feature
+
+Reads get group member list by join time filter from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                                                                                         |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Method signature | `GetGroupMemberListByJoinTimeFilter(callback Base, operationID string, groupID string, offset int32, count int32, joinTimeBegin int64, joinTimeEnd int64, filterUserIDList string)` |
+| Capability       | Groups                                                                                                                                                                              |
+| Source file      | `open_im_sdk/group.go`                                                                                                                                                              |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void getGroupMemberListByJoinTime(OnBase<List<GroupMembersInfo>> base, String groupID,
+                                         int offset, int count, long joinTimeBegin,
+                                         long joinTimeEnd, List<String> excludeUserIDList)
+```
+
+## Input Parameters
+
+| Parameter           | Type                                                                                                                                     | Description                                               |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `callBack`          | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[Group Members Info](/docs/chat/sdk/v4/android/models/group-members-info)`>>` | Async callback for success and failure results.           |
+| `groupID`           | String                                                                                                                                   | Group ID.                                                 |
+| `offset`            | int                                                                                                                                      | Pagination offset.                                        |
+| `count`             | int                                                                                                                                      | Number of records to return.                              |
+| `joinTimeBegin`     | int                                                                                                                                      | Parameter passed according to the core binding signature. |
+| `joinTimeEnd`       | int                                                                                                                                      | Parameter passed according to the core binding signature. |
+| `excludeUserIDList` | `List<String>`                                                                                                                           | List of user IDs, usually encoded as JSON.                |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.getGroupMemberListByJoinTime(
+    new OnBase<List<GroupMembersInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(List<GroupMembersInfo> data) {
+        // TODO: handle the callback result
+    }
+},
+    groupID,
+    offset,
+    count,
+    joinTimeBegin,
+    joinTimeEnd,
+    excludeUserIDList
+);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Group Members Info](/docs/chat/sdk/v4/android/models/group-members-info) (`GroupMembersInfo`): GroupMembersInfo used by this Android SDK type.

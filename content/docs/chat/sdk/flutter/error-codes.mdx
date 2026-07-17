@@ -1,18 +1,174 @@
 ---
-title: 'Error Codes'
-description: 'OpenIM · SDK · Flutter · v4 documentation scaffold for Error Codes. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+title: 'Error codes'
+description: 'Enumerates the error codes defined in SDK core and server source for Flutter SDK v3.8.3.'
 product: 'sdk'
-context: 'chat/sdk/flutter'
+context: 'chat/sdk/v4/flutter'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-09'
 version: 'v4'
 platform: 'flutter'
-sourcePath: '/sdk/flutter/error-codes'
+sourcePath: '/docs/chat/sdk/v4/flutter/error-codes'
 ---
+## SDK Core Error Codes
 
-<DocScaffold
-  route="/sdk/flutter/error-codes"
-  context="SDKs · Flutter · v4"
-  sourceTitle="Error Codes"
-/>
+### General Errors
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10000` | `NetworkError` | `Network error` | Network error. |
+| `10001` | `NetworkTimeoutError` | `Network timeout error` | Network timeout. |
+| `10002` | `ArgsError` | `Invalid input arguments` | Invalid input arguments. |
+| `10003` | `CtxDeadlineExceededError` | `Context deadline exceeded` | Context deadline exceeded. |
+| `10004` | `ResourceLoadNotCompleteError` | `Resource initialization incomplete` | SDK resources are not fully initialized. |
+| `10005` | `UnknownCode` | `Unrecognized code` | Unknown SDK error code. |
+| `10006` | `SdkInternalError` | `Internal SDK error` | Internal SDK error. |
+| `10007` | `NoUpdateError` | `No updates available` | No update is available. |
+
+### User And Login
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10100` | `UserIDNotFoundError` | `User ID not found` | The user ID does not exist or is not registered. |
+| `10101` | `LoginOutError` | `User has logged out` | The user has logged out. |
+| `10102` | `LoginRepeatError` | `User has logged in repeatedly` | The user logged in repeatedly. |
+
+### Message
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10200` | `FileNotFoundError` | `File not found` | File or record not found. |
+| `10201` | `MsgDeCompressionError` | `Message decompression failed` | Message decompression failed. |
+| `10202` | `MsgDecodeBinaryWsError` | `Message binary WebSocket decoding failed` | Binary WebSocket message decoding failed. |
+| `10203` | `MsgBinaryTypeNotSupportError` | `Message type not supported` | Binary message type is not supported. |
+| `10204` | `MsgRepeatError` | `Only failed messages can be resent` | Duplicate message; normally only failed messages can be resent. |
+| `10205` | `MsgContentTypeNotSupportError` | `Message content type not supported` | Message content type is not supported. |
+| `10206` | `MsgHasNoSeqError` | `Message has no sequence number` | The message has no seq. |
+| `10207` | `MsgHasDeletedError` | `Message has been deleted` | The message has been deleted. |
+
+### Conversation
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10301` | `NotSupportOptError` | `Operation not supported for supergroup` | Operation is not supported. |
+| `10302` | `NotSupportTypeError` | `Only supergroup type supported` | Type is not supported. |
+| `10303` | `UnreadCountError` | `Unread count is zero` | Unread count is zero. |
+
+### Group
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10400` | `GroupIDNotFoundError` | `Group ID not found` | Group ID not found. |
+| `10401` | `GroupTypeErr` | `Invalid group type` | Invalid group type. |
+
+## Server Error Codes
+
+### Success And Unknown Error
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `0` | `NoError` | `No error` | Success. |
+| `1000` | `UnknownCode` | Used when the code cannot be parsed or parses to 0. | Unknown error code. |
+
+### Account And Authentication Extension Errors
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `10001` | `FormattingError` | `Error in formatting` | Formatting error. |
+| `10002` | `HasRegistered` | `user has already registered` | User has already registered. |
+| `10003` | `NotRegistered` | `user is not registered` | User is not registered. |
+| `10004` | `PasswordErr` | `Password error` | Password error. |
+| `10005` | `GetIMTokenErr` | `Error in getting IM token` | Failed to get IM token. |
+| `10006` | `RepeatSendCode` | `Repeat sending code` | Verification code sent repeatedly. |
+| `10007` | `MailSendCodeErr` | `Error in sending code via email` | Failed to send code by email. |
+| `10008` | `SmsSendCodeErr` | `Error in sending code via SMS` | Failed to send code by SMS. |
+| `10009` | `CodeInvalidOrExpired` | `Code is invalid or expired` | Verification code is invalid or expired. |
+| `10010` | `RegisterFailed` | `Registration failed` | Registration failed. |
+| `10011` | `ResetPasswordFailed` | `Resetting password failed` | Password reset failed. |
+| `10012` | `RegisterLimit` | `Registration limit exceeded` | Registration limit exceeded. |
+| `10013` | `LoginLimit` | `Login limit exceeded` | Login limit exceeded. |
+| `10014` | `InvitationError` | `Error in invitation` | Invitation error. |
+
+### General And Infrastructure
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `500` | `ServerInternalError` | `ServerInternalError` | Internal server error. |
+| `1001` | `ArgsError` | `ArgsError` | Invalid arguments. |
+| `1002` | `NoPermissionError` | `NoPermissionError` | No permission. |
+| `1003` | `DuplicateKeyError` | `DuplicateKeyError` | Duplicate key or duplicate data. |
+| `1004` | `RecordNotFoundError` | `RecordNotFoundError` | Record not found. |
+| `80000` | `CallbackError` | `CallbackError` / `ErrCallbackContinue` | Callback error or callback continue. |
+| `90002` | `DatabaseError` | `DatabaseError` | Database, Redis, or storage error. |
+| `90004` | `NetworkError` | `NetworkError` | Network error. |
+| `90007` | `DataError` | `DataError` | Data error. |
+
+### Account
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1101` | `UserIDNotFoundError` | `UserIDNotFoundError` | User ID does not exist or is not registered. |
+| `1102` | `RegisteredAlreadyError` | `RegisteredAlreadyError` | User has already registered. |
+
+### Group
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1201` | `GroupIDNotFoundError` | `GroupIDNotFoundError` | Group ID not found. |
+| `1202` | `GroupIDExisted` | `GroupIDExisted` | Group ID already exists. |
+| `1203` | `NotInGroupYetError` | `NotInGroupYetError` | User has not joined the group. |
+| `1204` | `DismissedAlreadyError` | `DismissedAlreadyError` | Group has already been dismissed. |
+| `1205` | `GroupTypeNotSupport` | Empty string | Group type is not supported. |
+| `1206` | `GroupRequestHandled` | `GroupRequestHandled` | Group request has already been handled. |
+
+### Friends And Relationships
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1301` | `CanNotAddYourselfError` | `CanNotAddYourselfError` | Cannot add yourself as a friend. |
+| `1302` | `BlockedByPeer` | `BlockedByPeer` | Blocked by the peer user. |
+| `1303` | `NotPeersFriend` | `NotPeersFriend` | Not a friend of the peer user. |
+| `1304` | `RelationshipAlreadyError` | `RelationshipAlreadyError` | Relationship already exists. |
+| `1305` | `FriendRequestHandled` | `FriendRequestHandled` | Friend request has already been handled. |
+
+### Message
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1401` | `MessageHasReadDisable` | `MessageHasReadDisable` | Message read capability is disabled. |
+| `1402` | `MutedInGroup` | `MutedInGroup` | Member is muted in the group. |
+| `1403` | `MutedGroup` | `MutedGroup` | Group is muted. |
+| `1404` | `MsgAlreadyRevoke` | `MsgAlreadyRevoke` | Message has already been revoked. |
+
+### Token
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1501` | `TokenExpiredError` | `TokenExpiredError` | Token has expired. |
+| `1502` | `TokenInvalidError` | `TokenInvalidError` | Token is invalid. |
+| `1503` | `TokenMalformedError` | `TokenMalformedError` | Token is malformed. |
+| `1504` | `TokenNotValidYetError` | `TokenNotValidYetError` | Token is not valid yet. |
+| `1505` | `TokenUnknownError` | `TokenUnknownError` | Unknown token error. |
+| `1506` | `TokenKickedError` | `TokenKickedError` | The token account was kicked offline. |
+| `1507` | `TokenNotExistError` | `TokenNotExistError` | Token does not exist. |
+
+### WebSocket Gateway And Push
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1601` | `ConnOverMaxNumLimit` | `ConnOverMaxNumLimit` | Connection count exceeds the limit. |
+| `1602` | `ConnArgsErr` | `args err, need token, sendID, platformID` | WebSocket connection arguments are invalid or missing token, sendID, or platformID. |
+| `1603` | `PushMsgErr` | `push msg err` | Failed to push message. |
+| `1604` | `IOSBackgroundPushErr` | `ios background push err` | iOS background push failed. |
+
+### Object Storage
+
+| Code | Constant | Default message or source note | Description |
+| ---- | -------- | ------------------------------ | ----------- |
+| `1701` | `FileUploadedExpiredError` | `FileUploadedExpiredError` | File upload has expired. |
+
+## WebSocket Protocol Marker
+
+| Marker value | Constant | Description |
+| ------------ | -------- | ----------- |
+| `3001` | `WSDataError` | WebSocket data error protocol marker. |

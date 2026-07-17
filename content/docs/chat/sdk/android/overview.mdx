@@ -1,18 +1,48 @@
 ---
-title: 'OpenIM SDK for Android'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for OpenIM SDK for Android. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+title: 'OpenIM Android SDK overview'
+description: 'Organizes OpenIM Android SDK v3.8.3 capabilities by lifecycle, authentication, listeners, users, groups, messages, push notifications, logging, files, and model types.'
 product: 'sdk'
-context: 'chat/sdk/android'
+context: 'chat/sdk/v4/android'
 template: 'overview'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-09'
 version: 'v4'
 platform: 'android'
-sourcePath: '/sdk/android/overview'
+sourcePath: '/docs/chat/sdk/v4/android/overview'
 ---
 
-<OverviewScaffold
-  route="/sdk/android/overview"
-  context="SDKs · Android · v4"
-  sourceTitle="OpenIM SDK for Android"
-/>
+The OpenIM Android documentation follows the current OpenIM SDK capability structure and is based on the public methods exported by Android SDK v3.8.3. Each method page focuses on the Android call style, parameters, return value, and usage boundaries.
+
+This section records how the Android platform layer maps to OpenIM core capabilities. Platform method names and parameter wrappers may differ from other SDKs; when the platform layer differs from the core export, use the Android SDK v3.8.3 prototype shown on each page.
+
+## Integration Model
+
+| Model               | Description                                                                                                             |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Initialization      | Configure the API address, WebSocket address, logs, local data directory, and connection listener.                      |
+| Login state         | Register message, conversation, friend, group, and user listeners before login to avoid missing synchronization events. |
+| Asynchronous result | Platform methods return results through Promise, Future, or callback style depending on the method page.                |
+| Message creation    | `Create*Message` methods create local message objects that are passed to sending methods.                               |
+| operationID         | Generate a unique `operationID` for each call so client and server logs can be correlated.                              |
+
+## Current Capability Pages
+
+| Page                                                                                              | Coverage                                                                                                 |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| [Android integration flow](/docs/chat/sdk/v4/android/getting-started/send-first-message)          | Initialization, listeners, login, and the order of prerequisites before sending messages.                |
+| [Overview](/docs/chat/sdk/v4/android/application/overview)                                        | SDK initialization, login, logout, login state, foreground/background state, and network changes.        |
+| [Authentication flow](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication) | Token handling, connection listener behavior, login status, and logout boundaries.                       |
+| [Overview](/docs/chat/sdk/v4/android/event-handler/overview)                                      | Connection, user, friend, group, conversation, message, custom business, and message KV callbacks.       |
+| [Overview](/docs/chat/sdk/v4/android/user/overview)                                               | User profiles, user commands, online status subscriptions, friends, and blocklist APIs.                  |
+| [Overview](/docs/chat/sdk/v4/android/group/overview)                                              | Group creation, joining, members, applications, moderation, and ownership transfer.                      |
+| [Overview](/docs/chat/sdk/v4/android/message/overview)                                            | Conversation lists, message creation, sending, history, read status, deletion, search, and typing state. |
+| [Overview](/docs/chat/sdk/v4/android/push-notifications/overview)                                 | FCM token updates and application badge management.                                                      |
+| [Overview](/docs/chat/sdk/v4/android/logger/overview)                                             | SDK log writing and log upload.                                                                          |
+| [Overview](/docs/chat/sdk/v4/android/file/overview)                                               | Uploading files to the object storage path configured for the SDK.                                       |
+| [Overview](/docs/chat/sdk/v4/android/models/overview)                                             | Data models, enums, listeners, and callback structures.                                                  |
+| [Error codes](/docs/chat/sdk/v4/android/error-codes)                                              | SDK core, server, and WebSocket protocol error code identifiers.                                         |
+| [Unsupported or unexposed capabilities](/docs/chat/sdk/v4/android/deprecated)                     | Capabilities that are not currently exported as standalone Android SDK APIs.                             |
+
+## Currently Unexposed Capabilities
+
+Android SDK v3.8.3 does not currently expose standalone methods for open groups, polls, scheduled messages, message threads, translation, independent reporting, group metadata, or counters. Add those pages after the SDK exports matching methods.

@@ -1,0 +1,66 @@
+---
+title: 'Search group members'
+description: 'Explains the Search group members method in uni-app SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/group/group-members/search-group-members'
+---
+
+Use **Search group members** when your application needs this OpenIM capability from uni-app SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `SearchGroupMembers` through the platform wrapper to search group members. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                 |
+| ---------------- | --------------------------------------------------------------------------- |
+| Method signature | `SearchGroupMembers(callback Base, operationID string, searchParam string)` |
+| Capability       | Group                                                                       |
+| Source location  | `open_im_sdk/group.go`                                                      |
+
+## uni-app Call Reference
+
+uni-app SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`ios/OpenIMUniPlugin/OpenIMUniPlugin/Classes/OpenIMModule.m`.
+
+```js showLineNumbers
+openIM.searchGroupMembers(operationID, searchOptions, callback);
+```
+
+## Parameters
+
+| Parameter     | Type     | Required   | Description                                         |
+| ------------- | -------- | ---------- | --------------------------------------------------- |
+| searchOptions | Object   | As defined | Pass according to the uni-app native plugin export. |
+| callback      | Function | Yes        | Pass according to the uni-app native plugin export. |
+
+## Return Value
+
+Synchronous creation methods return a value directly. Asynchronous methods report success or failure through the callback. Pass a traceable operationID for each call.
+
+## Code Example
+
+The following example shows the uni-app SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```js showLineNumbers
+const openIM = uni.requireNativePlugin('OpenIMUniPlugin');
+
+openIM.searchGroupMembers('operationID', {}, callback);
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/uniapp/models/base) (`Base`)
+- [Group member info](/docs/chat/sdk/v4/uniapp/models/group-members-info) (`GroupMembersInfo`)
+
+## Related pages
+
+- [Group](/docs/chat/sdk/v4/uniapp/group/overview)

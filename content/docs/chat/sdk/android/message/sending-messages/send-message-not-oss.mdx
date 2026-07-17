@@ -1,0 +1,92 @@
+---
+title: 'Send non-OSS message'
+description: 'Explains the Android core binding method SendMessageNotOss, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/sending-messages/send-message-not-oss'
+---
+
+Use `SendMessageNotOss` for send non-oss message in the OpenIM Android SDK.
+
+## Feature
+
+Sends message data through OpenIM. Use the callback to handle progress, success, and failure.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| Method signature | `SendMessageNotOss(callback SendMsgCallBack, operationID string, message, recvID, groupID string, offlinePushInfo string, isOnlineOnly bool)` |
+| Capability       | Conversations and messages                                                                                                                    |
+| Source file      | `open_im_sdk/conversation_msg.go`                                                                                                             |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void sendMessageNotOss(OnMsgSendCallback base, Message message, String recvUid,
+                              String recvGid, OfflinePushInfo offlinePushInfo)
+public void sendMessageNotOss(OnMsgSendCallback base, Message message, String recvUid,
+                              String recvGid, OfflinePushInfo offlinePushInfo, boolean isOnlineOnly)
+```
+
+## Input Parameters
+
+| Parameter         | Type                                                                          | Description                                               |
+| ----------------- | ----------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`            | [On Msg Send Callback](/docs/chat/sdk/v4/android/models/on-msg-send-callback) | Async callback for success and failure results.           |
+| `message`         | [Message](/docs/chat/sdk/v4/android/models/message)                           | Message payload or message JSON.                          |
+| `recvUid`         | String                                                                        | Parameter passed according to the core binding signature. |
+| `recvGid`         | String                                                                        | Parameter passed according to the core binding signature. |
+| `offlinePushInfo` | [Offline Push Info](/docs/chat/sdk/v4/android/models/offline-push-info)       | Parameter passed according to the core binding signature. |
+| `isOnlineOnly`    | boolean                                                                       | Parameter passed according to the core binding signature. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.sendMessageNotOss(
+    new OnMsgSendCallback() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onProgress(long progress) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(Message message) {
+        // TODO: handle the callback result
+    }
+},
+    message,
+    recvUid,
+    recvGid,
+    offlinePushInfo
+);
+```
+
+## Related Types
+
+- [Send Msg Call Back](/docs/chat/sdk/v4/android/models/send-msg-call-back) (`SendMsgCallBack`): SendMsgCallBack used by this Android SDK type.
+- [Offline Push Info](/docs/chat/sdk/v4/android/models/offline-push-info) (`OfflinePushInfo`): OfflinePushInfo used by this Android SDK type.
+- [Message](/docs/chat/sdk/v4/android/models/message) (`Message`): Message used by this Android SDK type.
+- [On Msg Send Callback](/docs/chat/sdk/v4/android/models/on-msg-send-callback) (`OnMsgSendCallback`): OnMsgSendCallback used by this Android SDK type.

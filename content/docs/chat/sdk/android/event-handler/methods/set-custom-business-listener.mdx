@@ -1,0 +1,65 @@
+---
+title: 'Set custom business listener'
+description: 'Explains the Android core binding method SetCustomBusinessListener, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-custom-business-listener'
+---
+
+Use `SetCustomBusinessListener` for set custom business listener in the OpenIM Android SDK.
+
+## Feature
+
+Registers or replaces the listener used to receive set custom business listener. Register listeners before login when you need login-time synchronization events.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                    |
+| ---------------- | -------------------------------------------------------------- |
+| Method signature | `SetCustomBusinessListener(listener OnCustomBusinessListener)` |
+| Capability       | Event listeners                                                |
+| Source file      | `open_im_sdk/listener.go`                                      |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void setCustomBusinessListener(OnCustomBusinessListener customBusinessListener)
+```
+
+## Input Parameters
+
+| Parameter                | Type                                                                                        | Description                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `customBusinessListener` | [On Custom Business Listener](/docs/chat/sdk/v4/android/models/on-custom-business-listener) | Parameter passed according to the core binding signature. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().setCustomBusinessListener(new OnCustomBusinessListener() {
+    @Override
+    public void onRecvCustomBusinessMessage(String message) {
+        // TODO: handle the callback result
+    }
+});
+```
+
+## Related Types
+
+- [On Custom Business Listener](/docs/chat/sdk/v4/android/models/on-custom-business-listener) (`OnCustomBusinessListener`): OnCustomBusinessListener used by this Android SDK type.

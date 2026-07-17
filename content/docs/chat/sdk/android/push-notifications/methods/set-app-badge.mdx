@@ -1,0 +1,46 @@
+---
+title: 'Set app badge'
+description: 'Explains the Android core binding method SetAppBadge, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/push-notifications/methods/set-app-badge'
+---
+
+Use `SetAppBadge` for set app badge in the OpenIM Android SDK.
+
+## Feature
+
+SetAppBadge provides the Android SDK operation for set app badge.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                            |
+| ---------------- | ---------------------------------------------------------------------- |
+| Method signature | `SetAppBadge(callback Base, operationID string, appUnreadCount int32)` |
+| Capability       | Push notifications                                                     |
+| Source file      | `open_im_sdk/third.go`                                                 |
+
+## Input Parameters
+
+| Parameter        | Type                                          | Description                                     |
+| ---------------- | --------------------------------------------- | ----------------------------------------------- |
+| `callback`       | [Base](/docs/chat/sdk/v4/android/models/base) | Async callback for success and failure results. |
+| `operationID`    | `string`                                      | Trace ID for this operation.                    |
+| `appUnreadCount` | `int32`                                       | Number of records to return.                    |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.

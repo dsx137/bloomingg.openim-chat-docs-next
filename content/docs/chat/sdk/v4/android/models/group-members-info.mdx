@@ -1,0 +1,35 @@
+---
+title: 'Group Members Info'
+description: 'Explains the Android SDK GroupMembersInfo type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/group-members-info'
+---
+
+`GroupMembersInfo` is an Android SDK data model. Full class name: `io.openim.android.sdk.models.GroupMembersInfo`.
+
+## Fields
+
+| Field            | Java type | Description                                 |
+| ---------------- | --------- | ------------------------------------------- |
+| `groupID`        | `String`  | Group ID.                                   |
+| `userID`         | `String`  | User ID.                                    |
+| `nickname`       | `String`  | Nickname.                                   |
+| `faceURL`        | `String`  | Avatar URL.                                 |
+| `roleLevel`      | `int`     | SDK field returned or submitted by the SDK. |
+| `joinTime`       | `long`    | SDK field returned or submitted by the SDK. |
+| `joinSource`     | `int`     | SDK field returned or submitted by the SDK. |
+| `operatorUserID` | `String`  | SDK field returned or submitted by the SDK. |
+| `ex`             | `String`  | Extension field.                            |
+| `muteEndTime`    | `long`    | SDK field returned or submitted by the SDK. |
+| `inviterUserID`  | `String`  | SDK field returned or submitted by the SDK. |
+
+## Related Types
+
+- [Group Role](/docs/chat/sdk/v4/android/models/group-role) (`GroupRole`): GroupRole used by this Android SDK type.
+- [Join Source](/docs/chat/sdk/v4/android/models/join-source) (`JoinSource`): JoinSource used by this Android SDK type.

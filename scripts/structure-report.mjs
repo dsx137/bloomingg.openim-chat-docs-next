@@ -78,7 +78,7 @@ function renderMarkdown(value) {
 ## 当前保留范围
 
 - Chat 文档入口。
-- SDK v4 的当前指南页：iOS、Android、Flutter、uni-app、WASM、Electron、小程序、React Native、Unity。
+- SDK v4 的当前指南页：iOS、Android、Flutter、uni-app、WASM、Electron、小程序、React Native。
 - Platform API v3 的当前指南与接口页。
 - 不包含 UIKit、SDK v3、旧兼容路由或手写 SDK Reference 占位页。
 

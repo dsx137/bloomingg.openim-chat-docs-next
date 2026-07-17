@@ -1,0 +1,73 @@
+---
+title: '按消息 ID 标记已读'
+description: '说明 Android core binding 方法 MarkMessagesAsReadByMsgID 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-messages-as-read-by-msg-id'
+---
+
+按消息 ID 精确标记已读，适合只确认一部分消息已读的场景。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                       |
+| -------- | ---------------------------------------------------------------------------------------------------------- |
+| 方法签名 | `MarkMessagesAsReadByMsgID(callback Base, operationID string, conversationID string, clientMsgIDs string)` |
+| 所属能力 | 会话与消息                                                                                                 |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                                          |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void markMessagesAsReadByMsgID(String conversationID, List<String> clientMsgIDs, OnBase<String> callBack)
+```
+
+该方法在 Android SDK 中已标记为 `@Deprecated`，优先使用 `markConversationMessageAsRead` 按会话标记已读。
+
+## 输入参数
+
+| 参数名称       | Java 类型                                                      | 是否必填 | 描述                               |
+| -------------- | -------------------------------------------------------------- | -------- | ---------------------------------- |
+| conversationID | `String`                                                       | 是       | 要更新已读状态的会话 ID。          |
+| clientMsgIDs   | `List<String>`                                                 | 是       | 要标记为已读的客户端消息 ID 列表。 |
+| callBack       | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<String>` | 是       | 标记已读结果回调。                 |
+
+## 返回结果
+
+`onSuccess` 表示指定客户端消息 ID 已完成已读处理；该方法在当前 core 中已标记为 deprecated，新的业务流程优先使用整会话已读方法。会话、消息或回执处理失败时调用 `onError`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.markMessagesAsReadByMsgID(conversationID, clientMsgIDs, new OnBase<String>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(String data) {
+        // TODO: 处理成功结果
+    }
+});
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview)

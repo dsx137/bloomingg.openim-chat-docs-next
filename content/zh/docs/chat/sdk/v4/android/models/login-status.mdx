@@ -1,0 +1,26 @@
+---
+title: '登录状态'
+description: '说明 Android SDK LoginStatus 类型的用途和取值。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/login-status'
+---
+
+`LoginStatus` 是 Android SDK 的枚举常量，完整类名为 `io.openim.android.sdk.enums.LoginStatus`。SDK 登录状态常量。
+
+## 取值说明
+
+| 常量    | 值  | 描述                                                                           |
+| ------- | --- | ------------------------------------------------------------------------------ |
+| Logout  | 1   | 未登录或已经完成退出；此时不能调用要求登录态的用户、群组、会话和消息接口。     |
+| Logging | 2   | 正在执行登录初始化，包括加载本地资源、建立连接和准备同步；尚不能视为登录完成。 |
+| Logged  | 3   | 登录流程已完成，SDK 已进入用户态；连接断开重连期间仍可能保持该登录状态。       |
+
+## 相关页面
+
+- [获取登录状态](/docs/chat/sdk/v4/android/application/methods/get-login-status)

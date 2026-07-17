@@ -1,0 +1,35 @@
+---
+title: 'On Friendship Listener'
+description: 'Explains the Android SDK OnFriendshipListener type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-friendship-listener'
+---
+
+`OnFriendshipListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnFriendshipListener`.
+
+## Callback Methods
+
+| Method                        | Parameters                                                                               | Description                          |
+| ----------------------------- | ---------------------------------------------------------------------------------------- | ------------------------------------ |
+| `onBlacklistAdded`            | [Blacklist Info](/docs/chat/sdk/v4/android/models/blacklist-info) info                   | Called when this event is triggered. |
+| `onBlacklistDeleted`          | [Blacklist Info](/docs/chat/sdk/v4/android/models/blacklist-info) info                   | Called when this event is triggered. |
+| `onFriendApplicationAccepted` | [Friend Application Info](/docs/chat/sdk/v4/android/models/friend-application-info) info | Called when this event is triggered. |
+| `onFriendApplicationAdded`    | [Friend Application Info](/docs/chat/sdk/v4/android/models/friend-application-info) info | Called when this event is triggered. |
+| `onFriendApplicationDeleted`  | [Friend Application Info](/docs/chat/sdk/v4/android/models/friend-application-info) info | Called when this event is triggered. |
+| `onFriendApplicationRejected` | [Friend Application Info](/docs/chat/sdk/v4/android/models/friend-application-info) info | Called when this event is triggered. |
+| `onFriendInfoChanged`         | [Friend Info](/docs/chat/sdk/v4/android/models/friend-info) info                         | Called when this event is triggered. |
+| `onFriendAdded`               | [Friend Info](/docs/chat/sdk/v4/android/models/friend-info) info                         | Called when this event is triggered. |
+| `onFriendDeleted`             | [Friend Info](/docs/chat/sdk/v4/android/models/friend-info) info                         | Called when this event is triggered. |
+
+## Related Types
+
+- [Friend Application Info](/docs/chat/sdk/v4/android/models/friend-application-info) (`FriendApplicationInfo`): FriendApplicationInfo used by this Android SDK type.
+- [Friend Info](/docs/chat/sdk/v4/android/models/friend-info) (`FriendInfo`): FriendInfo used by this Android SDK type.
+- [Blacklist Info](/docs/chat/sdk/v4/android/models/blacklist-info) (`BlacklistInfo`): BlacklistInfo used by this Android SDK type.
+- [User Info](/docs/chat/sdk/v4/android/models/user-info) (`UserInfo`): User profile object.

@@ -1,69 +1,64 @@
 {
-  "generatedAt": "2026-06-30T08:46:28.867Z",
+  "generatedAt": "2026-07-09T10:13:39.121Z",
   "scope": "current-only",
-  "pageCount": 633,
-  "contextCount": 10,
+  "pageCount": 1735,
+  "contextCount": 9,
   "byProduct": {
     "chat": 1,
-    "platform-api": 25,
-    "sdk": 607
+    "platform-api": 109,
+    "sdk": 1625
   },
   "byTemplate": {
-    "api": 22,
-    "guide": 598,
+    "api": 98,
+    "guide": 1554,
     "landing": 1,
-    "overview": 12
+    "overview": 82
   },
   "contexts": [
     {
-      "key": "chat/platform-api",
+      "key": "chat/platform-api/v3",
       "title": "Platform API",
-      "pageCount": 25
+      "pageCount": 109
     },
     {
-      "key": "chat/sdk/ios",
+      "key": "chat/sdk/v4/ios",
       "title": "SDKs · iOS · v4",
-      "pageCount": 128
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/android",
+      "key": "chat/sdk/v4/android",
       "title": "SDKs · Android · v4",
-      "pageCount": 131
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/flutter",
+      "key": "chat/sdk/v4/flutter",
       "title": "SDKs · Flutter · v4",
-      "pageCount": 123
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/uniapp",
+      "key": "chat/sdk/v4/uniapp",
       "title": "SDKs · uni-app · v4",
-      "pageCount": 1
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/wasm",
+      "key": "chat/sdk/v4/wasm",
       "title": "SDKs · WASM · v4",
-      "pageCount": 126
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/electron",
+      "key": "chat/sdk/v4/electron",
       "title": "SDKs · Electron · v4",
-      "pageCount": 1
+      "pageCount": 232
     },
     {
-      "key": "chat/sdk/miniprogram",
+      "key": "chat/sdk/v4/miniprogram",
       "title": "SDKs · Mini Program · v4",
       "pageCount": 1
     },
     {
-      "key": "chat/sdk/react-native",
+      "key": "chat/sdk/v4/react-native",
       "title": "SDKs · React Native · v4",
-      "pageCount": 1
-    },
-    {
-      "key": "chat/sdk/unity",
-      "title": "SDKs · Unity · v4",
-      "pageCount": 95
+      "pageCount": 232
     }
   ]
 }

@@ -1,0 +1,50 @@
+---
+title: '好友关系监听器'
+description: '说明 Android SDK OnFriendshipListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-friendship-listener'
+---
+
+`OnFriendshipListener` 是 Android SDK 的监听器，完整类名为 `io.openim.android.sdk.listener.OnFriendshipListener`。好友、好友申请和黑名单变化监听器。
+
+## 回调方法
+
+| 方法                        | 参数                                                                                       | 描述                                                                                                                                                       |
+| --------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| onBlacklistAdded            | [`BlacklistInfo`](/docs/chat/sdk/v4/android/models/blacklist-info) `info`                  | 黑名单同步发现一条新增记录时触发，通常发生在当前用户把对方加入黑名单后。`info.userID` 标识被加入黑名单的用户，其他字段是该用户的资料和添加信息。           |
+| onBlacklistDeleted          | [`BlacklistInfo`](/docs/chat/sdk/v4/android/models/blacklist-info) `info`                  | 黑名单同步发现一条本地记录已被删除时触发，通常发生在当前用户把对方移出黑名单后。`info` 是删除前的黑名单用户资料，可通过 `userID` 定位用户。                |
+| onFriendApplicationAccepted | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到好友申请已同意通知时触发，随后 core 会同步好友列表。`info` 中的 `fromUserID`、`toUserID` 标识申请双方，`handleResult`、`handleTime` 表示处理结果。 |
+| onFriendApplicationAdded    | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到新的好友申请通知时触发。`info.fromUserID` 是申请人，`toUserID` 是接收人，`reqMsg` 和 `createTime` 分别是申请备注和申请时间。                       |
+| onFriendApplicationDeleted  | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | 当前 Go core 仅保留该接口，好友申请通知和同步流程中没有触发调用。业务代码不应依赖此回调删除申请记录，应在申请处理后重新查询申请列表。                      |
+| onFriendApplicationRejected | [`FriendApplicationInfo`](/docs/chat/sdk/v4/android/models/friend-application-info) `info` | SDK 收到好友申请已拒绝通知时触发。`info.handleResult` 表示拒绝结果，`handlerUserID`、`handleMsg` 和 `handleTime` 分别是处理人、处理备注和处理时间。        |
+| onFriendInfoChanged         | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现现有好友资料变化时触发，例如昵称、头像、备注或扩展字段变化。`info` 是更新后的好友资料，`userID` 标识发生变化的好友。                           |
+| onFriendAdded               | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现一条新增好友记录时触发，常见于好友申请通过或服务端直接添加好友。`info` 是新增好友的完整资料。                                                  |
+| onFriendDeleted             | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info) `info`                        | 好友同步发现一条本地好友记录已被删除时触发。`info` 是删除前的好友资料，可通过 `userID` 更新好友列表和相关单聊界面。                                        |
+
+## 关联类型
+
+- [好友申请信息](/docs/chat/sdk/v4/android/models/friend-application-info)（`FriendApplicationInfo`）：好友申请记录，包含申请人、接收人、处理状态和备注。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/android/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
+- [用户信息](/docs/chat/sdk/v4/android/models/user-info)（`UserInfo`）：用户资料对象。
+
+## 相关页面
+
+- [监听好友事件](/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener)
+- [加入黑名单](/docs/chat/sdk/v4/android/user/blacklist/methods/add-black)
+- [获取黑名单列表](/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list)
+- [移出黑名单](/docs/chat/sdk/v4/android/user/blacklist/methods/remove-black)
+- [概述](/docs/chat/sdk/v4/android/user/overview#黑名单)
+- [同意好友申请](/docs/chat/sdk/v4/android/user/friend/methods/accept-friend-application)
+- [发送好友申请](/docs/chat/sdk/v4/android/user/friend/methods/add-friend)
+- [校验好友关系](/docs/chat/sdk/v4/android/user/friend/methods/check-friend)
+- [删除好友](/docs/chat/sdk/v4/android/user/friend/methods/delete-friend)
+- [获取发出的好友申请](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-applicant)
+- [获取收到的好友申请](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-list-as-recipient)
+- [获取未处理好友申请数](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-application-unhandled-count)

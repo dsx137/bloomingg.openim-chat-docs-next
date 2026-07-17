@@ -1,0 +1,49 @@
+---
+title: 'Authentication flow'
+description: 'Explains the authentication flow, token boundaries, and login-state handling for React Native SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/application/authenticating-a-user/authentication'
+---
+Authentication uses a user token issued by your backend service. The client initializes the SDK, registers listeners, logs in with userID and token, and keeps UI state in sync with connection events and login status.
+
+## Authentication Order
+
+| Step | Action | Description |
+| ---- | ------ | ----------- |
+| 1 | Get userID and token | Request the current user's OpenIM userID and token from your backend service. |
+| 2 | Initialize the SDK | Call [Initialize the SDK](/docs/chat/sdk/v4/react-native/application/methods/init-sdk) with API address, WebSocket address, platform information, and log settings. |
+| 3 | Register listeners | Register at least the connection listener. Register conversation, message, friend, group, and user listeners before login when those events are needed. |
+| 4 | Log in | Call [Login](/docs/chat/sdk/v4/react-native/application/methods/login) with userID and token. |
+| 5 | Handle state | Use connection callbacks, [Get login status](/docs/chat/sdk/v4/react-native/application/methods/get-login-status), and API results to decide when user-scoped APIs are available. |
+| 6 | Logout or refresh token | When the token expires, becomes invalid, or the user is kicked offline, call [Log out](/docs/chat/sdk/v4/react-native/application/methods/logout) and refresh the token before logging in again if needed. |
+
+## Token Boundaries
+
+| Scenario | Handling |
+| -------- | -------- |
+| Token expired | Refresh the token through your backend, then call login again. |
+| Token invalid | Check userID, platform, issuing environment, and server time. |
+| Kicked offline | Notify the user through connection or login-state events, then follow your account-switch or re-login policy. |
+| User logs out | Call `Logout`, then clear app-level user state and page state. |
+
+## Related Error Codes
+
+| Code | Meaning |
+| ---- | ------- |
+| `1501` | Token expired. |
+| `1502` | Token invalid. |
+| `1503` | Token malformed. |
+| `1506` | Token account was kicked offline. |
+| `1507` | Token does not exist. |
+
+## Related Pages
+
+- [SDK lifecycle](/docs/chat/sdk/v4/react-native/application/overview)
+- [Event handlers](/docs/chat/sdk/v4/react-native/event-handler/overview)
+- [Error codes](/docs/chat/sdk/v4/react-native/error-codes)

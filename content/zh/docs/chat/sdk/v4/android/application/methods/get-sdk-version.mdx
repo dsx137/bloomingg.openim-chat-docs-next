@@ -1,0 +1,40 @@
+---
+title: '获取 SDK 版本'
+description: '说明 Android core binding 方法 GetSdkVersion 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/get-sdk-version'
+---
+
+获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## Core Binding 方法
+
+| 项目     | 说明                        |
+| -------- | --------------------------- |
+| 方法签名 | `GetSdkVersion() string`    |
+| 所属能力 | SDK 生命周期                |
+| 源码位置 | `open_im_sdk/init_login.go` |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 的 `OpenIMClient` 和各 Manager 均未公开获取 core 版本的方法。`GetSdkVersion()` 是无需初始化即可同步调用的底层导出函数，但不能通过该版本的公开 Java API 直接访问；上表用于核对底层能力，不代表存在同名 Java 方法。
+
+## 输入参数
+
+无输入参数。
+
+## 返回结果
+
+底层同步返回 `string`，值来自 core 构建时的 `version.Version`。Android v3.8.3 没有对应公开调用，因此本页不提供无法运行的 Java 示例。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)

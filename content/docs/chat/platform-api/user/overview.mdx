@@ -1,0 +1,42 @@
+---
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-03"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/overview"
+---
+
+The user module maps business accounts to OpenIM users and manages profile data, online status, status subscriptions, and notification accounts.
+
+## Capability scope
+
+| Capability | Description |
+| --- | --- |
+| User registration | Register business user IDs with nickname, avatar, and extension data. |
+| Profile maintenance | Update profile fields and global message receiving options. |
+| User queries | List users, fetch profiles, and check account existence. |
+| Presence | Query online status, subscribed status, and online token details. |
+| Notification accounts | Create, update, and search system notification accounts. |
+
+## Common APIs
+
+- [Create a user](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [Update a user](/docs/chat/platform-api/v3/user/managing-users/update-a-user)
+- [List users](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [Get online status](/docs/chat/platform-api/v3/user/presence/get-users-online-status)
+- [Add a notification account](/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account)
+
+## Integration advice
+
+Use your business system as the source of truth for user IDs.
+
+Let clients request login credentials from your backend, then let the backend issue OpenIM user tokens.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

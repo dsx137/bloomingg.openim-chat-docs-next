@@ -1,0 +1,101 @@
+---
+title: "概述"
+description: "OpenIM Platform API 关系模块概览，覆盖好友申请、好友列表、好友关系管理和黑名单。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/relation/overview"
+---
+
+关系模块面向可信后端服务，用于管理 OpenIM 用户之间的好友关系、好友申请、好友资料扩展和黑名单等用户关系数据。它属于用户关系能力，不放在内容审核模块中；黑名单虽然有治理含义，但数据归属仍是用户关系。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 好友申请 | 发起好友申请、查询收到或发出的申请，并处理同意或拒绝。 |
+| 好友查询 | 分页读取好友列表，或按指定好友 ID 批量获取好友资料。 |
+| 好友管理 | 删除好友、导入好友关系，并批量更新备注、置顶和扩展字段。 |
+| 黑名单 | 将用户加入黑名单、移出黑名单，并分页查询黑名单列表。 |
+
+## 常用接口
+
+- [申请添加好友](/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend)
+- [处理好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/respond-friend-apply)
+- [查询收到的好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/list-received-friend-requests)
+- [查询发出的好友申请](/docs/chat/platform-api/v3/relation/managing-friend-requests/list-sent-friend-requests)
+- [查询好友列表](/docs/chat/platform-api/v3/relation/listing-friends/list-friends)
+- [获取指定好友](/docs/chat/platform-api/v3/relation/listing-friends/get-designated-friends)
+- [删除好友](/docs/chat/platform-api/v3/relation/managing-friends/delete-friend)
+- [导入好友](/docs/chat/platform-api/v3/relation/managing-friends/import-friends)
+- [更新好友](/docs/chat/platform-api/v3/relation/managing-friends/update-friends)
+- [加入黑名单](/docs/chat/platform-api/v3/relation/blacklist/add-black)
+- [查询黑名单](/docs/chat/platform-api/v3/relation/blacklist/list-blacks)
+- [移出黑名单](/docs/chat/platform-api/v3/relation/blacklist/remove-black)
+
+## 资源表示
+
+关系模块的资源对象描述用户之间的关系状态，包括好友关系、好友申请和黑名单。黑名单虽然有治理含义，但对象归属仍在关系模块。
+
+### FriendInfo
+
+`FriendInfo` 表示当前用户与某个好友之间的关系资料。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| ownerUserID | string | 好友关系所有者用户 ID。 |
+| remark | string | 好友备注。 |
+| createTime | int64 | 好友关系创建时间，通常为 Unix 毫秒时间戳。 |
+| friendUser | object | 好友用户资料，结构为[用户模块的 `UserInfo`](/docs/chat/platform-api/v3/user/overview#userinfo)。 |
+| addSource | int | 好友添加来源。 |
+| operatorUserID | string | 建立或更新该关系的操作者用户 ID。 |
+| ex | string | 好友关系扩展字段。 |
+| isPinned | boolean | 是否置顶该好友关系。 |
+
+### FriendRequestInfo
+
+`FriendRequestInfo` 表示一条好友申请记录。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| fromUserID | string | 申请发起用户 ID。 |
+| fromNickname | string | 申请发起用户昵称。 |
+| fromFaceURL | string | 申请发起用户头像 URL。 |
+| toUserID | string | 申请接收用户 ID。 |
+| toNickname | string | 申请接收用户昵称。 |
+| toFaceURL | string | 申请接收用户头像 URL。 |
+| handleResult | int | 处理结果，例如待处理、同意或拒绝。 |
+| reqMsg | string | 申请说明。 |
+| createTime | int64 | 申请创建时间。 |
+| handlerUserID | string | 处理申请的用户 ID。 |
+| handleMsg | string | 处理说明。 |
+| handleTime | int64 | 申请处理时间。 |
+| ex | string | 好友申请扩展字段。 |
+
+### BlackInfo
+
+`BlackInfo` 表示用户黑名单关系。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| ownerUserID | string | 黑名单所有者用户 ID。 |
+| createTime | int64 | 加入黑名单时间。 |
+| blackUserInfo | object | 被加入黑名单的用户公开资料，结构为[用户模块的 `PublicUserInfo`](/docs/chat/platform-api/v3/user/overview#publicuserinfo)。 |
+| addSource | int | 加入黑名单来源。 |
+| operatorUserID | string | 操作者用户 ID。 |
+| ex | string | 黑名单扩展字段。 |
+
+## 接入建议
+
+好友关系应由业务后端统一判断是否允许建立、删除或导入。调用 OpenIM 前，先确认两个用户在业务系统中存在，并记录操作者、来源和原因；需要风控时可以结合回调或业务审批流程。
+
+黑名单应作为用户关系能力处理。产品上可以在内容治理入口中展示黑名单相关链接，但接口文档应保留在关系模块，避免用户误以为它是频道或消息审核能力。
+
+## 相关页面
+
+- [用户概览](/docs/chat/platform-api/v3/user/overview)
+- [Platform API 概述](/docs/chat/platform-api/v3/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

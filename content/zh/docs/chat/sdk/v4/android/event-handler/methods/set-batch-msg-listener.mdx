@@ -1,0 +1,51 @@
+---
+title: '监听批量消息事件'
+description: '说明 Android SDK 监听批量消息事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener'
+---
+
+接收批量消息事件，适合一次处理多条新消息或多条离线消息，减少高频单条事件处理压力。
+
+## 功能介绍
+
+批量消息事件适合在消息量较大、离线同步较多或需要批量写入本地数据库时使用。相比逐条处理，它更适合集中刷新会话列表、批量更新未读数或做后台消息归档。
+
+该监听器是单实例替换式注册。业务层应统一接收后再分发给页面或后台任务，避免重复注册导致事件处理链路被覆盖。
+
+## Core Binding 方法
+
+| 项目     | 说明                                               |
+| -------- | -------------------------------------------------- |
+| 方法签名 | `SetBatchMsgListener(listener OnBatchMsgListener)` |
+| 所属能力 | 监听器                                             |
+| 源码位置 | `open_im_sdk/listener.go`                          |
+
+## Android 调用参考
+
+Go core 提供 `SetBatchMsgListener` 和 `OnBatchMsgListener`，设置后新消息与离线消息会按 JSON 数组批量回调。当前 Android SDK v3.8.3 既没有公开注册方法，也没有对应的 Java `OnBatchMsgListener` 接口，因此不能在该版本的 Java 业务代码中使用；本页保留底层事件契约，不能把它当成可直接调用的 Android API。
+
+## 输入参数
+
+| 参数名称   | 类型                                                                           | 描述             |
+| ---------- | ------------------------------------------------------------------------------ | ---------------- |
+| `listener` | [`OnBatchMsgListener`](/docs/chat/sdk/v4/android/models/on-batch-msg-listener) | 事件监听器实例。 |
+
+## 返回结果
+
+底层注册方法无直接返回值。当前 Android v3.8.3 没有公开 Java 入口，因此本页不提供无法编译的示例；应继续使用 [`OnAdvanceMsgListener`](/docs/chat/sdk/v4/android/models/on-advance-msg-listener) 接收该版本已公开的消息事件。
+
+## 相关类型
+
+- [批量消息监听器](/docs/chat/sdk/v4/android/models/on-batch-msg-listener)（`OnBatchMsgListener`）：core binding 批量消息监听器，用于接收多条新消息和离线消息。
+- [高级消息监听器](/docs/chat/sdk/v4/android/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）：Android v3.8.3 已公开的单条消息事件接口。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)

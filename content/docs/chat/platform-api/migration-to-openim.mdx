@@ -1,0 +1,48 @@
+---
+title: "Migrate to OpenIM"
+description: "Migrate to OpenIM for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/migration-to-openim"
+---
+
+When migrating to OpenIM, normalize existing data into OpenIM users, relationships, groups, conversations, and messages, then import it from trusted backend jobs. Do not run migration workflows from client applications.
+
+## Capability scope
+
+| Source data | OpenIM target | Description |
+| ----------- | ------------- | ----------- |
+| Accounts and profiles | Users | Register users first, then fill nickname, avatar, and extension fields. |
+| Friend relationships | Relationships | Import historical friends and migrate blacklist data separately. |
+| Groups and members | Groups | Create groups before importing or inviting members. |
+| Historical messages | Messages | Write historical records by conversation, sender, timestamp, and message type. |
+| Conversation state | Conversations | Rebuild pinned, muted, unread, and offline-push state after core data is imported. |
+
+## Common APIs
+
+- [Create a user](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [List users](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [Import friends](/docs/chat/platform-api/v3/relation/managing-friends/import-friends)
+- [Create a group](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [Invite users to a group](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
+- [Send a message](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
+- [Batch send messages](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg)
+
+## Integration advice
+
+Run migration in repeatable batches. Record the source primary key, OpenIM target ID, operation time, `operationID`, response, and failure reason for each item.
+
+Import users first, then relationships and groups, then historical messages, and finally conversation state. Before retrying failed writes, check whether the target resource already exists.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [User overview](/docs/chat/platform-api/v3/user/overview)
+- [Relationship overview](/docs/chat/platform-api/v3/relation/overview)
+- [Group overview](/docs/chat/platform-api/v3/group/overview)
+- [Message overview](/docs/chat/platform-api/v3/message/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,33 +1,49 @@
 ---
-title: 'OpenIM SDK for React Native'
-description: 'OpenIM React Native SDK entry point for mobile applications.'
+title: 'OpenIM React Native SDK overview'
+description: 'React Native SDK v3.8.3 documentation organized by OpenIM SDK capabilities.'
 product: 'sdk'
-context: 'chat/sdk/react-native'
+context: 'chat/sdk/v4/react-native'
 template: 'overview'
 status: 'draft'
-lastUpdated: '2026-06-30'
+lastUpdated: '2026-07-09'
 version: 'v4'
 platform: 'react-native'
-sourcePath: '/sdk/react-native/overview'
+sourcePath: '/docs/chat/sdk/v4/react-native/overview'
 ---
+This documentation set follows the current OpenIM SDK capability model and the public methods exposed by React Native SDK v3.8.3. Each method page covers the platform call shape, parameters, return value, and usage boundaries.
 
-## Overview
+The pages describe how the platform wrapper maps to OpenIM core capabilities. Platform method names and parameter wrappers can differ; when the wrapper differs from the core export, follow the platform SDK v3.8.3 signature shown on the method page.
 
-Use the React Native SDK when your chat experience is built with React Native and needs mobile runtime behavior for connectivity, local cache, media selection, file upload, and push notification handoff.
+## Integration Model
 
-## Integration model
+| Model | Description |
+| ----- | ----------- |
+| Initialization | Configure the API address, WebSocket address, local data directory, logging, and connection listener. |
+| Login state | Register listeners before login when possible, then call the login API with a backend-issued token. |
+| Async result | Platform methods return results through Promise, Future, or callback patterns depending on the SDK. |
+| Message creation | Create local message objects with `Create*Message` methods before sending them. |
+| operationID | Generate a traceable operationID for each business operation so client and server logs can be correlated. |
 
-The SDK should be initialized after your application has a backend-issued token for the current `userID`. Register connection and message events before login, then keep conversation state in your application store so native lifecycle changes can restore the UI predictably.
+## Capability Pages
 
-## Mobile considerations
+| Page | Scope |
+| ---- | ----- |
+| [Integration flow](/docs/chat/sdk/v4/react-native/getting-started/send-first-message) | Initialization, listeners, login, and the first-message sequence. |
+| [SDK lifecycle](/docs/chat/sdk/v4/react-native/application/overview) | SDK initialization, login, logout, login status, and foreground/background state. |
+| [Authentication flow](/docs/chat/sdk/v4/react-native/application/authenticating-a-user/authentication) | Token handling, connection listener behavior, login status, and logout boundaries. |
+| [Event handlers](/docs/chat/sdk/v4/react-native/event-handler/overview) | Connection, user, friend, group, conversation, message, custom business, and message KV callbacks. |
+| [User](/docs/chat/sdk/v4/react-native/user/overview) | User profiles, user commands, and presence subscription. |
+| [Friends](/docs/chat/sdk/v4/react-native/user/overview#friends) | Friend list, friend info, friend search, friend applications, and relationship updates. |
+| [Blacklist](/docs/chat/sdk/v4/react-native/user/overview#blacklist) | Add, list, and remove blacklist entries. |
+| [Group](/docs/chat/sdk/v4/react-native/group/overview) | Group creation, applications, membership, members, moderation, and ownership. |
+| [Conversations and messages](/docs/chat/sdk/v4/react-native/message/overview) | Conversation lists, message creation, sending, history, read status, deletion, search, and typing state. |
+| [Push notifications](/docs/chat/sdk/v4/react-native/push-notifications/overview) | FCM token and application badge updates. |
+| [Logger](/docs/chat/sdk/v4/react-native/logger/overview) | SDK log configuration, writing client logs, and uploading logs. |
+| [File upload](/docs/chat/sdk/v4/react-native/file/overview) | Upload files through the object storage path configured for the SDK. |
+| [Models](/docs/chat/sdk/v4/react-native/models/overview) | Common models, enums, listeners, and callbacks. |
+| [Error codes](/docs/chat/sdk/v4/react-native/error-codes) | SDK core, server, and WebSocket protocol marker error-code enumeration. |
+| [Unsupported or unexposed capabilities](/docs/chat/sdk/v4/react-native/deprecated) | Capability boundaries that are not exposed by the current SDK. |
 
-- Validate login, reconnect, and message receipt after app foreground and background transitions.
-- Test file messages with the media picker and upload permissions required by each platform.
-- Route push notification registration through your trusted backend and platform notification services.
-- Record `operationID`, `errCode`, and `errMsg` when diagnosing mobile-only failures.
+## Currently Unavailable Capabilities
 
-## Related SDKs
-
-- [iOS SDK](/sdk/ios/overview)
-- [Android SDK](/sdk/android/overview)
-- [Flutter SDK](/sdk/flutter/overview)
+React Native SDK v3.8.3 does not expose standalone methods for public group variants, polls, scheduled messages, message threads, translation, independent reports, group metadata, or metacounters. Add these pages only after the platform SDK exposes corresponding methods.

@@ -1,0 +1,78 @@
+---
+title: 'Get friend list'
+description: 'Explains the Android core binding method GetFriendList, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list'
+---
+
+Use `GetFriendList` for get friend list in the OpenIM Android SDK.
+
+## Feature
+
+Reads get friend list from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                          |
+| ---------------- | -------------------------------------------------------------------- |
+| Method signature | `GetFriendList(callback Base, operationID string, filterBlack bool)` |
+| Capability       | Users, friends, and blocklist                                        |
+| Source file      | `open_im_sdk/relation.go`                                            |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void getFriendList(OnBase<List<UserInfo>> base, Boolean filterBlack)
+```
+
+## Input Parameters
+
+| Parameter     | Type                                                                                                                   | Description                                               |
+| ------------- | ---------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `base`        | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<List<`[User Info](/docs/chat/sdk/v4/android/models/user-info)`>>` | Async callback for success and failure results.           |
+| `filterBlack` | `Boolean`                                                                                                              | Parameter passed according to the core binding signature. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+| Name   | Type                                                              | Description                           |
+| ------ | ----------------------------------------------------------------- | ------------------------------------- |
+| `data` | `List<`[User Info](/docs/chat/sdk/v4/android/models/user-info)`>` | Returned when the operation succeeds. |
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.getFriendList(new OnBase<List<UserInfo>>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(List<UserInfo> data) {
+        // TODO: handle the callback result
+    }
+}, filterBlack);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [On Friendship Listener](/docs/chat/sdk/v4/android/models/on-friendship-listener) (`OnFriendshipListener`): OnFriendshipListener used by this Android SDK type.
+- [User Info](/docs/chat/sdk/v4/android/models/user-info) (`UserInfo`): User profile object.

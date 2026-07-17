@@ -1,0 +1,26 @@
+---
+title: '合并消息元素'
+description: '说明 Android SDK MergeElem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/merge-elem'
+---
+
+`MergeElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.MergeElem`。合并消息元素，用于多条消息合并转发。
+
+## 字段说明
+
+| 字段名称     | Java 类型                                                       | 描述                                                                                                               |
+| ------------ | --------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| title        | String                                                          | 合并转发卡片的标题，例如“群聊记录”或“与某人的聊天记录”。                                                           |
+| abstractList | `List<String>`                                                  | 卡片外层展示的摘要行列表，通常按原消息顺序放入“发送者：内容摘要”；它只用于预览，不代替 `multiMessage` 的完整内容。 |
+| multiMessage | `List<`[`Message`](/docs/chat/sdk/v4/android/models/message)`>` | 被选中合并转发的完整消息快照列表，顺序决定接收方打开合并记录后的展示顺序。                                         |
+
+## 关联类型
+
+- [消息对象](/docs/chat/sdk/v4/android/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。

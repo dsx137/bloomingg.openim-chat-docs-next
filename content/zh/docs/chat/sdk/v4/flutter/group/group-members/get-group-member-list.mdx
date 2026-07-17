@@ -1,0 +1,74 @@
+---
+title: '获取群成员列表'
+description: '说明 Flutter core binding 方法 GetGroupMemberList 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/group/group-members/get-group-member-list'
+---
+
+按成员类型筛选并分页获取群成员列表。
+
+## 功能介绍
+
+按成员类型筛选并分页获取群成员列表。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                                             |
+| -------- | ---------------------------------------------------------------------------------------------------------------- |
+| 方法签名 | `GetGroupMemberList(callback Base, operationID string, groupID string, filter int32, offset int32, count int32)` |
+| 所属能力 | 群组                                                                                                             |
+| 源码位置 | `open_im_sdk/group.go`                                                                                           |
+
+## Flutter 调用参考
+
+Flutter SDK v3.8.3 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_group_manager.dart`。
+
+```dart showLineNumbers
+Future<List<GroupMembersInfo>> getGroupMemberList({ required String groupID, int filter = 0, int offset = 0, int count = 0, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                     |
+| -------- | -------- | -------- | ------------------------ |
+| groupID  | String   | 是       | 群组 ID 或群组 ID 列表。 |
+| filter   | int      | 否       | 按方法原型传入。         |
+| offset   | int      | 否       | 分页参数。               |
+| count    | int      | 否       | 分页参数。               |
+
+## 返回结果
+
+返回 `Future<List<GroupMembersInfo>>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.groupManager.getGroupMemberList(
+  groupID: 'groupID',
+  filter: 0,
+  offset: 0,
+  count: 0,
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+- [群成员筛选类型](/docs/chat/sdk/v4/flutter/models/group-member-filter)（`GroupMemberFilter`）：群成员列表筛选类型。
+- [群成员信息](/docs/chat/sdk/v4/flutter/models/group-members-info)（`GroupMembersInfo`）：群成员资料，包含群内昵称、角色、入群来源和禁言时间。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/flutter/group/overview)

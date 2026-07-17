@@ -1,18 +1,39 @@
 ---
-title: 'Authentication'
-description: 'OpenIM · SDK · Android · v4 documentation scaffold for Authentication. Replace this placeholder with OpenIM-specific guidance, examples, and assets.'
+title: 'Authentication flow'
+description: 'Authentication flow for the OpenIM Android SDK v3.8.3.'
 product: 'sdk'
-context: 'chat/sdk/android'
+context: 'chat/sdk/v4/android'
 template: 'guide'
-status: 'scaffold'
-lastUpdated: '2026-06-24'
+status: 'draft'
+lastUpdated: '2026-07-09'
 version: 'v4'
 platform: 'android'
-sourcePath: '/sdk/android/application/authenticating-a-user/authentication'
+sourcePath: '/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication'
 ---
 
-<DocScaffold
-  route="/sdk/android/application/authenticating-a-user/authentication"
-  context="SDKs · Android · v4"
-  sourceTitle="Authentication"
-/>
+Authentication is centered on the user token issued by your business server. The client initializes the SDK, registers listeners, logs in with `userID` and `token`, and keeps UI state aligned with connection events and login state.
+
+## Authentication Order
+
+| Step               | Description                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------- |
+| Prepare a token    | Issue an OpenIM user token from your trusted business backend. Do not hard-code tokens in the client.         |
+| Initialize the SDK | Call `InitSDK` with API, WebSocket, log, and local data configuration.                                        |
+| Register listeners | Set connection, message, conversation, friend, group, and user listeners before login.                        |
+| Login              | Call `Login` with the user ID and token. User-scoped APIs are reliable only after login succeeds.             |
+| Handle expiration  | When token expiration or invalid-token events arrive, request a new token from your backend and log in again. |
+
+## Token Boundaries
+
+- User tokens are issued by your backend and should be treated as sensitive credentials.
+
+- Token expiration, invalid-token, and kicked-offline events are delivered through the connection listener.
+
+- Calling `Logout` clears the current user session but does not release the global SDK instance.
+
+## Related Pages
+
+- [Init SDK](/docs/chat/sdk/v4/android/application/methods/init-sdk)
+- [Login](/docs/chat/sdk/v4/android/application/methods/login)
+- [Logout](/docs/chat/sdk/v4/android/application/methods/logout)
+- [On Conn Listener](/docs/chat/sdk/v4/android/models/on-conn-listener)

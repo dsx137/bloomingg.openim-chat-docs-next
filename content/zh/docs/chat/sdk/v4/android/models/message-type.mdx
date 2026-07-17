@@ -1,0 +1,105 @@
+---
+title: '消息类型'
+description: '说明 Android SDK MessageType 类型的用途和取值。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/message-type'
+---
+
+`MessageType` 是 Android SDK 的枚举常量，完整类名为 `io.openim.android.sdk.enums.MessageType`。消息内容类型常量。
+
+## 取值说明
+
+`101` 至 `120` 是用户消息类型；`1000` 以上的值主要是 SDK 内部通知，不是业务端创建消息时选择的普通消息类型。core 收到内部通知后会同步本地数据并触发相应监听器。名称以 `_BEGIN` 或 `_END` 结尾的常量只是通知区间边界，不代表一个可处理的通知事件。
+
+| 常量                                | 值   | 描述                                                                                                                                                                                               |
+| ----------------------------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| TEXT                                | 101  | 文本消息，内容位于 [`TextElem`](/docs/chat/sdk/v4/android/models/text-elem) 的 `content`。                                                                                                         |
+| PICTURE                             | 102  | 图片消息，包含原图、大图和缩略图等 [`PictureElem`](/docs/chat/sdk/v4/android/models/picture-elem) 信息。                                                                                           |
+| VOICE                               | 103  | 语音消息，使用 [`SoundElem`](/docs/chat/sdk/v4/android/models/sound-elem) 保存时长、大小、本地路径和远端 URL。                                                                                     |
+| VIDEO                               | 104  | 视频消息，使用 [`VideoElem`](/docs/chat/sdk/v4/android/models/video-elem) 保存视频及封面信息。                                                                                                     |
+| FILE                                | 105  | 文件消息，使用 [`FileElem`](/docs/chat/sdk/v4/android/models/file-elem) 保存文件名、大小、类型和地址。                                                                                             |
+| AT_TEXT                             | 106  | @ 消息，使用 [`AtTextElem`](/docs/chat/sdk/v4/android/models/at-text-elem) 保存正文、被提及用户列表和引用消息；core 会据此判断当前用户是否被 @。                                                   |
+| MERGER                              | 107  | 合并转发消息，使用 [`MergeElem`](/docs/chat/sdk/v4/android/models/merge-elem) 保存标题、摘要和被合并的消息列表。                                                                                   |
+| CARD                                | 108  | 个人名片消息，使用 [`CardElem`](/docs/chat/sdk/v4/android/models/card-elem) 保存用户 ID、昵称和头像。                                                                                              |
+| LOCATION                            | 109  | 位置消息，使用 [`LocationElem`](/docs/chat/sdk/v4/android/models/location-elem) 保存经纬度和位置描述。                                                                                             |
+| CUSTOM                              | 110  | 普通自定义消息，使用 [`CustomElem`](/docs/chat/sdk/v4/android/models/custom-elem) 携带业务数据、描述和扩展内容；会按发送选项正常参与存储、未读数和会话更新。                                       |
+| HAS_READ_RECEIPT                    | 112  | Android 保留的单聊已读回执类型。当前 Go core 通过 `2200` 处理服务端已读通知，并在高级消息监听器中返回已读消息 ID 和时间。                                                                          |
+| TYPING                              | 113  | 正在输入状态消息。该消息不写入历史、不计未读、不更新会话，也不离线推送；输入平台集合变化通过会话监听器返回。                                                                                       |
+| QUOTE                               | 114  | 引用消息，使用 [`QuoteElem`](/docs/chat/sdk/v4/android/models/quote-elem) 保存正文、被引用消息和富文本片段。                                                                                       |
+| CUSTOM_FACE                         | 115  | 自定义表情消息，使用 [`FaceElem`](/docs/chat/sdk/v4/android/models/face-elem) 保存表情索引和业务数据。                                                                                             |
+| GROUP_HAS_READ_RECEIPT              | 116  | Android 保留的群消息已读回执类型，用于更新群消息已读人数、未读人数和已读成员。当前开源 Go core 没有把 `116` 定义为普通消息常量，实际已读通知由 core 构建及服务端协议决定。                         |
+| ADVANCED_TEXT                       | 117  | 高级文本消息，使用 [`AdvancedTextElem`](/docs/chat/sdk/v4/android/models/advanced-text-elem) 保存文本和富文本实体列表。                                                                            |
+| CUSTOM_MSG_NOT_TRIGGER_CONVERSATION | 119  | 不触发会话更新的自定义消息。消息体仍按 [`CustomElem`](/docs/chat/sdk/v4/android/models/custom-elem) 解析，但不会用于更新会话最后一条消息或会话排序；是否保存、计未读由服务端下发的消息选项决定。   |
+| CUSTOM_MSG_ONLINE_ONLY              | 120  | 仅在线自定义消息。消息体按 [`CustomElem`](/docs/chat/sdk/v4/android/models/custom-elem) 解析，不写历史、不持久化、不计未读、不更新发送方或接收方会话，也不离线推送；接收端通过仅在线消息回调处理。 |
+| NTF_BEGIN                           | 1000 | Android 通知类型的起始边界，不是实际通知。                                                                                                                                                         |
+| FRIEND_NTF_BEGIN                    | 1200 | 好友关系通知区间的起始边界，不是实际通知。                                                                                                                                                         |
+| FRIEND_APPLICATION_APPROVED_NTF     | 1201 | 好友申请被同意。core 先触发好友申请已同意回调，再同步好友列表；同步发现新增好友时还会触发好友新增回调。                                                                                            |
+| FRIEND_APPLICATION_REJECTED_NTF     | 1202 | 好友申请被拒绝，触发好友申请已拒绝回调，回调数据包含申请双方及处理结果。                                                                                                                           |
+| FRIEND_APPLICATION_NTF              | 1203 | 收到新的好友申请，触发好友申请新增回调。                                                                                                                                                           |
+| FRIEND_ADDED_NTF                    | 1204 | 好友关系新增通知。core 同步好友列表，并在发现新记录后触发好友新增回调。                                                                                                                            |
+| FRIEND_DELETED_NTF                  | 1205 | 好友关系删除通知。core 同步好友列表，并在发现本地好友记录被删除后触发好友删除回调。                                                                                                                |
+| FRIEND_REMARK_SET_NTF               | 1206 | 好友备注被修改。core 重新同步好友资料，并通过好友资料变化回调返回最新备注等字段。                                                                                                                  |
+| BLACK_ADDED_NTF                     | 1207 | 当前用户将对方加入黑名单。core 同步黑名单，并触发黑名单新增回调。                                                                                                                                  |
+| BLACK_DELETED_NTF                   | 1208 | 当前用户将对方移出黑名单。core 同步黑名单，并触发黑名单删除回调。                                                                                                                                  |
+| FRIEND_NTF_END                      | 1299 | 好友关系通知区间的结束边界，不是实际通知。                                                                                                                                                         |
+| CONVERSATION_CHANGE_NTF             | 1300 | 会话设置或资料发生变化。core 收到后增量同步会话列表，并通过会话新增或会话变化回调返回最新会话数据。                                                                                                |
+| USER_NTF_BEGIN                      | 1301 | 用户通知区间的起始边界，不是实际通知。                                                                                                                                                             |
+| USERINFO_UPDATED_NTF                | 1303 | 当前登录用户资料发生变化。core 仅在通知目标是当前用户时同步个人资料，并触发当前用户资料更新回调。                                                                                                  |
+| USER_NTF_END                        | 1399 | 用户通知区间的结束边界，不是实际通知。                                                                                                                                                             |
+| OA_NTF                              | 1400 | 旧版 OA（官方账号）通知类型。当前 Go core 已移除该常量和独立处理分支，Android 仅为兼容旧版协议保留此值。                                                                                           |
+| GROUP_NTF_BEGIN                     | 1500 | 群组通知区间的起始边界，不是实际通知。                                                                                                                                                             |
+| GROUP_CREATED_NTF                   | 1501 | 群创建完成。core 同步当前用户已加入的群和群成员；本地新增群时触发已加入群新增回调。                                                                                                                |
+| GROUP_INFO_SET_NTF                  | 1502 | 群资料被修改，例如群头像、简介、验证设置或全体禁言等字段变化。core 同步群资料并触发群资料变化回调。                                                                                                |
+| JOIN_GROUP_APPLICATION_NTF          | 1503 | 收到新的入群申请，触发群申请新增回调，通常由群主或管理员处理。                                                                                                                                     |
+| MEMBER_QUIT_NTF                     | 1504 | 成员主动退群。退出者是当前用户时同步已加入群列表并触发离群相关回调；否则同步群成员并触发群成员删除回调。                                                                                           |
+| GROUP_APPLICATION_ACCEPTED_NTF      | 1505 | 入群申请被同意，触发群申请已同意回调；申请人随后通过群同步进入已加入群和群成员列表。                                                                                                               |
+| GROUP_APPLICATION_REJECTED_NTF      | 1506 | 入群申请被拒绝，触发群申请已拒绝回调，回调数据包含群、申请人和处理结果。                                                                                                                           |
+| GROUP_OWNER_TRANSFERRED_NTF         | 1507 | 群主转让完成。core 同步群资料、新旧群主成员资料和角色，随后触发群资料及群成员资料变化回调。                                                                                                        |
+| MEMBER_KICKED_NTF                   | 1508 | 成员被移出群。当前用户被移出时同步已加入群列表；其他成员被移出时同步成员列表并触发群成员删除回调。                                                                                                 |
+| MEMBER_INVITED_NTF                  | 1509 | 成员受邀入群。当前用户在邀请名单中时同步已加入群及成员；否则同步新增成员并触发群成员新增回调。                                                                                                     |
+| MEMBER_ENTER_NTF                    | 1510 | 成员通过申请等方式进入群。当前用户入群时同步已加入群及成员；其他成员入群时触发群成员新增回调。                                                                                                     |
+| GROUP_DISBAND_NTF                   | 1511 | 群被解散。core 触发群解散回调，并同步已加入群列表和本地群成员数据。                                                                                                                                |
+| GROUP_MEMBER_MUTED_NTF              | 1512 | 群成员被禁言。core 同步该成员的 `muteEndTime`，并触发群成员资料变化回调。                                                                                                                          |
+| GROUP_MEMBER_CANCEL_MUTED_NTF       | 1513 | 群成员被取消禁言。core 同步该成员的禁言截止时间，并触发群成员资料变化回调。                                                                                                                        |
+| GROUP_MUTED_NTF                     | 1514 | 群开启全体禁言。core 同步群状态，并触发群资料变化回调。                                                                                                                                            |
+| GROUP_CANCEL_MUTED_NTF              | 1515 | 群取消全体禁言。core 同步群状态，并触发群资料变化回调。                                                                                                                                            |
+| GROUP_MEMBER_INFO_CHANGED_NTF       | 1516 | 群成员资料被设置，例如群昵称、头像、扩展字段或禁言信息变化。core 同步成员并触发群成员资料变化回调。                                                                                                |
+| GROUP_ANNOUNCEMENT_NTF              | 1519 | 群公告被修改。core 同步群公告、更新人和更新时间，并触发群资料变化回调。                                                                                                                            |
+| GROUP_NAME_CHANGED_NTF              | 1520 | 群名称被修改。core 同步群资料及对应会话展示名称，并触发群资料和会话变化回调。                                                                                                                      |
+| GROUP_NTF_END                       | 1599 | 群组通知区间的结束边界，不是实际通知。                                                                                                                                                             |
+| SIGNALING_NTF_BEGIN                 | 1600 | 旧版信令通知区间的起始边界，不是实际通知；当前 Go core 已移除该范围。                                                                                                                              |
+| SIGNALING_NTF                       | 1601 | 旧版音视频邀请、接受、拒绝、取消、超时和挂断等信令通知。旧版 core 将其交给信令模块处理；当前 core 已移除该常量和分发分支。                                                                         |
+| SIGNALING_NTF_END                   | 1699 | Android 保留的旧版信令区间结束边界，不是实际通知。历史 core 曾把 `1650` 至 `1699` 用于超级群及消息扩展通知，因此不要把该范围内的所有值都解释为信令事件。                                           |
+| BURN_AFTER_READING_NTF              | 1701 | 私聊或阅后即焚设置变化通知。当前 Go core 名称为 `ConversationPrivateChatNotification`，收到后重新同步会话的 `isPrivateChat`、`burnDuration` 等字段。                                               |
+| NTF_END                             | 2000 | Android 旧版通知区间结束边界，不是实际通知。当前 Go core 已将总结束边界扩展到 `5000`，因此 `2001`、`2101`、`2102` 和 `2200` 仍是有效通知类型。                                                     |
+| REVOKE_MESSAGE_NTF                  | 2101 | 消息撤回通知，兼容单聊撤回、群成员撤回以及群主或管理员撤回他人消息。core 更新本地原消息及会话最后一条消息后，触发消息撤回回调。                                                                    |
+
+## Go core 中的其他通知值
+
+下列值存在于当前 `openim-sdk-core`，但 Android v3.8.3 的 `MessageType` 类没有对应的 Java 常量。它们仍可能作为内部消息的 `contentType` 出现，业务端通常应通过监听器消费处理结果，而不是直接分发这些内部通知。
+
+| Go core 常量                             | 值   | 处理含义                                                                                                                                                                 |
+| ---------------------------------------- | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| FriendInfoUpdatedNotification            | 1209 | 好友的基础用户资料发生变化；如果变化对象不是当前用户，core 重新同步好友列表并触发好友资料变化回调。                                                                      |
+| FriendsInfoUpdateNotification            | 1210 | 好友关系资料被批量或定向更新；通知目标是当前用户时，core 重新同步好友列表。                                                                                              |
+| UserStatusChangeNotification             | 1304 | 用户在线状态变化的协议常量。当前 core 的用户通知分支没有直接处理该值，在线状态主要通过订阅通道进入 `onUserStatusChanged`，不要依赖此通知值自行维护状态。                 |
+| UserCommandAddNotification               | 1305 | 服务端命令或偏好记录新增通知。当前 core 虽有处理分支，但没有先从消息内容解析 `ToUserID`，因此提供的源码中不会进入同步分支；Android v3.8.3 高层监听器也没有开放对应回调。 |
+| UserCommandDeleteNotification            | 1306 | 服务端命令或偏好记录删除通知。当前 core 虽有处理分支，但没有先从消息内容解析 `ToUserID`，因此提供的源码中不会进入同步分支；Android v3.8.3 高层监听器也没有开放对应回调。 |
+| UserCommandUpdateNotification            | 1307 | 服务端命令或偏好记录更新通知。当前 core 虽有处理分支，但没有先从消息内容解析 `ToUserID`，因此提供的源码中不会进入同步分支；Android v3.8.3 高层监听器也没有开放对应回调。 |
+| GroupMemberSetToAdminNotification        | 1517 | 普通群成员被设为管理员；core 同步成员 `roleLevel` 并触发群成员资料变化回调。                                                                                             |
+| GroupMemberSetToOrdinaryUserNotification | 1518 | 管理员被设为普通成员；core 同步成员 `roleLevel` 并触发群成员资料变化回调。                                                                                               |
+| ClearConversationNotification            | 1703 | 跨端清空会话通知；core 清理指定会话的本地消息，并更新会话最后一条消息和总未读数。                                                                                        |
+| BusinessNotification                     | 2001 | 自定义业务通知；core 读取通知元素的 `detail` 并通过 `onRecvCustomBusinessMessage` 原样交给业务层。                                                                       |
+| DeleteMsgsNotification                   | 2102 | 跨端删除消息通知；core 按会话和消息序列在本地标记删除，逐条触发消息删除回调，并在需要时更新会话最后一条消息和未读数。                                                    |
+| HasReadReceipt                           | 2200 | 消息已读通知；core 更新本地消息、会话最后一条消息和未读状态，单聊通过已读回执回调返回读取人、消息 ID 列表与时间。                                                        |
+| NotificationEnd                          | 5000 | 当前 Go core 的通知类型总结束边界，不是实际通知。                                                                                                                        |
+
+## 相关页面
+
+- [搜索本地消息](/docs/chat/sdk/v4/android/message/retrieving-messages/search-local-messages)

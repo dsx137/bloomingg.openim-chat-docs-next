@@ -1,0 +1,74 @@
+---
+title: '监听单条消息事件'
+description: '说明 Electron SDK 监听单条消息事件 的事件范围、注册时机和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/event-handler/methods/set-advanced-msg-listener'
+---
+接收新消息、消息撤回、已读回执变化和消息扩展更新。
+
+## 功能介绍
+
+单条消息事件应更新当前聊天页、会话预览、未读数和本地消息缓存。它适合处理实时新消息以及影响单条消息状态的变化。
+
+## 底层能力
+
+| 项目     | 说明                                                     |
+| -------- | -------------------------------------------------------- |
+| 方法签名 | `SetAdvancedMsgListener(listener OnAdvancedMsgListener)` |
+| 所属能力 | 监听器                                                   |
+| 源码位置 | `open_im_sdk/listener.go`                                |
+
+## Electron 调用参考
+
+Electron SDK v3.8.3 暴露以下平台方法原型。底层能力表用于说明 OpenIM core 能力和参数映射。
+
+源码位置：`src/render.ts`。
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型 | 是否必填 | 描述                   |
+| -------- | -------- | -------- | ---------------------- |
+| event    | CbEvents | 是       | 需要订阅的事件名称。   |
+| listener | Function | 是       | 事件触发时执行的回调。 |
+
+## 返回结果
+
+返回 `Promise` 或注册回调结果。调用失败时 Promise reject；建议在业务层使用 `try/catch` 或 `.catch()` 处理错误。
+
+## 代码示例
+
+Electron 使用事件订阅方式接收回调。按需要替换事件名和处理函数。
+
+```ts showLineNumbers
+import { getWithRenderProcess } from '@openim/electron-client-sdk/lib/render';
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const { instance: openIM } = getWithRenderProcess();
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## 相关类型
+
+- [底层高级消息监听器](/docs/chat/sdk/v4/electron/models/on-advanced-msg-listener)（`OnAdvancedMsgListener`）：OpenIM core 高级消息监听器，Electron 调用层对应 OnAdvanceMsgListener。
+- [单聊已读回执信息](/docs/chat/sdk/v4/electron/models/c2c-read-receipt-info)（`C2CReadReceiptInfo`）：单聊消息已读回执信息。
+- [高级消息监听器](/docs/chat/sdk/v4/electron/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）：接收新消息、已读回执、撤回和消息扩展事件的监听器。
+- [群消息已读回执](/docs/chat/sdk/v4/electron/models/group-message-receipt)（`GroupMessageReceipt`）：群消息已读回执。
+- [消息撤回信息](/docs/chat/sdk/v4/electron/models/revoked-info)（`RevokedInfo`）：消息撤回事件中的撤回详情。
+- [消息对象](/docs/chat/sdk/v4/electron/models/message)（`Message`）：消息对象，包含消息 ID、发送者、会话、内容元素和状态等信息。
+
+## 相关页面
+
+- [监听器](/docs/chat/sdk/v4/electron/event-handler/overview)

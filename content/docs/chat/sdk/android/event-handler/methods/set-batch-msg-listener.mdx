@@ -1,0 +1,45 @@
+---
+title: 'Set batch msg listener'
+description: 'Explains the Android core binding method SetBatchMsgListener, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-batch-msg-listener'
+---
+
+Use `SetBatchMsgListener` for set batch msg listener in the OpenIM Android SDK.
+
+## Feature
+
+Registers or replaces the listener used to receive set batch msg listener. Register listeners before login when you need login-time synchronization events.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| Method signature | `SetBatchMsgListener(listener OnBatchMsgListener)` |
+| Capability       | Event listeners                                    |
+| Source file      | `open_im_sdk/listener.go`                          |
+
+## Input Parameters
+
+| Parameter  | Type                                                                            | Description              |
+| ---------- | ------------------------------------------------------------------------------- | ------------------------ |
+| `listener` | [On Batch Msg Listener](/docs/chat/sdk/v4/android/models/on-batch-msg-listener) | Event listener instance. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [On Batch Msg Listener](/docs/chat/sdk/v4/android/models/on-batch-msg-listener) (`OnBatchMsgListener`): OnBatchMsgListener used by this Android SDK type.
+- [On Advance Msg Listener](/docs/chat/sdk/v4/android/models/on-advance-msg-listener) (`OnAdvanceMsgListener`): OnAdvanceMsgListener used by this Android SDK type.

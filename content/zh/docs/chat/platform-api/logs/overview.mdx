@@ -1,0 +1,41 @@
+---
+title: "概述"
+description: "OpenIM Platform API 日志模块概览，覆盖客户端本地日志的上传、检索和删除。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-10"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/logs/overview"
+---
+
+日志模块面向客户端本地日志的统一管理场景设计。业务方可以在 App、Web、桌面端等客户端采集本地日志，先将日志文件上传到可访问的对象地址，再通过日志接口登记文件 URL、平台、版本和扩展信息，便于在管理后台、客服排障或问题反馈流程中统一检索和处理。
+
+这个模块不用于暴露 OpenIM 服务端运行日志，也不负责直接接收日志文件内容；它管理的是客户端日志文件的索引和元数据。
+
+## 能力范围
+
+| 能力 | 说明 |
+| ---- | ---- |
+| 上传日志 | 登记业务方已采集并上传的客户端本地日志 URL 和客户端环境信息。 |
+| 搜索日志 | 按关键字、时间范围和分页参数检索客户端日志记录。 |
+| 删除日志 | 按日志 ID 删除客户端日志索引记录。 |
+
+## 常用接口
+
+- [上传日志记录](/docs/chat/platform-api/v3/logs/upload-logs)
+- [搜索日志记录](/docs/chat/platform-api/v3/logs/search-logs)
+- [删除日志记录](/docs/chat/platform-api/v3/logs/delete-logs)
+
+## 接入建议
+
+日志接口适合管理后台、客服排障和客户端问题反馈流程使用。调用上传接口前，应先由客户端或业务服务完成日志文件上传，并确保传入的 URL 可由 OpenIM 服务端访问。
+
+客户端本地日志可能包含用户环境、设备信息和业务上下文，建议业务方在自己的产品流程中控制日志采集入口、用户授权、保留周期和访问权限。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [认证](/docs/chat/platform-api/v3/auth/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

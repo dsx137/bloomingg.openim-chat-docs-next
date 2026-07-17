@@ -1,0 +1,22 @@
+---
+title: '自定义消息元素'
+description: '说明 Android SDK CustomElem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/custom-elem'
+---
+
+`CustomElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.CustomElem`。自定义消息元素，用于携带业务自定义数据。
+
+## 字段说明
+
+| 字段名称    | Java 类型 | 描述                                                                                        |
+| ----------- | --------- | ------------------------------------------------------------------------------------------- |
+| data        | String    | 自定义消息的主要业务载荷；SDK 不解析内容，发送方和接收方需约定序列化格式与版本。            |
+| extension   | String    | 自定义消息的附加元数据，可用于协议版本、展示配置等不属于主要载荷的信息。                    |
+| description | String    | 自定义消息的可读摘要；core 会使用该字段参与本地消息关键词搜索，也可用于会话预览或降级展示。 |

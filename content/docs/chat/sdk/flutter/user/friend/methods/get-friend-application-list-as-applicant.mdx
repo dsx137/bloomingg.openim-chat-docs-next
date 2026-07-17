@@ -1,0 +1,67 @@
+---
+title: 'Get sent friend applications'
+description: 'Explains the Get sent friend applications method in Flutter SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/user/friend/methods/get-friend-application-list-as-applicant'
+---
+
+Use **Get sent friend applications** when your application needs this OpenIM capability from Flutter SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `GetFriendApplicationListAsApplicant` through the platform wrapper to get sent friend applications. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                   |
+| ---------------- | ----------------------------------------------------------------------------- |
+| Method signature | `GetFriendApplicationListAsApplicant(callback Base, operationID, req string)` |
+| Capability       | Friends                                                                       |
+| Source location  | `open_im_sdk/relation.go`                                                     |
+
+## Flutter Call Reference
+
+Flutter SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`lib/src/manager/im_friendship_manager.dart`.
+
+```dart showLineNumbers
+Future<List<FriendApplicationInfo>> getFriendApplicationListAsApplicant({GetFriendApplicationListAsApplicantReq? req, String? operationID})
+```
+
+## Parameters
+
+| Parameter | Type                                    | Required | Description                                                  |
+| --------- | --------------------------------------- | -------- | ------------------------------------------------------------ |
+| req       | GetFriendApplicationListAsApplicantReq? | No       | Request object. Use the fields defined by the platform type. |
+
+## Return Value
+
+Returns `Future<List<FriendApplicationInfo>>`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.friendshipManager.getFriendApplicationListAsApplicant(
+  req: [],
+);
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/flutter/models/base) (`Base`)
+- [GetFriendApplicationListAsApplicantReq](/docs/chat/sdk/v4/flutter/models/get-friend-application-list-as-applicant-req) (`GetFriendApplicationListAsApplicantReq`)
+- [Friendship listener](/docs/chat/sdk/v4/flutter/models/on-friendship-listener) (`OnFriendshipListener`)
+- [Friend application info](/docs/chat/sdk/v4/flutter/models/friend-application-info) (`FriendApplicationInfo`)
+
+## Related pages
+
+- [Friends](/docs/chat/sdk/v4/flutter/user/overview#friends)

@@ -1,0 +1,67 @@
+---
+title: 'Mark conversation messages as read'
+description: 'Explains the Mark conversation messages as read method in Electron SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/message/read-status/mark-conversation-message-as-read'
+---
+
+Use **Mark conversation messages as read** when your application needs this OpenIM capability from Electron SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying OpenIM core.
+
+## Overview
+
+Call `MarkConversationMessageAsRead` through the platform wrapper to mark conversation messages as read. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Underlying Capability
+
+| Item             | Description                                                                               |
+| ---------------- | ----------------------------------------------------------------------------------------- |
+| Method signature | `MarkConversationMessageAsRead(callback Base, operationID string, conversationID string)` |
+| Capability       | Conversations and messages                                                                |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                         |
+
+## Electron Call Reference
+
+Electron SDK v3.8.3 exposes the following platform method signature. The underlying capability table above explains the OpenIM core capability and parameter mapping.
+
+Source: `src/core/modules/conversation.ts`.
+
+```ts showLineNumbers
+markConversationMessageAsRead(conversationID: string, opid = uuidV4())
+```
+
+## Parameters
+
+| Parameter      | Type       | Required | Description                                                                          |
+| -------------- | ---------- | -------- | ------------------------------------------------------------------------------------ |
+| conversationID | string     | Yes      | Pass according to the platform type definition.                                      |
+| opid           | As defined | No       | Trace ID for correlating client and server logs. The SDK generates one when omitted. |
+
+## Return Value
+
+Returns a `Promise` or registers a callback result. If the call fails, the Promise rejects; handle failures with `try/catch` or `.catch()` in application code.
+
+## Code Example
+
+The following example shows the Electron SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```ts showLineNumbers
+import { getWithRenderProcess } from '@openim/electron-client-sdk/lib/render';
+
+const { instance: openIM } = getWithRenderProcess();
+
+const result = await openIM.markConversationMessageAsRead('conversationID');
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/electron/models/base) (`Base`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/electron/message/overview)

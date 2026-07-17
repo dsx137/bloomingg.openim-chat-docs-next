@@ -1,0 +1,81 @@
+---
+title: '创建群组'
+description: '说明 Android core binding 方法 CreateGroup 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/group/managing-groups/create-group'
+---
+
+创建一个 OpenIM 群组。适合发起群聊、创建项目群或从业务组织关系生成群。
+
+群组方法通常要求当前用户已登录，且群主、管理员、成员权限由服务端校验；群组变化通过 `SetGroupListener` 接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| 方法签名 | `CreateGroup(callback Base, operationID string, groupReqInfo string)` |
+| 所属能力 | 群组                                                                  |
+| 源码位置 | `open_im_sdk/group.go`                                                |
+
+## Android 调用参考
+
+Android SDK v3.8.3 的 Java 方法原型如下，示例代码也基于该调用方式。Core binding 方法签名用于说明底层 `open_im_sdk` 能力和参数映射。
+
+```java showLineNumbers
+public void createGroup(List<String> memberUserIDs, List<String> adminUserIDs,
+                        GroupInfo groupInfo, String ownerUserID, OnBase<GroupInfo> callBack)
+```
+
+## 输入参数
+
+| 参数名称      | 参数类型                                                                                                             | 是否必填 | 描述                           |
+| ------------- | -------------------------------------------------------------------------------------------------------------------- | -------- | ------------------------------ |
+| memberUserIDs | `List<String>`                                                                                                       | 是       | 初始化群成员 ID 列表。         |
+| adminUserIDs  | `List<String>`                                                                                                       | 否       | 初始化管理员 ID 列表。         |
+| groupInfo     | [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)                                                           | 是       | 群组基础资料。                 |
+| ownerUserID   | String                                                                                                               | 否       | 群主用户 ID。                  |
+| callBack      | [`OnBase`](/docs/chat/sdk/v4/android/models/on-base)`<`[`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)`>` | 是       | 创建结果回调，成功返回群资料。 |
+
+## 返回结果
+
+`onSuccess` 返回服务端创建后的 [`GroupInfo`](/docs/chat/sdk/v4/android/models/group-info)，其中包含正式 `groupID`、群主、创建时间和成员数；参数、成员或权限校验失败时调用 `onError`。
+
+## 代码示例
+
+以下示例展示 Android SDK v3.8.3 的调用方式。
+
+```java showLineNumbers
+OpenIMClient.getInstance().groupManager.createGroup(
+    memberUserIDs,
+    adminUserIDs,
+    groupInfo,
+    ownerUserID,
+    new OnBase<GroupInfo>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: 处理错误
+    }
+
+    @Override
+    public void onSuccess(GroupInfo data) {
+        // TODO: 创建成功，处理群资料
+    }
+}
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+- [通用回调](/docs/chat/sdk/v4/android/models/on-base)（`OnBase`）：Android SDK 异步方法的通用成功和失败回调。
+- [群组信息](/docs/chat/sdk/v4/android/models/group-info)（`GroupInfo`）：群组资料对象，包含群名、公告、群主、成员数和入群设置。
+
+## 相关页面
+
+- [群组](/docs/chat/sdk/v4/android/group/overview)

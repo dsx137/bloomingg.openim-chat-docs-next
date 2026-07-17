@@ -1,0 +1,142 @@
+---
+title: "Get specified user group request info"
+description: "Get specified user group request info with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/group/group-applications/get-specified-user-group-request-info"
+---
+
+Get specified user group request info is an OpenIM group REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
+
+## HTTP request
+
+```bash
+POST {API_ADDRESS}/group/get_specified_user_group_request_info
+```
+
+### Request example
+
+```bash
+curl --request POST "${API_ADDRESS}/group/get_specified_user_group_request_info" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "groupID": "group_001",
+  "userID": "user_002"
+}'
+```
+
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
+
+## Request body
+
+```json
+{
+  "groupID": "group_001",
+  "userID": "user_002"
+}
+```
+
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| groupID | Yes | string | OpenIM group ID. |
+| userID | Yes | string | OpenIM user ID. |
+
+## Response
+
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "total": 1,
+    "groupRequests": [
+      {
+        "userInfo": {
+          "userID": "user_002",
+          "nickname": "Jane",
+          "faceURL": "https://example.com/avatar-jane.png",
+          "ex": ""
+        },
+        "groupInfo": {
+          "groupID": "group_001",
+          "groupName": "Product Discussion",
+          "notification": "Welcome to OpenIM",
+          "introduction": "Group for product discussions",
+          "faceURL": "https://example.com/group.png",
+          "ownerUserID": "user_owner",
+          "createTime": 1719800000000,
+          "memberCount": 3,
+          "ex": "",
+          "status": 0,
+          "creatorUserID": "user_owner",
+          "groupType": 2,
+          "needVerification": 0,
+          "lookMemberInfo": 0,
+          "applyMemberFriend": 0,
+          "notificationUpdateTime": 0,
+          "notificationUserID": ""
+        },
+        "handleResult": 0,
+        "reqMsg": "Example value",
+        "handleMsg": "",
+        "reqTime": 1719800000000,
+        "handleUserID": "",
+        "handleTime": 0,
+        "ex": "",
+        "joinSource": 3,
+        "inviterUserID": ""
+      }
+    ]
+  }
+}
+```
+
+### Response fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | object | Endpoint-specific response data. |
+| data.total | int | Total number of matching records. |
+| data.groupRequests | array | The group requests value. |
+
+### Error response
+
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [group overview](/docs/chat/platform-api/v3/group/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

@@ -1,0 +1,50 @@
+---
+title: 'OpenIM Android SDK 概览'
+description: '基于 OpenIM SDK v3.8.3 整理 Android SDK 的生命周期、认证、监听器、用户、好友、黑名单、群组、会话、消息、推送通知、日志和文件上传能力。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/overview'
+---
+
+本 Android 文档按照当前 OpenIM SDK 能力结构组织，并以 Android SDK v3.8.3 的公开导出方法为准。每个方法均提供独立页面，围绕当前 Android 调用方式、参数、返回结果和使用边界说明。
+
+这里记录的是平台调用层与 OpenIM core 能力的对应关系。不同平台的方法命名和参数封装可能不同；当平台调用层与 core 导出方法不一致时，以本页标注的平台 SDK v3.8.3 方法原型为准。
+
+## 接入模型
+
+| 模型        | 说明                                                                   |
+| ----------- | ---------------------------------------------------------------------- |
+| 初始化      | 配置 API 地址、WebSocket 地址、日志和本地数据目录，并注册连接监听器。  |
+| 登录态      | 登录前建议先注册消息、会话、好友、群组和用户监听器，避免漏掉同步事件。 |
+| 异步结果    | 平台方法通过 Promise、Future 或回调返回结果，具体以方法页签名为准。    |
+| 消息创建    | `Create*Message` 类方法创建本地消息对象，再交给发送方法发送。          |
+| operationID | 建议每次调用生成唯一 operationID，便于客户端和服务端日志串联。         |
+
+## 当前能力页
+
+| 页面                                                                                   | 覆盖范围                                                         |
+| -------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [接入流程](/docs/chat/sdk/v4/android/getting-started/send-first-message)               | 初始化、监听器、登录、发送消息前置条件的顺序说明。               |
+| [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)                         | SDK 初始化、登录、退出、登录状态和前后台状态。                   |
+| [认证流程](/docs/chat/sdk/v4/android/application/authenticating-a-user/authentication) | token、连接监听、登录状态和退出登录的边界。                      |
+| [监听器](/docs/chat/sdk/v4/android/event-handler/overview)                             | 连接、用户、好友、群组、会话、消息、自定义业务和消息 KV 回调。   |
+| [用户](/docs/chat/sdk/v4/android/user/overview)                                        | 用户资料、用户命令和在线状态订阅。                               |
+| [好友](/docs/chat/sdk/v4/android/user/overview#好友)                                   | 好友列表、好友资料、好友搜索、好友申请和好友关系维护。           |
+| [黑名单](/docs/chat/sdk/v4/android/user/overview#黑名单)                               | 加入黑名单、获取黑名单和移出黑名单。                             |
+| [群组](/docs/chat/sdk/v4/android/group/overview)                                       | OpenIM 群组创建、加入、成员、申请、禁言和转让。                  |
+| [会话与消息](/docs/chat/sdk/v4/android/message/overview)                               | 会话列表、消息创建、发送、历史消息、已读、删除、搜索和输入状态。 |
+| [推送通知](/docs/chat/sdk/v4/android/push-notifications/overview)                      | FCM token 和应用角标。                                           |
+| [日志](/docs/chat/sdk/v4/android/logger/overview)                                      | 初始化日志配置、主动写日志和上传日志。                           |
+| [文件上传](/docs/chat/sdk/v4/android/file/overview)                                    | 上传文件到 SDK 配置的对象存储链路。                              |
+| [类型说明](/docs/chat/sdk/v4/android/models/overview)                                  | 常用数据模型、枚举、监听器和回调结构。                           |
+| [错误码](/docs/chat/sdk/v4/android/error-codes)                                        | SDK core、server 和 WebSocket 协议标识错误码枚举。               |
+| [未支持或未暴露能力](/docs/chat/sdk/v4/android/deprecated)                             | 当前 SDK 未导出的能力边界。                                      |
+
+## 当前未暴露的能力
+
+当前 Android SDK v3.8.3 未按独立方法暴露开放群组、投票、定时消息、消息线程、翻译、独立举报、群组元数据和计数器等能力。后续 SDK 增加导出方法后，再按源码补充。

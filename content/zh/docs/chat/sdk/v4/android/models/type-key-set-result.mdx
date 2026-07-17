@@ -1,0 +1,28 @@
+---
+title: '消息扩展设置结果'
+description: '说明 Android SDK TypeKeySetResult 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/type-key-set-result'
+---
+
+`TypeKeySetResult` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.TypeKeySetResult`。设置消息扩展后的结果信息。
+
+## 字段说明
+
+| 字段名称         | Java 类型 | 描述                                                             |
+| ---------------- | --------- | ---------------------------------------------------------------- |
+| errCode          | long      | 当前扩展项的设置结果错误码；`0` 表示该项设置成功。               |
+| errMsg           | String    | 当前扩展项设置失败时的错误信息。                                 |
+| typeKey          | String    | 被设置的消息扩展键。                                             |
+| latestUpdateTime | long      | 服务端记录的该扩展键最后更新时间，用于判断新旧值和处理并发更新。 |
+| value            | String    | `typeKey` 对应的扩展值，不是枚举常量。                           |
+
+## 相关页面
+
+- [查找消息列表](/docs/chat/sdk/v4/android/message/retrieving-messages/find-message-list)

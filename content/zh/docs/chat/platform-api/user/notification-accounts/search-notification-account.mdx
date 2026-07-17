@@ -1,0 +1,146 @@
+---
+title: "搜索通知账号"
+description: "OpenIM Platform API 中文参考：搜索通知账号。说明如何按关键字和级别分页查询通知账号。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/notification-accounts/search-notification-account"
+---
+
+使用 **搜索通知账号** 从可信后端分页查询可用于系统通知或业务通知的账号。传入 `keyword` 时，服务端会优先按用户 ID 查找，再按昵称查找；不传 `keyword` 时返回通知账号列表。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/user/search_notification_account
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/user/search_notification_account" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "keyword": "notice",
+  "appManagerLevel": 60,
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 20
+  }
+}'
+```
+:::
+
+> 安全提示：通知账号属于服务端能力边界，建议只在后台管理系统中展示和维护。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递搜索条件和分页参数。
+
+### 请求头
+
+| 请求头 | 示例值 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- | :--- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议每个请求独立生成。 |
+| token | eyJhbxxxx3Xs | 必填 | string | [管理员 token](/docs/chat/platform-api/v3/prepare-to-use-api)。 |
+
+### 请求体参数
+
+```json
+{
+  "keyword": "notice",
+  "appManagerLevel": 60,
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 20
+  }
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| :--- | :--- | :--- | :--- |
+| keyword | 选填 | string | 搜索关键字。服务端会优先按用户 ID 查找，再按昵称查找。 |
+| appManagerLevel | 选填 | int | 通知账号级别筛选字段。 |
+| pagination | 必填 | object | 分页参数结构体。 |
+| pagination.pageNumber | 必填 | int | 当前页码，从 1 开始。 |
+| pagination.showNumber | 必填 | int | 当前页请求数量。 |
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "total": 1,
+    "notificationAccounts": [
+      {
+        "userID": "notice_001",
+        "faceURL": "https://cdn.example.com/avatar/notice.png",
+        "nickName": "系统通知",
+        "appMangerLevel": 60
+      }
+    ]
+  }
+}
+```
+
+#### 响应属性列表
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时为空。 |
+| errDlt | errDlt | 错误详细信息，成功时为空。 |
+| data | object | 通用数据对象，具体结构见下方。 |
+| total | int | 匹配到的通知账号总数。 |
+| notificationAccounts | array | 当前页通知账号列表。 |
+
+#### notificationAccounts[] 属性
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| notificationAccounts[].userID | string | 通知账号 ID。 |
+| notificationAccounts[].faceURL | string | 通知账号头像地址。 |
+| notificationAccounts[].nickName | string | 通知账号昵称。 |
+| notificationAccounts[].appMangerLevel | int | 应用管理级别。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1001,
+  "errMsg": "ArgsError",
+  "errDlt": "pageNumber is invalid"
+}
+```
+
+| 参数名 | 类型 | 说明 |
+| :--- | :--- | :--- |
+| errCode | int | 错误码，具体查看全局错误码文档。 |
+| errMsg | string | 错误简要信息。 |
+| errDlt | errDlt | 错误详细信息。 |
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 分页参数无效 | `pagination` 缺失，或 `pageNumber` 小于 1。 | 传入完整分页对象，并从第 1 页开始。 |
+| 查询结果为空 | 关键字未命中用户 ID 或昵称，或账号不满足通知账号级别。 | 调整关键字，或先确认账号是否已创建为通知账号。 |

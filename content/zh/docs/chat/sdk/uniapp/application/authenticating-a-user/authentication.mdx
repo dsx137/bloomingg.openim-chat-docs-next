@@ -1,0 +1,49 @@
+---
+title: '认证流程'
+description: '说明 SDK 登录认证流程、token 边界和登录状态处理。'
+product: 'sdk'
+context: 'chat/sdk/v4/uniapp'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'uniapp'
+sourcePath: '/docs/chat/sdk/v4/uniapp/application/authenticating-a-user/authentication'
+---
+认证流程围绕业务服务端签发的用户 token 展开。客户端负责初始化 SDK、注册监听器、携带 userID 和 token 登录，并根据连接事件与登录状态维护 UI 状态。
+
+## 认证顺序
+
+| 步骤 | 操作 | 说明 |
+| ---- | ---- | ---- |
+| 1 | 获取 userID 和 token | 从业务服务端获取当前用户的 OpenIM userID 和 token。 |
+| 2 | 初始化 SDK | 调用 [初始化 SDK](/docs/chat/sdk/v4/uniapp/application/methods/init-sdk)，传入 API 地址、WebSocket 地址、平台信息和日志配置。 |
+| 3 | 注册监听器 | 至少注册连接监听器；需要会话、消息、好友、群组和用户事件时，也应在登录前注册。 |
+| 4 | 登录用户 | 调用 [登录用户](/docs/chat/sdk/v4/uniapp/application/methods/login)，传入 userID 和 token。 |
+| 5 | 处理状态 | 通过连接监听器、[获取登录状态](/docs/chat/sdk/v4/uniapp/application/methods/get-login-status) 和 API 回调判断是否进入用户态。 |
+| 6 | 退出或刷新 token | token 过期、被踢或主动退出时，调用 [退出登录](/docs/chat/sdk/v4/uniapp/application/methods/logout)，必要时刷新 token 后重新登录。 |
+
+## token 边界
+
+| 场景 | 处理建议 |
+| ---- | -------- |
+| token 过期 | 从业务服务端刷新 token，再重新调用登录。 |
+| token 无效 | 校验 userID、平台、签发环境和服务端时间。 |
+| 被踢下线 | 通过连接或登录状态事件提示用户，并按业务策略重新登录或切换账号。 |
+| 主动退出 | 调用 `Logout` 后清理业务层用户态缓存和页面状态。 |
+
+## 相关错误码
+
+| 错误码 | 含义 |
+| ------ | ---- |
+| `1501` | token 已过期。 |
+| `1502` | token 无效。 |
+| `1503` | token 格式错误。 |
+| `1506` | token 对应账号被踢下线。 |
+| `1507` | token 不存在。 |
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/uniapp/application/overview)
+- [监听器](/docs/chat/sdk/v4/uniapp/event-handler/overview)
+- [错误码](/docs/chat/sdk/v4/uniapp/error-codes)

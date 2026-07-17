@@ -1,0 +1,72 @@
+---
+title: 'Get group member list'
+description: 'Explains the Get group member list method in WASM SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/group/group-members/get-group-member-list'
+---
+
+Use **Get group member list** when your application needs this OpenIM capability from WASM SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying OpenIM core.
+
+## Overview
+
+Call `GetGroupMemberList` through the platform wrapper to get group member list. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Underlying Capability
+
+| Item             | Description                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| Method signature | `GetGroupMemberList(callback Base, operationID string, groupID string, filter int32, offset int32, count int32)` |
+| Capability       | Group                                                                                                            |
+| Source location  | `open_im_sdk/group.go`                                                                                           |
+
+## WASM Call Reference
+
+WASM SDK v3.8.3 exposes the following platform method signature. The underlying capability table above explains the OpenIM core capability and parameter mapping.
+
+Source: `src/sdk/index.ts`.
+
+```ts showLineNumbers
+getGroupMemberList(params: GetGroupMemberParams, operationID = uuidv4())
+```
+
+## Parameters
+
+| Parameter   | Type                 | Required | Description                                                                          |
+| ----------- | -------------------- | -------- | ------------------------------------------------------------------------------------ |
+| params      | GetGroupMemberParams | Yes      | Pass according to the platform type definition.                                      |
+| operationID | As defined           | No       | Trace ID for correlating client and server logs. The SDK generates one when omitted. |
+
+## Return Value
+
+Returns a `Promise` or registers a callback result. If the call fails, the Promise rejects; handle failures with `try/catch` or `.catch()` in application code.
+
+## Code Example
+
+The following example shows the WASM SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```ts showLineNumbers
+import { getSDK } from '@openim/wasm-client-sdk';
+
+const openIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+const result = await openIM.getGroupMemberList({});
+```
+
+## Related types
+
+- [Base callback](/docs/chat/sdk/v4/wasm/models/base) (`Base`)
+- [GroupMemberFilter](/docs/chat/sdk/v4/wasm/models/group-member-filter) (`GroupMemberFilter`)
+- [Group member info](/docs/chat/sdk/v4/wasm/models/group-members-info) (`GroupMembersInfo`)
+
+## Related pages
+
+- [Group](/docs/chat/sdk/v4/wasm/group/overview)

@@ -1,0 +1,23 @@
+---
+title: '会话类型'
+description: '说明 Android SDK ConversationType 类型的用途和取值。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/conversation-type'
+---
+
+`ConversationType` 是 Android SDK 的枚举常量，完整类名为 `io.openim.android.sdk.enums.ConversationType`。会话类型常量，用于区分单聊、群聊和通知会话。
+
+## 取值说明
+
+| 常量             | 值  | 描述                                                                                                             |
+| ---------------- | --- | ---------------------------------------------------------------------------------------------------------------- |
+| SINGLE_CHAT      | 1   | 单聊会话，目标由用户 ID 标识。                                                                                   |
+| GROUP_CHAT       | 2   | 普通写群聊会话。当前 Go core 将其命名为 `WriteGroupChatType`，并标注为暂未启用；不要把所有群聊都固定判断为该值。 |
+| SUPER_GROUP_CHAT | 3   | 读扩散群聊会话。当前 Go core 将其命名为 `ReadGroupChatType`，超级群和工作群的消息、会话通常使用该值。            |
+| NOTIFICATION     | 4   | 系统通知会话，用于承载内部通知消息；业务端通常通过好友、群组、会话或消息监听器消费处理后的事件。                 |

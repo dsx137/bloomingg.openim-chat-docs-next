@@ -1,0 +1,118 @@
+---
+title: "Get users online token details"
+description: "Get users online token details with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-06"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/user/presence/get-users-online-token-detail"
+---
+
+Get users online token details is an OpenIM user REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
+
+## HTTP request
+
+```bash
+POST {API_ADDRESS}/user/get_users_online_token_detail
+```
+
+### Request example
+
+```bash
+curl --request POST "${API_ADDRESS}/user/get_users_online_token_detail" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "userIDs": [
+    "user_001",
+    "user_002"
+  ]
+}'
+```
+
+> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
+
+## Request body
+
+```json
+{
+  "userIDs": [
+    "user_001",
+    "user_002"
+  ]
+}
+```
+
+| Parameter | Required | Type | Description |
+| --- | --- | --- | --- |
+| userIDs | Yes | array | List of OpenIM user IDs. |
+
+## Response
+
+OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": [
+    {
+      "userID": "user_001",
+      "status": 1,
+      "singlePlatformToken": [
+        {
+          "platformID": 1,
+          "total": 2,
+          "token": [
+            "eyJhbGciOiJIUzI1Ni...",
+            "eyJhbGciOiJIUzI1Ni..."
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+
+### Response fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| errCode | int | Business error code. `0` means success. |
+| errMsg | string | Short error message. |
+| errDlt | string | Detailed error information for troubleshooting. |
+| data | array | Endpoint-specific response data. |
+
+### Error response
+
+When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| Scenario | Possible cause | Recommended action |
+| --- | --- | --- |
+| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
+| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
+| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+
+## Permissions and limits
+
+- Call this endpoint from a trusted backend service.
+- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
+- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [user overview](/docs/chat/platform-api/v3/user/overview)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

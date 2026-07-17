@@ -1,0 +1,30 @@
+---
+title: '文件消息元素'
+description: '说明 Android SDK FileElem 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/file-elem'
+---
+
+`FileElem` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.FileElem`。文件消息元素，用于本地文件消息或 URL 文件消息。
+
+## 字段说明
+
+| 字段名称  | Java 类型 | 描述                                                                                |
+| --------- | --------- | ----------------------------------------------------------------------------------- |
+| filePath  | String    | 发送前文件的本地路径；使用 URL 创建消息时可以为空，接收端不应依赖发送设备上的路径。 |
+| uuid      | String    | 文件资源标识，用于上传、缓存或资源去重；通过 URL 创建消息时由调用方提供。           |
+| sourceUrl | String    | 上传完成后的远程文件 URL；本地创建消息后由发送流程补齐。                            |
+| fileName  | String    | 向接收方展示的文件名，通常包含扩展名。                                              |
+| fileSize  | long      | 文件大小，单位为字节。通过本地路径创建时由 core 读取文件属性。                      |
+
+当前 core 还返回 `fileType`，用于保存 MIME 类型或文件格式，但 Android v3.8.3 的 `FileElem` 没有公开该字段；反序列化时该值会被忽略。
+
+## 相关页面
+
+- [通过 URL 创建文件消息](/docs/chat/sdk/v4/android/message/creating-messages/create-file-message-by-url)

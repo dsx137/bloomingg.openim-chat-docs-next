@@ -1,0 +1,72 @@
+---
+title: 'Set Batch Msg Listener'
+description: 'Explains the Set Batch Msg Listener method in WASM SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/event-handler/methods/set-batch-msg-listener'
+---
+
+Use **Set Batch Msg Listener** when your application needs this OpenIM capability from WASM SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying OpenIM core.
+
+## Overview
+
+Call `SetBatchMsgListener` through the platform wrapper to set batch msg listener. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Underlying Capability
+
+| Item             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| Method signature | `SetBatchMsgListener(listener OnBatchMsgListener)` |
+| Capability       | Event handlers                                     |
+| Source location  | `open_im_sdk/listener.go`                          |
+
+## WASM Call Reference
+
+WASM SDK v3.8.3 exposes the following platform method signature. The underlying capability table above explains the OpenIM core capability and parameter mapping.
+
+Source: `src/sdk/index.ts`.
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## Parameters
+
+| Parameter | Type     | Required | Description                            |
+| --------- | -------- | -------- | -------------------------------------- |
+| event     | CbEvents | Yes      | Event name to subscribe to.            |
+| listener  | Function | Yes      | Callback invoked when the event fires. |
+
+## Return Value
+
+Returns a `Promise` or registers a callback result. If the call fails, the Promise rejects; handle failures with `try/catch` or `.catch()` in application code.
+
+## Code Example
+
+WASM receives callbacks through event subscriptions. Replace the event name and handler as needed.
+
+```ts showLineNumbers
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const openIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## Related types
+
+- [Batch message listener](/docs/chat/sdk/v4/wasm/models/on-batch-msg-listener) (`OnBatchMsgListener`)
+
+## Related pages
+
+- [Event handlers](/docs/chat/sdk/v4/wasm/event-handler/overview)

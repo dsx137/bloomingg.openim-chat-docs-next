@@ -1,0 +1,108 @@
+---
+title: "获取管理员 Token"
+description: "OpenIM 认证 REST API：获取管理员 Token。"
+sourcePath: "/docs/chat/platform-api/v3/auth/tokens/get-admin-token"
+---
+
+使用 **获取管理员 Token** 从可信后端调用 OpenIM 认证 REST 接口。使用服务端配置的 secret 为 APP 管理员账号签发管理员 Token，供可信后端调用管理端 REST API。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址；管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/auth/get_admin_token
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/auth/get_admin_token" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --data-raw '{
+  "secret": "openIM123",
+  "userID": "imAdmin"
+}'
+```
+
+## 参数
+
+此接口通过请求头传入链路追踪信息，通过 JSON 请求体传递业务参数。除 router 白名单接口外，管理端接口还需要在请求头中携带 APP 管理员 Token。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+
+## 请求体
+
+```json
+{
+  "secret": "openIM123",
+  "userID": "imAdmin"
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| secret | 是 | string | 服务端配置文件 `config/share.yml` 中的 `secret`。 |
+| userID | 是 | string | APP 管理员用户 ID，默认通常为 `imAdmin`，必须在服务端管理员账号配置中。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "token": "admin_or_user_token_sample",
+    "expireTimeSeconds": 7776000
+  }
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+| data | object | 接口返回数据。 |
+| data.token | string | 签发的 APP 管理员 Token。 |
+| data.expireTimeSeconds | int | Token 有效期，单位秒。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `secret` 不正确、`token` 缺失或 Token 已过期。 | 检查服务端配置，重新获取 APP 管理员 Token。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或终端类型不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 为指定 APP 管理员签发新的管理员 Token，并记录一次管理员登录。
+- `secret` 必须与服务端配置一致。
+- `userID` 必须是服务端配置中的 APP 管理员账号。
+- 此接口在 router 白名单中，不需要携带管理员 Token。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [获取用户详情](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

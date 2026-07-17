@@ -1,0 +1,68 @@
+---
+title: '删除消息'
+description: '说明 Flutter core binding 方法 DeleteMessage 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/deleting-messages/delete-message'
+---
+
+删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。
+
+## 功能介绍
+
+删除指定消息，具体本地和服务端影响以 SDK 实现和服务端策略为准。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                          |
+| -------- | --------------------------------------------------------------------------------------------- |
+| 方法签名 | `DeleteMessage(callback Base, operationID string, conversationID string, clientMsgID string)` |
+| 所属能力 | 会话与消息                                                                                    |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                             |
+
+## Flutter 调用参考
+
+Flutter SDK v3.8.3 的 Dart 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`lib/src/manager/im_message_manager.dart`。
+
+```dart showLineNumbers
+Future<dynamic> deleteMessageFromLocalAndSvr({ required String conversationID, required String clientMsgID, String? operationID, })
+```
+
+## 输入参数
+
+| 参数名称       | 参数类型 | 是否必填 | 描述                          |
+| -------------- | -------- | -------- | ----------------------------- |
+| conversationID | String   | 是       | 会话 ID 或会话 ID 列表。      |
+| clientMsgID    | String   | 是       | 消息对象、消息内容或消息 ID。 |
+
+## 返回结果
+
+返回 `Future<dynamic>`。调用失败时 Future 抛出异常，建议在业务层捕获并记录 operationID。
+
+## 代码示例
+
+以下示例展示 Flutter SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.deleteMessageFromLocalAndSvr(
+  conversationID: 'conversationID',
+  clientMsgID: 'clientMsgID',
+);
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/flutter/models/base)（`Base`）：core binding 异步结果回调，Flutter 调用层通常映射为 Future。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/flutter/message/overview)

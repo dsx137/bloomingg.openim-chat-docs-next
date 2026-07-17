@@ -1,0 +1,77 @@
+---
+title: 'Set friend listener'
+description: 'Explains the Android core binding method SetFriendListener, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/event-handler/methods/set-friend-listener'
+---
+
+Use `SetFriendListener` for set friend listener in the OpenIM Android SDK.
+
+## Feature
+
+Registers or replaces the listener used to receive set friend listener. Register listeners before login when you need login-time synchronization events.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| Method signature | `SetFriendListener(listener OnFriendshipListener)` |
+| Capability       | Event listeners                                    |
+| Source file      | `open_im_sdk/listener.go`                          |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void setOnFriendshipListener(OnFriendshipListener listener)
+```
+
+## Input Parameters
+
+| Parameter  | Type                                                                              | Description                                               |
+| ---------- | --------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| `listener` | [On Friendship Listener](/docs/chat/sdk/v4/android/models/on-friendship-listener) | Parameter passed according to the core binding signature. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().friendshipManager.setOnFriendshipListener(new OnFriendshipListener() {
+    @Override
+    public void onFriendAdded(FriendInfo info) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onFriendDeleted(FriendInfo info) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onBlacklistAdded(BlacklistInfo info) {
+        // TODO: handle the callback result
+    }
+});
+```
+
+## Related Types
+
+- [On Friendship Listener](/docs/chat/sdk/v4/android/models/on-friendship-listener) (`OnFriendshipListener`): OnFriendshipListener used by this Android SDK type.
+- [Friend Info](/docs/chat/sdk/v4/android/models/friend-info) (`FriendInfo`): FriendInfo used by this Android SDK type.
+- [Blacklist Info](/docs/chat/sdk/v4/android/models/blacklist-info) (`BlacklistInfo`): BlacklistInfo used by this Android SDK type.

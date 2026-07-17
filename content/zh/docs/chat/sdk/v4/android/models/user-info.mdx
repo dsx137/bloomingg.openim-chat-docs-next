@@ -1,0 +1,54 @@
+---
+title: '用户信息'
+description: '说明 Android SDK UserInfo 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/user-info'
+---
+
+`UserInfo` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.UserInfo`。用户资料对象。
+
+## 字段说明
+
+| 字段名称         | Java 类型                                                             | 描述                                                                                               |
+| ---------------- | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| userID           | String                                                                | 用户唯一 ID。基础字段为空时，Android getter 会依次尝试从好友、黑名单或公开资料子对象读取。         |
+| nickname         | String                                                                | 用户昵称。基础字段为空时，Android getter 会从可用的关系资料子对象读取。                            |
+| faceURL          | String                                                                | 用户头像 URL。基础字段为空时，Android getter 会从可用的关系资料子对象读取。                        |
+| gender           | Integer                                                               | 性别兼容字段：`1` 男、`2` 女、其他值未设置。当前 core 的公开、好友和黑名单本地结构均不填充该字段。 |
+| phoneNumber      | String                                                                | 手机号兼容字段。当前 core 的公开用户和好友关系返回结构不包含该字段，通常为空。                     |
+| birth            | Long                                                                  | 出生日期兼容字段。当前 core 的公开用户和好友关系返回结构不包含该字段，通常为 `0` 或空。            |
+| email            | String                                                                | 邮箱兼容字段。当前 core 的公开用户和好友关系返回结构不包含该字段，通常为空。                       |
+| ex               | String                                                                | 业务扩展字符串；基础值为空时，Android getter 可能从好友、黑名单或公开资料子对象读取。              |
+| remark           | String                                                                | 当前用户为该好友设置的备注；只有 `friendInfo` 存在时才有可靠值。                                   |
+| publicInfo       | [`PublicUserInfo`](/docs/chat/sdk/v4/android/models/public-user-info) | 用户公开资料；基础字段为空时，部分 getter 会从该对象读取。                                         |
+| friendInfo       | [`FriendInfo`](/docs/chat/sdk/v4/android/models/friend-info)          | 仅好友关系可见的资料和好友备注；非好友时为空。                                                     |
+| blackInfo        | [`BlacklistInfo`](/docs/chat/sdk/v4/android/models/blacklist-info)    | 黑名单关系及被拉黑用户资料；不在黑名单时为空。                                                     |
+| globalRecvMsgOpt | Integer                                                               | 全局收消息选项：`0` 正常接收，`1` 不接收（当前 core 暂未启用），`2` 接收但不通知。                 |
+| allowAddFriend   | Integer                                                               | 旧版资料兼容开关，表示是否允许他人添加好友：`1` 允许，`2` 不允许。                                 |
+| allowBeep        | Integer                                                               | 旧版资料兼容开关，表示新消息是否允许播放提示音：`1` 允许，`2` 不允许。                             |
+| allowVibration   | Integer                                                               | 旧版资料兼容开关，表示新消息是否允许振动：`1` 允许，`2` 不允许。                                   |
+| forbidden        | Integer                                                               | 旧版账号禁用状态字段；具体取值由服务端版本决定，当前开源 core 的公开用户资料不依赖该字段控制登录。 |
+| createTime       | Long                                                                  | 用户资料创建时间，当前 core 使用 Unix 毫秒时间戳。                                                 |
+
+当前 core 的公开用户结构实际稳定提供 `userID`、`nickname`、`faceURL`、`ex` 和 `createTime`。其余旧版资料字段应按上表的兼容边界使用，不要因为 Android 类存在 getter 就假设服务端一定返回数据。
+
+## 关联类型
+
+- [公开用户信息](/docs/chat/sdk/v4/android/models/public-user-info)（`PublicUserInfo`）：公开用户资料。
+- [好友信息](/docs/chat/sdk/v4/android/models/friend-info)（`FriendInfo`）：好友资料，包含昵称、头像、备注和添加来源等信息。
+- [黑名单用户信息](/docs/chat/sdk/v4/android/models/blacklist-info)（`BlacklistInfo`）：黑名单用户资料，用于黑名单列表和黑名单事件回调。
+
+## 相关页面
+
+- [监听用户事件](/docs/chat/sdk/v4/android/event-handler/methods/set-user-listener)
+- [获取黑名单列表](/docs/chat/sdk/v4/android/user/blacklist/methods/get-black-list)
+- [分页获取好友列表](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list-page)
+- [获取好友列表](/docs/chat/sdk/v4/android/user/friend/methods/get-friend-list)
+- [获取指定好友资料](/docs/chat/sdk/v4/android/user/friend/methods/get-specified-friends-info)
+- [获取当前用户资料](/docs/chat/sdk/v4/android/user/methods/get-self-user-info)

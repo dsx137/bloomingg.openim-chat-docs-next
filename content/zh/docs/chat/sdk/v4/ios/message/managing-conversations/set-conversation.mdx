@@ -1,0 +1,67 @@
+---
+title: '设置会话'
+description: '说明 iOS core binding 方法 SetConversation 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/message/managing-conversations/set-conversation'
+---
+
+设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
+
+## 功能介绍
+
+设置会话属性，例如置顶、免打扰、扩展字段等当前结构支持的字段。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                    |
+| -------- | --------------------------------------------------------------------------------------- |
+| 方法签名 | `SetConversation(callback Base, operationID string, conversationID string, req string)` |
+| 所属能力 | 会话与消息                                                                              |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                                       |
+
+## iOS 调用参考
+
+iOS Core SDK v3.8.3 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT void Open_im_sdkSetConversation(id<Open_im_sdk_callbackBase> _Nullable callback, NSString* _Nullable operationID, NSString* _Nullable conversationID, NSString* _Nullable req);
+```
+
+## 输入参数
+
+| 参数名称       | 参数类型                     | 是否必填   | 描述                                   |
+| -------------- | ---------------------------- | ---------- | -------------------------------------- |
+| callback       | id<Open_im_sdk_callbackBase> | 是         | 回调或监听器。                         |
+| conversationID | NSString\*                   | 按方法原型 | 会话 ID 或会话 ID 列表。               |
+| req            | NSString\*                   | 按方法原型 | 请求对象，字段以对应平台类型定义为准。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```objective-c showLineNumbers
+Open_im_sdkSetConversation(callback, @"operationID", @"conversationID", @"req");
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/ios/models/base)（`Base`）：core binding 异步结果回调，iOS 调用层通常映射为 Base。
+- [会话设置请求](/docs/chat/sdk/v4/ios/models/conversation-req)（`ConversationReq`）：会话设置请求对象，用于设置会话置顶、免打扰、扩展字段等属性。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/ios/message/overview)

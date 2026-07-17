@@ -1,0 +1,55 @@
+---
+title: 'Init SDK'
+description: 'Explains the Android core binding method InitSDK, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/init-sdk'
+---
+
+Use `InitSDK` for init sdk in the OpenIM Android SDK.
+
+## Feature
+
+InitSDK provides the Android SDK operation for init sdk.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| Method signature | `InitSDK(listener OnConnListener, operationID string, config string) bool` |
+| Capability       | SDK lifecycle                                                              |
+| Source file      | `open_im_sdk/init_login.go`                                                |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public boolean initSDK(Application application, InitConfig initConfig, @NotNull OnConnListener listener)
+```
+
+## Input Parameters
+
+| Parameter     | Type                                                                  | Description                                               |
+| ------------- | --------------------------------------------------------------------- | --------------------------------------------------------- |
+| `application` | `Application`                                                         | Parameter passed according to the core binding signature. |
+| `initConfig`  | [Init Config](/docs/chat/sdk/v4/android/models/init-config)           | Parameter passed according to the core binding signature. |
+| `listener`    | [On Conn Listener](/docs/chat/sdk/v4/android/models/on-conn-listener) | Parameter passed according to the core binding signature. |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+## Related Types
+
+- [Init Config](/docs/chat/sdk/v4/android/models/init-config) (`InitConfig`): InitConfig used by this Android SDK type.
+- [On Conn Listener](/docs/chat/sdk/v4/android/models/on-conn-listener) (`OnConnListener`): OnConnListener used by this Android SDK type.

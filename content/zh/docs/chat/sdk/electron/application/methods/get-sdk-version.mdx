@@ -1,0 +1,48 @@
+---
+title: '获取 SDK 版本'
+description: '说明 Electron OpenIM core 方法 GetSdkVersion 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/application/methods/get-sdk-version'
+---
+
+获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。
+
+## 功能介绍
+
+获取当前 core SDK 的版本号，适合在启动日志、问题反馈和兼容性判断中记录。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## 底层能力
+
+| 项目     | 说明                        |
+| -------- | --------------------------- |
+| 方法签名 | `GetSdkVersion() string`    |
+| 所属能力 | SDK 生命周期                |
+| 源码位置 | `open_im_sdk/init_login.go` |
+
+## Electron 调用参考
+
+Electron SDK v3.8.3 当前未暴露 `getSdkVersion` 这个独立平台方法。此页保留底层能力说明，避免把其他平台或旧封装层的调用方式误写成当前 Electron API。
+
+## 输入参数
+
+当前平台未暴露独立方法，因此没有可调用的平台参数。
+
+## 返回结果
+
+当前平台未暴露独立方法，因此没有平台返回值。
+
+## 代码示例
+
+当前 Electron SDK v3.8.3 未暴露 `getSdkVersion` 独立方法，暂无平台代码示例。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/electron/application/overview)

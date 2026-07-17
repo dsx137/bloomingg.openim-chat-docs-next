@@ -1,0 +1,29 @@
+---
+title: 'On Conn Listener'
+description: 'Explains the Android SDK OnConnListener type and its fields, callbacks, or constants.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-conn-listener'
+---
+
+`OnConnListener` is an Android SDK listener. Full class name: `io.openim.android.sdk.listener.OnConnListener`.
+
+## Notes
+
+On Conn Listener documentation for OpenIM Android SDK v3.8.3.
+
+## Callback Methods
+
+| Method               | Parameters             | Description                                       |
+| -------------------- | ---------------------- | ------------------------------------------------- |
+| `onConnectFailed`    | int code; String error | Called when connecting to the server fails.       |
+| `onConnectSuccess`   | None                   | Called after the server connection succeeds.      |
+| `onConnecting`       | None                   | Called while the SDK is connecting to the server. |
+| `onKickedOffline`    | None                   | Called when the current user is kicked offline.   |
+| `onUserTokenExpired` | None                   | Called when the login token expires.              |
+| `onUserTokenInvalid` | `String error`         | Called when the login token is invalid.           |

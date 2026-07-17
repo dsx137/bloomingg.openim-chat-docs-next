@@ -1,0 +1,47 @@
+---
+title: '标记全部会话已读'
+description: '说明 Android core binding 方法 MarkAllConversationMessageAsRead 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/read-status/mark-all-conversation-message-as-read'
+---
+
+将全部会话消息标记为已读，适合一键清除全部未读。
+
+创建消息类方法同步返回消息 JSON；发送、查询、删除、已读和本地写入方法通过回调返回。消息与会话事件分别通过消息监听器和会话监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                  |
+| -------- | --------------------------------------------------------------------- |
+| 方法签名 | `MarkAllConversationMessageAsRead(callback Base, operationID string)` |
+| 所属能力 | 会话与消息                                                            |
+| 源码位置 | `open_im_sdk/conversation_msg.go`                                     |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 未公开该 core 方法对应的 Java 调用入口。底层会先找出所有未读数大于 `0` 的本地会话，再逐个执行单会话已读流程；任一会话失败即停止并通过错误回调返回，因此它不是一次单独的服务端批量请求。
+
+## 输入参数
+
+| 参数名称      | 类型                                            | 描述                |
+| ------------- | ----------------------------------------------- | ------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。      |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。 |
+
+## 返回结果
+
+所有未读会话均完成标记，或当前没有未读会话时，底层调用 `OnSuccess`；查询会话或逐个标记失败时调用 `OnError`，没有业务返回数据。Android v3.8.3 没有公开 Java 入口，因此本页不提供无法运行的调用示例。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [会话与消息](/docs/chat/sdk/v4/android/message/overview)

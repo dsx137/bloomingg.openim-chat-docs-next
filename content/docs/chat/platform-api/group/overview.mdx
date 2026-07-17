@@ -1,0 +1,42 @@
+---
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-07"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/group/overview"
+---
+
+The group module lets backend services create and manage groups, members, join requests, ownership, moderation, and full data reads.
+
+## Capability scope
+
+| Capability | Description |
+| --- | --- |
+| Group management | Create groups, update group profile data, dismiss groups, and transfer ownership. |
+| Join workflows | Apply to join groups and process group applications. |
+| Members | Invite, remove, query, and update group members. |
+| Moderation | Mute or unmute members and whole groups. |
+| Full reads | Read complete member IDs, joined group IDs, and unhandled application counts. |
+
+## Common APIs
+
+- [Create a group](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [Invite users to a group](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
+- [Get group members](/docs/chat/platform-api/v3/group/group-members/get-group-member-list)
+- [Mute a group member](/docs/chat/platform-api/v3/group/group-moderation/mute-group-member)
+- [Get unhandled application count](/docs/chat/platform-api/v3/group/group-applications/get-group-application-unhandled-count)
+
+## Integration advice
+
+Group operations affect multiple users, so log the operator, target group, member list, and `operationID`.
+
+Restrict mute, kick, ownership transfer, and dismiss operations to audited backend workflows.
+
+## Related pages
+
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Error codes](/docs/chat/platform-api/v3/error-codes)

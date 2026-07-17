@@ -175,19 +175,7 @@ func main() {
 | errDlt  | errDlt | 错误详细信息，为空                              |
 | data    | object | 通用数据对象，具体结构见下方                           |
 | total   | int    | 用户总数                                               |
-| users   | array  | [用户信息](https://docs.openim.io/restapi/commonFields#userinfo)列表 |
-
-#### users[] 属性
-
-| 参数名 | 类型 | 说明 |
-| ------ | ---- | ---- |
-| users[].userID | string | OpenIM 用户 ID。 |
-| users[].nickname | string | 用户昵称。 |
-| users[].faceURL | string | 用户头像地址。 |
-| users[].ex | string | 业务扩展字段，通常由业务系统写入和解析。 |
-| users[].createTime | int64 | 用户创建时间，通常为毫秒时间戳。 |
-| users[].appMangerLevel | int | OpenIM 返回的应用管理级别字段，字段名以服务端响应为准。 |
-| users[].globalRecvMsgOpt | int | 全局消息接收设置。 |
+| users   | array  | [用户模块的 `UserInfo`](/docs/chat/platform-api/v3/user/overview#userinfo) 列表 |
 
 ### 分页读取建议
 

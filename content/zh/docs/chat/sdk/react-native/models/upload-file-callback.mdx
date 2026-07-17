@@ -1,0 +1,31 @@
+---
+title: '底层文件上传回调'
+description: '说明 React Native SDK UploadFileCallback 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/react-native'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'react-native'
+sourcePath: '/docs/chat/sdk/v4/react-native/models/upload-file-callback'
+---
+
+`UploadFileCallback` 是 React Native SDK 文档中展示 core binding 方法签名时使用的回调类型，完整类名为 `open_im_sdk_callback.UploadFileCallback`。core binding 文件上传回调，React Native 调用层通常映射为 OnPutFileListener。
+
+## 回调方法
+
+| 方法               | 参数                                                   | 描述                                |
+| ------------------ | ------------------------------------------------------ | ----------------------------------- |
+| Open               | size: int64                                            | 文件打开并返回总大小。              |
+| PartSize           | partSize: int64；num: int                              | 返回分片大小和分片数量。            |
+| HashPartProgress   | index: int；size: int64；partHash: string              | 分片哈希计算进度。                  |
+| HashPartComplete   | partsHash: string；fileHash: string                    | 所有分片哈希计算完成。              |
+| UploadID           | uploadID: string                                       | 生成并返回上传 ID。                 |
+| UploadPartComplete | index: int；partSize: int64；partHash: string          | 单个分片上传完成。                  |
+| UploadComplete     | fileSize: int64；streamSize: int64；storageSize: int64 | 文件上传阶段完成并返回大小信息。    |
+| Complete           | size: int64；url: string；typ: int                     | 文件上传完成并返回 URL 与文件类型。 |
+
+## 对应 React Native 类型
+
+- [文件上传回调](/docs/chat/sdk/v4/react-native/models/on-put-file-listener)（`OnPutFileListener`）

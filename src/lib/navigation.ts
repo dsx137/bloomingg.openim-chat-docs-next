@@ -18,6 +18,6 @@ export function getNavigationContexts(): readonly NavContext[] {
 }
 
 export function nodeContainsPath(node: NavNode, path: string): boolean {
-  if (node.href === path) return true;
+  if (node.href?.split(/[?#]/, 1)[0] === path) return true;
   return node.children.some((child) => nodeContainsPath(child, path));
 }

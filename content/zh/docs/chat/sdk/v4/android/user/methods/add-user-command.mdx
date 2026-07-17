@@ -1,0 +1,50 @@
+---
+title: '添加用户命令'
+description: '说明 Android core binding 方法 AddUserCommand 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/user/methods/add-user-command'
+---
+
+新增一条用户命令数据，当前源码注释指向用户收藏类数据，可用于按类型保存用户侧轻量命令或标记。
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                                       |
+| -------- | ------------------------------------------------------------------------------------------ |
+| 方法签名 | `AddUserCommand(callback Base, operationID string, Type int32, uuid string, value string)` |
+| 所属能力 | 用户                                                                                       |
+| 源码位置 | `open_im_sdk/user.go`                                                                      |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 未公开该方法的 Java 包装。提供的 Go core 源码还存在调用契约不一致：导出函数把 `Type`、`uuid`、`value` 作为三个独立参数传给内部 `ProcessUserCommandAdd`，而内部函数实际只接收一个 `ProcessUserCommandAddReq` 对象。按当前源码调用会在反射参数校验阶段失败，不能据此编写可运行的 Android 示例。
+
+## 输入参数
+
+| 参数名称      | 类型                                            | 描述                                                                                           |
+| ------------- | ----------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `callback`    | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                                                                 |
+| `operationID` | `string`                                        | 本次操作的追踪 ID。                                                                            |
+| `Type`        | `int32`                                         | 用户命令的业务分类值。当前 core 没有公开该字段的固定枚举，客户端与服务端必须使用同一业务约定。 |
+| `uuid`        | `string`                                        | 该命令记录的唯一标识；与 `Type` 共同定位记录，后续删除或更新时应复用同一值。                   |
+| `value`       | `string`                                        | 要保存的命令内容或业务值，由使用该命令分类的业务自行定义格式。                                 |
+
+## 返回结果
+
+按内部函数的预期契约，服务端新增记录并完成本地命令同步后调用 `OnSuccess`，失败时调用 `OnError`，没有业务返回数据。但当前导出签名无法正确构造内部请求，且 Android v3.8.3 没有公开 Java 包装；应使用已修复该契约的 SDK 版本后再接入。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/android/user/overview)

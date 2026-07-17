@@ -1,0 +1,69 @@
+---
+title: 'Create an advanced quote message'
+description: 'Explains the Create an advanced quote message method in Flutter SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/flutter'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'flutter'
+sourcePath: '/docs/chat/sdk/v4/flutter/message/creating-messages/create-advanced-quote-message'
+---
+
+Use **Create an advanced quote message** when your application needs this OpenIM capability from Flutter SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying core binding.
+
+## Overview
+
+Call `CreateAdvancedQuoteMessage` through the platform wrapper to create an advanced quote message. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Core Binding Method
+
+| Item             | Description                                                                                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------- |
+| Method signature | `CreateAdvancedQuoteMessage(operationID string, text string, message, messageEntityList string) string` |
+| Capability       | Conversations and messages                                                                              |
+| Source location  | `open_im_sdk/conversation_msg.go`                                                                       |
+
+## Flutter Call Reference
+
+Flutter SDK v3.8.3 exposes the following platform method signature. The core binding signature above explains the underlying capability and parameter mapping.
+
+Source:`lib/src/manager/im_message_manager.dart`.
+
+```dart showLineNumbers
+Future<Message> createAdvancedQuoteMessage({ required String text, required Message quoteMsg, List<RichMessageInfo> list = const [], String? operationID, })
+```
+
+## Parameters
+
+| Parameter | Type                                                | Required | Description                                     |
+| --------- | --------------------------------------------------- | -------- | ----------------------------------------------- |
+| text      | String                                              | Yes      | Pass as defined.                                |
+| quoteMsg  | [Message](/docs/chat/sdk/v4/flutter/models/message) | Yes      | Message object, message content, or message ID. |
+| list      | `List<RichMessageInfo>`                         | No       | Pass as defined.                                |
+
+## Return Value
+
+Returns `Future<Message>`. If the call fails, the Future throws an exception. Catch it in the application layer and keep the operationID in logs.
+
+## Code Example
+
+The following example shows the Flutter SDK v3.8.3 call shape. Replace placeholder values with real business data and add production error handling.
+
+```dart showLineNumbers
+final result = await OpenIM.iMManager.messageManager.createAdvancedQuoteMessage(
+  text: 'text',
+  quoteMsg: 'quoteMsg',
+  list: [],
+);
+```
+
+## Related types
+
+- [RichMessage](/docs/chat/sdk/v4/flutter/models/rich-message) (`RichMessage`)
+- [Message](/docs/chat/sdk/v4/flutter/models/message) (`Message`)
+
+## Related pages
+
+- [Conversations and messages](/docs/chat/sdk/v4/flutter/message/overview)

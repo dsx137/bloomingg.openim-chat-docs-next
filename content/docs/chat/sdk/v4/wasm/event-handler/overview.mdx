@@ -1,0 +1,35 @@
+---
+title: 'Overview'
+description: 'Explains event handler registration timing, event scope, and app-layer dispatch guidance for WASM SDK v3.8.3.'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/event-handler/overview'
+---
+Event handlers deliver connection, user, friend, group, conversation, message, custom business, and message KV changes to the app layer. Register them before login when possible so initial sync events are not missed.
+
+## Handler Index
+
+| Handler | Use case |
+| ------- | -------- |
+| [Listen for group events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-group-listener) | Group info, members, applications, and permission changes. |
+| [Listen for conversation events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-conversation-listener) | Conversation creation, updates, deletion, unread counts, and drafts. |
+| [Listen for single-message events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-advanced-msg-listener) | New messages, revocation, read status, and message extension changes. |
+| [Listen for batch message events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-batch-msg-listener) | Batched new messages or batched sync results. |
+| [Listen for user events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-user-listener) | Current user profile and user-related state changes. |
+| [Listen for friend events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-friend-listener) | Friend list, friend info, friend applications, and blacklist changes. |
+| [Listen for custom business events](/docs/chat/sdk/v4/wasm/event-handler/methods/set-custom-business-listener) | Custom business events delivered by the server. |
+| [Listen for message KV changes](/docs/chat/sdk/v4/wasm/event-handler/methods/set-message-kv-info-listener) | Message extension key-value additions, updates, and deletion. |
+
+## Registration Guidance
+
+| Guidance | Description |
+| -------- | ----------- |
+| Register before login | Register connection, message, conversation, friend, group, and user listeners before login when possible. |
+| Fan out in app code | If multiple pages consume the same event type, dispatch it through an app-level event bus or state store. |
+| Avoid accidental replacement | Most `Set*Listener` calls replace the listener stored for that event category. Repeated registration can overwrite the previous listener. |
+| Keep cache in sync | Listener callbacks should update local cache and UI state, then notify screens that need to refresh. |

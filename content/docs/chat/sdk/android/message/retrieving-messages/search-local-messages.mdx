@@ -1,0 +1,109 @@
+---
+title: 'Search local messages'
+description: 'Explains the Android core binding method SearchLocalMessages, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/retrieving-messages/search-local-messages'
+---
+
+Use `SearchLocalMessages` for search local messages in the OpenIM Android SDK.
+
+## Feature
+
+Reads search local messages from the local SDK state or OpenIM service according to the method contract.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                  |
+| ---------------- | ---------------------------------------------------------------------------- |
+| Method signature | `SearchLocalMessages(callback Base, operationID string, searchParam string)` |
+| Capability       | Conversations and messages                                                   |
+| Source file      | `open_im_sdk/conversation_msg.go`                                            |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public void searchLocalMessages(OnBase<SearchResult> base, String conversationID,
+                                List<String> keywordList, int keywordListMatchType,
+                                List<String> senderUserIDList, List<Integer> messageTypeList,
+                                int searchTimePosition, int searchTimePeriod,
+                                int pageIndex, int count)
+```
+
+## Input Parameters
+
+| Parameter              | Type                                                                                                                     | Description                                               |
+| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------- |
+| `callBack`             | [On Base](/docs/chat/sdk/v4/android/models/on-base)`<`[Search Result](/docs/chat/sdk/v4/android/models/search-result)`>` | Async callback for success and failure results.           |
+| `conversationID`       | String                                                                                                                   | Parameter passed according to the core binding signature. |
+| `keywordList`          | `List<String>`                                                                                                           | Parameter passed according to the core binding signature. |
+| `keywordListMatchType` | int                                                                                                                      | Parameter passed according to the core binding signature. |
+| `senderUserIDList`     | `List<String>`                                                                                                           | List of user IDs, usually encoded as JSON.                |
+| `messageTypeList`      | `List<Integer>`                                                                                                          | Message payload or message JSON.                          |
+| `searchTimePosition`   | int                                                                                                                      | Parameter passed according to the core binding signature. |
+| `searchTimePeriod`     | int                                                                                                                      | Parameter passed according to the core binding signature. |
+| `pageIndex`            | int                                                                                                                      | Parameter passed according to the core binding signature. |
+| `count`                | int                                                                                                                      | Number of records to return.                              |
+
+
+
+## Return Value
+
+The result is returned through the callback. Success is delivered through `OnSuccess`, failure through `OnError`, and sending or upload methods may also report progress.
+
+| Name | Type                                                            | Description                           |
+| ---- | --------------------------------------------------------------- | ------------------------------------- |
+| ~    | [Search Result](/docs/chat/sdk/v4/android/models/search-result) | Returned when the operation succeeds. |
+
+### SearchResult
+
+| Field               | Type                                                                                | Description                                 |
+| ------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------- |
+| `totalCount`        | int                                                                                 | SDK field returned or submitted by the SDK. |
+| `searchResultItems` | `List<`[Search Result Item](/docs/chat/sdk/v4/android/models/search-result-item)`>` | SDK field returned or submitted by the SDK. |
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+OpenIMClient.getInstance().messageManager.searchLocalMessages(
+    new OnBase<SearchResult>() {
+    @Override
+    public void onError(int code, String error) {
+        // TODO: handle the callback result
+    }
+
+    @Override
+    public void onSuccess(SearchResult data) {
+        // TODO: handle the callback result
+    }
+},
+    conversationID,
+    keywordList,
+    keywordListMatchType,
+    senderUserIDList,
+    messageTypeList,
+    searchTimePosition,
+    searchTimePeriod,
+    pageIndex,
+    count
+);
+```
+
+## Related Types
+
+- [Base](/docs/chat/sdk/v4/android/models/base) (`Base`): Base used by this Android SDK type.
+- [On Base](/docs/chat/sdk/v4/android/models/on-base) (`OnBase`): OnBase used by this Android SDK type.
+- [Message Type](/docs/chat/sdk/v4/android/models/message-type) (`MessageType`): MessageType used by this Android SDK type.
+- [Search Result](/docs/chat/sdk/v4/android/models/search-result) (`SearchResult`): SearchResult used by this Android SDK type.
+- [Search Result Item](/docs/chat/sdk/v4/android/models/search-result-item) (`SearchResultItem`): SearchResultItem used by this Android SDK type.

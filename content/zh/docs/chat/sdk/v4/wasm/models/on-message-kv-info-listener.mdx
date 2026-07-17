@@ -1,0 +1,28 @@
+---
+title: '消息扩展监听器'
+description: '说明 WASM SDK OnMessageKvInfoListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/wasm'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'wasm'
+sourcePath: '/docs/chat/sdk/v4/wasm/models/on-message-kv-info-listener'
+---
+
+`OnMessageKvInfoListener` 是 WASM SDK 的监听器，完整类名为 `io.openim.react-native.sdk.listener.OnMessageKvInfoListener`。消息扩展键值变化监听器。
+
+## 回调方法
+
+| 方法                   | 参数                 | 描述             |
+| ---------------------- | -------------------- | ---------------- |
+| onMessageKvInfoChanged | List<MessageKv> list | 事件触发时回调。 |
+
+## 关联类型
+
+- [消息扩展键值](/docs/chat/sdk/v4/wasm/models/message-kv)（`MessageKv`）：消息扩展键值信息。
+
+## 相关页面
+
+- [监听消息 KV 变化](/docs/chat/sdk/v4/wasm/event-handler/methods/set-message-kv-info-listener)

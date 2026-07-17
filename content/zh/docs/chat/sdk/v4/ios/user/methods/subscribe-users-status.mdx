@@ -1,0 +1,66 @@
+---
+title: '订阅用户在线状态'
+description: '说明 iOS core binding 方法 SubscribeUsersStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/ios'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'ios'
+sourcePath: '/docs/chat/sdk/v4/ios/user/methods/subscribe-users-status'
+---
+
+订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。
+
+## 功能介绍
+
+订阅一组用户的在线状态，适合好友列表、会话页和在线状态角标需要持续更新的场景。
+
+用户资料和在线状态方法通常要求当前用户已登录；在线状态变化通过 `SetUserListener` 设置的监听器接收。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                      |
+| -------- | ------------------------------------------------------------------------- |
+| 方法签名 | `SubscribeUsersStatus(callback Base, operationID string, userIDs string)` |
+| 所属能力 | 用户                                                                      |
+| 源码位置 | `open_im_sdk/online.go`                                                   |
+
+## iOS 调用参考
+
+iOS Core SDK v3.8.3 的 Objective-C 方法原型如下。Core binding 方法签名用于说明底层能力和参数映射。
+
+源码位置：`Framework/OpenIMCore.xcframework/.../Open_im_sdk.objc.h`。
+
+```objective-c showLineNumbers
+FOUNDATION_EXPORT void Open_im_sdkSubscribeUsersStatus(id<Open_im_sdk_callbackBase> _Nullable callback, NSString* _Nullable operationID, NSString* _Nullable userIDs);
+```
+
+## 输入参数
+
+| 参数名称 | 参数类型                     | 是否必填   | 描述                     |
+| -------- | ---------------------------- | ---------- | ------------------------ |
+| callback | id<Open_im_sdk_callbackBase> | 是         | 回调或监听器。           |
+| userIDs  | NSString\*                   | 按方法原型 | 用户 ID 或用户 ID 列表。 |
+
+## 返回结果
+
+同步创建类方法直接返回值；异步方法通过 callback 返回成功或失败。建议为每次调用传入可追踪的 operationID。
+
+## 代码示例
+
+以下示例展示 iOS Core SDK v3.8.3 的调用骨架，请按业务上下文补充真实参数、错误处理和 UI 状态更新。
+
+```objective-c showLineNumbers
+Open_im_sdkSubscribeUsersStatus(callback, @"operationID", @"userIDs");
+```
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/ios/models/base)（`Base`）：core binding 异步结果回调，iOS 调用层通常映射为 Base。
+- [用户在线状态](/docs/chat/sdk/v4/ios/models/users-online-status)（`UsersOnlineStatus`）：用户在线状态信息。
+
+## 相关页面
+
+- [用户](/docs/chat/sdk/v4/ios/user/overview)

@@ -1,0 +1,27 @@
+---
+title: '收到的群申请查询条件'
+description: '说明 Android SDK GetGroupApplicationListAsRecipientReq 类型的用途和字段。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/get-group-application-list-as-recipient-req'
+---
+
+`GetGroupApplicationListAsRecipientReq` 是 Android SDK 的数据模型，完整类名为 `io.openim.android.sdk.models.GetGroupApplicationListAsRecipientReq`。查询当前用户收到的入群申请时使用的分页和过滤条件。
+
+## 字段说明
+
+| 字段名称      | Java 类型 | 描述                                                                                                              |
+| ------------- | --------- | ----------------------------------------------------------------------------------------------------------------- |
+| offset        | int       | 从第几条申请开始返回，首条记录的偏移量为 `0`。                                                                    |
+| count         | int       | 本页最多返回的申请数量。                                                                                          |
+| groupIDs      | String[]  | 只返回这些群组收到的申请；空数组表示不按群组过滤。                                                                |
+| handleResults | int[]     | 只返回指定处理状态的申请。当前 Go core 使用 `-1` 表示拒绝、`0` 表示未处理、`1` 表示同意；空数组表示不按状态过滤。 |
+
+## 相关页面
+
+- [获取收到的入群申请](/docs/chat/sdk/v4/android/group/group-applications/get-group-application-list-as-recipient)

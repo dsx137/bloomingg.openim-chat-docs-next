@@ -1,0 +1,160 @@
+---
+title: "批量设置会话"
+description: "OpenIM 会话 REST API：批量设置会话。"
+sourcePath: "/docs/chat/platform-api/v3/conversation/managing-conversations/set-conversations"
+---
+
+使用 **批量设置会话** 从可信后端调用 OpenIM 会话 REST 接口。为多个用户批量设置同一个会话的可更新字段，例如免打扰、置顶、扩展字段或阅后即焚配置。 请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/conversation/set_conversations
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/conversation/set_conversations" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "userIDs": [
+    "user_001",
+    "user_003"
+  ],
+  "conversation": {
+    "conversationID": "si_user_001_user_002",
+    "conversationType": 1,
+    "userID": "user_002",
+    "groupID": "",
+    "recvMsgOpt": 0,
+    "isPinned": true,
+    "attachedInfo": "",
+    "isPrivateChat": false,
+    "ex": "",
+    "burnDuration": 0,
+    "minSeq": 0,
+    "maxSeq": 128,
+    "groupAtType": 0,
+    "msgDestructTime": 0,
+    "isMsgDestruct": false
+  }
+}'
+```
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| Header | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
+| token | 是 | string | APP 管理员 Token；仅保存在可信后端服务中。 |
+| Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
+
+## 请求体
+
+```json
+{
+  "userIDs": [
+    "user_001",
+    "user_003"
+  ],
+  "conversation": {
+    "conversationID": "si_user_001_user_002",
+    "conversationType": 1,
+    "userID": "user_002",
+    "groupID": "",
+    "recvMsgOpt": 0,
+    "isPinned": true,
+    "attachedInfo": "",
+    "isPrivateChat": false,
+    "ex": "",
+    "burnDuration": 0,
+    "minSeq": 0,
+    "maxSeq": 128,
+    "groupAtType": 0,
+    "msgDestructTime": 0,
+    "isMsgDestruct": false
+  }
+}
+```
+
+| 参数名 | 是否必填 | 类型 | 说明 |
+| --- | --- | --- | --- |
+| userIDs | 是 | array | 需要设置会话字段的用户 ID 列表。 |
+| conversation | 是 | object | 要设置的会话字段，结构为[会话模块的 `ConversationInfo`](/docs/chat/platform-api/v3/conversation/overview#conversationinfo)。 |
+| conversation.conversationID | 是 | string | 会话 ID。 |
+| conversation.conversationType | 是 | int | 会话类型，例如 1 单聊、3 群聊。 |
+| conversation.userID | 否 | string | 单聊目标用户 ID；单聊会话必填。 |
+| conversation.groupID | 否 | string | 群组 ID；群聊会话必填。 |
+| conversation.recvMsgOpt | 否 | int | 收消息选项，例如正常接收、免打扰等。 |
+| conversation.isPinned | 否 | boolean | 是否置顶会话；传入字段时会更新。 |
+| conversation.attachedInfo | 否 | string | 会话附加信息。 |
+| conversation.isPrivateChat | 否 | boolean | 是否为私聊/阅后即焚类会话。 |
+| conversation.ex | 否 | string | 会话扩展字段。 |
+| conversation.burnDuration | 否 | int | 阅后即焚时长，单位秒。 |
+| conversation.minSeq | 否 | int | 会话最小消息序列号。 |
+| conversation.maxSeq | 否 | int | 会话最大消息序列号。 |
+| conversation.groupAtType | 否 | int | 群聊 @ 状态。 |
+| conversation.msgDestructTime | 否 | int | 消息销毁时间配置。 |
+| conversation.isMsgDestruct | 否 | boolean | 是否开启消息销毁。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
+
+### 响应参数
+
+| 参数名 | 类型 | 说明 |
+| --- | --- | --- |
+| errCode | int | 业务错误码，0 表示成功。 |
+| errMsg | string | 错误简要信息，成功时通常为空。 |
+| errDlt | string | 错误详细信息，成功时通常为空。 |
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表和限制说明检查字段。 |
+
+## 权限和限制
+
+- 批量更新用户会话设置，并可能触发会话变更通知。
+- `userIDs` 和 `conversation` 必填。
+- 仅传需要更新的包装类型字段；未传字段不会被修改。
+- 单聊会话填写 `conversation.userID`，群聊会话填写 `conversation.groupID`。
+- 所有数组型请求参数建议控制在 1000 个元素以内。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [发送消息](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
+- [群组概览](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

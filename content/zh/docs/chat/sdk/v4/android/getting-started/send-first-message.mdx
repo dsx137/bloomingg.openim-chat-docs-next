@@ -1,0 +1,60 @@
+---
+title: 'Android 接入流程'
+description: '按当前 open_im_sdk 导出方法说明 Android SDK 从初始化、监听器、登录到消息调用前的接入顺序，不包含示例代码。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/getting-started/send-first-message'
+---
+
+本页只说明接入顺序和需要准备的参数，不提供示例代码。具体 API 签名见各能力页。
+
+## 调用顺序
+
+| 步骤       | 必要方法                                                                 | 说明                                                                                                                     |
+| ---------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| 读取版本   | `GetSdkVersion()`                                                        | 可用于诊断当前 AAR 或 core binding 版本。                                                                                |
+| 初始化     | `InitSDK(listener, operationID, config)`                                 | `config` 传入 `IMConfig` JSON；`listener` 处理连接生命周期。                                                             |
+| 设置监听器 | `SetConversationListener`、`SetAdvancedMsgListener`、`SetFriendListener` | 建议在登录前设置，避免漏掉登录同步期间的事件。                                                                           |
+| 登录       | `Login(callback, operationID, userID, token)`                            | token 应由业务服务端签发；登录成功后再调用会话、消息、群组等接口。                                                       |
+| 创建消息   | `CreateTextMessage`、`CreateImageMessage` 等                             | 创建方法同步返回消息 JSON 字符串。                                                                                       |
+| 发送消息   | `SendMessage` 或 `SendMessageNotOss`                                     | 单聊传 `recvID`，群聊传 `groupID`；发送结果走 [`SendMsgCallBack`](/docs/chat/sdk/v4/android/models/send-msg-call-back)。 |
+| 退出或销毁 | `Logout`、`UnInitSDK`                                                    | 退出当前用户用 `Logout`；释放 SDK 全局资源用 `UnInitSDK`。                                                               |
+
+## 初始化配置
+
+| 字段                   | 类型   | 说明                                       |
+| ---------------------- | ------ | ------------------------------------------ |
+| `systemType`           | string | 系统类型，用于日志和运行环境标识。         |
+| `platformID`           | int32  | 平台 ID；Android 必须传非 0 值。           |
+| `apiAddr`              | string | OpenIM HTTP API 地址，必须包含 http 协议。 |
+| `wsAddr`               | string | OpenIM WebSocket 地址，必须包含 ws 协议。  |
+| `dataDir`              | string | 本地数据库、缓存和 SDK 数据目录。          |
+| `logLevel`             | uint32 | SDK 日志等级。                             |
+| `isLogStandardOutput`  | bool   | 是否输出到标准输出。                       |
+| `logFilePath`          | string | 日志文件目录。                             |
+| `isExternalExtensions` | bool   | 是否启用外部扩展字段处理。                 |
+
+## 接入检查
+
+| 检查项             | 通过标准                                                                        |
+| ------------------ | ------------------------------------------------------------------------------- |
+| 初始化只执行一次   | 重复初始化会复用已有 `UserForSDK`，不应在同一进程内频繁重建。                   |
+| operationID 非空   | core 调用链会校验 `operationID`，建议每次业务操作生成可追踪 ID。                |
+| 登录后调用业务接口 | 未初始化或未登录时，多数接口会走错误回调。                                      |
+| JSON 参数合法      | `userIDList`、`groupIDList`、`searchParam`、`req` 等字符串应是目标结构的 JSON。 |
+| 监听器不重复丢失   | `Set*Listener` 是替换式设置；应用层需要自行做分发时，应在 wrapper 层维护。      |
+
+## 相关类型
+
+- [底层消息发送回调](/docs/chat/sdk/v4/android/models/send-msg-call-back)（`SendMsgCallBack`）：core binding 消息发送回调，Android 调用层通常映射为 OnMsgSendCallback。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)
+- [监听器](/docs/chat/sdk/v4/android/event-handler/overview)
+- [发送消息](/docs/chat/sdk/v4/android/message/overview#发送消息)

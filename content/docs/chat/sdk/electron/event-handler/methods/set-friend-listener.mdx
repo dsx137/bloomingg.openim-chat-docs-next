@@ -1,0 +1,72 @@
+---
+title: 'Set Friend Listener'
+description: 'Explains the Set Friend Listener method in Electron SDK v3.8.3, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/electron'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-09'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/docs/chat/sdk/v4/electron/event-handler/methods/set-friend-listener'
+---
+
+Use **Set Friend Listener** when your application needs this OpenIM capability from Electron SDK v3.8.3. This page follows the platform SDK reference and keeps the platform call signature visible next to the underlying OpenIM core.
+
+## Overview
+
+Call `SetFriendListener` through the platform wrapper to set friend listener. The current user usually needs to be initialized and logged in before calling business APIs. Keep `operationID` traceable so client and server logs can be matched during troubleshooting.
+
+## Underlying Capability
+
+| Item             | Description                                        |
+| ---------------- | -------------------------------------------------- |
+| Method signature | `SetFriendListener(listener OnFriendshipListener)` |
+| Capability       | Event handlers                                     |
+| Source location  | `open_im_sdk/listener.go`                          |
+
+## Electron Call Reference
+
+Electron SDK v3.8.3 exposes the following platform method signature. The underlying capability table above explains the OpenIM core capability and parameter mapping.
+
+Source: `src/render.ts`.
+
+```ts showLineNumbers
+on(event: CbEvents, listener: (event) => void)
+```
+
+## Parameters
+
+| Parameter | Type     | Required | Description                            |
+| --------- | -------- | -------- | -------------------------------------- |
+| event     | CbEvents | Yes      | Event name to subscribe to.            |
+| listener  | Function | Yes      | Callback invoked when the event fires. |
+
+## Return Value
+
+Returns a `Promise` or registers a callback result. If the call fails, the Promise rejects; handle failures with `try/catch` or `.catch()` in application code.
+
+## Code Example
+
+Electron receives callbacks through event subscriptions. Replace the event name and handler as needed.
+
+```ts showLineNumbers
+import { getWithRenderProcess } from '@openim/electron-client-sdk/lib/render';
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const { instance: openIM } = getWithRenderProcess();
+
+openIM.on(CbEvents.OnRecvNewMessages, (event) => {
+  console.log(event);
+});
+```
+
+## Related types
+
+- [Friendship listener](/docs/chat/sdk/v4/electron/models/on-friendship-listener) (`OnFriendshipListener`)
+- [Friend info](/docs/chat/sdk/v4/electron/models/friend-info) (`FriendInfo`)
+- [Blacklist info](/docs/chat/sdk/v4/electron/models/blacklist-info) (`BlacklistInfo`)
+
+## Related pages
+
+- [Event handlers](/docs/chat/sdk/v4/electron/event-handler/overview)

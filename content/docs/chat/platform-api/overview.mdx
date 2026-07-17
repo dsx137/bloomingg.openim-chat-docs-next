@@ -1,72 +1,76 @@
 ---
-title: "OpenIM Platform API"
-description: "OpenIM Platform API 中文概览，覆盖服务端 REST API、Webhook 和后端运营能力。"
+title: "Overview"
+description: "Overview for the OpenIM Platform API."
 product: "platform-api"
-context: "chat/platform-api"
+context: "chat/platform-api/v3"
 template: "overview"
 status: "published"
-lastUpdated: "2026-07-01"
+lastUpdated: "2026-07-07"
 version: "v3"
-sourcePath: "/platform-api/overview"
+sourcePath: "/docs/chat/platform-api/v3/overview"
 ---
 
-OpenIM Platform API 面向可信后端服务，提供用户、群组、消息、上传、Webhook 和运营管理相关的 REST 接口参考。中文文档保留 Platform API 的导航方式，具体能力、接口路径和请求字段以 OpenIM REST 已覆盖的文档为准。
+OpenIM Platform API is the server-side REST API surface for trusted backend services. It covers authentication, users, relationships, groups, conversations, messages, third-party services, migration workflows, and error handling.
 
-## 最常用
+## Common tasks
 
-### 认证
+### Authentication
 
-在调用管理端 REST API 前，后端服务需要确认 API 地址、请求头和管理员 Token 的使用方式。客户端登录所需的用户 Token 也应由可信后端签发。
+Issue administrator tokens for backend calls and user tokens for SDK login.
 
-- [接入准备](/platform-api/prepare-to-use-api)
-- [签发会话 Token](/platform-api/user/managing-session-tokens/issue-a-session-token)
+- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [Get an administrator token](/docs/chat/platform-api/v3/auth/tokens/get-admin-token)
+- [Get a user token](/docs/chat/platform-api/v3/auth/tokens/get-user-token)
 
-### 用户管理
+### User management
 
-通过 OpenIM 用户管理接口创建、更新、查询用户资料，并把注册、注销、权限等业务规则保留在业务系统中。
+Create, update, and query OpenIM users while keeping registration and authorization rules in your business system.
 
-- [创建用户](/platform-api/user/creating-users/create-a-user)
-- [查询用户列表](/platform-api/user/listing-users/list-users)
-- [获取用户信息](/platform-api/user/listing-users/get-a-user)
+- [Create a user](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
+- [List users](/docs/chat/platform-api/v3/user/listing-users/list-users)
+- [Get a user](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
 
-### 消息
+### Messages
 
-使用 OpenIM 消息接口从后端发送消息，并结合 Webhook 或业务后端处理审核、通知和扩展行为。
+Send messages from the backend, deliver business notifications, and maintain message state.
 
-- [发送消息](/platform-api/message/messaging-basics/send-a-message)
+- [Send a message](/docs/chat/platform-api/v3/message/sending-messages/send-msg)
+- [Batch send messages](/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg)
+- [Search messages](/docs/chat/platform-api/v3/message/retrieving-messages/search-msg)
 
-### 迁移其他项目到 OpenIM
+## Recommended modules
 
-将历史消息或其他 IM 项目中的消息数据导入 OpenIM 时，后端可以使用 OpenIM 消息接口写入带原始发送时间的消息记录。
+### Relationships
 
-- [迁移消息](/platform-api/migration/migrate-messages)
+Use relationship APIs to manage friends, friend requests, and blacklists.
 
-## 推荐功能
+- [Apply to add a friend](/docs/chat/platform-api/v3/relation/managing-friend-requests/apply-to-add-friend)
+- [List friends](/docs/chat/platform-api/v3/relation/listing-friends/list-friends)
+- [Add to blacklist](/docs/chat/platform-api/v3/relation/blacklist/add-black)
 
-### 群组频道
+### Groups
 
-OpenIM 使用群组能力承载群聊场景。文档中的“群组频道”概念在这里映射为 OpenIM 群组、群成员和入群申请。
+Use group APIs to create groups, invite members, process join requests, and manage moderation.
 
-- [创建群组频道](/platform-api/channel/creating-a-channel/create-a-group-channel)
-- [邀请成员](/platform-api/channel/inviting-a-user/invite-as-members-channel)
+- [Create a group](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [Invite users to a group](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
+- [Mute a group member](/docs/chat/platform-api/v3/group/group-moderation/mute-group-member)
 
-### 内容审核
+### Conversations and third-party services
 
-OpenIM 提供群禁言、成员禁言等可直接调用的管理能力，适合由可信后端执行。
+Conversation APIs help backend services inspect and repair conversation state. Third-party service APIs cover monitoring, push helpers, logs, and object storage.
 
-- [屏蔽用户](/platform-api/moderation/blocking-users/block-users)
-- [取消屏蔽用户](/platform-api/moderation/blocking-users/unblock-a-user)
-- [禁言群组成员](/platform-api/moderation/muting-a-user/mute-a-member-in-a-group-channel)
-- [解除群组成员禁言](/platform-api/moderation/muting-a-user/unmute-a-member-in-a-group-channel)
+- [Get sorted conversations](/docs/chat/platform-api/v3/conversation/listing-conversations/get-sorted-conversation-list)
+- [Open monitoring dashboard](/docs/chat/platform-api/v3/third/monitoring/prometheus)
+- [Initiate multipart upload](/docs/chat/platform-api/v3/third/object-storage/initiate-multipart-upload)
 
-## 资源
+## Resources
 
-| 字段 | 值 |
-| ---- | -- |
-| 支持情况 | OpenIM REST 已提供直接接口 |
-| 产品区域 | OpenIM 服务端 REST API |
-| 请求模型 | 后端到后端的 HTTP JSON 请求，使用 `operationID` 串联日志 |
-| 鉴权方式 | 管理端 REST API 使用 APP 管理员 Token |
+| Field | Value |
+| ---- | ----- |
+| Access model | Backend-to-backend HTTP JSON requests |
+| Authentication | Administrator token for management APIs |
+| Trace header | Use `operationID` to connect client, backend, and OpenIM logs |
 
-- [OpenIM REST API 介绍](https://docs.openim.io/restapi/apis/introduction)
-- [OpenIM 错误码](https://docs.openim.io/restapi/errCode)
+- [OpenIM REST API introduction](https://docs.openim.io/restapi/apis/introduction)
+- [OpenIM error codes](https://docs.openim.io/restapi/errCode)

@@ -1,0 +1,48 @@
+---
+title: '设置前后台状态'
+description: '说明 Android core binding 方法 SetAppBackgroundStatus 的用途、参数、返回和使用边界。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/application/methods/set-app-background-status'
+---
+
+通知 SDK 应用进入前台或后台，便于 SDK 调整连接、同步和推送相关行为。
+
+初始化类方法应在应用进程内按需调用；用户态方法通常要求 `InitSDK` 已成功执行，并通过 `operationID` 串联日志。
+
+## Core Binding 方法
+
+| 项目     | 说明                                                                           |
+| -------- | ------------------------------------------------------------------------------ |
+| 方法签名 | `SetAppBackgroundStatus(callback Base, operationID string, isBackground bool)` |
+| 所属能力 | SDK 生命周期                                                                   |
+| 源码位置 | `open_im_sdk/init_login.go`                                                    |
+
+## Android 调用参考
+
+当前 Android SDK v3.8.3 未公开该方法。`OpenIMClient` 内部存在私有的 `setAppBackgroundStatus(boolean)` 和基于 `ProcessLifecycleOwner` 的观察器：进程进入前台时传 `false`，进入后台时传 `true`；但该版本在登录成功处已注释掉观察器注册调用，因此公开 SDK 不会自动启用这段上报逻辑，应用也不能直接调用私有方法。
+
+## 输入参数
+
+| 参数名称       | 类型                                            | 描述                                                  |
+| -------------- | ----------------------------------------------- | ----------------------------------------------------- |
+| `callback`     | [`Base`](/docs/chat/sdk/v4/android/models/base) | 异步结果回调。                                        |
+| `operationID`  | `string`                                        | 本次操作的追踪 ID。                                   |
+| `isBackground` | `bool`                                          | 应用是否处于后台：`true` 表示后台，`false` 表示前台。 |
+
+## 返回结果
+
+底层完成状态切换后调用 `OnSuccess`，失败时调用 `OnError`，没有业务数据。由于 Android v3.8.3 没有公开调用入口，本页不提供无法运行的 Java 示例；如应用依赖该状态，需先升级到已公开此能力的 Android SDK 版本或确认所集成版本已恢复生命周期注册。
+
+## 相关类型
+
+- [底层通用回调](/docs/chat/sdk/v4/android/models/base)（`Base`）：core binding 异步结果回调，Android 调用层通常映射为 OnBase。
+
+## 相关页面
+
+- [SDK 生命周期](/docs/chat/sdk/v4/android/application/overview)

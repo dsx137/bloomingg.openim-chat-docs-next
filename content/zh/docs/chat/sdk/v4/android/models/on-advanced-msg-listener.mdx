@@ -1,0 +1,29 @@
+---
+title: '底层高级消息监听器'
+description: '说明 Android SDK OnAdvancedMsgListener 类型的用途和回调方法。'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-10'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/models/on-advanced-msg-listener'
+---
+
+`OnAdvancedMsgListener` 是 Android SDK 文档中展示 core binding 方法签名时使用的回调类型，完整类名为 `open_im_sdk_callback.OnAdvancedMsgListener`。core binding 高级消息监听器，Android 调用层对应 OnAdvanceMsgListener。
+
+## 回调方法
+
+| 方法                    | 参数                             | 描述                                                                                                                                                                                                    |
+| ----------------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| OnRecvNewMessage        | `message: string`（JSON）        | 未设置批量消息监听器时，SDK 在前台同步到普通新消息并完成本地处理后触发，正在输入消息和仅在线消息除外。`message` 是序列化的 [`Message`](/docs/chat/sdk/v4/android/models/message)。                      |
+| OnRecvC2CReadReceipt    | `msgReceiptList: string`（JSON） | 收到单聊已读通知并把本地消息标记为已读后触发。`msgReceiptList` 是序列化的 [`C2CReadReceiptInfo`](/docs/chat/sdk/v4/android/models/c2c-read-receipt-info) 数组。                                         |
+| OnNewRecvMessageRevoked | `messageRevoked: string`（JSON） | 收到撤回通知且 core 已更新本地原消息后触发。`messageRevoked` 是序列化的 [`RevokedInfo`](/docs/chat/sdk/v4/android/models/revoked-info)，其中 `clientMsgID` 标识被撤回消息。                             |
+| OnRecvOfflineNewMessage | `message: string`（JSON）        | 未设置批量消息监听器时，SDK 处于后台同步到新消息，且全局与会话接收选项允许接收后，对每条消息分别触发。`message` 是单个 [`Message`](/docs/chat/sdk/v4/android/models/message) 的 JSON。                  |
+| OnMsgDeleted            | `message: string`（JSON）        | 消息被本端或跨端删除并在本地标记为已删除后触发。`message` 是删除前的 [`Message`](/docs/chat/sdk/v4/android/models/message) 序列化数据。                                                                 |
+| OnRecvOnlineOnlyMessage | `message: string`（JSON）        | 未设置批量消息监听器且 SDK 在前台收到仅在线消息时触发，不再触发普通新消息回调。`message` 是序列化的 [`Message`](/docs/chat/sdk/v4/android/models/message)，Android 调用层当前将原始 JSON 透传给业务层。 |
+
+## 对应 Android 类型
+
+- [高级消息监听器](/docs/chat/sdk/v4/android/models/on-advance-msg-listener)（`OnAdvanceMsgListener`）

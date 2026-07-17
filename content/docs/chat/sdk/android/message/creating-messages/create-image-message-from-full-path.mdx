@@ -1,0 +1,64 @@
+---
+title: 'Create image message from full path'
+description: 'Explains the Android core binding method CreateImageMessageFromFullPath, including purpose, parameters, return value, and usage boundaries.'
+product: 'sdk'
+context: 'chat/sdk/v4/android'
+template: 'guide'
+status: 'draft'
+lastUpdated: '2026-07-08'
+version: 'v4'
+platform: 'android'
+sourcePath: '/docs/chat/sdk/v4/android/message/creating-messages/create-image-message-from-full-path'
+---
+
+Use `CreateImageMessageFromFullPath` for create image message from full path in the OpenIM Android SDK.
+
+## Feature
+
+Creates the local message payload for create image message from full path. Pass the returned message JSON to a sending method when you are ready to send it.
+
+Initialize the SDK before calling user-scoped APIs, and pass a unique `operationID` whenever the core binding signature includes it so client and server logs can be correlated.
+
+## Core Binding Method
+
+| Item             | Description                                                                       |
+| ---------------- | --------------------------------------------------------------------------------- |
+| Method signature | `CreateImageMessageFromFullPath(operationID string, imageFullPath string) string` |
+| Capability       | Conversations and messages                                                        |
+| Source file      | `open_im_sdk/conversation_msg.go`                                                 |
+
+## Android Call Reference
+
+The Java method prototype in Android SDK v3.8.3 is shown below. The core binding signature explains the underlying `open_im_sdk` capability and parameter mapping.
+
+```java showLineNumbers
+public Message createImageMessageFromFullPath(String imagePath)
+```
+
+## Input Parameters
+
+| Parameter   | Type   | Description      |
+| ----------- | ------ | ---------------- |
+| `imagePath` | String | Local file path. |
+
+
+
+## Return Value
+
+This method returns a value synchronously according to the Android method prototype, usually a message JSON string or SDK-defined value.
+
+| Name | Type                                                | Description                           |
+| ---- | --------------------------------------------------- | ------------------------------------- |
+| ~    | [Message](/docs/chat/sdk/v4/android/models/message) | Returned when the operation succeeds. |
+
+## Code Example
+
+The following example uses the Android SDK v3.8.3 call style.
+
+```java showLineNumbers
+Message imageMessage = OpenIMClient.getInstance().messageManager.createImageMessageFromFullPath(imagePath);
+```
+
+## Related Types
+
+- [Message](/docs/chat/sdk/v4/android/models/message) (`Message`): Message used by this Android SDK type.
