@@ -27,8 +27,7 @@ curl --request POST "${API_ADDRESS}/user/update_user_info_ex" \
     "userID": "2",
     "nickname": "alantestuid3",
     "faceURL": "",
-    "ex": "123",
-    "globalRecvMsgOpt": 0
+    "ex": "123"
   }
 }'
 ```
@@ -49,8 +48,7 @@ const response = await fetch(`${API_ADDRESS}/user/update_user_info_ex`, {
       "userID": "2",
       "nickname": "alantestuid3",
       "faceURL": "",
-      "ex": "123",
-      "globalRecvMsgOpt": 0
+      "ex": "123"
     }
   })
 });
@@ -78,8 +76,7 @@ func main() {
     "userID": "2",
     "nickname": "alantestuid3",
     "faceURL": "",
-    "ex": "123",
-    "globalRecvMsgOpt": 0
+    "ex": "123"
   }
 }`)
 	url := os.Getenv("OPENIM_API_ADDRESS") + "/user/update_user_info_ex"
@@ -133,20 +130,18 @@ func main() {
     "userID": "2",
     "nickname": "alantestuid3",
     "faceURL": "",
-    "ex": "123",
-    "globalRecvMsgOpt": 0
+    "ex": "123"
   }
 }
 ```
 
 | 参数名 | 是否必填 | 类型   | 说明     |
 | :---------------- | :--- | :----- | -------- |
-| userInfo | 必填 | object | 用户资料更新对象。除 `userID` 外，只传需要更新的字段；未传字段不会被更新。 |
-| userInfo.userID | 必填 | string | 需要更新的 OpenIM 用户 ID。 |
-| userInfo.nickname | 选填 | string | 用户昵称。传空字符串时会更新为空。 |
-| userInfo.faceURL | 选填 | string | 用户头像 URL。传空字符串时会更新为空。 |
-| userInfo.ex | 选填 | string | 用户扩展字段。传空字符串时会更新为空。 |
-| userInfo.globalRecvMsgOpt | 选填 | int | 用户全局消息接收选项。 |
+| userInfo          | 必填 | object | 用户信息 |
+| userInfo.userID   | 必填 | string | 用户 lD  |
+| userInfo.nickname | 选填 | string | 用户名称 |
+| userInfo.faceURL  | 选填 | string | 用户头像 |
+| ex                | 选填 | string | 扩展字段 |
 
 ---
 

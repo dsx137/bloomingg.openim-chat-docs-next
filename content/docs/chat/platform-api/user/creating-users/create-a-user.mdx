@@ -1,29 +1,38 @@
 ---
-title: "Create a user"
-description: "Create a user with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
+title: "创建用户"
+description: "OpenIM Platform API 中文参考：创建用户。说明 OpenIM REST 支持情况、接口结构和后端实现边界。"
 product: "platform-api"
-context: "chat/platform-api/v3"
+context: "chat/platform-api"
 template: "api"
 status: "published"
 lastUpdated: "2026-07-01"
 version: "v3"
-sourcePath: "/docs/chat/platform-api/v3/user/creating-users/create-a-user"
+sourcePath: "/platform-api/user/creating-users/create-a-user"
 ---
 
-Create a user is an OpenIM user REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
+使用 **创建用户** 从可信后端调用 OpenIM REST 接口。请先在[接入准备](/platform-api/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
 
-## HTTP request
+---
+
+## 访问 Token 与会话 Token
+
+OpenIM 管理端 REST API 使用管理员 Token 调用，客户端 SDK 登录使用用户 Token。业务后端应负责签发和保管 Token，客户端不应直接持有管理员凭证。
+
+---
+
+## HTTP 请求
 
 ```bash
 POST {API_ADDRESS}/user/user_register
 ```
 
-### Request example
+### 请求示例
 
-```bash
+:::code-tabs
+```bash title="cURL"
 curl --request POST "${API_ADDRESS}/user/user_register" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: ${OPERATION_ID}" \
+  --header "operationID: 1646445464564" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "users": [
@@ -36,9 +45,86 @@ curl --request POST "${API_ADDRESS}/user/user_register" \
 }'
 ```
 
-> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
+```javascript title="Node.js"
+const API_ADDRESS = process.env.OPENIM_API_ADDRESS;
+const ADMIN_TOKEN = process.env.OPENIM_ADMIN_TOKEN;
 
-## Request body
+const response = await fetch(`${API_ADDRESS}/user/user_register`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    operationID: '1646445464564',
+    token: ADMIN_TOKEN
+  },
+  body: JSON.stringify({
+    "users": [
+      {
+        "userID": "11111112",
+        "nickname": "yourNickname",
+        "faceURL": "yourFaceURL"
+      }
+    ]
+  })
+});
+
+const result = await response.json();
+if (result.errCode !== 0) {
+  throw new Error(result.errMsg || result.errDlt || 'OpenIM request failed');
+}
+```
+
+```go title="Go"
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func main() {
+	payload := strings.NewReader(`{
+  "users": [
+    {
+      "userID": "11111112",
+      "nickname": "yourNickname",
+      "faceURL": "yourFaceURL"
+    }
+  ]
+}`)
+	url := os.Getenv("OPENIM_API_ADDRESS") + "/user/user_register"
+	req, err := http.NewRequest(http.MethodPost, url, payload)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("operationID", "1646445464564")
+	req.Header.Set("token", os.Getenv("OPENIM_ADMIN_TOKEN"))
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(body))
+}
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+
+---
+
+## 请求体
+
+下表列出请求体支持的字段。
 
 ```json
 {
@@ -52,16 +138,18 @@ curl --request POST "${API_ADDRESS}/user/user_register" \
 }
 ```
 
-| Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| users | Yes | array | The users value. |
-| users.userID | Yes | string | OpenIM user ID. |
-| users.nickname | Yes | string | User nickname. |
-| users.faceURL | Yes | string | Avatar or icon URL. |
+| 参数名 | 是否必填 | 类型   | 说明                                             |
+| :------------- | :--- | :----- | ------------------------------------------------ |
+| users          | 必填 | array  | 用户列表                                         |
+| users.userID   | 必填 | string | 用户 ID                                          |
+| users.nickname | 必填 | string | 用户昵称                                         |
+| users.faceURL  | 必填 | string | 用户头像URL                                     |
 
-## Response
+---
 
-OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
 
 ```json
 {
@@ -71,17 +159,9 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
 }
 ```
 
-### Response fields
+### 错误
 
-| Field | Type | Description |
-| --- | --- | --- |
-| errCode | int | Business error code. `0` means success. |
-| errMsg | string | Short error message. |
-| errDlt | string | Detailed error information for troubleshooting. |
-
-### Error response
-
-When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/platform-api/error-codes)。
 
 ```json
 {
@@ -91,20 +171,16 @@ When a request fails, OpenIM returns the same error envelope. See [Error codes](
 }
 ```
 
-| Scenario | Possible cause | Recommended action |
-| --- | --- | --- |
-| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
-| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
-| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+| 参数名  | 类型   | 说明                          |
+| :------ | :----- | :---------------------------- |
+| errCode | int    | 错误码，具体查看全局错误码文档 |
+| errMsg  | string | 错误简要信息                  |
+| errDlt  | errDlt | 错误详细信息                  |
 
-## Permissions and limits
+**常见错误场景**
 
-- Call this endpoint from a trusted backend service.
-- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
-- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
-
-## Related pages
-
-- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [user overview](/docs/chat/platform-api/v3/user/overview)
-- [Error codes](/docs/chat/platform-api/v3/error-codes)
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表检查字段类型和必填项。 |

@@ -1,29 +1,32 @@
 ---
-title: "List users"
-description: "List users with the OpenIM Platform API, including endpoint, request body, response fields, and error handling."
+title: "查询用户列表"
+description: "OpenIM Platform API 中文参考：查询用户列表。说明 OpenIM REST 支持情况、接口结构和后端实现边界。"
 product: "platform-api"
-context: "chat/platform-api/v3"
+context: "chat/platform-api"
 template: "api"
 status: "published"
 lastUpdated: "2026-07-01"
 version: "v3"
-sourcePath: "/docs/chat/platform-api/v3/user/listing-users/list-users"
+sourcePath: "/platform-api/user/listing-users/list-users"
 ---
 
-List users is an OpenIM user REST API for trusted backend services. Configure the API address and administrator token in [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api) before calling management endpoints.
+使用 **查询用户列表** 从可信后端分页读取 OpenIM 已注册用户。请求体中的 `pagination.pageNumber` 表示页码，从 1 开始；`pagination.showNumber` 表示每页数量；响应中的 `data.total` 是用户总数，`data.users` 是当前页用户列表。
 
-## HTTP request
+---
+
+## HTTP 请求
 
 ```bash
 POST {API_ADDRESS}/user/get_users
 ```
 
-### Request example
+### 请求示例
 
-```bash
+:::code-tabs
+```bash title="cURL"
 curl --request POST "${API_ADDRESS}/user/get_users" \
   --header "Content-Type: application/json; charset=utf-8" \
-  --header "operationID: ${OPERATION_ID}" \
+  --header "operationID: 1646445464564" \
   --header "token: ${ADMIN_TOKEN}" \
   --data-raw '{
   "pagination": {
@@ -33,9 +36,89 @@ curl --request POST "${API_ADDRESS}/user/get_users" \
 }'
 ```
 
-> Keep administrator tokens on trusted backend services only. Client applications should use user tokens issued by your backend.
+```javascript title="Node.js"
+const API_ADDRESS = process.env.OPENIM_API_ADDRESS;
+const ADMIN_TOKEN = process.env.OPENIM_ADMIN_TOKEN;
 
-## Request body
+const response = await fetch(`${API_ADDRESS}/user/get_users`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    operationID: '1646445464564',
+    token: ADMIN_TOKEN
+  },
+  body: JSON.stringify({
+    "pagination": {
+      "pageNumber": 1,
+      "showNumber": 100
+    }
+  })
+});
+
+const result = await response.json();
+if (result.errCode !== 0) {
+  throw new Error(result.errMsg || result.errDlt || 'OpenIM request failed');
+}
+```
+
+```go title="Go"
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func main() {
+	payload := strings.NewReader(`{
+  "pagination": {
+    "pageNumber": 1,
+    "showNumber": 100
+  }
+}`)
+	url := os.Getenv("OPENIM_API_ADDRESS") + "/user/get_users"
+	req, err := http.NewRequest(http.MethodPost, url, payload)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("operationID", "1646445464564")
+	req.Header.Set("token", os.Getenv("OPENIM_ADMIN_TOKEN"))
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(body))
+}
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+| 请求头 | 示例值        | 是否必填 | 类型   | 说明                         |
+| :---------- | :------------ | :--- | ------ | ---------------------------- |
+| operationID | 1646445464564 | 必填 | string | 用于全局链路追踪，建议使用时间戳，在每个请求中独立 |
+| token       | eyJhbxxxx3Xs  | 必填 | string | [管理员 token](/platform-api/prepare-to-use-api)                 |
+
+### 请求体参数
 
 ```json
 {
@@ -46,15 +129,17 @@ curl --request POST "${API_ADDRESS}/user/get_users" \
 }
 ```
 
-| Parameter | Required | Type | Description |
-| --- | --- | --- | --- |
-| pagination | Yes | object | Pagination settings. |
-| pagination.pageNumber | Yes | int | Page number, starting from 1. |
-| pagination.showNumber | Yes | int | Number of records to return per page. |
+| 参数名 | 是否必填 | 类型   | 说明                |
+| :-------------------- | :--- | :----- | ------------------- |
+| pagination            | 必填 | object | 分页参数结构体      |
+| pagination.pageNumber | 必填 | int    | 当前页码，从 1 开始 |
+| pagination.showNumber | 必填 | int    | 当前页请求数量      |
 
-## Response
+---
 
-OpenIM usually returns `200 OK` when the request reaches the service. Use `errCode` in the JSON response to determine business success; `errCode === 0` means the operation succeeded.
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
 
 ```json
 {
@@ -87,20 +172,36 @@ OpenIM usually returns `200 OK` when the request reaches the service. Use `errCo
 }
 ```
 
-### Response fields
+#### 响应属性列表
 
-| Field | Type | Description |
-| --- | --- | --- |
-| errCode | int | Business error code. `0` means success. |
-| errMsg | string | Short error message. |
-| errDlt | string | Detailed error information for troubleshooting. |
-| data | object | Endpoint-specific response data. |
-| total | int | Total number of matching records. |
-| users | array | The users value. |
+| 参数名  | 类型   | 说明                                                   |
+| :------ | :----- | :----------------------------------------------------- |
+| errCode | int    | 错误码，0 表示成功                                      |
+| errMsg  | string | 错误简要信息，为空                              |
+| errDlt  | errDlt | 错误详细信息，为空                              |
+| data    | object | 通用数据对象，具体结构见下方                           |
+| total   | int    | 用户总数                                               |
+| users   | array  | [用户信息](https://docs.openim.io/restapi/commonFields#userinfo)列表 |
 
-### Error response
+#### users[] 属性
 
-When a request fails, OpenIM returns the same error envelope. See [Error codes](/docs/chat/platform-api/v3/error-codes) for the full handling model.
+| 参数名 | 类型 | 说明 |
+| ------ | ---- | ---- |
+| users[].userID | string | OpenIM 用户 ID。 |
+| users[].nickname | string | 用户昵称。 |
+| users[].faceURL | string | 用户头像地址。 |
+| users[].ex | string | 业务扩展字段，通常由业务系统写入和解析。 |
+| users[].createTime | int64 | 用户创建时间，通常为毫秒时间戳。 |
+| users[].appMangerLevel | int | OpenIM 返回的应用管理级别字段，字段名以服务端响应为准。 |
+| users[].globalRecvMsgOpt | int | 全局消息接收设置。 |
+
+### 分页读取建议
+
+从 `pagination.pageNumber = 1` 开始请求，并用 `pagination.showNumber` 控制每页数量。响应中的 `data.total` 表示总用户数，业务后端可以用 `Math.ceil(data.total / pagination.showNumber)` 计算总页数，并在当前页码小于总页数时继续请求下一页。
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/platform-api/error-codes)。
 
 ```json
 {
@@ -110,20 +211,17 @@ When a request fails, OpenIM returns the same error envelope. See [Error codes](
 }
 ```
 
-| Scenario | Possible cause | Recommended action |
-| --- | --- | --- |
-| Authentication failed | `token` is missing, expired, or not an administrator token. | Issue a new administrator token and keep it on the backend. |
-| Traceability is weak | `operationID` is missing or reused across many requests. | Generate a unique `operationID` for every request and log it with the response. |
-| Validation failed | The request body has an invalid type, missing field, or unsupported enum value. | Compare the payload with the request table and retry after correcting the fields. |
+| 参数名  | 类型   | 说明                          |
+| :------ | :----- | :---------------------------- |
+| errCode | int    | 错误码，具体查看全局错误码文档 |
+| errMsg  | string | 错误简要信息                  |
+| errDlt  | errDlt | 错误详细信息                  |
 
-## Permissions and limits
+**常见错误场景**
 
-- Call this endpoint from a trusted backend service.
-- Log `operationID`, the endpoint path, and the response error fields for troubleshooting.
-- Treat write operations as state-changing. If a retry follows an uncertain failure, check the resource state first.
-
-## Related pages
-
-- [Prepare to use the API](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [user overview](/docs/chat/platform-api/v3/user/overview)
-- [Error codes](/docs/chat/platform-api/v3/error-codes)
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表检查字段类型和必填项。 |
+| 分页参数错误 | `pagination.pageNumber` 小于 1，或 `pagination.showNumber` 超出服务端允许范围。 | 从第 1 页开始读取，并把每页数量限制在服务端允许范围内。 |

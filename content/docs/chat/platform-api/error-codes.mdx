@@ -1,18 +1,18 @@
 ---
-title: "Error codes"
-description: "Error codes for the OpenIM Platform API."
+title: "错误码"
+description: "OpenIM Platform API 错误码参考，说明响应结构、错误码范围、处理流程和服务端错误码。"
 product: "platform-api"
 context: "chat/platform-api"
 template: "overview"
 status: "published"
-lastUpdated: "2026-07-07"
+lastUpdated: "2026-07-01"
 version: "v3"
 sourcePath: "/platform-api/error-codes"
 ---
 
-OpenIM REST APIs use a common error response envelope. A request may return HTTP `200 OK` and still fail at the business layer, so always check `errCode`; `errCode === 0` means the operation succeeded.
+OpenIM REST API 使用统一的错误响应结构。HTTP 请求被网关和服务端正常处理时，仍需要读取响应体中的 `errCode` 判断业务是否成功；`errCode === 0` 表示成功，非 0 表示业务错误。
 
-## Response structure
+## 响应结构
 
 ```json
 {
@@ -22,74 +22,74 @@ OpenIM REST APIs use a common error response envelope. A request may return HTTP
 }
 ```
 
-| Field | Type | Description |
-| ----- | ---- | ----------- |
-| errCode | int | OpenIM business error code. `0` means success. |
-| errMsg | string | Short error message for logs and diagnostics. |
-| errDlt | string | Detailed error text for parameter, permission, or server-state troubleshooting. |
-| data | object | Successful responses may include endpoint-specific data. |
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| errCode | int | OpenIM 业务错误码。成功时为 `0`，失败时为非 0。 |
+| errMsg | string | 错误简要信息，适合写入服务端日志，不建议直接展示给最终用户。 |
+| errDlt | string | 错误详细信息，通常用于排查具体参数、权限或服务端状态。 |
+| data | object | 成功响应可能包含接口数据；错误响应通常不依赖该字段。 |
 
-## Error code ranges
+## 错误码范围
 
-| Range | Source | Description |
-| ----- | ------ | ----------- |
-| 0 | Common success code | The business operation succeeded. |
-| 1-9999 | OpenIM server errors | Main REST API and server-side error range. |
-| 10000-20000 | OpenIM client errors | SDK or client runtime errors, not expanded as server Platform API codes. |
-| 20001-29999 | Business webhook errors | Custom backend errors returned by webhook or business logic. |
+| 范围 | 来源 | 说明 |
+| ---- | ---- | ---- |
+| 0 | 通用成功码 | 表示请求业务处理成功。 |
+| 1~9999 | OpenIM 服务端错误码 | REST API 和服务端内部能力返回的主要错误码范围。 |
+| 10000~20000 | OpenIM 客户端错误码 | SDK 或客户端运行时使用的错误码范围，不作为 Platform API 服务端错误码表展开。 |
+| 20001~29999 | 业务服务端自定义 Webhooks 错误码 | 业务后端在 Webhook 回调或自定义逻辑中返回的扩展错误码范围。 |
 
-## Handling flow
+## 处理流程
 
-1. Check the HTTP status first for network, gateway, or infrastructure failures.
-2. Parse the JSON response and use `errCode` as the business success flag.
-3. When `errCode !== 0`, log `operationID`, endpoint path, request summary, `errCode`, `errMsg`, and `errDlt`.
-4. Fix authentication, permission, and parameter errors before retrying.
-5. Convert internal error details into product-safe messages before showing them to end users.
+1. 先检查 HTTP 状态码。网络失败、网关拒绝或 5xx 响应应按基础设施问题处理。
+2. HTTP 请求完成后解析 JSON 响应，并以 `errCode` 作为业务成功与失败的判断依据。
+3. 当 `errCode !== 0` 时，在日志中记录 `operationID`、接口路径、请求体摘要、`errCode`、`errMsg` 和 `errDlt`。
+4. 对鉴权、权限、参数错误优先修正请求；对服务器内部错误、数据库错误或连接限制，优先检查 OpenIM 服务状态和部署配置。
+5. 返回给最终用户的文案应由业务系统统一转换，不要直接暴露内部错误详情。
 
-## Server error codes
+## 服务端错误码
 
-| Code | Category | Meaning | Recommended action |
-| ---- | -------- | ------- | ------------------ |
-| 0 | Success | Success | Continue reading endpoint-specific `data`. |
-| 500 | Server | Internal server error | Check OpenIM services, dependencies, and internal networking. |
-| 1001 | Request | Invalid arguments | Check headers, JSON types, required fields, and enum values. |
-| 1002 | Request | Permission denied | Confirm that `token` is a valid administrator token and the operation is authorized. |
-| 1003 | Request | Duplicate primary key | Check whether the user, group, or business ID was already submitted. |
-| 1004 | Request | Record not found | Confirm that the target user, group, message, or relationship exists. |
-| 1101 | User | User ID does not exist | Register or import the user before calling dependent APIs. |
-| 1102 | User | User already registered | Treat repeated registration as idempotent success or a business conflict. |
-| 1201 | Group | Group does not exist | Confirm that `groupID` exists and has not been dismissed. |
-| 1202 | Group | Group already exists | Use another `groupID` or check whether creation already succeeded. |
-| 1203 | Group | User is not in the group | Confirm membership before member-level operations. |
-| 1204 | Group | Group dismissed | Stop group operations and sync business-side group state. |
-| 1205 | Group | Unsupported group type | Check that `groupType` is supported by the deployment. |
-| 1206 | Group | Group application already processed | Make join-request handling idempotent. |
-| 1301 | Relationship | Cannot add yourself as a friend | Reject self-targeted friend operations before calling OpenIM. |
-| 1302 | Relationship | Blocked by the other user | Resolve blacklist state before continuing friend workflows. |
-| 1303 | Relationship | The target user is not a friend | Establish the relationship before friend-dependent operations. |
-| 1304 | Relationship | Already friends | Treat the existing relationship as success. |
-| 1401 | Message | Read status is disabled | Avoid workflows that depend on read status when the feature is off. |
-| 1402 | Message | Member is muted | Check the member mute end time or unmute before sending. |
-| 1403 | Message | Group is muted | Unmute the group before sending. |
-| 1404 | Message | Message already revoked | Sync message state in the business system. |
-| 1405 | Message | Authorization expired | Refresh the related credential and retry. |
-| 1501 | Token | Token expired | Refresh or issue a new token. |
-| 1502 | Token | Token invalid | Reissue the token and check signing keys, user ID, and platform. |
-| 1503 | Token | Token format error | Check whether the token string was truncated or encoded incorrectly. |
-| 1504 | Token | Token not active yet | Check server time and token effective time. |
-| 1505 | Token | Unknown token error | Log full details and reissue the token. |
-| 1506 | Token | Token was kicked | Ask the client to log in again. |
-| 1507 | Token | Token missing | Confirm that the request header or login payload includes a token. |
-| 1601 | Connection | Too many gateway connections | Check gateway limits and scale or clear abnormal connections. |
-| 1602 | Connection | Invalid connection handshake | Check platform ID, user ID, token, and client version. |
-| 1701 | File | Upload expired | Initialize upload again and use fresh credentials. |
+| 错误码 | 分类 | 含义 | 处理建议 |
+| ------ | ---- | ---- | -------- |
+| 0 | 成功 | 正常 | 按成功响应处理，并继续读取接口特定的 `data` 字段。 |
+| 500 | 服务端 | 服务器内部错误，通常为内部网络错误，需要检查服务是否正常 | 检查 OpenIM 服务、依赖组件和内部网络，保留 `operationID` 交给运维排查。 |
+| 1001 | 通用请求 | 参数错误，需检查 body 参数及 header 参数是否正确 | 对照接口页检查请求头、JSON 字段类型、必填字段和枚举值。 |
+| 1002 | 通用请求 | 权限不足，通常为 header 参数中携带 token 不正确或权限越级操作 | 确认 `token` 是有效管理员 Token，并检查当前操作是否越权。 |
+| 1003 | 通用请求 | 数据库主键重复 | 检查用户、群组或业务唯一 ID 是否重复提交，必要时改为幂等处理。 |
+| 1004 | 通用请求 | 数据库记录未找到 | 确认目标用户、群组、消息或关系记录存在后再重试。 |
+| 1101 | 用户 | 用户 ID 不存在 | 确认 `userID` 已在 OpenIM 注册，并避免使用业务系统中尚未导入的用户。 |
+| 1102 | 用户 | 用户已经注册 | 注册前先查询用户是否存在；重复注册时按幂等成功或业务冲突处理。 |
+| 1201 | 群组 | 群不存在 | 确认 `groupID` 存在且群组未被删除或解散。 |
+| 1202 | 群组 | 群已存在 | 创建群组时更换 `groupID`，或先查询是否已经创建成功。 |
+| 1203 | 群组 | 用户不在群组中 | 先确认用户已加入该群，再执行成员相关操作。 |
+| 1204 | 群组 | 群组已解散 | 群已解散，停止后续群管理操作并同步业务侧群状态。 |
+| 1205 | 群组 | 不支持的群类型 | 检查 `groupType` 是否符合 OpenIM 当前支持范围。 |
+| 1206 | 群组 | 群申请已被处理，不需重复处理 | 把群申请处理流程做成幂等，避免重复同意或拒绝。 |
+| 1301 | 好友关系 | 不能添加自己为好友 | 阻止用户把自己作为好友目标提交。 |
+| 1302 | 好友关系 | 已被对方拉黑 | 提示存在黑名单关系，或先解除拉黑再继续好友流程。 |
+| 1303 | 好友关系 | 对方不是自己的好友 | 先建立好友关系，再执行依赖好友关系的操作。 |
+| 1304 | 好友关系 | 已是好友关系，不需重复申请 | 按已建立好友关系处理，不需要重复申请。 |
+| 1401 | 消息 | 消息已读功能被关闭 | 检查已读功能配置，关闭时不要继续调用依赖已读能力的流程。 |
+| 1402 | 消息 | 已被禁言，不能在群里发言 | 检查成员禁言结束时间，或由管理员解除禁言后再发送。 |
+| 1403 | 消息 | 群已被禁言，不能发言 | 检查群禁言状态，解除群禁言后再发送。 |
+| 1404 | 消息 | 该消息已被撤回 | 消息已撤回，业务侧应同步更新消息状态。 |
+| 1405 | 消息 | 授权过期 | 重新完成授权或刷新相关凭证后再重试。 |
+| 1501 | Token | token 已过期 | 刷新 Token 后重试，并检查服务端 Token 续期任务。 |
+| 1502 | Token | token 无效 | 重新签发 Token，确认签名密钥、用户 ID 和平台参数一致。 |
+| 1503 | Token | token 格式错误 | 检查 Token 字符串是否被截断、拼接或错误编码。 |
+| 1504 | Token | token 还未生效 | 检查服务端时间和 Token 生效时间，避免时钟偏差。 |
+| 1505 | Token | 未知 token 错误 | 记录完整错误详情并重新签发 Token；仍失败时检查认证服务配置。 |
+| 1506 | Token | 被踢出的 token，无效 | 该 Token 已被踢下线，要求客户端重新登录。 |
+| 1507 | Token | token 不存在 | 确认请求头或登录参数中已携带 Token。 |
+| 1601 | 连接 | 连接数超过网关最大限制 | 检查网关连接数限制，必要时扩容或清理异常连接。 |
+| 1602 | 连接 | 连接握手参数错误 | 检查连接握手参数、平台 ID、用户 ID、Token 和客户端版本。 |
+| 1701 | 文件 | 文件上传过期 | 重新初始化上传流程，获取新的上传凭证后再上传。 |
 
-## Troubleshooting
+## 排查建议
 
-| Scenario | Recommendation |
-| -------- | -------------- |
-| Error cannot be reproduced | Use the same `operationID` across business logs, OpenIM API logs, and gateway logs. |
-| Many `1001` errors | Check JSON field types, required fields, pagination, and headers. |
-| Many `1002` or `1501-1507` errors | Review administrator token issuing, refresh, and storage logic. |
-| Group or member errors | Confirm `groupID`, member role, group state, and operator permission before retrying. |
-| File upload errors | Initialize upload again and verify object name, signature, and expiration time. |
+| 场景 | 建议 |
+| ---- | ---- |
+| 无法复现错误 | 使用同一个 `operationID` 在业务日志、OpenIM API 日志和网关日志中串联请求链路。 |
+| 大量出现 `1001` | 对照接口页检查 JSON 字段类型、必填字段、分页参数和请求头。 |
+| 大量出现 `1002` 或 `1501~1507` | 检查管理员 Token 获取、刷新和服务端保存逻辑，确认没有把用户 Token 用在管理端接口上。 |
+| 群组或成员相关错误 | 先确认 `groupID`、成员身份、群状态和当前操作者角色，再重试管理操作。 |
+| 文件上传错误 | 重新初始化上传流程，并确认上传凭证、对象名和过期时间仍然有效。 |
