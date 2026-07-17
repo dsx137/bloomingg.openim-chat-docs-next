@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Groups'
     - 'Private'
+    - 'Groups'
   summary: 'GroupSetGroupInfo'
   description: 'OpenIM Server POST route handled by g.SetGroupInfo. It accepts the JSON serialization of group.SetGroupInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupSetGroupInfo

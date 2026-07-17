@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Messages'
     - 'Private'
+    - 'Messages'
   summary: 'MsgSendBusinessNotification'
   description: 'OpenIM Server POST route handled by m.SendBusinessNotification. It accepts the JSON serialization of internal.SendBusinessNotificationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgSendBusinessNotification

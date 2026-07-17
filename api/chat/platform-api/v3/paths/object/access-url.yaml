@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Object storage'
     - 'Private'
+    - 'Object storage'
   summary: 'ObjectAccessUrl'
   description: 'OpenIM Server POST route handled by t.AccessURL. It accepts the JSON serialization of third.AccessURLReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectAccessUrl

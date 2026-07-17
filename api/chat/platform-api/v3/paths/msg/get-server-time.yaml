@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Messages'
     - 'Private'
+    - 'Messages'
   summary: 'MsgGetServerTime'
   description: 'OpenIM Server POST route handled by m.GetServerTime. It accepts the JSON serialization of msg.GetServerTimeReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgGetServerTime

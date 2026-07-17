@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Messages'
     - 'Private'
+    - 'Messages'
   summary: 'MsgSearchMsg'
   description: 'OpenIM Server POST route handled by m.SearchMsg. It accepts the JSON serialization of msg.SearchMessageReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgSearchMsg

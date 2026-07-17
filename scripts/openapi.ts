@@ -198,7 +198,7 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
       '--output',
       collectionPath,
       '--options',
-      'parametersResolution=Example',
+      'parametersResolution=Example,folderStrategy=Tags,nestedFolderHierarchy=true',
     ]);
     const document: unknown = JSON.parse(await readFile(collectionPath, 'utf8'));
     return postmanCollectionSchema.parse(normalizePostmanCollection(document));

@@ -1,7 +1,7 @@
 post:
   tags:
-    - Moderation
     - 'Public'
+    - Moderation
   summary: Unblock user
   description: Removes an OpenIM user from the current user's block list.
   operationId: friendRemoveBlack

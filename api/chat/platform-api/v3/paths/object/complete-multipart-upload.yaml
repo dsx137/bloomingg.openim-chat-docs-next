@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Object storage'
     - 'Private'
+    - 'Object storage'
   summary: 'ObjectCompleteMultipartUpload'
   description: 'OpenIM Server POST route handled by t.CompleteMultipartUpload. It accepts the JSON serialization of third.CompleteMultipartUploadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectCompleteMultipartUpload

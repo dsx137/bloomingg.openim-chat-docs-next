@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Users'
     - 'Private'
+    - 'Users'
   summary: 'UserGetUsersStatus'
   description: 'OpenIM Server POST route handled by u.GetUserStatus. It accepts the JSON serialization of user.GetUserStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetUsersStatus

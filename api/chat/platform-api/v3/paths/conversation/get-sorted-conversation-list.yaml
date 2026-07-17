@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Conversations'
     - 'Private'
+    - 'Conversations'
   summary: 'ConversationGetSortedConversationList'
   description: 'OpenIM Server POST route handled by c.GetSortedConversationList. It accepts the JSON serialization of conversation.GetSortedConversationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetSortedConversationList

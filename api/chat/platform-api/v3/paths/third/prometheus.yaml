@@ -1,7 +1,7 @@
 get:
   tags:
-    - 'Third-party services'
     - 'Private'
+    - 'Third-party services'
   summary: 'ThirdPrometheus'
   description: 'OpenIM Server GET route handled by t.GetPrometheus. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getThirdPrometheus

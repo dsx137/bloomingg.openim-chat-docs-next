@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Authentication'
     - 'Private'
+    - 'Authentication'
   summary: 'AuthGetAdminToken'
   description: 'OpenIM Server POST route handled by a.GetAdminToken. It accepts the JSON serialization of auth.GetAdminTokenReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postAuthGetAdminToken

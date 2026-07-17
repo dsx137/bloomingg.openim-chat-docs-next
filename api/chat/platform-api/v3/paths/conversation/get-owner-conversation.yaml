@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Conversations'
     - 'Private'
+    - 'Conversations'
   summary: 'ConversationGetOwnerConversation'
   description: 'OpenIM Server POST route handled by c.GetOwnerConversation. It accepts the JSON serialization of conversation.GetOwnerConversationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetOwnerConversation

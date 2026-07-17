@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Conversations'
     - 'Private'
+    - 'Conversations'
   summary: 'ConversationGetPinnedConversationIds'
   description: 'OpenIM Server POST route handled by c.GetPinnedConversationIDs. It accepts the JSON serialization of conversation.GetPinnedConversationIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetPinnedConversationIds

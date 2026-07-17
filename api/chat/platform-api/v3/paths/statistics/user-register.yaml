@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Statistics'
     - 'Private'
+    - 'Statistics'
   summary: 'StatisticsUserRegister'
   description: 'OpenIM Server POST route handled by u.UserRegisterCount. It accepts the JSON serialization of user.UserRegisterCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postStatisticsUserRegister

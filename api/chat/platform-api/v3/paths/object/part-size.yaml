@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Object storage'
     - 'Private'
+    - 'Object storage'
   summary: 'ObjectPartSize'
   description: 'OpenIM Server POST route handled by t.PartSize. It accepts the JSON serialization of third.PartSizeReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectPartSize

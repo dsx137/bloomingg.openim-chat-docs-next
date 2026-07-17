@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Authentication'
     - 'Private'
+    - 'Authentication'
   summary: 'AuthParseToken'
   description: 'OpenIM Server POST route handled by a.ParseToken. It accepts the JSON serialization of auth.ParseTokenReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postAuthParseToken

@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Friends'
     - 'Private'
+    - 'Friends'
   summary: 'FriendSetFriendRemark'
   description: 'OpenIM Server POST route handled by f.SetFriendRemark. It accepts the JSON serialization of relation.SetFriendRemarkReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendSetFriendRemark

@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Object storage'
     - 'Private'
+    - 'Object storage'
   summary: 'ObjectPartLimit'
   description: 'OpenIM Server POST route handled by t.PartLimit. It accepts the JSON serialization of third.PartLimitReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectPartLimit

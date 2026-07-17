@@ -1,7 +1,7 @@
 post:
   tags:
-    - Groups
     - 'Public'
+    - Groups
   summary: Unmute group member
   description: Removes a group member's mute restriction.
   operationId: groupCancelMuteGroupMember

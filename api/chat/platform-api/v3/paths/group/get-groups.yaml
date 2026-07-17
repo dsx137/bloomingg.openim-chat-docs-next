@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Groups'
     - 'Private'
+    - 'Groups'
   summary: 'GroupGetGroups'
   description: 'OpenIM Server POST route handled by g.GetGroups. It accepts the JSON serialization of group.GetGroupsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroups

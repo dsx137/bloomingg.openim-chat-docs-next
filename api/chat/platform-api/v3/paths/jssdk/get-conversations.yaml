@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'JavaScript SDK'
     - 'Private'
+    - 'JavaScript SDK'
   summary: 'JssdkGetConversations'
   description: 'OpenIM Server POST route handled by j.GetConversations. It accepts the JSON serialization of jssdk.GetConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postJssdkGetConversations

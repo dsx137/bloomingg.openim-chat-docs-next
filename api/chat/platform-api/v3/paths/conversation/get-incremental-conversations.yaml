@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Conversations'
     - 'Private'
+    - 'Conversations'
   summary: 'ConversationGetIncrementalConversations'
   description: 'OpenIM Server POST route handled by c.GetIncrementalConversation. It accepts the JSON serialization of conversation.GetIncrementalConversationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetIncrementalConversations

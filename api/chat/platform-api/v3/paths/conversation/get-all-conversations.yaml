@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Conversations'
     - 'Private'
+    - 'Conversations'
   summary: 'ConversationGetAllConversations'
   description: 'OpenIM Server POST route handled by c.GetAllConversations. It accepts the JSON serialization of conversation.GetAllConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetAllConversations

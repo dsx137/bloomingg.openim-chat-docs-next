@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Messages'
     - 'Private'
+    - 'Messages'
   summary: 'MsgPullMsgBySeq'
   description: 'OpenIM Server POST route handled by m.PullMsgBySeqs. It accepts the JSON serialization of sdkws.PullMessageBySeqsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgPullMsgBySeq

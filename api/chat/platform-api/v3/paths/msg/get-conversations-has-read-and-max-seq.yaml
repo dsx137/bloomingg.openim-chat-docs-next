@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Messages'
     - 'Private'
+    - 'Messages'
   summary: 'MsgGetConversationsHasReadAndMaxSeq'
   description: 'OpenIM Server POST route handled by m.GetConversationsHasReadAndMaxSeq. It accepts the JSON serialization of msg.GetConversationsHasReadAndMaxSeqReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgGetConversationsHasReadAndMaxSeq

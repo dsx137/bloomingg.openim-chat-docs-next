@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Object storage'
     - 'Private'
+    - 'Object storage'
   summary: 'ObjectAuthSign'
   description: 'OpenIM Server POST route handled by t.AuthSign. It accepts the JSON serialization of third.AuthSignReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectAuthSign

@@ -1,7 +1,7 @@
 post:
   tags:
-    - Groups
     - 'Public'
+    - Groups
   summary: Join group
   description: Submits a request for an OpenIM user to join a group.
   operationId: groupJoinGroup

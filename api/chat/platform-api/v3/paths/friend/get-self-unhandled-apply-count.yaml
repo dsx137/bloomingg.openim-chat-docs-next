@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Friends'
     - 'Private'
+    - 'Friends'
   summary: 'FriendGetSelfUnhandledApplyCount'
   description: 'OpenIM Server POST route handled by f.GetSelfUnhandledApplyCount. It accepts the JSON serialization of relation.GetSelfUnhandledApplyCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetSelfUnhandledApplyCount

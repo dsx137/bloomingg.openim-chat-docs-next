@@ -1,7 +1,7 @@
 get:
   tags:
-    - 'Service discovery'
     - 'Private'
+    - 'Service discovery'
   summary: 'PrometheusDiscoveryMsgGateway'
   description: 'OpenIM Server GET route handled by pd.MessageGateway. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getPrometheusDiscoveryMsgGateway

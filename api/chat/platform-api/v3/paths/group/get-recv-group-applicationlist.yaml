@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Groups'
     - 'Private'
+    - 'Groups'
   summary: 'GroupGetRecvGroupApplicationList'
   description: 'OpenIM Server POST route handled by g.GetRecvGroupApplicationList. It accepts the JSON serialization of group.GetGroupApplicationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetRecvGroupApplicationList

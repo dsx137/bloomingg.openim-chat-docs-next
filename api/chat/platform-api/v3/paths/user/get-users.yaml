@@ -1,7 +1,7 @@
 post:
   tags:
-    - Users
     - 'Public'
+    - Users
   summary: List users
   description: Returns a paginated list of OpenIM users.
   operationId: userGetUsers

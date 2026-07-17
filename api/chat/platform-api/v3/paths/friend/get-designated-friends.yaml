@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Friends'
     - 'Private'
+    - 'Friends'
   summary: 'FriendGetDesignatedFriends'
   description: 'OpenIM Server POST route handled by f.GetDesignatedFriends. It accepts the JSON serialization of relation.GetDesignatedFriendsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetDesignatedFriends

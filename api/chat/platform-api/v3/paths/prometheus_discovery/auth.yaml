@@ -1,7 +1,7 @@
 get:
   tags:
-    - 'Service discovery'
     - 'Private'
+    - 'Service discovery'
   summary: 'PrometheusDiscoveryAuth'
   description: 'OpenIM Server GET route handled by pd.Auth. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getPrometheusDiscoveryAuth
