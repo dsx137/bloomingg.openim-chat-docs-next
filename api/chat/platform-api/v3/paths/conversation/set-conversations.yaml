@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Conversations'
+    - 'Private'
   summary: 'ConversationSetConversations'
   description: 'OpenIM Server POST route handled by c.SetConversations. It accepts the JSON serialization of conversation.SetConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationSetConversations
@@ -154,6 +155,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Empty result confirming the conversation settings update was processed.'
                     type: object
                     additionalProperties: true
                     properties: {}

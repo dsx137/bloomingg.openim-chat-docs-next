@@ -1,6 +1,7 @@
 post:
   tags:
     - Groups
+    - 'Public'
   summary: Mute group member
   description: Prevents a group member from sending messages for a specified duration.
   operationId: groupMuteGroupMember

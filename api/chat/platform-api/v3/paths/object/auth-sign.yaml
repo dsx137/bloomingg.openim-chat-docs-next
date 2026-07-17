@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Object storage'
+    - 'Private'
   summary: 'ObjectAuthSign'
   description: 'OpenIM Server POST route handled by t.AuthSign. It accepts the JSON serialization of third.AuthSignReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectAuthSign
@@ -37,20 +38,25 @@ post:
                 properties:
                   data:
                     type: object
+                    description: Signed upload request parameters.
                     additionalProperties: true
                     properties:
                       'url':
                         type: string
+                        description: Storage URL for the signed upload request.
                       'query':
                         type: array
+                        description: Query parameters for the signed upload request.
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
                               type: string
+                              description: Query parameter name.
                             'values':
                               type: array
+                              description: Values for the query parameter.
                               items:
                                 type: string
                           x-source-schema-status: field-level
@@ -58,14 +64,17 @@ post:
                           x-source-protobuf-type: 'openim.third.KeyValues'
                       'header':
                         type: array
+                        description: HTTP headers for the signed upload request.
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
                               type: string
+                              description: HTTP header name.
                             'values':
                               type: array
+                              description: Values for the HTTP header.
                               items:
                                 type: string
                           x-source-schema-status: field-level
@@ -73,6 +82,7 @@ post:
                           x-source-protobuf-type: 'openim.third.KeyValues'
                       'parts':
                         type: array
+                        description: Signing parameters for each requested multipart upload part.
                         items:
                           type: object
                           additionalProperties: true
@@ -80,18 +90,23 @@ post:
                             'partNumber':
                               type: integer
                               format: int32
+                              description: Multipart part number.
                             'url':
                               type: string
+                              description: Storage URL for the part upload.
                             'query':
                               type: array
+                              description: Query parameters for the part upload.
                               items:
                                 type: object
                                 additionalProperties: true
                                 properties:
                                   'key':
                                     type: string
+                                    description: Query parameter name.
                                   'values':
                                     type: array
+                                    description: Values for the query parameter.
                                     items:
                                       type: string
                                 x-source-schema-status: field-level
@@ -99,14 +114,17 @@ post:
                                 x-source-protobuf-type: 'openim.third.KeyValues'
                             'header':
                               type: array
+                              description: HTTP headers for the part upload.
                               items:
                                 type: object
                                 additionalProperties: true
                                 properties:
                                   'key':
                                     type: string
+                                    description: HTTP header name.
                                   'values':
                                     type: array
+                                    description: Values for the HTTP header.
                                     items:
                                       type: string
                                 x-source-schema-status: field-level

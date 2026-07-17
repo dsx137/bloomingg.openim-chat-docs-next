@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Conversations'
+    - 'Private'
   summary: 'ConversationGetOwnerConversation'
   description: 'OpenIM Server POST route handled by c.GetOwnerConversation. It accepts the JSON serialization of conversation.GetOwnerConversationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetOwnerConversation
@@ -44,59 +45,79 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Paginated conversations owned by the user.'
                     type: object
                     additionalProperties: true
                     properties:
                       'total':
+                        description: 'Total number of records in the result.'
                         type: integer
                         format: int64
                       'conversations':
+                        description: 'Returned conversation records.'
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'ownerUserID':
+                              description: 'Identifier of the user who owns the record.'
                               type: string
                             'conversationID':
+                              description: 'Unique conversation identifier.'
                               type: string
                             'recvMsgOpt':
+                              description: 'Message receiving preference for the conversation.'
                               type: integer
                               format: int32
                             'conversationType':
+                              description: 'Type of conversation.'
                               type: integer
                               format: int32
                             'userID':
+                              description: 'Unique OpenIM user identifier.'
                               type: string
                             'groupID':
+                              description: 'Unique group identifier.'
                               type: string
                             'isPinned':
+                              description: 'Whether the conversation is pinned.'
                               type: boolean
                             'attachedInfo':
+                              description: 'Additional message or conversation information.'
                               type: string
                             'isPrivateChat':
+                              description: 'Whether private chat with message destruction is enabled.'
                               type: boolean
                             'groupAtType':
+                              description: 'Group mention or strong-reminder type for the conversation.'
                               type: integer
                               format: int32
                             'ex':
+                              description: 'Application-defined extension data.'
                               type: string
                             'burnDuration':
+                              description: 'Configured duration for message destruction.'
                               type: integer
                               format: int32
                             'minSeq':
+                              description: 'Lowest message sequence retained by the conversation.'
                               type: integer
                               format: int64
                             'maxSeq':
+                              description: 'Highest message sequence in the conversation.'
                               type: integer
                               format: int64
                             'msgDestructTime':
+                              description: 'Configured message destruction time for the conversation.'
                               type: integer
                               format: int64
                             'latestMsgDestructTime':
+                              description: 'Scheduled destruction time of the latest message.'
                               type: integer
                               format: int64
                             'isMsgDestruct':
+                              description: 'Whether message destruction is enabled for the conversation.'
                               type: boolean
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf

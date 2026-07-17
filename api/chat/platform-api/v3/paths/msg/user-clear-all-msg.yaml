@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgUserClearAllMsg'
   description: 'OpenIM Server POST route handled by m.UserClearAllMsg. It accepts the JSON serialization of msg.UserClearAllMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgUserClearAllMsg
@@ -42,6 +43,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after all user messages are cleared.
                     type: object
                     additionalProperties: true
                     properties: {}

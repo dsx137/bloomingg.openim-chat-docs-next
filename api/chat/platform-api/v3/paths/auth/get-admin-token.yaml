@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Authentication'
+    - 'Private'
   summary: 'AuthGetAdminToken'
   description: 'OpenIM Server POST route handled by a.GetAdminToken. It accepts the JSON serialization of auth.GetAdminTokenReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postAuthGetAdminToken
@@ -33,12 +34,15 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Administrator token and its configured lifetime.
                     type: object
                     additionalProperties: true
                     properties:
                       'token':
+                        description: Authentication token.
                         type: string
                       'expireTimeSeconds':
+                        description: Configured administrator token lifetime in seconds.
                         type: integer
                         format: int64
                     x-source-schema-status: field-level

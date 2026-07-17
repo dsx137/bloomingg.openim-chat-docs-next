@@ -1,6 +1,7 @@
 post:
   tags:
     - Groups
+    - 'Public'
   summary: Update group
   description: Updates selected profile and configuration fields for an OpenIM group.
   operationId: groupSetGroupInfoEx

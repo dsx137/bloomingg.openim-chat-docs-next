@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Friends'
+    - 'Private'
   summary: 'FriendGetFullFriendUserIds'
   description: 'OpenIM Server POST route handled by f.GetFullFriendUserIDs. It accepts the JSON serialization of relation.GetFullFriendUserIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetFullFriendUserIds
@@ -34,17 +35,22 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Full friend user-ID synchronization result.
                     type: object
                     additionalProperties: true
                     properties:
                       'version':
+                        description: Synchronization version.
                         type: integer
                         format: int64
                       'versionID':
+                        description: Server synchronization version identifier.
                         type: string
                       'equal':
+                        description: Whether the client and server versions match.
                         type: boolean
                       'userIDs':
+                        description: User identifiers returned by this query.
                         type: array
                         items:
                           type: string

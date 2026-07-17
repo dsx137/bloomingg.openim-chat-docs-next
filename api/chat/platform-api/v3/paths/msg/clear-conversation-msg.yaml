@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgClearConversationMsg'
   description: 'OpenIM Server POST route handled by m.ClearConversationsMsg. It accepts the JSON serialization of msg.ClearConversationsMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgClearConversationMsg
@@ -46,6 +47,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after conversation messages are cleared.
                     type: object
                     additionalProperties: true
                     properties: {}

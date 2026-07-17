@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Conversations'
+    - 'Private'
   summary: 'ConversationGetSortedConversationList'
   description: 'OpenIM Server POST route handled by c.GetSortedConversationList. It accepts the JSON serialization of conversation.GetSortedConversationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetSortedConversationList
@@ -48,74 +49,100 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Sorted conversation summaries and aggregate unread counts.'
                     type: object
                     additionalProperties: true
                     properties:
                       'conversationTotal':
+                        description: 'Total number of conversations.'
                         type: integer
                         format: int64
                       'unreadTotal':
+                        description: 'Total number of unread messages.'
                         type: integer
                         format: int64
                       'conversationElems':
+                        description: 'Sorted conversation entries.'
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'conversationID':
+                              description: 'Unique conversation identifier.'
                               type: string
                             'recvMsgOpt':
+                              description: 'Message receiving preference for the conversation.'
                               type: integer
                               format: int32
                             'unreadCount':
+                              description: 'Number of unread messages.'
                               type: integer
                               format: int64
                             'IsPinned':
+                              description: 'Whether the conversation is pinned.'
                               type: boolean
                             'msgInfo':
+                              description: 'Summary of the latest message.'
                               type: object
                               additionalProperties: true
                               properties:
                                 'serverMsgID':
+                                  description: 'Server-generated unique message identifier.'
                                   type: string
                                 'clientMsgID':
+                                  description: 'Client-generated unique message identifier.'
                                   type: string
                                 'sessionType':
+                                  description: 'Session type of the message.'
                                   type: integer
                                   format: int32
                                 'sendID':
+                                  description: 'Identifier of the message sender.'
                                   type: string
                                 'recvID':
+                                  description: 'Identifier of the message recipient.'
                                   type: string
                                 'senderName':
+                                  description: 'Display name of the message sender.'
                                   type: string
                                 'faceURL':
+                                  description: 'URL of the profile or group avatar.'
                                   type: string
                                 'groupID':
+                                  description: 'Unique group identifier.'
                                   type: string
                                 'groupName':
+                                  description: 'Display name of the group.'
                                   type: string
                                 'groupFaceURL':
+                                  description: 'URL of the group avatar.'
                                   type: string
                                 'groupType':
+                                  description: 'Configured type of the group.'
                                   type: integer
                                   format: int32
                                 'groupMemberCount':
+                                  description: 'Current number of group members.'
                                   type: integer
                                   format: int32
                                 'LatestMsgRecvTime':
+                                  description: 'Time when the latest message was received.'
                                   type: integer
                                   format: int64
                                 'msgFrom':
+                                  description: 'Source category of the message.'
                                   type: integer
                                   format: int32
                                 'contentType':
+                                  description: 'Message content type that selects how to parse content.'
                                   type: integer
                                   format: int32
                                 'content':
+                                  description: 'Serialized message content.'
                                   type: string
                                 'ex':
+                                  description: 'Application-defined extension data.'
                                   type: string
                               x-source-schema-status: field-level
                               x-source-schema-kind: protobuf

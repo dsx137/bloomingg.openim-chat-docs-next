@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Third-party services'
+    - 'Private'
   summary: 'ThirdLogsDelete'
   description: 'OpenIM Server POST route handled by t.DeleteLogs. It accepts the JSON serialization of third.DeleteLogsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdLogsDelete
@@ -34,6 +35,7 @@ post:
                 properties:
                   data:
                     type: object
+                    description: No additional result data is returned after log deletion.
                     additionalProperties: true
                     properties: {}
                     x-source-schema-status: field-level

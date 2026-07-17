@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserGetUsersOnlineTokenDetail'
   description: 'OpenIM Server POST route handled by u.GetUsersOnlineTokenDetail. It accepts the JSON serialization of msggateway.GetUsersOnlineStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetUsersOnlineTokenDetail
@@ -33,29 +34,36 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Platform connection token details for requested users.
                     type: array
                     items:
                       type: object
                       additionalProperties: true
                       properties:
                         'userID':
+                          description: Unique user identifier.
                           type: string
                         'status':
+                          description: User online status.
                           type: integer
                           format: int32
                         'singlePlatformToken':
+                          description: Connection token details grouped by platform.
                           type: array
                           items:
                             type: object
                             additionalProperties: true
                             properties:
                               'platformID':
+                                description: User login platform identifier.
                                 type: integer
                                 format: int32
                               'total':
+                                description: Total number of records in this result.
                                 type: integer
                                 format: int32
                               'token':
+                                description: Authentication tokens for the platform connection.
                                 type: array
                                 items:
                                   type: string

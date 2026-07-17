@@ -1,6 +1,7 @@
 post:
   tags:
     - Users
+    - 'Public'
   summary: Create user
   description: Creates an OpenIM user account with the supplied profile information.
   operationId: userUserRegister

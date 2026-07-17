@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgSetConversationHasReadSeq'
   description: 'OpenIM Server POST route handled by m.SetConversationHasReadSeq. It accepts the JSON serialization of msg.SetConversationHasReadSeqReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgSetConversationHasReadSeq
@@ -38,6 +39,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after the conversation read sequence is updated.
                     type: object
                     additionalProperties: true
                     properties: {}

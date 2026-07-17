@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Friends'
+    - 'Private'
   summary: 'FriendIsFriend'
   description: 'OpenIM Server POST route handled by f.IsFriend. It accepts the JSON serialization of relation.IsFriendReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendIsFriend
@@ -33,12 +34,15 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Friendship relationship results for the two users.
                     type: object
                     additionalProperties: true
                     properties:
                       'inUser1Friends':
+                        description: Whether the second user is in the first user's friend list.
                         type: boolean
                       'inUser2Friends':
+                        description: Whether the first user is in the second user's friend list.
                         type: boolean
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgSendBusinessNotification'
   description: 'OpenIM Server POST route handled by m.SendBusinessNotification. It accepts the JSON serialization of internal.SendBusinessNotificationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgSendBusinessNotification
@@ -42,102 +43,137 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Business notification send result.
                     type: object
                     additionalProperties: true
                     properties:
                       'serverMsgID':
+                        description: Server-generated message ID.
                         type: string
                       'clientMsgID':
+                        description: Client-generated unique message ID.
                         type: string
                       'sendTime':
+                        description: Message send timestamp in milliseconds.
                         type: integer
                         format: int64
                       'modify':
+                        description: Message data returned after send processing.
                         type: object
                         additionalProperties: true
                         properties:
                           'sendID':
+                            description: User ID of the message sender.
                             type: string
                           'recvID':
+                            description: User ID of the message recipient.
                             type: string
                           'groupID':
+                            description: ID of the message group conversation.
                             type: string
                           'clientMsgID':
+                            description: Client-generated unique message ID.
                             type: string
                           'serverMsgID':
+                            description: Server-generated message ID.
                             type: string
                           'senderPlatformID':
+                            description: Platform identifier of the message sender.
                             type: integer
                             format: int32
                           'senderNickname':
+                            description: Display name of the message sender.
                             type: string
                           'senderFaceURL':
+                            description: Avatar URL of the message sender.
                             type: string
                           'sessionType':
+                            description: Conversation type of the message.
                             type: integer
                             format: int32
                           'msgFrom':
+                            description: Source classification of the message.
                             type: integer
                             format: int32
                           'contentType':
+                            description: Type code for the message content.
                             type: integer
                             format: int32
                           'content':
+                            description: Encoded message content payload.
                             type: string
                             format: byte
                           'seq':
+                            description: Sequence number of the message in its conversation.
                             type: integer
                             format: int64
                           'sendTime':
+                            description: Message send timestamp in milliseconds.
                             type: integer
                             format: int64
                           'createTime':
+                            description: Message creation timestamp in milliseconds.
                             type: integer
                             format: int64
                           'status':
+                            description: Message status code.
                             type: integer
                             format: int32
                           'isRead':
+                            description: Whether the message has been read.
                             type: boolean
                           'options':
+                            description: Message option entries.
                             type: array
                             items:
                               type: object
                               additionalProperties: true
                               properties:
                                 'key':
+                                  description: Name of this message option.
                                   type: string
                                 'value':
+                                  description: Boolean value of this message option.
                                   type: boolean
                               x-source-schema-status: field-level
                               x-source-schema-kind: protobuf
                               x-source-protobuf-type: 'openim.sdkws.MsgData.OptionsEntry'
                           'offlinePushInfo':
+                            description: Offline push notification settings.
                             type: object
                             additionalProperties: true
                             properties:
                               'title':
+                                description: Title for the offline push notification.
                                 type: string
                               'desc':
+                                description: Body text for the offline push notification.
                                 type: string
                               'ex':
+                                description: Application-defined offline-push extension data.
                                 type: string
                               'iOSPushSound':
+                                description: iOS sound for the offline push notification.
                                 type: string
                               'iOSBadgeCount':
+                                description: Whether the offline push increments the iOS app badge.
                                 type: boolean
                               'signalInfo':
+                                description: Additional offline-push signaling data.
                                 type: string
                             x-source-schema-status: field-level
                             x-source-schema-kind: protobuf
                             x-source-protobuf-type: 'openim.sdkws.OfflinePushInfo'
                           'atUserIDList':
+                            description: User IDs mentioned by the message.
                             type: array
                             items:
                               type: string
                           'attachedInfo':
+                            description: Attached message metadata.
                             type: string
                           'ex':
+                            description: Application-defined extension data.
                             type: string
                         x-source-schema-status: field-level
                         x-source-schema-kind: protobuf

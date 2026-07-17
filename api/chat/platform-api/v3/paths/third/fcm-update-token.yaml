@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Third-party services'
+    - 'Private'
   summary: 'ThirdFcmUpdateToken'
   description: 'OpenIM Server POST route handled by t.FcmUpdateToken. It accepts the JSON serialization of third.FcmUpdateTokenReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdFcmUpdateToken
@@ -40,6 +41,7 @@ post:
                 properties:
                   data:
                     type: object
+                    description: No additional result data is returned after the token update.
                     additionalProperties: true
                     properties: {}
                     x-source-schema-status: field-level

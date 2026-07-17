@@ -1,6 +1,7 @@
 post:
   tags:
     - Authentication
+    - 'Public'
   summary: Revoke all session tokens
   description: Revokes every active session token for an OpenIM user.
   operationId: authForceLogout

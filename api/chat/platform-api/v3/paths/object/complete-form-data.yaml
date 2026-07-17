@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Object storage'
+    - 'Private'
   summary: 'ObjectCompleteFormData'
   description: 'OpenIM Server POST route handled by t.CompleteFormData. It accepts the JSON serialization of third.CompleteFormDataReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectCompleteFormData
@@ -34,10 +35,12 @@ post:
                 properties:
                   data:
                     type: object
+                    description: Completed form-upload result.
                     additionalProperties: true
                     properties:
                       'url':
                         type: string
+                        description: Final business-accessible URL for the uploaded object.
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf
                     x-source-protobuf-type: 'openim.third.CompleteFormDataResp'

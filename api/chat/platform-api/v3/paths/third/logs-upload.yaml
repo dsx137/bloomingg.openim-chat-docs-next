@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Third-party services'
+    - 'Private'
   summary: 'ThirdLogsUpload'
   description: 'OpenIM Server POST route handled by t.UploadLogs. It accepts the JSON serialization of third.UploadLogsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdLogsUpload
@@ -52,6 +53,7 @@ post:
                 properties:
                   data:
                     type: object
+                    description: No additional result data is returned after log upload.
                     additionalProperties: true
                     properties: {}
                     x-source-schema-status: field-level

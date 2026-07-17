@@ -1,3 +1,4 @@
+description: 'Result data for a newly created group.'
 additionalProperties: false
 properties:
   groupInfo:

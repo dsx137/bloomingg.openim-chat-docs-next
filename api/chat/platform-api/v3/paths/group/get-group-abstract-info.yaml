@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupGetGroupAbstractInfo'
   description: 'OpenIM Server POST route handled by g.GetGroupAbstractInfo. It accepts the JSON serialization of group.GetGroupAbstractInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupAbstractInfo
@@ -33,21 +34,26 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Requested group membership summaries and member-list hashes.'
                     type: object
                     additionalProperties: true
                     properties:
                       'groupAbstractInfos':
+                        description: 'Summary records for the requested groups.'
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'groupID':
+                              description: 'Unique group identifier.'
                               type: string
                             'groupMemberNumber':
+                              description: 'Current number of members in the group.'
                               type: integer
                               format: int32
                             'groupMemberListHash':
+                              description: 'Hash of the group member list.'
                               type: integer
                               format: int64
                           x-source-schema-status: field-level

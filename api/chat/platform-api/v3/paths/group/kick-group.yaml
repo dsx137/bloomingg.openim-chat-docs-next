@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupKickGroup'
   description: 'OpenIM Server POST route handled by g.KickGroupMember. It accepts the JSON serialization of group.KickGroupMemberReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupKickGroup
@@ -39,6 +40,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Empty result confirming the members were removed from the group.'
                     type: object
                     additionalProperties: true
                     properties: {}

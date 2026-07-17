@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Statistics'
+    - 'Private'
   summary: 'StatisticsUserActive'
   description: 'OpenIM Server POST route handled by m.GetActiveUser. It accepts the JSON serialization of msg.GetActiveUserReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postStatisticsUserActive
@@ -52,60 +53,76 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Active-user statistics result.
                     type: object
                     additionalProperties: true
                     properties:
                       'msgCount':
+                        description: Message count included in these statistics.
                         type: integer
                         format: int64
                       'userCount':
+                        description: Number of active users.
                         type: integer
                         format: int64
                       'dateCount':
+                        description: Counts keyed by date.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Date key for this count.
                               type: string
                             'value':
+                              description: Count for this date key.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.msg.GetActiveUserResp.DateCountEntry'
                       'users':
+                        description: Active users returned by the query.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'user':
+                              description: Profile of this active user.
                               type: object
                               additionalProperties: true
                               properties:
                                 'userID':
+                                  description: Unique user ID.
                                   type: string
                                 'nickname':
+                                  description: User display name.
                                   type: string
                                 'faceURL':
+                                  description: User avatar URL.
                                   type: string
                                 'ex':
+                                  description: Application-defined user extension data.
                                   type: string
                                 'createTime':
+                                  description: User creation timestamp.
                                   type: integer
                                   format: int64
                                 'appMangerLevel':
+                                  description: Application manager level.
                                   type: integer
                                   format: int32
                                 'globalRecvMsgOpt':
+                                  description: 'Global message receive mode: receive, do not receive, or receive without notification.'
                                   type: integer
                                   format: int32
                               x-source-schema-status: field-level
                               x-source-schema-kind: protobuf
                               x-source-protobuf-type: 'openim.sdkws.UserInfo'
                             'count':
+                              description: Count for this active user.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level

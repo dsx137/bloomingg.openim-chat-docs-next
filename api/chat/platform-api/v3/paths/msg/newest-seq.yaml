@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgNewestSeq'
   description: 'OpenIM Server POST route handled by m.GetSeq. It accepts the JSON serialization of sdkws.GetMaxSeqReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgNewestSeq
@@ -31,32 +32,39 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Newest and minimum conversation sequence numbers.
                     type: object
                     additionalProperties: true
                     properties:
                       'maxSeqs':
+                        description: Newest sequence numbers by conversation.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Conversation ID for this newest sequence.
                               type: string
                             'value':
+                              description: Newest message sequence number for this conversation.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.sdkws.GetMaxSeqResp.MaxSeqsEntry'
                       'minSeqs':
+                        description: Minimum retained sequence numbers by conversation.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Conversation ID for this minimum sequence.
                               type: string
                             'value':
+                              description: Minimum retained message sequence number for this conversation.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level

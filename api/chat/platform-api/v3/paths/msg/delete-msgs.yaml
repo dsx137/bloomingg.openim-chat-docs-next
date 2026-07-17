@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgDeleteMsgs'
   description: 'OpenIM Server POST route handled by m.DeleteMsgs. It accepts the JSON serialization of msg.DeleteMsgsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgDeleteMsgs
@@ -49,6 +50,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after messages are deleted.
                     type: object
                     additionalProperties: true
                     properties: {}

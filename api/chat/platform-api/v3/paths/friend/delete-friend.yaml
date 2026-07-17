@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Friends'
+    - 'Private'
   summary: 'FriendDeleteFriend'
   description: 'OpenIM Server POST route handled by f.DeleteFriend. It accepts the JSON serialization of relation.DeleteFriendReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendDeleteFriend
@@ -33,6 +34,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: No additional data is returned on success.
                     type: object
                     additionalProperties: true
                     properties: {}

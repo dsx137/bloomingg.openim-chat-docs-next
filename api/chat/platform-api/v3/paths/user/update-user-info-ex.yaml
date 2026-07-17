@@ -1,6 +1,7 @@
 post:
   tags:
     - Users
+    - 'Public'
   summary: Update user
   description: Updates selected profile fields for an OpenIM user.
   operationId: userUpdateUserInfoEx

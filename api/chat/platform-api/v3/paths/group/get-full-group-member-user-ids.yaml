@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupGetFullGroupMemberUserIds'
   description: 'OpenIM Server POST route handled by g.GetFullGroupMemberUserIDs. It accepts the JSON serialization of group.GetFullGroupMemberUserIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetFullGroupMemberUserIds
@@ -34,17 +35,22 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Group-member synchronization version and complete member identifier list.'
                     type: object
                     additionalProperties: true
                     properties:
                       'version':
+                        description: 'Server version used for synchronization.'
                         type: integer
                         format: int64
                       'versionID':
+                        description: 'Identifier paired with the synchronization version.'
                         type: string
                       'equal':
+                        description: 'Whether the client version matches the server version.'
                         type: boolean
                       'userIDs':
+                        description: 'Identifiers of the returned users.'
                         type: array
                         items:
                           type: string

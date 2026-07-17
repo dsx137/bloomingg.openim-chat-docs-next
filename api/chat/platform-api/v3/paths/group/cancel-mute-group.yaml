@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupCancelMuteGroup'
   description: 'OpenIM Server POST route handled by g.CancelMuteGroup. It accepts the JSON serialization of group.CancelMuteGroupReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupCancelMuteGroup
@@ -31,6 +32,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Empty result confirming the group mute was removed.'
                     type: object
                     additionalProperties: true
                     properties: {}

@@ -1,6 +1,7 @@
 post:
   tags:
     - Groups
+    - 'Public'
   summary: List group members
   description: Returns a paginated list of members in an OpenIM group.
   operationId: groupGetGroupMemberList

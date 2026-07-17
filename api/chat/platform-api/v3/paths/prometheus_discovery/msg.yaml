@@ -1,6 +1,7 @@
 get:
   tags:
     - 'Service discovery'
+    - 'Private'
   summary: 'PrometheusDiscoveryMsg'
   description: 'OpenIM Server GET route handled by pd.Msg. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getPrometheusDiscoveryMsg
@@ -19,14 +20,17 @@ get:
               properties:
                 'targets':
                   type: array
+                  description: Prometheus scrape target addresses for the service.
                   items:
                     type: string
                 'labels':
                   type: object
+                  description: Labels applied to the discovered targets.
                   additionalProperties: true
                   properties:
                     'entries':
                       type: array
+                      description: Label map entries applied to the discovered targets.
                       items:
                         type: string
                   x-source-schema-status: field-level

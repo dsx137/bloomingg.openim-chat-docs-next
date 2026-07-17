@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupGetGroupMembersInfo'
   description: 'OpenIM Server POST route handled by g.GetGroupMembersInfo. It accepts the JSON serialization of group.GetGroupMembersInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupMembersInfo
@@ -35,43 +36,57 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Detailed records for the requested group members.'
                     type: object
                     additionalProperties: true
                     properties:
                       'members':
+                        description: 'Returned group member records.'
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'groupID':
+                              description: 'Unique group identifier.'
                               type: string
                             'userID':
+                              description: 'Unique OpenIM user identifier.'
                               type: string
                             'roleLevel':
+                              description: 'Role level of the group member.'
                               type: integer
                               format: int32
                             'joinTime':
+                              description: 'Time when the user joined the group.'
                               type: integer
                               format: int64
                             'nickname':
+                              description: 'User display name.'
                               type: string
                             'faceURL':
+                              description: 'URL of the profile or group avatar.'
                               type: string
                             'appMangerLevel':
+                              description: 'Internal application-manager level.'
                               type: integer
                               format: int32
                             'joinSource':
+                              description: 'How the member or applicant joined the group.'
                               type: integer
                               format: int32
                             'operatorUserID':
+                              description: 'Identifier of the user who performed the group member action.'
                               type: string
                             'ex':
+                              description: 'Application-defined extension data.'
                               type: string
                             'muteEndTime':
+                              description: 'Time when the member mute restriction ends.'
                               type: integer
                               format: int64
                             'inviterUserID':
+                              description: 'Identifier of the user who invited the member or applicant.'
                               type: string
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf

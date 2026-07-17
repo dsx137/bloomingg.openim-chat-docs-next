@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgSearchMsg'
   description: 'OpenIM Server POST route handled by m.SearchMsg. It accepts the JSON serialization of msg.SearchMessageReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgSearchMsg
@@ -54,84 +55,112 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Message search result.
                     type: object
                     additionalProperties: true
                     properties:
                       'chatLogs':
+                        description: Matched chat log entries.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'chatLog':
+                              description: Message and conversation details for this match.
                               type: object
                               additionalProperties: true
                               properties:
                                 'serverMsgID':
+                                  description: Server-generated message ID.
                                   type: string
                                 'clientMsgID':
+                                  description: Client-generated unique message ID.
                                   type: string
                                 'sendID':
+                                  description: User ID of the message sender.
                                   type: string
                                 'recvID':
+                                  description: User ID of the message recipient.
                                   type: string
                                 'groupID':
+                                  description: ID of the message group conversation.
                                   type: string
                                 'recvNickname':
+                                  description: Display name of the message recipient.
                                   type: string
                                 'senderPlatformID':
+                                  description: Platform identifier of the message sender.
                                   type: integer
                                   format: int32
                                 'senderNickname':
+                                  description: Display name of the message sender.
                                   type: string
                                 'senderFaceURL':
+                                  description: Avatar URL of the message sender.
                                   type: string
                                 'groupName':
+                                  description: Name of the message group.
                                   type: string
                                 'sessionType':
+                                  description: Conversation type of the message.
                                   type: integer
                                   format: int32
                                 'msgFrom':
+                                  description: Source classification of the message.
                                   type: integer
                                   format: int32
                                 'contentType':
+                                  description: Type code for the message content.
                                   type: integer
                                   format: int32
                                 'content':
+                                  description: Message content payload.
                                   type: string
                                 'status':
+                                  description: Message status code.
                                   type: integer
                                   format: int32
                                 'sendTime':
+                                  description: Message send timestamp in milliseconds.
                                   type: integer
                                   format: int64
                                 'createTime':
+                                  description: Message creation timestamp in milliseconds.
                                   type: integer
                                   format: int64
                                 'ex':
+                                  description: Application-defined extension data.
                                   type: string
                                 'groupFaceURL':
+                                  description: Avatar URL of the message group.
                                   type: string
                                 'groupMemberCount':
+                                  description: Current member count of the message group.
                                   type: integer
                                   format: int32
                                 'seq':
+                                  description: Sequence number of the message in its conversation.
                                   type: integer
                                   format: int64
                                 'groupOwner':
+                                  description: User ID of the message group owner.
                                   type: string
                                 'groupType':
+                                  description: Type code of the message group.
                                   type: integer
                                   format: int32
                               x-source-schema-status: field-level
                               x-source-schema-kind: protobuf
                               x-source-protobuf-type: 'openim.msg.ChatLog'
                             'isRevoked':
+                              description: Whether this matched message has been revoked.
                               type: boolean
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.msg.SearchChatLog'
                       'chatLogsNum':
+                        description: Total number of matched chat logs.
                         type: integer
                         format: int32
                     x-source-schema-status: field-level

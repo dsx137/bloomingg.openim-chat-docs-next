@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserAddNotificationAccount'
   description: 'OpenIM Server POST route handled by u.AddNotificationAccount. It accepts the JSON serialization of user.AddNotificationAccountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserAddNotificationAccount
@@ -38,16 +39,21 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Created notification account details.
                     type: object
                     additionalProperties: true
                     properties:
                       'userID':
+                        description: Unique user identifier.
                         type: string
                       'faceURL':
+                        description: User avatar URL.
                         type: string
                       'nickName':
+                        description: User nickname.
                         type: string
                       'appMangerLevel':
+                        description: Account type or management level.
                         type: integer
                         format: int32
                     x-source-schema-status: field-level

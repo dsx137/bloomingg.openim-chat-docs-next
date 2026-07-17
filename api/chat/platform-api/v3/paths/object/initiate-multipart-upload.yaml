@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Object storage'
+    - 'Private'
   summary: 'ObjectInitiateMultipartUpload'
   description: 'OpenIM Server POST route handled by t.InitiateMultipartUpload. It accepts the JSON serialization of third.InitiateMultipartUploadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectInitiateMultipartUpload
@@ -49,35 +50,45 @@ post:
                 properties:
                   data:
                     type: object
+                    description: Multipart-upload initialization result.
                     additionalProperties: true
                     properties:
                       'url':
                         type: string
+                        description: Storage URL associated with the multipart upload.
                       'upload':
                         type: object
+                        description: Multipart upload parameters.
                         additionalProperties: true
                         properties:
                           'uploadID':
                             type: string
+                            description: Multipart upload ID used for signing and completion requests.
                           'partSize':
                             type: integer
                             format: int64
+                            description: Size in bytes of each multipart chunk.
                           'sign':
                             type: object
+                            description: Signed parameters for multipart upload requests.
                             additionalProperties: true
                             properties:
                               'url':
                                 type: string
+                                description: Storage URL for the signed multipart upload.
                               'query':
                                 type: array
+                                description: Query parameters for the signed multipart upload.
                                 items:
                                   type: object
                                   additionalProperties: true
                                   properties:
                                     'key':
                                       type: string
+                                      description: Query parameter name.
                                     'values':
                                       type: array
+                                      description: Values for the query parameter.
                                       items:
                                         type: string
                                   x-source-schema-status: field-level
@@ -85,14 +96,17 @@ post:
                                   x-source-protobuf-type: 'openim.third.KeyValues'
                               'header':
                                 type: array
+                                description: HTTP headers for the signed multipart upload.
                                 items:
                                   type: object
                                   additionalProperties: true
                                   properties:
                                     'key':
                                       type: string
+                                      description: HTTP header name.
                                     'values':
                                       type: array
+                                      description: Values for the HTTP header.
                                       items:
                                         type: string
                                   x-source-schema-status: field-level
@@ -100,6 +114,7 @@ post:
                                   x-source-protobuf-type: 'openim.third.KeyValues'
                               'parts':
                                 type: array
+                                description: Signing parameters for each multipart upload part.
                                 items:
                                   type: object
                                   additionalProperties: true
@@ -107,18 +122,23 @@ post:
                                     'partNumber':
                                       type: integer
                                       format: int32
+                                      description: Multipart part number.
                                     'url':
                                       type: string
+                                      description: Storage URL for the part upload.
                                     'query':
                                       type: array
+                                      description: Query parameters for the part upload.
                                       items:
                                         type: object
                                         additionalProperties: true
                                         properties:
                                           'key':
                                             type: string
+                                            description: Query parameter name.
                                           'values':
                                             type: array
+                                            description: Values for the query parameter.
                                             items:
                                               type: string
                                         x-source-schema-status: field-level
@@ -126,14 +146,17 @@ post:
                                         x-source-protobuf-type: 'openim.third.KeyValues'
                                     'header':
                                       type: array
+                                      description: HTTP headers for the part upload.
                                       items:
                                         type: object
                                         additionalProperties: true
                                         properties:
                                           'key':
                                             type: string
+                                            description: HTTP header name.
                                           'values':
                                             type: array
+                                            description: Values for the HTTP header.
                                             items:
                                               type: string
                                         x-source-schema-status: field-level
@@ -148,6 +171,7 @@ post:
                           'expireTime':
                             type: integer
                             format: int64
+                            description: Unix timestamp in milliseconds when the multipart upload credentials expire.
                         x-source-schema-status: field-level
                         x-source-schema-kind: protobuf
                         x-source-protobuf-type: 'openim.third.UploadInfo'

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserProcessUserCommandGetAll'
   description: 'OpenIM Server POST route handled by u.ProcessUserCommandGetAll. It accepts the JSON serialization of user.ProcessUserCommandGetAllReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserProcessUserCommandGetAll
@@ -31,26 +32,33 @@ post:
               - type: object
                 properties:
                   data:
+                    description: All stored user command records.
                     type: object
                     additionalProperties: true
                     properties:
                       'CommandResp':
+                        description: Stored user command records.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'type':
+                              description: User command type.
                               type: integer
                               format: int32
                             'createTime':
+                              description: Creation time.
                               type: integer
                               format: int64
                             'uuid':
+                              description: Unique identifier for this record.
                               type: string
                             'value':
+                              description: Stored user command value.
                               type: string
                             'ex':
+                              description: Extension data.
                               type: string
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf

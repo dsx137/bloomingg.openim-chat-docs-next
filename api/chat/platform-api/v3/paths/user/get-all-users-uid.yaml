@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserGetAllUsersUid'
   description: 'OpenIM Server POST route handled by u.GetAllUsersID. It accepts the JSON serialization of user.GetAllUserIDReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetAllUsersUid
@@ -42,13 +43,16 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Registered user IDs and their total count.
                     type: object
                     additionalProperties: true
                     properties:
                       'total':
+                        description: Total number of records in this result.
                         type: integer
                         format: int32
                       'userIDs':
+                        description: User identifiers returned by this query.
                         type: array
                         items:
                           type: string

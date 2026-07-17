@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupGetGroupApplicationUnhandledCount'
   description: 'OpenIM Server POST route handled by g.GetGroupApplicationUnhandledCount. It accepts the JSON serialization of group.GetGroupApplicationUnhandledCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupApplicationUnhandledCount
@@ -34,10 +35,12 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Count of unhandled group applications.'
                     type: object
                     additionalProperties: true
                     properties:
                       'count':
+                        description: 'Number of unhandled group applications.'
                         type: integer
                         format: int64
                     x-source-schema-status: field-level

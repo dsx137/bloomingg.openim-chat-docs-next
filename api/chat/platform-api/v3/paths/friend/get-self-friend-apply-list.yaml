@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Friends'
+    - 'Private'
   summary: 'FriendGetSelfFriendApplyList'
   description: 'OpenIM Server POST route handled by f.GetSelfApplyList. It accepts the JSON serialization of relation.GetPaginationFriendsApplyFromReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetSelfFriendApplyList
@@ -49,48 +50,64 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Sent friend applications and their total count.
                     type: object
                     additionalProperties: true
                     properties:
                       'friendRequests':
+                        description: Friend application records.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'fromUserID':
+                              description: User identifier of the friend applicant.
                               type: string
                             'fromNickname':
+                              description: Nickname of the friend applicant.
                               type: string
                             'fromFaceURL':
+                              description: Avatar URL of the friend applicant.
                               type: string
                             'toUserID':
+                              description: User identifier of the friend application recipient.
                               type: string
                             'toNickname':
+                              description: Nickname of the friend application recipient.
                               type: string
                             'toFaceURL':
+                              description: Avatar URL of the friend application recipient.
                               type: string
                             'handleResult':
+                              description: Friend application handling result.
                               type: integer
                               format: int32
                             'reqMsg':
+                              description: Message included with the friend application.
                               type: string
                             'createTime':
+                              description: Creation time.
                               type: integer
                               format: int64
                             'handlerUserID':
+                              description: User identifier of the application handler.
                               type: string
                             'handleMsg':
+                              description: Handling message for the friend application.
                               type: string
                             'handleTime':
+                              description: Time the application was handled.
                               type: integer
                               format: int64
                             'ex':
+                              description: Extension data.
                               type: string
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.sdkws.FriendRequest'
                       'total':
+                        description: Total number of records in this result.
                         type: integer
                         format: int32
                     x-source-schema-status: field-level

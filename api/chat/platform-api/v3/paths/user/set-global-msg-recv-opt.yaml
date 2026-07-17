@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserSetGlobalMsgRecvOpt'
   description: 'OpenIM Server POST route handled by u.SetGlobalRecvMessageOpt. It accepts the JSON serialization of user.SetGlobalRecvMessageOptReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserSetGlobalMsgRecvOpt
@@ -18,6 +19,7 @@ post:
             'userID':
               type: string
             'globalRecvMsgOpt':
+              description: 'Global message receive mode: receive, do not receive, or receive without notification.'
               type: integer
               format: int32
           x-source-schema-status: field-level
@@ -34,6 +36,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: No additional data is returned on success.
                     type: object
                     additionalProperties: true
                     properties: {}

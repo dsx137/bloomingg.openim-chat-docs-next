@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserProcessUserCommandAdd'
   description: 'OpenIM Server POST route handled by u.ProcessUserCommandAdd. It accepts the JSON serialization of user.ProcessUserCommandAddReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserProcessUserCommandAdd
@@ -54,6 +55,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: No additional data is returned on success.
                     type: object
                     additionalProperties: true
                     properties: {}

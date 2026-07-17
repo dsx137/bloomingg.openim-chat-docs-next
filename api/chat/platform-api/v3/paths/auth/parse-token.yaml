@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Authentication'
+    - 'Private'
   summary: 'AuthParseToken'
   description: 'OpenIM Server POST route handled by a.ParseToken. It accepts the JSON serialization of auth.ParseTokenReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postAuthParseToken
@@ -31,15 +32,19 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Claims decoded from the supplied JWT.
                     type: object
                     additionalProperties: true
                     properties:
                       'userID':
+                        description: Unique user identifier.
                         type: string
                       'platformID':
+                        description: User login platform identifier.
                         type: integer
                         format: int32
                       'expireTimeSeconds':
+                        description: JWT expiration Unix timestamp in seconds.
                         type: integer
                         format: int64
                     x-source-schema-status: field-level

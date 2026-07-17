@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgDeleteMsgPhysical'
   description: 'OpenIM Server POST route handled by m.DeleteMsgPhysical. It accepts the JSON serialization of msg.DeleteMsgPhysicalReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgDeleteMsgPhysical
@@ -36,6 +37,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after the message is physically deleted.
                     type: object
                     additionalProperties: true
                     properties: {}

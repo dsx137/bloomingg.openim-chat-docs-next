@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Third-party services'
+    - 'Private'
   summary: 'ThirdSetAppBadge'
   description: 'OpenIM Server POST route handled by t.SetAppBadge. It accepts the JSON serialization of third.SetAppBadgeReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdSetAppBadge
@@ -35,6 +36,7 @@ post:
                 properties:
                   data:
                     type: object
+                    description: No additional result data is returned after the app badge update.
                     additionalProperties: true
                     properties: {}
                     x-source-schema-status: field-level

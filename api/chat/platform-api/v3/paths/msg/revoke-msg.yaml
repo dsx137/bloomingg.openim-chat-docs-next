@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgRevokeMsg'
   description: 'OpenIM Server POST route handled by m.RevokeMsg. It accepts the JSON serialization of msg.RevokeMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgRevokeMsg
@@ -36,6 +37,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after the message is revoked.
                     type: object
                     additionalProperties: true
                     properties: {}

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgMarkConversationAsRead'
   description: 'OpenIM Server POST route handled by m.MarkConversationAsRead. It accepts the JSON serialization of msg.MarkConversationAsReadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgMarkConversationAsRead
@@ -41,6 +42,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Empty payload returned after the conversation is marked as read.
                     type: object
                     additionalProperties: true
                     properties: {}

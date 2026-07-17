@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserSearchNotificationAccount'
   description: 'OpenIM Server POST route handled by u.SearchNotificationAccount. It accepts the JSON serialization of user.SearchNotificationAccountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserSearchNotificationAccount
@@ -47,25 +48,32 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Matching notification accounts and their total count.
                     type: object
                     additionalProperties: true
                     properties:
                       'total':
+                        description: Total number of records in this result.
                         type: integer
                         format: int64
                       'notificationAccounts':
+                        description: Notification account records.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'userID':
+                              description: Unique user identifier.
                               type: string
                             'faceURL':
+                              description: User avatar URL.
                               type: string
                             'nickName':
+                              description: User nickname.
                               type: string
                             'appMangerLevel':
+                              description: Account type or management level.
                               type: integer
                               format: int32
                           x-source-schema-status: field-level

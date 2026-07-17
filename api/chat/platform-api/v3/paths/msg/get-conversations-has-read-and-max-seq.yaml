@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgGetConversationsHasReadAndMaxSeq'
   description: 'OpenIM Server POST route handled by m.GetConversationsHasReadAndMaxSeq. It accepts the JSON serialization of msg.GetConversationsHasReadAndMaxSeqReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgGetConversationsHasReadAndMaxSeq
@@ -37,28 +38,35 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Conversation read and sequence summaries.
                     type: object
                     additionalProperties: true
                     properties:
                       'seqs':
+                        description: Read and maximum sequence summaries by conversation.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Conversation ID for this sequence summary.
                               type: string
                             'value':
+                              description: Read and maximum sequence values for this conversation.
                               type: object
                               additionalProperties: true
                               properties:
                                 'maxSeq':
+                                  description: Latest message sequence number for this conversation.
                                   type: integer
                                   format: int64
                                 'hasReadSeq':
+                                  description: Highest message sequence marked as read.
                                   type: integer
                                   format: int64
                                 'maxSeqTime':
+                                  description: Timestamp associated with the latest message sequence.
                                   type: integer
                                   format: int64
                               x-source-schema-status: field-level
@@ -68,6 +76,7 @@ post:
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.msg.GetConversationsHasReadAndMaxSeqResp.SeqsEntry'
                       'pinnedConversationIDs':
+                        description: IDs of pinned conversations.
                         type: array
                         items:
                           type: string

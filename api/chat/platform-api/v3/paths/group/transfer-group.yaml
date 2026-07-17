@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupTransferGroup'
   description: 'OpenIM Server POST route handled by g.TransferGroupOwner. It accepts the JSON serialization of group.TransferGroupOwnerReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupTransferGroup
@@ -35,6 +36,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Empty result confirming group ownership was transferred.'
                     type: object
                     additionalProperties: true
                     properties: {}

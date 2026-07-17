@@ -14,6 +14,10 @@ servers:
         default: api.example.invalid
         description: Hostname of the deployed OpenIM API service.
 tags:
+  - name: Public
+    description: Operations documented in the Platform API reference.
+  - name: Private
+    description: Operations not documented in the Platform API reference.
   - name: Authentication
     description: OpenIM authentication operations.
   - name: Conversations
@@ -42,8 +46,6 @@ externalDocs:
   description: OpenIM Server release v3.8.3-patch.16
   url: https://github.com/openimsdk/open-im-server/releases/tag/v3.8.3-patch.16
 x-source-tag: v3.8.3-patch.16
-x-source-tag-object: 8c6bf8af683b0f739c4b7c1b3b4447cb436dcbcd
-x-source-commit: f6411a8a1a31d3df36f4c2b3ad28481a94141e1f
 x-protocol-version: v0.0.73-alpha.12
 paths:
   /auth/force_logout:

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserGetSubscribeUsersStatus'
   description: 'OpenIM Server POST route handled by u.GetSubscribeUsersStatus. It accepts the JSON serialization of user.GetSubscribeUsersStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetSubscribeUsersStatus
@@ -31,21 +32,26 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Subscription status results for the requested users.
                     type: object
                     additionalProperties: true
                     properties:
                       'statusList':
+                        description: Online status results for the requested users.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'userID':
+                              description: Unique user identifier.
                               type: string
                             'status':
+                              description: User online status.
                               type: integer
                               format: int32
                             'platformIDs':
+                              description: Platform identifiers on which the user is online.
                               type: array
                               items:
                                 type: integer

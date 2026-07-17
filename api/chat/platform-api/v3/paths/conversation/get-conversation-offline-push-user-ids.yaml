@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Conversations'
+    - 'Private'
   summary: 'ConversationGetConversationOfflinePushUserIds'
   description: 'OpenIM Server POST route handled by c.GetConversationOfflinePushUserIDs. It accepts the JSON serialization of conversation.GetConversationOfflinePushUserIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetConversationOfflinePushUserIds
@@ -35,10 +36,12 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'User identifiers eligible for offline push in the conversation.'
                     type: object
                     additionalProperties: true
                     properties:
                       'userIDs':
+                        description: 'Identifiers of the returned users.'
                         type: array
                         items:
                           type: string

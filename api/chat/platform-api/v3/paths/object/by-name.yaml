@@ -1,6 +1,7 @@
 get:
   tags:
     - 'Object storage'
+    - 'Private'
   summary: 'ObjectName'
   description: 'OpenIM Server GET route handled by t.ObjectRedirect. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getObjectName

@@ -1,6 +1,7 @@
 post:
   tags:
     - Users
+    - 'Public'
   summary: Get users
   description: Returns public profile information for specified OpenIM users.
   operationId: userGetUsersInfo

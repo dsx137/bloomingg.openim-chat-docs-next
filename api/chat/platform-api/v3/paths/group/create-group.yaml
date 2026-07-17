@@ -1,6 +1,7 @@
 post:
   tags:
     - Groups
+    - 'Public'
   summary: Create group
   description: Creates an OpenIM group with the specified owner, members, and group settings.
   operationId: groupCreateGroup

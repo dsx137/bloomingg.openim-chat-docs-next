@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Messages'
+    - 'Private'
   summary: 'MsgGetServerTime'
   description: 'OpenIM Server POST route handled by m.GetServerTime. It accepts the JSON serialization of msg.GetServerTimeReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgGetServerTime
@@ -29,10 +30,12 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Server time result.
                     type: object
                     additionalProperties: true
                     properties:
                       'serverTime':
+                        description: Current server Unix timestamp in milliseconds.
                         type: integer
                         format: int64
                     x-source-schema-status: field-level

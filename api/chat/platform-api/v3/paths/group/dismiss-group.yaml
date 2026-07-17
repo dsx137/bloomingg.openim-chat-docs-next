@@ -1,6 +1,7 @@
 post:
   tags:
     - Groups
+    - 'Public'
   summary: Delete group
   description: Dismisses an OpenIM group and removes it from service.
   operationId: groupDismissGroup

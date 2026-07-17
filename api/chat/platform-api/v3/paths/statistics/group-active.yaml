@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Statistics'
+    - 'Private'
   summary: 'StatisticsGroupActive'
   description: 'OpenIM Server POST route handled by m.GetActiveGroup. It accepts the JSON serialization of msg.GetActiveGroupReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postStatisticsGroupActive
@@ -50,85 +51,111 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Active-group statistics result.
                     type: object
                     additionalProperties: true
                     properties:
                       'msgCount':
+                        description: Message count included in these statistics.
                         type: integer
                         format: int64
                       'groupCount':
+                        description: Number of active groups.
                         type: integer
                         format: int64
                       'dateCount':
+                        description: Counts keyed by date.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Date key for this count.
                               type: string
                             'value':
+                              description: Count for this date key.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.msg.GetActiveGroupResp.DateCountEntry'
                       'groups':
+                        description: Active groups returned by the query.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'group':
+                              description: Profile of this active group.
                               type: object
                               additionalProperties: true
                               properties:
                                 'groupID':
+                                  description: Unique group ID.
                                   type: string
                                 'groupName':
+                                  description: Group display name.
                                   type: string
                                 'notification':
+                                  description: Group notification text.
                                   type: string
                                 'introduction':
+                                  description: Group introduction text.
                                   type: string
                                 'faceURL':
+                                  description: Group avatar URL.
                                   type: string
                                 'ownerUserID':
+                                  description: User ID of the group owner.
                                   type: string
                                 'createTime':
+                                  description: Group creation timestamp.
                                   type: integer
                                   format: int64
                                 'memberCount':
+                                  description: Current number of group members.
                                   type: integer
                                   format: int32
                                 'ex':
+                                  description: Application-defined group extension data.
                                   type: string
                                 'status':
+                                  description: Group status code.
                                   type: integer
                                   format: int32
                                 'creatorUserID':
+                                  description: User ID of the group creator.
                                   type: string
                                 'groupType':
+                                  description: Group type code.
                                   type: integer
                                   format: int32
                                 'needVerification':
+                                  description: Group join-verification mode.
                                   type: integer
                                   format: int32
                                 'lookMemberInfo':
+                                  description: Whether members may view other group members information.
                                   type: integer
                                   format: int32
                                 'applyMemberFriend':
+                                  description: Whether group members may add each other as friends.
                                   type: integer
                                   format: int32
                                 'notificationUpdateTime':
+                                  description: Timestamp of the latest group-notification update.
                                   type: integer
                                   format: int64
                                 'notificationUserID':
+                                  description: User ID that last set the group notification.
                                   type: string
                               x-source-schema-status: field-level
                               x-source-schema-kind: protobuf
                               x-source-protobuf-type: 'openim.sdkws.GroupInfo'
                             'count':
+                              description: Count for this active group.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level

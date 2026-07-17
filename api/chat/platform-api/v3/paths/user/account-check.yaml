@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserAccountCheck'
   description: 'OpenIM Server POST route handled by u.AccountCheck. It accepts the JSON serialization of user.AccountCheckReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserAccountCheck
@@ -33,18 +34,22 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Registration statuses for the requested user IDs.
                     type: object
                     additionalProperties: true
                     properties:
                       'results':
+                        description: Account check results by user.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'userID':
+                              description: Unique user identifier.
                               type: string
                             'accountStatus':
+                              description: Registration status returned by the account check.
                               type: integer
                               format: int32
                           x-source-schema-status: field-level

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Users'
+    - 'Private'
   summary: 'UserGetUsersOnlineStatus'
   description: 'OpenIM Server POST route handled by u.GetUsersOnlineStatus. It accepts the JSON serialization of msggateway.GetUsersOnlineStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetUsersOnlineStatus
@@ -33,30 +34,38 @@ post:
               - type: object
                 properties:
                   data:
+                    description: Online status and platform connection details for requested users.
                     type: array
                     items:
                       type: object
                       additionalProperties: true
                       properties:
                         'userID':
+                          description: Unique user identifier.
                           type: string
                         'status':
+                          description: User online status.
                           type: integer
                           format: int32
                         'detailPlatformStatus':
+                          description: Per-platform connection status details.
                           type: array
                           items:
                             type: object
                             additionalProperties: true
                             properties:
                               'platformID':
+                                description: User login platform identifier.
                                 type: integer
                                 format: int32
                               'connID':
+                                description: Connection identifier for the platform session.
                                 type: string
                               'isBackground':
+                                description: Whether the platform session is in the background.
                                 type: boolean
                               'token':
+                                description: Authentication token.
                                 type: string
                             x-source-schema-status: field-level
                             x-source-schema-kind: protobuf

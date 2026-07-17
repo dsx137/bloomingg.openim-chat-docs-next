@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Conversations'
+    - 'Private'
   summary: 'ConversationGetFullConversationIds'
   description: 'OpenIM Server POST route handled by c.GetFullOwnerConversationIDs. It accepts the JSON serialization of conversation.GetFullOwnerConversationIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetFullConversationIds
@@ -34,17 +35,22 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Conversation synchronization version and complete identifier list.'
                     type: object
                     additionalProperties: true
                     properties:
                       'version':
+                        description: 'Server version used for synchronization.'
                         type: integer
                         format: int64
                       'versionID':
+                        description: 'Identifier paired with the synchronization version.'
                         type: string
                       'equal':
+                        description: 'Whether the client version matches the server version.'
                         type: boolean
                       'conversationIDs':
+                        description: 'Identifiers of the returned conversations.'
                         type: array
                         items:
                           type: string

@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Third-party services'
+    - 'Private'
   summary: 'ThirdLogsSearch'
   description: 'OpenIM Server POST route handled by t.SearchLogs. It accepts the JSON serialization of third.SearchLogsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdLogsSearch
@@ -51,41 +52,54 @@ post:
                 properties:
                   data:
                     type: object
+                    description: Search-log response payload.
                     additionalProperties: true
                     properties:
                       'logsInfos':
                         type: array
+                        description: Log records matching the search criteria.
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'userID':
                               type: string
+                              description: ID of the user associated with the log.
                             'platform':
                               type: string
+                              description: Client platform identifier recorded for the log.
                             'url':
                               type: string
+                              description: URL associated with the uploaded log file.
                             'createTime':
                               type: integer
                               format: int64
+                              description: Timestamp recorded when the log was created.
                             'nickname':
                               type: string
+                              description: Nickname of the user associated with the log.
                             'logID':
                               type: string
+                              description: Unique identifier of the log record.
                             'filename':
                               type: string
+                              description: Original filename of the uploaded log.
                             'systemType':
                               type: string
+                              description: Client system type recorded for the log.
                             'ex':
                               type: string
+                              description: Additional metadata recorded for the log.
                             'version':
                               type: string
+                              description: Client or application version recorded for the log.
                           x-source-schema-status: field-level
                           x-source-schema-kind: protobuf
                           x-source-protobuf-type: 'openim.third.LogInfo'
                       'total':
                         type: integer
                         format: int32
+                        description: Total number of log records matching the search criteria.
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf
                     x-source-protobuf-type: 'openim.third.SearchLogsResp'

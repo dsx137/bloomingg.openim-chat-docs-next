@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Groups'
+    - 'Private'
   summary: 'GroupSetGroupMemberInfo'
   description: 'OpenIM Server POST route handled by g.SetGroupMemberInfo. It accepts the JSON serialization of group.SetGroupMemberInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupSetGroupMemberInfo
@@ -79,6 +80,7 @@ post:
               - type: object
                 properties:
                   data:
+                    description: 'Empty result confirming the group member updates were processed.'
                     type: object
                     additionalProperties: true
                     properties: {}

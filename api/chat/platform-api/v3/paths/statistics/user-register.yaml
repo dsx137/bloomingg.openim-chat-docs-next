@@ -1,6 +1,7 @@
 post:
   tags:
     - 'Statistics'
+    - 'Private'
   summary: 'StatisticsUserRegister'
   description: 'OpenIM Server POST route handled by u.UserRegisterCount. It accepts the JSON serialization of user.UserRegisterCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postStatisticsUserRegister
@@ -35,24 +36,30 @@ post:
               - type: object
                 properties:
                   data:
+                    description: User registration statistics result.
                     type: object
                     additionalProperties: true
                     properties:
                       'total':
+                        description: Total registered users returned by the query.
                         type: integer
                         format: int64
                       'before':
+                        description: Registered-user count before the requested period.
                         type: integer
                         format: int64
                       'count':
+                        description: Registration counts keyed by the response aggregation key.
                         type: array
                         items:
                           type: object
                           additionalProperties: true
                           properties:
                             'key':
+                              description: Aggregation key for this registration count.
                               type: string
                             'value':
+                              description: Registration count for this aggregation key.
                               type: integer
                               format: int64
                           x-source-schema-status: field-level
