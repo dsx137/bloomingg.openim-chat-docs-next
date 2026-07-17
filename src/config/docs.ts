@@ -43,10 +43,10 @@ export type SdkPlatformSection = {
 export const sdkPlatformSections: SdkPlatformSection[] = [
   {
     items: [
-      { label: 'iOS', platform: 'ios', href: '/docs/chat/sdk/v4/ios/overview' },
-      { label: 'Android', platform: 'android', href: '/docs/chat/sdk/v4/android/overview' },
-      { label: 'Flutter', platform: 'flutter', href: '/docs/chat/sdk/v4/flutter/overview' },
-      { label: 'uni-app', platform: 'uniapp', href: '/docs/chat/sdk/v4/uniapp/overview' },
+      { label: 'iOS', platform: 'ios', href: '/sdk/ios/overview' },
+      { label: 'Android', platform: 'android', href: '/sdk/android/overview' },
+      { label: 'Flutter', platform: 'flutter', href: '/sdk/flutter/overview' },
+      { label: 'uni-app', platform: 'uniapp', href: '/sdk/uniapp/overview' },
     ],
   },
   {
@@ -55,12 +55,12 @@ export const sdkPlatformSections: SdkPlatformSection[] = [
     description: 'Shared core API',
     descriptionZh: '共享核心 API',
     items: [
-      { label: 'WASM', platform: 'wasm', href: '/docs/chat/sdk/v4/wasm/overview' },
-      { label: 'Electron', platform: 'electron', href: '/docs/chat/sdk/v4/electron/overview' },
+      { label: 'WASM', platform: 'wasm', href: '/sdk/wasm/overview' },
+      { label: 'Electron', platform: 'electron', href: '/sdk/electron/overview' },
       {
         label: 'Mini Program',
         platform: 'miniprogram',
-        href: '/docs/chat/sdk/v4/miniprogram/overview',
+        href: '/sdk/miniprogram/overview',
       },
     ],
   },
@@ -69,9 +69,9 @@ export const sdkPlatformSections: SdkPlatformSection[] = [
       {
         label: 'React Native',
         platform: 'react-native',
-        href: '/docs/chat/sdk/v4/react-native/overview',
+        href: '/sdk/react-native/overview',
       },
-      { label: 'Unity', platform: 'unity', href: '/docs/chat/sdk/v4/unity/overview' },
+      { label: 'Unity', platform: 'unity', href: '/sdk/unity/overview' },
     ],
   },
 ];

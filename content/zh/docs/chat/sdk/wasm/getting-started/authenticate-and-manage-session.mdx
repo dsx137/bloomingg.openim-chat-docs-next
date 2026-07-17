@@ -1,0 +1,252 @@
+---
+title: '认证与管理登录会话'
+description: '使用 OpenIM SDK 登录、查询登录状态、处理连接事件并退出当前账号。'
+sourcePath: '/sdk/wasm/getting-started/authenticate-and-manage-session'
+---
+
+OpenIM SDK 使用 `login()` 建立当前用户的登录会话。开始认证前，请先按照[开始之前](/sdk/wasm/getting-started/before-you-start)完成准备工作：OpenIM 服务、用户登录信息、浏览器可访问的服务地址，以及 SDK 运行资源。
+
+完整登录流程按以下顺序执行：
+
+1. 发布 WASM 资源并通过 `getSDK()` 创建 SDK 实例。
+2. 注册连接、Token 和账号下线事件，确保登录阶段的状态不会丢失。
+3. 从可信后端获取“开始之前”约定的 `userID`、Token、`apiAddr` 和 `wsAddr`。
+4. 调用 `login()`，等待 Promise 成功，并继续等待 `OnConnectSuccess` 确认连接可用。
+5. 连接成功后再查询用户、好友、会话、群组和消息数据。
+6. 用户主动退出或切换账号时调用 `logout()`，然后清理当前账号的应用状态和事件监听。
+
+## 使用应用配置初始化 SDK
+
+先发布浏览器 SDK 所需的 WASM 资源，再创建 SDK 实例。`coreWasmPath` 和 `sqlWasmPath` 必须指向浏览器可访问的资源路径。
+
+```ts
+import { CbEvents, getSDK } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+```
+
+### 参数说明
+
+`getSDK()` 的配置字段如下：
+
+| 字段 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `coreWasmPath` | `string` | 否 | `openIM.wasm` 的浏览器可访问地址，未传时默认使用 `/openIM.wasm`。 |
+| `sqlWasmPath` | `string` | 否 | `sql-wasm.wasm` 的浏览器可访问地址；项目改变静态资源目录或使用 CDN 时应显式传入。 |
+| `debug` | `boolean` | 否 | 控制 JavaScript 包装层和本地数据库桥接的调试输出，默认开启，生产环境通常显式关闭。 |
+
+### 理解浏览器包
+
+`@openim/wasm-client-sdk` 是浏览器 WASM 包。`getSDK()` 在同一个页面运行环境中复用 SDK 实例，业务代码不应为不同组件重复创建实例。不要在服务端渲染阶段、Node.js API 路由或 Electron 主进程中初始化该实例。
+
+OpenIM 的应用配置分成两部分：WASM 资源路径在 `getSDK()` 时传入；OpenIM 服务地址和用户认证信息在 `login()` 时传入。
+
+## 获取当前用户的登录信息
+
+调用业务后端提供的登录信息接口，取得当前用户的 `userID`、Token 和 OpenIM 服务地址。接口的职责和返回结构见[开始之前](/sdk/wasm/getting-started/before-you-start)。
+
+```ts
+const { userID, token, apiAddr, wsAddr } = await loadOpenIMSession();
+```
+
+`userID` 只是当前 OpenIM 用户的标识，不是认证凭据；它必须与 Token 对应。浏览器只使用后端返回的登录信息，不负责创建用户或签发 Token。
+
+## 在登录前注册连接事件
+
+连接事件应在 `login()` 前注册。这样便可捕获登录阶段因网络、地址、Token 或服务端问题产生的错误，并反馈到界面和日志中。
+
+```ts
+const handleConnecting = () => {
+  setConnectionState('connecting');
+};
+
+const handleConnectSuccess = () => {
+  setConnectionState('connected');
+};
+
+const handleConnectFailed = ({ errCode, errMsg }) => {
+  setConnectionState('failed');
+  console.error('OpenIM 连接失败', { errCode, errMsg });
+};
+
+OpenIM.on(CbEvents.OnConnecting, handleConnecting);
+OpenIM.on(CbEvents.OnConnectSuccess, handleConnectSuccess);
+OpenIM.on(CbEvents.OnConnectFailed, handleConnectFailed);
+```
+
+## 登录当前用户
+
+调用 `login()` 时传入 `InitAndLoginConfig`。下面示例使用 `Platform.Web`，避免在业务代码中直接填写平台数字：
+
+```ts
+import { LogLevel, Platform } from '@openim/wasm-client-sdk';
+
+try {
+  await OpenIM.login({
+    userID,
+    token,
+    platformID: Platform.Web,
+    apiAddr,
+    wsAddr,
+    logLevel: LogLevel.Warn,
+    isLogStandardOutput: false,
+  });
+} catch ({ errCode, errMsg }) {
+  console.error('OpenIM 登录失败', { errCode, errMsg, userID });
+  throw new Error(`OpenIM login failed: ${errCode} ${errMsg}`);
+}
+```
+
+### 参数说明
+
+| 字段 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `userID` | `string` | 是 | 当前 OpenIM 用户 ID，必须与 Token 对应。它不是昵称、手机号或业务侧临时会话 ID。 |
+| `token` | `string` | 是 | 当前用户的 OpenIM Token，由可信后端获取并返回；不要使用管理员 Token，也不要在前端自行签发。 |
+| `platformID` | `number` | 是 | 当前客户端平台。浏览器使用 `Platform.Web`；桌面或移动端应按实际运行平台和服务端多端登录策略选择对应枚举。 |
+| `apiAddr` | `string` | 是 | OpenIM 服务端的 HTTP API 地址，必须能从当前浏览器访问；HTTPS 页面应使用 HTTPS 地址。 |
+| `wsAddr` | `string` | 是 | OpenIM 服务端的 WebSocket 地址，必须能从当前浏览器建立连接；HTTPS 页面通常使用 WSS 地址。 |
+| `logLevel` | `LogLevel` | 否 | SDK 日志级别。开发环境可使用 `Debug`，生产环境通常使用 `Warn` 或 `Error`。 |
+| `isLogStandardOutput` | `boolean` | 否 | 是否把 SDK 核心日志输出到浏览器控制台。关闭该字段不等于关闭 `getSDK({ debug })` 控制的 JavaScript 包装层日志。 |
+
+`login()` 的 Promise 成功表示登录请求已经完成；`OnConnectSuccess` 表示 SDK 连接已经可用。两者是不同阶段，不能只因 Promise 成功就立即调用依赖连接的消息、会话、群组或用户 API。
+
+重复点击登录时，应复用正在进行的登录请求及其 Promise，避免并发调用 `login()`。
+
+## 查询当前登录状态
+
+`getLoginStatus()` 和 `getLoginUserID()` 都不接收业务参数：
+
+```ts
+import { LoginStatus } from '@openim/wasm-client-sdk';
+
+const { data: loginStatus } = await OpenIM.getLoginStatus();
+
+if (loginStatus === LoginStatus.Logged) {
+  const { data: currentUserID } = await OpenIM.getLoginUserID();
+  restoreSessionFor(currentUserID);
+}
+```
+
+`LoginStatus` 有三种状态：
+
+| 状态 | 说明 |
+| --- | --- |
+| `LoginStatus.Logout` | 当前 SDK 实例未登录。 |
+| `LoginStatus.Logging` | 登录流程正在进行，不要再次发起并行登录。 |
+| `LoginStatus.Logged` | SDK 已登录；仍应结合连接事件判断当前网络连接是否可用。 |
+
+`getLoginUserID()` 返回 SDK 当前登录的用户 ID，适合校验应用账号与 SDK 账号是否一致；它不能替代业务侧身份认证。这两个查询的 Promise 成功后，都可以直接使用各自的 `data` 建立当前登录快照。查询本身不会触发连接事件。
+
+切换账号时不要直接用新参数覆盖当前登录。先调用 `logout()` 完成旧账号退出并清理旧账号状态，再使用新账号参数调用 `login()`。
+
+## 上报浏览器运行状态
+
+浏览器网络恢复时调用 `networkStatusChanged()`，通知 SDK 重新检查连接；该方法不接收业务参数。页面前后台变化时调用 `setAppBackgroundStatus()`：传入 `true` 表示进入后台，传入 `false` 表示回到前台。进入后台后，新到达的消息一般通过 `OnRecvOfflineNewMessages` 进入客户端，完整监听见[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)。
+
+```ts
+const handleOnline = () => {
+  void OpenIM.networkStatusChanged();
+};
+
+const handleVisibilityChange = () => {
+  void OpenIM.setAppBackgroundStatus(document.hidden);
+};
+
+window.addEventListener('online', handleOnline);
+document.addEventListener('visibilitychange', handleVisibilityChange);
+
+function removeRuntimeListeners() {
+  window.removeEventListener('online', handleOnline);
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
+}
+```
+
+这些方法只上报运行环境变化，不会建立新的用户登录会话，也不能替代 `login()` 或 Token 刷新。应用卸载时调用 `removeRuntimeListeners()`。其他运行环境的处理方式见[按运行环境接入](/sdk/wasm/getting-started/environment-specific-implementation)。
+
+### 使用访问 Token
+
+OpenIM Token 应由可信后端签发并返回给浏览器。前端只负责把 Token 传给 `login()`，以及在 Token 过期、无效或用户主动切换账号时重新进入认证流程。
+
+```ts
+const handleUserTokenExpired = async () => {
+  console.warn('OpenIM Token 已过期');
+  await refreshSessionAndRelogin();
+};
+
+const handleUserTokenInvalid = () => {
+  console.warn('OpenIM Token 无效');
+  redirectToSignIn();
+};
+
+OpenIM.on(CbEvents.OnUserTokenExpired, handleUserTokenExpired);
+OpenIM.on(CbEvents.OnUserTokenInvalid, handleUserTokenInvalid);
+```
+
+刷新 Token 时，应重新向可信后端请求新的 `userID`、Token 和服务地址，然后按产品策略重新调用 `login()` 或引导用户重新登录。
+
+### 会话 Token 差异
+
+OpenIM WASM SDK 的浏览器登录流程不区分「访问 Token」和「会话 Token」这两类客户端凭据。对前端来说，`login()` 接收的是 OpenIM Token。该 Token 的签发、有效期、刷新和撤销策略，由你的后端与 OpenIM 服务端配置决定。
+
+如果产品需要短期会话、一次性登录或多端策略，请在后端实现，并通过 Token 生命周期事件通知前端重新认证。
+
+## 设置连接生命周期处理
+
+除连接和 Token 事件外，还应处理账号被强制下线。该事件通常表示：同一账号在其他客户端登录、服务端策略要求当前端下线，或当前 Token 已不再适合继续使用。
+
+```ts
+const handleKickedOffline = () => {
+  clearCurrentSession();
+  showSignedInElsewhereDialog();
+};
+
+OpenIM.on(CbEvents.OnKickedOffline, handleKickedOffline);
+```
+
+收到 `OnKickedOffline` 时，OpenIM SDK 已经自动退出当前登录会话，不要再调用 `logout()`。事件处理器只需清理应用自身保存的当前用户、会话列表、消息视图和页面状态，再根据产品策略提示重新登录或跳转到登录页。
+
+## 断开与 OpenIM 服务的连接
+
+用户主动退出登录或切换账号时，调用 `logout()`，再清理当前用户的会话列表、消息缓存、未读数和业务状态。被 `OnKickedOffline` 强制下线不属于主动退出，不要执行这里的 `logout()` 流程。
+
+```ts
+await OpenIM.logout();
+
+clearCurrentSession();
+```
+
+`logout()` 的 Promise 成功表示当前 SDK 登录会话已经退出，随后再清理应用状态。不要只等待某个连接事件来判断主动退出完成。
+
+`logout()` 不接收业务参数。切换账号时，先等待旧账号的 `logout()` Promise 成功，再移除旧事件监听、清空旧账号状态，然后调用新账号的 `login()`。不要让两个账号的登录和退出流程并发执行。
+
+### 仅断开 WebSocket
+
+OpenIM WASM SDK 不提供「仅断开 WebSocket、但保留登录会话」的独立方法。需要主动结束当前用户的会话时，使用 `logout()`。需要表达前后台或网络变化时，使用应用生命周期、`setAppBackgroundStatus()` 和 `networkStatusChanged()`，并配合连接事件处理。
+
+## 清理登录相关事件监听
+
+本页是连接、Token 和账号下线事件的完整监听示例归属页。退出登录、切换账号或销毁 SDK 作用域时，使用注册时的同一组函数引用清理监听：
+
+```ts
+function removeSessionListeners() {
+  OpenIM.off(CbEvents.OnConnecting, handleConnecting);
+  OpenIM.off(CbEvents.OnConnectSuccess, handleConnectSuccess);
+  OpenIM.off(CbEvents.OnConnectFailed, handleConnectFailed);
+  OpenIM.off(CbEvents.OnUserTokenExpired, handleUserTokenExpired);
+  OpenIM.off(CbEvents.OnUserTokenInvalid, handleUserTokenInvalid);
+  OpenIM.off(CbEvents.OnKickedOffline, handleKickedOffline);
+}
+```
+
+连接事件没有业务实体合并键，应按当前 SDK 实例和登录用户隔离状态；切换账号前先移除旧实例监听。重新登录后，各业务领域通过对应事件同步数据变化；页面首次进入时再查询所需数据，建立快照。
+
+## 下一步
+
+- [开始之前](/sdk/wasm/getting-started/before-you-start)
+- [发送第一条消息](/sdk/wasm/getting-started/send-first-message)
+- [事件概览](/sdk/wasm/events/overview-events)
+- [日志](/sdk/wasm/logger)

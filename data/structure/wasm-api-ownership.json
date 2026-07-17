@@ -1,0 +1,1215 @@
+{
+  "schemaVersion": 1,
+  "sdkVersion": "3.8.5-hotfix.0",
+  "methods": [
+    {
+      "name": "acceptFriendApplication",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "acceptGroupApplication",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "addBlack",
+      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "status": "documented"
+    },
+    {
+      "name": "addConversationsToGroups",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "addFriend",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "changeGroupMemberMute",
+      "page": "/sdk/wasm/group/moderating-groups/mute-a-group-or-member",
+      "status": "documented"
+    },
+    {
+      "name": "changeGroupMute",
+      "page": "/sdk/wasm/group/moderating-groups/mute-a-group-or-member",
+      "status": "documented"
+    },
+    {
+      "name": "changeInputStates",
+      "page": "/sdk/wasm/message/composing-messages/manage-typing-status",
+      "status": "documented"
+    },
+    {
+      "name": "checkFriend",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-friend-information",
+      "status": "documented"
+    },
+    {
+      "name": "clearConversationAndDeleteAllMsg",
+      "page": "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "clearGroupApplicationBadgeCount",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "createAdvancedQuoteMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "createAdvancedTextMessage",
+      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "createCardMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createConversationGroup",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "createCustomMessage",
+      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createFaceMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createFileMessageByFile",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "createFileMessageByURL",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createForwardMessage",
+      "page": "/sdk/wasm/message/managing-messages/forward-or-merge-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createGroup",
+      "page": "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+      "status": "documented"
+    },
+    {
+      "name": "createImageMessageByFile",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "createImageMessageByURL",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createLocationMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createMarkdownMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createMergerMessage",
+      "page": "/sdk/wasm/message/managing-messages/forward-or-merge-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createQuoteMessage",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createSoundMessageByFile",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "createSoundMessageByURL",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "createTargetedGroupMessage",
+      "page": "/sdk/wasm/message/sending-messages/send-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createTextAtMessage",
+      "page": "/sdk/wasm/message/composing-messages/mention-users-in-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createTextMessage",
+      "page": "/sdk/wasm/message/sending-messages/send-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "createVideoMessageByFile",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "createVideoMessageByURL",
+      "page": "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+      "status": "documented"
+    },
+    {
+      "name": "deleteAllConversationFromLocal",
+      "page": "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "deleteAllMsgFromLocal",
+      "page": "/sdk/wasm/message/managing-messages/clear-message-history",
+      "status": "documented"
+    },
+    {
+      "name": "deleteAllMsgFromLocalAndSvr",
+      "page": "/sdk/wasm/message/managing-messages/clear-message-history",
+      "status": "documented"
+    },
+    {
+      "name": "deleteConversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "deleteConversationAndDeleteAllMsg",
+      "page": "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "deleteConversationGroup",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "deleteFriend",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "documented"
+    },
+    {
+      "name": "deleteFriendRequests",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "deleteGroupRequests",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "deleteMessage",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "deleteMessageFromLocalStorage",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "deleteMessages",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "deleteUserAllMessagesInConv",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "dismissGroup",
+      "page": "/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group",
+      "status": "documented"
+    },
+    {
+      "name": "exportDB",
+      "page": "/sdk/wasm/logger",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "fetchSurroundingMessages",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "status": "documented"
+    },
+    {
+      "name": "fileMapSet",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "findMessageList",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "status": "documented"
+    },
+    {
+      "name": "getAdvancedHistoryMessageList",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "status": "documented"
+    },
+    {
+      "name": "getAdvancedHistoryMessageListReverse",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "status": "documented"
+    },
+    {
+      "name": "getAllConversationList",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list",
+      "status": "excluded-non-paginated"
+    },
+    {
+      "name": "getBlackList",
+      "page": "/sdk/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationGroupIDsByConversationID",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationGroupInfoWithConversations",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationGroups",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationIDBySessionType",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationListSplit",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationPinnedMsg",
+      "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
+      "status": "documented"
+    },
+    {
+      "name": "getConversationRecvMessageOpt",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "getFriendApplicationListAsApplicant",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "getFriendApplicationListAsRecipient",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "getFriendApplicationUnhandledCount",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "getFriendList",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+      "status": "excluded-non-paginated"
+    },
+    {
+      "name": "getFriendListPage",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupApplicationBadgeCount",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupApplicationListAsApplicant",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupApplicationListAsRecipient",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupApplicationUnhandledCount",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupMemberList",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupMemberListByJoinTimeFilter",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "getGroupMemberOwnerAndAdmin",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "getGroupMessageReaderList",
+      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "status": "documented"
+    },
+    {
+      "name": "getHistoryMessageListReverse",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "status": "documented"
+    },
+    {
+      "name": "getInputstates",
+      "page": "/sdk/wasm/message/composing-messages/manage-typing-status",
+      "status": "documented"
+    },
+    {
+      "name": "getJoinedGroupList",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getJoinedGroupListPage",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getLoginStatus",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "getLoginUserID",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "getMultipleConversation",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "status": "documented"
+    },
+    {
+      "name": "getOneConversation",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "status": "documented"
+    },
+    {
+      "name": "getSelfUserInfo",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "status": "documented"
+    },
+    {
+      "name": "getSignalingInvitationInfoStartApp",
+      "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
+      "status": "documented"
+    },
+    {
+      "name": "getSpecifiedFriendsInfo",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-friend-information",
+      "status": "documented"
+    },
+    {
+      "name": "getSpecifiedGroupMembersInfo",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "getSpecifiedGroupsInfo",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "getSubscribeUsersStatus",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
+      "status": "documented"
+    },
+    {
+      "name": "getTotalUnreadMsgCount",
+      "page": "/sdk/wasm/conversation/managing-conversations/manage-read-status",
+      "status": "documented"
+    },
+    {
+      "name": "getUsersInfo",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-users",
+      "status": "documented"
+    },
+    {
+      "name": "getUsersInGroup",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "getUserStatus",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "hideConversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "insertGroupMessageToLocalStorage",
+      "page": "/sdk/wasm/message/managing-messages/insert-a-local-message",
+      "status": "documented"
+    },
+    {
+      "name": "insertSingleMessageToLocalStorage",
+      "page": "/sdk/wasm/message/managing-messages/insert-a-local-message",
+      "status": "documented"
+    },
+    {
+      "name": "inviteUserToGroup",
+      "page": "/sdk/wasm/group/managing-group-members/invite-or-remove-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "isJoinGroup",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "joinGroup",
+      "page": "/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group",
+      "status": "documented"
+    },
+    {
+      "name": "kickGroupMember",
+      "page": "/sdk/wasm/group/managing-group-members/invite-or-remove-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "login",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "logout",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "markConversationMessageAsRead",
+      "page": "/sdk/wasm/conversation/managing-conversations/manage-read-status",
+      "status": "documented"
+    },
+    {
+      "name": "modifyMessage",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "networkStatusChanged",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "pinConversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "pinFriends",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "quitGroup",
+      "page": "/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group",
+      "status": "documented"
+    },
+    {
+      "name": "refuseFriendApplication",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "refuseGroupApplication",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "removeBlack",
+      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "status": "documented"
+    },
+    {
+      "name": "removeConversationsFromGroups",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "resetConversationGroupAtType",
+      "page": "/sdk/wasm/conversation/managing-conversations/manage-read-status",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "revokeMessage",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "searchFriends",
+      "page": "/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+      "status": "documented"
+    },
+    {
+      "name": "searchGroupMembers",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "searchGroups",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "searchLocalMessages",
+      "page": "/sdk/wasm/message/searching-messages/search-messages",
+      "status": "documented"
+    },
+    {
+      "name": "sendGroupMessageReadReceipt",
+      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "status": "documented"
+    },
+    {
+      "name": "sendMessage",
+      "page": "/sdk/wasm/message/sending-messages/send-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "sendMessageNotOss",
+      "page": "/sdk/wasm/message/sending-messages/send-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "setAppBackgroundStatus",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "setConversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "documented"
+    },
+    {
+      "name": "setConversationBurnDuration",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setConversationDraft",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-draft",
+      "status": "documented"
+    },
+    {
+      "name": "setConversationEx",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setConversationGroupOrder",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "setConversationIsMsgDestruct",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "setConversationMsgDestructTime",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-consolidated"
+    },
+    {
+      "name": "setConversationPinnedMsg",
+      "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
+      "status": "documented"
+    },
+    {
+      "name": "setConversationPrivateChat",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setConversationRecvMessageOpt",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setFriendRemark",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setFriendsEx",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGlobalRecvMessageOpt",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGroupApplyMemberFriend",
+      "page": "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGroupInfo",
+      "page": "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+      "status": "documented"
+    },
+    {
+      "name": "setGroupLookMemberInfo",
+      "page": "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGroupMemberInfo",
+      "page": "/sdk/wasm/group/managing-group-members/update-group-member-info",
+      "status": "documented"
+    },
+    {
+      "name": "setGroupMemberNickname",
+      "page": "/sdk/wasm/group/managing-group-members/update-group-member-info",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGroupMemberRoleLevel",
+      "page": "/sdk/wasm/group/managing-group-members/update-group-member-info",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setGroupVerification",
+      "page": "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "setMessageLocalContent",
+      "page": "/sdk/wasm/message/composing-messages/transcribe-audio",
+      "status": "documented"
+    },
+    {
+      "name": "setMessageLocalEx",
+      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "setSelfInfo",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "status": "documented"
+    },
+    {
+      "name": "SetSelfInfoEx",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "signalingAccept",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingCancel",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingGetRoomByGroupID",
+      "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
+      "status": "documented"
+    },
+    {
+      "name": "signalingGetTokenByRoomID",
+      "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
+      "status": "documented"
+    },
+    {
+      "name": "signalingHungUp",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingInvite",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingInviteInGroup",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingReject",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "signalingSendCustomSignal",
+      "page": "/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal",
+      "status": "documented"
+    },
+    {
+      "name": "speechToText",
+      "page": "/sdk/wasm/message/composing-messages/transcribe-audio",
+      "status": "documented"
+    },
+    {
+      "name": "speechToTextCapabilities",
+      "page": "/sdk/wasm/message/composing-messages/transcribe-audio",
+      "status": "documented"
+    },
+    {
+      "name": "subscribeUsersStatus",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
+      "status": "documented"
+    },
+    {
+      "name": "transferGroupOwner",
+      "page": "/sdk/wasm/group/managing-group-members/transfer-group-owner",
+      "status": "documented"
+    },
+    {
+      "name": "typingStatusUpdate",
+      "page": "/sdk/wasm/message/composing-messages/manage-typing-status",
+      "status": "excluded-deprecated"
+    },
+    {
+      "name": "unsubscribeUsersStatus",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
+      "status": "documented"
+    },
+    {
+      "name": "updateConversationGroup",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "updateFriends",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "documented"
+    },
+    {
+      "name": "uploadFile",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    }
+  ],
+  "events": [
+    {
+      "name": "Login",
+      "page": null,
+      "status": "excluded"
+    },
+    {
+      "name": "OnBlackAdded",
+      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "status": "documented"
+    },
+    {
+      "name": "OnBlackDeleted",
+      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "status": "documented"
+    },
+    {
+      "name": "OnChangedPinnedMsg",
+      "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnConnectFailed",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "OnConnecting",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "OnConnectSuccess",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationChanged",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationGroupAdded",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationGroupChanged",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationGroupDeleted",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationGroupMemberAdded",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationGroupMemberDeleted",
+      "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnConversationUserInputStatusChanged",
+      "page": "/sdk/wasm/message/composing-messages/manage-typing-status",
+      "status": "documented"
+    },
+    {
+      "name": "OnDeleteUserAllMsgsInConv",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendAdded",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendApplicationAccepted",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendApplicationAdded",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendApplicationDeleted",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendApplicationRejected",
+      "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendDeleted",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "documented"
+    },
+    {
+      "name": "OnFriendInfoChanged",
+      "page": "/sdk/wasm/user/managing-friends/update-or-delete-friends",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupApplicationAccepted",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupApplicationAdded",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupApplicationBadgeCountChanged",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupApplicationDeleted",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupApplicationRejected",
+      "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupDismissed",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupInfoChanged",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupMemberAdded",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupMemberDeleted",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "OnGroupMemberInfoChanged",
+      "page": "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+      "status": "documented"
+    },
+    {
+      "name": "OnHangUp",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInvitationCancelled",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInvitationTimeout",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInviteeAccepted",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInviteeAcceptedByOtherDevice",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInviteeRejected",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnInviteeRejectedByOtherDevice",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnJoinedGroupAdded",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnJoinedGroupDeleted",
+      "page": "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+      "status": "documented"
+    },
+    {
+      "name": "OnKickedOffline",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "OnMessageModified",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnMsgDeleted",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnNewConversation",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list",
+      "status": "documented"
+    },
+    {
+      "name": "OnNewRecvMessageRevoked",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnProgress",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    },
+    {
+      "name": "OnReceiveCustomSignal",
+      "page": "/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal",
+      "status": "documented"
+    },
+    {
+      "name": "OnReceiveNewInvitation",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvC2CReadReceipt",
+      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvCustomBusinessMessage",
+      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvGroupReadReceipt",
+      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvMessageRevoked",
+      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvNewMessage",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvNewMessages",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvOfflineNewMessage",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvOfflineNewMessages",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvOnlineOnlyMessage",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRecvOnlineOnlyMessages",
+      "page": "/sdk/wasm/message/receiving-messages/receive-messages",
+      "status": "documented"
+    },
+    {
+      "name": "OnRoomParticipantConnected",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnRoomParticipantDisconnected",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnSelfInfoUpdated",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "status": "documented"
+    },
+    {
+      "name": "OnStreamChange",
+      "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+      "status": "documented"
+    },
+    {
+      "name": "OnSyncServerFailed",
+      "page": "/sdk/wasm/events/overview-events",
+      "status": "documented"
+    },
+    {
+      "name": "OnSyncServerFinish",
+      "page": "/sdk/wasm/events/overview-events",
+      "status": "documented"
+    },
+    {
+      "name": "OnSyncServerProgress",
+      "page": "/sdk/wasm/events/overview-events",
+      "status": "documented"
+    },
+    {
+      "name": "OnSyncServerStart",
+      "page": "/sdk/wasm/events/overview-events",
+      "status": "documented"
+    },
+    {
+      "name": "OnTotalUnreadMessageCountChanged",
+      "page": "/sdk/wasm/conversation/managing-conversations/manage-read-status",
+      "status": "documented"
+    },
+    {
+      "name": "OnUploadLogsProgress",
+      "page": null,
+      "status": "excluded"
+    },
+    {
+      "name": "OnUserStatusChanged",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
+      "status": "documented"
+    },
+    {
+      "name": "OnUserTokenExpired",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "OnUserTokenInvalid",
+      "page": "/sdk/wasm/getting-started/authenticate-and-manage-session",
+      "status": "documented"
+    },
+    {
+      "name": "UnUsedEvent",
+      "page": null,
+      "status": "excluded"
+    },
+    {
+      "name": "UploadComplete",
+      "page": "/sdk/wasm/message/sending-messages/upload-files-and-track-progress",
+      "status": "documented"
+    }
+  ],
+  "conceptPages": [
+    "/sdk/wasm/overview",
+    "/sdk/wasm/getting-started/before-you-start",
+    "/sdk/wasm/getting-started/environment-specific-implementation",
+    "/sdk/wasm/getting-started/send-first-message",
+    "/sdk/wasm/user/overview-user",
+    "/sdk/wasm/conversation/overview-conversation",
+    "/sdk/wasm/group/overview-group",
+    "/sdk/wasm/message/overview-message",
+    "/sdk/wasm/calling/overview-calling",
+    "/sdk/wasm/logger"
+  ]
+}

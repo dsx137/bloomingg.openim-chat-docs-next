@@ -3,10 +3,10 @@ import { dirname, resolve } from 'node:path';
 
 const root = process.cwd();
 const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Shanghai' });
-const localRoot = '/docs/chat/platform-api/v3';
-const contentRoot = 'content/docs/chat/platform-api/v3';
-const zhContentRoot = 'content/zh/docs/chat/platform-api/v3';
-const contextKey = 'chat/platform-api/v3';
+const localRoot = '/platform-api';
+const contentRoot = 'content/docs/chat/platform-api';
+const zhContentRoot = 'content/zh/docs/chat/platform-api';
+const contextKey = 'chat/platform-api';
 const contextTitle = 'Platform API';
 const sendbirdOverviewUrl = 'https://sendbird.com/docs/chat/platform-api/v3/overview';
 const openimRawBase = 'https://raw.githubusercontent.com/openimsdk/docs/main';
@@ -312,28 +312,28 @@ async function renderZhOverviewPage(route, mapping, allRoutes) {
 
 在调用管理端 REST API 前，后端服务需要确认 API 地址、请求头和管理员 Token 的使用方式。客户端登录所需的用户 Token 也应由可信后端签发。
 
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [签发会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token)
+- [接入准备](/platform-api/prepare-to-use-api)
+- [签发会话 Token](/platform-api/user/managing-session-tokens/issue-a-session-token)
 
 ### 用户管理
 
 通过 OpenIM 用户管理接口创建、更新、查询用户资料，并把注册、注销、权限等业务规则保留在业务系统中。
 
-- [创建用户](/docs/chat/platform-api/v3/user/creating-users/create-a-user)
-- [查询用户列表](/docs/chat/platform-api/v3/user/listing-users/list-users)
-- [获取用户信息](/docs/chat/platform-api/v3/user/listing-users/get-a-user)
+- [创建用户](/platform-api/user/creating-users/create-a-user)
+- [查询用户列表](/platform-api/user/listing-users/list-users)
+- [获取用户信息](/platform-api/user/listing-users/get-a-user)
 
 ### 消息
 
 使用 OpenIM 消息接口从后端发送消息，并结合 Webhook 或业务后端处理审核、通知和扩展行为。
 
-- [发送消息](/docs/chat/platform-api/v3/message/messaging-basics/send-a-message)
+- [发送消息](/platform-api/message/messaging-basics/send-a-message)
 
 ### 迁移其他项目到 OpenIM
 
 将历史消息或其他 IM 项目中的消息数据导入 OpenIM 时，后端可以使用 OpenIM 消息接口写入带原始发送时间的消息记录。
 
-- [迁移消息](/docs/chat/platform-api/v3/migration/migrate-messages)
+- [迁移消息](/platform-api/migration/migrate-messages)
 
 ## 推荐功能
 
@@ -341,17 +341,17 @@ async function renderZhOverviewPage(route, mapping, allRoutes) {
 
 OpenIM 使用群组能力承载群聊场景。文档中的“群组频道”概念在这里映射为 OpenIM 群组、群成员和入群申请。
 
-- [创建群组频道](/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel)
-- [邀请成员](/docs/chat/platform-api/v3/channel/inviting-a-user/invite-as-members-channel)
+- [创建群组频道](/platform-api/channel/creating-a-channel/create-a-group-channel)
+- [邀请成员](/platform-api/channel/inviting-a-user/invite-as-members-channel)
 
 ### 内容审核
 
 OpenIM 提供群禁言、成员禁言等可直接调用的管理能力，适合由可信后端执行。
 
-- [屏蔽用户](/docs/chat/platform-api/v3/moderation/blocking-users/block-users)
-- [取消屏蔽用户](/docs/chat/platform-api/v3/moderation/blocking-users/unblock-a-user)
-- [禁言群组成员](/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel)
-- [解除群组成员禁言](/docs/chat/platform-api/v3/moderation/muting-a-user/unmute-a-member-in-a-group-channel)
+- [屏蔽用户](/platform-api/moderation/blocking-users/block-users)
+- [取消屏蔽用户](/platform-api/moderation/blocking-users/unblock-a-user)
+- [禁言群组成员](/platform-api/moderation/muting-a-user/mute-a-member-in-a-group-channel)
+- [解除群组成员禁言](/platform-api/moderation/muting-a-user/unmute-a-member-in-a-group-channel)
 
 ## 资源
 
@@ -410,7 +410,7 @@ OpenIM 管理端 REST API 以 JSON 请求为主。除具体接口另有说明外
 3. 使用管理员 Token 调用用户、群组、消息等管理端接口。
 4. 当客户端需要登录 OpenIM 时，由服务端调用用户 Token 接口签发会话 Token。
 
-- [签发会话 Token](/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token)
+- [签发会话 Token](/platform-api/user/managing-session-tokens/issue-a-session-token)
 - [OpenIM 管理员 Token 文档](${sourceUrl(openimSources.adminToken)})
 
 ## 请求体
@@ -434,9 +434,9 @@ ${childRows ? `| 页面 | 支持情况 |\n| ---- | -------- |\n${childRows}` : '
 | 产品区域 | ${zhArea(mapping.area)} |
 | 实现方式 | ${zhSummary(mapping)} |
 
-- [Platform API 概览](/docs/chat/platform-api/v3/overview)
-- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
-- [错误码](/docs/chat/platform-api/v3/error-codes)`;
+- [Platform API 概览](/platform-api/overview)
+- [接入准备](/platform-api/prepare-to-use-api)
+- [错误码](/platform-api/error-codes)`;
 }
 
 async function renderZhErrorCodesPage() {
@@ -907,7 +907,7 @@ function renderZhResponsePropertiesSection({ route, successFields }) {
 function renderZhErrorSection({ failure, failureFields, route }) {
   const parts = [
     '### 错误',
-    '如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/docs/chat/platform-api/v3/error-codes)。',
+    '如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/platform-api/error-codes)。',
     failure
       ? normalizeImportedMarkdown(failure)
       : '```json\n{\n  "errCode": 1004,\n  "errMsg": "RecordNotFoundError",\n  "errDlt": ": [1004]RecordNotFoundError"\n}\n```',
@@ -1482,7 +1482,7 @@ function zhApiIntro(route, title, mapping) {
   if (mapping.status === 'direct') {
     const routeSpecificIntro = zhDirectApiIntro(route.path, title);
     if (routeSpecificIntro) return routeSpecificIntro;
-    return `使用 **${title}** 从可信后端调用 OpenIM REST 接口。请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。`;
+    return `使用 **${title}** 从可信后端调用 OpenIM REST 接口。请先在[接入准备](/platform-api/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。`;
   }
   if (mapping.status === 'partial') {
     return `使用 **${title}** 规划一个由业务后端编排的能力。OpenIM 提供相关 REST 基础能力，但完整产品流程、策略和持久化需要由业务系统负责。`;
@@ -2121,7 +2121,7 @@ function normalizeImportedMarkdown(value) {
       .replace(/\[([^\]]+)\]\(([^)]+)\.md\)/g, '[$1]($2)')
       .replace(
         /\]\((?:\.\.?\/|\/)*(?:(?:restapi\/)?apis\/)?authenticationManagement\/getAdminToken(?:\.md)?\)/g,
-        '](/docs/chat/platform-api/v3/prepare-to-use-api)',
+        '](/platform-api/prepare-to-use-api)',
       )
       .replace(
         /\]\((?:\.\.?\/|\/)*(?:restapi\/)?commonFields(?:\.md)?(#[^)]+)?\)/g,

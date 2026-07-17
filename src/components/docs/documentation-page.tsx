@@ -29,18 +29,25 @@ import {
   localizeRouteRecord,
 } from '@/src/lib/localized-docs';
 import { getSourceDocPage } from '@/src/lib/source-docs';
+import {
+  getPublishedWasmLocales,
+  isWasmLocalePublished,
+  isWasmRoute,
+} from '@/src/lib/wasm-publication';
 import type { BreadcrumbItem, TocItem } from '@/src/types/docs';
 
 export type DocumentationPageParams = {
+  routePath?: string;
   slug?: string[];
+  sourceSlugs?: string[];
 };
 
 export async function generateDocumentationMetadata(
-  { slug }: DocumentationPageParams,
+  { routePath, slug, sourceSlugs }: DocumentationPageParams,
   locale: Locale = 'en',
 ): Promise<Metadata> {
-  const pageSlugs = slug?.length ? slug : ['chat'];
-  const path = pathFromSlug(slug);
+  const pageSlugs = sourceSlugs ?? (slug?.length ? slug : ['chat']);
+  const path = routePath ?? pathFromSlug(slug);
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
   if (!route || !page) return {};
@@ -49,17 +56,29 @@ export async function generateDocumentationMetadata(
   const title = localizeDocLabel(localized?.title ?? page.data.title ?? route.title, locale);
   const description = localized?.description ?? page.data.description ?? route.description;
   const url = toLocalizedPath(route.path, locale);
+  const wasmRoute = isWasmRoute(route.path);
+  const languages = wasmRoute
+    ? Object.fromEntries(
+        getPublishedWasmLocales(route.path).map((publishedLocale) => [
+          publishedLocale,
+          toLocalizedPath(route.path, publishedLocale),
+        ]),
+      )
+    : {
+        en: route.path,
+        zh: toLocalizedPath(route.path, 'zh'),
+      };
 
   return {
     title,
     description,
     alternates: {
       canonical: url,
-      languages: {
-        en: route.path,
-        zh: toLocalizedPath(route.path, 'zh'),
-      },
+      languages,
     },
+    ...(wasmRoute && !isWasmLocalePublished(route.path, locale)
+      ? { robots: { follow: false, index: false } }
+      : {}),
     openGraph: {
       title,
       description,
@@ -71,11 +90,11 @@ export async function generateDocumentationMetadata(
 }
 
 export async function renderDocumentationPage(
-  { slug }: DocumentationPageParams,
+  { routePath, slug, sourceSlugs }: DocumentationPageParams,
   locale: Locale = 'en',
 ) {
-  const pageSlugs = slug?.length ? slug : ['chat'];
-  const path = pathFromSlug(slug);
+  const pageSlugs = sourceSlugs ?? (slug?.length ? slug : ['chat']);
+  const path = routePath ?? pathFromSlug(slug);
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
 
@@ -139,7 +158,7 @@ export async function renderDocumentationPage(
   const showVersion = shouldShowVersion(effectiveRoute.version, routeVersions);
   const breadcrumbs = localizeBreadcrumbs(getBreadcrumbs(effectiveRoute, { showVersion }), locale);
 
-  if (effectiveRoute.path === '/docs/chat/sdk/v4/wasm/overview') {
+  if (effectiveRoute.path === '/sdk/wasm/overview' && locale === 'zh') {
     return (
       <DocsShell
         context={context}
@@ -160,7 +179,7 @@ export async function renderDocumentationPage(
     );
   }
 
-  if (effectiveRoute.path === '/docs/chat/platform-api/v3/overview') {
+  if (effectiveRoute.path === '/platform-api/overview') {
     return (
       <DocsShell
         context={context}

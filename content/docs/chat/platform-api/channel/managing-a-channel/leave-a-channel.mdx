@@ -1,0 +1,170 @@
+---
+title: "退出群组频道"
+description: "OpenIM Platform API 中文参考：退出群组频道。说明 OpenIM REST 支持情况、接口结构和后端实现边界。"
+product: "platform-api"
+context: "chat/platform-api"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-01"
+version: "v3"
+sourcePath: "/platform-api/channel/managing-a-channel/leave-a-channel"
+---
+
+使用 **退出群组频道** 从可信后端调用 OpenIM REST 接口。请先在[接入准备](/platform-api/prepare-to-use-api)中配置 API 地址和管理员 Token；接口参数通过请求头和 JSON 请求体传递。
+
+---
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/group/quit_group
+```
+
+### 请求示例
+
+:::code-tabs
+```bash title="cURL"
+curl --request POST "${API_ADDRESS}/group/quit_group" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: 1646445464564" \
+  --header "token: ${ADMIN_TOKEN}" \
+  --data-raw '{
+  "groupID": "xadxwr24",
+  "userID": "4251711209"
+}'
+```
+
+```javascript title="Node.js"
+const API_ADDRESS = process.env.OPENIM_API_ADDRESS;
+const ADMIN_TOKEN = process.env.OPENIM_ADMIN_TOKEN;
+
+const response = await fetch(`${API_ADDRESS}/group/quit_group`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json; charset=utf-8',
+    operationID: '1646445464564',
+    token: ADMIN_TOKEN
+  },
+  body: JSON.stringify({
+    "groupID": "xadxwr24",
+    "userID": "4251711209"
+  })
+});
+
+const result = await response.json();
+if (result.errCode !== 0) {
+  throw new Error(result.errMsg || result.errDlt || 'OpenIM request failed');
+}
+```
+
+```go title="Go"
+package main
+
+import (
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"strings"
+)
+
+func main() {
+	payload := strings.NewReader(`{
+  "groupID": "xadxwr24",
+  "userID": "4251711209"
+}`)
+	url := os.Getenv("OPENIM_API_ADDRESS") + "/group/quit_group"
+	req, err := http.NewRequest(http.MethodPost, url, payload)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("operationID", "1646445464564")
+	req.Header.Set("token", os.Getenv("OPENIM_ADMIN_TOKEN"))
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(string(body))
+}
+```
+:::
+
+> 安全提示：管理员 Token 只能保存在可信后端服务中，不能下发到客户端或写入前端代码。客户端登录应使用服务端签发的用户 Token。
+
+---
+
+## 参数
+
+此接口通过请求头传入链路追踪信息和鉴权凭证，通过 JSON 请求体传递业务参数。
+
+### 请求头
+
+|header名|示例值| 是否必填 |类型|说明|
+|:----    |:-------    |:--- |---|------      |
+|operationID|1646445464564|必填|string|用于全局链路追踪，建议使用时间戳，在每个请求中独立|
+|token|eyJhbxxxx3Xs|必填|string|[管理员 token](/platform-api/prepare-to-use-api)|
+
+---
+
+## 请求体
+
+下表列出请求体支持的字段。
+
+```json
+{
+  "groupID": "xadxwr24",
+  "userID": "4251711209"
+}
+```
+| 参数名 | 是否必填 |类型|说明|
+|:----    |:-------    |:--- |---|
+|groupID|必填|string|群ID|
+|userID|必填|string|用户ID|
+
+---
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准；`errCode === 0` 表示成功，非 0 表示业务错误。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": ""
+}
+```
+
+### 错误
+
+如果请求失败，OpenIM 返回错误对象。更多错误码说明见[错误码](/platform-api/error-codes)。
+
+```json
+{
+  "errCode": 1004,
+  "errMsg": "RecordNotFoundError",
+  "errDlt": ": [1004]RecordNotFoundError"
+}
+```
+
+|参数名|类型|说明|
+|:----    |:-------    |:--- |
+|errCode|int|错误码，具体查看全局错误码文档|
+|errMsg|string|错误简要信息|
+|errDlt|errDlt|错误详细信息|
+
+**常见错误场景**
+
+| 错误场景 | 可能原因 | 处理方式 |
+| -------- | -------- | -------- |
+| 鉴权失败 | `token` 缺失、过期，或不是可调用管理端接口的管理员 Token。 | 重新获取 APP 管理员 Token，并只在可信后端保存。 |
+| 链路追踪困难 | `operationID` 缺失或在大量请求中重复使用。 | 为每次请求生成独立 `operationID`，并在服务端日志中保留。 |
+| 参数校验失败 | 请求体字段类型、必填字段或枚举值不符合接口要求。 | 对照请求体参数表检查字段类型和必填项。 |

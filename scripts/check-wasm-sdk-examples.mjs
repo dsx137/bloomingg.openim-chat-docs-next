@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-const roots = ['content/docs/chat/sdk/v4/wasm', 'content/zh/docs/chat/sdk/v4/wasm'];
+const roots = ['content/docs/chat/sdk/wasm', 'content/zh/docs/chat/sdk/wasm'];
 const files = [];
 
 for (const root of roots) walk(root);

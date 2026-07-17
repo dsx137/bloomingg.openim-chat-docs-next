@@ -218,7 +218,7 @@ function ScaffoldFrame({
       <aside className="authoring-handoff">
         <strong>{locale === 'zh' ? '内容交接' : 'Authoring handoff'}</strong>
         <code>{displayRoute}</code>
-        <Link href={toLocalizedPath('/docs/chat', locale)}>
+        <Link href={toLocalizedPath('/', locale)}>
           {locale === 'zh' ? '查看文档入口' : 'Review the documentation entry point'}
         </Link>
       </aside>

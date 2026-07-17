@@ -36,40 +36,40 @@ const copy = {
         title: 'Prepare to use API',
         description:
           'Confirm the base API address, JSON headers, administrator token, and request body conventions.',
-        href: '/docs/chat/platform-api/v3/prepare-to-use-api',
+        href: '/platform-api/prepare-to-use-api',
         visual: 'setup',
       },
       {
         title: 'List users',
         description: 'Retrieve registered OpenIM users from a trusted backend service.',
-        href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
+        href: '/platform-api/user/listing-users/list-users',
         visual: 'user-list',
       },
       {
         title: 'Create a user',
         description: 'Register OpenIM users and keep business identity rules in your own system.',
-        href: '/docs/chat/platform-api/v3/user/creating-users/create-a-user',
+        href: '/platform-api/user/creating-users/create-a-user',
         visual: 'create-user',
       },
       {
         title: 'Create a group channel',
         description:
           'Provision an OpenIM group for channel-style conversations and member management.',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
         visual: 'group',
       },
       {
         title: 'Send a message',
         description:
           'Send server-side text, custom, and notification messages through OpenIM message APIs.',
-        href: '/docs/chat/platform-api/v3/message/messaging-basics/send-a-message',
+        href: '/platform-api/message/messaging-basics/send-a-message',
         visual: 'message',
       },
       {
         title: 'Migrate messages',
         description:
           'Import historical messages into OpenIM while preserving sender and conversation context.',
-        href: '/docs/chat/platform-api/v3/migration/migrate-messages',
+        href: '/platform-api/migration/migrate-messages',
         visual: 'migration',
       },
     ],
@@ -77,30 +77,30 @@ const copy = {
       {
         title: 'User lifecycle',
         description: 'Create users, update profiles, query user records, and issue session tokens.',
-        href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
+        href: '/platform-api/user/listing-users/list-users',
       },
       {
         title: 'Group channels',
         description:
           'Create groups, update group information, invite members, and manage membership changes.',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
       },
       {
         title: 'Moderation',
         description: 'Block users, list block relationships, and mute or unmute group members.',
-        href: '/docs/chat/platform-api/v3/moderation/blocking-users/block-users',
+        href: '/platform-api/moderation/blocking-users/block-users',
       },
     ],
     links: [
       {
         title: 'Error codes',
         description: 'Handle OpenIM errCode, errMsg, and errDlt responses consistently.',
-        href: '/docs/chat/platform-api/v3/error-codes',
+        href: '/platform-api/error-codes',
       },
       {
         title: 'Issue a session token',
         description: 'Generate login tokens for clients from a trusted backend.',
-        href: '/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token',
+        href: '/platform-api/user/managing-session-tokens/issue-a-session-token',
       },
       {
         title: 'OpenIM REST API introduction',
@@ -119,37 +119,37 @@ const copy = {
       {
         title: '接入准备',
         description: '确认 API 基础地址、JSON 请求头、管理员 Token 和请求体约定。',
-        href: '/docs/chat/platform-api/v3/prepare-to-use-api',
+        href: '/platform-api/prepare-to-use-api',
         visual: 'setup',
       },
       {
         title: '查询用户列表',
         description: '从可信后端查询已注册的 OpenIM 用户。',
-        href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
+        href: '/platform-api/user/listing-users/list-users',
         visual: 'user-list',
       },
       {
         title: '创建用户',
         description: '注册 OpenIM 用户，并把业务身份、权限和风控逻辑保留在业务系统中。',
-        href: '/docs/chat/platform-api/v3/user/creating-users/create-a-user',
+        href: '/platform-api/user/creating-users/create-a-user',
         visual: 'create-user',
       },
       {
         title: '创建群组频道',
         description: '创建 OpenIM 群组，用于承载频道式会话和成员管理。',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
         visual: 'group',
       },
       {
         title: '发送消息',
         description: '通过 OpenIM 消息接口从服务端发送文本、自定义或通知类消息。',
-        href: '/docs/chat/platform-api/v3/message/messaging-basics/send-a-message',
+        href: '/platform-api/message/messaging-basics/send-a-message',
         visual: 'message',
       },
       {
         title: '迁移消息',
         description: '把历史消息导入 OpenIM，并保留发送者、会话和消息上下文。',
-        href: '/docs/chat/platform-api/v3/migration/migrate-messages',
+        href: '/platform-api/migration/migrate-messages',
         visual: 'migration',
       },
     ],
@@ -157,29 +157,29 @@ const copy = {
       {
         title: '用户生命周期',
         description: '创建用户、更新资料、查询用户记录，并为客户端签发会话 Token。',
-        href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
+        href: '/platform-api/user/listing-users/list-users',
       },
       {
         title: '群组频道',
         description: '创建群组、更新群资料、邀请成员，并处理入群、退群和解散流程。',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
+        href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
       },
       {
         title: '内容治理',
         description: '屏蔽用户、查询屏蔽关系，并对群组或群成员执行禁言与解除禁言。',
-        href: '/docs/chat/platform-api/v3/moderation/blocking-users/block-users',
+        href: '/platform-api/moderation/blocking-users/block-users',
       },
     ],
     links: [
       {
         title: '错误码',
         description: '统一处理 OpenIM 的 errCode、errMsg 和 errDlt 响应。',
-        href: '/docs/chat/platform-api/v3/error-codes',
+        href: '/platform-api/error-codes',
       },
       {
         title: '签发会话 Token',
         description: '由可信后端为客户端生成登录 Token。',
-        href: '/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token',
+        href: '/platform-api/user/managing-session-tokens/issue-a-session-token',
       },
       {
         title: 'OpenIM REST API 介绍',

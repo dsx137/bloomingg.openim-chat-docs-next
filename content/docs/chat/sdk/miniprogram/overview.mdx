@@ -1,0 +1,33 @@
+---
+title: 'OpenIM SDK for Mini Program'
+description: 'OpenIM Mini Program SDK entry point for supported mini program runtimes.'
+product: 'sdk'
+context: 'chat/sdk/miniprogram'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-06-30'
+version: 'v4'
+platform: 'miniprogram'
+sourcePath: '/sdk/miniprogram/overview'
+---
+
+## Overview
+
+Mini Program integrations follow the WASM-compatible core API model for user login, conversations, messages, groups, and events, while the runtime adapter must respect each mini program platform's storage, networking, upload, and websocket restrictions.
+
+## Compatibility with WASM
+
+Use the WASM SDK documentation for shared OpenIM concepts and method-level behavior. Mini Program pages should document only the runtime differences: initialization entry, asset handling, request domain configuration, file upload limits, and background lifecycle.
+
+## Runtime notes
+
+- Configure allowed request and websocket domains before testing login.
+- Verify local storage quota and cleanup behavior for conversation and message cache.
+- Test file messages with the target platform's upload API and file size limits.
+- Keep token issuance on a trusted backend and pass only short-lived credentials to the client.
+
+## Next steps
+
+- [WASM SDK overview](/sdk/wasm/overview)
+- [User authentication](/sdk/wasm/application/authenticating-a-user/authentication)
+- [Send your first message](/sdk/wasm/getting-started/send-first-message)

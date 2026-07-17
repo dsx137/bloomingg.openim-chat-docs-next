@@ -9,7 +9,7 @@ export function Logo({ locale = 'en' }: { locale?: Locale }) {
     <Link
       aria-label="OpenIM Docs home"
       className="brand-lockup"
-      href={toLocalizedPath('/docs/chat', locale)}
+      href={toLocalizedPath('/', locale)}
     >
       <span aria-hidden="true" className="brand-mark">
         <span />

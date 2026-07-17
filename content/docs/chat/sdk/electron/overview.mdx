@@ -1,0 +1,41 @@
+---
+title: 'OpenIM SDK for Electron'
+description: 'OpenIM Electron SDK entry point for planning WASM and FFI usage across web-compatible UI and packaged desktop apps.'
+product: 'sdk'
+context: 'chat/sdk/electron'
+template: 'overview'
+status: 'draft'
+lastUpdated: '2026-06-30'
+version: 'v4'
+platform: 'electron'
+sourcePath: '/sdk/electron/overview'
+---
+
+## Overview
+
+OpenIM Electron SDK can use both WASM and FFI integration modes. They are not always an either-or choice: if the same product supports a web client and a packaged Electron app, you typically need to plan for both.
+
+Use WASM for browser pages, renderer processes, WebViews, or UI layers that should stay aligned with the web client. Use FFI for the desktop application side, packaged app behavior, native runtime integration, and boundaries that should live outside a browser-like page.
+
+## SDK mode responsibilities
+
+| Mode       | Applies to                                             | Notes                                                                                                                       |
+| ---------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| WASM       | Web pages, Electron renderer processes, WebViews       | Initialize like the web SDK and publish `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js` where the page can load them.    |
+| FFI        | Electron application-side capabilities and native apps | Follow the Electron FFI SDK installation, packaging, and initialization rules. Do not use browser WASM asset paths for FFI. |
+| WASM + FFI | Products that support both web and packaged Electron   | Wrap IM access behind an app-level adapter, select the runtime implementation per environment, and avoid competing logins.  |
+
+## Desktop integration notes
+
+- If the product supports both web and Electron, define an app-level IM adapter before wiring SDK calls into UI code.
+- Use WASM in renderer or web-compatible layers, and verify packaged builds can load `openIM.wasm`, `sql-wasm.wasm`, and `wasm_exec.js`.
+- Use FFI for application-side integration, and design installation, permission, packaging, and update behavior around the packaged desktop app.
+- If both the main process and renderer process need IM state, define an IPC boundary and decide which side owns login, connection, message events, and local state.
+- Keep tokens out of preload scripts and main-process logs.
+- Validate websocket connectivity in packaged builds, not only in local dev mode.
+
+## Next steps
+
+- [WASM SDK overview](/sdk/wasm/overview)
+- [Environment-specific implementation](/sdk/wasm/getting-started/environment-specific-implementation)
+- [Send your first message](/sdk/wasm/getting-started/send-first-message)

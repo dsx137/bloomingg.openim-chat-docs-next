@@ -35,7 +35,13 @@ export function MobileSidebar({
       <div>
         {sidebarIntro}
         <ContextPicker currentKey={context.key} locale={locale} options={options} />
-        <SidebarNav currentPath={currentPath} locale={locale} nodes={context.nodes} />
+        <SidebarNav
+          currentPath={currentPath}
+          locale={locale}
+          nodes={context.nodes}
+          sidebarExpansion={context.sidebarExpansion}
+          stateScope={context.key}
+        />
       </div>
     </details>
   );

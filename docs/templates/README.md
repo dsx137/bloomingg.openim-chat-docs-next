@@ -17,7 +17,7 @@
 - 页面正文从 `##` 开始，不写 `#`，页面标题由 frontmatter 渲染。
 - `status` 从 `draft` 开始，技术和产品确认后改为 `published`。
 - SDK 页面必须填写 `version` 和 `platform`；Platform API 页面必须填写 `version`。
-- 内部链接使用 `/docs/chat/...` 绝对路径，不链接 `.mdx` 文件。
+- 内部链接使用 `/sdk/...` 或 `/platform-api/...` 绝对路径，不链接 `.mdx` 文件。
 - 不确认的 API 字段、错误码、SDK 方法不要猜；先保留 TODO 或维持 `draft`。
 - 示例代码必须能对应当前 OpenIM SDK 或服务端接口，不提交密钥、私有域名或真实用户数据。
 

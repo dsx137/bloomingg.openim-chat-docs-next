@@ -1,5 +1,10 @@
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import {
+  isChatDocumentationPath,
+  localizedContentFile,
+} from './lib/chat-content-paths.mjs';
+import { validateSearchIndexPaths } from './lib/search-index-contract.mjs';
 
 const root = process.cwd();
 const routes = JSON.parse(await readFile(resolve(root, 'src/generated/routes.json'), 'utf8'));
@@ -8,6 +13,12 @@ const navigation = JSON.parse(
 );
 const searchIndex = JSON.parse(
   await readFile(resolve(root, 'src/generated/search-index.json'), 'utf8'),
+);
+const searchIndexZh = JSON.parse(
+  await readFile(resolve(root, 'src/generated/search-index-zh.json'), 'utf8'),
+);
+const wasmAudit = JSON.parse(
+  await readFile(resolve(root, 'data/structure/wasm-content-audit.json'), 'utf8'),
 );
 const scope = JSON.parse(await readFile(resolve(root, 'data/structure/scope.json'), 'utf8'));
 const expectedSdkPlatforms = [
@@ -104,7 +115,7 @@ const platformApiForbiddenApiHeadings = [
 ];
 const platformApiSendbirdHeadingExpectations = new Map([
   [
-    '/docs/chat/platform-api/v3/user/listing-users/list-users',
+    '/platform-api/user/listing-users/list-users',
     [
       '## HTTP 请求',
       '### 请求示例',
@@ -120,13 +131,13 @@ const platformApiSendbirdHeadingExpectations = new Map([
   ],
 ]);
 const platformApiOverviewHeadingExpectations = new Map([
-  ['/docs/chat/platform-api/v3/overview', ['## 最常用', '## 推荐功能', '## 资源']],
+  ['/platform-api/overview', ['## 最常用', '## 推荐功能', '## 资源']],
   [
-    '/docs/chat/platform-api/v3/prepare-to-use-api',
+    '/platform-api/prepare-to-use-api',
     ['## 基础地址', '## 请求头', '## Multipart 请求', '## 鉴权', '## 请求体'],
   ],
   [
-    '/docs/chat/platform-api/v3/error-codes',
+    '/platform-api/error-codes',
     ['## 响应结构', '## 错误码范围', '## 处理流程', '## 服务端错误码', '## 排查建议'],
   ],
 ]);
@@ -194,9 +205,9 @@ for (const route of routes) {
     if (
       route.template === 'overview' &&
       ![
-        '/docs/chat/platform-api/v3/overview',
-        '/docs/chat/platform-api/v3/prepare-to-use-api',
-        '/docs/chat/platform-api/v3/error-codes',
+        '/platform-api/overview',
+        '/platform-api/prepare-to-use-api',
+        '/platform-api/error-codes',
       ].includes(route.path)
     ) {
       errors.push(
@@ -230,7 +241,7 @@ for (const route of routes) {
         );
       }
     }
-    if (route.path === '/docs/chat/platform-api/v3/error-codes') {
+    if (route.path === '/platform-api/error-codes') {
       checkPlatformApiErrorCodesPage(bodyWithoutFrontmatter, route.contentFile);
     }
     for (const pattern of platformApiUncoveredPatterns) {
@@ -282,7 +293,7 @@ for (const route of routes) {
           );
         }
       }
-      if (route.path === '/docs/chat/platform-api/v3/user/listing-users/list-users') {
+      if (route.path === '/platform-api/user/listing-users/list-users') {
         for (const expected of [
           'curl --request POST',
           'process.env.OPENIM_API_ADDRESS',
@@ -310,81 +321,70 @@ for (const route of routes) {
       }
     }
 
-    const localizedPath = resolve(root, 'content/zh', `${route.path.slice(1)}.mdx`);
+    const localizedFile = localizedContentFile(route.contentFile);
+    const localizedPath = resolve(root, localizedFile);
     let localizedMdx = '';
     try {
       const details = await stat(localizedPath);
-      if (!details.isFile()) errors.push(`Not a file: content/zh/${route.path.slice(1)}.mdx`);
+      if (!details.isFile()) errors.push(`Not a file: ${localizedFile}`);
       localizedMdx = await readFile(localizedPath, 'utf8');
     } catch {
-      errors.push(`Missing Chinese Platform API MDX file: content/zh/${route.path.slice(1)}.mdx`);
+      errors.push(`Missing Chinese Platform API MDX file: ${localizedFile}`);
     }
     if (localizedMdx) {
       const localizedFrontmatter = parseFrontmatter(localizedMdx);
       if (!localizedFrontmatter.title) {
-        errors.push(`content/zh/${route.path.slice(1)}.mdx: missing localized title`);
+        errors.push(`${localizedFile}: missing localized title`);
       } else if (containsUnexpectedEnglish(localizedFrontmatter.title)) {
-        errors.push(
-          `content/zh/${route.path.slice(1)}.mdx: localized title contains untranslated English text`,
-        );
+        errors.push(`${localizedFile}: localized title contains untranslated English text`);
       }
       const localizedBody = localizedMdx.replace(/^---\r?\n[\s\S]*?\r?\n---/, '');
       if (visibleBrandPattern.test(localizedMdx)) {
-        errors.push(
-          `content/zh/${route.path.slice(1)}.mdx: visible Chinese page must not mention Sendbird`,
-        );
+        errors.push(`${localizedFile}: visible Chinese page must not mention Sendbird`);
       }
       const expectedOverviewHeadings = platformApiOverviewHeadingExpectations.get(route.path);
       if (expectedOverviewHeadings) {
         const actualHeadings = extractPlatformApiSecondLevelHeadings(localizedBody);
         if (actualHeadings.join('\n') !== expectedOverviewHeadings.join('\n')) {
           errors.push(
-            `content/zh/${route.path.slice(
-              1,
-            )}.mdx: overview heading structure differs from Sendbird source; expected ${JSON.stringify(
+            `${localizedFile}: overview heading structure differs from Sendbird source; expected ${JSON.stringify(
               expectedOverviewHeadings,
             )}, got ${JSON.stringify(actualHeadings)}`,
           );
         }
       }
-      if (route.path === '/docs/chat/platform-api/v3/error-codes') {
-        checkPlatformApiErrorCodesPage(localizedBody, `content/zh/${route.path.slice(1)}.mdx`);
+      if (route.path === '/platform-api/error-codes') {
+        checkPlatformApiErrorCodesPage(localizedBody, localizedFile);
       }
       for (const pattern of platformApiUncoveredPatterns) {
         if (pattern.test(localizedBody)) {
           errors.push(
-            `content/zh/${route.path.slice(1)}.mdx: contains uncovered capability wording (${pattern})`,
+            `${localizedFile}: contains uncovered capability wording (${pattern})`,
           );
         }
       }
       for (const pattern of platformApiZhLegacyPatterns) {
         if (pattern.test(localizedBody)) {
           errors.push(
-            `content/zh/${route.path.slice(1)}.mdx: contains English Platform API template text (${pattern})`,
+            `${localizedFile}: contains English Platform API template text (${pattern})`,
           );
         }
       }
       if (route.template === 'api') {
         for (const heading of platformApiZhRequiredApiHeadings) {
           if (!localizedBody.includes(heading)) {
-            errors.push(
-              `content/zh/${route.path.slice(1)}.mdx: missing Chinese heading "${heading}"`,
-            );
+            errors.push(`${localizedFile}: missing Chinese heading "${heading}"`);
           }
         }
         if (!localizedBody.includes('## 参数') && !localizedBody.includes('## 请求体')) {
           errors.push(
-            `content/zh/${route.path.slice(
-              1,
-            )}.mdx: missing Sendbird-style parameter/request-body section`,
+            `${localizedFile}: missing Sendbird-style parameter/request-body section`,
           );
         }
         for (const pattern of platformApiForbiddenApiHeadings) {
           if (pattern.test(localizedBody)) {
             errors.push(
-              `content/zh/${route.path.slice(
-                1,
-              )}.mdx: contains non-Sendbird Platform API heading ${pattern}`,
+              `${localizedFile}: contains non-Sendbird Platform API heading ${pattern}`,
             );
           }
         }
@@ -393,15 +393,13 @@ for (const route of routes) {
           const actualHeadings = extractPlatformApiHeadings(localizedBody);
           if (actualHeadings.join('\n') !== expectedHeadings.join('\n')) {
             errors.push(
-              `content/zh/${route.path.slice(
-                1,
-              )}.mdx: heading structure differs from Sendbird source; expected ${JSON.stringify(
+              `${localizedFile}: heading structure differs from Sendbird source; expected ${JSON.stringify(
                 expectedHeadings,
               )}, got ${JSON.stringify(actualHeadings)}`,
             );
           }
         }
-        if (route.path === '/docs/chat/platform-api/v3/user/listing-users/list-users') {
+        if (route.path === '/platform-api/user/listing-users/list-users') {
           for (const expected of [
             'curl --request POST',
             'process.env.OPENIM_API_ADDRESS',
@@ -417,16 +415,14 @@ for (const route of routes) {
           ]) {
             if (!localizedBody.includes(expected)) {
               errors.push(
-                `content/zh/${route.path.slice(1)}.mdx: list-users page is missing "${expected}"`,
+                `${localizedFile}: list-users page is missing "${expected}"`,
               );
             }
           }
           for (const forbidden of ['123.321.1.1', '203.56.175.233']) {
             if (localizedBody.includes(forbidden)) {
               errors.push(
-                `content/zh/${route.path.slice(
-                  1,
-                )}.mdx: list-users page contains raw sample host ${forbidden}`,
+                `${localizedFile}: list-users page contains raw sample host ${forbidden}`,
               );
             }
           }
@@ -435,16 +431,21 @@ for (const route of routes) {
     }
   }
 
-  for (const href of mdx.matchAll(/href=["'](\/docs\/[^"']+)["']/g)) {
-    if (!pathSet.has(href[1]) && !routes.some((item) => item.path === href[1])) {
+  for (const href of mdx.matchAll(/href=["']((?:\/zh)?\/(?:sdk|platform-api)(?:\/[^"']*)?)["']/g)) {
+    const routePath = href[1].replace(/^\/zh(?=\/(?:sdk|platform-api)(?:\/|$))/, '');
+    if (isChatDocumentationPath(routePath) && !pathSet.has(routePath)) {
       warnings.push(`${route.contentFile}: unresolved internal link ${href[1]}`);
     }
   }
 }
 
-if (searchIndex.length !== routes.length) {
-  errors.push(`Search index has ${searchIndex.length} records; expected ${routes.length}`);
-}
+errors.push(
+  ...validateSearchIndexPaths({
+    routes,
+    auditPages: new Map(wasmAudit.pages.map((page) => [page.currentPath, page])),
+    indexes: { en: searchIndex, zh: searchIndexZh },
+  }),
+);
 
 const navigatedPaths = new Set();
 for (const context of navigation.contexts) {
@@ -484,13 +485,13 @@ if (routeSdkPlatforms.join('\n') !== expectedSdkPlatforms.join('\n')) {
 }
 
 for (const route of routes) {
-  if (route.path === '/docs/chat') continue;
+  if (route.path === '') continue;
   if (!navigatedPaths.has(route.path))
     warnings.push(`Route is not represented in sidebar navigation: ${route.path}`);
 }
 
 const platformContext = navigation.contexts.find(
-  (context) => context.key === 'chat/platform-api/v3',
+  (context) => context.key === 'chat/platform-api',
 );
 if (platformContext) {
   for (const segment of collectFolderSegments(platformContext.nodes)) {
@@ -502,7 +503,9 @@ if (platformContext) {
 
 console.log(`Content files checked: ${routes.length.toLocaleString()}`);
 console.log(`Navigation contexts: ${navigation.contexts.length.toLocaleString()}`);
-console.log(`Search records: ${searchIndex.length.toLocaleString()}`);
+console.log(
+  `Search records: ${searchIndex.length.toLocaleString()} en, ${searchIndexZh.length.toLocaleString()} zh`,
+);
 
 if (warnings.length > 0) {
   console.warn(`Warnings: ${warnings.length}`);

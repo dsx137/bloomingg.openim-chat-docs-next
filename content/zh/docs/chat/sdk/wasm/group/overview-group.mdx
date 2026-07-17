@@ -1,0 +1,43 @@
+---
+title: '群组概览'
+description: '了解 OpenIM SDK 中群资料、群成员、群申请、角色和群组事件的关系。'
+sourcePath: '/sdk/wasm/group/overview-group'
+---
+
+OpenIM 的多人聊天使用群组承载共享资料、成员关系和权限。`groupID` 是群组稳定标识，发送群消息、读取群资料、管理成员和处理入群申请都使用它。当前用户聊天列表中的群会话仍由 `conversationID` 管理，两者不能混用。
+
+## 核心数据类型
+
+| 类型                   | 用途                                                   |
+| ---------------------- | ------------------------------------------------------ |
+| `GroupItem`            | 群名称、头像、公告、群主、验证配置、成员数和扩展字段。 |
+| `GroupMemberItem`      | 用户在指定群内的昵称、角色、禁言和入群信息。           |
+| `GroupApplicationItem` | 入群申请及处理状态。                                   |
+
+群角色使用 `GroupMemberRole`：普通成员为 `20`，管理员为 `60`，群主为 `100`。前端可以据此控制操作入口，但最终权限由服务端校验。
+
+## 群资料和生命周期
+
+- [创建或更新群组](/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group)
+- [获取和搜索群组](/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups)
+- [加入、退出或解散群组](/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group)
+
+## 群成员和申请
+
+- [处理入群申请](/sdk/wasm/group/managing-group-applications/manage-group-applications)
+- [获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members)
+- [邀请或移除群成员](/sdk/wasm/group/managing-group-members/invite-or-remove-group-members)
+- [更新群成员资料和角色](/sdk/wasm/group/managing-group-members/update-group-member-info)
+- [转让群主](/sdk/wasm/group/managing-group-members/transfer-group-owner)
+
+## 群组管控
+
+- [禁言群组或群成员](/sdk/wasm/group/moderating-groups/mute-a-group-or-member)
+
+## 状态更新
+
+群组事件由对应数据页面统一监听：群资料、当前用户加入或退出以及群组解散见[获取和搜索群组](/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups)；成员新增、删除和资料变化见[获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members)；入群申请变化见[处理入群申请](/sdk/wasm/group/managing-group-applications/manage-group-applications)。
+
+概览页只说明事件归属，不注册处理器。群组写操作的 Promise 结果和事件增量应分别处理；重新登录后的群组变化由事件同步。
+
+OpenIM SDK 的群组 API 只处理 OpenIM 群资料、成员关系和权限。公开发现、复杂目录和大规模群聊的容量治理属于业务后端与 OpenIM 服务端配置，不应扩写成不存在的客户端群组类型。

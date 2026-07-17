@@ -1,0 +1,33 @@
+---
+title: '设置会话草稿'
+description: '使用 OpenIM SDK 的 setConversationDraft 保存会话草稿。'
+sourcePath: '/sdk/wasm/conversation/managing-conversations/set-conversation-draft'
+---
+
+用户离开聊天页、切换会话或输入框内容变化时，可以使用 `setConversationDraft()` 保存当前会话的草稿。调用时传入 `conversationID` 和草稿文本 `draftText`。
+
+输入过程中建议先在本地维护编辑器状态，并对保存调用做防抖；离开页面或切换会话前再立即提交一次最新文本，避免每次按键都写入 SDK。
+
+```ts
+await OpenIM.setConversationDraft(
+  {
+    conversationID,
+    draftText: editorValue,
+  }
+);
+```
+
+清空草稿时传入空字符串：
+
+```ts
+await OpenIM.setConversationDraft({
+  conversationID,
+  draftText: '',
+});
+```
+
+## 调用后的状态变化
+
+`setConversationDraft()` 成功表示草稿内容已经保存。SDK 通过 `CbEvents.OnConversationChanged` 同步变化后的会话；事件中的 `data` 是 `ConversationItem[]`，应按 `conversationID` 合并 `draftText` 和 `draftTextTime`。
+
+完整的事件注册、清理和会话合并方式见[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)。退出登录或切换账号时还应清理编辑器内存状态，避免把一个账号的草稿带到另一个账号。

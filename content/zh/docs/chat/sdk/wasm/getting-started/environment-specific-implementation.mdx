@@ -1,0 +1,201 @@
+---
+title: '按运行环境接入'
+description: '在浏览器、SSR 框架、Electron 和小程序环境中选择合适的 OpenIM SDK 接入方式，并明确各运行时边界。'
+sourcePath: '/sdk/wasm/getting-started/environment-specific-implementation'
+---
+
+## 运行环境选择
+
+OpenIM 的 Web 侧 SDK 接入需要先确认运行环境。浏览器页面、SSR 框架、Electron 应用和小程序环境在用户、会话、消息、群组和事件模型上保持一致，但 SDK 形态、资源加载方式、本地存储能力和运行时生命周期并不相同。
+
+本页帮助开发者在接入前选择正确的 SDK 形态，并完成浏览器 WASM SDK 的资源发布、初始化和运行时约束检查。消息、会话、群组和事件的具体 API，请参见 WASM SDK 对应功能页。
+
+## 运行环境对照
+
+| 运行环境                | 推荐 SDK 形态             | 适用范围                                                                                      |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------------------------------- |
+| Web 浏览器              | WASM SDK                  | 适用于需要浏览器本地缓存、会话列表、消息历史和完整 Web 客户端能力的页面。                     |
+| SSR 框架                | WASM SDK，仅客户端初始化  | 适用于 Next.js、Nuxt、Remix 等框架中的浏览器页面；服务端只负责提供登录所需的凭据和服务地址。 |
+| Electron Web/渲染层     | Electron SDK 的 WASM 形态 | 适用于 Electron 渲染进程、WebView 或其他浏览器式页面，接入方式接近 Web。                      |
+| Electron 桌面端原生层   | Electron SDK 的 FFI 形态  | 适用于桌面应用打包、原生运行时能力和桌面端原生运行层集成。                                |
+| Web + Electron 混合产品 | WASM + FFI                | 同时支持 Web 客户端和 Electron 应用打包时，通常需要同时规划两种形态，并在业务层封装统一入口。 |
+| 小程序或轻量 Web        | 小程序 SDK                | 适用于小程序和轻量 Web 场景；不提供本地消息存储，适合无需本地缓存的轻量页面。                 |
+| React Native            | React Native SDK          | 不属于 WASM 运行时；应使用 React Native SDK 或原生桥接方案。                                  |
+
+## 接入准备
+
+公共前提（服务地址、用户 Token 和浏览器资源）见[开始之前](/sdk/wasm/getting-started/before-you-start)。开始资源发布和初始化前，先确认这些公共条件：
+
+- OpenIM 服务端的 HTTP API 地址 `apiAddr` 和 WebSocket 地址 `wsAddr` 能从目标客户端访问。
+- 当前用户已经在业务后端完成 OpenIM 用户绑定，并拿到有效 `userID` 和 Token。
+- Web 或 Electron 渲染进程可以访问 SDK 静态资源：`openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js`。
+
+再按目标运行环境补充确认：
+
+- SSR 框架：SDK 初始化必须放到客户端组件、浏览器生命周期或动态导入逻辑中。
+- Electron：先划分 Web/渲染层和桌面端原生运行层的职责；同时支持 Web 和桌面打包时，通常需要同时规划 WASM 与 FFI。
+- 小程序 SDK：确认业务接受无本地消息存储的轻量运行模式。
+
+## 资源发布
+
+使用 pnpm 安装浏览器 WASM SDK，并在构建或部署阶段复制 SDK 运行资源。下面示例把资源发布到站点静态资源根目录。
+
+```bash
+pnpm add @openim/wasm-client-sdk@3.8.5-hotfix.0
+cp -R node_modules/@openim/wasm-client-sdk/assets/* public/
+```
+
+如果应用部署在 CDN、子路径或 Electron 打包目录下，示例中的路径应替换为目标运行时实际可访问的 URL。
+
+```html
+<script src="/wasm_exec.js"></script>
+```
+
+## 初始化浏览器 SDK
+
+浏览器应用通常只创建一个 SDK 实例，并在当前浏览器会话中复用。连接和 Token 事件应按[认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session)注册一次，再调用 `login()`。本页只展示环境初始化，不重复注册事件。
+
+```ts
+import { getSDK, Platform } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+await OpenIM.login(
+  {
+    userID,
+    token,
+    platformID: Platform.Web,
+    apiAddr,
+    wsAddr,
+  }
+);
+```
+
+`login()` 的 Promise 成功和 `OnConnectSuccess` 到达是两个阶段：前者表示登录请求完成，后者表示连接已可用于后续业务 API。完整处理器、错误载荷和清理代码统一放在认证页面。
+
+浏览器登录使用 `Platform.Web`，不要直接填写平台数字。若 Electron 或小程序需要纳入多端互踢、在线状态或端类型统计，应按产品端类型和服务端多端登录策略选择对应的 `Platform` 枚举值。
+
+## 按运行环境落地
+
+### Web 浏览器
+
+浏览器接入的核心检查项是资源、连接和本地缓存。
+
+- `wasm_exec.js`、`openIM.wasm` 和 `sql-wasm.wasm` 必须在生产路径可访问，不能只在本地开发服务器可访问。
+- OpenIM HTTP API 和 WebSocket 地址必须允许当前页面访问，并正确处理 HTTPS/WSS 混合内容限制。
+- SDK 本地缓存依赖浏览器存储能力。应用不要直接读写 SDK 的 IndexedDB 或 sql.js 内部结构；应通过 SDK API 和事件同步到自己的状态层。
+- 如果浏览器网络恢复、页面前后台切换或应用重新获得焦点，可以结合业务状态调用 `networkStatusChanged()` 或 `setAppBackgroundStatus()`。
+
+```ts
+const handleOnline = () => {
+  void OpenIM.networkStatusChanged();
+};
+
+const handleVisibilityChange = () => {
+  void OpenIM.setAppBackgroundStatus(document.hidden);
+};
+
+window.addEventListener('online', handleOnline);
+document.addEventListener('visibilitychange', handleVisibilityChange);
+
+function removeBrowserLifecycleListeners() {
+  window.removeEventListener('online', handleOnline);
+  document.removeEventListener('visibilitychange', handleVisibilityChange);
+}
+```
+
+销毁 SDK 作用域或卸载应用时调用 `removeBrowserLifecycleListeners()`，避免重新挂载后重复上报浏览器生命周期变化。
+
+### SSR 框架
+
+Next.js、Nuxt、Remix 等框架会在服务端执行部分代码。OpenIM WASM SDK 应只在浏览器上下文中初始化。
+
+推荐做法是把 SDK 创建封装成客户端函数，并通过动态导入加载包。
+
+```ts
+import type { getSDK as createOpenIMSDK } from '@openim/wasm-client-sdk';
+
+let openIM: ReturnType<typeof createOpenIMSDK> | undefined;
+
+export async function getOpenIMClient() {
+  if (typeof window === 'undefined') {
+    throw new Error('OpenIM WASM SDK must be initialized in the browser.');
+  }
+
+  if (!openIM) {
+    const { getSDK } = await import('@openim/wasm-client-sdk');
+    openIM = getSDK({
+      coreWasmPath: '/openIM.wasm',
+      sqlWasmPath: '/sql-wasm.wasm',
+    });
+  }
+
+  return openIM;
+}
+```
+
+在 React Server Components 或服务端 API Route 中不要导入并创建 SDK 实例。服务端只负责创建用户、签发 Token，以及返回 `apiAddr` 和 `wsAddr` 等登录所需参数。
+
+### Electron
+
+Electron SDK 需要区分 WASM 和 FFI 两种形态，但它们不是简单的二选一。WASM 形态适用于 Electron 渲染进程、WebView 或浏览器式页面。FFI 形态适用于桌面端原生运行层接入。
+
+若同一套产品同时支持 Web 客户端和 Electron 应用打包，通常需要同时规划 WASM 与 FFI，并通过应用层适配器统一业务调用。
+
+落地时重点确认：
+
+- 使用 WASM 形态时，按浏览器方式发布 WASM 资源，并确保渲染进程可以加载脚本、WASM、WebSocket、HTTP API 和可能的 Worker 资源。
+- 使用 FFI 形态时，不应套用浏览器 WASM 资源路径；应按 Electron FFI SDK 的安装、打包、权限和运行时要求接入。
+- 同时使用 WASM 与 FFI 时，应明确哪个运行层拥有登录、连接、消息事件和本地状态，避免多个 SDK 实例竞争同一用户会话。
+- Token、服务地址和用户态数据不要写入主进程日志、preload 固定脚本或不受信任页面可读的位置。
+- 桌面端平台 ID 可能需要按 Windows、macOS、Linux 或 Web 策略区分，应以服务端多端登录策略为准。
+
+### 小程序
+
+小程序 SDK 也可用于轻量 Web 场景。它不提供本地消息存储，适合客服入口、活动页、后台管理页、临时会话等不依赖本地历史缓存的轻量场景。
+
+接入前需要确认：
+
+- request、WebSocket 和 upload 域名已经在目标小程序平台配置。
+- 当前业务不依赖 SDK 本地消息库、离线历史缓存或本地会话持久化。
+- 文件消息需要走目标平台支持的文件选择、临时文件路径和上传 API。
+- 网络切换、进入后台、被系统回收后，应按平台生命周期恢复连接和同步。
+- 方法级 API 如果与 WASM 文档一致，可以继续参考 WASM 功能页；初始化入口、网络适配和文件上传以小程序 SDK 实际实现为准。
+
+## 不适用范围
+
+React Native 不属于浏览器 WASM 运行时。React Native 没有标准浏览器 DOM、IndexedDB 和 `wasm_exec.js` 加载模型，不应直接把 `@openim/wasm-client-sdk` 当作移动端 SDK 使用。
+
+如果产品需要 React Native 客户端，请从 [React Native SDK 概览](/sdk/react-native/overview)开始，使用适合移动端的 SDK 或原生桥接层。连接保活、推送、本地缓存、相册文件和后台生命周期需要单独处理。
+
+## 验证与排查
+
+- 生产构建后，浏览器或 Electron 渲染进程能直接访问 `/wasm_exec.js`、`/openIM.wasm` 和 `/sql-wasm.wasm`。
+- `login()` 返回成功，并且在调用消息、会话或群组 API 前，确认已触发 `CbEvents.OnConnectSuccess`。
+- 刷新页面、网络断开恢复、标签页前后台切换后，连接状态和会话列表能够恢复。
+- Electron 打包后验证一次真实安装包，不只验证开发模式。
+- 小程序 SDK 需要验证 request、WebSocket、上传和后台恢复，并确认业务不依赖本地消息存储。
+
+## 常见问题
+
+| 现象                              | 可能原因                                                      | 处理方式                                                                             |
+| --------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| WASM 资源 404                     | `assets` 没有复制到生产静态目录，或路径被 CDN/子路径改写。    | 复制整个 `assets` 目录，并用浏览器的 Network 面板确认三个关键资源可访问。            |
+| SSR 报 `window is not defined`    | 在服务端渲染阶段导入或创建了 SDK 实例。                       | 把 SDK 初始化移动到客户端组件、浏览器生命周期或动态导入函数。                        |
+| `login()` 后没有连接成功          | `apiAddr`、`wsAddr`、Token、平台 ID 或网络策略不正确。        | 先注册连接事件，记录 `errCode`、`errMsg` 和当前用户，再核对服务端日志。              |
+| Electron 开发模式正常，打包后失败 | 生产包内资源路径、CSP 或 WASM/FFI 运行层边界与开发模式不同。  | 在打包产物中检查 SDK 形态、资源路径、协议、CSP、WebSocket、IPC 边界和 API 访问权限。 |
+| 小程序无法连接或上传              | 目标平台没有配置合法域名，或文件 API 与浏览器不同。           | 在平台后台配置 request、WebSocket 和 upload 域名，并使用小程序原生文件能力适配文件消息。 |
+| 小程序刷新后没有历史数据          | 小程序 SDK 不提供本地消息存储。                               | 通过服务端或 SDK 查询重新拉取必要数据，或改用具备本地缓存能力的客户端 SDK。          |
+| 本地缓存行为异常                  | 浏览器存储被清理、隐私模式受限，或应用直接读写 SDK 内部存储。 | 不直接操作 SDK IndexedDB/sql.js 数据；通过 SDK API、事件和应用状态层恢复界面。       |
+
+## 下一步
+
+- [发送第一条消息](/sdk/wasm/getting-started/send-first-message)
+- [用户认证](/sdk/wasm/getting-started/authenticate-and-manage-session)
+- [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)
+- [Electron SDK 概览](/sdk/electron/overview)
+- [小程序 SDK 概览](/sdk/miniprogram/overview)
+- [React Native SDK 概览](/sdk/react-native/overview)

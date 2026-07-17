@@ -16,26 +16,26 @@ data/structure/scope.json
 
 | 分支                                | 当前范围                     |
 | ----------------------------------- | ---------------------------- |
-| `/docs/chat`                        | Chat 文档总入口              |
-| `/docs/chat/sdk/v4/ios/**`          | iOS 当前 SDK 指南            |
-| `/docs/chat/sdk/v4/android/**`      | Android 当前 SDK 指南        |
-| `/docs/chat/sdk/v4/flutter/**`      | Flutter 当前 SDK 指南        |
-| `/docs/chat/sdk/v4/uniapp/**`       | uni-app 当前 SDK 指南        |
-| `/docs/chat/sdk/v4/wasm/**`         | WASM 当前 SDK 指南           |
-| `/docs/chat/sdk/v4/electron/**`     | Electron 当前 SDK 指南       |
-| `/docs/chat/sdk/v4/miniprogram/**`  | 小程序当前 SDK 指南          |
-| `/docs/chat/sdk/v4/react-native/**` | React Native 当前 SDK 指南   |
-| `/docs/chat/sdk/v4/unity/**`        | Unity 当前 SDK 指南          |
-| `/docs/chat/platform-api/v3/**`     | 当前 Server API 指南与接口页 |
+| `/`                           | Chat 文档总入口              |
+| `/sdk/ios/**`              | iOS 当前 SDK 指南            |
+| `/sdk/android/**`          | Android 当前 SDK 指南        |
+| `/sdk/flutter/**`          | Flutter 当前 SDK 指南        |
+| `/sdk/uniapp/**`           | uni-app 当前 SDK 指南        |
+| `/sdk/wasm/**`             | WASM 当前 SDK 指南           |
+| `/sdk/electron/**`         | Electron 当前 SDK 指南       |
+| `/sdk/miniprogram/**`      | 小程序当前 SDK 指南          |
+| `/sdk/react-native/**`     | React Native 当前 SDK 指南   |
+| `/sdk/unity/**`            | Unity 当前 SDK 指南          |
+| `/platform-api/**`         | 当前 Server API 指南与接口页 |
 
-这里的 `v4` 与 `v3` 是当前结构中的 URL 版本段。正式写文档时，应把页面内的产品版本说明替换为 OpenIM 真实发布版本和兼容范围。
+当前 default / 最新版的公开 URL **省略版本段**（例如 `/sdk/wasm/**`、`/platform-api/**`）。`version` 仍作为页面元数据保留（SDK `v4`、Server API `v3`）。以后若保留历史版，历史版继续使用带版本段的路径（如 `/sdk/v4/wasm/**`），default 版仍省略。正式写文档时，应把页面内的产品版本说明替换为 OpenIM 真实发布版本和兼容范围。
 
 ## 3. 当前删除
 
-- 全部 `/docs/chat/uikit/**`。
+- 全部 `/uikit/**`。
 - 全部 SDK v3 历史页面。
-- `/docs/chat/v3/**` Legacy Server API 路由。
-- `/docs/chat/v4/**` 历史兼容 Reference 路由。
+- `/v3/**` Legacy Server API 路由。
+- `/v4/**` 历史兼容 Reference 路由。
 - 所有 `template: reference` 的手写 SDK Reference 占位页。
 
 这些分支不会出现在侧栏、搜索、Sitemap、迁移统计或构建产物中。

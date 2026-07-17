@@ -2,24 +2,24 @@
 
 ## 1. 找到页面
 
-URL 与 MDX 文件一一对应：
+公开 URL 通过路由记录映射到物理 MDX 文件；物理内容目录继续保留 `docs/chat`：
 
 ```text
-/docs/chat/platform-api/v3/user/creating-users/create-a-user
-content/docs/chat/platform-api/v3/user/creating-users/create-a-user.mdx
+/platform-api/user/creating-users/create-a-user
+content/docs/chat/platform-api/user/creating-users/create-a-user.mdx
 ```
 
 根页面使用 `index.mdx`：
 
 ```text
-/docs/chat
+/
 content/docs/chat/index.mdx
 ```
 
 查找路由：
 
 ```bash
-rg '"/docs/chat/sdk/v4/wasm/overview"' src/generated/routes.json
+rg '"/sdk/wasm/overview"' src/generated/routes.json
 ```
 
 ## 2. Frontmatter
@@ -31,13 +31,13 @@ rg '"/docs/chat/sdk/v4/wasm/overview"' src/generated/routes.json
 title: '页面标题'
 description: '用于搜索摘要和 SEO 的一句话描述。'
 product: 'sdk'
-context: 'chat/sdk/v4/wasm'
+context: 'chat/sdk/wasm'
 template: 'guide'
 status: 'draft'
 lastUpdated: '2026-06-24'
 version: 'v4'
 platform: 'wasm'
-sourcePath: '/docs/chat/sdk/v4/wasm/original-structure-path'
+sourcePath: '/sdk/wasm/original-structure-path'
 ---
 ```
 
@@ -66,7 +66,7 @@ sourcePath: '/docs/chat/sdk/v4/wasm/original-structure-path'
 占位页通常只有：
 
 ```mdx
-<DocScaffold route="/docs/chat/..." context="SDKs · WASM · v4" sourceTitle="..." />
+<DocScaffold route="/sdk/..." context="SDKs · WASM · v4" sourceTitle="..." />
 ```
 
 正式写作时删除该组件，改为普通 Markdown/MDX。不要把真实正文写入 `src/components/mdx/scaffolds.tsx`，否则所有同类占位页都会显示相同内容。
@@ -148,7 +148,7 @@ Platform API 页面分两类：
 pnpm platform-api:sync
 ```
 
-该命令会抓取 Sendbird 风格的 Platform API v3 路由清单，再拉取 OpenIM 官方 REST API 与 webhook Markdown，重建 `content/docs/chat/platform-api/v3`、`src/generated/routes.json`、`src/generated/navigation.json`、`src/generated/search-index.json` 和 `data/structure/chat-pages.json`。手工修改批量导入页面前，先确认这些修改是否应该回写到导入脚本或官方源。
+该命令会抓取 Sendbird 风格的 Platform API v3 路由清单，再拉取 OpenIM 官方 REST API 与 webhook Markdown，重建 `content/docs/chat/platform-api`、`src/generated/routes.json`、`src/generated/navigation.json`、`src/generated/search-index.json` 和 `data/structure/chat-pages.json`。手工修改批量导入页面前，先确认这些修改是否应该回写到导入脚本或官方源。
 
 API endpoint 固定章节：
 
@@ -199,7 +199,7 @@ API endpoint 固定章节：
 内部链接使用绝对文档路径：
 
 ```md
-[初始化 SDK](/docs/chat/sdk/v4/wasm/getting-started/send-first-message)
+[初始化 SDK](/sdk/wasm/getting-started/send-first-message)
 ```
 
 不要链接 `.mdx` 文件路径。

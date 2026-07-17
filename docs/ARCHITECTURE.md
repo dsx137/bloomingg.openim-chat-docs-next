@@ -4,15 +4,16 @@
 
 项目把页面结构与正文内容分离：作者主要维护 MDX，路由、导航、面包屑、上下页、搜索和 SEO 由统一数据层推导。
 
-默认采用 `current-only` 范围，共 999 个页面和 7 个导航上下文。UIKit、历史版本、兼容路由与 SDK Reference 占位页均不参与运行和构建。Platform API 保持 Sendbird Platform API v3 的目录组织、侧栏层级和页面风格，内容、接口签名与使用细节映射到 OpenIM 官方 REST API 与 webhook 文档。
+默认采用 `current-only` 范围，共 556 个页面和 10 个导航上下文。UIKit、历史版本、兼容路由与 SDK Reference 占位页均不参与运行和构建。Platform API 保持 Sendbird Platform API v3 的目录组织、侧栏层级和页面风格，内容、接口签名与使用细节映射到 OpenIM 官方 REST API 与 webhook 文档。
 
 ## 2. 请求链路
 
 ```text
-浏览器请求 /docs/chat/...
+浏览器请求 /sdk/... 或 /platform-api/...
         │
         ▼
-app/docs/[[...slug]]/page.tsx
+app/sdk/[[...slug]]/page.tsx
+app/platform-api/[[...slug]]/page.tsx
         │
         ├── src/generated/routes.json      定位页面结构记录
         ├── Fumadocs dynamic source        按需加载对应 MDX
@@ -30,7 +31,7 @@ DocsShell
 └── TableOfContents
 ```
 
-文档入口 `/docs/chat` 使用同一动态路由；`template: landing` 会切换为宽屏 Landing 页面。
+中文文档分别由 `app/[locale]/sdk/[[...slug]]/page.tsx` 和 `app/[locale]/platform-api/[[...slug]]/page.tsx` 渲染。Chat 首页由 `/` 与 `/zh` 独立渲染；`/docs/chat/**` 和 `/zh/docs/chat/**` 不提供兼容跳转。
 
 ## 3. 数据源与职责
 
@@ -175,4 +176,4 @@ npm start
 - 反馈：`src/components/docs/feedback.tsx`
 - MDX 组件：`src/components/mdx-components.tsx`
 - 视觉系统：`app/globals.css`
-- SEO：`app/docs/[[...slug]]/page.tsx`、`app/sitemap.ts`
+- SEO：`app/sdk/[[...slug]]/page.tsx`、`app/platform-api/[[...slug]]/page.tsx`、`app/sitemap.ts`

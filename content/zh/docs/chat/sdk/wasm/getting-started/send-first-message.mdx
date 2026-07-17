@@ -1,0 +1,125 @@
+---
+title: '发送第一条消息'
+description: '验证单聊或群聊的首条文本消息发送链路。'
+sourcePath: '/sdk/wasm/getting-started/send-first-message'
+---
+
+本页说明如何在浏览器应用中安装并初始化 OpenIM SDK，登录后发送第一条文本消息。开始前，请先完成[开始之前](/sdk/wasm/getting-started/before-you-start)列出的服务、用户、Token 和浏览器环境准备。
+
+OpenIM 消息的发送对象可以是用户或群组。单聊消息使用目标用户 `recvID`；群聊消息使用目标群组 `groupID`。
+
+## 准备消息目标
+
+单聊测试需要一个已存在的接收方用户。群聊测试需要一个已存在的 `groupID`；发送群聊消息时不再传接收方用户 ID，也不需要为这条消息指定某个群成员。
+
+| 场景 | 需要准备的目标标识                                      |
+| ---- | ------------------------------------------------------- |
+| 单聊 | 已存在的接收方用户 ID，发送时写入 `recvID`。            |
+| 群聊 | 已存在的 `groupID`，发送时写入 `groupID`，`recvID` 为空。 |
+
+### 确认目标可用
+
+首条消息通常用于验证端到端链路。发送前确认以下条件：
+
+- 单聊接收方用户已存在，并且服务端策略允许当前用户向其发送消息。
+- 群聊目标 `groupID` 已存在；是否允许当前用户发言由 OpenIM 服务端的群组状态和权限校验决定。
+
+## 开始使用
+
+按照下面步骤发送首条文本消息。
+
+### 第 1 步：安装 OpenIM WASM SDK
+
+使用 `pnpm` 安装浏览器 SDK 包，并把 WASM 运行资源发布到前端静态资源目录。
+
+```bash
+pnpm add @openim/wasm-client-sdk@3.8.5-hotfix.0
+cp node_modules/@openim/wasm-client-sdk/assets/openIM.wasm public/
+cp node_modules/@openim/wasm-client-sdk/assets/sql-wasm.wasm public/
+cp node_modules/@openim/wasm-client-sdk/assets/wasm_exec.js public/
+```
+
+在创建 SDK 实例前加载 `wasm_exec.js`。
+
+```html
+<script src="/wasm_exec.js"></script>
+```
+
+### 第 2 步：初始化 OpenIM WASM SDK
+
+在浏览器会话中创建并复用一个 SDK 实例。`coreWasmPath` 和 `sqlWasmPath` 必须指向真实可访问的静态资源路径。
+
+```ts
+import { getSDK, Platform } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+```
+
+### 第 3 步：连接到 OpenIM 服务端
+
+使用[开始之前](/sdk/wasm/getting-started/before-you-start)准备的业务接口获取登录信息。登录前先按[认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session)注册连接和 Token 事件；本页只保留首条消息主流程，不重复定义事件处理器。
+
+```ts
+const { userID, token, apiAddr, wsAddr } = await loadOpenIMSession();
+
+await OpenIM.login({
+  userID,
+  token,
+  platformID: Platform.Web,
+  apiAddr,
+  wsAddr,
+});
+```
+
+`login()` 的 Promise 成功表示登录请求完成；收到由认证页面统一处理的 `OnConnectSuccess` 后，再调用依赖连接的消息 API。
+
+### 第 4 步：确定消息目标
+
+单聊只需要接收方用户 ID。把已经确认存在的目标用户 ID 写入 `recvID`；消息是否允许发送仍由服务端策略和双方关系状态决定。
+
+```ts
+const target = {
+  recvID: 'user_b',
+  groupID: '',
+};
+```
+
+群聊只使用 OpenIM 群组 ID 作为发送目标。你可以复用业务系统中已有的 `groupID`，也可以先通过管理后台、业务后端或群组 API 创建测试群，并保存返回的 `groupID`。创建群组时可能会设置初始成员，但发送群消息本身不再传某个接收用户 ID。
+
+```ts
+const target = {
+  recvID: '',
+  groupID: 'group_123',
+};
+```
+
+### 第 5 步：发送消息
+
+发送 OpenIM 文本消息需要分两步：先创建消息对象 `MessageItem`，再通过 `sendMessage()` 发送到目标用户或群组。
+
+```ts
+const { data: message } = await OpenIM.createTextMessage('你好，OpenIM');
+
+const { data: sentMessage } = await OpenIM.sendMessage({
+  recvID: target.recvID,
+  groupID: target.groupID,
+  message,
+});
+
+appendOutgoingMessage(sentMessage);
+```
+
+`createTextMessage()` 的 Promise 只返回待发送 `MessageItem`，不会触发消息事件。`sendMessage()` 的 Promise 成功后，当前客户端直接用 `sentMessage` 按 `clientMsgID` 合并到本地消息列表；另一已登录客户端通过 `OnRecvNewMessages` 获得 `MessageItem[]`。完整监听、清理和会话路由代码见[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)，本页不重复注册。
+
+发送成功后，分别检查当前客户端返回的消息，以及另一已登录客户端是否收到新消息事件。Promise 成功和对端事件到达是两个阶段，应分别验证。排查问题时记录 `errCode`、`errMsg`、当前用户 ID，以及目标用户 ID 或群组 ID，便于和 OpenIM 服务端日志对应。
+
+## 下一步
+
+- [开始之前](/sdk/wasm/getting-started/before-you-start)
+- [用户认证](/sdk/wasm/getting-started/authenticate-and-manage-session)
+- [按运行环境接入](/sdk/wasm/getting-started/environment-specific-implementation)
+- [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
+- [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

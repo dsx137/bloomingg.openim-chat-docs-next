@@ -1,0 +1,79 @@
+---
+title: '事件概览'
+description: '注册 OpenIM SDK 事件，并按业务生命周期同步连接与数据状态。'
+sourcePath: '/sdk/wasm/events/overview-events'
+---
+
+OpenIM SDK 通过 `CbEvents` 推送连接、同步、用户、好友、会话、群组、消息和通话相关事件。`getSDK()` 返回的实例统一提供 `on()` 和 `off()`；不需要为不同领域创建独立的事件处理器对象。
+
+## 注册与移除事件
+
+处理函数必须保持稳定引用。需要清理时，把注册时使用的同一事件枚举值和函数引用传给 `off()`。每个事件的完整代码只放在下表链接的归属页面；本页不使用其他领域事件重复演示通用写法。
+
+事件回调通常包含 `data`、`errCode` 和 `errMsg`。应用应校验 `errCode`，把 `data` 幂等合并到状态层，并在错误日志中记录事件名和必要的业务标识。
+
+## 选择注册时机
+
+| 事件范围 | 建议生命周期 | 对应页面 |
+| --- | --- | --- |
+| 连接和 token | 在 `login()` 前注册，切换账号时清理 | [认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session) |
+| 用户、好友和黑名单 | 联系人状态层初始化时注册 | [用户概览](/sdk/wasm/user/overview-user) |
+| 会话列表 | 会话列表状态层初始化时注册 | [获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list) |
+| 会话未读数 | 应用角标状态层初始化时注册 | [管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status) |
+| 群组列表 | 群组状态层初始化时注册 | [获取和搜索群组](/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups) |
+| 群成员 | 群成员状态层初始化时注册 | [获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members) |
+| 入群申请 | 群申请状态层初始化时注册 | [处理入群申请](/sdk/wasm/group/managing-group-applications/manage-group-applications) |
+| 消息 | 消息状态层初始化时注册 | [接收消息](/sdk/wasm/message/receiving-messages/receive-messages) |
+| 通话 | 通话功能初始化时注册 | [发起或处理通话](/sdk/wasm/calling/managing-calls/start-or-handle-a-call) |
+
+不要在每次组件渲染时重复注册。多次注册同一个逻辑会造成重复消息、未读数反复累加，以及将旧账号的状态写入当前界面。
+
+## 监听初始化同步
+
+登录后 SDK 会同步服务端数据。以下事件适合驱动全局同步状态和进度展示：
+
+| 事件 | 含义 |
+| --- | --- |
+| `OnSyncServerStart` | 开始同步服务端数据。`data` 为 `boolean`：`true` 表示本地库因卸载重装、清除站点数据等原因重建后的同步；`false` 表示普通登录后同步。 |
+| `OnSyncServerProgress` | 同步进度发生变化；`data` 为进度数值。 |
+| `OnSyncServerFinish` | 本轮同步完成，可以刷新依赖完整数据的界面。 |
+| `OnSyncServerFailed` | 本轮同步失败，应记录错误并等待重试或连接恢复。 |
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+function handleSyncStart({ data: reinstalled }) {
+  setSyncState({ status: 'syncing', progress: 0, reinstalled });
+}
+
+function handleSyncProgress({ data }) {
+  setSyncState({ status: 'syncing', progress: data });
+}
+
+function handleSyncFinish() {
+  setSyncState({ status: 'ready', progress: 100 });
+}
+
+function handleSyncFailed({ errCode, errMsg }) {
+  setSyncState({ status: 'failed' });
+  console.error('OpenIM 数据同步失败', { errCode, errMsg });
+}
+
+OpenIM.on(CbEvents.OnSyncServerStart, handleSyncStart);
+OpenIM.on(CbEvents.OnSyncServerProgress, handleSyncProgress);
+OpenIM.on(CbEvents.OnSyncServerFinish, handleSyncFinish);
+OpenIM.on(CbEvents.OnSyncServerFailed, handleSyncFailed);
+
+function removeSyncListeners() {
+  OpenIM.off(CbEvents.OnSyncServerStart, handleSyncStart);
+  OpenIM.off(CbEvents.OnSyncServerProgress, handleSyncProgress);
+  OpenIM.off(CbEvents.OnSyncServerFinish, handleSyncFinish);
+  OpenIM.off(CbEvents.OnSyncServerFailed, handleSyncFailed);
+}
+```
+
+`OnSyncServerStart` 用于进入同步状态；其 `data` 就是是否为卸载重装（或等价的本地库重建）后的同步。`true` 时本地通常没有可用缓存，适合展示更完整的同步引导或全量拉取提示；`false` 时多为增量同步。`OnSyncServerProgress` 的 `data` 是当前进度数值。完成和失败事件在 WASM 声明中不携带该布尔值，只用于将本轮同步状态置为完成或失败。它们描述 SDK 的同步生命周期，不是某个查询 API 的 Promise 回调，也没有业务实体合并键；状态应按当前 SDK 实例和登录用户隔离。
+
+本页是四个同步事件的完整监听示例归属页。退出登录、切换账号或销毁 SDK 作用域时调用 `removeSyncListeners()`。
+
+同步完成后，数据仍可能继续变化：应重新查询当前界面所需快照，并继续通过各领域归属页的增量事件更新同一状态层。

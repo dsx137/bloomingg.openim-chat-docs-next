@@ -25,122 +25,120 @@ const landingCopy = {
   en: {
     apiAction: 'Open API overview',
     apiDescription:
-      'Use server-side APIs for application control, user lifecycle, channel administration, message workflows, webhooks, and operations.',
+      'Call Platform API from trusted backends to create users, issue login tokens, manage groups and members, and send or migrate messages.',
     apiEyebrow: 'SERVER',
     apiHeroCta: 'Start with the API overview',
     apiHeroDescription:
-      'The Platform API section organizes operational tasks by resource so backend teams can move from application setup to production automation without switching products.',
-    apiHeroKicker: 'REST API v3',
-    apiHeroTitle: 'Control the chat system from trusted services.',
+      'Platform API is organized by users, groups, and messages. Configure the base URL, auth, and request conventions first, then wire each server capability.',
+    apiHeroKicker: 'REST API',
+    apiHeroTitle: 'Manage OpenIM from your backend.',
     apiTitle: 'Platform API',
     featureDescription:
-      'Review the product capabilities OpenIM Chat already documents, then jump to the client or server guide that implements each capability.',
+      'Browse capabilities by users, conversations, groups, and messages, then open the matching SDK or Platform API guide.',
     featureEyebrow: 'CAPABILITIES',
     featureTitle: 'Features',
     featuredDescription:
-      'A few high-signal implementation paths for validating the integration surface before you fill out product-specific documentation.',
-    featuredEyebrow: 'COMMON PATHS',
-    featuredTitle: 'Featured samples',
+      'Follow prepare, client login, first message, and group creation guides to complete the core integration path.',
+    featuredEyebrow: 'GETTING STARTED',
+    featuredTitle: 'Core integration flow',
     heroDescription:
-      'Start with the client platform, move into server-side control, or jump straight to sample-driven workflows for messages, channels, users, moderation, and notifications.',
-    heroEyebrow: 'OPENIM CHAT',
+      'Start from client SDKs, Platform API, sample apps, or the core integration flow to add users, conversations, groups, messages, and calling.',
+    heroEyebrow: 'OPENIM',
     heroPrimary: 'Explore SDKs',
     heroSecondary: 'Open Platform API',
-    heroTitle: 'Build chat products with SDKs, APIs, and implementation paths in one place.',
+    heroTitle: 'Build instant messaging with OpenIM.',
     sampleDescription:
-      'Open the maintained demo repositories under the openimsdk GitHub organization and compare real app wiring across platforms.',
-    sampleEyebrow: 'STARTERS',
+      'Browse demos maintained by the openimsdk GitHub organization to see how each platform integrates OpenIM.',
+    sampleEyebrow: 'OPEN SOURCE',
     sampleTitle: 'Sample apps',
-    sdkAction: 'Browse Web-compatible SDK',
+    sdkAction: 'Browse WASM SDK',
     sdkDescription:
-      'Choose the client runtime first. WASM, Electron, and Mini Program share one Web-compatible core API surface, while their platform entries document runtime differences.',
+      'Pick the client SDK for your runtime. Each entry covers users, conversations, groups, and messages, and documents platform-specific setup.',
     sdkEyebrow: 'CLIENT',
     sdkTitle: 'SDKs',
   },
   zh: {
     apiAction: '查看 API 概览',
     apiDescription:
-      '通过服务端 API 管理应用、用户生命周期、频道管理、消息工作流、Webhook 和运营能力。',
+      '通过 Platform API，在可信服务端创建用户、签发登录 Token、管理群组和成员，并发送或迁移消息。',
     apiEyebrow: '服务端',
     apiHeroCta: '从 API 概览开始',
     apiHeroDescription:
-      'Platform API 按资源组织服务端能力，便于后端团队从应用设置扩展到生产自动化。',
-    apiHeroKicker: 'REST API v3',
-    apiHeroTitle: '在可信服务中控制聊天系统。',
+      'Platform API 按用户、群组和消息等资源组织。先完成地址、鉴权和请求约定配置，再接入具体服务端能力。',
+    apiHeroKicker: 'REST API',
+    apiHeroTitle: '从服务端管理 OpenIM。',
     apiTitle: 'Platform API',
     featureDescription:
-      '按产品能力查看 OpenIM Chat 已覆盖的功能特性，并进入对应 SDK 或 Platform API 文档。',
-    featureEyebrow: '功能特性',
+      '按用户、会话、群组和消息等领域查找能力，并进入对应的 SDK 或 Platform API 文档。',
+    featureEyebrow: '能力导航',
     featureTitle: '功能特性',
-    featuredDescription: '常用实现路径，用来快速验证集成面并连接到更完整的功能文档。',
-    featuredEyebrow: '常用示例',
-    featuredTitle: '精选示例',
+    featuredDescription:
+      '按接入准备、客户端登录、发送第一条消息和创建群组的顺序，进入对应操作指南。',
+    featuredEyebrow: '接入指南',
+    featuredTitle: '核心接入流程',
     heroDescription:
-      '从客户端平台开始，进入服务端控制，或直接查看围绕消息、频道、用户、审核和通知的示例路径。',
-    heroEyebrow: 'OPENIM CHAT',
-    heroPrimary: '查看 SDKs',
+      '从客户端 SDK、服务端 Platform API、示例应用和核心接入流程开始，接入用户、会话、群组、消息与音视频通话。',
+    heroEyebrow: 'OPENIM',
+    heroPrimary: '查看 SDK',
     heroSecondary: '查看 Platform API',
-    heroTitle: '在一个入口中构建聊天产品、SDK 集成和服务端能力。',
-    sampleDescription: '直接打开 openimsdk GitHub 组织下维护的 Demo 仓库，对照真实应用接入方式。',
-    sampleEyebrow: '示例应用',
+    heroTitle: '使用 OpenIM 构建即时通讯应用。',
+    sampleDescription: '查看 openimsdk GitHub 组织维护的 Demo，对照各平台的实际接入方式。',
+    sampleEyebrow: '开源 Demo',
     sampleTitle: '示例应用',
-    sdkAction: '查看 Web 兼容 SDK',
+    sdkAction: '查看 WASM SDK',
     sdkDescription:
-      '先选择客户端运行时。WASM、Electron 和小程序共用 Web 兼容核心 API，平台入口只补充运行环境差异。',
+      '按应用运行平台选择客户端 SDK。各平台文档覆盖同一套用户、会话、群组和消息能力，并说明各自的运行环境与集成差异。',
     sdkEyebrow: '客户端',
-    sdkTitle: 'SDKs',
+    sdkTitle: 'SDK',
   },
 } satisfies Record<Locale, Record<string, string>>;
 
 const sdkCards: HomeCard[] = [
   {
     title: 'iOS',
-    href: '/docs/chat/sdk/v4/ios/overview',
-    description:
-      'Ship native chat on Apple platforms with channel, message, and notification guides.',
+    href: '/sdk/ios/overview',
+    description: 'Integrate login, users, conversations, groups, and messages in native iOS apps.',
     meta: 'Swift',
   },
   {
     title: 'Android',
-    href: '/docs/chat/sdk/v4/android/overview',
-    description: 'Integrate Android messaging, authentication, users, groups, and delivery states.',
+    href: '/sdk/android/overview',
+    description:
+      'Integrate login, users, conversations, groups, and messages in native Android apps.',
     meta: 'Kotlin / Java',
   },
   {
     title: 'Flutter',
-    href: '/docs/chat/sdk/v4/flutter/overview',
-    description: 'Use one integration path for cross-platform mobile and desktop chat experiences.',
+    href: '/sdk/flutter/overview',
+    description: 'Use one OpenIM integration path across mobile and supported desktop targets.',
     meta: 'Dart',
   },
   {
     title: 'uni-app',
-    href: '/docs/chat/sdk/v4/uniapp/overview',
-    description: 'Build one OpenIM integration for App, H5, and supported mini-app targets.',
+    href: '/sdk/uniapp/overview',
+    description: 'Integrate OpenIM once for App, H5, and supported mini program targets.',
     meta: 'Vue / uni-app',
   },
   {
-    title: 'Web-compatible',
-    href: '/docs/chat/sdk/v4/wasm/overview',
-    description:
-      'Maintain one shared API path for WASM, Electron, and Mini Program, then handle runtime setup per platform.',
-    meta: 'Shared API',
+    title: 'WASM',
+    href: '/sdk/wasm/overview',
+    description: 'Build browser messaging apps with the OpenIM WebAssembly SDK.',
+    meta: 'WebAssembly',
     related: [
-      { title: 'WASM', href: '/docs/chat/sdk/v4/wasm/overview' },
-      { title: 'Electron', href: '/docs/chat/sdk/v4/electron/overview' },
-      { title: 'Mini Program', href: '/docs/chat/sdk/v4/miniprogram/overview' },
+      { title: 'Electron', href: '/sdk/electron/overview' },
+      { title: 'Mini Program', href: '/sdk/miniprogram/overview' },
     ],
   },
   {
     title: 'React Native',
-    href: '/docs/chat/sdk/v4/react-native/overview',
-    description: 'Add OpenIM messaging to React Native apps with native mobile runtime guidance.',
+    href: '/sdk/react-native/overview',
+    description: 'Add OpenIM messaging to React Native apps and handle mobile runtime differences.',
     meta: 'RN',
   },
   {
     title: 'Unity',
-    href: '/docs/chat/sdk/v4/unity/overview',
-    description:
-      'Connect in-game communities with channels, real-time messages, and user profiles.',
+    href: '/sdk/unity/overview',
+    description: 'Add users, groups, and realtime messaging to Unity games and interactive apps.',
     meta: 'C#',
   },
 ];
@@ -148,23 +146,23 @@ const sdkCards: HomeCard[] = [
 const apiTopics: HomeCard[] = [
   {
     title: 'API setup',
-    href: '/docs/chat/platform-api/v3/prepare-to-use-api',
-    description: 'Prepare base URLs, headers, admin tokens, and request conventions.',
+    href: '/platform-api/prepare-to-use-api',
+    description: 'Configure the API address, headers, admin token, and request conventions.',
   },
   {
     title: 'Users',
-    href: '/docs/chat/platform-api/v3/user/creating-users/create-a-user',
-    description: 'Create users, query user records, update profiles, and issue session tokens.',
+    href: '/platform-api/user/creating-users/create-a-user',
+    description: 'Create and query users, update profiles, and issue login tokens.',
   },
   {
-    title: 'Channels',
-    href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
-    description: 'Create group conversations, update group data, manage members, and invite users.',
+    title: 'Groups',
+    href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
+    description: 'Create or update groups, manage members, and handle invitations.',
   },
   {
     title: 'Messages',
-    href: '/docs/chat/platform-api/v3/message/messaging-basics/send-a-message',
-    description: 'Send messages from trusted services and migrate historical message data.',
+    href: '/platform-api/message/messaging-basics/send-a-message',
+    description: 'Send messages from trusted services, or migrate historical message data.',
   },
 ];
 
@@ -172,275 +170,294 @@ const sampleApps: HomeCard[] = [
   {
     title: 'H5 demo',
     href: 'https://github.com/openimsdk/openim-h5-demo',
-    description: 'Explore the browser-oriented demo app for OpenIM Chat integration.',
+    description: 'Browser demo for OpenIM login, conversations, and messaging.',
     meta: 'GitHub / H5',
   },
   {
     title: 'Electron demo',
     href: 'https://github.com/openimsdk/openim-electron-demo',
-    description: 'Review the desktop demo for Electron packaging and runtime setup.',
+    description: 'Desktop demo for Electron packaging and runtime setup.',
     meta: 'GitHub / Electron',
-  },
-  {
-    title: 'Mini Program demo',
-    href: 'https://github.com/openimsdk/openim-miniprogram-demo',
-    description: 'Use the mini program demo as the starting point for platform-specific setup.',
-    meta: 'GitHub / Mini Program',
   },
   {
     title: 'iOS demo',
     href: 'https://github.com/openimsdk/openim-ios-demo',
-    description: 'Inspect the native iOS sample app and its OpenIM SDK integration path.',
+    description: 'Native iOS demo and its OpenIM SDK integration path.',
     meta: 'GitHub / iOS',
   },
   {
     title: 'Android demo',
     href: 'https://github.com/openimsdk/open-im-android-demo',
-    description: 'Inspect the native Android demo app for login, conversations, and messages.',
+    description: 'Native Android demo for login, conversations, and messages.',
     meta: 'GitHub / Android',
   },
   {
     title: 'Flutter demo',
     href: 'https://github.com/openimsdk/openim-flutter-demo',
-    description: 'Start from the Flutter demo when one codebase needs mobile coverage.',
+    description: 'Flutter demo for a single codebase covering mobile targets.',
     meta: 'GitHub / Flutter',
   },
   {
     title: 'uni-app demo',
     href: 'https://github.com/openimsdk/open-im-uniapp-demo',
-    description: 'Review the uni-app demo for App, H5, and supported mini-app targets.',
+    description: 'uni-app demo covering App, H5, and supported mini program targets.',
     meta: 'GitHub / uni-app',
   },
   {
     title: 'React Native demo',
     href: 'https://github.com/openimsdk/openim-reactnative-demo',
-    description: 'Use the React Native demo to validate mobile runtime integration.',
+    description: 'React Native demo for mobile runtime and SDK integration.',
     meta: 'GitHub / RN',
   },
   {
     title: 'Unity demo',
     href: 'https://github.com/openimsdk/open-im-unity-demo',
-    description: 'Review the Unity demo for game and interactive app chat scenarios.',
+    description: 'Unity demo for game and interactive app chat scenarios.',
     meta: 'GitHub / Unity',
   },
 ];
 
 const featuredSamples: HomeCard[] = [
   {
-    title: 'Send your first message',
-    href: '/docs/chat/sdk/v4/wasm/getting-started/send-first-message',
-    description: 'Authenticate, connect, and send a message from a client SDK.',
+    title: 'Prepare SDK integration',
+    href: '/sdk/wasm/getting-started/before-you-start',
+    description: 'Prepare the OpenIM server, app credentials, user account, and login token.',
     meta: 'SDK',
   },
   {
-    title: 'Create a group channel',
-    href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
-    description: 'Provision a group channel from the server side and prepare it for members.',
+    title: 'Authenticate a client',
+    href: '/sdk/wasm/getting-started/authenticate-and-manage-session',
+    description: 'Initialize the SDK, log in, and handle token expiry and kick-off events.',
+    meta: 'SDK',
+  },
+  {
+    title: 'Send your first message',
+    href: '/sdk/wasm/getting-started/send-first-message',
+    description: 'After prepare and login, create and send the first message from the client SDK.',
+    meta: 'SDK',
+  },
+  {
+    title: 'Create a group',
+    href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
+    description: 'Create a group from a trusted service and set the owner and initial members.',
     meta: 'API',
-  },
-  {
-    title: 'Issue a session token',
-    href: '/docs/chat/platform-api/v3/user/managing-session-tokens/issue-a-session-token',
-    description: 'Generate user login credentials from a trusted backend service.',
-    meta: 'Auth',
-  },
-  {
-    title: 'Block a user',
-    href: '/docs/chat/platform-api/v3/moderation/blocking-users/block-users',
-    description: 'Apply moderation controls from the server side when safety rules require it.',
-    meta: 'Moderation',
   },
 ];
 
 const featureGroups: FeatureGroup[] = [
   {
     title: 'User identity and access',
-    description:
-      'Provision chat identities, keep profile data current, and control how users enter the chat system.',
+    description: 'Create OpenIM users, keep profiles up to date, and complete client login.',
     links: [
       {
         title: 'User provisioning',
-        href: '/docs/chat/platform-api/v3/user/creating-users/create-a-user',
-        description: 'Create chat users from a trusted backend before they sign in.',
+        href: '/platform-api/user/creating-users/create-a-user',
+        description: 'Create OpenIM users from a trusted backend before clients log in.',
         meta: 'Users',
       },
       {
         title: 'User directory',
-        href: '/docs/chat/platform-api/v3/user/listing-users/list-users',
-        description: 'Query user records and keep business profiles aligned with chat identity.',
+        href: '/platform-api/user/listing-users/list-users',
+        description: 'Query users already imported into OpenIM from the backend.',
         meta: 'Users',
       },
       {
         title: 'User profiles',
-        href: '/docs/chat/platform-api/v3/user/managing-users/update-a-user',
-        description: 'Update display names, avatars, and profile fields from the backend.',
+        href: '/platform-api/user/managing-users/update-a-user',
+        description: 'Update nicknames, avatars, and extension fields from the backend.',
         meta: 'Profile',
       },
       {
         title: 'Client authentication',
-        href: '/docs/chat/sdk/v4/wasm/application/authenticating-a-user/authentication',
-        description: 'Initialize the client SDK, log in, and handle token lifecycle events.',
+        href: '/sdk/wasm/getting-started/authenticate-and-manage-session',
+        description: 'Initialize and log in the SDK, then handle connection and token events.',
         meta: 'SDK',
       },
     ],
   },
   {
     title: 'Conversations and groups',
-    description:
-      'Create conversation spaces, maintain group metadata, and manage the member lifecycle.',
+    description: 'Manage client conversation state, create groups, and handle membership changes.',
     links: [
       {
-        title: 'Create group conversations',
-        href: '/docs/chat/platform-api/v3/channel/creating-a-channel/create-a-group-channel',
-        description: 'Create group conversations from the Platform API.',
-        meta: 'Groups',
+        title: 'Manage conversations',
+        href: '/sdk/wasm/conversation/overview-conversation',
+        description: 'Retrieve conversations and maintain draft, unread, and other client state.',
+        meta: 'Conversations',
       },
       {
-        title: 'Group profile and lifecycle',
-        href: '/docs/chat/platform-api/v3/channel/managing-a-channel/update-a-group-channel',
-        description: 'Update or delete group conversation records as product state changes.',
+        title: 'Create a group',
+        href: '/platform-api/channel/creating-a-channel/create-a-group-channel',
+        description: 'Create a group with Platform API and set the owner, admins, and members.',
         meta: 'Groups',
       },
       {
         title: 'List group members',
-        href: '/docs/chat/platform-api/v3/channel/listing-users/list-members-of-a-group-channel',
-        description: 'Read group membership from the backend for admin tools and sync jobs.',
+        href: '/platform-api/channel/listing-users/list-members-of-a-group-channel',
+        description: 'Read group members from the backend for admin tools and sync jobs.',
         meta: 'Members',
       },
       {
         title: 'Join and leave flows',
-        href: '/docs/chat/platform-api/v3/channel/managing-a-channel/join-a-channel',
-        description: 'Let users join or leave group conversations from trusted services.',
+        href: '/platform-api/channel/managing-a-channel/join-a-channel',
+        description: 'Let users join or leave groups from trusted backend services.',
         meta: 'Members',
       },
     ],
   },
   {
     title: 'Messaging and history',
-    description:
-      'Send messages, receive realtime updates, read conversation history, and import legacy data.',
+    description: 'Send and receive messages, load history, and search conversation records.',
     links: [
       {
         title: 'Send messages',
-        href: '/docs/chat/platform-api/v3/message/messaging-basics/send-a-message',
-        description: 'Send server-side text and custom messages into one-to-one or group sessions.',
+        href: '/platform-api/message/messaging-basics/send-a-message',
+        description: 'Send messages from a trusted service to one-to-one or group sessions.',
         meta: 'Message',
       },
       {
         title: 'Message history',
-        href: '/docs/chat/sdk/v4/wasm/message/retrieving-messages/retrieve-a-list-of-messages',
-        description: 'Load conversation history and page through older messages from the SDK.',
+        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-list',
+        description: 'Page through conversation history from the client SDK.',
         meta: 'History',
       },
       {
         title: 'Receive realtime messages',
-        href: '/docs/chat/sdk/v4/wasm/message/receiving-messages-through-event-handler/receive-messages-in-a-group-channel',
-        description: 'Subscribe to SDK message events and merge updates into the UI.',
+        href: '/sdk/wasm/message/receiving-messages/receive-messages',
+        description: 'Listen for new and offline message events and merge them by message ID.',
         meta: 'Realtime',
       },
       {
         title: 'Search message history',
-        href: '/docs/chat/sdk/v4/wasm/message/searching-messages-in-a-group-channel/search-messages-by-a-keyword',
-        description: 'Search historical messages by keyword for in-app search and support tools.',
+        href: '/sdk/wasm/message/searching-messages/search-messages',
+        description: 'Search locally synced messages by keyword and filters.',
         meta: 'Search',
       },
     ],
   },
   {
     title: 'Message state and UX',
-    description:
-      'Keep unread badges, read state, typing indicators, and message-level product data in sync.',
+    description: 'Keep unread counts, read receipts, typing indicators, and message extras in sync.',
     links: [
       {
         title: 'Unread counts',
-        href: '/docs/chat/sdk/v4/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-messages',
-        description: 'Power conversation badges and global unread summaries.',
+        href: '/sdk/wasm/conversation/managing-conversations/manage-read-status',
+        description: 'Read conversation and account unread counts for list badges and app badges.',
         meta: 'Unread',
       },
       {
         title: 'Read receipts',
-        href: '/docs/chat/sdk/v4/wasm/message/managing-read-status-in-a-group-channel/get-read-status',
-        description: 'Show read state and inspect who has read group messages.',
+        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        description: 'Show read state and inspect which members have read a group message.',
         meta: 'Read',
       },
       {
         title: 'Typing indicators',
-        href: '/docs/chat/sdk/v4/wasm/message/managing-a-message/send-typing-indicators-to-other-members',
-        description: 'Display active typing state in the current conversation.',
+        href: '/sdk/wasm/message/composing-messages/manage-typing-status',
+        description: 'Show realtime typing state in the active conversation.',
         meta: 'Typing',
       },
       {
-        title: 'Message metadata',
-        href: '/docs/chat/sdk/v4/wasm/message/adding-extra-data-to-a-message/add-extra-data-to-a-message',
-        description: 'Attach extra data to messages for product-specific rendering.',
+        title: 'Message extensions',
+        href: '/sdk/wasm/message/composing-messages/add-extra-data-to-a-message',
+        description: 'Carry shared or local extras with custom messages, ex, and localEx.',
         meta: 'Data',
       },
     ],
   },
   {
     title: 'Moderation and governance',
-    description:
-      'Apply user-level and conversation-level controls when product policy or operations require them.',
+    description: 'Manage user block lists and mute groups or members when policy requires it.',
     links: [
       {
         title: 'Block users',
-        href: '/docs/chat/platform-api/v3/moderation/blocking-users/block-users',
-        description: 'Block unwanted users and remove blocks when policy allows.',
+        href: '/platform-api/moderation/blocking-users/block-users',
+        description: 'Create or remove block relationships that control one-to-one messaging.',
         meta: 'Block',
       },
       {
         title: 'Mute group members',
-        href: '/docs/chat/platform-api/v3/moderation/muting-a-user/mute-a-member-in-a-group-channel',
-        description: 'Mute or unmute members inside a group conversation.',
+        href: '/platform-api/moderation/muting-a-user/mute-a-member-in-a-group-channel',
+        description: 'Mute or unmute a member inside a group from the backend.',
         meta: 'Mute',
       },
       {
         title: 'List blocked users',
-        href: '/docs/chat/platform-api/v3/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users',
-        description: 'Review block relationships for support, safety, and admin workflows.',
+        href: '/platform-api/moderation/listing-blocked-and-blocking-users/list-blocked-and-blocking-users',
+        description: 'Query block relationships for admin tools and troubleshooting.',
         meta: 'Audit',
       },
       {
-        title: 'Freeze group conversations',
-        href: '/docs/chat/sdk/v4/wasm/channel/moderating-a-channel/freeze-and-unfreeze-a-channel',
-        description: 'Control whether a group conversation can accept new messages.',
-        meta: 'Freeze',
+        title: 'Mute groups or members',
+        href: '/sdk/wasm/group/moderating-groups/mute-a-group-or-member',
+        description: 'Restrict sending for an entire group or a specific member from the SDK.',
+        meta: 'Mute',
+      },
+    ],
+  },
+  {
+    title: 'Advanced messaging',
+    description:
+      'Add group read receipts, delete or revoke messages, conversation groups, and pinned messages.',
+    links: [
+      {
+        title: 'Group message read receipts',
+        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        description: 'Report group message read state and query who has or has not read a message.',
+        meta: 'Read',
+      },
+      {
+        title: 'Delete or revoke messages',
+        href: '/sdk/wasm/message/managing-messages/delete-or-revoke-a-message',
+        description: 'Delete messages locally or on the server, or revoke them for conversation members.',
+        meta: 'Delete',
+      },
+      {
+        title: 'Conversation groups',
+        href: '/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups',
+        description: 'Organize conversations into user-defined groups and keep changes in sync.',
+        meta: 'Group',
+      },
+      {
+        title: 'Pinned messages',
+        href: '/sdk/wasm/message/managing-messages/pin-conversation-messages',
+        description: 'Pin important messages in a conversation and sync pin changes.',
+        meta: 'Pin',
       },
     ],
   },
   {
     title: 'Cross-platform SDKs and operations',
-    description:
-      'Use the documented cross-platform client runtimes and prepare the server-side API foundation.',
+    description: 'Choose a client SDK for your stack and prepare the Platform API foundation.',
     links: [
       {
-        title: 'Web-compatible SDKs',
-        href: '/docs/chat/sdk/v4/wasm/overview',
-        description: 'Use the shared WASM, Electron, and Mini Program API surface.',
-        meta: 'Web',
+        title: 'WASM SDK',
+        href: '/sdk/wasm/overview',
+        description: 'Integrate OpenIM into browser apps through WebAssembly.',
+        meta: 'WASM',
       },
       {
         title: 'uni-app',
-        href: '/docs/chat/sdk/v4/uniapp/overview',
-        description: 'Reuse one integration path across App, H5, and supported mini-app targets.',
+        href: '/sdk/uniapp/overview',
+        description: 'Reuse one integration path across App, H5, and supported mini program targets.',
         meta: 'uni-app',
       },
       {
         title: 'React Native',
-        href: '/docs/chat/sdk/v4/react-native/overview',
-        description: 'Bring OpenIM messaging into React Native mobile runtime environments.',
+        href: '/sdk/react-native/overview',
+        description: 'Bring OpenIM messaging into React Native mobile apps.',
         meta: 'RN',
       },
       {
         title: 'API setup',
-        href: '/docs/chat/platform-api/v3/prepare-to-use-api',
-        description: 'Configure base URLs, headers, admin tokens, and request conventions.',
+        href: '/platform-api/prepare-to-use-api',
+        description: 'Configure the API address, headers, admin token, and request conventions.',
         meta: 'API',
       },
       {
         title: 'Error codes',
-        href: '/docs/chat/platform-api/v3/error-codes',
-        description: 'Diagnose REST and SDK responses with consistent error fields.',
+        href: '/platform-api/error-codes',
+        description: 'Look up Platform API response structure and server error codes.',
         meta: 'Errors',
       },
     ],
@@ -448,311 +465,133 @@ const featureGroups: FeatureGroup[] = [
 ];
 
 const zhCardText: Record<string, Pick<HomeCard, 'title' | 'description'> & { meta?: string }> = {
-  'Admin messages': {
-    title: '管理员消息',
-    description: '发送系统消息，用于公告、通知和自动化场景。',
-    meta: '系统',
-  },
-  Announcements: {
-    title: '公告',
-    description: '广播重要消息，并查看公告触达与互动数据。',
-    meta: '广播',
-  },
   Android: {
     title: 'Android',
-    description: '集成 Android 消息、认证、用户、群组和送达状态。',
+    description: '在 Android 原生应用中接入登录、用户、会话、群组和消息。',
     meta: 'Kotlin / Java',
-  },
-  Applications: {
-    title: '应用',
-    description: '管理应用设置、令牌、速率限制和 Webhook 投递状态。',
-  },
-  Bots: {
-    title: '机器人',
-    description: '创建机器人、加入频道，并发送机器人消息或流式消息。',
-    meta: '机器人',
-  },
-  'Channel membership': {
-    title: '频道成员',
-    description: '支持邀请、成员、参与者、管理员、加入、离开和隐藏流程。',
-    meta: '成员',
-  },
-  'Channel metadata': {
-    title: '频道元数据',
-    description: '为频道添加自定义数据和计数器，承载产品状态。',
-    meta: '数据',
-  },
-  Channels: {
-    title: '频道',
-    description: '创建、列出、邀请、隐藏和审核群组频道或开放频道。',
-  },
-  'Create a group channel': {
-    title: '创建群组频道',
-    description: '通过服务端创建群组频道，并为成员加入做好准备。',
-    meta: 'API',
-  },
-  'Data export': {
-    title: '数据导出',
-    description: '调度并查看消息、频道和用户的数据导出任务。',
-    meta: '导出',
-  },
-  'Delivery receipts': {
-    title: '送达回执',
-    description: '标记并查看群组频道消息是否已送达。',
-    meta: '送达',
   },
   'Error codes': {
     title: '错误码',
-    description: '使用结构化错误引用诊断平台响应。',
+    description: '查询 Platform API 的响应结构和服务端错误码。',
     meta: '错误',
-  },
-  'Event handlers': {
-    title: '事件处理器',
-    description: '响应客户端侧的用户、频道和消息事件。',
-    meta: '事件',
   },
   Flutter: {
     title: 'Flutter',
-    description: '通过一套集成路径覆盖跨平台移动和桌面聊天体验。',
+    description: '用同一套 OpenIM 接入路径覆盖移动端和支持的桌面平台。',
     meta: 'Dart',
-  },
-  'File upload progress': {
-    title: '文件上传进度',
-    description: '跟踪媒体和其他文件消息附件的上传状态。',
-    meta: '文件',
-  },
-  'Game chat starter': {
-    title: '游戏聊天示例',
-    description: '围绕连接、用户和第一条频道消息构建 Unity 示例。',
-    meta: 'Unity',
-  },
-  'Group channels': {
-    title: '群组频道',
-    description: '用于一对一或多人聊天的私有成员制会话。',
-    meta: '频道',
   },
   iOS: {
     title: 'iOS',
-    description: '在 Apple 平台交付原生聊天，覆盖频道、消息和通知指南。',
+    description: '在 iOS 原生应用中接入登录、用户、会话、群组和消息。',
     meta: 'Swift',
-  },
-  Invitations: {
-    title: '邀请',
-    description: '在客户端邀请用户并管理群组频道成员关系。',
-    meta: 'SDK',
   },
   'Issue a session token': {
     title: '签发会话 Token',
-    description: '从可信后端服务生成用户登录凭证。',
+    description: '由可信业务服务端为 OpenIM 用户签发登录 Token。',
     meta: '认证',
   },
   'Block a user': {
     title: '屏蔽用户',
-    description: '当安全策略要求时，从服务端执行管控操作。',
+    description: '从可信服务端建立用户黑名单关系，阻止对方向当前用户发送消息。',
     meta: '管控',
   },
   Electron: {
     title: 'Electron',
-    description: '在桌面端渲染进程复用 WASM 兼容 API，并处理 Electron 打包资源路径。',
+    description: '查看 Electron 中 WASM 与 FFI 两种接入形态及运行环境差异。',
     meta: 'Desktop',
   },
   Messages: {
     title: '消息',
-    description: '发送、列出、更新、搜索、翻译、置顶、定时和导出消息。',
-  },
-  'Message metadata': {
-    title: '消息元数据',
-    description: '添加自定义类型和附加数据，支持产品自定义渲染。',
-    meta: '数据',
-  },
-  'Message search': {
-    title: '消息搜索',
-    description: '按关键词和筛选条件搜索消息归档和会话历史。',
-    meta: '搜索',
-  },
-  'Message threading': {
-    title: '消息线程',
-    description: '支持在父消息下回复，形成结构化讨论。',
-    meta: '线程',
-  },
-  'Message translation': {
-    title: '消息翻译',
-    description: '手动翻译消息，或通过配置的翻译引擎自动处理。',
-    meta: '翻译',
-  },
-  'Mobile chat starter': {
-    title: '移动端聊天示例',
-    description: '当示例需要同时覆盖 iOS 和 Android 时，可从 Flutter 路径开始。',
-    meta: 'Flutter',
-  },
-  Moderation: {
-    title: '审核与管控',
-    description: '控制封禁、禁言、冻结、运营者和受限行为。',
-    meta: '安全',
-  },
-  'Native Android starter': {
-    title: 'Android 原生示例',
-    description: '先走通 Android 设置流程，再补充生产级频道能力。',
-    meta: 'Android',
-  },
-  'Open channels': {
-    title: '开放频道',
-    description: '适合社区、直播活动和广播的大型公开会话空间。',
-    meta: '频道',
-  },
-  'Pinned messages': {
-    title: '置顶消息',
-    description: '置顶重要消息，帮助成员快速找到关键上下文。',
-    meta: '置顶',
-  },
-  Polls: {
-    title: '投票',
-    description: '创建投票、选项、投票记录、投票人列表和关闭状态。',
-    meta: '投票',
-  },
-  Privacy: {
-    title: '隐私',
-    description: '支持隐私相关控制和数据处理要求。',
-    meta: '隐私',
-  },
-  'Push notifications': {
-    title: '推送通知',
-    description: '通过偏好设置和模板投递消息提醒。',
-    meta: '推送',
-  },
-  'Reactions and emojis': {
-    title: '表情回应',
-    description: '启用表情目录、消息回应和消息级表达能力。',
-    meta: '表情',
+    description: '从可信服务端发送消息，或导入其他系统的历史消息。',
   },
   'Read receipts': {
     title: '已读回执',
-    description: '展示消息已读人员，并维护已读状态计数。',
+    description: '展示已读状态，并查询群消息的已读成员。',
     meta: '已读',
-  },
-  Reports: {
-    title: '举报',
-    description: '允许用户举报消息、用户或会话以供审核。',
-    meta: '举报',
-  },
-  'Scheduled messages': {
-    title: '定时消息',
-    description: '创建、更新、取消和立即发送延迟消息。',
-    meta: '定时',
   },
   'Search message history': {
     title: '搜索消息历史',
-    description: '为支持团队和用户工具添加可搜索的会话归档。',
+    description: '按关键词和筛选条件搜索 SDK 已同步到本地的消息。',
     meta: '搜索',
   },
   'Send your first message': {
     title: '发送第一条消息',
-    description: '使用客户端 SDK 完成认证、连接并发送消息。',
+    description: '完成接入准备和登录后，创建并发送第一条消息。',
     meta: 'SDK',
   },
-  Statistics: {
-    title: '统计分析',
-    description: '跟踪活跃用户、连接数和高级分析指标。',
-    meta: '统计',
+  'Prepare SDK integration': {
+    title: '完成接入准备',
+    description: '准备 OpenIM 服务端、应用凭证、用户账号和登录 Token。',
+    meta: 'SDK',
   },
-  'Subscribe to webhook events': {
-    title: '订阅 Webhook 事件',
-    description: '使用事件投递同步消息、审核事件和频道变化。',
-    meta: 'Webhook',
-  },
-  'Text and file messages': {
-    title: '文本和文件消息',
-    description: '在支持的频道类型中发送文本消息和文件消息。',
-    meta: '消息',
+  'Authenticate a client': {
+    title: '初始化并登录客户端',
+    description: '初始化 SDK、完成登录，并处理 Token 过期和被踢下线等事件。',
+    meta: 'SDK',
   },
   'Typing indicators': {
     title: '输入状态',
-    description: '在活跃会话中显示实时输入状态。',
+    description: '在当前活跃会话中显示实时输入状态。',
     meta: '输入中',
   },
   Unity: {
     title: 'Unity',
-    description: '用频道、实时消息和用户资料连接游戏社区。',
+    description: '在 Unity 游戏和互动应用中接入用户、群组和实时消息。',
     meta: 'C#',
   },
   'Mini Program': {
     title: '小程序',
-    description: '在支持的小程序环境中接入 OpenIM，并沿用 WASM 兼容的核心 API 模型。',
+    description: '查看小程序 SDK 的适用场景、运行限制和平台接入方式。',
     meta: '小程序',
   },
   'React Native': {
     title: 'React Native',
-    description: '在 React Native 应用中接入 OpenIM 消息能力，并处理移动端运行时差异。',
+    description: '在 React Native 应用中接入 OpenIM，并处理移动端运行时差异。',
     meta: 'RN',
   },
   'Unread counts': {
     title: '未读数',
-    description: '驱动角标、收件箱计数和单频道未读摘要。',
+    description: '读取会话未读数和账号总未读数，更新会话列表与应用角标。',
     meta: '未读',
-  },
-  'User metadata': {
-    title: '用户元数据',
-    description: '随聊天用户存储自定义资料或产品数据。',
-    meta: '数据',
   },
   'User profiles': {
     title: '用户资料',
-    description: '从后端更新昵称、头像和用户资料字段。',
+    description: '从服务端更新用户昵称、头像和扩展字段。',
     meta: '资料',
   },
   Users: {
     title: '用户',
-    description: '创建用户、更新资料、管理元数据并配置未读数。',
-  },
-  'Web chat starter': {
-    title: 'Web 聊天示例',
-    description: '从 WASM 应用路径开始，登录用户并发送第一条消息。',
-    meta: 'WASM',
-  },
-  'Web-compatible': {
-    title: 'Web 兼容 SDK',
-    description: 'WASM、Electron 和小程序共用一套 API 文档，再分别处理运行环境配置。',
-    meta: '共享 API',
-  },
-  'Web-compatible SDKs': {
-    title: 'Web 兼容 SDK',
-    description: 'WASM、Electron 和小程序共用一套核心 API 能力。',
-    meta: 'Web',
+    description: '创建和查询用户、更新资料，并为客户端登录签发 Token。',
   },
   WASM: {
     title: 'WASM',
-    description: '使用 WebAssembly SDK 在浏览器中接入本地存储、实时事件和 TypeScript API。',
-    meta: 'Web',
+    description: '使用 OpenIM WebAssembly SDK 在浏览器中接入即时通讯。',
+    meta: 'WebAssembly',
   },
   'uni-app': {
     title: 'uni-app',
-    description: '用一套 OpenIM 集成覆盖 App、H5 和支持的小程序目标。',
+    description: '在 uni-app 工程中一次接入，覆盖 App、H5 和支持的小程序目标。',
     meta: 'Vue / uni-app',
   },
   'Android demo': {
     title: 'Android Demo',
-    description: '查看 Android 原生 Demo 中的登录、会话和消息接入方式。',
+    description: '查看 Android 原生 Demo 的登录、会话和消息接入方式。',
     meta: 'GitHub / Android',
   },
   'API setup': {
     title: 'API 接入准备',
-    description: '配置基础地址、请求头、管理员 token 和请求约定。',
+    description: '配置 API 地址、公共请求头、管理员 Token 和请求体约定。',
     meta: 'API',
   },
   'Block users': {
     title: '屏蔽用户',
-    description: '屏蔽不受欢迎的用户，并在策略允许时解除屏蔽。',
+    description: '建立或解除用户黑名单关系，控制单聊消息发送。',
     meta: '屏蔽',
   },
   'Client authentication': {
-    title: '客户端认证',
-    description: '初始化客户端 SDK、完成登录，并处理 token 生命周期事件。',
+    title: '登录与会话管理',
+    description: '初始化并登录 OpenIM SDK，处理连接、Token 过期和被踢下线事件。',
     meta: 'SDK',
-  },
-  'Create group conversations': {
-    title: '创建群组会话',
-    description: '通过 Platform API 从服务端创建群组会话。',
-    meta: '群组',
   },
   'Electron demo': {
     title: 'Electron Demo',
@@ -761,22 +600,12 @@ const zhCardText: Record<string, Pick<HomeCard, 'title' | 'description'> & { met
   },
   'Flutter demo': {
     title: 'Flutter Demo',
-    description: '当一套代码需要覆盖移动端时，可以从 Flutter Demo 开始。',
+    description: '查看 Flutter Demo，用同一工程覆盖移动端接入。',
     meta: 'GitHub / Flutter',
-  },
-  'Freeze group conversations': {
-    title: '冻结群组会话',
-    description: '控制群组会话是否允许继续发送新消息。',
-    meta: '冻结',
-  },
-  'Group profile and lifecycle': {
-    title: '群组资料与生命周期',
-    description: '在产品状态变化时更新或删除群组会话记录。',
-    meta: '群组',
   },
   'H5 demo': {
     title: 'H5 Demo',
-    description: '查看面向浏览器的 OpenIM Chat Demo 应用。',
+    description: '查看浏览器端 Demo 的登录、会话和消息接入方式。',
     meta: 'GitHub / H5',
   },
   'iOS demo': {
@@ -785,74 +614,44 @@ const zhCardText: Record<string, Pick<HomeCard, 'title' | 'description'> & { met
     meta: 'GitHub / iOS',
   },
   'Join and leave flows': {
-    title: '加入与退出流程',
-    description: '从可信服务中处理用户加入或退出群组会话。',
+    title: '加入与退出群组',
+    description: '从可信服务端处理用户加入或退出群组。',
     meta: '成员',
   },
   'List blocked users': {
     title: '查询屏蔽关系',
-    description: '为客服、安全和后台管理流程查看用户屏蔽关系。',
+    description: '查询指定用户的黑名单关系，用于后台管理和问题排查。',
     meta: '审计',
   },
   'List group members': {
     title: '查询群组成员',
-    description: '从后端读取群组成员列表，用于后台管理和数据同步。',
-    meta: '成员',
-  },
-  Logging: {
-    title: '日志',
-    description: '记录 operationID 和 SDK 日志，用于客户端与服务端联合排查。',
-    meta: '日志',
-  },
-  'Members and invitations': {
-    title: '成员与邀请',
-    description: '邀请成员，并处理接受或拒绝邀请的流程。',
+    description: '从服务端读取群成员列表，用于后台管理和数据同步。',
     meta: '成员',
   },
   'Message history': {
     title: '历史消息',
-    description: '通过 SDK 读取会话历史，并按页加载更早消息。',
+    description: '通过 SDK 分页读取会话历史消息。',
     meta: '历史',
-  },
-  'Message migration': {
-    title: '消息迁移',
-    description: '从其他系统迁移时导入历史消息。',
-    meta: '迁移',
-  },
-  'Mobile SDKs': {
-    title: '移动端 SDK',
-    description: '通过原生、Flutter、uni-app 或 React Native 路径交付移动端聊天。',
-    meta: '移动端',
-  },
-  'Mini Program demo': {
-    title: '小程序 Demo',
-    description: '从小程序 Demo 开始处理平台相关的接入配置。',
-    meta: 'GitHub / 小程序',
   },
   'Mute group members': {
     title: '禁言群组成员',
-    description: '在群组会话中禁言或解除禁言成员。',
+    description: '从服务端禁言或解除禁言指定群成员。',
     meta: '禁言',
   },
   'Receive realtime messages': {
     title: '接收实时消息',
-    description: '订阅 SDK 消息事件，并把增量消息合并到界面状态。',
+    description: '监听新消息和离线消息事件，并按消息 ID 合并到消息列表。',
     meta: '实时',
   },
   'React Native demo': {
     title: 'React Native Demo',
-    description: '使用 React Native Demo 验证移动端运行环境接入。',
+    description: '查看 React Native Demo 的移动端运行环境与 SDK 接入方式。',
     meta: 'GitHub / RN',
   },
   'Send messages': {
     title: '发送消息',
-    description: '从可信服务端流程发送文本消息和自定义消息。',
+    description: '从可信服务端向单聊用户或群组发送消息。',
     meta: '消息',
-  },
-  'Session tokens': {
-    title: '会话 Token',
-    description: '从服务端为用户签发 token，并在需要时注销会话。',
-    meta: '认证',
   },
   'Unity demo': {
     title: 'Unity Demo',
@@ -865,46 +664,94 @@ const zhCardText: Record<string, Pick<HomeCard, 'title' | 'description'> & { met
     meta: 'GitHub / uni-app',
   },
   'User directory': {
-    title: '用户目录',
-    description: '查询用户记录，并让业务资料与聊天身份保持一致。',
+    title: '查询用户',
+    description: '从服务端查询已导入 OpenIM 的用户资料。',
     meta: '用户',
   },
   'User provisioning': {
     title: '创建用户',
-    description: '在用户登录前，由可信后端创建聊天用户。',
+    description: '在客户端登录前，由可信业务服务端创建 OpenIM 用户。',
     meta: '用户',
   },
-  Webhooks: {
-    title: 'Webhooks',
-    description: '订阅服务端事件，用于同步、审计和工作流自动化。',
-    meta: 'Hooks',
+  Groups: {
+    title: '群组',
+    description: '创建或更新群组、管理群成员，并处理邀请和加入流程。',
+  },
+  'Create a group': {
+    title: '创建群组',
+    description: '通过 Platform API 创建群组，并设置群主和初始成员。',
+    meta: 'API',
+  },
+  'Manage conversations': {
+    title: '管理会话',
+    description: '通过 SDK 获取会话，并维护草稿、未读数和其他客户端会话状态。',
+    meta: '会话',
+  },
+  'Message extensions': {
+    title: '消息附加数据',
+    description: '使用自定义消息、ex 和 localEx 承载共享或本地附加数据。',
+    meta: '扩展',
+  },
+  'Group message read receipts': {
+    title: '群聊已读回执',
+    description: '上报群消息已读状态，并查询已读成员和未读成员。',
+    meta: '已读',
+  },
+  'Delete or revoke messages': {
+    title: '删除或撤回消息',
+    description: '删除本地或服务端消息，或将会话中的消息撤回。',
+    meta: '删除',
+  },
+  'Conversation groups': {
+    title: '会话分组',
+    description: '创建和管理当前用户的会话分组，并同步分组及成员会话的变化。',
+    meta: '分组',
+  },
+  'Pinned messages': {
+    title: '置顶消息',
+    description: '置顶会话中的重要消息，并通过事件同步变更。',
+    meta: '置顶',
+  },
+  'Mute groups or members': {
+    title: '群组与成员禁言',
+    description: '限制整个群组或指定群成员发送消息。',
+    meta: '禁言',
+  },
+  'WASM SDK': {
+    title: 'WASM SDK',
+    description: '通过 WebAssembly 在浏览器应用中接入 OpenIM。',
+    meta: 'WASM',
   },
 };
 
 const zhFeatureGroupText: Record<string, Pick<FeatureGroup, 'title' | 'description'>> = {
   'User identity and access': {
-    title: '用户与访问',
-    description: '创建聊天身份、维护用户资料，并控制用户进入聊天系统的方式。',
+    title: '用户与登录',
+    description: '创建 OpenIM 用户、维护用户资料，并完成客户端登录。',
   },
   'Conversations and groups': {
     title: '会话与群组',
-    description: '创建会话空间、维护群组资料，并管理成员生命周期。',
+    description: '管理客户端会话状态，并创建群组、查询成员和处理成员进退群。',
   },
   'Messaging and history': {
     title: '消息与历史',
-    description: '发送消息、接收实时更新、读取会话历史，并导入旧系统数据。',
+    description: '发送和接收消息、读取历史消息，并按关键词搜索会话记录。',
   },
   'Message state and UX': {
     title: '消息状态与体验',
     description: '同步未读数、已读回执、输入状态和消息附加数据。',
   },
+  'Advanced messaging': {
+    title: '高级功能',
+    description: '接入群聊已读、删除与撤回、会话分组和消息置顶等进阶能力。',
+  },
   'Moderation and governance': {
-    title: '安全与管控',
-    description: '在产品策略或运营需要时，执行用户级和会话级控制。',
+    title: '关系与群组管控',
+    description: '管理用户黑名单，并对群组或群成员设置禁言。',
   },
   'Cross-platform SDKs and operations': {
-    title: '跨端 SDK 与接入',
-    description: '使用已整理的跨端客户端运行时，并准备服务端 API 接入基础。',
+    title: '跨平台 SDK 与服务端接入',
+    description: '选择适合应用技术栈的客户端 SDK，并完成 Platform API 接入准备。',
   },
 };
 
@@ -1040,6 +887,12 @@ export function ChatHero({
 
   return (
     <section className="chat-hero">
+      <div aria-hidden="true" className="chat-hero-backdrop">
+        <span className="chat-hero-grid" />
+        <span className="chat-hero-glow chat-hero-glow-a" />
+        <span className="chat-hero-glow chat-hero-glow-b" />
+        <span className="chat-hero-fade" />
+      </div>
       <div className="chat-hero-copy">
         <span className="chat-eyebrow">{hero.eyebrow}</span>
         <h1>{hero.title}</h1>
@@ -1148,7 +1001,7 @@ export function SDKsSection({ locale = 'en' }: { locale?: Locale }) {
         title={copy.sdkTitle}
         description={copy.sdkDescription}
         actionLabel={copy.sdkAction}
-        actionHref={toLocalizedPath('/docs/chat/sdk/v4/wasm/overview', locale)}
+        actionHref={toLocalizedPath('/sdk/wasm/overview', locale)}
       />
       <div className="sdk-card-grid">
         {cards.map((card) => (
@@ -1176,12 +1029,12 @@ export function PlatformApiSection({ locale = 'en' }: { locale?: Locale }) {
         title={copy.apiTitle}
         description={copy.apiDescription}
         actionLabel={copy.apiAction}
-        actionHref={toLocalizedPath('/docs/chat/platform-api/v3/overview', locale)}
+        actionHref={toLocalizedPath('/platform-api/overview', locale)}
       />
       <div className="platform-api-panel">
         <Link
           className="platform-api-hero-card"
-          href={toLocalizedPath('/docs/chat/platform-api/v3/overview', locale)}
+          href={toLocalizedPath('/platform-api/overview', locale)}
         >
           <span>{copy.apiHeroKicker}</span>
           <h3>{copy.apiHeroTitle}</h3>

@@ -16,9 +16,9 @@
 
 | 结构分支                        | OpenIM 目标内容        | 处理方式                               |
 | ------------------------------- | ---------------------- | -------------------------------------- |
-| `/docs/chat`                    | OpenIM Chat 总入口     | 产品定位、最短成功路径和主要入口       |
-| `/docs/chat/sdk/v4/**`          | OpenIM Client SDK 指南 | 按各平台真实包、初始化方式和能力重写   |
-| `/docs/chat/platform-api/v3/**` | OpenIM Server REST API | 按当前鉴权、接口、错误码和权限模型重写 |
+| `/`                     | OpenIM Chat 总入口     | 产品定位、最短成功路径和主要入口       |
+| `/sdk/**`             | OpenIM Client SDK 指南 | 按各平台真实包、初始化方式和能力重写   |
+| `/platform-api/**`    | OpenIM Server REST API | 按当前鉴权、接口、错误码和权限模型重写 |
 
 不再迁移 UIKit、SDK v3、Legacy API 和手写 SDK Reference 页面。
 
@@ -85,7 +85,7 @@
 
 | 项目            | 示例                                   |
 | --------------- | -------------------------------------- |
-| 结构路由        | `/docs/chat/sdk/v4/wasm/...`           |
+| 结构路由        | `/sdk/wasm/...`                     |
 | OpenIM 对应能力 | 会话列表                               |
 | 真实来源        | SDK 代码、接口规范、测试用例、产品说明 |
 | 内容负责人      | WASM SDK 团队                          |

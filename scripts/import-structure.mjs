@@ -57,18 +57,18 @@ function renderPage(route) {
 
 function renderLanding(frontmatter) {
   return `---\n${frontmatter}\n---\n<ChatHero
-  eyebrow="OPENIM CHAT"
+  eyebrow="OPENIM"
   title="Build real-time communication on infrastructure you control."
   description="A documentation workspace for the current OpenIM SDKs and server-side APIs. Replace the scaffold pages with your product content."
   primaryLabel="Explore client SDKs"
-  primaryHref="/docs/chat/sdk/v4/wasm/overview"
+  primaryHref="/sdk/wasm/overview"
   secondaryLabel="Explore server APIs"
-  secondaryHref="/docs/chat/platform-api/v3/overview"
+  secondaryHref="/platform-api/overview"
 />
 
 <LandingSection title="Choose how you want to build" description="Keep client SDKs and server control in one consistent documentation system.">
-  <LandingCard title="Client SDKs" href="/docs/chat/sdk/v4/wasm/overview" description="Integrate messaging capabilities across supported client platforms." icon="code" />
-  <LandingCard title="Server API" href="/docs/chat/platform-api/v3/overview" description="Describe administrative operations, webhooks, and automation." icon="server" />
+  <LandingCard title="Client SDKs" href="/sdk/wasm/overview" description="Integrate messaging capabilities across supported client platforms." icon="code" />
+  <LandingCard title="Server API" href="/platform-api/overview" description="Describe administrative operations, webhooks, and automation." icon="server" />
 </LandingSection>
 `;
 }

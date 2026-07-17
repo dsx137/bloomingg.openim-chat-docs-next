@@ -2,18 +2,28 @@ import type { MetadataRoute } from 'next';
 import { getAllRoutes } from '@/src/lib/routes';
 import { siteConfig } from '@/src/config/site';
 import { toLocalizedPath } from '@/src/lib/i18n';
+import { getPublishedWasmLocales, isWasmRoute } from '@/src/lib/wasm-publication';
 import { getGuidePagePaths } from '@/src/components/docs/guides-page';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date('2026-06-24T00:00:00.000Z');
+  const homeEntries: MetadataRoute.Sitemap = (['en', 'zh'] as const).map((locale) => ({
+    url: new URL(toLocalizedPath('/', locale), siteConfig.siteUrl).toString(),
+    lastModified,
+    changeFrequency: 'weekly' as const,
+    priority: 1,
+  }));
   const routeEntries: MetadataRoute.Sitemap = getAllRoutes().flatMap((route) => {
     const changeFrequency =
       route.status === 'published' ? ('monthly' as const) : ('weekly' as const);
-    return (['en', 'zh'] as const).map((locale) => ({
+    const locales = isWasmRoute(route.path)
+      ? getPublishedWasmLocales(route.path)
+      : (['en', 'zh'] as const);
+    return locales.map((locale) => ({
       url: new URL(toLocalizedPath(route.path, locale), siteConfig.siteUrl).toString(),
       lastModified,
       changeFrequency,
-      priority: route.path === '/docs/chat' ? 1 : route.template === 'overview' ? 0.8 : 0.6,
+      priority: route.template === 'overview' ? 0.8 : 0.6,
     }));
   });
 
@@ -26,5 +36,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...routeEntries, ...guideEntries];
+  return [...homeEntries, ...routeEntries, ...guideEntries];
 }

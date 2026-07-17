@@ -6,6 +6,8 @@ import localizedSdkData from '@/src/generated/wasm-sdk-zh-content.json';
 import localizedPlatformApiData from '@/src/generated/platform-api-zh-content.json';
 import { extractMarkdownHeadings } from '@/src/lib/heading-ids';
 import type { Locale } from '@/src/lib/i18n';
+import { getRouteRecord } from '@/src/lib/routes';
+import { createWasmPendingReviewContent } from '@/src/lib/wasm-publication';
 import type { NavNode, RouteRecord, TocItem } from '@/src/types/docs';
 
 type LocalizedDocPage = {
@@ -39,12 +41,27 @@ export function getLocalizedDocPage(
 ): LocalizedDocPage | undefined {
   if (locale !== 'zh' || !path) return undefined;
   const normalized = normalizePath(path);
-  return getManualLocalizedPage(normalized, locale) ?? sdkZh.pages[normalized];
+  const localized = getManualLocalizedPage(normalized, locale) ?? sdkZh.pages[normalized];
+  if (localized) return localized;
+
+  const route = getRouteRecord(normalized);
+  if (route?.contextKey !== 'chat/sdk/wasm') return undefined;
+  const pending = createWasmPendingReviewContent({
+    description: '该 OpenIM WASM SDK 页面的中文技术内容仍在逐页核对中。',
+    path: normalized,
+    title: localizeDocLabel(route.title, locale),
+  });
+  return pending
+    ? {
+        ...pending,
+        headings: extractMarkdownHeadings(pending.body),
+      }
+    : undefined;
 }
 
 export function getLocalizedDocTitle(path: string | undefined, locale: Locale): string | undefined {
   const title = getLocalizedDocPage(path, locale)?.title;
-  return title ? localizeDocLabel(title, locale) : undefined;
+  return title || undefined;
 }
 
 export function localizeRouteRecord(route: RouteRecord, locale: Locale): RouteRecord {
@@ -53,11 +70,12 @@ export function localizeRouteRecord(route: RouteRecord, locale: Locale): RouteRe
   return {
     ...route,
     description: localized.description,
-    title: localizeDocLabel(localized.title, locale),
+    title: localized.title,
   };
 }
 
 export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
+  if (node.navigationTitle) return localizeDocLabel(node.navigationTitle, locale);
   if (locale !== 'zh') return node.title;
   if (node.href) return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
   const label =
@@ -115,7 +133,14 @@ function getManualLocalizedPage(path: string, locale: Locale): LocalizedDocPage 
   const cacheKey = `${locale}:${path}`;
   if (localizedPageCache.has(cacheKey)) return localizedPageCache.get(cacheKey);
 
-  const filePath = resolve(process.cwd(), 'content', locale, `${path.slice(1)}.mdx`);
+  const route = getRouteRecord(path);
+  const localizedRelativePath = route?.contentFile.replace(/^content\/docs\//, 'docs/');
+  const filePath = resolve(
+    process.cwd(),
+    'content',
+    locale,
+    localizedRelativePath ?? `${path.slice(1)}.mdx`,
+  );
   if (!existsSync(filePath)) {
     localizedPageCache.set(cacheKey, undefined);
     return undefined;
@@ -123,14 +148,14 @@ function getManualLocalizedPage(path: string, locale: Locale): LocalizedDocPage 
 
   const source = readFileSync(filePath, 'utf8');
   const { body, frontmatter } = parseMdx(source);
-  const normalizedBody = normalizeOpenImZhTerminology(body);
+  const normalizedBody = body.replace(/\r\n?/g, '\n').trim();
   const fallback = sdkZh.pages[path];
   const page = {
     body: normalizedBody,
-    description: normalizeOpenImZhTerminology(frontmatter.description ?? fallback?.description ?? ''),
+    description: frontmatter.description ?? fallback?.description ?? '',
     headings: extractMarkdownHeadings(normalizedBody),
     sourcePath: frontmatter.sourcePath ?? path,
-    title: normalizeOpenImZhTerminology(frontmatter.title ?? fallback?.title ?? ''),
+    title: frontmatter.title ?? fallback?.title ?? '',
   };
 
   localizedPageCache.set(cacheKey, page);

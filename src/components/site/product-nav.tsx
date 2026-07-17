@@ -11,19 +11,19 @@ export function ProductNav() {
   return (
     <div className="product-nav-shell">
       <nav aria-label="Chat documentation products" className="product-nav">
-        <Link className={active(pathname, '/docs/chat', true)} href="/docs/chat">
+        <Link className={active(pathname, '/', true)} href="/">
           Overview
         </Link>
         <Dropdown active={pathname.includes('/sdk/')} sections={sdkPlatformSections} label="SDKs" />
         <Link
-          className={active(pathname, '/docs/chat/platform-api/')}
-          href="/docs/chat/platform-api/v3/overview"
+          className={active(pathname, '/platform-api/')}
+          href="/platform-api/overview"
         >
           Server API
         </Link>
         <Link
-          className={active(pathname, '/docs/chat/sdk/v4/wasm/getting-started/')}
-          href="/docs/chat/sdk/v4/wasm/getting-started/send-first-message"
+          className={active(pathname, '/sdk/wasm/getting-started/')}
+          href="/sdk/wasm/getting-started/send-first-message"
         >
           SDK Tour
         </Link>

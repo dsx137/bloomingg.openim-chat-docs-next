@@ -1,0 +1,29 @@
+---
+title: 'OpenIM uni-app SDK 概览'
+description: 'OpenIM uni-app SDK 入口，用于 App、H5 和支持的小程序目标。'
+sourcePath: '/sdk/uniapp/overview'
+---
+
+## 概览
+
+当你希望在一个 uni-app 工程中覆盖 App、H5 以及支持的小程序目标时，可以从 uni-app SDK 开始。接入时应保持认证、用户身份、消息创建、会话状态和事件处理模型与 OpenIM 其他客户端 SDK 一致。
+
+## 适用范围
+
+- App 和 H5 构建应使用与你部署的 OpenIM Server 版本匹配的 SDK 包和运行时适配方式。
+- 小程序目标需要额外确认本地存储、网络请求、文件上传和 WebSocket 行为。
+- token 必须由可信后端签发，不应在客户端包内生成或写死用户 token。
+
+## 核心接入路径
+
+1. 安装与你的 OpenIM Server 版本匹配的 SDK 包。
+2. 使用 `apiAddr`、`wsAddr`、当前 `userID` 和后端签发的 token 初始化客户端。
+3. 在调用 `login()` 前注册连接事件和消息事件。
+4. 发送第一条文本消息，并在另一个已登录客户端确认收到消息。
+5. 再补充文件消息、推送通知和后台生命周期等平台差异处理。
+
+## 相关 SDK
+
+- [WASM SDK](/sdk/wasm/overview)：查看浏览器和 WebAssembly 方向的核心 API 示例。
+- [Flutter SDK](/sdk/flutter/overview)：适合用 Flutter 覆盖移动端和桌面端。
+- [React Native SDK](/sdk/react-native/overview)：适合 React Native 应用。

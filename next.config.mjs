@@ -1,4 +1,6 @@
 import { createMDX } from 'fumadocs-mdx/next';
+import wasmLegacyRedirectEntries from './data/structure/wasm-legacy-redirects.json' with { type: 'json' };
+import { buildWasmLegacyRedirects } from './scripts/lib/wasm-legacy-redirects.mjs';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -13,6 +15,9 @@ const nextConfig = {
   serverExternalPackages: ['shiki'],
   images: {
     formats: ['image/avif', 'image/webp'],
+  },
+  async redirects() {
+    return buildWasmLegacyRedirects(wasmLegacyRedirectEntries);
   },
   async headers() {
     return [

@@ -1,0 +1,99 @@
+---
+title: '日志'
+description: '配置 OpenIM SDK 日志级别，并使用 operationID 串联客户端与服务端调用日志。'
+sourcePath: '/sdk/wasm/logger'
+---
+
+OpenIM SDK 的日志主要用于定位浏览器端登录和业务 API 调用问题。开发和预发布环境可以输出更详细的 SDK 日志；生产环境应只保留必要的错误和追踪字段，避免记录 Token、消息正文、文件 URL 等敏感数据。
+
+日志链路通常包含 SDK 登录参数中的日志配置、单次调用的 `operationID`、SDK 响应中的诊断字段，以及应用自己的结构化日志。
+
+## 日志级别
+
+浏览器 SDK 的日志选项在 `login()` 时通过 `InitAndLoginConfig` 传入。`logLevel` 使用 `LogLevel` 枚举；从最详细到最简略依次为 `Verbose`（6）、`Debug`（5）、`Info`（4）、`Warn`（3）、`Error`（2）、`Fatal`（1）和 `Panic`（0）。开发诊断可使用 `LogLevel.Debug`，生产环境通常只保留警告或错误级别。
+
+在 `@openim/wasm-client-sdk@3.8.5-hotfix.0` 中，登录包装层使用 `params.logLevel || 5` 写入配置。因为 `LogLevel.Panic` 的数值是 `0`，传入后会被当成假值并回退为 `Debug`；需要最低噪声级别时，应使用 `LogLevel.Fatal` 或 `LogLevel.Error`，不要依赖 `Panic`。
+
+生产环境不建议始终开启最详细日志。更稳妥的方式是按环境、灰度开关或用户主动提交诊断信息时临时提高日志级别。
+
+### 日志级别列表
+
+| 场景         | 建议配置                                       | 说明                                                       |
+| ------------ | ---------------------------------------------- | ---------------------------------------------------------- |
+| 本地开发     | `LogLevel.Debug`，`isLogStandardOutput: true`  | 在浏览器控制台查看 SDK 调用细节。                          |
+| 联调或预发布 | 根据问题临时使用更详细的级别                   | 配合用户 ID、会话 ID、错误码和服务端日志定位问题。         |
+| 生产默认     | 使用 `Warn` 或 `Error`，关闭不必要的控制台输出 | 避免噪声和敏感信息泄露，只保留应用层结构化错误日志。       |
+| 用户诊断模式 | 临时打开更详细日志，并提示收集范围             | 在产品界面说明会收集哪些字段，并遵守隐私与合规要求。       |
+
+## 如何配置日志级别
+
+创建 SDK 实例后，在 `login()` 参数中设置日志选项。浏览器端登录仍需要传入 `userID`、`token`、`Platform.Web`、`apiAddr` 和 `wsAddr`。
+
+```ts
+import { getSDK, LogLevel, Platform } from '@openim/wasm-client-sdk';
+
+const OpenIM = getSDK({
+  coreWasmPath: '/openIM.wasm',
+  sqlWasmPath: '/sql-wasm.wasm',
+});
+
+await OpenIM.login({
+  userID,
+  token,
+  platformID: Platform.Web,
+  apiAddr,
+  wsAddr,
+  logLevel: LogLevel.Debug,
+  isLogStandardOutput: true,
+});
+```
+
+### 参数说明
+
+| 参数                  | 类型       | 是否必填 | 用途                                                      |
+| --------------------- | ---------- | -------- | --------------------------------------------------------- |
+| `logLevel`            | `LogLevel` | 否       | 控制 SDK 运行日志详细程度。                               |
+| `isLogStandardOutput` | `boolean`  | 否       | 是否把 SDK 日志输出到浏览器控制台；开发和临时诊断时使用。 |
+
+`errCode`、`errMsg` 是响应中的诊断字段，不是 `login()` 的日志配置参数。
+
+## 使用 operationID 定位一次调用
+
+`operationID` 是单次 SDK 调用的链路标识。WASM SDK 的多数方法都把它作为最后一个可选参数；不传时，JavaScript 包装层会为本次调用自动生成 UUID，并把同一个值传给 SDK 核心。可借助响应中的 `operationID` 将客户端日志与 OpenIM 服务端日志对应起来，用于确认某条请求经过了哪些处理环节。
+
+```ts
+const operationID = crypto.randomUUID();
+
+try {
+  const response = await OpenIM.getConversationListSplit(
+    { offset: 0, count: 50 },
+    operationID,
+  );
+
+  appLogger.info('openim_api_success', {
+    operationID: response.operationID,
+    action: 'get_conversation_page',
+  });
+} catch (error) {
+  appLogger.error('openim_api_failed', {
+    operationID,
+    action: 'get_conversation_page',
+    error,
+  });
+  throw error;
+}
+```
+
+日常调用可以省略 `operationID`，由 SDK 自动生成。只有业务需要把一次具体调用与服务端日志精确对应时，才需要显式生成并传入；每次调用使用新的值，不要让多个无关请求共享同一个 `operationID`。
+
+`operationID` 不是用户身份、权限凭据、会话 ID 或业务幂等键，不能用来替代 Token、`conversationID`、`clientMsgID` 等业务标识。如果一个业务流程包含多次 SDK 调用，应为每次调用生成独立的 `operationID`，另用业务侧 trace ID 串联整个流程。
+
+## 记录业务上下文
+
+记录日志时保留当前路由、业务动作名称、`operationID`、`errCode`、`errMsg` 和必要的目标标识。不要把 Token、完整消息正文、原始文件地址或用户隐私字段写入前端日志。
+
+## 相关页面
+
+- [用户认证](/sdk/wasm/getting-started/authenticate-and-manage-session)
+- [发送第一条消息](/sdk/wasm/getting-started/send-first-message)
+- [发送消息](/sdk/wasm/message/sending-messages/send-a-message)

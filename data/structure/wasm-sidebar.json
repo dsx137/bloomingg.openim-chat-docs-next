@@ -1,0 +1,165 @@
+{
+  "sidebarExpansion": "active-path",
+  "nodes": [
+    {
+      "path": "/sdk/wasm/overview",
+      "navigationTitle": "Overview"
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting started",
+      "children": [
+        "/sdk/wasm/getting-started/before-you-start",
+        "/sdk/wasm/getting-started/environment-specific-implementation",
+        "/sdk/wasm/getting-started/authenticate-and-manage-session",
+        "/sdk/wasm/getting-started/send-first-message"
+      ]
+    },
+    {
+      "id": "user",
+      "title": "User",
+      "children": [
+        "/sdk/wasm/user/overview-user",
+        {
+          "id": "user/user-profile",
+          "title": "User profile",
+          "children": [
+            "/sdk/wasm/user/retrieving-users/retrieve-users",
+            "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+            "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user"
+          ]
+        },
+        {
+          "id": "user/friends",
+          "title": "Friends",
+          "children": [
+            "/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends",
+            "/sdk/wasm/user/retrieving-users/retrieve-friend-information",
+            "/sdk/wasm/user/managing-friends/manage-friend-requests",
+            "/sdk/wasm/user/managing-friends/update-or-delete-friends"
+          ]
+        },
+        {
+          "id": "user/blacklist",
+          "title": "Blacklist",
+          "children": [
+            "/sdk/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
+            "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "conversation",
+      "title": "Conversation",
+      "children": [
+        "/sdk/wasm/conversation/overview-conversation",
+        {
+          "id": "conversation/retrieving-conversations",
+          "title": "Retrieving conversations",
+          "children": [
+            "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+            "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list"
+          ]
+        },
+        {
+          "id": "conversation/managing-conversations",
+          "title": "Managing conversations",
+          "children": [
+            "/sdk/wasm/conversation/managing-conversations/set-conversation",
+            "/sdk/wasm/conversation/managing-conversations/set-conversation-draft",
+            "/sdk/wasm/conversation/managing-conversations/manage-read-status",
+            "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+            "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation"
+          ]
+        },
+        "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups"
+      ]
+    },
+    {
+      "id": "group",
+      "title": "Group",
+      "children": [
+        "/sdk/wasm/group/overview-group",
+        "/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-group",
+        "/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups",
+        "/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group",
+        "/sdk/wasm/group/managing-group-applications/manage-group-applications",
+        "/sdk/wasm/group/retrieving-group-members/retrieve-group-members",
+        {
+          "id": "group/managing-group-members",
+          "title": "Managing group members",
+          "children": [
+            "/sdk/wasm/group/managing-group-members/invite-or-remove-group-members",
+            "/sdk/wasm/group/managing-group-members/update-group-member-info",
+            "/sdk/wasm/group/managing-group-members/transfer-group-owner"
+          ]
+        },
+        "/sdk/wasm/group/moderating-groups/mute-a-group-or-member"
+      ]
+    },
+    {
+      "id": "message",
+      "title": "Message",
+      "children": [
+        "/sdk/wasm/message/overview-message",
+        {
+          "id": "message/sending-messages",
+          "title": "Sending messages",
+          "children": [
+            "/sdk/wasm/message/sending-messages/send-a-message",
+            "/sdk/wasm/message/sending-messages/create-media-and-rich-messages",
+            "/sdk/wasm/message/sending-messages/upload-files-and-track-progress"
+          ]
+        },
+        "/sdk/wasm/message/receiving-messages/receive-messages",
+        {
+          "id": "message/retrieving-messages",
+          "title": "Retrieving messages",
+          "children": [
+            "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+            "/sdk/wasm/message/retrieving-messages/retrieve-messages"
+          ]
+        },
+        "/sdk/wasm/message/searching-messages/search-messages",
+        {
+          "id": "message/composing-messages",
+          "title": "Composing messages",
+          "children": [
+            "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+            "/sdk/wasm/message/composing-messages/mention-users-in-a-message",
+            "/sdk/wasm/message/composing-messages/manage-typing-status",
+            "/sdk/wasm/message/composing-messages/transcribe-audio"
+          ]
+        },
+        {
+          "id": "message/managing-messages",
+          "title": "Managing messages",
+          "children": [
+            "/sdk/wasm/message/managing-messages/forward-or-merge-a-message",
+            "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+            "/sdk/wasm/message/managing-messages/pin-conversation-messages",
+            "/sdk/wasm/message/managing-messages/insert-a-local-message",
+            "/sdk/wasm/message/managing-messages/clear-message-history"
+          ]
+        },
+        "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts"
+      ]
+    },
+    {
+      "id": "calling",
+      "title": "Calling",
+      "children": [
+        "/sdk/wasm/calling/overview-calling",
+        "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
+        "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
+        "/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal"
+      ]
+    },
+    {
+      "path": "/sdk/wasm/events/overview-events",
+      "navigationTitle": "Events"
+    },
+    "/sdk/wasm/logger"
+  ]
+}

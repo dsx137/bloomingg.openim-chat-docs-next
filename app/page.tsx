@@ -1,5 +1,7 @@
-import { redirect } from 'next/navigation';
+import { HomeLanding, generateHomeMetadata } from '@/src/components/mdx/home-landing';
+
+export const metadata = generateHomeMetadata('en');
 
 export default function HomePage() {
-  redirect('/docs/chat');
+  return <HomeLanding locale="en" />;
 }

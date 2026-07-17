@@ -125,8 +125,8 @@ export function GlobalHeader({ locale: localeProp }: { locale?: Locale }) {
             </div>
           </details>
           <Link
-            className={active(plainPathname, '/docs/chat/platform-api/')}
-            href={toLocalizedPath('/docs/chat/platform-api/v3/overview', locale)}
+            className={active(plainPathname, '/platform-api/')}
+            href={toLocalizedPath('/platform-api/overview', locale)}
           >
             {text.chrome.platformApi}
           </Link>

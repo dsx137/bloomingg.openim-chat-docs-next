@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { ContextPicker, type ContextOption } from '@/src/components/docs/context-picker';
 import { MobileSidebar } from '@/src/components/docs/mobile-sidebar';
 import { SidebarNav } from '@/src/components/docs/sidebar-nav';
+import { SidebarPane } from '@/src/components/docs/sidebar-pane';
 import { TableOfContents } from '@/src/components/docs/table-of-contents';
 import type { Locale } from '@/src/lib/i18n';
 import type { NavContext, TocItem } from '@/src/types/docs';
@@ -38,11 +39,17 @@ export function DocsShell({
         showVersion={showVersion}
       />
       <div className={`docs-grid ${overview ? 'is-overview' : ''}`}>
-        <aside className="docs-sidebar">
+        <SidebarPane stateScope={context.key}>
           {sidebarIntro}
           <ContextPicker currentKey={context.key} locale={locale} options={contextOptions} />
-          <SidebarNav currentPath={currentPath} locale={locale} nodes={context.nodes} />
-        </aside>
+          <SidebarNav
+            currentPath={currentPath}
+            locale={locale}
+            nodes={context.nodes}
+            sidebarExpansion={context.sidebarExpansion}
+            stateScope={context.key}
+          />
+        </SidebarPane>
         <article className="docs-article">{children}</article>
         <aside className="docs-toc">
           <TableOfContents items={toc} locale={locale} />

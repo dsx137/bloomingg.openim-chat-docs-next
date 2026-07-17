@@ -1,0 +1,1131 @@
+{
+  "package": "@openim/wasm-client-sdk",
+  "version": "3.8.5-hotfix.0",
+  "tarball": "https://registry.npmjs.org/@openim/wasm-client-sdk/-/wasm-client-sdk-3.8.5-hotfix.0.tgz",
+  "integrity": "sha512-JvUwGeTgUVgicS/88hJtJRkENWBzoPi/8TtQ8/JnqLWFIoLcpdHbs3fXsJ1ZE927v1tfTuwEaXausmsan70Quw==",
+  "methods": [
+    {
+      "name": "acceptFriendApplication",
+      "signature": "acceptFriendApplication: <T>(data: AccessFriendApplicationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "acceptGroupApplication",
+      "signature": "acceptGroupApplication: <T>(data: AccessGroupApplicationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "addBlack",
+      "signature": "addBlack: <T>(data: AddBlackParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "addConversationsToGroups",
+      "signature": "addConversationsToGroups: <T>(data: AddConversationsToGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "addFriend",
+      "signature": "addFriend: <T>(data: AddFriendParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "changeGroupMemberMute",
+      "signature": "changeGroupMemberMute: <T>(data: ChangeGroupMemberMuteParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "changeGroupMute",
+      "signature": "changeGroupMute: <T>(data: ChangeGroupMuteParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "changeInputStates",
+      "signature": "changeInputStates: (data: ChangeInputStatesParams, operationID?: string) => Promise<WsResponse<void>>",
+      "deprecated": false
+    },
+    {
+      "name": "checkFriend",
+      "signature": "checkFriend: (data: string[], operationID?: string) => Promise<WsResponse<FriendshipInfo[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "clearConversationAndDeleteAllMsg",
+      "signature": "clearConversationAndDeleteAllMsg: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "clearGroupApplicationBadgeCount",
+      "signature": "clearGroupApplicationBadgeCount: (operationID?: string) => Promise<WsResponse<void>>",
+      "deprecated": false
+    },
+    {
+      "name": "createAdvancedQuoteMessage",
+      "signature": "createAdvancedQuoteMessage: (params: AdvancedQuoteMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createAdvancedTextMessage",
+      "signature": "createAdvancedTextMessage: (params: AdvancedMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createCardMessage",
+      "signature": "createCardMessage: (data: CardElem, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createConversationGroup",
+      "signature": "createConversationGroup: (data: CreateConversationGroupReq, operationID?: string) => Promise<WsResponse<ConversationGroup>>",
+      "deprecated": false
+    },
+    {
+      "name": "createCustomMessage",
+      "signature": "createCustomMessage: (params: CustomMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createFaceMessage",
+      "signature": "createFaceMessage: (data: FaceMessageParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createFileMessageByFile",
+      "signature": "createFileMessageByFile: (data: FileMsgParamsByURL & { file: File; }, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createFileMessageByURL",
+      "signature": "createFileMessageByURL: (data: FileMsgParamsByURL, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createForwardMessage",
+      "signature": "createForwardMessage: (data: MessageItem, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createGroup",
+      "signature": "createGroup: (data: CreateGroupParams, operationID?: string) => Promise<WsResponse<GroupItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createImageMessageByFile",
+      "signature": "createImageMessageByFile: (params: ImageMsgParamsByURL & { file: File; }, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createImageMessageByURL",
+      "signature": "createImageMessageByURL: (params: ImageMsgParamsByURL, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createLocationMessage",
+      "signature": "createLocationMessage: (data: LocationMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createMarkdownMessage",
+      "signature": "createMarkdownMessage: (text: string, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createMergerMessage",
+      "signature": "createMergerMessage: (data: MergerMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createQuoteMessage",
+      "signature": "createQuoteMessage: (params: QuoteMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createSoundMessageByFile",
+      "signature": "createSoundMessageByFile: (data: SoundMsgParamsByURL & { file: File; }, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createSoundMessageByURL",
+      "signature": "createSoundMessageByURL: (data: SoundMsgParamsByURL, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createTargetedGroupMessage",
+      "signature": "createTargetedGroupMessage: (params: CreateTargetedGroupMessageParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createTextAtMessage",
+      "signature": "createTextAtMessage: (data: AtMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createTextMessage",
+      "signature": "createTextMessage: (text: string, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createVideoMessageByFile",
+      "signature": "createVideoMessageByFile: (data: VideoMsgParamsByURL & { videoFile: File; snapshotFile: File; }, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "createVideoMessageByURL",
+      "signature": "createVideoMessageByURL: (data: VideoMsgParamsByURL, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteAllConversationFromLocal",
+      "signature": "deleteAllConversationFromLocal: <T>(operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteAllMsgFromLocal",
+      "signature": "deleteAllMsgFromLocal: <T>(operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteAllMsgFromLocalAndSvr",
+      "signature": "deleteAllMsgFromLocalAndSvr: <T>(operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteConversation",
+      "signature": "deleteConversation: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteConversationAndDeleteAllMsg",
+      "signature": "deleteConversationAndDeleteAllMsg: <T>(conversationID: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteConversationGroup",
+      "signature": "deleteConversationGroup: <T>(groupID: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteFriend",
+      "signature": "deleteFriend: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteFriendRequests",
+      "signature": "deleteFriendRequests: (params: Array<{ fromUserID: string; toUserID: string; }>, operationID?: string) => Promise<WsResponse<void>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteGroupRequests",
+      "signature": "deleteGroupRequests: (params: Array<{ fromUserID: string; groupID: string; }>, operationID?: string) => Promise<WsResponse<void>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteMessage",
+      "signature": "deleteMessage: <T>(data: AccessMessageParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteMessageFromLocalStorage",
+      "signature": "deleteMessageFromLocalStorage: <T>(data: AccessMessageParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteMessages",
+      "signature": "deleteMessages: <T>(data: DeleteMessagesParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "deleteUserAllMessagesInConv",
+      "signature": "deleteUserAllMessagesInConv: <T>(data: DeleteUserMsgInConvParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "dismissGroup",
+      "signature": "dismissGroup: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "exportDB",
+      "signature": "exportDB(operationID?: string): Promise<WsResponse<unknown>>",
+      "deprecated": false
+    },
+    {
+      "name": "fetchSurroundingMessages",
+      "signature": "fetchSurroundingMessages: (params: FetchSurroundingParams, operationID?: string) => Promise<WsResponse<{ messageList: MessageItem[]; }>>",
+      "deprecated": false
+    },
+    {
+      "name": "fileMapSet",
+      "signature": "fileMapSet: (uuid: string, file: File) => Promise<any>",
+      "deprecated": false
+    },
+    {
+      "name": "findMessageList",
+      "signature": "findMessageList: (data: FindMessageParams[], operationID?: string) => Promise<WsResponse<SearchMessageResult>>",
+      "deprecated": false
+    },
+    {
+      "name": "getAdvancedHistoryMessageList",
+      "signature": "getAdvancedHistoryMessageList: (params: GetAdvancedHistoryMsgParams, operationID?: string) => Promise<WsResponse<AdvancedGetMessageResult>>",
+      "deprecated": false
+    },
+    {
+      "name": "getAdvancedHistoryMessageListReverse",
+      "signature": "getAdvancedHistoryMessageListReverse: (params: GetAdvancedHistoryMsgParams, operationID?: string) => Promise<WsResponse<AdvancedGetMessageResult>>",
+      "deprecated": false
+    },
+    {
+      "name": "getAllConversationList",
+      "signature": "getAllConversationList: (operationID?: string) => Promise<WsResponse<ConversationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getBlackList",
+      "signature": "getBlackList: (operationID?: string) => Promise<WsResponse<BlackUserItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationGroupIDsByConversationID",
+      "signature": "getConversationGroupIDsByConversationID: (conversationID: string, operationID?: string) => Promise<WsResponse<string[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationGroupInfoWithConversations",
+      "signature": "getConversationGroupInfoWithConversations: (data: GetConversationGroupInfoWithConversationsReq, operationID?: string) => Promise<WsResponse<GetConversationGroupInfoWithConversationsResp>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationGroups",
+      "signature": "getConversationGroups: (conversationGroupType: ConversationGroupType, operationID?: string) => Promise<WsResponse<ConversationGroup[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationIDBySessionType",
+      "signature": "getConversationIDBySessionType: (data: GetOneConversationParams, operationID?: string) => Promise<WsResponse<string>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationListSplit",
+      "signature": "getConversationListSplit: (data: SplitConversationParams, operationID?: string) => Promise<WsResponse<ConversationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationPinnedMsg",
+      "signature": "getConversationPinnedMsg: (data: string, operationID?: string) => Promise<WsResponse<MessageItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getConversationRecvMessageOpt",
+      "signature": "getConversationRecvMessageOpt: (data: string[], operationID?: string) => Promise<WsResponse<ConversationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getFriendApplicationListAsApplicant",
+      "signature": "getFriendApplicationListAsApplicant: (data?: GetFriendApplicationListAsApplicationParams, operationID?: string) => Promise<WsResponse<FriendApplicationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getFriendApplicationListAsRecipient",
+      "signature": "getFriendApplicationListAsRecipient: (data?: GetFriendApplicationListAsRecipientParams, operationID?: string) => Promise<WsResponse<FriendApplicationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getFriendApplicationUnhandledCount",
+      "signature": "getFriendApplicationUnhandledCount: (data: GetSelfUnhandledApplyCountParams, operationID?: string) => Promise<WsResponse<number>>",
+      "deprecated": false
+    },
+    {
+      "name": "getFriendList",
+      "signature": "getFriendList: (filterBlack?: boolean, operationID?: string) => Promise<WsResponse<FriendUserItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getFriendListPage",
+      "signature": "getFriendListPage: (data: OffsetParams & { filterBlack?: boolean; }, operationID?: string) => Promise<WsResponse<FriendUserItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupApplicationBadgeCount",
+      "signature": "getGroupApplicationBadgeCount: (operationID?: string) => Promise<WsResponse<number>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupApplicationListAsApplicant",
+      "signature": "getGroupApplicationListAsApplicant: (data?: GetGroupApplicationListParams, operationID?: string) => Promise<WsResponse<GroupApplicationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupApplicationListAsRecipient",
+      "signature": "getGroupApplicationListAsRecipient: (data?: GetGroupApplicationListParams, operationID?: string) => Promise<WsResponse<GroupApplicationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupApplicationUnhandledCount",
+      "signature": "getGroupApplicationUnhandledCount: (data: GetSelfUnhandledApplyCountParams, operationID?: string) => Promise<WsResponse<number>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupMemberList",
+      "signature": "getGroupMemberList: (params: GetGroupMemberParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupMemberListByJoinTimeFilter",
+      "signature": "getGroupMemberListByJoinTimeFilter: (data: GetGroupMemberByTimeParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupMemberOwnerAndAdmin",
+      "signature": "getGroupMemberOwnerAndAdmin: (data: string, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getGroupMessageReaderList",
+      "signature": "getGroupMessageReaderList: (params: GetGroupMessageReaderParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getHistoryMessageListReverse",
+      "signature": "getHistoryMessageListReverse: (params: GetHistoryMsgParams, operationID?: string) => Promise<WsResponse<AdvancedGetMessageResult>>",
+      "deprecated": false
+    },
+    {
+      "name": "getInputstates",
+      "signature": "getInputstates: (data: GetInputstatesParams, operationID?: string) => Promise<WsResponse<Platform[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getJoinedGroupList",
+      "signature": "getJoinedGroupList: (operationID?: string) => Promise<WsResponse<GroupItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getJoinedGroupListPage",
+      "signature": "getJoinedGroupListPage: (data: OffsetParams, operationID?: string) => Promise<WsResponse<GroupItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getLoginStatus",
+      "signature": "getLoginStatus: (operationID?: string) => Promise<WsResponse<LoginStatus>>",
+      "deprecated": false
+    },
+    {
+      "name": "getLoginUserID",
+      "signature": "getLoginUserID: (operationID?: string) => Promise<WsResponse<string>>",
+      "deprecated": false
+    },
+    {
+      "name": "getMultipleConversation",
+      "signature": "getMultipleConversation: (data: string[], operationID?: string) => Promise<WsResponse<ConversationItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getOneConversation",
+      "signature": "getOneConversation: (params: GetOneConversationParams, operationID?: string) => Promise<WsResponse<ConversationItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSelfUserInfo",
+      "signature": "getSelfUserInfo: (operationID?: string) => Promise<WsResponse<SelfUserInfo>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSignalingInvitationInfoStartApp",
+      "signature": "getSignalingInvitationInfoStartApp: (operationID?: string) => Promise<WsResponse<{ invitation: RtcInvite | null; offlinePushInfo: OfflinePush; }>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSpecifiedFriendsInfo",
+      "signature": "getSpecifiedFriendsInfo: (data: GetSpecifiedFriendsParams, operationID?: string) => Promise<WsResponse<FriendUserItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSpecifiedGroupMembersInfo",
+      "signature": "getSpecifiedGroupMembersInfo: (data: Omit<AccessToGroupParams, 'reason'>, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSpecifiedGroupsInfo",
+      "signature": "getSpecifiedGroupsInfo: (params: string[], operationID?: string) => Promise<WsResponse<GroupItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getSubscribeUsersStatus",
+      "signature": "getSubscribeUsersStatus: (operationID?: string) => Promise<WsResponse<UserOnlineState[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getTotalUnreadMsgCount",
+      "signature": "getTotalUnreadMsgCount: (operationID?: string) => Promise<WsResponse<number>>",
+      "deprecated": false
+    },
+    {
+      "name": "getUsersInfo",
+      "signature": "getUsersInfo: (data: string[], operationID?: string) => Promise<WsResponse<PublicUserItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getUsersInGroup",
+      "signature": "getUsersInGroup: (data: Omit<AccessToGroupParams, 'reason'>, operationID?: string) => Promise<WsResponse<string[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "getUserStatus",
+      "signature": "getUserStatus: (operationID?: string) => Promise<WsResponse<UserOnlineState[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "hideConversation",
+      "signature": "hideConversation: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "insertGroupMessageToLocalStorage",
+      "signature": "insertGroupMessageToLocalStorage: <T>(data: InsertGroupMsgParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "insertSingleMessageToLocalStorage",
+      "signature": "insertSingleMessageToLocalStorage: <T>(data: InsertSingleMsgParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "inviteUserToGroup",
+      "signature": "inviteUserToGroup: <T>(data: AccessToGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "isJoinGroup",
+      "signature": "isJoinGroup: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "joinGroup",
+      "signature": "joinGroup: <T>(data: JoinGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "kickGroupMember",
+      "signature": "kickGroupMember: <T>(data: AccessToGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "login",
+      "signature": "login: (params: InitAndLoginConfig, operationID?: string) => Promise<any>",
+      "deprecated": false
+    },
+    {
+      "name": "logout",
+      "signature": "logout: <T>(operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "markConversationMessageAsRead",
+      "signature": "markConversationMessageAsRead: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "modifyMessage",
+      "signature": "modifyMessage: (params: ModifyMessageParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "networkStatusChanged",
+      "signature": "networkStatusChanged: <T>(operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "pinConversation",
+      "signature": "pinConversation: <T>(data: SetConversationPinParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "pinFriends",
+      "signature": "pinFriends: <T>(data: PinFriendParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "quitGroup",
+      "signature": "quitGroup: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "refuseFriendApplication",
+      "signature": "refuseFriendApplication: <T>(data: AccessFriendApplicationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "refuseGroupApplication",
+      "signature": "refuseGroupApplication: <T>(data: AccessGroupApplicationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "removeBlack",
+      "signature": "removeBlack: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "removeConversationsFromGroups",
+      "signature": "removeConversationsFromGroups: <T>(data: RemoveConversationsFromGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "resetConversationGroupAtType",
+      "signature": "resetConversationGroupAtType: <T>(data: string, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "revokeMessage",
+      "signature": "revokeMessage: <T>(data: AccessMessageParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "searchFriends",
+      "signature": "searchFriends: (data: SearchFriendParams, operationID?: string) => Promise<WsResponse<SearchedFriendsInfo[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "searchGroupMembers",
+      "signature": "searchGroupMembers: (data: SearchGroupMemberParams, operationID?: string) => Promise<WsResponse<GroupMemberItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "searchGroups",
+      "signature": "searchGroups: (data: SearchGroupParams, operationID?: string) => Promise<WsResponse<GroupItem[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "searchLocalMessages",
+      "signature": "searchLocalMessages: (data: SearchLocalParams, operationID?: string) => Promise<WsResponse<SearchMessageResult>>",
+      "deprecated": false
+    },
+    {
+      "name": "sendGroupMessageReadReceipt",
+      "signature": "sendGroupMessageReadReceipt: <T>(params: SendGroupReadReceiptParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "sendMessage",
+      "signature": "sendMessage: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "sendMessageNotOss",
+      "signature": "sendMessageNotOss: (params: SendMsgParams, operationID?: string) => Promise<WsResponse<MessageItem>>",
+      "deprecated": false
+    },
+    {
+      "name": "setAppBackgroundStatus",
+      "signature": "setAppBackgroundStatus: <T>(data: boolean, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversation",
+      "signature": "setConversation: <T>(params: SetConversationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversationBurnDuration",
+      "signature": "setConversationBurnDuration: <T>(params: SetBurnDurationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setConversationDraft",
+      "signature": "setConversationDraft: <T>(data: SetConversationDraftParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setConversationEx",
+      "signature": "setConversationEx: (data: SetConversationExParams, operationID?: string) => Promise<WsResponse<ConversationItem[]>>",
+      "deprecated": true
+    },
+    {
+      "name": "setConversationGroupOrder",
+      "signature": "setConversationGroupOrder: <T>(data: SetConversationGroupOrderReq[], operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversationIsMsgDestruct",
+      "signature": "setConversationIsMsgDestruct: <T>(data: SetConversationMsgDestructParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversationMsgDestructTime",
+      "signature": "setConversationMsgDestructTime: <T>(data: SetConversationMsgDestructTimeParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversationPinnedMsg",
+      "signature": "setConversationPinnedMsg: <T>(data: SetConversationPinnedMsgParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setConversationPrivateChat",
+      "signature": "setConversationPrivateChat: <T>(params: SetConversationPrivateStateParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setConversationRecvMessageOpt",
+      "signature": "setConversationRecvMessageOpt: <T>(data: SetConversationRecvOptParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setFriendRemark",
+      "signature": "setFriendRemark: <T>(data: RemarkFriendParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setFriendsEx",
+      "signature": "setFriendsEx: <T>(data: SetFriendExParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGlobalRecvMessageOpt",
+      "signature": "setGlobalRecvMessageOpt: <T>(opt: MessageReceiveOptType, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGroupApplyMemberFriend",
+      "signature": "setGroupApplyMemberFriend: <T>(data: SetMemberPermissionParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGroupInfo",
+      "signature": "setGroupInfo: <T>(data: Partial<GroupItem> & { groupID: string; }, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setGroupLookMemberInfo",
+      "signature": "setGroupLookMemberInfo: <T>(data: SetMemberPermissionParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGroupMemberInfo",
+      "signature": "setGroupMemberInfo: <T>(data: UpdateMemberInfoParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setGroupMemberNickname",
+      "signature": "setGroupMemberNickname: <T>(data: SetGroupMemberNickParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGroupMemberRoleLevel",
+      "signature": "setGroupMemberRoleLevel: <T>(data: SetGroupRoleParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setGroupVerification",
+      "signature": "setGroupVerification: <T>(data: SetGroupVerificationParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "setMessageLocalContent",
+      "signature": "setMessageLocalContent: (data: SetMessageLocalContentParams, operationID?: string) => Promise<WsResponse<void>>",
+      "deprecated": false
+    },
+    {
+      "name": "setMessageLocalEx",
+      "signature": "setMessageLocalEx: <T>(params: SetMessageLocalExParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "setSelfInfo",
+      "signature": "setSelfInfo: <T>(data: PartialUserItem, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "SetSelfInfoEx",
+      "signature": "SetSelfInfoEx: <T>(data: PartialUserItem, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "signalingAccept",
+      "signature": "signalingAccept: (data: RtcActionParams, operationID?: string) => Promise<WsResponse<RtcInviteResults>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingCancel",
+      "signature": "signalingCancel: <T>(data: RtcActionParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingGetRoomByGroupID",
+      "signature": "signalingGetRoomByGroupID: (groupID: string, operationID?: string) => Promise<WsResponse<CallingRoomData>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingGetTokenByRoomID",
+      "signature": "signalingGetTokenByRoomID: (roomID: string, operationID?: string) => Promise<WsResponse<RtcInviteResults>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingHungUp",
+      "signature": "signalingHungUp: <T>(data: RtcActionParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingInvite",
+      "signature": "signalingInvite: (data: SignalingInviteParams, operationID?: string) => Promise<WsResponse<RtcInviteResults>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingInviteInGroup",
+      "signature": "signalingInviteInGroup: (data: SignalingInviteParams, operationID?: string) => Promise<WsResponse<RtcInviteResults>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingReject",
+      "signature": "signalingReject: <T>(data: RtcActionParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "signalingSendCustomSignal",
+      "signature": "signalingSendCustomSignal: <T>(data: CustomSignalParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "speechToText",
+      "signature": "speechToText: (data: SpeechToTextParams, operationID?: string) => Promise<WsResponse<{ text: string; }>>",
+      "deprecated": false
+    },
+    {
+      "name": "speechToTextCapabilities",
+      "signature": "speechToTextCapabilities: (operationID?: string) => Promise<WsResponse<SpeechToTextCapabilities>>",
+      "deprecated": false
+    },
+    {
+      "name": "subscribeUsersStatus",
+      "signature": "subscribeUsersStatus: (data: string[], operationID?: string) => Promise<WsResponse<UserOnlineState[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "transferGroupOwner",
+      "signature": "transferGroupOwner: <T>(data: TransferGroupParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "typingStatusUpdate",
+      "signature": "typingStatusUpdate: <T>(data: TypingUpdateParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": true
+    },
+    {
+      "name": "unsubscribeUsersStatus",
+      "signature": "unsubscribeUsersStatus: (data: string[], operationID?: string) => Promise<WsResponse<UserOnlineState[]>>",
+      "deprecated": false
+    },
+    {
+      "name": "updateConversationGroup",
+      "signature": "updateConversationGroup: (data: UpdateConversationGroupReq, operationID?: string) => Promise<WsResponse<ConversationGroup>>",
+      "deprecated": false
+    },
+    {
+      "name": "updateFriends",
+      "signature": "updateFriends: <T>(data: UpdateFriendsParams, operationID?: string) => Promise<WsResponse<T>>",
+      "deprecated": false
+    },
+    {
+      "name": "uploadFile",
+      "signature": "uploadFile: (data: UploadFileParams, operationID?: string) => Promise<WsResponse<{ url: string; }>>",
+      "deprecated": false
+    }
+  ],
+  "events": [
+    {
+      "name": "Login",
+      "value": "Login"
+    },
+    {
+      "name": "OnBlackAdded",
+      "value": "OnBlackAdded"
+    },
+    {
+      "name": "OnBlackDeleted",
+      "value": "OnBlackDeleted"
+    },
+    {
+      "name": "OnChangedPinnedMsg",
+      "value": "OnChangedPinnedMsg"
+    },
+    {
+      "name": "OnConnectFailed",
+      "value": "OnConnectFailed"
+    },
+    {
+      "name": "OnConnecting",
+      "value": "OnConnecting"
+    },
+    {
+      "name": "OnConnectSuccess",
+      "value": "OnConnectSuccess"
+    },
+    {
+      "name": "OnConversationChanged",
+      "value": "OnConversationChanged"
+    },
+    {
+      "name": "OnConversationGroupAdded",
+      "value": "OnConversationGroupAdded"
+    },
+    {
+      "name": "OnConversationGroupChanged",
+      "value": "OnConversationGroupChanged"
+    },
+    {
+      "name": "OnConversationGroupDeleted",
+      "value": "OnConversationGroupDeleted"
+    },
+    {
+      "name": "OnConversationGroupMemberAdded",
+      "value": "OnConversationGroupMemberAdded"
+    },
+    {
+      "name": "OnConversationGroupMemberDeleted",
+      "value": "OnConversationGroupMemberDeleted"
+    },
+    {
+      "name": "OnConversationUserInputStatusChanged",
+      "value": "OnConversationUserInputStatusChanged"
+    },
+    {
+      "name": "OnDeleteUserAllMsgsInConv",
+      "value": "OnDeleteUserAllMsgsInConv"
+    },
+    {
+      "name": "OnFriendAdded",
+      "value": "OnFriendAdded"
+    },
+    {
+      "name": "OnFriendApplicationAccepted",
+      "value": "OnFriendApplicationAccepted"
+    },
+    {
+      "name": "OnFriendApplicationAdded",
+      "value": "OnFriendApplicationAdded"
+    },
+    {
+      "name": "OnFriendApplicationDeleted",
+      "value": "OnFriendApplicationDeleted"
+    },
+    {
+      "name": "OnFriendApplicationRejected",
+      "value": "OnFriendApplicationRejected"
+    },
+    {
+      "name": "OnFriendDeleted",
+      "value": "OnFriendDeleted"
+    },
+    {
+      "name": "OnFriendInfoChanged",
+      "value": "OnFriendInfoChanged"
+    },
+    {
+      "name": "OnGroupApplicationAccepted",
+      "value": "OnGroupApplicationAccepted"
+    },
+    {
+      "name": "OnGroupApplicationAdded",
+      "value": "OnGroupApplicationAdded"
+    },
+    {
+      "name": "OnGroupApplicationBadgeCountChanged",
+      "value": "OnGroupApplicationBadgeCountChanged"
+    },
+    {
+      "name": "OnGroupApplicationDeleted",
+      "value": "OnGroupApplicationDeleted"
+    },
+    {
+      "name": "OnGroupApplicationRejected",
+      "value": "OnGroupApplicationRejected"
+    },
+    {
+      "name": "OnGroupDismissed",
+      "value": "OnGroupDismissed"
+    },
+    {
+      "name": "OnGroupInfoChanged",
+      "value": "OnGroupInfoChanged"
+    },
+    {
+      "name": "OnGroupMemberAdded",
+      "value": "OnGroupMemberAdded"
+    },
+    {
+      "name": "OnGroupMemberDeleted",
+      "value": "OnGroupMemberDeleted"
+    },
+    {
+      "name": "OnGroupMemberInfoChanged",
+      "value": "OnGroupMemberInfoChanged"
+    },
+    {
+      "name": "OnHangUp",
+      "value": "OnHangUp"
+    },
+    {
+      "name": "OnInvitationCancelled",
+      "value": "OnInvitationCancelled"
+    },
+    {
+      "name": "OnInvitationTimeout",
+      "value": "OnInvitationTimeout"
+    },
+    {
+      "name": "OnInviteeAccepted",
+      "value": "OnInviteeAccepted"
+    },
+    {
+      "name": "OnInviteeAcceptedByOtherDevice",
+      "value": "OnInviteeAcceptedByOtherDevice"
+    },
+    {
+      "name": "OnInviteeRejected",
+      "value": "OnInviteeRejected"
+    },
+    {
+      "name": "OnInviteeRejectedByOtherDevice",
+      "value": "OnInviteeRejectedByOtherDevice"
+    },
+    {
+      "name": "OnJoinedGroupAdded",
+      "value": "OnJoinedGroupAdded"
+    },
+    {
+      "name": "OnJoinedGroupDeleted",
+      "value": "OnJoinedGroupDeleted"
+    },
+    {
+      "name": "OnKickedOffline",
+      "value": "OnKickedOffline"
+    },
+    {
+      "name": "OnMessageModified",
+      "value": "OnMessageModified"
+    },
+    {
+      "name": "OnMsgDeleted",
+      "value": "OnMsgDeleted"
+    },
+    {
+      "name": "OnNewConversation",
+      "value": "OnNewConversation"
+    },
+    {
+      "name": "OnNewRecvMessageRevoked",
+      "value": "OnNewRecvMessageRevoked"
+    },
+    {
+      "name": "OnProgress",
+      "value": "OnProgress"
+    },
+    {
+      "name": "OnReceiveCustomSignal",
+      "value": "OnReceiveCustomSignal"
+    },
+    {
+      "name": "OnReceiveNewInvitation",
+      "value": "OnReceiveNewInvitation"
+    },
+    {
+      "name": "OnRecvC2CReadReceipt",
+      "value": "OnRecvC2CReadReceipt"
+    },
+    {
+      "name": "OnRecvCustomBusinessMessage",
+      "value": "OnRecvCustomBusinessMessage"
+    },
+    {
+      "name": "OnRecvGroupReadReceipt",
+      "value": "OnRecvGroupReadReceipt"
+    },
+    {
+      "name": "OnRecvMessageRevoked",
+      "value": "OnRecvMessageRevoked"
+    },
+    {
+      "name": "OnRecvNewMessage",
+      "value": "OnRecvNewMessage"
+    },
+    {
+      "name": "OnRecvNewMessages",
+      "value": "OnRecvNewMessages"
+    },
+    {
+      "name": "OnRecvOfflineNewMessage",
+      "value": "onRecvOfflineNewMessage"
+    },
+    {
+      "name": "OnRecvOfflineNewMessages",
+      "value": "onRecvOfflineNewMessages"
+    },
+    {
+      "name": "OnRecvOnlineOnlyMessage",
+      "value": "OnRecvOnlineOnlyMessage"
+    },
+    {
+      "name": "OnRecvOnlineOnlyMessages",
+      "value": "OnRecvOnlineOnlyMessages"
+    },
+    {
+      "name": "OnRoomParticipantConnected",
+      "value": "OnRoomParticipantConnected"
+    },
+    {
+      "name": "OnRoomParticipantDisconnected",
+      "value": "OnRoomParticipantDisconnected"
+    },
+    {
+      "name": "OnSelfInfoUpdated",
+      "value": "OnSelfInfoUpdated"
+    },
+    {
+      "name": "OnStreamChange",
+      "value": "OnStreamChange"
+    },
+    {
+      "name": "OnSyncServerFailed",
+      "value": "OnSyncServerFailed"
+    },
+    {
+      "name": "OnSyncServerFinish",
+      "value": "OnSyncServerFinish"
+    },
+    {
+      "name": "OnSyncServerProgress",
+      "value": "OnSyncServerProgress"
+    },
+    {
+      "name": "OnSyncServerStart",
+      "value": "OnSyncServerStart"
+    },
+    {
+      "name": "OnTotalUnreadMessageCountChanged",
+      "value": "OnTotalUnreadMessageCountChanged"
+    },
+    {
+      "name": "OnUploadLogsProgress",
+      "value": "OnUploadLogsProgress"
+    },
+    {
+      "name": "OnUserStatusChanged",
+      "value": "OnUserStatusChanged"
+    },
+    {
+      "name": "OnUserTokenExpired",
+      "value": "OnUserTokenExpired"
+    },
+    {
+      "name": "OnUserTokenInvalid",
+      "value": "OnUserTokenInvalid"
+    },
+    {
+      "name": "UnUsedEvent",
+      "value": "UnUsedEvent"
+    },
+    {
+      "name": "UploadComplete",
+      "value": "UploadComplete"
+    }
+  ]
+}

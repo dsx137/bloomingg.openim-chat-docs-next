@@ -1,0 +1,19 @@
+---
+title: '隐藏会话'
+description: '使用 OpenIM SDK 隐藏当前用户的会话。'
+sourcePath: '/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation'
+---
+
+`hideConversation()` 只隐藏当前登录用户的会话入口，不会删除单聊关系、退出群组或影响其他用户。
+
+```ts
+await OpenIM.hideConversation(
+  conversationID
+);
+```
+
+该方法适合临时从聊天列表移除会话入口。收到新消息或完成重新同步后，隐藏的会话可能再次出现在列表中。
+
+## 调用后的状态变化
+
+`hideConversation()` 的 Promise 成功表示本次隐藏请求已完成。调用端可以立即从当前会话列表移除对应的 `conversationID`。相关客户端随后可能收到 `CbEvents.OnConversationChanged`，事件 `data` 是 `ConversationItem[]`，应按 `conversationID` 幂等合并或从列表移除；需要显示当前列表时，再重新查询校准。会话事件的完整监听和清理方式见[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)。本页不重复注册处理器，也不把隐藏操作描述为删除聊天关系。

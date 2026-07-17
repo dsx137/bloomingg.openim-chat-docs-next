@@ -1,0 +1,62 @@
+---
+title: '开始之前'
+description: '准备 OpenIM 服务、用户登录信息和浏览器运行环境，再开始认证或发送消息。'
+sourcePath: '/sdk/wasm/getting-started/before-you-start'
+---
+
+在浏览器中接入 OpenIM SDK 前，需要先准备可访问的 OpenIM 服务、可信的用户认证流程和 SDK 运行资源。这些条件同时适用于[认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session)和[发送第一条消息](/sdk/wasm/getting-started/send-first-message)。
+
+## 准备 OpenIM 服务
+
+如果还没有可用的 OpenIM Server，先按 [Docker 部署指南](https://docs.openim.io/guides/gettingstarted/dockercompose)完成部署，并确认浏览器可访问的 `apiAddr` 与 `wsAddr`（含 HTTPS/WSS、反向代理与跨域）。
+
+浏览器登录需要以下两个服务地址：
+
+| 字段 | 说明 |
+| --- | --- |
+| `apiAddr` | OpenIM Server 的 HTTP API 地址，用于登录、同步和资源请求。HTTPS 页面应使用浏览器可以访问的 HTTPS 地址。 |
+| `wsAddr` | OpenIM Server 的 WebSocket 地址，用于建立长连接和接收实时事件。HTTPS 页面通常使用 WSS 地址。 |
+
+不要只验证服务在内网或服务器本机能够访问。还应从实际部署页面检查跨域配置、HTTPS 证书、反向代理和 WebSocket 升级是否正常。
+
+## 准备用户和 Token
+
+`userID` 标识 OpenIM 用户，Token 用于认证当前用户。创建或绑定 OpenIM 用户、签发 Token 和校验业务权限都应由可信后端完成，浏览器不能保存管理员 Token、secret 或其他服务端凭据。
+
+后端接入 OpenIM REST API 前，可先阅读[准备使用 Platform API](/platform-api/prepare-to-use-api)和[签发会话 Token](/platform-api/user/managing-session-tokens/issue-a-session-token)。如果产品已有账号体系，后端应把业务账号与 OpenIM `userID` 建立稳定映射，并确保返回的 Token 与该 `userID` 对应。
+
+建议由业务后端提供一个登录信息接口，浏览器只取得 SDK 登录所需的最小数据：
+
+```ts
+type OpenIMSession = {
+  userID: string;
+  token: string;
+  apiAddr: string;
+  wsAddr: string;
+};
+
+async function loadOpenIMSession(): Promise<OpenIMSession> {
+  const response = await fetch('/api/openim/session');
+  if (!response.ok) throw new Error('Failed to load OpenIM session.');
+  return response.json();
+}
+```
+
+业务登录接口需要先验证当前业务账号，再返回对应的 OpenIM 登录信息；不能接受浏览器任意传入的 `userID` 后直接为其签发 Token。
+
+## 准备浏览器运行环境
+
+OpenIM SDK 在浏览器中依赖 WebAssembly、WebSocket 和 IndexedDB。项目还需要发布 `openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js`，并保证页面能够从配置的静态资源路径加载这些文件。
+
+如果应用使用 Next.js、Nuxt、Remix 等支持服务端渲染的框架，只能在浏览器端初始化 SDK、访问本地数据库和建立连接。不同运行环境的初始化位置和生命周期处理见[按运行环境接入](/sdk/wasm/getting-started/environment-specific-implementation)。
+
+正式发布前，应在产品实际支持的浏览器和网络环境中验证：
+
+- 三个 SDK 静态资源均能成功加载，响应内容没有被登录页或错误页替换。
+- `apiAddr` 可以发起 HTTP 请求，`wsAddr` 可以完成 WebSocket 连接。
+- IndexedDB 可以创建并写入本地数据库。
+- 隐私模式、存储空间不足、页面进入后台后恢复等场景符合产品预期。
+
+## 继续接入
+
+公共前提准备完成后，先完成[认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session)。确认连接成功后，再按照[发送第一条消息](/sdk/wasm/getting-started/send-first-message)准备单聊用户或群组目标并验证消息链路。

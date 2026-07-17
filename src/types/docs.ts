@@ -28,6 +28,7 @@ export interface NavNode {
   type: 'folder' | 'page';
   children: NavNode[];
   minIndex: number;
+  navigationTitle?: string;
 }
 
 export interface NavContext {
@@ -40,6 +41,7 @@ export interface NavContext {
   platform?: string | null;
   nodes: NavNode[];
   pageCount: number;
+  sidebarExpansion?: 'top-level' | 'active-path';
 }
 
 export interface NavigationData {

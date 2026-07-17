@@ -518,7 +518,7 @@ function GuidesPageContent({
   const content = selection.kind === 'item' ? getGuideContent(selection.item) : undefined;
   const route = createGuidesRoute(text, currentPath, selection, content);
   const breadcrumbs: BreadcrumbItem[] = [
-    { title: locale === 'zh' ? '首页' : 'Home', href: toLocalizedPath('/docs/chat', locale) },
+    { title: locale === 'zh' ? '首页' : 'Home', href: toLocalizedPath('/', locale) },
     selection.kind === 'overview'
       ? { title: text.heroTitle }
       : { title: text.heroTitle, href: toLocalizedPath('/docs/guides', locale) },

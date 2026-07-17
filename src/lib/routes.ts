@@ -19,7 +19,7 @@ for (const group of routesByContext.values()) {
 }
 
 export function normalizePath(path: string): string {
-  if (!path) return '/docs/chat';
+  if (!path) return '/';
   const normalized = `/${path}`.replace(/\/{2,}/g, '/').replace(/\/$/, '');
   return normalized || '/';
 }
@@ -57,14 +57,10 @@ export function getBreadcrumbs(
   { showVersion = true }: { showVersion?: boolean } = {},
 ): BreadcrumbItem[] {
   const parts = route.relativePath.split('/');
-  const crumbs: BreadcrumbItem[] = [{ title: 'Home', href: '/docs/chat' }];
+  const crumbs: BreadcrumbItem[] = [{ title: 'Home', href: '/' }];
 
-  if (parts[0] === 'chat') {
-    crumbs.push({ title: 'Chat', href: '/docs/chat' });
-  }
-
-  let current = '/docs/chat';
-  for (let index = 1; index < parts.length; index += 1) {
+  let current = '';
+  for (let index = 0; index < parts.length; index += 1) {
     current += `/${parts[index]}`;
     if (!showVersion && route.version && parts[index] === route.version) continue;
     const record = routeMap.get(current);

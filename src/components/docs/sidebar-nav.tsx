@@ -1,19 +1,24 @@
 import Link from 'next/link';
 import type { CSSProperties } from 'react';
-import type { NavNode } from '@/src/types/docs';
+import type { NavContext, NavNode } from '@/src/types/docs';
 import { nodeContainsPath } from '@/src/lib/navigation';
 import type { Locale } from '@/src/lib/i18n';
 import { toLocalizedPath } from '@/src/lib/i18n';
 import { localizeNavNodeTitle } from '@/src/lib/localized-docs';
+import { SidebarDisclosure } from '@/src/components/docs/sidebar-disclosure';
 
 export function SidebarNav({
   nodes,
   currentPath,
   locale = 'en',
+  sidebarExpansion = 'top-level',
+  stateScope = 'docs',
 }: {
   nodes: NavNode[];
   currentPath: string;
   locale?: Locale;
+  sidebarExpansion?: NavContext['sidebarExpansion'];
+  stateScope?: string;
 }) {
   return (
     <nav aria-label="Documentation navigation" className="sidebar-tree">
@@ -24,6 +29,8 @@ export function SidebarNav({
           key={node.id}
           locale={locale}
           node={node}
+          sidebarExpansion={sidebarExpansion}
+          stateScope={stateScope}
         />
       ))}
     </nav>
@@ -35,11 +42,15 @@ function SidebarNode({
   currentPath,
   depth,
   locale,
+  sidebarExpansion,
+  stateScope,
 }: {
   node: NavNode;
   currentPath: string;
   depth: number;
   locale: Locale;
+  sidebarExpansion: NavContext['sidebarExpansion'];
+  stateScope: string;
 }) {
   const active = node.href === currentPath;
   const containsActive = nodeContainsPath(node, currentPath);
@@ -60,7 +71,11 @@ function SidebarNode({
   }
 
   return (
-    <details className="sidebar-group" open={containsActive || depth === 0}>
+    <SidebarDisclosure
+      className="sidebar-group"
+      initiallyOpen={containsActive || (sidebarExpansion === 'top-level' && depth === 0)}
+      stateKey={`${stateScope}:${node.id}`}
+    >
       <summary style={{ '--nav-depth': depth } as CSSProperties}>
         {node.href ? (
           <Link
@@ -81,9 +96,11 @@ function SidebarNode({
             key={child.id}
             locale={locale}
             node={child}
+            sidebarExpansion={sidebarExpansion}
+            stateScope={stateScope}
           />
         ))}
       </div>
-    </details>
+    </SidebarDisclosure>
   );
 }

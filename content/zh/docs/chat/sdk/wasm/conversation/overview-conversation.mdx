@@ -1,0 +1,69 @@
+---
+title: '会话概览'
+description: '了解 OpenIM SDK 中 ConversationItem、conversationID、会话设置和会话事件的职责。'
+sourcePath: '/sdk/wasm/conversation/overview-conversation'
+---
+
+在 OpenIM 中，会话（Conversation）是客户端围绕一次单聊或群聊维护的聊天状态，由当前登录用户的一条 `ConversationItem` 记录表示。它保存未读数、最后一条消息、置顶、草稿、消息接收选项和扩展字段等列表状态。会话记录与聊天目标分开标识：`conversationID` 用于定位当前账号的会话状态，单聊目标使用对方 `userID`，群聊目标使用 `groupID`。
+
+单聊和群聊都通过会话记录承载聊天列表状态；群资料、成员关系和权限仍由群组 API 管理。群聊页面需要同时使用 `groupID` 访问群组能力，并使用 `conversationID` 处理会话设置、未读数、草稿和消息历史。
+
+## 会话标识
+
+单聊会话使用目标用户 ID 作为 `sourceID`，会话类型为 `SessionType.Single`；群聊会话使用 `groupID` 作为 `sourceID`，会话类型为 `SessionType.WorkingGroup`。可以调用 `getConversationIDBySessionType()` 得到稳定的 `conversationID`，再把它用于会话设置、已读、隐藏和删除操作。
+
+| 标识             | 用途                                                |
+| ---------------- | --------------------------------------------------- |
+| `conversationID` | 当前账号的会话记录 ID，用于会话设置、消息历史和未读状态。 |
+| `userID`         | 单聊对方的用户 ID。                                 |
+| `groupID`        | 群聊对应的群组 ID，也是群组 API 的目标标识。         |
+| `sourceID`       | 按会话类型查询时传入的聊天目标 ID：单聊为 `userID`，群聊为 `groupID`。 |
+
+## ConversationItem
+
+`ConversationItem` 中常用字段如下：
+
+| 字段                | 说明                       |
+| ------------------- | -------------------------- |
+| `conversationID`    | 会话 ID。                  |
+| `conversationType`  | 会话类型。                 |
+| `showName`          | 当前会话展示名称。         |
+| `faceURL`           | 当前会话展示头像。         |
+| `unreadCount`       | 当前会话未读数。           |
+| `latestMsg`         | 最后一条消息。             |
+| `latestMsgSendTime` | 最后一条消息发送时间。     |
+| `recvMsgOpt`        | 当前会话的消息接收选项。   |
+| `groupAtType`       | 群聊中的 @ 提醒状态。      |
+| `draftText`         | 当前会话草稿。             |
+| `isPinned`          | 是否置顶。                 |
+| `isPrivateChat`     | 是否启用私聊状态。         |
+| `isMsgDestruct`     | 是否启用消息销毁。         |
+| `isMarked`          | 是否标记该会话。           |
+| `remark`            | 当前用户设置的会话备注。   |
+| `burnDuration`      | 阅后即焚时长。             |
+| `msgDestructTime`   | 消息销毁时间配置。         |
+| `ex`                | 应用约定的会话扩展字符串。 |
+
+## 查询和设置
+
+- [获取会话](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations)
+- [获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)
+- [设置会话](/sdk/wasm/conversation/managing-conversations/set-conversation)
+- [设置会话草稿](/sdk/wasm/conversation/managing-conversations/set-conversation-draft)
+- [管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)
+- [管理会话分组](/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups)
+
+## 会话生命周期
+
+- [隐藏会话](/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation)
+- [删除或清空会话](/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation)
+
+## 状态更新
+
+查询方法用于建立页面快照，事件用于合并后续变化：
+
+- 新会话和会话属性变化由[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)统一监听。
+- 当前账号总未读数变化由[管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)统一监听。
+- 会话分组变化由[管理会话分组](/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups)统一监听。
+
+概览页只说明事件归属，不注册处理器。调用按钮的成功状态、事件增量和重新查询校准应分别处理，不能只根据用户操作推断最终会话状态。

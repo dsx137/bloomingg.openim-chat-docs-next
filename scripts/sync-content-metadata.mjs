@@ -1,11 +1,14 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { buildWasmSidebar, getWasmSidebarPaths } from './lib/wasm-sidebar.mjs';
 
 const root = process.cwd();
 const routesPath = resolve(root, 'src/generated/routes.json');
 const navigationPath = resolve(root, 'src/generated/navigation.json');
+const wasmSidebarPath = resolve(root, 'data/structure/wasm-sidebar.json');
 const routes = JSON.parse(await readFile(routesPath, 'utf8'));
 const navigation = JSON.parse(await readFile(navigationPath, 'utf8'));
+const wasmSidebar = JSON.parse(await readFile(wasmSidebarPath, 'utf8'));
 let changed = 0;
 
 for (const route of routes) {
@@ -28,12 +31,18 @@ for (const route of routes) {
   }
 }
 
-changed += applyWasmRetrievingUsersOrder(routes);
+changed += applyWasmSidebarOrder(routes, wasmSidebar);
 
 const routeMap = new Map(routes.map((route) => [route.path, route]));
 for (const context of navigation.contexts) {
-  changed += refreshNodes(context.nodes, routeMap);
-  changed += applyWasmRetrievingUsersNavigationOrder(context);
+  if (context.key === 'chat/sdk/wasm') {
+    const next = buildWasmSidebar(wasmSidebar, routes);
+    changed += replaceField(context, 'nodes', next.nodes);
+    changed += setField(context, 'pageCount', next.pageCount);
+    changed += setField(context, 'sidebarExpansion', next.sidebarExpansion);
+  } else {
+    changed += refreshNodes(context.nodes, routeMap);
+  }
   const overview = routeMap.get(context.overviewPath);
   if (overview && context.title !== overview.contextTitle && overview.contextTitle) {
     context.title = overview.contextTitle;
@@ -101,57 +110,23 @@ function setField(target, key, value) {
   return 1;
 }
 
-function applyWasmRetrievingUsersOrder(routes) {
-  const order = wasmRetrievingUsersOrder();
-  const overview = routes.find(
-    (route) => route.path === '/docs/chat/sdk/v4/wasm/user/overview-user',
-  );
-  const baseOrder = Number.isFinite(overview?.navOrder) ? overview.navOrder : 506;
+function applyWasmSidebarOrder(routes, config) {
+  const order = getWasmSidebarPaths(config);
+  const wasmRoutes = routes.filter((route) => route.contextKey === 'chat/sdk/wasm');
+  const baseOrder = Math.min(...wasmRoutes.map((route) => route.navOrder).filter(Number.isFinite));
   let changed = 0;
 
   order.forEach((path, index) => {
     const route = routes.find((item) => item.path === path);
-    if (!route) return;
-    changed += setField(route, 'navOrder', Number((baseOrder + (index + 1) / 10).toFixed(1)));
+    if (!route) throw new Error(`Cannot order missing WASM route: ${path}`);
+    changed += setField(route, 'navOrder', baseOrder + index);
   });
 
   return changed;
 }
 
-function applyWasmRetrievingUsersNavigationOrder(context) {
-  if (context.key !== 'chat/sdk/v4/wasm') return 0;
-
-  const group = findNode(context.nodes, 'user/retrieving-users');
-  if (!group) return 0;
-
-  const order = new Map(wasmRetrievingUsersOrder().map((path, index) => [path, index]));
-  const before = group.children.map((child) => child.href ?? child.id).join('\n');
-  group.children.sort((a, b) => {
-    const first = order.get(a.href) ?? Number.POSITIVE_INFINITY;
-    const second = order.get(b.href) ?? Number.POSITIVE_INFINITY;
-    return (
-      first - second ||
-      (a.minIndex ?? Number.POSITIVE_INFINITY) - (b.minIndex ?? Number.POSITIVE_INFINITY) ||
-      a.title.localeCompare(b.title)
-    );
-  });
-  const after = group.children.map((child) => child.href ?? child.id).join('\n');
-  return before === after ? 0 : 1;
-}
-
-function findNode(nodes, id) {
-  for (const node of nodes) {
-    if (node.id === id) return node;
-    const found = findNode(node.children ?? [], id);
-    if (found) return found;
-  }
-  return undefined;
-}
-
-function wasmRetrievingUsersOrder() {
-  return [
-    '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application',
-    '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-a-list-of-friends',
-    '/docs/chat/sdk/v4/wasm/user/retrieving-users/retrieve-friend-information',
-  ];
+function replaceField(target, key, value) {
+  if (JSON.stringify(target[key]) === JSON.stringify(value)) return 0;
+  target[key] = value;
+  return 1;
 }
