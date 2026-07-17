@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Moderation
+  x-apifox-folder: 'Public/Moderation'
   summary: Unblock user
   description: Removes an OpenIM user from the current user's block list.
   operationId: friendRemoveBlack

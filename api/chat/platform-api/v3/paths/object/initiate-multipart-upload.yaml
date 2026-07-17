@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Object storage'
+  x-apifox-folder: 'Private/Object storage'
   summary: 'ObjectInitiateMultipartUpload'
   description: 'OpenIM Server POST route handled by t.InitiateMultipartUpload. It accepts the JSON serialization of third.InitiateMultipartUploadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectInitiateMultipartUpload

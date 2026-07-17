@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Groups'
+  x-apifox-folder: 'Private/Groups'
   summary: 'GroupGetGroupApplicationUnhandledCount'
   description: 'OpenIM Server POST route handled by g.GetGroupApplicationUnhandledCount. It accepts the JSON serialization of group.GetGroupApplicationUnhandledCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupApplicationUnhandledCount

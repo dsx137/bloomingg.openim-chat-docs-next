@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Users'
+  x-apifox-folder: 'Private/Users'
   summary: 'UserAccountCheck'
   description: 'OpenIM Server POST route handled by u.AccountCheck. It accepts the JSON serialization of user.AccountCheckReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserAccountCheck

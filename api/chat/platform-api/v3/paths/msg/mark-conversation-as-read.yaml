@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Messages'
+  x-apifox-folder: 'Private/Messages'
   summary: 'MsgMarkConversationAsRead'
   description: 'OpenIM Server POST route handled by m.MarkConversationAsRead. It accepts the JSON serialization of msg.MarkConversationAsReadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgMarkConversationAsRead

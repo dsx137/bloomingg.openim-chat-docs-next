@@ -2,6 +2,7 @@ get:
   tags:
     - 'Private'
     - 'Object storage'
+  x-apifox-folder: 'Private/Object storage'
   summary: 'ObjectName'
   description: 'OpenIM Server GET route handled by t.ObjectRedirect. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getObjectName

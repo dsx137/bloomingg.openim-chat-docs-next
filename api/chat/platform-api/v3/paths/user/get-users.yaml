@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Users
+  x-apifox-folder: 'Public/Users'
   summary: List users
   description: Returns a paginated list of OpenIM users.
   operationId: userGetUsers

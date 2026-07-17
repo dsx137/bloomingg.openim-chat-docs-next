@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Moderation
+  x-apifox-folder: 'Public/Moderation'
   summary: List blocked and blocking users
   description: Lists users blocked by the current user and users who have blocked them.
   operationId: friendGetBlackList

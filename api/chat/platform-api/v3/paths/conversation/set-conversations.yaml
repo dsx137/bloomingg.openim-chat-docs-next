@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Conversations'
+  x-apifox-folder: 'Private/Conversations'
   summary: 'ConversationSetConversations'
   description: 'OpenIM Server POST route handled by c.SetConversations. It accepts the JSON serialization of conversation.SetConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationSetConversations

@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Groups'
+  x-apifox-folder: 'Private/Groups'
   summary: 'GroupGetGroupUsersReqApplicationList'
   description: 'OpenIM Server POST route handled by g.GetGroupUsersReqApplicationList. It accepts the JSON serialization of group.GetGroupUsersReqApplicationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupUsersReqApplicationList

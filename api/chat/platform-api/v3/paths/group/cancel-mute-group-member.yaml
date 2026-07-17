@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Unmute group member
   description: Removes a group member's mute restriction.
   operationId: groupCancelMuteGroupMember

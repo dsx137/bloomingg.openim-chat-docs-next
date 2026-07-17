@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'JavaScript SDK'
+  x-apifox-folder: 'Private/JavaScript SDK'
   summary: 'JssdkGetActiveConversations'
   description: 'OpenIM Server POST route handled by j.GetActiveConversations. It accepts the JSON serialization of jssdk.GetActiveConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postJssdkGetActiveConversations

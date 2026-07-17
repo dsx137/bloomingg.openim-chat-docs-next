@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Delete group
   description: Dismisses an OpenIM group and removes it from service.
   operationId: groupDismissGroup

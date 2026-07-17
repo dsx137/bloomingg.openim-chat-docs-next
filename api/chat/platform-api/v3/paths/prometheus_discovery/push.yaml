@@ -2,6 +2,7 @@ get:
   tags:
     - 'Private'
     - 'Service discovery'
+  x-apifox-folder: 'Private/Service discovery'
   summary: 'PrometheusDiscoveryPush'
   description: 'OpenIM Server GET route handled by pd.Push. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getPrometheusDiscoveryPush

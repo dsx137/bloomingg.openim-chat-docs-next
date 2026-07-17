@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Third-party services'
+  x-apifox-folder: 'Private/Third-party services'
   summary: 'ThirdSetAppBadge'
   description: 'OpenIM Server POST route handled by t.SetAppBadge. It accepts the JSON serialization of third.SetAppBadgeReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdSetAppBadge

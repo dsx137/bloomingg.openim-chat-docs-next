@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Users'
+  x-apifox-folder: 'Private/Users'
   summary: 'UserUpdateNotificationAccount'
   description: 'OpenIM Server POST route handled by u.UpdateNotificationAccountInfo. It accepts the JSON serialization of user.UpdateNotificationAccountInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserUpdateNotificationAccount

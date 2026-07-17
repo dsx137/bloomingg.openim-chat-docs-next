@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Users'
+  x-apifox-folder: 'Private/Users'
   summary: 'UserProcessUserCommandAdd'
   description: 'OpenIM Server POST route handled by u.ProcessUserCommandAdd. It accepts the JSON serialization of user.ProcessUserCommandAddReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserProcessUserCommandAdd

@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Groups'
+  x-apifox-folder: 'Private/Groups'
   summary: 'GroupGetIncrementalGroupMembersBatch'
   description: 'OpenIM Server POST route handled by g.GetIncrementalGroupMemberBatch. It accepts the JSON serialization of group.BatchGetIncrementalGroupMemberReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetIncrementalGroupMembersBatch

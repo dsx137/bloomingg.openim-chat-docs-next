@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Friends'
+  x-apifox-folder: 'Private/Friends'
   summary: 'FriendImportFriend'
   description: 'OpenIM Server POST route handled by f.ImportFriends. It accepts the JSON serialization of relation.ImportFriendReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendImportFriend

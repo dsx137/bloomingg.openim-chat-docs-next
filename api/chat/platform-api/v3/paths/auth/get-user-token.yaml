@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Authentication
+  x-apifox-folder: 'Public/Authentication'
   summary: Issue session token
   description: Issues a session token for an OpenIM user on the selected platform.
   operationId: authGetUserToken

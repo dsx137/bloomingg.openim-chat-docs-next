@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Invite members
   description: Invites one or more OpenIM users to a group.
   operationId: groupInviteUserToGroup

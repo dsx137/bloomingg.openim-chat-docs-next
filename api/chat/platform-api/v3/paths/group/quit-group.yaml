@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Leave group
   description: Removes the current OpenIM user from a group.
   operationId: groupQuitGroup

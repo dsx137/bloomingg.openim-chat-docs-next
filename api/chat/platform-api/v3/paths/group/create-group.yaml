@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Create group
   description: Creates an OpenIM group with the specified owner, members, and group settings.
   operationId: groupCreateGroup

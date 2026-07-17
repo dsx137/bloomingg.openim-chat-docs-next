@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Friends'
+  x-apifox-folder: 'Private/Friends'
   summary: 'FriendGetIncrementalFriends'
   description: 'OpenIM Server POST route handled by f.GetIncrementalFriends. It accepts the JSON serialization of relation.GetIncrementalFriendsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetIncrementalFriends

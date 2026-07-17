@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Users
+  x-apifox-folder: 'Public/Users'
   summary: Create user
   description: Creates an OpenIM user account with the supplied profile information.
   operationId: userUserRegister

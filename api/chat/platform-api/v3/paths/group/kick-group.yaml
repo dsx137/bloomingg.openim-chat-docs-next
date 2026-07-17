@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Groups'
+  x-apifox-folder: 'Private/Groups'
   summary: 'GroupKickGroup'
   description: 'OpenIM Server POST route handled by g.KickGroupMember. It accepts the JSON serialization of group.KickGroupMemberReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupKickGroup

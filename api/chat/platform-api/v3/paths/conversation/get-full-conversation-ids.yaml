@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Conversations'
+  x-apifox-folder: 'Private/Conversations'
   summary: 'ConversationGetFullConversationIds'
   description: 'OpenIM Server POST route handled by c.GetFullOwnerConversationIDs. It accepts the JSON serialization of conversation.GetFullOwnerConversationIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetFullConversationIds

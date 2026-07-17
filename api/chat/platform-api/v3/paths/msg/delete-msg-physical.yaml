@@ -2,6 +2,7 @@ post:
   tags:
     - 'Private'
     - 'Messages'
+  x-apifox-folder: 'Private/Messages'
   summary: 'MsgDeleteMsgPhysical'
   description: 'OpenIM Server POST route handled by m.DeleteMsgPhysical. It accepts the JSON serialization of msg.DeleteMsgPhysicalReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgDeleteMsgPhysical

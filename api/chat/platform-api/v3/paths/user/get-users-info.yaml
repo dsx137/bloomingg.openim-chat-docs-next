@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Users
+  x-apifox-folder: 'Public/Users'
   summary: Get users
   description: Returns public profile information for specified OpenIM users.
   operationId: userGetUsersInfo

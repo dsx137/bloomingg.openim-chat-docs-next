@@ -2,6 +2,7 @@ post:
   tags:
     - 'Public'
     - Groups
+  x-apifox-folder: 'Public/Groups'
   summary: Join group
   description: Submits a request for an OpenIM user to join a group.
   operationId: groupJoinGroup
