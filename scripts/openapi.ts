@@ -6,7 +6,17 @@ import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
 class PlatformApiError extends Error {
-  readonly name = 'PlatformApiError';
+  readonly name: string = 'PlatformApiError';
+}
+
+export class PostmanCollectionUnavailableError extends PlatformApiError {
+  readonly name = 'PostmanCollectionUnavailableError';
+
+  constructor(readonly collectionId: string) {
+    super(
+      `Postman collection does not exist or is not accessible: ${collectionId}. Verify POSTMAN_COLLECTION_ID and that the account owning POSTMAN_API_KEY has edit access.`,
+    );
+  }
 }
 
 function required<T>(value: T | null | undefined, message: string): T {
@@ -78,7 +88,9 @@ const publishConfigSchema = z.object({
 });
 export const postmanPublishConfigSchema = publishConfigSchema.extend({
   POSTMAN_API_KEY: z.string().min(1),
-  POSTMAN_COLLECTION_ID: z.string().min(1),
+  POSTMAN_COLLECTION_ID: z
+    .string()
+    .regex(/^(?:\d+-)?[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
 });
 export const apifoxPublishConfigSchema = publishConfigSchema.extend({
   APIFOX_ACCESS_TOKEN: z.string().min(1),
@@ -195,9 +207,14 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
   }
 }
 
-async function requestJson(url: string, init: RequestInit): Promise<unknown> {
+async function requestJson(
+  url: string,
+  init: RequestInit,
+  notFoundError?: PlatformApiError,
+): Promise<unknown> {
   const response = await fetch(url, { ...init, signal: AbortSignal.timeout(30_000) });
   const body = await response.text();
+  if (response.status === 404 && notFoundError !== undefined) throw notFoundError;
   if (!response.ok)
     throw new PlatformApiError(
       `${init.method ?? 'GET'} ${url} returned ${response.status}: ${body}`,
@@ -212,16 +229,22 @@ async function requestJson(url: string, init: RequestInit): Promise<unknown> {
   }
 }
 
-async function publishPostman(
+export async function publishPostman(
   apiKey: string,
   collectionId: string,
   openApi: string,
 ): Promise<void> {
-  const collection = await convertOpenApiToPostman(openApi);
   const url = `https://api.getpostman.com/collections/${collectionId}`;
+  const apiKeyHeader = { 'X-API-Key': apiKey };
+  await requestJson(
+    url,
+    { headers: apiKeyHeader },
+    new PostmanCollectionUnavailableError(collectionId),
+  );
+  const collection = await convertOpenApiToPostman(openApi);
   await requestJson(url, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'X-API-Key': apiKey },
+    headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
     body: JSON.stringify({ collection }),
   });
 }
