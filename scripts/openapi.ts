@@ -5,7 +5,7 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
-class PlatformApiError extends Error {
+export class PlatformApiError extends Error {
   readonly name: string = 'PlatformApiError';
 }
 
@@ -15,6 +15,16 @@ export class PostmanCollectionUnavailableError extends PlatformApiError {
   constructor(readonly collectionId: string) {
     super(
       `Postman collection does not exist or is not accessible: ${collectionId}. Verify POSTMAN_COLLECTION_ID and that the account owning POSTMAN_API_KEY has edit access.`,
+    );
+  }
+}
+
+export class PostmanSpecUnavailableError extends PlatformApiError {
+  readonly name = 'PostmanSpecUnavailableError';
+
+  constructor(readonly specId: string) {
+    super(
+      `Postman Spec does not exist or is not accessible: ${specId}. Verify POSTMAN_SPEC_ID and that the account owning POSTMAN_API_KEY has edit access.`,
     );
   }
 }
@@ -92,6 +102,12 @@ export const postmanPublishConfigSchema = publishConfigSchema.extend({
     .string()
     .regex(/^(?:\d+-)?[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
 });
+const postmanSpecIdSchema = z.string().regex(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
+const postmanSpecRootPath = 'index.json';
+export const postmanSpecPublishConfigSchema = publishConfigSchema.extend({
+  POSTMAN_API_KEY: z.string().min(1),
+  POSTMAN_SPEC_ID: postmanSpecIdSchema,
+});
 export const apifoxPublishConfigSchema = publishConfigSchema.extend({
   APIFOX_ACCESS_TOKEN: z.string().min(1),
   APIFOX_PROJECT_ID: z.string().regex(/^\d+$/),
@@ -101,6 +117,25 @@ const postmanCollectionSchema = z
     info: z.object({ name: z.string().min(1), schema: z.literal(postmanSchema) }).passthrough(),
     item: z.array(z.unknown()),
   })
+  .passthrough();
+const postmanSpecSchema = z
+  .object({
+    id: postmanSpecIdSchema,
+    type: z.enum(['OPENAPI:2.0', 'OPENAPI:3.0', 'OPENAPI:3.1']),
+  })
+  .passthrough();
+const postmanSpecFileSchema = z
+  .object({ id: postmanSpecIdSchema, path: z.string().min(1) })
+  .extend({ type: z.enum(['ROOT', 'DEFAULT']) })
+  .passthrough();
+const postmanSpecFileListSchema = z
+  .object({
+    files: z.array(postmanSpecFileSchema),
+    meta: z.object({ nextCursor: z.string().nullable() }),
+  })
+  .passthrough();
+const postmanSpecRootFileSchema = z
+  .object({ id: postmanSpecIdSchema, path: z.string().min(1), type: z.literal('ROOT') })
   .passthrough();
 const apifoxImportResultSchema = z.object({
   data: z.object({
@@ -115,6 +150,10 @@ const apifoxImportResultSchema = z.object({
   }),
 });
 type PostmanCollection = z.infer<typeof postmanCollectionSchema>;
+type PostmanSpecTarget = {
+  readonly apiKey: string;
+  readonly specId: string;
+};
 
 export function normalizePostmanCollection(
   value: unknown,
@@ -249,6 +288,51 @@ export async function publishPostman(
   });
 }
 
+export async function publishPostmanSpec(
+  target: PostmanSpecTarget,
+  openApi: string,
+): Promise<void> {
+  const specUrl = `https://api.getpostman.com/specs/${target.specId}`;
+  const apiKeyHeader = { 'X-API-Key': target.apiKey };
+  postmanSpecSchema.parse(
+    await requestJson(
+      specUrl,
+      { headers: apiKeyHeader },
+      new PostmanSpecUnavailableError(target.specId),
+    ),
+  );
+  let cursor: string | null = null;
+  while (true) {
+    const query = new URLSearchParams({ limit: '100' });
+    if (cursor !== null) query.set('cursor', cursor);
+    const page = postmanSpecFileListSchema.parse(
+      await requestJson(`${specUrl}/files?${query.toString()}`, { headers: apiKeyHeader }),
+    );
+    const file = page.files.find(({ path }) => path === postmanSpecRootPath);
+    if (file !== undefined) {
+      if (file.type !== 'ROOT')
+        throw new PlatformApiError(
+          `Postman Spec file is not the root file: ${postmanSpecRootPath} (${file.type}).`,
+        );
+      break;
+    }
+    cursor = page.meta.nextCursor;
+    if (cursor === null)
+      throw new PlatformApiError(`Postman Spec root file does not exist: ${postmanSpecRootPath}.`);
+  }
+  const file = postmanSpecRootFileSchema.parse(
+    await requestJson(`${specUrl}/files/${postmanSpecRootPath}`, {
+      method: 'PATCH',
+      headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: openApi }),
+    }),
+  );
+  if (file.path !== postmanSpecRootPath)
+    throw new PlatformApiError(
+      `Postman updated an unexpected Spec file: ${file.path}; expected ${postmanSpecRootPath}.`,
+    );
+}
+
 async function publishApifox(
   accessToken: string,
   projectId: string,
@@ -293,6 +377,27 @@ async function publishPlatformApiPostman(openApiPath: string): Promise<void> {
   console.log('Published OpenIM Platform API v3 to Postman.');
 }
 
+async function publishPlatformApiPostmanSpec(openApiPath: string): Promise<void> {
+  const config = postmanSpecPublishConfigSchema.parse(process.env);
+  const openApi = await readFile(openApiPath, 'utf8');
+  await publishPostmanSpec(
+    {
+      apiKey: config.POSTMAN_API_KEY,
+      specId: config.POSTMAN_SPEC_ID,
+    },
+    openApi,
+  );
+  const summary = [
+    '### Postman OpenAPI Specification publication completed',
+    '',
+    `- Source revision: \`${config.GITHUB_SHA ?? 'local'}\``,
+    `- Postman Spec root file updated: \`${postmanSpecRootPath}\``,
+    '',
+  ].join('\n');
+  if (config.GITHUB_STEP_SUMMARY) await appendFile(config.GITHUB_STEP_SUMMARY, summary);
+  console.log('Published OpenIM Platform API v3 Specification to Postman.');
+}
+
 async function publishPlatformApiApifox(openApiPath: string): Promise<void> {
   const config = apifoxPublishConfigSchema.parse(process.env);
   const openApi = await readFile(openApiPath, 'utf8');
@@ -311,6 +416,7 @@ async function publishPlatformApiApifox(openApiPath: string): Promise<void> {
 export function commandArguments(args: readonly string[]): readonly [string, string?] {
   const [command = '--help', ...rawArguments] = args;
   const values = rawArguments[0] === '--' ? rawArguments.slice(1) : rawArguments;
+  if (values[0] === '--help' || values[0] === 'help') return [values[0]];
   return [command, values[0]];
 }
 
@@ -320,6 +426,10 @@ async function runCommand(command: string, inputPath?: string): Promise<void> {
       return publishPlatformApiPostman(
         required(inputPath, 'publish-postman requires an OpenAPI path.'),
       );
+    case 'publish-postman-spec':
+      return publishPlatformApiPostmanSpec(
+        required(inputPath, 'publish-postman-spec requires an OpenAPI path.'),
+      );
     case 'publish-apifox':
       return publishPlatformApiApifox(
         required(inputPath, 'publish-apifox requires an OpenAPI path.'),
@@ -327,12 +437,12 @@ async function runCommand(command: string, inputPath?: string): Promise<void> {
     case '--help':
     case 'help':
       console.log(
-        'Usage: pnpm run platform-api:<publish-postman|publish-apifox> -- <openapi-path>',
+        'Usage: pnpm run platform-api:<publish-postman|publish-postman-spec|publish-apifox> -- <openapi-path>',
       );
       return;
     default:
       throw new PlatformApiError(
-        `Unknown Platform API command: ${command}. Use publish-postman, publish-apifox, or --help.`,
+        `Unknown Platform API command: ${command}. Use publish-postman, publish-postman-spec, publish-apifox, or --help.`,
       );
   }
 }

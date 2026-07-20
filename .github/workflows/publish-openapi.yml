@@ -46,15 +46,23 @@ jobs:
       - name: Bundle OpenAPI
         run: pnpm exec redocly bundle api/chat/platform-api/v3/openapi.yaml --output "$RUNNER_TEMP/platform-api-openapi.json"
 
+      - name: Bundle dereferenced OpenAPI for Postman Specification
+        run: pnpm exec redocly bundle api/chat/platform-api/v3/openapi.yaml --dereferenced --output "$RUNNER_TEMP/platform-api-openapi-dereferenced.json"
+
       - name: Publish OpenAPI to Postman
         env:
           POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
           POSTMAN_COLLECTION_ID: ${{ vars.POSTMAN_COLLECTION_ID }}
         run: pnpm run platform-api:publish-postman -- "$RUNNER_TEMP/platform-api-openapi.json"
 
+      - name: Publish OpenAPI Specification to Postman
+        env:
+          POSTMAN_API_KEY: ${{ secrets.POSTMAN_API_KEY }}
+          POSTMAN_SPEC_ID: ${{ vars.POSTMAN_SPEC_ID }}
+        run: pnpm run platform-api:publish-postman-spec -- "$RUNNER_TEMP/platform-api-openapi-dereferenced.json"
+
       - name: Publish OpenAPI to Apifox
         env:
           APIFOX_ACCESS_TOKEN: ${{ secrets.APIFOX_ACCESS_TOKEN }}
           APIFOX_PROJECT_ID: ${{ vars.APIFOX_PROJECT_ID }}
         run: pnpm run platform-api:publish-apifox -- "$RUNNER_TEMP/platform-api-openapi.json"
-  
