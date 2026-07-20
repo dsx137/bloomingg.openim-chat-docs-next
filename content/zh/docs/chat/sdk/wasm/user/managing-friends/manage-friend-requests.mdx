@@ -1,6 +1,6 @@
 ---
 title: '管理好友申请'
-description: '使用 OpenIM SDK 发送、查询和处理好友申请，并获取未处理申请数。'
+description: '使用 OpenIMClientSDK 发送、查询和处理好友申请，并获取未处理申请数。'
 sourcePath: '/sdk/wasm/user/managing-friends/manage-friend-requests'
 ---
 
@@ -8,12 +8,12 @@ sourcePath: '/sdk/wasm/user/managing-friends/manage-friend-requests'
 
 ## 发送好友申请
 
-调用 `addFriend()` 向目标用户发送好友申请。`toUserID` 是申请接收方的 OpenIM 用户 ID；`reqMsg` 是申请附言，没有附言时也必须传空字符串。产品层还应限制附言长度并校验内容。
+调用 `addFriend()` 向目标用户发送好友申请。`toUserID` 是申请接收方的 OpenIMSDK 用户 ID；`reqMsg` 是申请附言，没有附言时也必须传空字符串。产品层还应限制附言长度并校验内容。
 
 ```ts
 async function sendFriendRequest(toUserID: string, reqMsg: string) {
   try {
-    await OpenIM.addFriend({
+    await openimsdk.addFriend({
       toUserID,
       reqMsg,
     });
@@ -47,7 +47,7 @@ import { ApplicationHandleResult } from '@openim/wasm-client-sdk';
 
 async function loadReceivedFriendRequests(offset = 0, count = 20) {
   try {
-    const { data } = await OpenIM.getFriendApplicationListAsRecipient({
+    const { data } = await openimsdk.getFriendApplicationListAsRecipient({
       handleResults: [ApplicationHandleResult.Unprocessed],
       offset,
       count,
@@ -70,7 +70,7 @@ Promise 成功后，`data` 是当前页的 `FriendApplicationItem[]`，可用于
 ```ts
 async function loadSentFriendRequests(offset = 0, count = 20) {
   try {
-    const { data } = await OpenIM.getFriendApplicationListAsApplicant({
+    const { data } = await openimsdk.getFriendApplicationListAsApplicant({
       offset,
       count,
     });
@@ -94,7 +94,7 @@ Promise 成功后，`data` 是当前页已发出的 `FriendApplicationItem[]`。
 ```ts
 async function loadUnhandledFriendRequestCount(lastViewedAt: number) {
   try {
-    const { data } = await OpenIM.getFriendApplicationUnhandledCount({
+    const { data } = await openimsdk.getFriendApplicationUnhandledCount({
       time: lastViewedAt,
     });
 
@@ -115,7 +115,7 @@ Promise 成功后，`data` 是符合统计条件的未处理申请数量。
 ```ts
 async function acceptFriendRequest(applicantUserID: string) {
   try {
-    await OpenIM.acceptFriendApplication({
+    await openimsdk.acceptFriendApplication({
       toUserID: applicantUserID,
       handleMsg: '已通过',
     });
@@ -127,7 +127,7 @@ async function acceptFriendRequest(applicantUserID: string) {
 
 async function refuseFriendRequest(applicantUserID: string) {
   try {
-    await OpenIM.refuseFriendApplication({
+    await openimsdk.refuseFriendApplication({
       toUserID: applicantUserID,
       handleMsg: '暂不添加',
     });
@@ -145,7 +145,7 @@ Promise 成功表示对应的处理请求已经完成。同意申请后，新的
 `deleteFriendRequests()` 按申请双方的用户 ID 批量删除申请记录：
 
 ```ts
-await OpenIM.deleteFriendRequests([
+await openimsdk.deleteFriendRequests([
   {
     fromUserID: application.fromUserID,
     toUserID: application.toUserID,
@@ -208,16 +208,16 @@ function handleFriendApplicationDeleted({ data }) {
   removeFriendApplication(data);
 }
 
-OpenIM.on(CbEvents.OnFriendApplicationAdded, handleFriendApplicationAdded);
-OpenIM.on(CbEvents.OnFriendApplicationAccepted, handleFriendApplicationAccepted);
-OpenIM.on(CbEvents.OnFriendApplicationRejected, handleFriendApplicationRejected);
-OpenIM.on(CbEvents.OnFriendApplicationDeleted, handleFriendApplicationDeleted);
+openimsdk.on(CbEvents.OnFriendApplicationAdded, handleFriendApplicationAdded);
+openimsdk.on(CbEvents.OnFriendApplicationAccepted, handleFriendApplicationAccepted);
+openimsdk.on(CbEvents.OnFriendApplicationRejected, handleFriendApplicationRejected);
+openimsdk.on(CbEvents.OnFriendApplicationDeleted, handleFriendApplicationDeleted);
 
 function disposeFriendApplicationEvents() {
-  OpenIM.off(CbEvents.OnFriendApplicationAdded, handleFriendApplicationAdded);
-  OpenIM.off(CbEvents.OnFriendApplicationAccepted, handleFriendApplicationAccepted);
-  OpenIM.off(CbEvents.OnFriendApplicationRejected, handleFriendApplicationRejected);
-  OpenIM.off(CbEvents.OnFriendApplicationDeleted, handleFriendApplicationDeleted);
+  openimsdk.off(CbEvents.OnFriendApplicationAdded, handleFriendApplicationAdded);
+  openimsdk.off(CbEvents.OnFriendApplicationAccepted, handleFriendApplicationAccepted);
+  openimsdk.off(CbEvents.OnFriendApplicationRejected, handleFriendApplicationRejected);
+  openimsdk.off(CbEvents.OnFriendApplicationDeleted, handleFriendApplicationDeleted);
 }
 ```
 

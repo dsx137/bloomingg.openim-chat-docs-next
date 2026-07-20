@@ -1,17 +1,17 @@
 ---
 title: '管理会话已读状态'
-description: '使用 OpenIM SDK 标记会话消息已读、获取总未读数并清理群聊 @ 状态。'
+description: '使用 OpenIMClientSDK 标记会话消息已读、获取总未读数并清理群聊 @ 状态。'
 sourcePath: '/sdk/wasm/conversation/managing-conversations/manage-read-status'
 ---
 
-OpenIM 的普通会话未读数保存在 `ConversationItem.unreadCount` 中。群聊 @ 状态保存在 `groupAtType`，两者是不同状态。
+OpenIMSDK 的普通会话未读数保存在 `ConversationItem.unreadCount` 中。群聊 @ 状态保存在 `groupAtType`，两者是不同状态。
 
 ## 标记会话已读
 
 打开会话并阅读完当前可见消息后，调用 `markConversationMessageAsRead()`：
 
 ```ts
-await OpenIM.markConversationMessageAsRead(conversationID);
+await openimsdk.markConversationMessageAsRead(conversationID);
 ```
 
 不要在只预览通知或后台收到消息时提前标记已读。调用成功后仍应通过 `CbEvents.OnConversationChanged` 合并该会话的最新未读数。
@@ -21,7 +21,7 @@ await OpenIM.markConversationMessageAsRead(conversationID);
 调用 `getTotalUnreadMsgCount()` 获取当前用户所有会话的总未读数：
 
 ```ts
-const { data: totalUnread } = await OpenIM.getTotalUnreadMsgCount();
+const { data: totalUnread } = await openimsdk.getTotalUnreadMsgCount();
 updateApplicationBadge(totalUnread);
 ```
 
@@ -34,10 +34,10 @@ const handleTotalUnreadChanged = ({ data }) => {
   updateApplicationBadge(data);
 };
 
-OpenIM.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
+openimsdk.on(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
 
 function removeTotalUnreadListener() {
-  OpenIM.off(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
+  openimsdk.off(CbEvents.OnTotalUnreadMessageCountChanged, handleTotalUnreadChanged);
 }
 ```
 
@@ -50,7 +50,7 @@ function removeTotalUnreadListener() {
 ```ts
 import { GroupAtType } from '@openim/wasm-client-sdk';
 
-await OpenIM.setConversation({
+await openimsdk.setConversation({
   conversationID,
   groupAtType: GroupAtType.AtNormal,
 });

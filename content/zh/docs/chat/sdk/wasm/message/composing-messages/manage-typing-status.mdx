@@ -1,23 +1,23 @@
 ---
 title: '管理输入状态'
-description: '使用 OpenIM SDK 管理输入状态。'
+description: '使用 OpenIMClientSDK 管理输入状态。'
 sourcePath: '/sdk/wasm/message/composing-messages/manage-typing-status'
 ---
 
-OpenIM SDK 使用会话输入状态实现“正在输入”提示。当前用户开始输入时调用 `changeInputStates({ conversationID, focus: true })`，发送消息、失焦、切换会话或停止输入时再调用 `focus: false`。输入状态绑定到 `conversationID`，不会写入消息列表，也不用于保存草稿文本。
+OpenIMClientSDK 使用会话输入状态实现“正在输入”提示。当前用户开始输入时调用 `changeInputStates({ conversationID, focus: true })`，发送消息、失焦、切换会话或停止输入时再调用 `focus: false`。输入状态绑定到 `conversationID`，不会写入消息列表，也不用于保存草稿文本。
 
 ```ts
 import { CbEvents } from '@openim/wasm-client-sdk';
 
 async function startTyping(conversationID: string) {
-  await OpenIM.changeInputStates({
+  await openimsdk.changeInputStates({
     conversationID,
     focus: true,
   });
 }
 
 async function stopTyping(conversationID: string) {
-  await OpenIM.changeInputStates({
+  await openimsdk.changeInputStates({
     conversationID,
     focus: false,
   });
@@ -43,10 +43,10 @@ function handleInputStatusChanged({ data }) {
   }
 }
 
-OpenIM.on(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
+openimsdk.on(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
 
 function removeInputStatusListener() {
-  OpenIM.off(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
+  openimsdk.off(CbEvents.OnConversationUserInputStatusChanged, handleInputStatusChanged);
 }
 ```
 
@@ -57,7 +57,7 @@ function removeInputStatusListener() {
 进入会话页时，可以用 `getInputstates()` 查询某个成员在当前会话中仍处于输入状态的平台列表。返回数组非空时展示该成员正在输入。
 
 ```ts
-const { data: platformIDs } = await OpenIM.getInputstates({
+const { data: platformIDs } = await openimsdk.getInputstates({
   conversationID,
   userID: memberUserID,
 });

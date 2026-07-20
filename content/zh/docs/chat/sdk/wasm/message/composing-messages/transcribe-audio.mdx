@@ -1,15 +1,15 @@
 ---
 title: '将音频转为文字'
-description: '使用 OpenIM SDK 将音频转为文字，并把结果保存到本地语音消息。'
+description: '使用 OpenIMClientSDK 将音频转为文字，并把结果保存到本地语音消息。'
 sourcePath: '/sdk/wasm/message/composing-messages/transcribe-audio'
 ---
 
-`speechToText()` 把音频内容提交给当前 OpenIM 部署配置的语音识别服务，并返回识别文本。调用前先查询服务端能力，不要在客户端写死格式、采样率或大小限制。
+`speechToText()` 把音频内容提交给当前 OpenIMServer 部署配置的语音识别服务，并返回识别文本。调用前先查询服务端能力，不要在客户端写死格式、采样率或大小限制。
 
 ## 查询能力
 
 ```ts
-const { data: capabilities } = await OpenIM.speechToTextCapabilities();
+const { data: capabilities } = await openimsdk.speechToTextCapabilities();
 ```
 
 `SpeechToTextCapabilities` 包含以下字段：
@@ -53,7 +53,7 @@ if (audioFile.size > capabilities.maxFileSize) {
   throw new Error('音频文件超过当前语音识别服务限制');
 }
 
-const { data: transcription } = await OpenIM.speechToText({
+const { data: transcription } = await openimsdk.speechToText({
   filename: audioFile.name,
   data: arrayBufferToBase64(buffer),
 });
@@ -90,7 +90,7 @@ const messageWithTranscript = {
   },
 };
 
-await OpenIM.setMessageLocalContent({
+await openimsdk.setMessageLocalContent({
   conversationID,
   message: messageWithTranscript,
 });

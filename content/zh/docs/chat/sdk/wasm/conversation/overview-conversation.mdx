@@ -1,10 +1,10 @@
 ---
 title: '会话概览'
-description: '了解 OpenIM SDK 中 ConversationItem、conversationID、会话设置和会话事件的职责。'
+description: '了解 OpenIMClientSDK 中 ConversationItem、conversationID、会话设置和会话事件的职责。'
 sourcePath: '/sdk/wasm/conversation/overview-conversation'
 ---
 
-在 OpenIM 中，会话（Conversation）是客户端围绕一次单聊或群聊维护的聊天状态，由当前登录用户的一条 `ConversationItem` 记录表示。它保存未读数、最后一条消息、置顶、草稿、消息接收选项和扩展字段等列表状态。会话记录与聊天目标分开标识：`conversationID` 用于定位当前账号的会话状态，单聊目标使用对方 `userID`，群聊目标使用 `groupID`。
+在 OpenIMSDK 中，会话（Conversation）是客户端围绕一次单聊或群聊维护的聊天状态，由当前登录用户的一条 `ConversationItem` 记录表示。它保存未读数、最后一条消息、置顶、草稿、消息接收选项和扩展字段等列表状态。会话记录与聊天目标分开标识：`conversationID` 用于定位当前账号的会话状态，单聊目标使用对方 `userID`，群聊目标使用 `groupID`。
 
 单聊和群聊都通过会话记录承载聊天列表状态；群资料、成员关系和权限仍由群组 API 管理。群聊页面需要同时使用 `groupID` 访问群组能力，并使用 `conversationID` 处理会话设置、未读数、草稿和消息历史。
 

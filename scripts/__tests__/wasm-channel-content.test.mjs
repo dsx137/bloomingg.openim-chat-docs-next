@@ -60,8 +60,8 @@ test('group join example uses the pinned GroupJoinSource declaration', () => {
 test('every Conversation and Group event example includes matching cleanup', () => {
   for (const path of activePages) {
     const source = read(path);
-    const onCount = source.match(/OpenIM\.on\(/g)?.length ?? 0;
-    const offCount = source.match(/OpenIM\.off\(/g)?.length ?? 0;
+    const onCount = source.match(/openimsdk\.on\(/g)?.length ?? 0;
+    const offCount = source.match(/openimsdk\.off\(/g)?.length ?? 0;
     assert.equal(offCount, onCount, `${path}: expected one off() for every on()`);
   }
 });

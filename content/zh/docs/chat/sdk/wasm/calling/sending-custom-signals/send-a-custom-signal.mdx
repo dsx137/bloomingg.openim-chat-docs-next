@@ -1,6 +1,6 @@
 ---
 title: '发送自定义信令'
-description: '使用 OpenIM SDK 在通话房间中发送和接收自定义信令。'
+description: '使用 OpenIMClientSDK 在通话房间中发送和接收自定义信令。'
 sourcePath: '/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal'
 ---
 
@@ -19,13 +19,13 @@ const signal = {
   sentAt: Date.now(),
 };
 
-await OpenIM.signalingSendCustomSignal({
+await openimsdk.signalingSendCustomSignal({
   roomID,
   customInfo: JSON.stringify(signal),
 });
 ```
 
-Promise 成功表示服务端已接受本次自定义信令发送，不等于其他参与者已经处理该数据。自定义信令应保持精简，并包含版本和业务幂等 ID，以便新旧客户端兼容并避免重复应用。大文件、聊天记录、长期状态和敏感凭据不应放入 `customInfo`。
+Promise 成功表示 OpenIMServer 已接受本次自定义信令发送，不等于其他参与者已经处理该数据。自定义信令应保持精简，并包含版本和业务幂等 ID，以便新旧客户端兼容并避免重复应用。大文件、聊天记录、长期状态和敏感凭据不应放入 `customInfo`。
 
 ## 接收信令
 
@@ -45,10 +45,10 @@ function handleCustomSignal({ data }) {
   }
 }
 
-OpenIM.on(CbEvents.OnReceiveCustomSignal, handleCustomSignal);
+openimsdk.on(CbEvents.OnReceiveCustomSignal, handleCustomSignal);
 
 function removeCustomSignalListener() {
-  OpenIM.off(CbEvents.OnReceiveCustomSignal, handleCustomSignal);
+  openimsdk.off(CbEvents.OnReceiveCustomSignal, handleCustomSignal);
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: '删除或清空会话'
-description: '区分 OpenIM SDK 删除会话、删除消息、清空会话和清理本地会话列表的影响范围。'
+description: '区分 OpenIMClientSDK 删除会话、删除消息、清空会话和清理本地会话列表的影响范围。'
 sourcePath: '/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation'
 ---
 
@@ -16,7 +16,7 @@ sourcePath: '/sdk/wasm/conversation/managing-conversations/delete-or-clear-conve
 ## 删除一个会话
 
 ```ts
-await OpenIM.deleteConversation(
+await openimsdk.deleteConversation(
   conversationID
 );
 ```
@@ -28,9 +28,9 @@ await OpenIM.deleteConversation(
 需要连同指定会话消息一起处理时，根据产品语义选择以下方法：
 
 ```ts
-await OpenIM.deleteConversationAndDeleteAllMsg(conversationID);
+await openimsdk.deleteConversationAndDeleteAllMsg(conversationID);
 
-await OpenIM.clearConversationAndDeleteAllMsg(conversationID);
+await openimsdk.clearConversationAndDeleteAllMsg(conversationID);
 ```
 
 `deleteConversationAndDeleteAllMsg()` 适合“删除此聊天”，会话在后续产生新消息时仍可能重新生成。`clearConversationAndDeleteAllMsg()` 适合“清空聊天记录”，会话入口继续保留。两种操作都只处理当前账号的会话数据，不会删除好友关系、退出群组或影响其他用户。
@@ -40,7 +40,7 @@ await OpenIM.clearConversationAndDeleteAllMsg(conversationID);
 `deleteAllConversationFromLocal()` 是账号级本地清理操作，影响范围大，不应放在单条会话菜单中：
 
 ```ts
-await OpenIM.deleteAllConversationFromLocal();
+await openimsdk.deleteAllConversationFromLocal();
 ```
 
 执行前清理当前账号的页面状态和缓存引用，并确认产品确实需要删除全部本地会话。它不等于删除服务端聊天关系或让其他用户的数据消失。

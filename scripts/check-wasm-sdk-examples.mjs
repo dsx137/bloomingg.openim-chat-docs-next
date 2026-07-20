@@ -7,17 +7,23 @@ const files = [];
 for (const root of roots) walk(root);
 files.push('scripts/build-wasm-sdk-zh-content.mjs');
 
+const sdkCall = String.raw`(?:OpenIM|openimsdk)`;
+
 const codePatterns = [
   {
-    reason: 'destructures errCode/errMsg from an awaited OpenIM call',
-    pattern: /\{[\s\S]*\berr(?:Code|Msg)\b[\s\S]*\}\s*=\s*await\s+OpenIM\./,
+    reason: 'destructures errCode/errMsg from an awaited OpenIMClientSDK call',
+    pattern: new RegExp(
+      String.raw`\{[\s\S]*\berr(?:Code|Msg)\b[\s\S]*\}\s*=\s*await\s+${sdkCall}\.`,
+    ),
   },
   {
-    reason: 'checks response.errCode after an awaited OpenIM call',
-    pattern: /(?:const|let|var)\s+(\w+)\s*=\s*await\s+OpenIM\.[\s\S]*?\b\1\.errCode\b/,
+    reason: 'checks response.errCode after an awaited OpenIMClientSDK call',
+    pattern: new RegExp(
+      String.raw`(?:const|let|var)\s+(\w+)\s*=\s*await\s+${sdkCall}\.[\s\S]*?\b\1\.errCode\b`,
+    ),
   },
   {
-    reason: 'checks errCode after an awaited OpenIM call',
+    reason: 'checks errCode after an awaited OpenIMClientSDK call',
     pattern: /\b(?:errCode|\w+\.errCode)\s*!==?\s*0/,
   },
 ];
@@ -32,7 +38,7 @@ const prosePatterns = [
   /响应(?:满足|包含)[^。\n`]*`errCode === 0`/,
   /返回 `errCode === 0`/,
   /例如 `errCode === 0`/,
-  /const \{[^}\n]*err(?:Code|Msg)[^}\n]*\}.*await OpenIM/,
+  new RegExp(String.raw`const \{[^}\n]*err(?:Code|Msg)[^}\n]*\}.*await ${sdkCall}`),
   /if \(errCode !== 0\)/,
   /\b(?:response|result)\.errCode\b/,
   /errMsg \|\|/,
@@ -54,11 +60,11 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log('WASM SDK code examples use catch-based OpenIM error handling.');
+console.log('WASM SDK code examples use catch-based OpenIMClientSDK error handling.');
 
 function checkMdxFile(file, source) {
   for (const block of codeBlocks(source)) {
-    if (!/await\s+OpenIM\./.test(block.code)) continue;
+    if (!new RegExp(String.raw`await\s+${sdkCall}\.`).test(block.code)) continue;
 
     for (const { pattern, reason } of codePatterns) {
       if (pattern.test(block.code)) {

@@ -4,7 +4,7 @@ description: '向单聊或群聊发送已创建的 MessageItem，并处理发送
 sourcePath: '/sdk/wasm/message/sending-messages/send-a-message'
 ---
 
-OpenIM SDK 发送消息时先创建 `MessageItem`，再把它交给 `sendMessage()`。单聊消息填写 `recvID` 并把 `groupID` 设为空字符串；群聊消息填写 `groupID` 并把 `recvID` 设为空字符串。
+OpenIMClientSDK 发送消息时先创建 `MessageItem`，再把它交给 `sendMessage()`。单聊消息填写 `recvID` 并把 `groupID` 设为空字符串；群聊消息填写 `groupID` 并把 `recvID` 设为空字符串。
 
 调用发送 API 前，请确保浏览器端已经完成 SDK 初始化和 `login()`。调用失败时记录 `errCode`、`errMsg`、当前用户以及目标用户或群组 ID，便于排查发送链路。
 
@@ -35,9 +35,9 @@ OpenIM SDK 发送消息时先创建 `MessageItem`，再把它交给 `sendMessage
 创建方法返回的 `data` 就是发送时传入的 `message`。发送成功后，`sendMessage()` 返回服务端确认后的 `MessageItem`，应用按 `clientMsgID` 用返回对象替换本地待发送项，从而更新发送状态、服务端消息 ID 和时间等字段。
 
 ```ts
-const { data: message } = await OpenIM.createTextMessage('你好，OpenIM');
+const { data: message } = await openimsdk.createTextMessage('你好，OpenIMSDK');
 
-const { data: sentMessage } = await OpenIM.sendMessage({
+const { data: sentMessage } = await openimsdk.sendMessage({
   recvID: receiverUserID,
   groupID: '',
   message,
@@ -49,9 +49,9 @@ appendMessage(sentMessage);
 发送群聊消息只需要切换目标字段。不要把 `conversationID` 当作发送目标；它主要用于历史消息、会话列表和未读状态。
 
 ```ts
-const { data: message } = await OpenIM.createTextMessage('大家好');
+const { data: message } = await openimsdk.createTextMessage('大家好');
 
-await OpenIM.sendMessage({
+await openimsdk.sendMessage({
   recvID: '',
   groupID,
   message,
@@ -63,14 +63,14 @@ await OpenIM.sendMessage({
 `createTargetedGroupMessage()` 把已经创建的 `MessageItem` 转换为只面向指定群成员的定向群消息。它只负责创建消息对象，仍需调用 `sendMessage()` 发送到目标群组。
 
 ```ts
-const { data: textMessage } = await OpenIM.createTextMessage('请两位负责人确认');
+const { data: textMessage } = await openimsdk.createTextMessage('请两位负责人确认');
 
-const { data: targetedMessage } = await OpenIM.createTargetedGroupMessage({
+const { data: targetedMessage } = await openimsdk.createTargetedGroupMessage({
   message: textMessage,
   dstUserIDs: ['user_a', 'user_b'],
 });
 
-await OpenIM.sendMessage({
+await openimsdk.sendMessage({
   recvID: '',
   groupID,
   message: targetedMessage,
@@ -91,9 +91,9 @@ async function sendTextToUser(receiverUserID: string, text: string) {
     return;
   }
 
-  const { data: message } = await OpenIM.createTextMessage(normalizedText);
+  const { data: message } = await openimsdk.createTextMessage(normalizedText);
 
-  return OpenIM.sendMessage({
+  return openimsdk.sendMessage({
     recvID: receiverUserID,
     groupID: '',
     message,

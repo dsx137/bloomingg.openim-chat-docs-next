@@ -58,7 +58,7 @@ export function getPageCommercialNames(pagePath: string): Set<string> {
   return new Set([...info.methods, ...info.events]);
 }
 
-/** Match inline code like `foo()`, `OpenIM.foo`, or `CbEvents.OnBar` to a commercial symbol. */
+/** Match inline code like `foo()`, `openimsdk.foo`, `OpenIM.foo`, or `CbEvents.OnBar` to a commercial symbol. */
 export function matchCommercialSymbol(
   codeText: string,
   commercialNames: ReadonlySet<string>,
@@ -69,6 +69,7 @@ export function matchCommercialSymbol(
   const withoutCall = trimmed.replace(/\(\s*\)$/, '');
   const candidates = [
     withoutCall,
+    withoutCall.replace(/^openimsdk\./, ''),
     withoutCall.replace(/^OpenIM\./, ''),
     withoutCall.replace(/^CbEvents\./, ''),
     withoutCall.includes('.') ? (withoutCall.split('.').at(-1) ?? withoutCall) : withoutCall,

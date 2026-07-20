@@ -1,10 +1,10 @@
 ---
 title: '上传文件并跟踪进度'
-description: '使用 OpenIM SDK 上传文件并跟踪进度。'
+description: '使用 OpenIMClientSDK 上传文件并跟踪进度。'
 sourcePath: '/sdk/wasm/message/sending-messages/upload-files-and-track-progress'
 ---
 
-OpenIM SDK 的文件类消息在创建并发送时进入上传链路。应用应先注册 `CbEvents.OnProgress` 和 `CbEvents.UploadComplete`，再调用文件、图片、音频或视频消息创建方法，并通过 `sendMessage()` 发送生成的 `MessageItem`。
+OpenIMClientSDK 的文件类消息在创建并发送时进入上传链路。应用应先注册 `CbEvents.OnProgress` 和 `CbEvents.UploadComplete`，再调用文件、图片、音频或视频消息创建方法，并通过 `sendMessage()` 发送生成的 `MessageItem`。
 
 上传中的百分比、失败提示和重试按钮属于应用界面状态。SDK 事件负责提供进度和完成信号；应用需要把事件数据关联到本地上传项或消息气泡。
 
@@ -26,12 +26,12 @@ function handleUploadComplete({ data }) {
   });
 }
 
-OpenIM.on(CbEvents.OnProgress, handleUploadProgress);
-OpenIM.on(CbEvents.UploadComplete, handleUploadComplete);
+openimsdk.on(CbEvents.OnProgress, handleUploadProgress);
+openimsdk.on(CbEvents.UploadComplete, handleUploadComplete);
 
 function removeUploadListeners() {
-  OpenIM.off(CbEvents.OnProgress, handleUploadProgress);
-  OpenIM.off(CbEvents.UploadComplete, handleUploadComplete);
+  openimsdk.off(CbEvents.OnProgress, handleUploadProgress);
+  openimsdk.off(CbEvents.UploadComplete, handleUploadComplete);
 }
 ```
 
@@ -54,7 +54,7 @@ function removeUploadListeners() {
 
 ```ts
 const uuid = crypto.randomUUID();
-const { data } = await OpenIM.uploadFile({
+const { data } = await openimsdk.uploadFile({
   name: file.name,
   contentType: file.type || 'application/octet-stream',
   uuid,
@@ -68,12 +68,12 @@ console.log(data.url);
 
 ```ts
 const mappedUUID = `${uuid}/${file.name}`;
-await OpenIM.fileMapSet(mappedUUID, file);
+await openimsdk.fileMapSet(mappedUUID, file);
 ```
 
 ## 创建并发送文件消息
 
-文件消息仍然遵循 OpenIM 的两步发送模型：先创建 `MessageItem`，再传给 `sendMessage()`。单聊填写 `recvID`，群聊填写 `groupID`。
+文件消息仍然遵循 OpenIMSDK 的两步发送模型：先创建 `MessageItem`，再传给 `sendMessage()`。单聊填写 `recvID`，群聊填写 `groupID`。
 
 ```ts
 type SendFileWithProgressParams = {
@@ -89,7 +89,7 @@ async function sendFileWithProgress({
 }: SendFileWithProgressParams) {
   const uuid = crypto.randomUUID();
 
-  const { data: message } = await OpenIM.createFileMessageByFile({
+  const { data: message } = await openimsdk.createFileMessageByFile({
     file,
     filePath: file.name,
     fileName: file.name,
@@ -100,7 +100,7 @@ async function sendFileWithProgress({
   });
 
   // UploadComplete 应按 message.fileElem.uuid（已是 uuid/file.name）关联
-  const { data: sentMessage } = await OpenIM.sendMessage({
+  const { data: sentMessage } = await openimsdk.sendMessage({
     recvID,
     groupID,
     message,

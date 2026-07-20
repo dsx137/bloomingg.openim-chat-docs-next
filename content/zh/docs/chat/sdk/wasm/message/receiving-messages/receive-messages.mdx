@@ -46,7 +46,7 @@ function messagesForCurrentConversation(messages: MessageItem[]) {
 
 ### 图片、音频、视频和文件消息
 
-OpenIM SDK 用不同元素表示图片、音频、视频和普通文件。接收端不需要重新上传文件，只需要读取消息中已有的文件地址、大小、名称、时长或快照图等字段，并按界面规则展示。
+OpenIMClientSDK 用不同元素表示图片、音频、视频和普通文件。接收端不需要重新上传文件，只需要读取消息中已有的文件地址、大小、名称、时长或快照图等字段，并按界面规则展示。
 
 如果产品需要一次发送多个文件，常见实现是连续发送多条文件消息，或发送一条自定义消息承载文件组数据。接收端仍应以每条 `MessageItem` 的 `clientMsgID` 作为渲染和状态更新的稳定标识。
 
@@ -66,7 +66,7 @@ function handleNewMessages({ data }: { data: MessageItem[] }) {
   scrollToLatestMessageIfNeeded();
 }
 
-OpenIM.on(CbEvents.OnRecvNewMessages, handleNewMessages);
+openimsdk.on(CbEvents.OnRecvNewMessages, handleNewMessages);
 ```
 
 应用通过 `setAppBackgroundStatus(true)` 进入后台后，新到达的消息一般会走 `CbEvents.OnRecvOfflineNewMessages`，而不是前台常用的 `OnRecvNewMessages`。回到前台时应再调用 `setAppBackgroundStatus(false)`。处理方式与实时新消息相同：筛选当前会话、按 `clientMsgID` 去重，并保持时间顺序。前后台状态调用见[认证与管理登录会话](/sdk/wasm/getting-started/authenticate-and-manage-session)。
@@ -76,7 +76,7 @@ function handleOfflineMessages({ data }: { data: MessageItem[] }) {
   mergeMessagesByClientMsgID(messagesForCurrentConversation(data));
 }
 
-OpenIM.on(CbEvents.OnRecvOfflineNewMessages, handleOfflineMessages);
+openimsdk.on(CbEvents.OnRecvOfflineNewMessages, handleOfflineMessages);
 ```
 
 发送方在 `sendMessage()` 或 `sendMessageNotOss()` 中把 `isOnlineOnly` 设为 `true` 时，接收端通过 `CbEvents.OnRecvOnlineOnlyMessages` 收到这类只在线投递的消息。它们不会写入 SDK 本地消息存储，也不能通过历史消息接口回放，通常只适合临时提示或业务通知；是否展示在当前界面按产品约定处理。发送参数见[发送消息](/sdk/wasm/message/sending-messages/send-a-message)。
@@ -86,12 +86,12 @@ function handleOnlineOnlyMessages({ data }: { data: MessageItem[] }) {
   handleTransientMessages(messagesForCurrentConversation(data));
 }
 
-OpenIM.on(CbEvents.OnRecvOnlineOnlyMessages, handleOnlineOnlyMessages);
+openimsdk.on(CbEvents.OnRecvOnlineOnlyMessages, handleOnlineOnlyMessages);
 
 function removeMessageListeners() {
-  OpenIM.off(CbEvents.OnRecvNewMessages, handleNewMessages);
-  OpenIM.off(CbEvents.OnRecvOfflineNewMessages, handleOfflineMessages);
-  OpenIM.off(CbEvents.OnRecvOnlineOnlyMessages, handleOnlineOnlyMessages);
+  openimsdk.off(CbEvents.OnRecvNewMessages, handleNewMessages);
+  openimsdk.off(CbEvents.OnRecvOfflineNewMessages, handleOfflineMessages);
+  openimsdk.off(CbEvents.OnRecvOnlineOnlyMessages, handleOnlineOnlyMessages);
 }
 ```
 
@@ -117,7 +117,7 @@ SDK 同时导出单条事件 `OnRecvNewMessage`、`OnRecvOfflineNewMessage` 和 
 ```ts
 import { ViewType } from '@openim/wasm-client-sdk';
 
-const { data: firstPage } = await OpenIM.getAdvancedHistoryMessageList({
+const { data: firstPage } = await openimsdk.getAdvancedHistoryMessageList({
   conversationID,
   startClientMsgID: '',
   count: 30,
@@ -134,7 +134,7 @@ replaceMessageList(firstPage.messageList);
 ```ts
 const nextCursor = messageList.at(-1)?.clientMsgID ?? '';
 
-const { data: nextPage } = await OpenIM.getAdvancedHistoryMessageList({
+const { data: nextPage } = await openimsdk.getAdvancedHistoryMessageList({
   conversationID,
   startClientMsgID: nextCursor,
   count: 30,
@@ -149,7 +149,7 @@ appendOlderMessages(nextPage.messageList);
 用户进入群聊并看到最新消息后，可以调用 `markConversationMessageAsRead(conversationID)` 清理该会话的未读数。这个调用处理的是会话未读数，不等同于群消息成员级已读回执。
 
 ```ts
-await OpenIM.markConversationMessageAsRead(conversationID);
+await openimsdk.markConversationMessageAsRead(conversationID);
 ```
 
 会话列表和总未读角标分别通过[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)和[管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)中的事件处理器做最终同步。

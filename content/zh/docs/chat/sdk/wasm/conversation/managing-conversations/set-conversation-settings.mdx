@@ -25,7 +25,7 @@ sourcePath: '/sdk/wasm/conversation/managing-conversations/set-conversation-sett
 ```ts
 import { MessageReceiveOptType } from '@openim/wasm-client-sdk';
 
-await OpenIM.setConversation(
+await openimsdk.setConversation(
   {
     conversationID,
     isPinned: true,
@@ -44,7 +44,7 @@ await OpenIM.setConversation(
 开启消息销毁时，可以在同一次调用中设置开关和销毁时长：
 
 ```ts
-await OpenIM.setConversation({
+await openimsdk.setConversation({
   conversationID,
   isMsgDestruct: true,
   msgDestructTime: 3600,

@@ -1,12 +1,12 @@
 ---
 title: '在消息中提及用户'
-description: '使用 OpenIM SDK 在消息中提及用户。'
+description: '使用 OpenIMClientSDK 在消息中提及用户。'
 sourcePath: '/sdk/wasm/message/composing-messages/mention-users-in-a-message'
 ---
 
-在 OpenIM SDK 中，提及用户的消息是一种群聊 `MessageItem`。你需要先用 `createTextAtMessage()` 创建 @ 文本消息，再通过 `sendMessage()` 发送到目标群组。接收端可以从消息的 `atTextElem` 读取被提及的用户列表，并从会话的 `groupAtType` 判断当前用户是否有未处理的 @ 提醒。
+在 OpenIMClientSDK 中，提及用户的消息是一种群聊 `MessageItem`。你需要先用 `createTextAtMessage()` 创建 @ 文本消息，再通过 `sendMessage()` 发送到目标群组。接收端可以从消息的 `atTextElem` 读取被提及的用户列表，并从会话的 `groupAtType` 判断当前用户是否有未处理的 @ 提醒。
 
-提及逻辑应基于 OpenIM 用户 ID，而不是昵称、头像或会话 ID。昵称只用于展示，真正触发提醒的是 `atUserIDList`。
+提及逻辑应基于 OpenIMSDK 用户 ID，而不是昵称、头像或会话 ID。昵称只用于展示，真正触发提醒的是 `atUserIDList`。
 
 ## 按用户 ID 提及成员
 
@@ -27,7 +27,7 @@ const mentionedUsers = [
   { userID: 'lee-user-id', groupNickname: 'Lee' },
 ];
 
-const { data: message } = await OpenIM.createTextAtMessage(
+const { data: message } = await openimsdk.createTextAtMessage(
   {
     text: '@alex-user-id @lee-user-id 请看一下这条消息',
     atUserIDList: mentionedUsers.map((user) => user.userID),
@@ -38,7 +38,7 @@ const { data: message } = await OpenIM.createTextAtMessage(
   }
 );
 
-const { data: sentMessage } = await OpenIM.sendMessage(
+const { data: sentMessage } = await openimsdk.sendMessage(
   {
     recvID: '',
     groupID,
@@ -69,7 +69,7 @@ const atAllElement = {
   groupNickname: '全体成员',
 };
 
-const { data: message } = await OpenIM.createTextAtMessage({
+const { data: message } = await openimsdk.createTextAtMessage({
   text: '@AtAllTag 请查看这条消息',
   atUserIDList: [atAllElement.userID],
   atUsersInfo: [
@@ -80,28 +80,28 @@ const { data: message } = await OpenIM.createTextAtMessage({
   ],
 });
 
-await OpenIM.sendMessage({
+await openimsdk.sendMessage({
   recvID: '',
   groupID,
   message,
 });
 ```
 
-`AtAllTag` 是 OpenIM 识别 @ 全体成员的特殊用户 ID，不是真实群成员，也不是 `GroupAtType` 的枚举值。客户端应根据当前成员的角色和群权限决定是否展示“@ 全体成员”入口，服务端仍会对发送权限做最终校验。
+`AtAllTag` 是 OpenIMSDK 识别 @ 全体成员的特殊用户 ID，不是真实群成员，也不是 `GroupAtType` 的枚举值。客户端应根据当前成员的角色和群权限决定是否展示“@ 全体成员”入口，服务端仍会对发送权限做最终校验。
 
 ## 发送带引用的 @ 消息
 
 `createTextAtMessage()` 还可以接收可选的 `message` 字段，用来把一条已有消息作为引用消息带入 @ 文本消息中。
 
 ```ts
-const { data: mentionReply } = await OpenIM.createTextAtMessage({
+const { data: mentionReply } = await openimsdk.createTextAtMessage({
   text: '@alex-user-id 我回复的是这条消息',
   atUserIDList: ['alex-user-id'],
   atUsersInfo: [{ atUserID: 'alex-user-id', groupNickname: 'Alex' }],
   message: quotedMessage,
 });
 
-await OpenIM.sendMessage({
+await openimsdk.sendMessage({
   recvID: '',
   groupID,
   message: mentionReply,
@@ -131,7 +131,7 @@ await OpenIM.sendMessage({
 ```ts
 import { GroupAtType } from '@openim/wasm-client-sdk';
 
-await OpenIM.setConversation({
+await openimsdk.setConversation({
   conversationID,
   groupAtType: GroupAtType.AtNormal,
 });

@@ -1,6 +1,6 @@
 ---
 title: '转发或合并消息'
-description: '使用 OpenIM SDK 转发或合并消息。'
+description: '使用 OpenIMClientSDK 转发或合并消息。'
 sourcePath: '/sdk/wasm/message/managing-messages/forward-or-merge-a-message'
 ---
 
@@ -13,9 +13,9 @@ sourcePath: '/sdk/wasm/message/managing-messages/forward-or-merge-a-message'
 下面把一条已有消息转发到单聊。`sourceMessage` 可以来自当前消息列表、历史消息查询结果或新消息事件。
 
 ```ts
-const { data: forwardMessage } = await OpenIM.createForwardMessage(sourceMessage);
+const { data: forwardMessage } = await openimsdk.createForwardMessage(sourceMessage);
 
-const { data: sentMessage } = await OpenIM.sendMessage(
+const { data: sentMessage } = await openimsdk.sendMessage(
   {
     recvID: targetUserID,
     groupID: '',
@@ -45,13 +45,13 @@ const summaryList = selectedMessages.map((message) =>
   buildMessageSummary(message)
 );
 
-const { data: mergerMessage } = await OpenIM.createMergerMessage({
+const { data: mergerMessage } = await openimsdk.createMergerMessage({
   messageList: selectedMessages,
   title: '聊天记录',
   summaryList,
 });
 
-await OpenIM.sendMessage({
+await openimsdk.sendMessage({
   recvID: '',
   groupID: targetGroupID,
   message: mergerMessage,

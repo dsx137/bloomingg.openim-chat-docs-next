@@ -1,6 +1,6 @@
 ---
 title: '获取和搜索群组'
-description: '使用 OpenIM SDK 获取指定群组、已加入群组列表并搜索本地已加入群组。'
+description: '使用 OpenIMClientSDK 获取指定群组、已加入群组列表并搜索本地已加入群组。'
 sourcePath: '/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups'
 ---
 
@@ -9,7 +9,7 @@ sourcePath: '/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups'
 `getSpecifiedGroupsInfo()` 接收 `groupID[]`，返回匹配的 `GroupItem[]`：
 
 ```ts
-const { data: groups } = await OpenIM.getSpecifiedGroupsInfo(
+const { data: groups } = await openimsdk.getSpecifiedGroupsInfo(
   groupIDs
 );
 ```
@@ -32,7 +32,7 @@ const { data: groups } = await OpenIM.getSpecifiedGroupsInfo(
 | `count` | `number` | 必填 | 本次读取数量。 |
 
 ```ts
-const { data: firstPage } = await OpenIM.getJoinedGroupListPage({
+const { data: firstPage } = await openimsdk.getJoinedGroupListPage({
   offset: 0,
   count: 50,
 });
@@ -45,7 +45,7 @@ const { data: firstPage } = await OpenIM.getJoinedGroupListPage({
 使用 `isJoinGroup(groupID)` 检查当前用户是否仍属于目标群组：
 
 ```ts
-const { data: isJoined } = await OpenIM.isJoinGroup(groupID);
+const { data: isJoined } = await openimsdk.isJoinGroup(groupID);
 ```
 
 返回的 `data` 表示当前用户是否已经加入目标群组。需要校准成员关系时，再重新查询已加入群组列表。
@@ -63,7 +63,7 @@ const { data: isJoined } = await OpenIM.isJoinGroup(groupID);
 | `isSearchGroupName` | `boolean` | 必填 | 是否匹配群名称。 |
 
 ```ts
-const { data: matchedGroups } = await OpenIM.searchGroups({
+const { data: matchedGroups } = await openimsdk.searchGroups({
   keywordList: [keyword.trim()],
   isSearchGroupID: true,
   isSearchGroupName: true,
@@ -86,16 +86,16 @@ const handlers = {
   groupDismissed: ({ data }) => markGroupDismissed(data.groupID),
 };
 
-OpenIM.on(CbEvents.OnJoinedGroupAdded, handlers.joinedAdded);
-OpenIM.on(CbEvents.OnJoinedGroupDeleted, handlers.joinedDeleted);
-OpenIM.on(CbEvents.OnGroupInfoChanged, handlers.groupChanged);
-OpenIM.on(CbEvents.OnGroupDismissed, handlers.groupDismissed);
+openimsdk.on(CbEvents.OnJoinedGroupAdded, handlers.joinedAdded);
+openimsdk.on(CbEvents.OnJoinedGroupDeleted, handlers.joinedDeleted);
+openimsdk.on(CbEvents.OnGroupInfoChanged, handlers.groupChanged);
+openimsdk.on(CbEvents.OnGroupDismissed, handlers.groupDismissed);
 
 function removeGroupListListeners() {
-  OpenIM.off(CbEvents.OnJoinedGroupAdded, handlers.joinedAdded);
-  OpenIM.off(CbEvents.OnJoinedGroupDeleted, handlers.joinedDeleted);
-  OpenIM.off(CbEvents.OnGroupInfoChanged, handlers.groupChanged);
-  OpenIM.off(CbEvents.OnGroupDismissed, handlers.groupDismissed);
+  openimsdk.off(CbEvents.OnJoinedGroupAdded, handlers.joinedAdded);
+  openimsdk.off(CbEvents.OnJoinedGroupDeleted, handlers.joinedDeleted);
+  openimsdk.off(CbEvents.OnGroupInfoChanged, handlers.groupChanged);
+  openimsdk.off(CbEvents.OnGroupDismissed, handlers.groupDismissed);
 }
 ```
 

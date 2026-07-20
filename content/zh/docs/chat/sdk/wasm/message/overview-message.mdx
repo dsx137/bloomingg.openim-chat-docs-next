@@ -1,10 +1,10 @@
 ---
 title: '消息概览'
-description: '了解 OpenIM SDK 的消息类型、消息标识、收发事件、历史记录、搜索、已读状态和扩展数据能力。'
+description: '了解 OpenIMClientSDK 的消息类型、消息标识、收发事件、历史记录、搜索、已读状态和扩展数据能力。'
 sourcePath: '/sdk/wasm/message/overview-message'
 ---
 
-OpenIM SDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本地文件创建的媒体消息，使用 `create*Message()` 或 `create*MessageByFile()` 创建，再通过 `sendMessage()` 发送。媒体文件已经由业务侧上传并取得 URL 时，必须使用 `create*MessageByURL()` 创建消息，再通过 `sendMessageNotOss()` 发送。两条路径都可以发送到单聊或群聊；收到新消息、撤回、已读回执、上传进度和会话变化时，通过 `CbEvents` 事件同步到应用状态。
+OpenIMClientSDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本地文件创建的媒体消息，使用 `create*Message()` 或 `create*MessageByFile()` 创建，再通过 `sendMessage()` 发送。媒体文件已经由业务侧上传并取得 URL 时，必须使用 `create*MessageByURL()` 创建消息，再通过 `sendMessageNotOss()` 发送。两条路径都可以发送到单聊或群聊；收到新消息、撤回、已读回执、上传进度和会话变化时，通过 `CbEvents` 事件同步到应用状态。
 
 消息页通常需要长期保存以下标识：
 

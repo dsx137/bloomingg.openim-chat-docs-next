@@ -1,6 +1,6 @@
 ---
 title: '设置会话草稿'
-description: '使用 OpenIM SDK 的 setConversationDraft 保存会话草稿。'
+description: '使用 OpenIMClientSDK 的 setConversationDraft 保存会话草稿。'
 sourcePath: '/sdk/wasm/conversation/managing-conversations/set-conversation-draft'
 ---
 
@@ -9,7 +9,7 @@ sourcePath: '/sdk/wasm/conversation/managing-conversations/set-conversation-draf
 输入过程中建议先在本地维护编辑器状态，并对保存调用做防抖；离开页面或切换会话前再立即提交一次最新文本，避免每次按键都写入 SDK。
 
 ```ts
-await OpenIM.setConversationDraft(
+await openimsdk.setConversationDraft(
   {
     conversationID,
     draftText: editorValue,
@@ -20,7 +20,7 @@ await OpenIM.setConversationDraft(
 清空草稿时传入空字符串：
 
 ```ts
-await OpenIM.setConversationDraft({
+await openimsdk.setConversationDraft({
   conversationID,
   draftText: '',
 });

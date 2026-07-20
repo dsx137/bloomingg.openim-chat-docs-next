@@ -1,12 +1,12 @@
 ---
 title: '获取用户在线状态'
-description: '使用 OpenIM SDK 订阅、查询并同步用户在线状态。'
+description: '使用 OpenIMClientSDK 订阅、查询并同步用户在线状态。'
 sourcePath: '/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user'
 ---
 
-OpenIM SDK 通过订阅机制同步用户在线状态。建议只订阅当前界面可见的用户，例如会话列表、联系人当前页或正在查看的资料卡中的用户。
+OpenIMClientSDK 通过订阅机制同步用户在线状态。建议只订阅当前界面可见的用户，例如会话列表、联系人当前页或正在查看的资料卡中的用户。
 
-在线状态只反映用户是否连接到 OpenIM。好友关系、群成员状态、禁言状态和应用自身记录的活跃时间，应分别使用对应的数据源。
+在线状态只反映用户是否连接到 OpenIMServer。好友关系、群成员状态、禁言状态和应用自身记录的活跃时间，应分别使用对应的数据源。
 
 ## 订阅可见用户的状态
 
@@ -25,7 +25,7 @@ async function subscribeVisibleUserStatus(userIDs: string[]) {
   }
 
   try {
-    const { data } = await OpenIM.subscribeUsersStatus(targetUserIDs);
+    const { data } = await openimsdk.subscribeUsersStatus(targetUserIDs);
     return data;
   } catch (error) {
     console.error('subscribeVisibleUserStatus failed', { error, targetUserIDs });
@@ -59,10 +59,10 @@ function handleUserStatusChanged({ data }) {
   renderPresenceDot(data.userID, data.status === OnlineState.Online);
 }
 
-OpenIM.on(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
+openimsdk.on(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
 
 function disposeUserStatusEvents() {
-  OpenIM.off(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
+  openimsdk.off(CbEvents.OnUserStatusChanged, handleUserStatusChanged);
 }
 ```
 
@@ -75,7 +75,7 @@ function disposeUserStatusEvents() {
 ```ts
 async function refreshSubscribedStatus() {
   try {
-    const { data: subscribedStates } = await OpenIM.getSubscribeUsersStatus();
+    const { data: subscribedStates } = await openimsdk.getSubscribeUsersStatus();
     mergePresence(subscribedStates);
     return subscribedStates;
   } catch (error) {
@@ -100,7 +100,7 @@ async function unsubscribeUserStatus(userIDs: string[]) {
   }
 
   try {
-    const { data } = await OpenIM.unsubscribeUsersStatus(targetUserIDs);
+    const { data } = await openimsdk.unsubscribeUsersStatus(targetUserIDs);
 
     for (const userID of targetUserIDs) {
       presenceByUserID.delete(userID);

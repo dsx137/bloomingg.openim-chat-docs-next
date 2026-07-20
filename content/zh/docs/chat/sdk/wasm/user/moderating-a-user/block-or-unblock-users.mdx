@@ -1,10 +1,10 @@
 ---
 title: '拉黑或取消拉黑用户'
-description: '使用 OpenIM SDK 将用户加入或移出当前账号的黑名单，并通过事件同步状态。'
+description: '使用 OpenIMClientSDK 将用户加入或移出当前账号的黑名单，并通过事件同步状态。'
 sourcePath: '/sdk/wasm/user/moderating-a-user/block-or-unblock-users'
 ---
 
-OpenIM 黑名单是当前用户主动维护的单向关系。调用 `addBlack()` 将目标用户加入黑名单，调用 `removeBlack()` 将其移出黑名单。该能力可用于屏蔽用户、限制聊天入口，以及展示资料卡中的关系状态。
+OpenIMSDK 黑名单是当前用户主动维护的单向关系。调用 `addBlack()` 将目标用户加入黑名单，调用 `removeBlack()` 将其移出黑名单。该能力可用于屏蔽用户、限制聊天入口，以及展示资料卡中的关系状态。
 
 ## 关系边界
 
@@ -12,7 +12,7 @@ OpenIM 黑名单是当前用户主动维护的单向关系。调用 `addBlack()`
 
 黑名单对消息发送的限制是非对称的：拉黑后，对方不能向当前用户发送消息，但当前用户仍可向对方发送消息。如果产品要求双方都不能继续发送消息，还需要在界面和业务层限制当前用户的发送入口。
 
-| 需求                   | OpenIM 对应能力                                                                                                                     |
+| 需求                   | OpenIMSDK 对应能力                                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | 当前用户屏蔽另一个用户 | `addBlack({ toUserID })`                                                                                                            |
 | 当前用户解除屏蔽       | `removeBlack(toUserID)`                                                                                                             |
@@ -29,7 +29,7 @@ OpenIM 黑名单是当前用户主动维护的单向关系。调用 `addBlack()`
 ```ts
 async function blockUser(targetUserID: string) {
   try {
-    await OpenIM.addBlack({
+    await openimsdk.addBlack({
       toUserID: targetUserID,
       ex: JSON.stringify({ source: 'profile-menu' }),
     });
@@ -45,7 +45,7 @@ async function blockUser(targetUserID: string) {
 ```ts
 async function unblockUser(targetUserID: string) {
   try {
-    await OpenIM.removeBlack(targetUserID);
+    await openimsdk.removeBlack(targetUserID);
   } catch (error) {
     console.error('removeBlack failed', { error, targetUserID });
     throw error;
@@ -73,12 +73,12 @@ function handleBlackDeleted({ data }) {
   removeBlockedUser(data.userID);
 }
 
-OpenIM.on(CbEvents.OnBlackAdded, handleBlackAdded);
-OpenIM.on(CbEvents.OnBlackDeleted, handleBlackDeleted);
+openimsdk.on(CbEvents.OnBlackAdded, handleBlackAdded);
+openimsdk.on(CbEvents.OnBlackDeleted, handleBlackDeleted);
 
 function disposeBlackEvents() {
-  OpenIM.off(CbEvents.OnBlackAdded, handleBlackAdded);
-  OpenIM.off(CbEvents.OnBlackDeleted, handleBlackDeleted);
+  openimsdk.off(CbEvents.OnBlackAdded, handleBlackAdded);
+  openimsdk.off(CbEvents.OnBlackDeleted, handleBlackDeleted);
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: '邀请或移除群成员'
-description: '使用 OpenIM SDK 邀请用户加入群组，或按权限移除群成员。'
+description: '使用 OpenIMClientSDK 邀请用户加入群组，或按权限移除群成员。'
 sourcePath: '/sdk/wasm/group/managing-group-members/invite-or-remove-group-members'
 ---
 
@@ -17,14 +17,14 @@ sourcePath: '/sdk/wasm/group/managing-group-members/invite-or-remove-group-membe
 | `userIDList` | `string[]` | 必填 | 要邀请的用户 ID 列表。 |
 
 ```ts
-await OpenIM.inviteUserToGroup({
+await openimsdk.inviteUserToGroup({
   groupID,
   reason: '邀请加入项目讨论组',
   userIDList: ['user-002', 'user-003'],
 });
 ```
 
-邀请结果取决于当前用户角色、群验证配置和服务端权限。Promise 成功表示服务端已接受本次邀请请求，不等于所有目标用户都已经出现在成员列表中。
+邀请结果取决于当前用户角色、群验证配置和 OpenIMServer 权限。Promise 成功表示 OpenIMServer 已接受本次邀请请求，不等于所有目标用户都已经出现在成员列表中。
 
 ## 移除群成员
 
@@ -39,14 +39,14 @@ await OpenIM.inviteUserToGroup({
 | `userIDList` | `string[]` | 必填 | 要移除的成员用户 ID 列表。 |
 
 ```ts
-await OpenIM.kickGroupMember({
+await openimsdk.kickGroupMember({
   groupID,
   reason: '已离开项目',
   userIDList: [targetUserID],
 });
 ```
 
-不能用该方法移除群主。群主身份必须先通过 `transferGroupOwner()` 转让。服务端会按当前操作者角色校验可移除的目标成员。
+不能用该方法移除群主。群主身份必须先通过 `transferGroupOwner()` 转让。OpenIMServer 会按当前操作者角色校验可移除的目标成员。
 
 ## 调用后的状态变化
 

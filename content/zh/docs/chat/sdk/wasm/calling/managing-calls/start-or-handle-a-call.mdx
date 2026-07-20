@@ -1,10 +1,10 @@
 ---
 title: '发起或处理通话'
-description: '使用 OpenIM SDK 发起、接受、拒绝、取消或挂断音视频通话。'
+description: '使用 OpenIMClientSDK 发起、接受、拒绝、取消或挂断音视频通话。'
 sourcePath: '/sdk/wasm/calling/managing-calls/start-or-handle-a-call'
 ---
 
-发起通话时，先构造 `RtcInvite`。单聊通话调用 `signalingInvite()`，群聊通话调用 `signalingInviteInGroup()`。两个方法都接收包含 `invitation` 和可选 `offlinePushInfo` 的对象。OpenIM SDK 负责邀请、接受、拒绝和挂断等信令状态。应用仍需使用返回的房间凭据，接入所选的实时音视频媒体引擎。
+发起通话时，先构造 `RtcInvite`。单聊通话调用 `signalingInvite()`，群聊通话调用 `signalingInviteInGroup()`。两个方法都接收包含 `invitation` 和可选 `offlinePushInfo` 的对象。OpenIMClientSDK 负责邀请、接受、拒绝和挂断等信令状态。应用仍需使用返回的房间凭据，接入所选的实时音视频媒体引擎。
 
 ## 发起单聊通话
 
@@ -23,7 +23,7 @@ const invitation = {
   platformID: Platform.Web,
 };
 
-const { data: roomCredentials } = await OpenIM.signalingInvite({
+const { data: roomCredentials } = await openimsdk.signalingInvite({
   invitation,
   offlinePushInfo: {
     title: '视频通话',
@@ -51,9 +51,9 @@ const { data: roomCredentials } = await OpenIM.signalingInvite({
 | `sessionType` | 单聊传 `SessionType.Single`。 |
 | `platformID` | 发起邀请的当前客户端平台；网页端传 `Platform.Web`，其他平台传对应枚举值。 |
 
-`RtcInvite` 声明中还包含可选的 `initiateTime` 和 `busyLineUserIDList`。`initiateTime` 是以秒为单位的 Unix 时间戳，未传时由信令流程补充。`busyLineUserIDList` 是服务端返回的忙线结果，不应由发起端预先填写。
+`RtcInvite` 声明中还包含可选的 `initiateTime` 和 `busyLineUserIDList`。`initiateTime` 是以秒为单位的 Unix 时间戳，未传时由信令流程补充。`busyLineUserIDList` 是 OpenIMServer 返回的忙线结果，不应由发起端预先填写。
 
-`offlinePushInfo` 是可选的离线推送内容，不属于 `RtcInvite`。其中 `title` 和 `desc` 是通知标题与正文，`ex` 可承载业务扩展字符串，`iOSPushSound` 和 `iOSBadgeCount` 控制 iOS 提示音与角标。是否能够收到离线推送，仍取决于服务端和客户端的推送配置。
+`offlinePushInfo` 是可选的离线推送内容，不属于 `RtcInvite`。其中 `title` 和 `desc` 是通知标题与正文，`ex` 可承载业务扩展字符串，`iOSPushSound` 和 `iOSBadgeCount` 控制 iOS 提示音与角标。是否能够收到离线推送，仍取决于 OpenIMServer 和客户端的推送配置。
 
 Promise 成功后，`roomCredentials` 是 `RtcInviteResults`，包含 `roomID`、`token`、`liveURL`，以及可选的 `busyLineUserIDList`。取得有效的 `token` 和 `roomID` 后再连接媒体房间。Promise 成功不表示被邀请方已经接听。
 
@@ -76,7 +76,7 @@ const groupInvitation = {
   platformID: Platform.Web,
 };
 
-const { data: roomCredentials } = await OpenIM.signalingInviteInGroup({
+const { data: roomCredentials } = await openimsdk.signalingInviteInGroup({
   invitation: groupInvitation,
   offlinePushInfo: {
     title: '群聊视频通话',
@@ -96,10 +96,10 @@ const { data: roomCredentials } = await OpenIM.signalingInviteInGroup({
 | --- | --- |
 | `inviteeUserIDList` | 本次实际邀请的群成员 ID。先排除当前用户、空值和重复 ID；没有选择的群成员不会收到本次邀请。 |
 | `groupID` | 目标群组 ID，不能传空字符串。发起前应确认当前用户仍在群内。 |
-| `roomID` | 群通话房间标识。示例沿用 OpenIM Chat 的做法使用 `groupID`；如果业务自行生成房间 ID，必须保证本次群通话的所有参与端使用同一个值，并避免与仍在进行的房间冲突。 |
+| `roomID` | 群通话房间标识。示例沿用 OpenIMSDK 的做法使用 `groupID`；如果业务自行生成房间 ID，必须保证本次群通话的所有参与端使用同一个值，并避免与仍在进行的房间冲突。 |
 | `sessionType` | 群聊传 `SessionType.WorkingGroup`。不要沿用单聊的 `SessionType.Single`。 |
 
-`inviterUserID`、`customData`、`timeout`、`mediaType` 和 `platformID` 与单聊含义一致。群成员选择、能否发起群通话等权限，需要客户端根据群资料和群成员字段在业务层处理。服务端拒绝请求时，应直接展示接口返回的错误，不能把失败成员当成已进入房间。
+`inviterUserID`、`customData`、`timeout`、`mediaType` 和 `platformID` 与单聊含义一致。群成员选择、能否发起群通话等权限，需要客户端根据群资料和群成员字段在业务层处理。OpenIMServer 拒绝请求时，应直接展示接口返回的错误，不能把失败成员当成已进入房间。
 
 `signalingInviteInGroup()` 的 Promise 成功同样返回 `RtcInviteResults`。`busyLineUserIDList` 只表示其中一部分成员忙线，不应因此中止其余成员的邀请和入会流程。
 
@@ -113,29 +113,29 @@ const action = {
   invitation,
 };
 
-const { data: roomCredentials } = await OpenIM.signalingAccept(action);
+const { data: roomCredentials } = await openimsdk.signalingAccept(action);
 
 // 用户拒绝时：
-await OpenIM.signalingReject(action);
+await openimsdk.signalingReject(action);
 ```
 
 `opUserID` 是执行接受、拒绝、取消或挂断操作的当前用户 ID。不要用邀请人 ID 固定填充该字段。
 
 `invitation` 必须使用收到的原始 `RtcInvite`，尤其要保留同一个 `roomID`、邀请人、被邀请人列表和会话类型，不要在接受或拒绝时重新生成房间 ID。
 
-`signalingAccept()` 成功返回 `RtcInviteResults`；接听端取得有效 `token` 和 `roomID` 后再连接媒体房间。`signalingReject()` 成功只表示服务端已接受拒绝请求，发起端界面随后由 `OnInviteeRejected` 更新。
+`signalingAccept()` 成功返回 `RtcInviteResults`；接听端取得有效 `token` 和 `roomID` 后再连接媒体房间。`signalingReject()` 成功只表示 OpenIMServer 已接受拒绝请求，发起端界面随后由 `OnInviteeRejected` 更新。
 
 ## 取消或挂断
 
 邀请尚未接通时，发起方调用 `signalingCancel()`；通话已经建立后，参与者调用 `signalingHungUp()`。
 
 ```ts
-await OpenIM.signalingCancel({ opUserID: currentUserID, invitation });
+await openimsdk.signalingCancel({ opUserID: currentUserID, invitation });
 
-await OpenIM.signalingHungUp({ opUserID: currentUserID, invitation });
+await openimsdk.signalingHungUp({ opUserID: currentUserID, invitation });
 ```
 
-这些调用只更新 OpenIM 信令状态。应用还需要停止本地采集、断开媒体房间，并释放摄像头和麦克风资源。为避免重复操作，建议按 `roomID` 维护通话状态机，并让取消、拒绝、超时和挂断都进入同一个清理流程。
+这些调用只更新 OpenIMClientSDK 信令状态。应用还需要停止本地采集、断开媒体房间，并释放摄像头和麦克风资源。为避免重复操作，建议按 `roomID` 维护通话状态机，并让取消、拒绝、超时和挂断都进入同一个清理流程。
 
 `signalingCancel()` 和 `signalingHungUp()` 都接收当前用户的 `opUserID` 与本次通话的原始 `invitation`。前者只能用于尚未接通的邀请，后者用于已经建立的通话。不要通过重新构造一个只有 `roomID` 的对象代替完整邀请。
 
@@ -143,7 +143,7 @@ await OpenIM.signalingHungUp({ opUserID: currentUserID, invitation });
 
 调用失败时记录 `errCode`、`errMsg` 和当前会话标识。在获得有效 `token` 和 `roomID` 之前，不要启动媒体房间连接。
 
-`signalingReject()`、`signalingCancel()` 和 `signalingHungUp()` 的 Promise 成功表示服务端已受理并完成当前信令请求；远端界面是否更新仍由对应事件决定。
+`signalingReject()`、`signalingCancel()` 和 `signalingHungUp()` 的 Promise 成功表示 OpenIMServer 已受理并完成当前信令请求；远端界面是否更新仍由对应事件决定。
 
 ## 监听通话状态
 
@@ -184,30 +184,30 @@ const handlers = {
   streamChanged: ({ data }) => updateParticipantStream(data),
 };
 
-OpenIM.on(CbEvents.OnReceiveNewInvitation, handlers.invitation);
-OpenIM.on(CbEvents.OnInviteeAccepted, handlers.accepted);
-OpenIM.on(CbEvents.OnInviteeRejected, handlers.rejected);
-OpenIM.on(CbEvents.OnInvitationCancelled, handlers.cancelled);
-OpenIM.on(CbEvents.OnInvitationTimeout, handlers.timeout);
-OpenIM.on(CbEvents.OnInviteeAcceptedByOtherDevice, handlers.acceptedByOtherDevice);
-OpenIM.on(CbEvents.OnInviteeRejectedByOtherDevice, handlers.rejectedByOtherDevice);
-OpenIM.on(CbEvents.OnHangUp, handlers.hangUp);
-OpenIM.on(CbEvents.OnRoomParticipantConnected, handlers.participantConnected);
-OpenIM.on(CbEvents.OnRoomParticipantDisconnected, handlers.participantDisconnected);
-OpenIM.on(CbEvents.OnStreamChange, handlers.streamChanged);
+openimsdk.on(CbEvents.OnReceiveNewInvitation, handlers.invitation);
+openimsdk.on(CbEvents.OnInviteeAccepted, handlers.accepted);
+openimsdk.on(CbEvents.OnInviteeRejected, handlers.rejected);
+openimsdk.on(CbEvents.OnInvitationCancelled, handlers.cancelled);
+openimsdk.on(CbEvents.OnInvitationTimeout, handlers.timeout);
+openimsdk.on(CbEvents.OnInviteeAcceptedByOtherDevice, handlers.acceptedByOtherDevice);
+openimsdk.on(CbEvents.OnInviteeRejectedByOtherDevice, handlers.rejectedByOtherDevice);
+openimsdk.on(CbEvents.OnHangUp, handlers.hangUp);
+openimsdk.on(CbEvents.OnRoomParticipantConnected, handlers.participantConnected);
+openimsdk.on(CbEvents.OnRoomParticipantDisconnected, handlers.participantDisconnected);
+openimsdk.on(CbEvents.OnStreamChange, handlers.streamChanged);
 
 function removeCallListeners() {
-  OpenIM.off(CbEvents.OnReceiveNewInvitation, handlers.invitation);
-  OpenIM.off(CbEvents.OnInviteeAccepted, handlers.accepted);
-  OpenIM.off(CbEvents.OnInviteeRejected, handlers.rejected);
-  OpenIM.off(CbEvents.OnInvitationCancelled, handlers.cancelled);
-  OpenIM.off(CbEvents.OnInvitationTimeout, handlers.timeout);
-  OpenIM.off(CbEvents.OnInviteeAcceptedByOtherDevice, handlers.acceptedByOtherDevice);
-  OpenIM.off(CbEvents.OnInviteeRejectedByOtherDevice, handlers.rejectedByOtherDevice);
-  OpenIM.off(CbEvents.OnHangUp, handlers.hangUp);
-  OpenIM.off(CbEvents.OnRoomParticipantConnected, handlers.participantConnected);
-  OpenIM.off(CbEvents.OnRoomParticipantDisconnected, handlers.participantDisconnected);
-  OpenIM.off(CbEvents.OnStreamChange, handlers.streamChanged);
+  openimsdk.off(CbEvents.OnReceiveNewInvitation, handlers.invitation);
+  openimsdk.off(CbEvents.OnInviteeAccepted, handlers.accepted);
+  openimsdk.off(CbEvents.OnInviteeRejected, handlers.rejected);
+  openimsdk.off(CbEvents.OnInvitationCancelled, handlers.cancelled);
+  openimsdk.off(CbEvents.OnInvitationTimeout, handlers.timeout);
+  openimsdk.off(CbEvents.OnInviteeAcceptedByOtherDevice, handlers.acceptedByOtherDevice);
+  openimsdk.off(CbEvents.OnInviteeRejectedByOtherDevice, handlers.rejectedByOtherDevice);
+  openimsdk.off(CbEvents.OnHangUp, handlers.hangUp);
+  openimsdk.off(CbEvents.OnRoomParticipantConnected, handlers.participantConnected);
+  openimsdk.off(CbEvents.OnRoomParticipantDisconnected, handlers.participantDisconnected);
+  openimsdk.off(CbEvents.OnStreamChange, handlers.streamChanged);
 }
 ```
 

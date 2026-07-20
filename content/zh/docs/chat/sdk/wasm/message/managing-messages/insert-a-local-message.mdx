@@ -1,6 +1,6 @@
 ---
 title: '插入本地消息'
-description: '使用 OpenIM SDK 插入本地消息。'
+description: '使用 OpenIMClientSDK 插入本地消息。'
 sourcePath: '/sdk/wasm/message/managing-messages/insert-a-local-message'
 ---
 
@@ -19,9 +19,9 @@ sourcePath: '/sdk/wasm/message/managing-messages/insert-a-local-message'
 | `sendID` | `string` | 必填 | 单聊发送方用户 ID。 |
 
 ```ts
-const { data: message } = await OpenIM.createTextMessage('本地提示消息');
+const { data: message } = await openimsdk.createTextMessage('本地提示消息');
 
-await OpenIM.insertSingleMessageToLocalStorage({
+await openimsdk.insertSingleMessageToLocalStorage({
   message,
   recvID: 'user_b',
   sendID: currentUserID,
@@ -41,9 +41,9 @@ await OpenIM.insertSingleMessageToLocalStorage({
 | `sendID` | `string` | 必填 | 消息发送方用户 ID。 |
 
 ```ts
-const { data: message } = await OpenIM.createTextMessage('群内本地提示');
+const { data: message } = await openimsdk.createTextMessage('群内本地提示');
 
-await OpenIM.insertGroupMessageToLocalStorage({
+await openimsdk.insertGroupMessageToLocalStorage({
   message,
   groupID,
   sendID: currentUserID,

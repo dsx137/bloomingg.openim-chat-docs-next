@@ -1,10 +1,10 @@
 ---
 title: '获取黑名单列表'
-description: '使用 OpenIM SDK 获取当前用户的黑名单。'
+description: '使用 OpenIMClientSDK 获取当前用户的黑名单。'
 sourcePath: '/sdk/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users'
 ---
 
-OpenIM 黑名单记录当前用户主动拉黑的用户。调用 `getBlackList()` 可获取完整列表，每条记录都是 `BlackUserItem`。这些数据可用于构建黑名单设置页、展示资料卡中的关系状态，以及限制聊天入口。
+OpenIMSDK 黑名单记录当前用户主动拉黑的用户。调用 `getBlackList()` 可获取完整列表，每条记录都是 `BlackUserItem`。这些数据可用于构建黑名单设置页、展示资料卡中的关系状态，以及限制聊天入口。
 
 黑名单与群组管理是两类独立能力。禁言、移除群成员或调整群角色时，应使用群成员相关 API；`getBlackList()` 只读取当前用户维护的黑名单。
 
@@ -15,7 +15,7 @@ OpenIM 黑名单记录当前用户主动拉黑的用户。调用 `getBlackList()
 ```ts
 async function loadBlockedUsers() {
   try {
-    const { data } = await OpenIM.getBlackList();
+    const { data } = await openimsdk.getBlackList();
     return data;
   } catch (error) {
     console.error('getBlackList failed', { error });

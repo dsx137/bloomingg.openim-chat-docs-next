@@ -138,8 +138,8 @@ test('every user-page event example includes matching cleanup', () => {
 
   for (const page of pages) {
     const source = read(page);
-    const onCount = source.match(/OpenIM\.on\(/g)?.length ?? 0;
-    const offCount = source.match(/OpenIM\.off\(/g)?.length ?? 0;
+    const onCount = source.match(/openimsdk\.on\(/g)?.length ?? 0;
+    const offCount = source.match(/openimsdk\.off\(/g)?.length ?? 0;
     assert.equal(offCount, onCount, `${page}: expected one off() for every on()`);
   }
 });

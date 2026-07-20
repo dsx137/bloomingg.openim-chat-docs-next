@@ -1,6 +1,6 @@
 ---
 title: '获取通话信息'
-description: '使用 OpenIM SDK 恢复邀请并查询通话房间和入会凭据。'
+description: '使用 OpenIMClientSDK 恢复邀请并查询通话房间和入会凭据。'
 sourcePath: '/sdk/wasm/calling/retrieving-call-information/retrieve-call-information'
 ---
 
@@ -12,7 +12,7 @@ sourcePath: '/sdk/wasm/calling/retrieving-call-information/retrieve-call-informa
 
 ```ts
 const { data } =
-  await OpenIM.getSignalingInvitationInfoStartApp();
+  await openimsdk.getSignalingInvitationInfoStartApp();
 
 if (data.invitation?.roomID) {
   restoreIncomingCall(data.invitation, data.offlinePushInfo);
@@ -27,14 +27,14 @@ if (data.invitation?.roomID) {
 
 ```ts
 const { data: room } =
-  await OpenIM.signalingGetRoomByGroupID(groupID);
+  await openimsdk.signalingGetRoomByGroupID(groupID);
 
 if (room.roomID) {
   renderParticipants(room.participant ?? []);
 }
 ```
 
-返回的快照包含 `roomID`，并可能包含邀请和参与者信息。没有进行中的群聊通话时，服务端可能返回错误或空的房间数据。应用应把这种情况视为“当前无可恢复通话”，而不是继续使用旧的本地凭据。
+返回的快照包含 `roomID`，并可能包含邀请和参与者信息。没有进行中的群聊通话时，OpenIMServer 可能返回错误或空的房间数据。应用应把这种情况视为“当前无可恢复通话”，而不是继续使用旧的本地凭据。
 
 ## 获取房间凭据
 
@@ -42,7 +42,7 @@ if (room.roomID) {
 
 ```ts
 const { data: roomCredentials } =
-  await OpenIM.signalingGetTokenByRoomID(roomID);
+  await openimsdk.signalingGetTokenByRoomID(roomID);
 
 await mediaEngine.join({
   roomID: roomCredentials.roomID,

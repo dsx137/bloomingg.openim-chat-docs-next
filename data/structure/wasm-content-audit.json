@@ -52,7 +52,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -76,7 +76,8 @@
         "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
         "2026-07-15：逐页复核事件写作规范；概览只保留会话、未读数和分组事件的归属导航，不注册处理器。",
         "2026-07-15：第二轮逐页复审；会话与聊天目标、conversationID 与 groupID、会话字段和事件归属的说明保持准确，无需调整正文。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -102,7 +103,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -125,7 +126,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/conversation/retrieving-conversations/retrieve-conversations 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/conversation/retrieving-conversations/retrieve-conversations 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -152,7 +154,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -183,7 +185,8 @@
         "2026-07-17：逐页复核并拆出公共“开始之前”页面；本页删除服务部署、Token 签发、业务登录接口和浏览器能力的重复说明，只保留单聊或群聊目标、固定版本安装、登录串联和首条消息验证。",
         "2026-07-17：初始化与登录示例统一使用 Platform.Web，发送边界明确受服务端策略和群组权限约束。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -211,7 +214,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -234,7 +237,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/message/composing-messages/add-extra-data-to-a-message 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/message/composing-messages/add-extra-data-to-a-message 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -260,7 +264,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -288,7 +292,8 @@
         "2026-07-15：逐页复核事件写作规范；区分输入状态写入 Promise、远端事件和状态查询快照，按 conversationID:userID 合并并保留唯一监听与清理示例。",
         "2026-07-15：第二轮逐页复审；输入状态节流、focus 清理、平台快照、查询校准和唯一事件处理器保持准确，无需调整正文。",
         "2026-07-15：第二轮跨页复查；把通用消息接收页的链接名称统一为“接收消息”。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -315,7 +320,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -349,7 +354,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：发布前深审删除“atUserIDList 不超过 10”无固定包证据的限制表述。",
         "2026-07-17：按产品确认恢复 atUserIDList 单条最多 10 人的 SDK 底层限制说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -389,7 +395,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -417,7 +423,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：接收消息概览同步 OfflineNewMessages / OnlineOnlyMessages 的触发条件表述。",
         "2026-07-17：概览补充 OnlineOnly 消息不落本地存储。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -466,7 +473,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-specified-messages 重命名迁入；同步更新中文标题与副标题语义。"
+        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-specified-messages 重命名迁入；同步更新中文标题与副标题语义。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -493,7 +501,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -523,7 +531,8 @@
         "2026-07-15：第二轮跨页复查；把通用消息接收页的链接名称统一为“接收消息”。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：搜索结果展示上下文改为调用 fetchSurroundingMessages()；明确不要用 findMessageList() 读取附近聊天记录。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -544,7 +553,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -573,7 +582,8 @@
         "2026-07-15：第二轮逐页复审；移除面向内部审核的 API/事件数量统计，保留版本基线、废弃能力和强制分页的开发者可执行说明。",
         "2026-07-17：逐页复核页面删除影响；移除本地数据库导出领域、错误码入口和数据库导出敏感数据说明，诊断入口统一指向日志页。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -596,7 +606,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -624,7 +634,8 @@
         "2026-07-15：逐页复核事件写作规范；区分自定义信令发送 Promise 与接收事件，补齐稳定监听清理，并使用 roomID + 业务 eventID 幂等合并。",
         "2026-07-15：第二轮逐页复审；接收示例改为先验证协议版本、eventID、类型和业务字段，再执行 roomID:eventID 幂等合并。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -647,7 +658,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -677,7 +688,8 @@
         "2026-07-17：明确 signalingGetRoomByGroupID 需要群组内通话使用的房间号，并建议发起群通话时使用 groupID 作为 roomID，便于后续恢复。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：发布前深审修正 signalingGetRoomByGroupID 参数语义为 groupID；自定义 roomID 场景改用本方法的 groupID，另以 roomID 合并状态或取 Token。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -696,7 +708,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -720,7 +732,8 @@
         "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
         "2026-07-15：逐页复核事件写作规范；概览仅说明 Promise、邀请/房间/自定义信令事件归属和 roomID + userID 合并规则，不重复注册处理器。",
         "2026-07-15：第二轮逐页复审；信令与媒体引擎边界、通话流程、核心数据和事件归属保持准确，无需调整正文。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -761,7 +774,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -791,7 +804,8 @@
         "2026-07-15：第二轮跨页复查；将请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：逐页复核参数与结果组织；按发送、收到列表、发出列表、未处理数、处理和删除记录拆分方法上下文，复杂接收方筛选使用参数表，简单字段使用正文说明。",
         "2026-07-17：统一枚举写法：好友申请 handleResults 改为 ApplicationHandleResult，与入群申请页一致。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -823,7 +837,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -852,7 +866,8 @@
         "2026-07-15：第二轮逐页复审；移除“修改备注”示例中会意外覆盖 ex 的无关字段，整理 Promise 与好友资料事件的中文表达。",
         "2026-07-15：第二轮跨页复查；将请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：逐页复核参数与结果组织；updateFriends 的复杂对象保留参数表并统一标题，返回结果改为说明 Promise 的业务阶段，不再展示泛型 unknown 包装。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -882,7 +897,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -905,7 +920,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -934,7 +950,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -963,7 +979,8 @@
         "2026-07-15：第二轮逐页复审；移除固定包核对口吻，并把事件清理指向本页唯一处理器。",
         "2026-07-16：按用户要求移除 getUserStatus 的公开文档说明，仅保留订阅和已订阅用户状态查询能力。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1005,7 +1022,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1041,7 +1058,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
         "2026-07-17：setAppBackgroundStatus 补充与 OnRecvOfflineNewMessages 的关联说明，并链接接收消息归属页。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1079,7 +1097,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1108,7 +1126,8 @@
         "2026-07-15：第二轮逐页复审；保留按已请求条目数推进 offset 的规则，并补充列表结构变化时重置分页以避免跳项。",
         "2026-07-16：根据用户反馈重新复核会话分页逻辑；删除套用其他列表的 offset 失效和从第一页重载警告，仅保留按已请求数量推进并按 conversationID 去重。",
         "2026-07-16：逐页复核参数与结果组织；为 getConversationListSplit 的分页对象补充操作内参数表，并直接说明 data 的 ConversationItem[] 结果。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1131,7 +1150,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1154,7 +1173,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/set-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/set-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1189,7 +1209,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1217,7 +1237,8 @@
         "2026-07-15：逐页复核事件写作规范；五类会话分组写操作分别映射五个事件，本页完整覆盖唯一监听和清理。",
         "2026-07-15：第二轮逐页复审；补齐 deleteConversationGroup 示例，并明确声明参数 groupID 实际是 conversationGroupID，避免与 OpenIM 群组 ID 混用。",
         "2026-07-16：逐页复核参数与结果组织；九个分组 API 按独立操作拆分，创建和嵌套分页使用各自参数表，简单 ID 与数组参数紧贴示例说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1239,7 +1260,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1266,7 +1287,8 @@
         "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
         "2026-07-15：逐页复核事件写作规范；草稿保存结果与 OnConversationChanged 分开说明，事件监听链接到会话列表归属页。",
         "2026-07-15：第二轮逐页复审；补充草稿保存防抖和离开页面前立即提交的实际使用方式，避免正文暗示每次按键都调用 SDK。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1302,7 +1324,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1330,7 +1352,8 @@
         "2026-07-15：逐页复核事件写作规范；单会话未读、总未读和群聊 @ 状态分别说明 Promise、查询快照及事件归属。",
         "2026-07-15：第二轮逐页复审；单会话未读、账号总未读与群聊 @ 状态的职责、载荷和事件归属保持准确，无需调整正文。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1352,7 +1375,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1375,7 +1398,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1401,7 +1425,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1429,7 +1453,8 @@
         "2026-07-15：逐页复核事件写作规范；删除、重置、清空消息和账号级本地清理按影响范围分别说明事件与重新查询。",
         "2026-07-15：第二轮逐页复审；把删除会话并删消息与保留入口清空历史的产品语义明确拆开，并整理账号级本地清理示例。",
         "2026-07-17：发布前深审补齐 OnConversationChanged 载荷与 conversationID 合并说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1468,7 +1493,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -1493,7 +1518,8 @@
         "2026-07-15：逐页复核事件写作规范；概览仅导航群资料、群成员和群申请的事件归属页面，不注册处理器。",
         "2026-07-15：第二轮逐页复审；群组、会话、成员、申请与角色边界及事件归属保持准确，无需调整正文。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1520,7 +1546,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1550,7 +1576,8 @@
         "2026-07-16：根据用户反馈重新逐页复核；分别说明 memberUserIDs 与 adminUserIDs 的角色及互斥要求，并明确客户端业务层必须根据群资料和成员角色字段组织权限界面与操作流程。",
         "2026-07-16：逐页复核参数与结果组织；createGroup 的复杂创建对象补充“参数说明”和字段类型，并把 GroupItem 返回结果放到调用示例之后。",
         "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1599,7 +1626,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1627,7 +1654,8 @@
         "2026-07-15：逐页复核事件写作规范；群组查询只建立快照，本页唯一监听加入、退出、资料变化和解散事件。",
         "2026-07-15：第二轮逐页复审；移除固定声明核对口吻，明确单关键词搜索，并补充群组事件导致分页 offset 失效时的重载策略。",
         "2026-07-16：逐页复核参数与结果组织；完整列表与分页列表拆开说明，分页和搜索对象各自使用参数表，其他单一 ID 查询保持简洁。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1665,7 +1693,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1693,7 +1721,8 @@
         "2026-07-15：逐页复核事件写作规范；加入流程区分直接加入和待审核，退出和解散分别链接到唯一群组事件归属页。",
         "2026-07-15：第二轮逐页复审；直接加入、待审核、退出、群主转让和解散的状态边界保持准确，无需调整正文。",
         "2026-07-16：逐页复核参数与结果组织；joinGroup 的群组、申请说明、来源枚举和扩展字段集中为操作内参数表，退出和解散的简单 ID 参数继续使用正文说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1737,7 +1766,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1765,7 +1794,8 @@
         "2026-07-15：逐页复核事件写作规范；区分查询快照与申请状态变更，逐项说明同意、拒绝、删除和角标清除的 Promise 结果、事件载荷及 userID + groupID 合并标识。",
         "2026-07-15：第二轮逐页复审；移除内部来源说明，收紧同意/拒绝 Promise 语义，并补充申请事件导致分页 offset 失效时的重载策略。",
         "2026-07-16：逐页复核参数与结果组织；收到和发出的申请拆成独立操作并补齐示例，共享完全相同的筛选分页字段；计数、角标、处理和删除各归入明确操作。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1804,7 +1834,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1834,7 +1864,8 @@
         "2026-07-16：根据用户反馈重新逐页复核；移除 getGroupMemberListByJoinTimeFilter 的公开说明，并明确 searchGroupMembers 用于按关键词获取 @ 候选人。",
         "2026-07-16：逐页复核参数与结果组织；分页成员与成员搜索分别补充操作内参数表，指定成员和角色查询的简单参数继续使用正文说明。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1866,7 +1897,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1895,7 +1926,8 @@
         "2026-07-15：第二轮逐页复审；邀请、待审核、直接入群和移除的事件边界保持准确，仅整理两个调用示例的结构。",
         "2026-07-16：逐页复核参数与结果组织；inviteUserToGroup 与 kickGroupMember 分别补充操作内参数表，避免共享字段说明掩盖邀请和移除语义。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1922,7 +1954,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -1951,7 +1983,8 @@
         "2026-07-15：第二轮逐页复审；纠正 roleLevel 字段说明，避免暗示可直接设置群主，并补充群成员 ex 的整值覆盖规则。",
         "2026-07-16：逐页复核参数与结果组织；setGroupMemberInfo 的多字段对象明确归入“参数说明”，并补齐字段类型。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -1973,7 +2006,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2001,7 +2034,8 @@
         "2026-07-15：逐页复核事件写作规范；区分群主转让的 Promise 结果与成员角色事件，说明单条 GroupMemberItem 载荷、合并键和重新查询校准。",
         "2026-07-15：第二轮逐页复审；转让权限、原/新群主角色变化和成员事件校准保持准确，仅整理调用示例结构。",
         "2026-07-16：逐页复核参数与结果组织；transferGroupOwner 只有两个含义清晰的 ID 字段，删除形式化参数表并改为紧贴示例说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2032,7 +2066,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2061,7 +2095,8 @@
         "2026-07-15：第二轮逐页复审；群禁言例外用户、角色权限、成员禁言时间归一化和事件边界保持准确，仅整理示例结构。",
         "2026-07-16：逐页复核参数与结果组织；群组禁言和成员禁言各自补充参数表，明确例外用户、布尔开关和秒制时长属于不同 API。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2118,7 +2153,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2147,7 +2182,8 @@
         "2026-07-15：第二轮逐页复审；同步事件归属、处理器生命周期、进度载荷与同步完成后的快照校准表述保持准确，无需调整正文。",
         "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
         "2026-07-17：补充 OnSyncServerStart 的 data 布尔语义：true 表示卸载重装或本地库重建后的同步，并按 WASM 声明明确 Finish/Failed 不携带该字段。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2171,7 +2207,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2203,7 +2239,8 @@
         "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
         "2026-07-17：调整「接入准备」排版：补引导语，拆分公共条件与按运行环境补充确认，并链接开始之前。",
         "2026-07-17：统一枚举写法：login platformID 改为 Platform.Web，避免直接填写平台数字。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2229,7 +2266,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2262,7 +2299,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：按要求删除“采集连接和同步日志”整节及连接/同步事件指引；日志页只保留级别配置、operationID 与业务上下文记录。",
         "2026-07-17：发布前深审注明 LogLevel.Panic=0 在本版本 login 包装层会被 || 5 回退为 Debug。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2289,7 +2327,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2324,7 +2362,8 @@
         "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
         "2026-07-20：页面路径重命名为 /sdk/wasm/message/managing-messages/clear-all-message-history；保留本记录与永久重定向用于追溯。",
         "2026-07-20：由 /sdk/wasm/message/managing-messages/clear-all-message-history 重命名迁入；同步更新中文标题与副标题语义。",
-        "2026-07-20：路径回迁为当前正式地址；恢复为 adapt 发布页，不再作为中间重定向记录。"
+        "2026-07-20：路径回迁为当前正式地址；恢复为 adapt 发布页，不再作为中间重定向记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2349,7 +2388,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2381,7 +2420,8 @@
         "2026-07-16：按固定 WASM 声明重写 API 参数；createForwardMessage 接收单个 MessageItem，createMergerMessage 接收包含 messageList、title、summaryList 的 MergerMsgParams，不再把示例变量列作 SDK 参数。",
         "2026-07-16：对比同类指南页后移除独立 API 参数章节；参数语义分别贴近单条转发和多条合并示例说明，避免在任务型页面重复 API Reference 签名。",
         "2026-07-16：逐页复核参数与结果组织；单条转发的简单 MessageItem 参数保持正文说明，createMergerMessage 的三字段对象在多条合并操作内使用参数表。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2433,7 +2473,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 delete-or-revoke-a-message 拆出；本页只保留删除相关 API 与事件。"
+        "2026-07-20：由 delete-or-revoke-a-message 拆出；本页只保留删除相关 API 与事件。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2481,7 +2522,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 delete-or-revoke-a-message 拆出；OnNewRecvMessageRevoked 完整监听示例归属本页。"
+        "2026-07-20：由 delete-or-revoke-a-message 拆出；OnNewRecvMessageRevoked 完整监听示例归属本页。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2526,7 +2568,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：从 delete-or-revoke-a-message 拆出独立修改消息页；OnMessageModified 完整监听示例归属本页。"
+        "2026-07-20：从 delete-or-revoke-a-message 拆出独立修改消息页；OnMessageModified 完整监听示例归属本页。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2550,7 +2593,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2579,7 +2622,8 @@
         "2026-07-15：第二轮逐页复审；消息置顶与会话置顶边界、PinnedMessageChangeData 载荷、集合替换和清理时机保持准确，无需调整正文。",
         "2026-07-16：逐页复核参数与结果组织；setConversationPinnedMsg 的会话、消息和布尔开关字段补充操作内参数表。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2605,7 +2649,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2635,7 +2679,8 @@
         "2026-07-16：逐页复核参数与结果组织；单聊和群聊本地插入分别补充真实三字段参数表，避免 recvID 与 groupID 在同页串台。",
         "2026-07-17：根据实际用途重新复核 setMessageLocalContent；本页只保留其本地修改边界和语音转写页入口，完整参数与 soundElem.text 示例迁移到语音转文字页面。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2661,7 +2706,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2684,7 +2729,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/message/managing-read-status/manage-group-message-read-receipts 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/message/managing-read-status/manage-group-message-read-receipts 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2717,7 +2763,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2748,7 +2794,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：修正 OnRecvOfflineNewMessages（应用 setAppBackgroundStatus(true) 后的新消息）与 OnRecvOnlineOnlyMessages（发送 isOnlineOnly）语义，并同步验证项。",
         "2026-07-17：补充 OnRecvOnlineOnlyMessages 收到的消息不写入 SDK 本地存储、不可历史回放。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2799,7 +2846,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-message-list 重命名迁入；同步更新中文标题与副标题语义。"
+        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-message-list 重命名迁入；同步更新中文标题与副标题语义。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2835,7 +2883,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2868,7 +2916,8 @@
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：isOnlineOnly 参数说明补充接收端 OnRecvOnlineOnlyMessages 事件路径。",
         "2026-07-17：isOnlineOnly 说明补充接收消息不落本地存储。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2904,7 +2953,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2935,7 +2984,8 @@
         "2026-07-16：根据用户要求再次复核；删除 createAdvancedQuoteMessage，引用消息只保留 createQuoteMessage。",
         "2026-07-16：逐页复核参数与结果组织；名片、位置及四类 URL 媒体按独立操作说明真实字段，共同的 MessageItem 创建结果继续在页末统一说明。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -2958,7 +3008,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2988,7 +3038,8 @@
         "2026-07-16：逐页复核参数与结果组织；speechToText 的 filename 与序列化敏感的 data 字段补充参数表，返回文本继续在调用示例后说明。",
         "2026-07-17：按实际组合流程补充 setMessageLocalContent；明确把 speechToText 返回文本写入完整 MessageItem.soundElem.text，仅更新当前设备本地消息，不触发共享消息事件。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3024,7 +3075,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3054,7 +3105,8 @@
         "2026-07-16：逐页复核参数与结果组织；uploadFile 的浏览器文件、路径替代项、UUID 和可选字段补充操作内参数表。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：发布前深审按固定包装层实现说明 uuid 改写为 uuid/file.name，以及 UploadComplete/fileMapSet 关联方式。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3092,7 +3144,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3124,7 +3176,8 @@
         "2026-07-17：根据实际事件行为删除“重连或多端操作可能导致事件重复到达”的错误说明，继续按 roomID 和用户 ID 定位通话及参与者状态。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
         "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3147,7 +3200,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3174,7 +3227,8 @@
         "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
         "2026-07-15：逐页复核事件写作规范；getBlackList 只返回完整查询快照，黑名单增量事件由写操作页面唯一处理。",
         "2026-07-15：第二轮逐页复审；黑名单字段、完整快照替换、数据类型边界与事件归属保持准确，仅清理示例空行。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3210,7 +3264,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -3234,7 +3288,8 @@
         "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
         "2026-07-15：逐页复核事件写作规范；概览只保留用户事件归属导航，不注册或复制业务事件处理器。",
         "2026-07-15：第二轮逐页复审；补齐 UserOnlineState 对 getUserStatus() 的直接查询入口，避免把在线状态误写成仅能通过订阅获取。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3266,7 +3321,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3289,7 +3344,8 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-20：由 /sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
+        "2026-07-20：由 /sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3312,7 +3368,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3342,7 +3398,8 @@
         "2026-07-15：第二轮跨页复查；将请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：针对用户反馈重新逐页复核；删除 ConversationItem.showName 及会话页面展示规则，保持本页只说明公开用户资料及其与好友、群成员资料的边界。",
         "2026-07-16：逐页复核参数与结果组织；getUsersInfo 的单一数组参数改为正文说明，保留有查阅价值的 PublicUserItem 字段表并明确 data 类型。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3366,7 +3423,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3396,7 +3453,8 @@
         "2026-07-15：第二轮跨页复查；将两组请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：针对用户反馈重新逐页复核；将分页结果、搜索结果、好友事件和重新加载时机拆开说明，并明确 searchFriends 的结果不能覆盖完整好友列表。",
         "2026-07-16：逐页复核参数与结果组织；分页和搜索的复杂字段保留操作内参数表，统一改用“参数说明”“返回结果”，并删除无价值的 WsResponse 包装说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3420,7 +3478,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -3449,7 +3507,8 @@
         "2026-07-15：第二轮逐页复审；指定好友查询、关系检查、黑名单过滤和公开资料回退场景保持准确，无需调整正文。",
         "2026-07-15：第二轮跨页复查；将请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：逐页复核参数与结果组织；指定好友查询只有两个清晰字段，改为紧邻示例的正文说明，并直接说明 data 的 FriendUserItem[] 结果。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {
@@ -3469,7 +3528,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "not-applicable",
             "evidence": [],
@@ -3492,7 +3551,8 @@
         "2026-07-17：逐页新增并人工审核公共前置页；集中说明服务地址、可信后端签发用户 Token、浏览器运行资源和敏感凭据边界。",
         "2026-07-17：该页只建立认证与首条消息共用的准备条件，不归属 SDK 方法或事件；英文仅保留延后发布骨架。",
         "2026-07-17：发布前深审替换本站不存在的 /docs/guides/quick-deployment/* 死链为 docs.openim.io Docker 部署指南。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：中文正文统一术语为 OpenIMSDK / OpenIMClientSDK / OpenIMServer；示例实例变量改为 openimsdk。无空格写法；平台特指 OpenIM WASM SDK 与包名保留。"
       ]
     },
     {

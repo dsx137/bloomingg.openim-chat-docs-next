@@ -216,6 +216,7 @@ test('matches commercial symbols in inline code text', () => {
   );
   assert.equal(
     matchCommercialSymbol('OpenIM.getAdvancedHistoryMessageListReverse', names),
+    matchCommercialSymbol('openimsdk.getAdvancedHistoryMessageListReverse', names),
     'getAdvancedHistoryMessageListReverse',
   );
   assert.equal(matchCommercialSymbol('CbEvents.OnMsgDeleted', names), 'OnMsgDeleted');

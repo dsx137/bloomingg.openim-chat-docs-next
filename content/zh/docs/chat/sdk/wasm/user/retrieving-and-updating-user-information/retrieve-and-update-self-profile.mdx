@@ -15,7 +15,7 @@ sourcePath: '/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-an
 ```ts
 async function loadCurrentUser() {
   try {
-    const { data } = await OpenIM.getSelfUserInfo();
+    const { data } = await openimsdk.getSelfUserInfo();
     setCurrentUser(data);
     return data;
   } catch (error) {
@@ -58,7 +58,7 @@ async function updateMyProfile(input: EditableSelfProfile) {
   }
 
   try {
-    await OpenIM.setSelfInfo(payload);
+    await openimsdk.setSelfInfo(payload);
   } catch (error) {
     console.error('setSelfInfo failed', { error });
     throw error;
@@ -88,10 +88,10 @@ function parseProfileExtra(ex?: string): Record<string, unknown> {
 }
 
 async function updateProfileExtra(patch: Record<string, unknown>) {
-  const { data: currentUser } = await OpenIM.getSelfUserInfo();
+  const { data: currentUser } = await openimsdk.getSelfUserInfo();
   const currentExtra = parseProfileExtra(currentUser.ex);
 
-  await OpenIM.setSelfInfo({
+  await openimsdk.setSelfInfo({
     ex: JSON.stringify({ ...currentExtra, ...patch }),
   });
 }
@@ -106,7 +106,7 @@ async function updateProfileExtra(patch: Record<string, unknown>) {
 ```ts
 import { MessageReceiveOptType } from '@openim/wasm-client-sdk';
 
-await OpenIM.setSelfInfo({
+await openimsdk.setSelfInfo({
   globalRecvMsgOpt: MessageReceiveOptType.NotNotify,
 });
 ```
@@ -130,10 +130,10 @@ function handleSelfInfoUpdated({ data }) {
   setCurrentUser(data);
 }
 
-OpenIM.on(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
+openimsdk.on(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
 
 function disposeSelfInfoEvents() {
-  OpenIM.off(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
+  openimsdk.off(CbEvents.OnSelfInfoUpdated, handleSelfInfoUpdated);
 }
 ```
 

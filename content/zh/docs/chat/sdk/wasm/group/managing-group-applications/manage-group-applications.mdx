@@ -1,10 +1,10 @@
 ---
 title: '处理入群申请'
-description: '使用 OpenIM SDK 查询、统计、同意或拒绝入群申请。'
+description: '使用 OpenIMClientSDK 查询、统计、同意或拒绝入群申请。'
 sourcePath: '/sdk/wasm/group/managing-group-applications/manage-group-applications'
 ---
 
-OpenIM 的入群申请由群主或管理员处理。它和 `inviteUserToGroup()` 的成员邀请不同：申请人主动提交入群请求后，由有权限的群成员审核；成员邀请则由群内有权限的用户发起。
+OpenIMSDK 的入群申请由群主或管理员处理。它和 `inviteUserToGroup()` 的成员邀请不同：申请人主动提交入群请求后，由有权限的群成员审核；成员邀请则由群内有权限的用户发起。
 
 ## 查询申请
 
@@ -24,7 +24,7 @@ OpenIM 的入群申请由群主或管理员处理。它和 `inviteUserToGroup()`
 ```ts
 import { ApplicationHandleResult } from '@openim/wasm-client-sdk';
 
-const { data: pendingApplications } = await OpenIM.getGroupApplicationListAsRecipient({
+const { data: pendingApplications } = await openimsdk.getGroupApplicationListAsRecipient({
   groupID: [groupID],
   handleResults: [ApplicationHandleResult.Unprocessed],
   offset: 0,
@@ -41,7 +41,7 @@ Promise 成功后，`data` 是当前用户有权处理的 `GroupApplicationItem[
 申请人查询自己提交的记录时，使用相同的群组、状态和分页字段：
 
 ```ts
-const { data: sentApplications } = await OpenIM.getGroupApplicationListAsApplicant({
+const { data: sentApplications } = await openimsdk.getGroupApplicationListAsApplicant({
   groupID: [groupID],
   handleResults: [
     ApplicationHandleResult.Unprocessed,
@@ -62,7 +62,7 @@ Promise 成功后，`data` 是当前用户发出的 `GroupApplicationItem[]`。
 `getGroupApplicationUnhandledCount({ time })` 返回当前用户作为群主或管理员需要处理的申请数量。
 
 ```ts
-const { data: count } = await OpenIM.getGroupApplicationUnhandledCount({
+const { data: count } = await openimsdk.getGroupApplicationUnhandledCount({
   time: 0,
 });
 ```
@@ -74,7 +74,7 @@ const { data: count } = await OpenIM.getGroupApplicationUnhandledCount({
 `getGroupApplicationBadgeCount()` 返回用于申请入口角标的计数。它和按时间统计的未处理申请数是两个独立入口：
 
 ```ts
-const { data: badgeCount } = await OpenIM.getGroupApplicationBadgeCount();
+const { data: badgeCount } = await openimsdk.getGroupApplicationBadgeCount();
 updateGroupApplicationBadge(badgeCount);
 ```
 
@@ -83,7 +83,7 @@ updateGroupApplicationBadge(badgeCount);
 用户打开并确认申请列表后，可以清除角标：
 
 ```ts
-await OpenIM.clearGroupApplicationBadgeCount();
+await openimsdk.clearGroupApplicationBadgeCount();
 ```
 
 清除角标不会同意、拒绝或删除申请。角标变化通过 `CbEvents.OnGroupApplicationBadgeCountChanged` 同步，事件的 `data` 是最新计数。
@@ -101,13 +101,13 @@ await OpenIM.clearGroupApplicationBadgeCount();
 | `handleMsg` | `string` | 必填 | 同意或拒绝时的处理说明；没有说明时传空字符串。 |
 
 ```ts
-await OpenIM.acceptGroupApplication({
+await openimsdk.acceptGroupApplication({
   groupID: application.groupID,
   fromUserID: application.userID,
   handleMsg: '同意加入',
 });
 
-await OpenIM.refuseGroupApplication({
+await openimsdk.refuseGroupApplication({
   groupID: application.groupID,
   fromUserID: application.userID,
   handleMsg: '暂不接受该申请',
@@ -121,7 +121,7 @@ await OpenIM.refuseGroupApplication({
 `deleteGroupRequests()` 按申请人和群组的组合批量删除申请记录：
 
 ```ts
-await OpenIM.deleteGroupRequests([
+await openimsdk.deleteGroupRequests([
   {
     fromUserID: application.userID,
     groupID: application.groupID,
@@ -137,8 +137,8 @@ await OpenIM.deleteGroupRequests([
 
 会改变申请状态的调用需要分别处理请求结果和事件增量：
 
-- `acceptGroupApplication()` 的 Promise 成功表示服务端已完成本次同意请求，随后通过 `OnGroupApplicationAccepted` 合并已同意的申请记录。
-- `refuseGroupApplication()` 的 Promise 成功表示服务端已完成本次拒绝请求，随后通过 `OnGroupApplicationRejected` 合并已拒绝的申请记录。
+- `acceptGroupApplication()` 的 Promise 成功表示 OpenIMServer 已完成本次同意请求，随后通过 `OnGroupApplicationAccepted` 合并已同意的申请记录。
+- `refuseGroupApplication()` 的 Promise 成功表示 OpenIMServer 已完成本次拒绝请求，随后通过 `OnGroupApplicationRejected` 合并已拒绝的申请记录。
 - `deleteGroupRequests()` 的 Promise 成功表示删除请求已完成，随后通过 `OnGroupApplicationDeleted` 移除对应记录。
 - `clearGroupApplicationBadgeCount()` 的 Promise 成功表示清除请求已完成，最新角标以 `OnGroupApplicationBadgeCountChanged` 的数值载荷为准。
 
@@ -161,18 +161,18 @@ const handlers = {
   badgeChanged: ({ data }) => updateGroupApplicationBadge(data),
 };
 
-OpenIM.on(CbEvents.OnGroupApplicationAdded, handlers.added);
-OpenIM.on(CbEvents.OnGroupApplicationAccepted, handlers.accepted);
-OpenIM.on(CbEvents.OnGroupApplicationRejected, handlers.rejected);
-OpenIM.on(CbEvents.OnGroupApplicationDeleted, handlers.deleted);
-OpenIM.on(CbEvents.OnGroupApplicationBadgeCountChanged, handlers.badgeChanged);
+openimsdk.on(CbEvents.OnGroupApplicationAdded, handlers.added);
+openimsdk.on(CbEvents.OnGroupApplicationAccepted, handlers.accepted);
+openimsdk.on(CbEvents.OnGroupApplicationRejected, handlers.rejected);
+openimsdk.on(CbEvents.OnGroupApplicationDeleted, handlers.deleted);
+openimsdk.on(CbEvents.OnGroupApplicationBadgeCountChanged, handlers.badgeChanged);
 
 function removeGroupApplicationListeners() {
-  OpenIM.off(CbEvents.OnGroupApplicationAdded, handlers.added);
-  OpenIM.off(CbEvents.OnGroupApplicationAccepted, handlers.accepted);
-  OpenIM.off(CbEvents.OnGroupApplicationRejected, handlers.rejected);
-  OpenIM.off(CbEvents.OnGroupApplicationDeleted, handlers.deleted);
-  OpenIM.off(CbEvents.OnGroupApplicationBadgeCountChanged, handlers.badgeChanged);
+  openimsdk.off(CbEvents.OnGroupApplicationAdded, handlers.added);
+  openimsdk.off(CbEvents.OnGroupApplicationAccepted, handlers.accepted);
+  openimsdk.off(CbEvents.OnGroupApplicationRejected, handlers.rejected);
+  openimsdk.off(CbEvents.OnGroupApplicationDeleted, handlers.deleted);
+  openimsdk.off(CbEvents.OnGroupApplicationBadgeCountChanged, handlers.badgeChanged);
 }
 ```
 

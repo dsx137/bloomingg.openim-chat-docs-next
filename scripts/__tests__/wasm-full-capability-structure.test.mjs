@@ -109,7 +109,7 @@ test('speech transcription stores its result in local sound message content', ()
   );
   const ownership = readJson('data/structure/wasm-api-ownership.json');
 
-  assert.match(source, /OpenIM\.setMessageLocalContent/);
+  assert.match(source, /openimsdk\.setMessageLocalContent/);
   assert.match(source, /soundElem:[\s\S]+text:[\s\S]+transcription\.text/);
   assert.match(source, /不会同步到其他设备或其他用户/);
   assert.equal(
@@ -143,12 +143,12 @@ test('shared browser prerequisites have one Getting Started owner', () => {
   for (const source of [authentication, firstMessage]) {
     assert.match(source, new RegExp(prerequisitePath));
   }
-  for (const term of ['apiAddr', 'wsAddr', 'OpenIMSession', 'WebAssembly', 'IndexedDB']) {
+  for (const term of ['apiAddr', 'wsAddr', 'OpenIMSDKSession', 'WebAssembly', 'IndexedDB']) {
     assert.match(prerequisite, new RegExp(`\\b${term}\\b`), term);
   }
   assert.match(firstMessage, /recvID/);
   assert.match(firstMessage, /groupID/);
-  assert.doesNotMatch(firstMessage, /type OpenIMSession/);
+  assert.doesNotMatch(firstMessage, /type OpenIMSDKSession/);
 });
 
 test('call recovery and logging match the reviewed WASM behavior', () => {
@@ -636,7 +636,7 @@ test('event listeners appear only on their ownership page', () => {
 
   for (const path of activePages) {
     const source = readFileSync(zhContentFile(path), 'utf8');
-    const events = [...source.matchAll(/OpenIM\.on\(CbEvents\.([A-Za-z0-9_]+)/g)].map(
+    const events = [...source.matchAll(/openimsdk\.on\(CbEvents\.([A-Za-z0-9_]+)/g)].map(
       (match) => match[1],
     );
     for (const event of events) {
@@ -648,9 +648,9 @@ test('event listeners appear only on their ownership page', () => {
 test('every event listener uses a stable handler and matching cleanup', () => {
   for (const path of activePages) {
     const source = readFileSync(zhContentFile(path), 'utf8');
-    const onCount = source.match(/OpenIM\.on\(/g)?.length ?? 0;
+    const onCount = source.match(/openimsdk\.on\(/g)?.length ?? 0;
     const registrations = [
-      ...source.matchAll(/OpenIM\.on\(CbEvents\.([A-Za-z0-9_]+),\s*([A-Za-z0-9_.]+)\s*\)/g),
+      ...source.matchAll(/openimsdk\.on\(CbEvents\.([A-Za-z0-9_]+),\s*([A-Za-z0-9_.]+)\s*\)/g),
     ];
 
     assert.equal(
@@ -662,7 +662,7 @@ test('every event listener uses a stable handler and matching cleanup', () => {
       const escapedHandler = handler.replaceAll('.', '\\.');
       assert.match(
         source,
-        new RegExp(`OpenIM\\.off\\(CbEvents\\.${event},\\s*${escapedHandler}\\s*\\)`),
+        new RegExp(`openimsdk\\.off\\(CbEvents\\.${event},\\s*${escapedHandler}\\s*\\)`),
         `${path}: ${event} must remove ${handler}`,
       );
     }

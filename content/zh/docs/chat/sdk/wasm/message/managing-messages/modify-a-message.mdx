@@ -1,6 +1,6 @@
 ---
 title: '修改消息'
-description: '使用 OpenIM SDK 修改已发送消息的内容。'
+description: '使用 OpenIMClientSDK 修改已发送消息的内容。'
 sourcePath: '/sdk/wasm/message/managing-messages/modify-a-message'
 ---
 
@@ -18,7 +18,7 @@ sourcePath: '/sdk/wasm/message/managing-messages/modify-a-message'
 | `message` | `MessageItem` | 必填 | 修改后的完整消息对象；必须保留原 `clientMsgID`。 |
 
 ```ts
-const { data: modifiedMessage } = await OpenIM.modifyMessage({
+const { data: modifiedMessage } = await openimsdk.modifyMessage({
   conversationID,
   message: {
     ...message,
@@ -32,7 +32,7 @@ const { data: modifiedMessage } = await OpenIM.modifyMessage({
 replaceMessage(modifiedMessage);
 ```
 
-该方法不是局部更新。应从当前消息复制并只修改目标内容，保留 `clientMsgID` 和其他消息字段。允许修改的发送者、时间窗口和消息类型由 OpenIM 服务端校验；失败时不要只在本地保留编辑结果。
+该方法不是局部更新。应从当前消息复制并只修改目标内容，保留 `clientMsgID` 和其他消息字段。允许修改的发送者、时间窗口和消息类型由 OpenIMServer 校验；失败时不要只在本地保留编辑结果。
 
 ## 返回结果
 
@@ -51,10 +51,10 @@ const handleMessageModified = ({ data }) => {
   replaceMessage(resolveConversationID(data), data.clientMsgID, data);
 };
 
-OpenIM.on(CbEvents.OnMessageModified, handleMessageModified);
+openimsdk.on(CbEvents.OnMessageModified, handleMessageModified);
 
 function removeMessageModifiedListener() {
-  OpenIM.off(CbEvents.OnMessageModified, handleMessageModified);
+  openimsdk.off(CbEvents.OnMessageModified, handleMessageModified);
 }
 ```
 

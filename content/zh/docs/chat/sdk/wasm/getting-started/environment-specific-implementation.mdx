@@ -1,12 +1,12 @@
 ---
 title: '按运行环境接入'
-description: '在浏览器、SSR 框架、Electron 和小程序环境中选择合适的 OpenIM SDK 接入方式，并明确各运行时边界。'
+description: '在浏览器、SSR 框架、Electron 和小程序环境中选择合适的 OpenIMClientSDK 接入方式，并明确各运行时边界。'
 sourcePath: '/sdk/wasm/getting-started/environment-specific-implementation'
 ---
 
 ## 运行环境选择
 
-OpenIM 的 Web 侧 SDK 接入需要先确认运行环境。浏览器页面、SSR 框架、Electron 应用和小程序环境在用户、会话、消息、群组和事件模型上保持一致，但 SDK 形态、资源加载方式、本地存储能力和运行时生命周期并不相同。
+OpenIMSDK 的 Web 侧 SDK 接入需要先确认运行环境。浏览器页面、SSR 框架、Electron 应用和小程序环境在用户、会话、消息、群组和事件模型上保持一致，但 SDK 形态、资源加载方式、本地存储能力和运行时生命周期并不相同。
 
 本页帮助开发者在接入前选择正确的 SDK 形态，并完成浏览器 WASM SDK 的资源发布、初始化和运行时约束检查。消息、会话、群组和事件的具体 API，请参见 WASM SDK 对应功能页。
 
@@ -26,8 +26,8 @@ OpenIM 的 Web 侧 SDK 接入需要先确认运行环境。浏览器页面、SSR
 
 公共前提（服务地址、用户 Token 和浏览器资源）见[开始之前](/sdk/wasm/getting-started/before-you-start)。开始资源发布和初始化前，先确认这些公共条件：
 
-- OpenIM 服务端的 HTTP API 地址 `apiAddr` 和 WebSocket 地址 `wsAddr` 能从目标客户端访问。
-- 当前用户已经在业务后端完成 OpenIM 用户绑定，并拿到有效 `userID` 和 Token。
+- OpenIMServer 的 HTTP API 地址 `apiAddr` 和 WebSocket 地址 `wsAddr` 能从目标客户端访问。
+- 当前用户已经在业务后端完成 OpenIMSDK 用户绑定，并拿到有效 `userID` 和 Token。
 - Web 或 Electron 渲染进程可以访问 SDK 静态资源：`openIM.wasm`、`sql-wasm.wasm` 和 `wasm_exec.js`。
 
 再按目标运行环境补充确认：
@@ -58,12 +58,12 @@ cp -R node_modules/@openim/wasm-client-sdk/assets/* public/
 ```ts
 import { getSDK, Platform } from '@openim/wasm-client-sdk';
 
-const OpenIM = getSDK({
+const openimsdk = getSDK({
   coreWasmPath: '/openIM.wasm',
   sqlWasmPath: '/sql-wasm.wasm',
 });
 
-await OpenIM.login(
+await openimsdk.login(
   {
     userID,
     token,
@@ -85,17 +85,17 @@ await OpenIM.login(
 浏览器接入的核心检查项是资源、连接和本地缓存。
 
 - `wasm_exec.js`、`openIM.wasm` 和 `sql-wasm.wasm` 必须在生产路径可访问，不能只在本地开发服务器可访问。
-- OpenIM HTTP API 和 WebSocket 地址必须允许当前页面访问，并正确处理 HTTPS/WSS 混合内容限制。
+- OpenIMServer 的 HTTP API 和 WebSocket 地址必须允许当前页面访问，并正确处理 HTTPS/WSS 混合内容限制。
 - SDK 本地缓存依赖浏览器存储能力。应用不要直接读写 SDK 的 IndexedDB 或 sql.js 内部结构；应通过 SDK API 和事件同步到自己的状态层。
 - 如果浏览器网络恢复、页面前后台切换或应用重新获得焦点，可以结合业务状态调用 `networkStatusChanged()` 或 `setAppBackgroundStatus()`。
 
 ```ts
 const handleOnline = () => {
-  void OpenIM.networkStatusChanged();
+  void openimsdk.networkStatusChanged();
 };
 
 const handleVisibilityChange = () => {
-  void OpenIM.setAppBackgroundStatus(document.hidden);
+  void openimsdk.setAppBackgroundStatus(document.hidden);
 };
 
 window.addEventListener('online', handleOnline);
@@ -116,24 +116,24 @@ Next.js、Nuxt、Remix 等框架会在服务端执行部分代码。OpenIM WASM 
 推荐做法是把 SDK 创建封装成客户端函数，并通过动态导入加载包。
 
 ```ts
-import type { getSDK as createOpenIMSDK } from '@openim/wasm-client-sdk';
+import type { getSDK as createOpenIMClientSDK } from '@openim/wasm-client-sdk';
 
-let openIM: ReturnType<typeof createOpenIMSDK> | undefined;
+let openimsdk: ReturnType<typeof createOpenIMClientSDK> | undefined;
 
-export async function getOpenIMClient() {
+export async function getOpenIMClientSDK() {
   if (typeof window === 'undefined') {
     throw new Error('OpenIM WASM SDK must be initialized in the browser.');
   }
 
-  if (!openIM) {
+  if (!openimsdk) {
     const { getSDK } = await import('@openim/wasm-client-sdk');
-    openIM = getSDK({
+    openimsdk = getSDK({
       coreWasmPath: '/openIM.wasm',
       sqlWasmPath: '/sql-wasm.wasm',
     });
   }
 
-  return openIM;
+  return openimsdk;
 }
 ```
 

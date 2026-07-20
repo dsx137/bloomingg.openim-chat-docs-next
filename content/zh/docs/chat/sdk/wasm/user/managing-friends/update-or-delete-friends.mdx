@@ -1,6 +1,6 @@
 ---
 title: '更新或删除好友'
-description: '使用 OpenIM SDK 更新好友备注、置顶状态和扩展字段，或删除好友关系。'
+description: '使用 OpenIMClientSDK 更新好友备注、置顶状态和扩展字段，或删除好友关系。'
 sourcePath: '/sdk/wasm/user/managing-friends/update-or-delete-friends'
 ---
 
@@ -22,7 +22,7 @@ sourcePath: '/sdk/wasm/user/managing-friends/update-or-delete-friends'
 ```ts
 async function updateFriendRemark(friendUserID: string, remark: string) {
   try {
-    await OpenIM.updateFriends({
+    await openimsdk.updateFriends({
       friendUserIDs: [friendUserID],
       remark: remark.trim(),
     });
@@ -56,7 +56,7 @@ Promise 成功表示好友资料更新请求已经完成。好友列表和联系
 ```ts
 async function deleteFriend(friendUserID: string) {
   try {
-    await OpenIM.deleteFriend(friendUserID);
+    await openimsdk.deleteFriend(friendUserID);
   } catch (error) {
     console.error('deleteFriend failed', { error, friendUserID });
     throw error;
@@ -96,14 +96,14 @@ function handleFriendDeleted({ data }) {
   resetContactDetailIfNeeded(data.userID);
 }
 
-OpenIM.on(CbEvents.OnFriendAdded, handleFriendAdded);
-OpenIM.on(CbEvents.OnFriendInfoChanged, handleFriendInfoChanged);
-OpenIM.on(CbEvents.OnFriendDeleted, handleFriendDeleted);
+openimsdk.on(CbEvents.OnFriendAdded, handleFriendAdded);
+openimsdk.on(CbEvents.OnFriendInfoChanged, handleFriendInfoChanged);
+openimsdk.on(CbEvents.OnFriendDeleted, handleFriendDeleted);
 
 function disposeFriendEvents() {
-  OpenIM.off(CbEvents.OnFriendAdded, handleFriendAdded);
-  OpenIM.off(CbEvents.OnFriendInfoChanged, handleFriendInfoChanged);
-  OpenIM.off(CbEvents.OnFriendDeleted, handleFriendDeleted);
+  openimsdk.off(CbEvents.OnFriendAdded, handleFriendAdded);
+  openimsdk.off(CbEvents.OnFriendInfoChanged, handleFriendInfoChanged);
+  openimsdk.off(CbEvents.OnFriendDeleted, handleFriendDeleted);
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: '获取会话列表'
-description: '使用 OpenIM SDK 分页获取当前用户的会话列表。'
+description: '使用 OpenIMClientSDK 分页获取当前用户的会话列表。'
 sourcePath: '/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list'
 ---
 
@@ -21,7 +21,7 @@ sourcePath: '/sdk/wasm/conversation/retrieving-conversations/retrieve-conversati
 const pageSize = 50;
 
 async function loadConversationPage(offset = 0) {
-  const { data } = await OpenIM.getConversationListSplit(
+  const { data } = await openimsdk.getConversationListSplit(
     { offset, count: pageSize }
   );
 
@@ -51,12 +51,12 @@ const handleConversationChanged = ({ data }) => {
   mergeConversations(data);
 };
 
-OpenIM.on(CbEvents.OnNewConversation, handleNewConversation);
-OpenIM.on(CbEvents.OnConversationChanged, handleConversationChanged);
+openimsdk.on(CbEvents.OnNewConversation, handleNewConversation);
+openimsdk.on(CbEvents.OnConversationChanged, handleConversationChanged);
 
 function removeConversationListListeners() {
-  OpenIM.off(CbEvents.OnNewConversation, handleNewConversation);
-  OpenIM.off(CbEvents.OnConversationChanged, handleConversationChanged);
+  openimsdk.off(CbEvents.OnNewConversation, handleNewConversation);
+  openimsdk.off(CbEvents.OnConversationChanged, handleConversationChanged);
 }
 ```
 

@@ -1,10 +1,10 @@
 ---
 title: '删除消息'
-description: '使用 OpenIM SDK 删除本地消息、当前账号保存的消息，或按用户批量删除会话消息。'
+description: '使用 OpenIMClientSDK 删除本地消息、当前账号保存的消息，或按用户批量删除会话消息。'
 sourcePath: '/sdk/wasm/message/managing-messages/delete-a-message'
 ---
 
-在 OpenIM 中，删除影响消息是否仍对当前账号可见，不会让其他会话成员看到“消息已撤回”。需要展示撤回态时，使用[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。修改已发送消息内容见[修改消息](/sdk/wasm/message/managing-messages/modify-a-message)。
+在 OpenIMSDK 中，删除影响消息是否仍对当前账号可见，不会让其他会话成员看到“消息已撤回”。需要展示撤回态时，使用[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。修改已发送消息内容见[修改消息](/sdk/wasm/message/managing-messages/modify-a-message)。
 
 `deleteMessageFromLocalStorage()` 只删除当前设备上的本地消息；`deleteMessages()` 可以删除当前账号在服务端保存的消息，并通过 `isSync` 决定是否请求把删除动作同步到其他客户端；`deleteUserAllMessagesInConv()` 按用户批量删除会话中的消息。
 
@@ -13,7 +13,7 @@ sourcePath: '/sdk/wasm/message/managing-messages/delete-a-message'
 如果用户动作是“仅从这台设备删除”，使用 `deleteMessageFromLocalStorage()`。它只修改当前设备使用的本地消息库，不删除服务端消息，也不会向当前账号的其他设备或会话中的其他用户同步删除动作。
 
 ```ts
-await OpenIM.deleteMessageFromLocalStorage({
+await openimsdk.deleteMessageFromLocalStorage({
   conversationID,
   clientMsgID,
 });
@@ -38,7 +38,7 @@ removeMessageFromCurrentList(clientMsgID);
 | `isSync` | `boolean` | 必填 | 是否请求把删除动作同步到其他客户端。 |
 
 ```ts
-await OpenIM.deleteMessages({
+await openimsdk.deleteMessages({
   conversationID,
   clientMsgIDs: [clientMsgID],
   isSync: false,
@@ -56,21 +56,21 @@ removeMessageFromCurrentList(clientMsgID);
 需要把删除动作同步到其他客户端时，将 `isSync` 设为 `true`：
 
 ```ts
-await OpenIM.deleteMessages({
+await openimsdk.deleteMessages({
   conversationID,
   clientMsgIDs: selectedMessageIDs,
   isSync: true,
 });
 ```
 
-`isSync: true` 与普通的账号侧删除不同：SDK 会请求服务端把删除动作同步到其他客户端，其他客户端通过 `CbEvents.OnMsgDeleted` 删除已经同步到本地的消息。删除自己发送的消息或删除其他成员发送给自己的消息时，可同步的设备和用户范围以及操作权限由 OpenIM 服务端校验；调用失败时不要只更新本地列表。
+`isSync: true` 与普通的账号侧删除不同：SDK 会请求服务端把删除动作同步到其他客户端，其他客户端通过 `CbEvents.OnMsgDeleted` 删除已经同步到本地的消息。删除自己发送的消息或删除其他成员发送给自己的消息时，可同步的设备和用户范围以及操作权限由 OpenIMServer 校验；调用失败时不要只更新本地列表。
 
 ## 删除指定用户在会话中的全部消息
 
 `deleteUserAllMessagesInConv()` 是高影响范围的管控接口，按 `conversationID` 和 `userID` 删除该用户在会话中的全部消息：
 
 ```ts
-await OpenIM.deleteUserAllMessagesInConv({
+await openimsdk.deleteUserAllMessagesInConv({
   conversationID,
   userID: targetUserID,
 });
@@ -94,12 +94,12 @@ const handleUserMessagesDeleted = ({ data }) => {
   removeUserMessages(data.conversationID, data.userID);
 };
 
-OpenIM.on(CbEvents.OnMsgDeleted, handleMessageDeleted);
-OpenIM.on(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
+openimsdk.on(CbEvents.OnMsgDeleted, handleMessageDeleted);
+openimsdk.on(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
 
 function removeDeleteListeners() {
-  OpenIM.off(CbEvents.OnMsgDeleted, handleMessageDeleted);
-  OpenIM.off(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
+  openimsdk.off(CbEvents.OnMsgDeleted, handleMessageDeleted);
+  openimsdk.off(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
 }
 ```
 

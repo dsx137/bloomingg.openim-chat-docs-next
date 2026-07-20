@@ -14,7 +14,7 @@ sourcePath: '/sdk/wasm/message/managing-messages/clear-message-history'
 
 ```ts
 async function clearConversationHistory(conversationID: string) {
-  await OpenIM.clearConversationAndDeleteAllMsg(conversationID);
+  await openimsdk.clearConversationAndDeleteAllMsg(conversationID);
 
   removeMessagesFromConversation(conversationID);
   resetConversationPreview(conversationID);
@@ -40,7 +40,7 @@ async function clearConversationHistory(conversationID: string) {
 只需要重置当前浏览器中的消息数据，同时希望服务端仍保留历史消息时，调用 `deleteAllMsgFromLocal()`：
 
 ```ts
-await OpenIM.deleteAllMsgFromLocal();
+await openimsdk.deleteAllMsgFromLocal();
 resetAllMessageSnapshots();
 ```
 
@@ -51,7 +51,7 @@ Promise 成功表示当前账号的本地消息已经清理完成。此时应清
 需要永久清理当前账号的全部历史消息时，调用 `deleteAllMsgFromLocalAndSvr()`：
 
 ```ts
-await OpenIM.deleteAllMsgFromLocalAndSvr();
+await openimsdk.deleteAllMsgFromLocalAndSvr();
 resetAllMessageSnapshots();
 ```
 

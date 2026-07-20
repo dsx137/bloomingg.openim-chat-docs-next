@@ -20,7 +20,7 @@ sourcePath: '/sdk/wasm/group/managing-group-members/update-group-member-info'
 ```ts
 import { GroupMemberRole } from '@openim/wasm-client-sdk';
 
-await OpenIM.setGroupMemberInfo({
+await openimsdk.setGroupMemberInfo({
   groupID,
   userID: targetUserID,
   nickname: '项目负责人',
@@ -28,7 +28,7 @@ await OpenIM.setGroupMemberInfo({
 });
 ```
 
-群主负责设置或移除管理员。前端角色按钮只是交互控制，最终权限由服务端校验。不能通过把 `roleLevel` 改为 Owner 来替代 `transferGroupOwner()`。
+群主负责设置或移除管理员。前端角色按钮只是交互控制，最终权限由 OpenIMServer 校验。不能通过把 `roleLevel` 改为 Owner 来替代 `transferGroupOwner()`。
 
 ## 更新昵称和角色
 
@@ -38,6 +38,6 @@ await OpenIM.setGroupMemberInfo({
 
 ## 调用后的状态变化
 
-Promise 成功表示服务端已完成本次群成员资料更新。相关客户端随后可能收到 `OnGroupMemberInfoChanged`，事件 `data` 是更新后的单个 `GroupMemberItem`，应按 `groupID:userID` 覆盖本地成员记录。
+Promise 成功表示 OpenIMServer 已完成本次群成员资料更新。相关客户端随后可能收到 `OnGroupMemberInfoChanged`，事件 `data` 是更新后的单个 `GroupMemberItem`，应按 `groupID:userID` 覆盖本地成员记录。
 
 该事件也可能来自其他管理员或其他客户端的修改，不能只把它当作当前调用的完成回调。完整监听和清理代码见[获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members)；首次进入成员列表或用户主动刷新时，再查询目标成员获取当前资料，重新登录后的变化由成员事件同步。

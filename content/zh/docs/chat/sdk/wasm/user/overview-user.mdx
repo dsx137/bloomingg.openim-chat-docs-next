@@ -1,16 +1,16 @@
 ---
 title: '用户概览'
-description: '了解 OpenIM SDK 中的用户资料、好友关系、黑名单和在线状态。'
+description: '了解 OpenIMClientSDK 中的用户资料、好友关系、黑名单和在线状态。'
 sourcePath: '/sdk/wasm/user/overview-user'
 ---
 
-OpenIM SDK 使用 `userID` 标识用户。实现资料卡、好友添加、联系人或黑名单功能时，首先要区分应用用户的公开资料、当前用户维护的好友关系，以及黑名单状态。
+OpenIMClientSDK 使用 `userID` 标识用户。实现资料卡、好友添加、联系人或黑名单功能时，首先要区分应用用户的公开资料、当前用户维护的好友关系，以及黑名单状态。
 
 群成员列表、群内昵称、群角色和成员管理属于群组能力，相关用法见 [获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members)。
 
 ## 用户类型
 
-OpenIM 会根据使用场景返回不同的用户对象：
+OpenIMSDK 会根据使用场景返回不同的用户对象：
 
 | 类型 | 适用场景 | 主要接口 |
 | --- | --- | --- |

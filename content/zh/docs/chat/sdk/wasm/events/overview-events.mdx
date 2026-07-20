@@ -1,10 +1,10 @@
 ---
 title: '事件概览'
-description: '注册 OpenIM SDK 事件，并按业务生命周期同步连接与数据状态。'
+description: '注册 OpenIMClientSDK 事件，并按业务生命周期同步连接与数据状态。'
 sourcePath: '/sdk/wasm/events/overview-events'
 ---
 
-OpenIM SDK 通过 `CbEvents` 推送连接、同步、用户、好友、会话、群组、消息和通话相关事件。`getSDK()` 返回的实例统一提供 `on()` 和 `off()`；不需要为不同领域创建独立的事件处理器对象。
+OpenIMClientSDK 通过 `CbEvents` 推送连接、同步、用户、好友、会话、群组、消息和通话相关事件。`getSDK()` 返回的实例统一提供 `on()` 和 `off()`；不需要为不同领域创建独立的事件处理器对象。
 
 ## 注册与移除事件
 
@@ -30,11 +30,11 @@ OpenIM SDK 通过 `CbEvents` 推送连接、同步、用户、好友、会话、
 
 ## 监听初始化同步
 
-登录后 SDK 会同步服务端数据。以下事件适合驱动全局同步状态和进度展示：
+登录后 SDK 会同步 OpenIMServer 数据。以下事件适合驱动全局同步状态和进度展示：
 
 | 事件 | 含义 |
 | --- | --- |
-| `OnSyncServerStart` | 开始同步服务端数据。`data` 为 `boolean`：`true` 表示本地库因卸载重装、清除站点数据等原因重建后的同步；`false` 表示普通登录后同步。 |
+| `OnSyncServerStart` | 开始同步 OpenIMServer 数据。`data` 为 `boolean`：`true` 表示本地库因卸载重装、清除站点数据等原因重建后的同步；`false` 表示普通登录后同步。 |
 | `OnSyncServerProgress` | 同步进度发生变化；`data` 为进度数值。 |
 | `OnSyncServerFinish` | 本轮同步完成，可以刷新依赖完整数据的界面。 |
 | `OnSyncServerFailed` | 本轮同步失败，应记录错误并等待重试或连接恢复。 |
@@ -56,19 +56,19 @@ function handleSyncFinish() {
 
 function handleSyncFailed({ errCode, errMsg }) {
   setSyncState({ status: 'failed' });
-  console.error('OpenIM 数据同步失败', { errCode, errMsg });
+  console.error('OpenIMClientSDK 数据同步失败', { errCode, errMsg });
 }
 
-OpenIM.on(CbEvents.OnSyncServerStart, handleSyncStart);
-OpenIM.on(CbEvents.OnSyncServerProgress, handleSyncProgress);
-OpenIM.on(CbEvents.OnSyncServerFinish, handleSyncFinish);
-OpenIM.on(CbEvents.OnSyncServerFailed, handleSyncFailed);
+openimsdk.on(CbEvents.OnSyncServerStart, handleSyncStart);
+openimsdk.on(CbEvents.OnSyncServerProgress, handleSyncProgress);
+openimsdk.on(CbEvents.OnSyncServerFinish, handleSyncFinish);
+openimsdk.on(CbEvents.OnSyncServerFailed, handleSyncFailed);
 
 function removeSyncListeners() {
-  OpenIM.off(CbEvents.OnSyncServerStart, handleSyncStart);
-  OpenIM.off(CbEvents.OnSyncServerProgress, handleSyncProgress);
-  OpenIM.off(CbEvents.OnSyncServerFinish, handleSyncFinish);
-  OpenIM.off(CbEvents.OnSyncServerFailed, handleSyncFailed);
+  openimsdk.off(CbEvents.OnSyncServerStart, handleSyncStart);
+  openimsdk.off(CbEvents.OnSyncServerProgress, handleSyncProgress);
+  openimsdk.off(CbEvents.OnSyncServerFinish, handleSyncFinish);
+  openimsdk.off(CbEvents.OnSyncServerFailed, handleSyncFailed);
 }
 ```
 

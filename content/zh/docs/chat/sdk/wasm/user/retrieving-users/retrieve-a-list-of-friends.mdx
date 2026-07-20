@@ -1,6 +1,6 @@
 ---
 title: '获取好友列表'
-description: '使用 OpenIM SDK 分页获取当前用户的好友列表，并通过好友事件同步通讯录。'
+description: '使用 OpenIMClientSDK 分页获取当前用户的好友列表，并通过好友事件同步通讯录。'
 sourcePath: '/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends'
 ---
 
@@ -21,7 +21,7 @@ sourcePath: '/sdk/wasm/user/retrieving-users/retrieve-a-list-of-friends'
 ```ts
 const pageSize = 50;
 
-const { data: friends } = await OpenIM.getFriendListPage(
+const { data: friends } = await openimsdk.getFriendListPage(
   {
     offset: 0,
     count: pageSize,
@@ -86,7 +86,7 @@ async function searchFriends(keyword: string) {
     return [];
   }
 
-  const { data: friends } = await OpenIM.searchFriends({
+  const { data: friends } = await openimsdk.searchFriends({
     keywordList: [normalizedKeyword],
     isSearchUserID: true,
     isSearchNickname: true,

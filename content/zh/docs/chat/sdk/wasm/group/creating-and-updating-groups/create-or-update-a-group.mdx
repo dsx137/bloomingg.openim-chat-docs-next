@@ -24,7 +24,7 @@ sourcePath: '/sdk/wasm/group/creating-and-updating-groups/create-or-update-a-gro
 ```ts
 import { AllowType, GroupType, GroupVerificationType } from '@openim/wasm-client-sdk';
 
-const { data: group } = await OpenIM.createGroup(
+const { data: group } = await openimsdk.createGroup(
   {
     memberUserIDs: ['user-003', 'user-004'],
     adminUserIDs: ['user-002'],
@@ -40,14 +40,14 @@ const { data: group } = await OpenIM.createGroup(
 
 Promise 成功后，`data` 是新建群组的 `GroupItem`。
 
-需要自定义 `groupID` 时可以在 `groupInfo` 中传入，但必须全局唯一；省略时由服务端生成。
+需要自定义 `groupID` 时可以在 `groupInfo` 中传入，但必须全局唯一；省略时由 OpenIMServer 生成。
 
 ## 更新群资料
 
 `setGroupInfo()` 接收包含 `groupID` 的部分 `GroupItem` 字段。只传需要更新的字段，不要用旧快照覆盖刚同步到本地的新状态。
 
 ```ts
-await OpenIM.setGroupInfo(
+await openimsdk.setGroupInfo(
   {
     groupID,
     groupName: '新的群名称',
@@ -75,15 +75,15 @@ await OpenIM.setGroupInfo(
 
 这些字段可以和群名称、公告等资料一起更新，也可以单独传入。不要把未修改字段的旧值一并提交，以免覆盖刚同步到本地的新设置。
 
-SDK 只提供这些权限与验证字段的当前值，不会自动替客户端隐藏按钮、禁用入口或组织操作流程。
+OpenIMClientSDK 只提供这些权限与验证字段的当前值，不会自动替客户端隐藏按钮、禁用入口或组织操作流程。
 
 客户端应在业务层读取最新的 `GroupItem` 和当前用户的群角色，再根据 `applyMemberFriend`、`lookMemberInfo`、`needVerification` 等字段决定：是否展示相应功能、是否允许继续提交。
 
-若允许提交，再选择直接执行还是进入申请审核流程。服务端仍负责最终权限校验，不能只依赖前端界面限制。
+若允许提交，再选择直接执行还是进入申请审核流程。OpenIMServer 仍负责最终权限校验，不能只依赖前端界面限制。
 
 ## 调用后的状态变化
 
 - `createGroup()` 成功后，可以立即使用返回的 `GroupItem` 打开群资料或群聊页面。当前账号的已加入群组列表通过 `CbEvents.OnJoinedGroupAdded` 合并新群组。
-- `setGroupInfo()` 的 Promise 成功表示服务端已完成本次群资料设置请求。SDK 通过 `CbEvents.OnGroupInfoChanged` 同步变化后的 `GroupItem`，应按 `groupID` 覆盖本地群资料。
+- `setGroupInfo()` 的 Promise 成功表示 OpenIMServer 已完成本次群资料设置请求。OpenIMClientSDK 通过 `CbEvents.OnGroupInfoChanged` 同步变化后的 `GroupItem`，应按 `groupID` 覆盖本地群资料。
 
-两个事件的完整监听和清理方式见[获取和搜索群组](/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups)。如果设置页面需要立即确认服务端最终值，可以在调用成功后使用 `getSpecifiedGroupsInfo([groupID])` 重新查询。重新查询失败不应被误报为群资料设置失败。
+两个事件的完整监听和清理方式见[获取和搜索群组](/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups)。如果设置页面需要立即确认 OpenIMServer 最终值，可以在调用成功后使用 `getSpecifiedGroupsInfo([groupID])` 重新查询。重新查询失败不应被误报为群资料设置失败。

@@ -1,6 +1,6 @@
 ---
 title: '加入、退出或解散群组'
-description: '使用 OpenIM SDK 申请加入群组、退出群组或由群主解散群组。'
+description: '使用 OpenIMClientSDK 申请加入群组、退出群组或由群主解散群组。'
 sourcePath: '/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group'
 ---
 
@@ -20,7 +20,7 @@ sourcePath: '/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-
 ```ts
 import { GroupJoinSource } from '@openim/wasm-client-sdk';
 
-await OpenIM.joinGroup(
+await openimsdk.joinGroup(
   {
     groupID,
     reqMsg: '申请加入项目讨论组',
@@ -29,14 +29,14 @@ await OpenIM.joinGroup(
 );
 ```
 
-`joinSource` 只记录加入途径，不决定是否需要审核。如果群组允许直接加入，SDK 会同步 `CbEvents.OnJoinedGroupAdded`；需要审核时，Promise 成功只表示申请已经提交，不能立即把当前用户写成群成员。
+`joinSource` 只记录加入途径，不决定是否需要审核。如果群组允许直接加入，OpenIMClientSDK 会同步 `CbEvents.OnJoinedGroupAdded`；需要审核时，Promise 成功只表示申请已经提交，不能立即把当前用户写成群成员。
 
 ## 退出群组
 
 普通成员和管理员调用 `quitGroup(groupID)` 退出：
 
 ```ts
-await OpenIM.quitGroup(groupID);
+await openimsdk.quitGroup(groupID);
 ```
 
 退出后通常触发 `CbEvents.OnJoinedGroupDeleted`。历史会话可能继续保留，但不能再据此判断用户仍在群内。
@@ -48,7 +48,7 @@ await OpenIM.quitGroup(groupID);
 只有群主可以调用 `dismissGroup(groupID)`：
 
 ```ts
-await OpenIM.dismissGroup(groupID);
+await openimsdk.dismissGroup(groupID);
 ```
 
 解散会影响所有成员，并触发 `CbEvents.OnGroupDismissed`。它不同于删除或隐藏当前用户的会话；会话操作不会解散群组。
