@@ -103,7 +103,6 @@ export const postmanPublishConfigSchema = publishConfigSchema.extend({
     .regex(/^(?:\d+-)?[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
 });
 const postmanSpecIdSchema = z.string().regex(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
-const postmanSpecRootPath = 'index.json';
 export const postmanSpecPublishConfigSchema = publishConfigSchema.extend({
   POSTMAN_API_KEY: z.string().min(1),
   POSTMAN_SPEC_ID: postmanSpecIdSchema,
@@ -291,7 +290,7 @@ export async function publishPostman(
 export async function publishPostmanSpec(
   target: PostmanSpecTarget,
   openApi: string,
-): Promise<void> {
+): Promise<string> {
   const specUrl = `https://api.getpostman.com/specs/${target.specId}`;
   const apiKeyHeader = { 'X-API-Key': target.apiKey };
   postmanSpecSchema.parse(
@@ -302,35 +301,31 @@ export async function publishPostmanSpec(
     ),
   );
   let cursor: string | null = null;
-  while (true) {
+  let rootFile: z.infer<typeof postmanSpecFileSchema> | undefined;
+  while (rootFile === undefined) {
     const query = new URLSearchParams({ limit: '100' });
     if (cursor !== null) query.set('cursor', cursor);
     const page = postmanSpecFileListSchema.parse(
       await requestJson(`${specUrl}/files?${query.toString()}`, { headers: apiKeyHeader }),
     );
-    const file = page.files.find(({ path }) => path === postmanSpecRootPath);
-    if (file !== undefined) {
-      if (file.type !== 'ROOT')
-        throw new PlatformApiError(
-          `Postman Spec file is not the root file: ${postmanSpecRootPath} (${file.type}).`,
-        );
-      break;
-    }
+    rootFile = page.files.find(({ type }) => type === 'ROOT');
+    if (rootFile !== undefined) break;
     cursor = page.meta.nextCursor;
-    if (cursor === null)
-      throw new PlatformApiError(`Postman Spec root file does not exist: ${postmanSpecRootPath}.`);
+    if (cursor === null) throw new PlatformApiError('Postman Spec does not contain a root file.');
   }
+  const encodedRootPath = rootFile.path.split('/').map(encodeURIComponent).join('/');
   const file = postmanSpecRootFileSchema.parse(
-    await requestJson(`${specUrl}/files/${postmanSpecRootPath}`, {
+    await requestJson(`${specUrl}/files/${encodedRootPath}`, {
       method: 'PATCH',
       headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
       body: JSON.stringify({ content: openApi }),
     }),
   );
-  if (file.path !== postmanSpecRootPath)
+  if (file.path !== rootFile.path)
     throw new PlatformApiError(
-      `Postman updated an unexpected Spec file: ${file.path}; expected ${postmanSpecRootPath}.`,
+      `Postman updated an unexpected Spec file: ${file.path}; expected ${rootFile.path}.`,
     );
+  return rootFile.path;
 }
 
 async function publishApifox(
@@ -380,7 +375,7 @@ async function publishPlatformApiPostman(openApiPath: string): Promise<void> {
 async function publishPlatformApiPostmanSpec(openApiPath: string): Promise<void> {
   const config = postmanSpecPublishConfigSchema.parse(process.env);
   const openApi = await readFile(openApiPath, 'utf8');
-  await publishPostmanSpec(
+  const rootPath = await publishPostmanSpec(
     {
       apiKey: config.POSTMAN_API_KEY,
       specId: config.POSTMAN_SPEC_ID,
@@ -391,7 +386,7 @@ async function publishPlatformApiPostmanSpec(openApiPath: string): Promise<void>
     '### Postman OpenAPI Specification publication completed',
     '',
     `- Source revision: \`${config.GITHUB_SHA ?? 'local'}\``,
-    `- Postman Spec root file updated: \`${postmanSpecRootPath}\``,
+    `- Postman Spec root file updated: \`${rootPath}\``,
     '',
   ].join('\n');
   if (config.GITHUB_STEP_SUMMARY) await appendFile(config.GITHUB_STEP_SUMMARY, summary);
