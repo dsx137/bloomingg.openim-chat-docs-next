@@ -3872,12 +3872,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
-    "openimPath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+    "sourcePath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+    "openimPath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
     "title": "Block or unblock users",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/user/moderating-a-user/block-or-unblock-users.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user",
@@ -3888,12 +3888,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-    "openimPath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-    "title": "Update the user profile",
+    "sourcePath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+    "openimPath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+    "title": "Retrieve and update the current user profile",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/conversation/overview-conversation",
@@ -3904,12 +3904,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/conversation/overview-conversation.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-    "openimPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-    "title": "Retrieve conversations",
+    "sourcePath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+    "openimPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+    "title": "Retrieve a conversation",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list",
@@ -3920,12 +3920,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
-    "openimPath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
-    "title": "Set a conversation",
+    "sourcePath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+    "openimPath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+    "title": "Set conversation settings",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/set-conversation.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/set-conversation-settings.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/conversation/managing-conversations/set-conversation-draft",
@@ -3944,12 +3944,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/manage-read-status.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
-    "openimPath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+    "sourcePath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+    "openimPath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
     "title": "Hide a conversation",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/hide-a-conversation.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation",
@@ -4088,20 +4088,20 @@
     "contentFile": "content/docs/chat/sdk/wasm/message/receiving-messages/receive-messages.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-    "openimPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-    "title": "Retrieve a message list",
+    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+    "openimPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+    "title": "Retrieve message history",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-message-list.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-message-history.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-    "openimPath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-    "title": "Retrieve messages",
+    "sourcePath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+    "openimPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+    "title": "Locate messages by ID",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-messages.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/locate-messages-by-id.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/message/searching-messages/search-messages",
@@ -4112,12 +4112,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/message/searching-messages/search-messages.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-    "openimPath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-    "title": "Add extra data to a message",
+    "sourcePath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+    "openimPath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+    "title": "Custom message and extra data",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/message/composing-messages/add-extra-data-to-a-message.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/message/composing-messages/custom-message-and-extra-data.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/message/composing-messages/mention-users-in-a-message",
@@ -4152,12 +4152,20 @@
     "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/forward-or-merge-a-message.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-    "openimPath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-    "title": "Delete or revoke a message",
+    "sourcePath": "/sdk/wasm/message/managing-messages/delete-a-message",
+    "openimPath": "/sdk/wasm/message/managing-messages/delete-a-message",
+    "title": "Delete a message",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/delete-or-revoke-a-message.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/delete-a-message.mdx"
+  },
+  {
+    "sourcePath": "/sdk/wasm/message/managing-messages/revoke-a-message",
+    "openimPath": "/sdk/wasm/message/managing-messages/revoke-a-message",
+    "title": "Revoke a message",
+    "context": "chat/sdk/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/revoke-a-message.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
@@ -4184,12 +4192,12 @@
     "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/clear-message-history.mdx"
   },
   {
-    "sourcePath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-    "openimPath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-    "title": "Manage group message read receipts",
+    "sourcePath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+    "openimPath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+    "title": "Manage message read receipts",
     "context": "chat/sdk/wasm",
     "template": "guide",
-    "contentFile": "content/docs/chat/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts.mdx"
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-read-status/manage-message-read-receipts.mdx"
   },
   {
     "sourcePath": "/sdk/wasm/calling/overview-calling",
@@ -4830,5 +4838,13 @@
     "context": "chat/platform-api",
     "template": "api",
     "contentFile": "content/zh/docs/chat/platform-api/logs/delete-logs.mdx"
+  },
+  {
+    "sourcePath": "/sdk/wasm/message/managing-messages/modify-a-message",
+    "openimPath": "/sdk/wasm/message/managing-messages/modify-a-message",
+    "title": "Modify a message",
+    "context": "chat/sdk/wasm",
+    "template": "guide",
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/modify-a-message.mdx"
   }
 ]

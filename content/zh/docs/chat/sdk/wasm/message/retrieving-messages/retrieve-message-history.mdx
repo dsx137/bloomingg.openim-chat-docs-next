@@ -1,7 +1,7 @@
 ---
-title: '获取消息列表'
-description: '使用 OpenIM SDK 获取消息列表。'
-sourcePath: '/sdk/wasm/message/retrieving-messages/retrieve-message-list'
+title: '获取消息历史'
+description: '按 conversationID 与 clientMsgID 游标分页读取会话历史消息。'
+sourcePath: '/sdk/wasm/message/retrieving-messages/retrieve-message-history'
 ---
 
 OpenIM SDK 使用 `conversationID` 和 `clientMsgID` 游标读取历史消息。进入会话时先请求第一页；用户上拉或滚动到边界时，再把上一页边界消息的 `clientMsgID` 作为下一次请求的 `startClientMsgID`。
@@ -153,6 +153,6 @@ const { data: groupHistory } = await OpenIM.getHistoryMessageListReverse({
 ## 相关页面
 
 - [消息概览](/sdk/wasm/message/overview-message)
-- [获取单条消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)
 - [搜索消息](/sdk/wasm/message/searching-messages/search-messages)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

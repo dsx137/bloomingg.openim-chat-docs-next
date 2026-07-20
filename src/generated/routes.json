@@ -8119,11 +8119,11 @@
   },
   {
     "id": 386,
-    "path": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-    "relativePath": "sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-    "sourcePath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-    "title": "Retrieve conversations",
-    "description": "OpenIM WASM SDK guide for Retrieve conversations.",
+    "path": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+    "relativePath": "sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+    "sourcePath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+    "title": "Retrieve a conversation",
+    "description": "OpenIM WASM SDK guide for Retrieve a conversation.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8132,7 +8132,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 385,
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation.mdx",
     "navOrder": 399
   },
   {
@@ -8155,11 +8155,11 @@
   },
   {
     "id": 388,
-    "path": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-    "relativePath": "sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-    "sourcePath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-    "title": "Add extra data to a message",
-    "description": "OpenIM WASM SDK guide for Add extra data to a message.",
+    "path": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+    "relativePath": "sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+    "sourcePath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+    "title": "Custom message and extra data",
+    "description": "OpenIM WASM SDK guide for Custom message and extra data.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8168,7 +8168,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 387,
-    "contentFile": "content/docs/chat/sdk/wasm/message/composing-messages/add-extra-data-to-a-message.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/message/composing-messages/custom-message-and-extra-data.mdx",
     "navOrder": 425
   },
   {
@@ -8227,11 +8227,11 @@
   },
   {
     "id": 398,
-    "path": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-    "relativePath": "sdk/wasm/message/retrieving-messages/retrieve-messages",
-    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-    "title": "Retrieve messages",
-    "description": "OpenIM WASM SDK guide for Retrieve messages.",
+    "path": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+    "relativePath": "sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+    "sourcePath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+    "title": "Locate messages by ID",
+    "description": "OpenIM WASM SDK guide for Locate messages by ID.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8240,7 +8240,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 397,
-    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-messages.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/locate-messages-by-id.mdx",
     "navOrder": 423
   },
   {
@@ -8295,7 +8295,7 @@
     "status": "draft",
     "sourceIndex": 405,
     "contentFile": "content/docs/chat/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal.mdx",
-    "navOrder": 438
+    "navOrder": 440
   },
   {
     "id": 408,
@@ -8313,7 +8313,7 @@
     "status": "draft",
     "sourceIndex": 407,
     "contentFile": "content/docs/chat/sdk/wasm/calling/retrieving-call-information/retrieve-call-information.mdx",
-    "navOrder": 437
+    "navOrder": 439
   },
   {
     "id": 409,
@@ -8331,7 +8331,7 @@
     "status": "draft",
     "sourceIndex": 408,
     "contentFile": "content/docs/chat/sdk/wasm/calling/overview-calling.mdx",
-    "navOrder": 435
+    "navOrder": 437
   },
   {
     "id": 411,
@@ -8371,9 +8371,9 @@
   },
   {
     "id": 413,
-    "path": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
-    "relativePath": "sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
-    "sourcePath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+    "path": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+    "relativePath": "sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+    "sourcePath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
     "title": "Block or unblock users",
     "description": "OpenIM WASM SDK guide for Block or unblock users.",
     "product": "sdk",
@@ -8384,7 +8384,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 412,
-    "contentFile": "content/docs/chat/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/user/moderating-a-user/block-or-unblock-users.mdx",
     "navOrder": 397
   },
   {
@@ -8443,11 +8443,11 @@
   },
   {
     "id": 421,
-    "path": "/sdk/wasm/conversation/managing-conversations/set-conversation",
-    "relativePath": "sdk/wasm/conversation/managing-conversations/set-conversation",
-    "sourcePath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
-    "title": "Set a conversation",
-    "description": "OpenIM WASM SDK guide for Set a conversation.",
+    "path": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+    "relativePath": "sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+    "sourcePath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+    "title": "Set conversation settings",
+    "description": "OpenIM WASM SDK guide for Set conversation settings.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8456,7 +8456,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 420,
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/set-conversation.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/set-conversation-settings.mdx",
     "navOrder": 401
   },
   {
@@ -8515,11 +8515,11 @@
   },
   {
     "id": 424,
-    "path": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
-    "relativePath": "sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
-    "sourcePath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+    "path": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+    "relativePath": "sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+    "sourcePath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
     "title": "Hide a conversation",
-    "description": "OpenIM WASM SDK guide for hiding a conversation.",
+    "description": "OpenIM WASM SDK guide for Hide a conversation.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8528,7 +8528,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 423,
-    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/conversation/managing-conversations/hide-a-conversation.mdx",
     "navOrder": 404
   },
   {
@@ -8745,7 +8745,7 @@
     "status": "draft",
     "sourceIndex": 441,
     "contentFile": "content/docs/chat/sdk/wasm/events/overview-events.mdx",
-    "navOrder": 439
+    "navOrder": 441
   },
   {
     "id": 443,
@@ -8781,7 +8781,7 @@
     "status": "draft",
     "sourceIndex": 446,
     "contentFile": "content/docs/chat/sdk/wasm/logger.mdx",
-    "navOrder": 440
+    "navOrder": 442
   },
   {
     "id": 450,
@@ -8799,7 +8799,7 @@
     "status": "draft",
     "sourceIndex": 449,
     "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/clear-message-history.mdx",
-    "navOrder": 433
+    "navOrder": 435
   },
   {
     "id": 451,
@@ -8820,12 +8820,12 @@
     "navOrder": 429
   },
   {
-    "id": 452,
-    "path": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-    "relativePath": "sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-    "sourcePath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-    "title": "Delete or revoke a message",
-    "description": "OpenIM WASM SDK guide for Delete or revoke a message.",
+    "id": 1701,
+    "path": "/sdk/wasm/message/managing-messages/delete-a-message",
+    "relativePath": "sdk/wasm/message/managing-messages/delete-a-message",
+    "sourcePath": "/sdk/wasm/message/managing-messages/delete-a-message",
+    "title": "Delete a message",
+    "description": "OpenIM WASM SDK guide for Delete a message.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8834,8 +8834,44 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 451,
-    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/delete-or-revoke-a-message.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/delete-a-message.mdx",
     "navOrder": 430
+  },
+  {
+    "id": 1702,
+    "path": "/sdk/wasm/message/managing-messages/revoke-a-message",
+    "relativePath": "sdk/wasm/message/managing-messages/revoke-a-message",
+    "sourcePath": "/sdk/wasm/message/managing-messages/revoke-a-message",
+    "title": "Revoke a message",
+    "description": "OpenIM WASM SDK guide for Revoke a message.",
+    "product": "sdk",
+    "version": "v4",
+    "platform": "wasm",
+    "contextKey": "chat/sdk/wasm",
+    "contextTitle": "SDKs · WASM · v4",
+    "template": "guide",
+    "status": "draft",
+    "sourceIndex": 451,
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/revoke-a-message.mdx",
+    "navOrder": 431
+  },
+  {
+    "id": 1700,
+    "path": "/sdk/wasm/message/managing-messages/modify-a-message",
+    "relativePath": "sdk/wasm/message/managing-messages/modify-a-message",
+    "sourcePath": "/sdk/wasm/message/managing-messages/modify-a-message",
+    "title": "Modify a message",
+    "description": "OpenIM WASM SDK guide for Modify a message.",
+    "product": "sdk",
+    "version": "v4",
+    "platform": "wasm",
+    "contextKey": "chat/sdk/wasm",
+    "contextTitle": "SDKs · WASM · v4",
+    "template": "guide",
+    "status": "draft",
+    "sourceIndex": 452,
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/modify-a-message.mdx",
+    "navOrder": 432
   },
   {
     "id": 452,
@@ -8853,7 +8889,7 @@
     "status": "draft",
     "sourceIndex": 451,
     "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/pin-conversation-messages.mdx",
-    "navOrder": 431
+    "navOrder": 433
   },
   {
     "id": 453,
@@ -8871,15 +8907,15 @@
     "status": "draft",
     "sourceIndex": 452,
     "contentFile": "content/docs/chat/sdk/wasm/message/managing-messages/insert-a-local-message.mdx",
-    "navOrder": 432
+    "navOrder": 434
   },
   {
     "id": 470,
-    "path": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-    "relativePath": "sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-    "sourcePath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-    "title": "Manage group message read receipts",
-    "description": "OpenIM WASM SDK guide for Manage group message read receipts.",
+    "path": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+    "relativePath": "sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+    "sourcePath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+    "title": "Manage message read receipts",
+    "description": "OpenIM WASM SDK guide for Manage message read receipts.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8888,8 +8924,8 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 469,
-    "contentFile": "content/docs/chat/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts.mdx",
-    "navOrder": 434
+    "contentFile": "content/docs/chat/sdk/wasm/message/managing-read-status/manage-message-read-receipts.mdx",
+    "navOrder": 436
   },
   {
     "id": 479,
@@ -8911,11 +8947,11 @@
   },
   {
     "id": 481,
-    "path": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-    "relativePath": "sdk/wasm/message/retrieving-messages/retrieve-message-list",
-    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-    "title": "Retrieve a message list",
-    "description": "OpenIM WASM SDK guide for Retrieve a message list.",
+    "path": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+    "relativePath": "sdk/wasm/message/retrieving-messages/retrieve-message-history",
+    "sourcePath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+    "title": "Retrieve message history",
+    "description": "OpenIM WASM SDK guide for Retrieve message history.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -8924,7 +8960,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 480,
-    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-message-list.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/message/retrieving-messages/retrieve-message-history.mdx",
     "navOrder": 422
   },
   {
@@ -9015,7 +9051,7 @@
     "status": "draft",
     "sourceIndex": 501,
     "contentFile": "content/docs/chat/sdk/wasm/calling/managing-calls/start-or-handle-a-call.mdx",
-    "navOrder": 436
+    "navOrder": 438
   },
   {
     "id": 505,
@@ -9055,11 +9091,11 @@
   },
   {
     "id": 509,
-    "path": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-    "relativePath": "sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-    "sourcePath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-    "title": "Update the user profile",
-    "description": "OpenIM WASM SDK guide for Update the user profile.",
+    "path": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+    "relativePath": "sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+    "sourcePath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+    "title": "Retrieve and update the current user profile",
+    "description": "OpenIM WASM SDK guide for Retrieve and update the current user profile.",
     "product": "sdk",
     "version": "v4",
     "platform": "wasm",
@@ -9068,7 +9104,7 @@
     "template": "guide",
     "status": "draft",
     "sourceIndex": 508,
-    "contentFile": "content/docs/chat/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile.mdx",
+    "contentFile": "content/docs/chat/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile.mdx",
     "navOrder": 390
   },
   {

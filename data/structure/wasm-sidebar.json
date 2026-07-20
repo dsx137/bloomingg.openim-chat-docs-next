@@ -25,7 +25,7 @@
           "title": "User profile",
           "children": [
             "/sdk/wasm/user/retrieving-users/retrieve-users",
-            "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+            "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
             "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user"
           ]
         },
@@ -44,7 +44,7 @@
           "title": "Blacklist",
           "children": [
             "/sdk/wasm/user/moderating-a-user/retrieve-a-list-of-blocked-users",
-            "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members"
+            "/sdk/wasm/user/moderating-a-user/block-or-unblock-users"
           ]
         }
       ]
@@ -58,7 +58,7 @@
           "id": "conversation/retrieving-conversations",
           "title": "Retrieving conversations",
           "children": [
-            "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+            "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
             "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list"
           ]
         },
@@ -66,10 +66,10 @@
           "id": "conversation/managing-conversations",
           "title": "Managing conversations",
           "children": [
-            "/sdk/wasm/conversation/managing-conversations/set-conversation",
+            "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
             "/sdk/wasm/conversation/managing-conversations/set-conversation-draft",
             "/sdk/wasm/conversation/managing-conversations/manage-read-status",
-            "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+            "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
             "/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation"
           ]
         },
@@ -117,8 +117,8 @@
           "id": "message/retrieving-messages",
           "title": "Retrieving messages",
           "children": [
-            "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-            "/sdk/wasm/message/retrieving-messages/retrieve-messages"
+            "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+            "/sdk/wasm/message/retrieving-messages/locate-messages-by-id"
           ]
         },
         "/sdk/wasm/message/searching-messages/search-messages",
@@ -126,7 +126,7 @@
           "id": "message/composing-messages",
           "title": "Composing messages",
           "children": [
-            "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+            "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
             "/sdk/wasm/message/composing-messages/mention-users-in-a-message",
             "/sdk/wasm/message/composing-messages/manage-typing-status",
             "/sdk/wasm/message/composing-messages/transcribe-audio"
@@ -137,13 +137,15 @@
           "title": "Managing messages",
           "children": [
             "/sdk/wasm/message/managing-messages/forward-or-merge-a-message",
-            "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+            "/sdk/wasm/message/managing-messages/delete-a-message",
+            "/sdk/wasm/message/managing-messages/revoke-a-message",
+            "/sdk/wasm/message/managing-messages/modify-a-message",
             "/sdk/wasm/message/managing-messages/pin-conversation-messages",
             "/sdk/wasm/message/managing-messages/insert-a-local-message",
             "/sdk/wasm/message/managing-messages/clear-message-history"
           ]
         },
-        "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts"
+        "/sdk/wasm/message/managing-read-status/manage-message-read-receipts"
       ]
     },
     {

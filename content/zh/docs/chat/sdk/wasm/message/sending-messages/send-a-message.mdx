@@ -1,6 +1,6 @@
 ---
 title: '发送消息'
-description: '使用 OpenIM SDK 发送消息。'
+description: '向单聊或群聊发送已创建的 MessageItem，并处理发送结果。'
 sourcePath: '/sdk/wasm/message/sending-messages/send-a-message'
 ---
 
@@ -107,7 +107,7 @@ async function sendTextToUser(receiverUserID: string, text: string) {
 
 文件、图片、音频和视频消息仍遵循“先创建、再发送”的模型；文件参数、上传关联和进度事件集中见[上传文件并跟踪进度](/sdk/wasm/message/sending-messages/upload-files-and-track-progress)。
 
-自定义消息的业务数据设计、发送示例和接收端解析集中见[为消息添加扩展数据](/sdk/wasm/message/composing-messages/add-extra-data-to-a-message)，本页只说明发送目标和通用发送流程。
+自定义消息的业务数据设计、发送示例和接收端解析集中见[自定义消息与扩展数据](/sdk/wasm/message/composing-messages/custom-message-and-extra-data)，本页只说明发送目标和通用发送流程。
 
 如果项目使用自定义文件上传链路，文件上传成功后应调用对应的 `create*MessageByURL()` 创建 `MessageItem`，再把同一个 `SendMsgParams` 结构传给 `sendMessageNotOss()`。它是发送入口，不是新的消息类型；文件、图片、音频和视频的完整组合示例见[创建媒体与富消息](/sdk/wasm/message/sending-messages/create-media-and-rich-messages#发送已经上传的媒体文件)。
 
@@ -122,4 +122,4 @@ async function sendTextToUser(receiverUserID: string, text: string) {
 - [消息概览](/sdk/wasm/message/overview-message)
 - [发送第一条消息](/sdk/wasm/getting-started/send-first-message)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)
-- [为消息添加附加数据](/sdk/wasm/message/composing-messages/add-extra-data-to-a-message)
+- [自定义消息与扩展数据](/sdk/wasm/message/composing-messages/custom-message-and-extra-data)

@@ -317,7 +317,7 @@ const featureGroups: FeatureGroup[] = [
       },
       {
         title: 'Message history',
-        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-list',
+        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-history',
         description: 'Page through conversation history from the client SDK.',
         meta: 'History',
       },
@@ -347,7 +347,7 @@ const featureGroups: FeatureGroup[] = [
       },
       {
         title: 'Read receipts',
-        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        href: '/sdk/wasm/message/managing-read-status/manage-message-read-receipts',
         description: 'Show read state and inspect which members have read a group message.',
         meta: 'Read',
       },
@@ -359,7 +359,7 @@ const featureGroups: FeatureGroup[] = [
       },
       {
         title: 'Message extensions',
-        href: '/sdk/wasm/message/composing-messages/add-extra-data-to-a-message',
+        href: '/sdk/wasm/message/composing-messages/custom-message-and-extra-data',
         description: 'Carry shared or local extras with custom messages, ex, and localEx.',
         meta: 'Data',
       },
@@ -402,13 +402,13 @@ const featureGroups: FeatureGroup[] = [
     links: [
       {
         title: 'Group message read receipts',
-        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        href: '/sdk/wasm/message/managing-read-status/manage-message-read-receipts',
         description: 'Report group message read state and query who has or has not read a message.',
         meta: 'Read',
       },
       {
         title: 'Delete or revoke messages',
-        href: '/sdk/wasm/message/managing-messages/delete-or-revoke-a-message',
+        href: '/sdk/wasm/message/managing-messages/delete-a-message',
         description: 'Delete messages locally or on the server, or revoke them for conversation members.',
         meta: 'Delete',
       },

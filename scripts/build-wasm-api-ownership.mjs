@@ -8,6 +8,64 @@ const domainCoverage = JSON.parse(
   await readFile('data/structure/wasm-domain-api-coverage.json', 'utf8'),
 );
 
+const commercialMethods = new Set([
+  'speechToTextCapabilities',
+  'speechToText',
+  'getConversationGroupInfoWithConversations',
+  'getConversationGroupIDsByConversationID',
+  'removeConversationsFromGroups',
+  'addConversationsToGroups',
+  'setConversationGroupOrder',
+  'getConversationGroups',
+  'deleteConversationGroup',
+  'updateConversationGroup',
+  'createConversationGroup',
+  'getConversationPinnedMsg',
+  'setConversationPinnedMsg',
+  'deleteMessages',
+  'modifyMessage',
+  'getSignalingInvitationInfoStartApp',
+  'signalingGetTokenByRoomID',
+  'signalingGetRoomByGroupID',
+  'signalingHungUp',
+  'signalingCancel',
+  'signalingReject',
+  'signalingAccept',
+  'signalingInviteInGroup',
+  'signalingInvite',
+  'deleteGroupRequests',
+  'deleteFriendRequests',
+  'fetchSurroundingMessages',
+  'getAdvancedHistoryMessageListReverse',
+  'sendGroupMessageReadReceipt',
+  'getGroupMessageReaderList',
+]);
+
+const commercialEvents = new Set([
+  'OnChangedPinnedMsg',
+  'OnConversationGroupAdded',
+  'OnConversationGroupChanged',
+  'OnConversationGroupDeleted',
+  'OnConversationGroupMemberAdded',
+  'OnConversationGroupMemberDeleted',
+  'OnMsgDeleted',
+  'OnMessageModified',
+  'OnReceiveNewInvitation',
+  'OnInviteeAccepted',
+  'OnInviteeAcceptedByOtherDevice',
+  'OnInviteeRejected',
+  'OnInviteeRejectedByOtherDevice',
+  'OnInvitationCancelled',
+  'OnInvitationTimeout',
+  'OnHangUp',
+  'OnRoomParticipantConnected',
+  'OnRoomParticipantDisconnected',
+  'OnStreamChange',
+  'OnFriendApplicationDeleted',
+  'OnGroupApplicationDeleted',
+  'OnRecvGroupReadReceipt',
+]);
+
 const methodOwners = new Map();
 const eventOwners = new Map();
 
@@ -52,14 +110,14 @@ methods('user/managing-friends/update-or-delete-friends', [
   'updateFriends',
 ]);
 methods('user/moderating-a-user/retrieve-a-list-of-blocked-users', ['getBlackList']);
-methods('user/moderating-a-user/block-and-unblock-other-members', ['addBlack', 'removeBlack']);
+methods('user/moderating-a-user/block-or-unblock-users', ['addBlack', 'removeBlack']);
 methods('user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user', [
   'getUserStatus',
   'getSubscribeUsersStatus',
   'subscribeUsersStatus',
   'unsubscribeUsersStatus',
 ]);
-methods('user/retrieving-and-updating-user-information/update-user-profile', [
+methods('user/retrieving-and-updating-user-information/retrieve-and-update-self-profile', [
   'getSelfUserInfo',
   'setGlobalRecvMessageOpt',
   'setSelfInfo',
@@ -92,17 +150,17 @@ methods('message/sending-messages/upload-files-and-track-progress', [
   'fileMapSet',
   'uploadFile',
 ]);
-methods('message/retrieving-messages/retrieve-message-list', [
+methods('message/retrieving-messages/retrieve-message-history', [
   'getAdvancedHistoryMessageList',
   'getAdvancedHistoryMessageListReverse',
   'getHistoryMessageListReverse',
 ]);
-methods('message/retrieving-messages/retrieve-messages', [
+methods('message/retrieving-messages/locate-messages-by-id', [
   'fetchSurroundingMessages',
   'findMessageList',
 ]);
 methods('message/searching-messages/search-messages', ['searchLocalMessages']);
-methods('message/composing-messages/add-extra-data-to-a-message', [
+methods('message/composing-messages/custom-message-and-extra-data', [
   'createAdvancedTextMessage',
   'createCustomMessage',
   'setMessageLocalEx',
@@ -122,14 +180,14 @@ methods('message/managing-messages/forward-or-merge-a-message', [
   'createForwardMessage',
   'createMergerMessage',
 ]);
-methods('message/managing-messages/delete-or-revoke-a-message', [
+methods('message/managing-messages/delete-a-message', [
   'deleteMessages',
   'deleteMessage',
   'deleteMessageFromLocalStorage',
   'deleteUserAllMessagesInConv',
-  'modifyMessage',
-  'revokeMessage',
 ]);
+methods('message/managing-messages/revoke-a-message', ['revokeMessage']);
+methods('message/managing-messages/modify-a-message', ['modifyMessage']);
 methods('message/managing-messages/pin-conversation-messages', [
   'getConversationPinnedMsg',
   'setConversationPinnedMsg',
@@ -142,7 +200,7 @@ methods('message/managing-messages/clear-message-history', [
   'deleteAllMsgFromLocal',
   'deleteAllMsgFromLocalAndSvr',
 ]);
-methods('message/managing-read-status/manage-group-message-read-receipts', [
+methods('message/managing-read-status/manage-message-read-receipts', [
   'getGroupMessageReaderList',
   'sendGroupMessageReadReceipt',
 ]);
@@ -182,14 +240,14 @@ events('user/managing-friends/update-or-delete-friends', [
   'OnFriendDeleted',
   'OnFriendInfoChanged',
 ]);
-events('user/moderating-a-user/block-and-unblock-other-members', [
+events('user/moderating-a-user/block-or-unblock-users', [
   'OnBlackAdded',
   'OnBlackDeleted',
 ]);
 events('user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user', [
   'OnUserStatusChanged',
 ]);
-events('user/retrieving-and-updating-user-information/update-user-profile', ['OnSelfInfoUpdated']);
+events('user/retrieving-and-updating-user-information/retrieve-and-update-self-profile', ['OnSelfInfoUpdated']);
 events('message/sending-messages/upload-files-and-track-progress', [
   'OnProgress',
   'UploadComplete',
@@ -202,16 +260,18 @@ events('message/receiving-messages/receive-messages', [
   'OnRecvOnlineOnlyMessage',
   'OnRecvOnlineOnlyMessages',
 ]);
-events('message/composing-messages/add-extra-data-to-a-message', ['OnRecvCustomBusinessMessage']);
-events('message/managing-messages/delete-or-revoke-a-message', [
+events('message/composing-messages/custom-message-and-extra-data', ['OnRecvCustomBusinessMessage']);
+events('message/managing-messages/delete-a-message', [
   'OnDeleteUserAllMsgsInConv',
-  'OnMessageModified',
   'OnMsgDeleted',
+]);
+events('message/managing-messages/revoke-a-message', [
   'OnNewRecvMessageRevoked',
   'OnRecvMessageRevoked',
 ]);
+events('message/managing-messages/modify-a-message', ['OnMessageModified']);
 events('message/managing-messages/pin-conversation-messages', ['OnChangedPinnedMsg']);
-events('message/managing-read-status/manage-group-message-read-receipts', [
+events('message/managing-read-status/manage-message-read-receipts', [
   'OnRecvC2CReadReceipt',
   'OnRecvGroupReadReceipt',
 ]);
@@ -263,26 +323,38 @@ const manifest = {
   schemaVersion: 1,
   sdkVersion: sdk.version,
   methods: [...methodOwners]
-    .map(([name, owner]) => ({
-      name,
-      page: owner.page,
-      status: excludedNonPaginated.has(name)
+    .map(([name, owner]) => {
+      const status = excludedNonPaginated.has(name)
         ? 'excluded-non-paginated'
         : excludedConsolidated.has(name)
           ? 'excluded-consolidated'
-        : sdkMethods.get(name)?.deprecated && !deprecatedOverrides.has(name)
-          ? 'excluded-deprecated'
-          : owner.status,
-    }))
+          : sdkMethods.get(name)?.deprecated && !deprecatedOverrides.has(name)
+            ? 'excluded-deprecated'
+            : owner.status;
+      return {
+        name,
+        page: owner.page,
+        status,
+        ...(commercialMethods.has(name) ? { commercial: true } : {}),
+      };
+    })
     .sort((left, right) => left.name.localeCompare(right.name)),
   events: sdk.events
     .map(({ name }) => {
-      if (excludedEvents.has(name)) return { name, page: null, status: 'excluded' };
+      if (excludedEvents.has(name)) {
+        return {
+          name,
+          page: null,
+          status: 'excluded',
+          ...(commercialEvents.has(name) ? { commercial: true } : {}),
+        };
+      }
       const owner = eventOwners.get(name);
       return {
         name,
         page: owner.page,
         status: owner.status,
+        ...(commercialEvents.has(name) ? { commercial: true } : {}),
       };
     })
     .sort((left, right) => left.name.localeCompare(right.name)),

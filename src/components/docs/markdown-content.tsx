@@ -3,7 +3,8 @@ import { Fragment, type ReactNode } from 'react';
 import { CodeBlock, CodeTabs, type CodeTab } from '@/src/components/docs/code-block';
 import { createHeadingIdGenerator } from '@/src/lib/heading-ids';
 import type { Locale } from '@/src/lib/i18n';
-import { toLocalizedPath } from '@/src/lib/i18n';
+import { t, toLocalizedPath } from '@/src/lib/i18n';
+import { matchCommercialSymbol } from '@/src/lib/wasm-commercial';
 
 type MarkdownBlock =
   | { type: 'blockquote'; lines: string[] }
@@ -15,15 +16,30 @@ type MarkdownBlock =
   | { type: 'paragraph'; text: string }
   | { type: 'table'; rows: string[][] };
 
-export function MarkdownContent({ body, locale }: { body: string; locale: Locale }) {
+type InlineRenderOptions = {
+  commercialNames?: ReadonlySet<string>;
+  locale: Locale;
+};
+
+export function MarkdownContent({
+  body,
+  locale,
+  commercialNames,
+}: {
+  body: string;
+  locale: Locale;
+  commercialNames?: ReadonlySet<string>;
+}) {
+  const inlineOptions: InlineRenderOptions = { commercialNames, locale };
+
   return (
     <>
       {parseMarkdown(body).map((block, index) => (
         <MarkdownBlockView
           block={block}
           index={index}
+          inlineOptions={inlineOptions}
           key={`${block.type}-${index}`}
-          locale={locale}
         />
       ))}
     </>
@@ -33,20 +49,23 @@ export function MarkdownContent({ body, locale }: { body: string; locale: Locale
 function MarkdownBlockView({
   block,
   index,
-  locale,
+  inlineOptions,
 }: {
   block: MarkdownBlock;
   index: number;
-  locale: Locale;
+  inlineOptions: InlineRenderOptions;
 }) {
   if (block.type === 'heading') {
     const level = Math.min(Math.max(block.depth, 2), 4);
-    if (level === 2) return <h2 id={block.id}>{renderInlineMarkdown(block.title, locale)}</h2>;
-    if (level === 3) return <h3 id={block.id}>{renderInlineMarkdown(block.title, locale)}</h3>;
-    return <h4 id={block.id}>{renderInlineMarkdown(block.title, locale)}</h4>;
+    const content = renderInlineMarkdown(block.title, inlineOptions);
+    if (level === 2) return <h2 id={block.id}>{content}</h2>;
+    if (level === 3) return <h3 id={block.id}>{content}</h3>;
+    return <h4 id={block.id}>{content}</h4>;
   }
 
-  if (block.type === 'paragraph') return <p>{renderInlineMarkdown(block.text, locale)}</p>;
+  if (block.type === 'paragraph') {
+    return <p>{renderInlineMarkdown(block.text, inlineOptions)}</p>;
+  }
 
   if (block.type === 'blockquote') {
     return (
@@ -54,7 +73,7 @@ function MarkdownBlockView({
         {block.lines.map((line, lineIndex) => (
           <Fragment key={`${index}-${lineIndex}`}>
             {lineIndex > 0 ? <br /> : null}
-            {renderInlineMarkdown(line, locale)}
+            {renderInlineMarkdown(line, inlineOptions)}
           </Fragment>
         ))}
       </blockquote>
@@ -62,11 +81,13 @@ function MarkdownBlockView({
   }
 
   if (block.type === 'code') {
-    return <CodeBlock code={block.code} language={block.language} locale={locale} />;
+    return (
+      <CodeBlock code={block.code} language={block.language} locale={inlineOptions.locale} />
+    );
   }
 
   if (block.type === 'codeTabs') {
-    return <CodeTabs locale={locale} tabs={block.tabs} />;
+    return <CodeTabs locale={inlineOptions.locale} tabs={block.tabs} />;
   }
 
   if (block.type === 'list') {
@@ -74,7 +95,7 @@ function MarkdownBlockView({
     return (
       <Tag>
         {block.items.map((item, itemIndex) => (
-          <li key={`${index}-${itemIndex}`}>{renderInlineMarkdown(item, locale)}</li>
+          <li key={`${index}-${itemIndex}`}>{renderInlineMarkdown(item, inlineOptions)}</li>
         ))}
       </Tag>
     );
@@ -89,7 +110,9 @@ function MarkdownBlockView({
             <thead>
               <tr>
                 {headings.map((cell, cellIndex) => (
-                  <th key={`${index}-head-${cellIndex}`}>{renderInlineMarkdown(cell, locale)}</th>
+                  <th key={`${index}-head-${cellIndex}`}>
+                    {renderInlineMarkdown(cell, inlineOptions)}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -99,7 +122,7 @@ function MarkdownBlockView({
               <tr key={`${index}-row-${rowIndex}`}>
                 {row.map((cell, cellIndex) => (
                   <td key={`${index}-${rowIndex}-${cellIndex}`}>
-                    {renderInlineMarkdown(cell, locale)}
+                    {renderInlineMarkdown(cell, inlineOptions)}
                   </td>
                 ))}
               </tr>
@@ -277,10 +300,11 @@ function parseCodeTabTitle(meta: string | undefined, language: string) {
   return labels[language] ?? language;
 }
 
-function renderInlineMarkdown(value: string, locale: Locale): ReactNode[] {
+function renderInlineMarkdown(value: string, options: InlineRenderOptions): ReactNode[] {
   const nodes: ReactNode[] = [];
   const pattern = /!\[([^\]]*)]\(([^)]+)\)|\[([^\]]+)]\(([^)]+)\)|`([^`]+)`|\*\*([^*]+)\*\*/g;
   let cursor = 0;
+  const badgeLabel = t(options.locale).article.commercialBadge;
 
   for (const match of value.matchAll(pattern)) {
     if (match.index > cursor) nodes.push(value.slice(cursor, match.index));
@@ -292,25 +316,36 @@ function renderInlineMarkdown(value: string, locale: Locale): ReactNode[] {
       );
     } else if (match[3] !== undefined) {
       const href = match[4];
-      const localizedHref = toLocalizedPath(href, locale);
+      const localizedHref = toLocalizedPath(href, options.locale);
       if (isExternalHref(localizedHref)) {
         nodes.push(
           <a href={localizedHref} key={`${match.index}-link`} rel="noreferrer" target="_blank">
-            {renderInlineMarkdown(match[3], locale)}
+            {renderInlineMarkdown(match[3], options)}
           </a>,
         );
       } else {
         nodes.push(
           <Link href={localizedHref} key={`${match.index}-link`}>
-            {renderInlineMarkdown(match[3], locale)}
+            {renderInlineMarkdown(match[3], options)}
           </Link>,
         );
       }
     } else if (match[5] !== undefined) {
-      nodes.push(<code key={`${match.index}-code`}>{match[5]}</code>);
+      const codeText = match[5];
+      const commercial = matchCommercialSymbol(codeText, options.commercialNames ?? new Set());
+      if (commercial) {
+        nodes.push(
+          <span className="commercial-api-ref" key={`${match.index}-code`}>
+            <code>{codeText}</code>
+            <span className="commercial-inline-mark">{badgeLabel}</span>
+          </span>,
+        );
+      } else {
+        nodes.push(<code key={`${match.index}-code`}>{codeText}</code>);
+      }
     } else if (match[6] !== undefined) {
       nodes.push(
-        <strong key={`${match.index}-strong`}>{renderInlineMarkdown(match[6], locale)}</strong>,
+        <strong key={`${match.index}-strong`}>{renderInlineMarkdown(match[6], options)}</strong>,
       );
     }
     cursor = match.index + match[0].length;

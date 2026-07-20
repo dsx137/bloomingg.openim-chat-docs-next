@@ -1,0 +1,69 @@
+---
+title: '修改消息'
+description: '使用 OpenIM SDK 修改已发送消息的内容。'
+sourcePath: '/sdk/wasm/message/managing-messages/modify-a-message'
+---
+
+`modifyMessage()` 用于在会话中修改一条已存在消息的内容。它和[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)、[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)不同：删除影响消息是否仍对当前账号可见，撤回让会话成员看到撤回态；修改则替换消息内容并同步给其他客户端。
+
+## 修改消息内容
+
+`modifyMessage()` 接收消息所在的 `conversationID` 和修改后的完整 `MessageItem`：
+
+### 参数说明
+
+| 参数 | 类型 | 是否必填 | 说明 |
+| --- | --- | --- | --- |
+| `conversationID` | `string` | 必填 | 消息所属的会话 ID。 |
+| `message` | `MessageItem` | 必填 | 修改后的完整消息对象；必须保留原 `clientMsgID`。 |
+
+```ts
+const { data: modifiedMessage } = await OpenIM.modifyMessage({
+  conversationID,
+  message: {
+    ...message,
+    textElem: {
+      ...message.textElem,
+      content: editedText,
+    },
+  },
+});
+
+replaceMessage(modifiedMessage);
+```
+
+该方法不是局部更新。应从当前消息复制并只修改目标内容，保留 `clientMsgID` 和其他消息字段。允许修改的发送者、时间窗口和消息类型由 OpenIM 服务端校验；失败时不要只在本地保留编辑结果。
+
+## 返回结果
+
+Promise 成功后，`data` 是服务端确认的修改后 `MessageItem`。调用端可先用返回值替换当前列表中的同 `clientMsgID` 消息；其他客户端随后通过事件合并增量。
+
+Promise 成功代表当前修改请求已完成，不代表所有端界面已经更新。其他客户端通过 `CbEvents.OnMessageModified` 收到修改后的 `MessageItem`，应按 `clientMsgID` 替换现有消息。
+
+## 监听消息修改
+
+本页是 `OnMessageModified` 的完整监听示例归属页。删除相关事件见[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)；撤回相关事件见[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const handleMessageModified = ({ data }) => {
+  replaceMessage(resolveConversationID(data), data.clientMsgID, data);
+};
+
+OpenIM.on(CbEvents.OnMessageModified, handleMessageModified);
+
+function removeMessageModifiedListener() {
+  OpenIM.off(CbEvents.OnMessageModified, handleMessageModified);
+}
+```
+
+`OnMessageModified` 的 `data` 是单个 `MessageItem`。消息使用 `clientMsgID` 合并，并结合消息路由字段确定所属会话。组件卸载、退出登录或切换账号时调用 `removeMessageModifiedListener()`。
+
+## 相关页面
+
+- [删除消息](/sdk/wasm/message/managing-messages/delete-a-message)
+- [撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)
+- [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)
+- [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

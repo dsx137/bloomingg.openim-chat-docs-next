@@ -771,7 +771,7 @@
             {
               "id": "message/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "概述",
               "href": "/platform-api/message/overview",
               "type": "page",
               "minIndex": 719.9,
@@ -780,7 +780,7 @@
             {
               "id": "message/message-content-types",
               "segment": "message-content-types",
-              "title": "Message content types",
+              "title": "消息内容类型",
               "href": "/platform-api/message/message-content-types",
               "type": "page",
               "minIndex": 720,
@@ -797,7 +797,7 @@
                 {
                   "id": "message/sending-messages/send-msg",
                   "segment": "send-msg",
-                  "title": "Send message",
+                  "title": "发送单条消息",
                   "href": "/platform-api/message/sending-messages/send-msg",
                   "type": "page",
                   "minIndex": 721,
@@ -806,7 +806,7 @@
                 {
                   "id": "message/sending-messages/batch-send-msg",
                   "segment": "batch-send-msg",
-                  "title": "Batch send message",
+                  "title": "批量发送消息",
                   "href": "/platform-api/message/sending-messages/batch-send-msg",
                   "type": "page",
                   "minIndex": 722,
@@ -815,7 +815,7 @@
                 {
                   "id": "message/sending-messages/send-business-notification",
                   "segment": "send-business-notification",
-                  "title": "Send business notification",
+                  "title": "发送业务通知",
                   "href": "/platform-api/message/sending-messages/send-business-notification",
                   "type": "page",
                   "minIndex": 723,
@@ -834,7 +834,7 @@
                 {
                   "id": "message/managing-messages/revoke-msg",
                   "segment": "revoke-msg",
-                  "title": "Revoke message",
+                  "title": "撤回消息",
                   "href": "/platform-api/message/managing-messages/revoke-msg",
                   "type": "page",
                   "minIndex": 724,
@@ -853,7 +853,7 @@
                 {
                   "id": "message/retrieving-messages/get-server-time",
                   "segment": "get-server-time",
-                  "title": "Get server time",
+                  "title": "获取服务器时间",
                   "href": "/platform-api/message/retrieving-messages/get-server-time",
                   "type": "page",
                   "minIndex": 725,
@@ -874,7 +874,7 @@
             {
               "id": "logs/overview",
               "segment": "overview",
-              "title": "Overview",
+              "title": "概述",
               "href": "/platform-api/logs/overview",
               "type": "page",
               "minIndex": 761.9,
@@ -883,7 +883,7 @@
             {
               "id": "logs/upload-logs",
               "segment": "upload-logs",
-              "title": "Upload logs",
+              "title": "上传日志记录",
               "href": "/platform-api/logs/upload-logs",
               "type": "page",
               "minIndex": 762.9,
@@ -892,7 +892,7 @@
             {
               "id": "logs/search-logs",
               "segment": "search-logs",
-              "title": "Search logs",
+              "title": "搜索日志记录",
               "href": "/platform-api/logs/search-logs",
               "type": "page",
               "minIndex": 763.9,
@@ -901,7 +901,7 @@
             {
               "id": "logs/delete-logs",
               "segment": "delete-logs",
-              "title": "Delete logs",
+              "title": "删除日志记录",
               "href": "/platform-api/logs/delete-logs",
               "type": "page",
               "minIndex": 764.9,
@@ -6049,10 +6049,10 @@
                   "minIndex": 389
                 },
                 {
-                  "id": "sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-                  "segment": "update-user-profile",
-                  "title": "Update the user profile",
-                  "href": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+                  "id": "sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+                  "segment": "retrieve-and-update-self-profile",
+                  "title": "Retrieve and update the current user profile",
+                  "href": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
                   "type": "page",
                   "children": [],
                   "minIndex": 390
@@ -6132,10 +6132,10 @@
                   "minIndex": 396
                 },
                 {
-                  "id": "sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
-                  "segment": "block-and-unblock-other-members",
+                  "id": "sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+                  "segment": "block-or-unblock-users",
                   "title": "Block or unblock users",
-                  "href": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+                  "href": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
                   "type": "page",
                   "children": [],
                   "minIndex": 397
@@ -6170,10 +6170,10 @@
               "type": "folder",
               "children": [
                 {
-                  "id": "sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-                  "segment": "retrieve-conversations",
-                  "title": "Retrieve conversations",
-                  "href": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+                  "id": "sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+                  "segment": "retrieve-a-conversation",
+                  "title": "Retrieve a conversation",
+                  "href": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
                   "type": "page",
                   "children": [],
                   "minIndex": 399
@@ -6198,10 +6198,10 @@
               "type": "folder",
               "children": [
                 {
-                  "id": "sdk/wasm/conversation/managing-conversations/set-conversation",
-                  "segment": "set-conversation",
-                  "title": "Set a conversation",
-                  "href": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+                  "id": "sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+                  "segment": "set-conversation-settings",
+                  "title": "Set conversation settings",
+                  "href": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
                   "type": "page",
                   "children": [],
                   "minIndex": 401
@@ -6225,10 +6225,10 @@
                   "minIndex": 403
                 },
                 {
-                  "id": "sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
-                  "segment": "hide-or-archive-conversation",
+                  "id": "sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+                  "segment": "hide-a-conversation",
                   "title": "Hide a conversation",
-                  "href": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+                  "href": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
                   "type": "page",
                   "children": [],
                   "minIndex": 404
@@ -6437,19 +6437,19 @@
               "type": "folder",
               "children": [
                 {
-                  "id": "sdk/wasm/message/retrieving-messages/retrieve-message-list",
-                  "segment": "retrieve-message-list",
-                  "title": "Retrieve a message list",
-                  "href": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+                  "id": "sdk/wasm/message/retrieving-messages/retrieve-message-history",
+                  "segment": "retrieve-message-history",
+                  "title": "Retrieve message history",
+                  "href": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
                   "type": "page",
                   "children": [],
                   "minIndex": 422
                 },
                 {
-                  "id": "sdk/wasm/message/retrieving-messages/retrieve-messages",
-                  "segment": "retrieve-messages",
-                  "title": "Retrieve messages",
-                  "href": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+                  "id": "sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+                  "segment": "locate-messages-by-id",
+                  "title": "Locate messages by ID",
+                  "href": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
                   "type": "page",
                   "children": [],
                   "minIndex": 423
@@ -6474,10 +6474,10 @@
               "type": "folder",
               "children": [
                 {
-                  "id": "sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-                  "segment": "add-extra-data-to-a-message",
-                  "title": "Add extra data to a message",
-                  "href": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+                  "id": "sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+                  "segment": "custom-message-and-extra-data",
+                  "title": "Custom message and extra data",
+                  "href": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
                   "type": "page",
                   "children": [],
                   "minIndex": 425
@@ -6529,13 +6529,31 @@
                   "minIndex": 429
                 },
                 {
-                  "id": "sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-                  "segment": "delete-or-revoke-a-message",
-                  "title": "Delete or revoke a message",
-                  "href": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+                  "id": "sdk/wasm/message/managing-messages/delete-a-message",
+                  "segment": "delete-a-message",
+                  "title": "Delete a message",
+                  "href": "/sdk/wasm/message/managing-messages/delete-a-message",
                   "type": "page",
                   "children": [],
                   "minIndex": 430
+                },
+                {
+                  "id": "sdk/wasm/message/managing-messages/revoke-a-message",
+                  "segment": "revoke-a-message",
+                  "title": "Revoke a message",
+                  "href": "/sdk/wasm/message/managing-messages/revoke-a-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 431
+                },
+                {
+                  "id": "sdk/wasm/message/managing-messages/modify-a-message",
+                  "segment": "modify-a-message",
+                  "title": "Modify a message",
+                  "href": "/sdk/wasm/message/managing-messages/modify-a-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 432
                 },
                 {
                   "id": "sdk/wasm/message/managing-messages/pin-conversation-messages",
@@ -6544,7 +6562,7 @@
                   "href": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
                   "type": "page",
                   "children": [],
-                  "minIndex": 431
+                  "minIndex": 433
                 },
                 {
                   "id": "sdk/wasm/message/managing-messages/insert-a-local-message",
@@ -6553,7 +6571,7 @@
                   "href": "/sdk/wasm/message/managing-messages/insert-a-local-message",
                   "type": "page",
                   "children": [],
-                  "minIndex": 432
+                  "minIndex": 434
                 },
                 {
                   "id": "sdk/wasm/message/managing-messages/clear-message-history",
@@ -6562,19 +6580,19 @@
                   "href": "/sdk/wasm/message/managing-messages/clear-message-history",
                   "type": "page",
                   "children": [],
-                  "minIndex": 433
+                  "minIndex": 435
                 }
               ],
               "minIndex": 429
             },
             {
-              "id": "sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-              "segment": "manage-group-message-read-receipts",
-              "title": "Manage group message read receipts",
-              "href": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+              "id": "sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+              "segment": "manage-message-read-receipts",
+              "title": "Manage message read receipts",
+              "href": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
               "type": "page",
               "children": [],
-              "minIndex": 434
+              "minIndex": 436
             }
           ],
           "minIndex": 417
@@ -6593,7 +6611,7 @@
               "href": "/sdk/wasm/calling/overview-calling",
               "type": "page",
               "children": [],
-              "minIndex": 435
+              "minIndex": 437
             },
             {
               "id": "sdk/wasm/calling/managing-calls/start-or-handle-a-call",
@@ -6602,7 +6620,7 @@
               "href": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
               "type": "page",
               "children": [],
-              "minIndex": 436
+              "minIndex": 438
             },
             {
               "id": "sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
@@ -6611,7 +6629,7 @@
               "href": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
               "type": "page",
               "children": [],
-              "minIndex": 437
+              "minIndex": 439
             },
             {
               "id": "sdk/wasm/calling/sending-custom-signals/send-a-custom-signal",
@@ -6620,10 +6638,10 @@
               "href": "/sdk/wasm/calling/sending-custom-signals/send-a-custom-signal",
               "type": "page",
               "children": [],
-              "minIndex": 438
+              "minIndex": 440
             }
           ],
-          "minIndex": 435
+          "minIndex": 437
         },
         {
           "id": "sdk/wasm/events/overview-events",
@@ -6632,7 +6650,7 @@
           "href": "/sdk/wasm/events/overview-events",
           "type": "page",
           "children": [],
-          "minIndex": 439,
+          "minIndex": 441,
           "navigationTitle": "Events"
         },
         {
@@ -6642,10 +6660,10 @@
           "href": "/sdk/wasm/logger",
           "type": "page",
           "children": [],
-          "minIndex": 440
+          "minIndex": 442
         }
       ],
-      "pageCount": 58,
+      "pageCount": 60,
       "sidebarExpansion": "active-path"
     },
     {

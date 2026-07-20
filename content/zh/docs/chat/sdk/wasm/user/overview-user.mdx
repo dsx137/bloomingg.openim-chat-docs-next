@@ -33,8 +33,8 @@ OpenIM 会根据使用场景返回不同的用户对象：
 | 按指定好友 ID 读取好友关系信息 | [获取指定好友信息](/sdk/wasm/user/retrieving-users/retrieve-friend-information) |
 | 发送、查询、同意或拒绝好友申请 | [管理好友申请](/sdk/wasm/user/managing-friends/manage-friend-requests) |
 | 修改好友备注、置顶、扩展字段或删除好友 | [更新或删除好友](/sdk/wasm/user/managing-friends/update-or-delete-friends) |
-| 查看和维护当前用户黑名单 | [拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members) |
-| 读取或更新当前用户资料、扩展字段和消息接收选项 | [获取和更新用户资料](/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile) |
+| 查看和维护当前用户黑名单 | [拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-or-unblock-users) |
+| 读取或更新当前用户资料、扩展字段和消息接收选项 | [获取和更新当前用户资料](/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile) |
 | 订阅和读取在线状态 | [获取用户在线状态](/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user) |
 | 读取群成员列表、成员搜索、指定成员资料 | [获取群成员](/sdk/wasm/group/retrieving-group-members/retrieve-group-members) |
 
@@ -42,10 +42,10 @@ OpenIM 会根据使用场景返回不同的用户对象：
 
 用户相关事件由对应能力页负责监听和合并：
 
-- 当前用户资料变化：见[获取和更新用户资料](/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile)。
+- 当前用户资料变化：见[获取和更新当前用户资料](/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile)。
 - 好友申请变化：见[管理好友申请](/sdk/wasm/user/managing-friends/manage-friend-requests)。
 - 好友关系和好友资料变化：见[更新或删除好友](/sdk/wasm/user/managing-friends/update-or-delete-friends)。
-- 黑名单变化：见[拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members)。
+- 黑名单变化：见[拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-or-unblock-users)。
 - 在线状态变化：见[获取用户在线状态](/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user)。
 
 概览页只说明事件归属，不重复注册处理器。

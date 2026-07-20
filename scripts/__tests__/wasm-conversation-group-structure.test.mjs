@@ -6,12 +6,12 @@ import { buildWasmLegacyRedirects } from '../lib/wasm-legacy-redirects.mjs';
 
 const conversationPages = [
   '/sdk/wasm/conversation/overview-conversation',
-  '/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations',
+  '/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation',
   '/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list',
-  '/sdk/wasm/conversation/managing-conversations/set-conversation',
+  '/sdk/wasm/conversation/managing-conversations/set-conversation-settings',
   '/sdk/wasm/conversation/managing-conversations/set-conversation-draft',
   '/sdk/wasm/conversation/managing-conversations/manage-read-status',
-  '/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation',
+  '/sdk/wasm/conversation/managing-conversations/hide-a-conversation',
   '/sdk/wasm/conversation/managing-conversations/delete-or-clear-conversation',
   '/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups',
 ];
@@ -152,7 +152,7 @@ const migratedLegacyPages = {
   '/sdk/wasm/channel/managing-channels/delete-a-channel':
     '/sdk/wasm/group/joining-and-leaving-groups/join-leave-or-dismiss-a-group',
   '/sdk/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels':
-    '/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation',
+    '/sdk/wasm/conversation/managing-conversations/hide-a-conversation',
   '/sdk/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel':
     '/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups',
   '/sdk/wasm/conversation/synchronizing-conversations/synchronize-conversation-data':
@@ -176,7 +176,7 @@ const migratedLegacyPages = {
   '/sdk/wasm/channel/searching-channels/search-group-channels-by-name-url-or-other-filters':
     '/sdk/wasm/group/retrieving-groups/retrieve-and-search-groups',
   '/sdk/wasm/conversations/configuring-message-destruction':
-    '/sdk/wasm/conversation/managing-conversations/set-conversation',
+    '/sdk/wasm/conversation/managing-conversations/set-conversation-settings',
   '/sdk/wasm/groups/retrieving-members/filter-members-by-join-time':
     '/sdk/wasm/group/retrieving-group-members/retrieve-group-members',
   '/sdk/wasm/groups/retrieving-members/retrieve-owner-and-administrators':

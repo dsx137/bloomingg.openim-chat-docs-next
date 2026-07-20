@@ -1,7 +1,7 @@
 ---
-title: '为消息添加扩展数据'
-description: '使用 OpenIM SDK 为消息添加扩展数据。'
-sourcePath: '/sdk/wasm/message/composing-messages/add-extra-data-to-a-message'
+title: '自定义消息与扩展数据'
+description: '创建自定义消息，并区分 MessageItem.ex、localEx 与业务扩展数据的落点。'
+sourcePath: '/sdk/wasm/message/composing-messages/custom-message-and-extra-data'
 ---
 
 OpenIM 的消息扩展数据需要先确定作用范围：需要随消息同步给其他客户端的数据，可以在发送前写入 `MessageItem.ex`；只影响当前客户端展示状态的数据，写入 `localEx`。需要承载完整业务对象时，使用自定义消息通常更清晰。
@@ -152,4 +152,4 @@ function removeCustomBusinessMessageListener() {
 
 - [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)
-- [获取单条消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)

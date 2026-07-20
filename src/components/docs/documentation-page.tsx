@@ -36,6 +36,7 @@ import {
   isWasmLocalePublished,
   isWasmRoute,
 } from '@/src/lib/wasm-publication';
+import { getPageCommercialInfo, getPageCommercialNames } from '@/src/lib/wasm-commercial';
 import type { BreadcrumbItem, TocItem } from '@/src/types/docs';
 
 export type DocumentationPageParams = {
@@ -194,6 +195,13 @@ export async function renderDocumentationPage(
   const tocFooter = platformApiServerVersion ? (
     <TocGithubLink version={platformApiServerVersion} />
   ) : undefined;
+  const commercial = isWasmRoute(effectiveRoute.path)
+    ? getPageCommercialInfo(effectiveRoute.path)
+    : undefined;
+  const commercialNames =
+    commercial && commercial.kind !== 'none'
+      ? getPageCommercialNames(effectiveRoute.path)
+      : undefined;
 
   if (effectiveRoute.path === '/sdk/wasm/overview' && locale === 'zh') {
     return (
@@ -244,6 +252,7 @@ export async function renderDocumentationPage(
     >
       <ArticleHeader
         breadcrumbs={breadcrumbs}
+        commercial={commercial}
         editUrl={getEditUrl(effectiveRoute)}
         locale={locale}
         route={effectiveRoute}
@@ -251,7 +260,11 @@ export async function renderDocumentationPage(
       />
       <div className="prose-docs">
         {markdownPage ? (
-          <MarkdownContent body={markdownPage.body} locale={locale} />
+          <MarkdownContent
+            body={markdownPage.body}
+            commercialNames={commercialNames}
+            locale={locale}
+          />
         ) : MdxContent ? (
           <MdxContent components={getMDXComponents(locale)} />
         ) : null}

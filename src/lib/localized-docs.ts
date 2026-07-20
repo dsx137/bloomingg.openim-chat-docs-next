@@ -78,11 +78,14 @@ export function localizeNavNodeTitle(node: NavNode, locale: Locale): string {
   if (node.navigationTitle) return localizeDocLabel(node.navigationTitle, locale);
   if (locale !== 'zh') return node.title;
   if (node.href) return getLocalizedDocTitle(node.href, locale) ?? localizeDocLabel(node.title, locale);
-  const label =
-    platformApiZh.navigationLabels[node.segment] ??
-    sdkZh.navigationLabels[node.segment] ??
-    node.title;
-  return localizeDocLabel(label, locale);
+
+  const labels = navigationLabelsForNode(node);
+  const fromTitle = labels[node.title];
+  if (fromTitle) return normalizeOpenImZhTerminology(fromTitle);
+  const fromSegment = labels[node.segment];
+  if (fromSegment) return normalizeOpenImZhTerminology(fromSegment);
+
+  return localizeDocLabel(node.title, locale);
 }
 
 export function localizeDocLabel(label: string, locale: Locale): string {
@@ -90,14 +93,38 @@ export function localizeDocLabel(label: string, locale: Locale): string {
   const exact = zhLabelOverrides[label];
   if (exact) return normalizeOpenImZhTerminology(exact);
 
+  // Prefer WASM/SDK title keys first so shared segments like retrieving-messages
+  // do not inherit Platform API folder labels in SDK sidebars.
+  const fromSdkTitle = sdkZh.navigationLabels[label];
+  if (fromSdkTitle) return normalizeOpenImZhTerminology(fromSdkTitle);
+
+  const fromSdkSegment = localizeHumanizedNavigationLabel(label, sdkZh.navigationLabels);
+  if (fromSdkSegment) return normalizeOpenImZhTerminology(fromSdkSegment);
+
   const fromPlatformSegment = localizeHumanizedNavigationLabel(
     label,
     platformApiZh.navigationLabels,
   );
-  if (fromPlatformSegment) return normalizeOpenImZhTerminology(fromPlatformSegment);
+  return normalizeOpenImZhTerminology(fromPlatformSegment ?? label);
+}
 
-  const fromSdkSegment = localizeHumanizedNavigationLabel(label, sdkZh.navigationLabels);
-  return normalizeOpenImZhTerminology(fromSdkSegment ?? label);
+function navigationLabelsForNode(node: NavNode): Record<string, string> {
+  const href = findFirstNavHref(node);
+  if (href?.startsWith('/platform-api')) return platformApiZh.navigationLabels;
+  if (href?.startsWith('/sdk/')) return sdkZh.navigationLabels;
+  return {
+    ...platformApiZh.navigationLabels,
+    ...sdkZh.navigationLabels,
+  };
+}
+
+function findFirstNavHref(node: NavNode): string | undefined {
+  if (node.href) return node.href;
+  for (const child of node.children ?? []) {
+    const href = findFirstNavHref(child);
+    if (href) return href;
+  }
+  return undefined;
 }
 
 export function localizeNavContextTitle(title: string, locale: Locale): string {

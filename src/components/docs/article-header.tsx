@@ -5,6 +5,7 @@ import { getPlatformLabel, getProductLabel } from '@/src/config/docs';
 import { hasGuideMarkdownPage } from '@/src/lib/guide-markdown';
 import type { Locale } from '@/src/lib/i18n';
 import { t } from '@/src/lib/i18n';
+import type { PageCommercialInfo } from '@/src/lib/wasm-commercial';
 import type { BreadcrumbItem, RouteRecord } from '@/src/types/docs';
 
 export function ArticleHeader({
@@ -13,29 +14,44 @@ export function ArticleHeader({
   editUrl,
   locale = 'en',
   showVersion = true,
+  commercial,
 }: {
   route: RouteRecord;
   breadcrumbs: BreadcrumbItem[];
   editUrl?: string;
   locale?: Locale;
   showVersion?: boolean;
+  commercial?: PageCommercialInfo;
 }) {
   const text = t(locale);
+  const commercialBadge =
+    commercial?.kind === 'full'
+      ? text.article.commercialBadge
+      : commercial?.kind === 'partial'
+        ? text.article.commercialPartialBadge
+        : undefined;
   const badges = [
     getProductLabel(route.product, locale),
     getPlatformLabel(route.platform),
     showVersion ? route.version : undefined,
     route.status === 'scaffold' ? text.article.scaffold : undefined,
+    commercialBadge,
   ].filter(Boolean);
   const showDescription = route.product !== 'platform-api' && route.description;
   const supportsMarkdown = route.contentFile !== 'guides' || hasGuideMarkdownPage(route.path);
+  const showCommercialNotice = commercial && commercial.kind !== 'none';
 
   return (
     <header className="article-header">
       <Breadcrumbs items={breadcrumbs} />
       <div className="article-badges">
         {badges.map((badge) => (
-          <span key={badge}>{badge}</span>
+          <span
+            className={badge === commercialBadge ? 'article-badge-commercial' : undefined}
+            key={badge}
+          >
+            {badge}
+          </span>
         ))}
       </div>
       <div className="article-title-row">
@@ -53,6 +69,15 @@ export function ArticleHeader({
           ) : null}
         </div>
       </div>
+      {showCommercialNotice ? (
+        <div className="article-commercial-notice" role="note">
+          <p>
+            {commercial.kind === 'full'
+              ? text.article.commercialFullNotice
+              : text.article.commercialPartialNotice}
+          </p>
+        </div>
+      ) : null}
     </header>
   );
 }

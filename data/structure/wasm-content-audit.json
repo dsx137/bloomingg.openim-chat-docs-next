@@ -80,8 +80,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
-      "targetPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "currentPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+      "targetPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -125,54 +125,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；三个会话查询方法均直接使用 Promise 返回值，后续增量变化链接到会话列表事件归属页。",
-        "2026-07-15：第二轮逐页复审；保留首次聊天直接调用 getOneConversation 的场景结论，统一认证页名称并整理查询示例结构。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
-      ]
-    },
-    {
-      "currentPath": "/sdk/wasm/getting-started/before-you-start",
-      "targetPath": "/sdk/wasm/getting-started/before-you-start",
-      "sourceKind": "openim-specific",
-      "disposition": "adapt",
-      "sendbirdSource": null,
-      "openimSources": [
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/initialization/login.md",
-        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
-        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
-      ],
-      "sdkMethods": [],
-      "sdkEvents": [],
-      "locales": {
-        "zh": {
-          "reviewStatus": "published",
-          "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
-          "exampleVerification": {
-            "status": "not-applicable",
-            "evidence": [],
-            "reason": "概念、导航或接入前提页，不归属需单独执行的 SDK 示例；发布前已完成正文与链接复核。"
-          }
-        },
-        "en": {
-          "reviewStatus": "deferred",
-          "reviewer": null,
-          "reviewedAt": null,
-          "exampleVerification": {
-            "status": "pending",
-            "evidence": [],
-            "reason": null
-          }
-        }
-      },
-      "redirectTo": null,
-      "notes": [
-        "2026-07-17：逐页新增并人工审核公共前置页；集中说明服务地址、可信后端签发用户 Token、浏览器运行资源和敏感凭据边界。",
-        "2026-07-17：该页只建立认证与首条消息共用的准备条件，不归属 SDK 方法或事件；英文仅保留延后发布骨架。",
-        "2026-07-17：发布前深审替换本站不存在的 /docs/guides/quick-deployment/* 死链为 docs.openim.io Docker 部署指南。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/conversation/retrieving-conversations/retrieve-conversations 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -234,8 +187,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
-      "targetPath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "currentPath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+      "targetPath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -281,16 +234,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；补齐自定义业务通知的唯一监听与清理示例，区分消息创建、发送返回、本地扩展和接收事件，并按业务协议幂等键合并。",
-        "2026-07-15：第二轮逐页复审；删除与正文重复的四条类型声明，改为直接说明 CustomMsgParams 字段，并收紧验证清单的成功/失败措辞。",
-        "2026-07-15：第二轮跨页复查；把通用消息接收页的链接名称统一为“接收消息”。",
-        "2026-07-16：根据用户要求重新逐页复核；删除 createAdvancedTextMessage 和高级文本消息说明，结构化共享数据统一使用 createCustomMessage。",
-        "2026-07-16：根据用户反馈再次逐页复核；分别补充 MessageItem.ex 与 localEx 的同步范围、写入时机、完整字符串覆盖规则和适用边界。",
-        "2026-07-16：逐页复核参数与结果组织；createCustomMessage 与 setMessageLocalEx 的多字段对象分别补充操作内参数表，不与后续 sendMessage 参数混合。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/message/composing-messages/add-extra-data-to-a-message 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -477,8 +421,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "currentPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -499,7 +443,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -522,15 +466,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；明确三类查询直接返回快照且不触发事件，按 conversationID + clientMsgID 定位，并链接同步和撤回事件归属页。",
-        "2026-07-15：第二轮逐页复审；修正把 ConversationItem.latestMsg 当作 MessageItem 直接取字段的问题，补充安全解析降级，并用枚举替换魔法数字。",
-        "2026-07-15：第二轮跨页复查；把相关页面名称统一为“搜索消息”和“接收消息”。",
-        "2026-07-16：逐页复核参数与结果组织；拆除混合 findMessageList 与 fetchSurroundingMessages 的页面级参数表，在两个操作内分别说明真实参数和返回结构。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：读取消息上下文补充：搜索命中可直接作 startMessage，且不要用 findMessageList 代替周边查询。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-specified-messages 重命名迁入；同步更新中文标题与副标题语义。"
       ]
     },
     {
@@ -920,8 +856,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
-      "targetPath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "currentPath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+      "targetPath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -969,12 +905,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；拉黑和取消拉黑分别通过黑名单新增、删除事件按 userID 合并，查询快照仍由列表页负责。",
-        "2026-07-15：第二轮逐页复审；黑名单单向关系、消息非对称限制、Promise 与新增/删除事件边界保持准确，仅整理示例结构。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -1181,8 +1112,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
-      "targetPath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "currentPath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -1223,14 +1154,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；setConversation 的 Promise 结果与 OnConversationChanged 增量分开说明，按 conversationID 合并。",
-        "2026-07-15：第二轮逐页复审；删除与属性表重复的四字段说明，收紧 Promise 成功语义，保留统一入口、整值覆盖和消息销毁配置。",
-        "2026-07-16：逐页复核参数与结果组织；将会话字段表明确归入“参数说明”，保留复杂设置对象的集中查阅价值。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/set-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -1410,8 +1334,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
-      "targetPath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "currentPath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -1451,14 +1375,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；隐藏会话以列表查询校准，ex 归档通过 OnConversationChanged 按 conversationID 合并。",
-        "2026-07-15：第二轮逐页复审；隐藏会话的临时性、ex 归档的整值合并和后端权威索引边界保持准确，无需调整正文。",
-        "2026-07-16：根据用户反馈重新逐页复核；删除基于 ConversationItem.ex 自定义归档的全部说明，只保留 hideConversation 隐藏会话能力，并同步中英文结构标题与导航文案。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：发布前深审补齐 OnConversationChanged 载荷与 conversationID 合并说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -2148,56 +2065,6 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/error-codes",
-      "targetPath": "/sdk/wasm/logger",
-      "sourceKind": "openim-specific",
-      "disposition": "merge",
-      "sendbirdSource": null,
-      "openimSources": [
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/errcode.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/initialization/login.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/getAdvancedHistoryMessageList.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/sendMessage.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onConnectFailed.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSyncServerFailed.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onUserTokenExpired.md",
-        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
-        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
-      ],
-      "sdkMethods": [],
-      "sdkEvents": [],
-      "locales": {
-        "zh": {
-          "reviewStatus": "api-verified",
-          "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
-          "exampleVerification": {
-            "status": "pending",
-            "evidence": [],
-            "reason": null
-          }
-        },
-        "en": {
-          "reviewStatus": "deferred",
-          "reviewer": null,
-          "reviewedAt": null,
-          "exampleVerification": {
-            "status": "pending",
-            "evidence": [],
-            "reason": null
-          }
-        }
-      },
-      "redirectTo": "/sdk/wasm/logger",
-      "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；移除连接、token 与同步事件的重复监听，明确 Promise resolve/reject、连接事件和错误关联日志的边界。",
-        "2026-07-15：第二轮逐页复审；收紧 Promise 错误处理措辞，移除声明式元文案，并为历史消息示例补齐必填 viewType。",
-        "2026-07-17：按要求删除独立错误码页面；诊断日志与 operationID 说明统一归入 /sdk/wasm/logger，并为旧地址保留永久重定向。"
-      ]
-    },
-    {
       "currentPath": "/sdk/wasm/events/overview-events",
       "targetPath": "/sdk/wasm/events/overview-events",
       "sourceKind": "openim-specific",
@@ -2340,51 +2207,6 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/local-data/export-local-database",
-      "targetPath": "/sdk/wasm/local-data/export-local-database",
-      "sourceKind": "openim-specific",
-      "disposition": "remove",
-      "sendbirdSource": null,
-      "openimSources": [
-        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
-        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
-      ],
-      "sdkMethods": [
-        "exportDB"
-      ],
-      "sdkEvents": [],
-      "locales": {
-        "zh": {
-          "reviewStatus": "api-verified",
-          "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
-          "exampleVerification": {
-            "status": "pending",
-            "evidence": [],
-            "reason": null
-          }
-        },
-        "en": {
-          "reviewStatus": "deferred",
-          "reviewer": null,
-          "reviewedAt": null,
-          "exampleVerification": {
-            "status": "pending",
-            "evidence": [],
-            "reason": null
-          }
-        }
-      },
-      "redirectTo": null,
-      "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；明确 exportDB 仅通过 Promise 返回 unknown 导出结果、不触发业务事件，并补充运行时校验与失败日志边界。",
-        "2026-07-15：第二轮逐页复审；导出结果类型、安全边界、Promise 结果和不触发业务事件的说明保持准确，无需调整正文。",
-        "2026-07-17：按要求从公开文档删除本地数据库导出页面；固定声明仍保留 exportDB 证据，但公开正文不再描述该方法，也不设置重定向。"
-      ]
-    },
-    {
       "currentPath": "/sdk/wasm/logger",
       "targetPath": "/sdk/wasm/logger",
       "sourceKind": "openim-specific",
@@ -2499,7 +2321,10 @@
         "2026-07-16：移除仅针对群聊的会话 ID 换算示例；明确 clearConversationAndDeleteAllMsg 按 conversationID 同时适用于一对一和群聊会话，并统一链接到获取会话页面。",
         "2026-07-16：逐页补审账号级清理能力；分别说明 deleteAllMsgFromLocal 与 deleteAllMsgFromLocalAndSvr 的作用域、服务端数据差异、重新建立本地数据后的同步结果，以及 Promise 成功后的快照处理。",
         "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/message/managing-messages/clear-all-message-history；保留本记录与永久重定向用于追溯。",
+        "2026-07-20：由 /sdk/wasm/message/managing-messages/clear-all-message-history 重命名迁入；同步更新中文标题与副标题语义。",
+        "2026-07-20：路径回迁为当前正式地址；恢复为 adapt 发布页，不再作为中间重定向记录。"
       ]
     },
     {
@@ -2560,43 +2385,36 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-      "targetPath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "currentPath": "/sdk/wasm/message/managing-messages/delete-a-message",
+      "targetPath": "/sdk/wasm/message/managing-messages/delete-a-message",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
       "openimSources": [
         "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteMessage.md",
         "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteMessageFromLocalStorage.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/revokeMessage.md",
         "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onConversationChanged.md",
-        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onNewRecvMessageRevoked.md",
         "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
         "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
       ],
       "sdkMethods": [
         "deleteMessageFromLocalStorage",
         "deleteMessages",
-        "deleteUserAllMessagesInConv",
-        "modifyMessage",
-        "revokeMessage"
+        "deleteUserAllMessagesInConv"
       ],
       "sdkEvents": [
         "OnDeleteUserAllMsgsInConv",
-        "OnMessageModified",
-        "OnMsgDeleted",
-        "OnNewRecvMessageRevoked",
-        "OnRecvMessageRevoked"
+        "OnMsgDeleted"
       ],
       "locales": {
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
-              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "2026-07-20：从 delete-or-revoke-a-message 拆出删除能力；对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 复核删除 API 与 OnMsgDeleted / OnDeleteUserAllMsgsInConv 示例",
               "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
             ],
             "reason": null
@@ -2615,14 +2433,100 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；补齐撤回、修改、同步删除和按用户删除的唯一监听与清理示例，逐项说明载荷、clientMsgID/会话合并和重查校准。",
-        "2026-07-15：第二轮逐页复审；删除、本地删除、撤回、修改和批量管控的影响范围及事件载荷保持准确，仅整理单条删除示例。",
-        "2026-07-16：重写消息删除作用域；明确本地删除、当前账号服务端删除和 isSync 同步删除对重装、其他设备及其他用户的不同影响，并将重复的 deleteMessage 从公开正文合并到 deleteMessages 能力。",
-        "2026-07-16：逐页复核参数与结果组织；deleteMessages 的参数表移动到首次调用位置并统一为“参数说明”，本地删除、撤回、修改和按用户删除保留各自上下文。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 delete-or-revoke-a-message 拆出；本页只保留删除相关 API 与事件。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/managing-messages/revoke-a-message",
+      "targetPath": "/sdk/wasm/message/managing-messages/revoke-a-message",
+      "sourceKind": "openim-specific",
+      "disposition": "adapt",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/revokeMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onNewRecvMessageRevoked.md",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "revokeMessage"
+      ],
+      "sdkEvents": [
+        "OnNewRecvMessageRevoked",
+        "OnRecvMessageRevoked"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "published",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-20",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-20：从 delete-or-revoke-a-message 拆出撤回能力；对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 复核 revokeMessage 与 OnNewRecvMessageRevoked 示例",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": null,
+      "notes": [
+        "2026-07-20：由 delete-or-revoke-a-message 拆出；OnNewRecvMessageRevoked 完整监听示例归属本页。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/managing-messages/modify-a-message",
+      "targetPath": "/sdk/wasm/message/managing-messages/modify-a-message",
+      "sourceKind": "openim-specific",
+      "disposition": "adapt",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "modifyMessage"
+      ],
+      "sdkEvents": [
+        "OnMessageModified"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "published",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-20",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-20：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核 modifyMessage 与 OnMessageModified 示例",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": null,
+      "notes": [
+        "2026-07-20：从 delete-or-revoke-a-message 拆出独立修改消息页；OnMessageModified 完整监听示例归属本页。"
       ]
     },
     {
@@ -2735,8 +2639,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-      "targetPath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "currentPath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "targetPath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -2780,15 +2684,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；补齐群回执上报示例及群聊/单聊已读事件的唯一监听与清理代码，说明查询快照、载荷和会话 + clientMsgID 合并。",
-        "2026-07-15：第二轮逐页复审；标题覆盖实际包含的群聊和单聊回执事件，并补充已读成员变化导致分页 offset 失效时的重载策略。",
-        "2026-07-16：逐页复核并补齐单聊回执完整流程；明确阅读端由 markConversationMessageAsRead 产生回执、发送端通过 OnRecvC2CReadReceipt 合并消息状态，同时移除不必要的群成员分页重置建议。",
-        "2026-07-16：逐页复核参数与结果组织；getGroupMessageReaderList 统一使用“参数说明”，补齐类型和必填边界，单聊回执与群聊查询仍保持独立操作。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：统一枚举写法：getGroupMessageReaderList filter 改为 GroupMessageReaderFilter.Read / UnRead。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/message/managing-read-status/manage-group-message-read-receipts 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -2856,8 +2752,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -2880,7 +2776,7 @@
         "zh": {
           "reviewStatus": "published",
           "reviewer": "Codex",
-          "reviewedAt": "2026-07-17",
+          "reviewedAt": "2026-07-20",
           "exampleVerification": {
             "status": "verified",
             "evidence": [
@@ -2903,15 +2799,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；明确历史与会话查询均直接返回快照且不触发事件，分页、事件和重查统一按 conversationID + clientMsgID 合并。",
-        "2026-07-15：第二轮逐页复审；用 SessionType.WorkingGroup 替换群聊魔法数字，修复历史参数标题层级并去除“旧接口”暗示。",
-        "2026-07-15：第二轮跨页复查；把相关页面名称统一为“搜索消息”和“接收消息”。",
-        "2026-07-16：逐页复核参数与结果组织；getAdvancedHistoryMessageList 的游标、数量和视图字段统一为“参数说明”，补齐类型与必填边界。",
-        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
-        "2026-07-17：参数表去掉 ViewType.History 的裸数字补充说明，保持枚举优先。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-message-list 重命名迁入；同步更新中文标题与副标题语义。"
       ]
     },
     {
@@ -3350,8 +3238,8 @@
       ]
     },
     {
-      "currentPath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
-      "targetPath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "currentPath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+      "targetPath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "sourceKind": "openim-specific",
       "disposition": "adapt",
       "sendbirdSource": null,
@@ -3401,11 +3289,7 @@
       },
       "redirectTo": null,
       "notes": [
-        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
-        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
-        "2026-07-15：逐页复核事件写作规范；读取方法建立资料快照，setSelfInfo 成功、OnSelfInfoUpdated 和重新查询按三个阶段分别说明。",
-        "2026-07-15：第二轮逐页复审；资料字段、ex 整值覆盖和全局接收设置保持准确，去除重复结论并补充多端事件与清理时机。",
-        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+        "2026-07-20：由 /sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。"
       ]
     },
     {
@@ -3565,6 +3449,49 @@
         "2026-07-15：第二轮逐页复审；指定好友查询、关系检查、黑名单过滤和公开资料回退场景保持准确，无需调整正文。",
         "2026-07-15：第二轮跨页复查；将请求参数与返回值标题从 H4 调整为 H3，保持标题层级连续。",
         "2026-07-16：逐页复核参数与结果组织；指定好友查询只有两个清晰字段，改为紧邻示例的正文说明，并直接说明 data 的 FriendUserItem[] 结果。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/getting-started/before-you-start",
+      "targetPath": "/sdk/wasm/getting-started/before-you-start",
+      "sourceKind": "openim-specific",
+      "disposition": "adapt",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/initialization/login.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "published",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "not-applicable",
+            "evidence": [],
+            "reason": "概念、导航或接入前提页，不归属需单独执行的 SDK 示例；发布前已完成正文与链接复核。"
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": null,
+      "notes": [
+        "2026-07-17：逐页新增并人工审核公共前置页；集中说明服务地址、可信后端签发用户 Token、浏览器运行资源和敏感凭据边界。",
+        "2026-07-17：该页只建立认证与首条消息共用的准备条件，不归属 SDK 方法或事件；英文仅保留延后发布骨架。",
+        "2026-07-17：发布前深审替换本站不存在的 /docs/guides/quick-deployment/* 死链为 docs.openim.io Docker 部署指南。",
         "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。"
       ]
     },
@@ -4440,7 +4367,7 @@
     },
     {
       "currentPath": "/sdk/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
-      "targetPath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
@@ -4487,7 +4414,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "redirectTo": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
       "notes": [
         "2026-07-14：已按 Sendbird 原页保留 GroupChannelHideParams 四级参数结构；确认 SDK 没有内置归档状态，隐藏会话后不能依赖普通会话列表恢复归档记录。",
         "2026-07-14：该页面已合并到 /sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation；保留本记录用于追溯原 Sendbird 路径、OpenIM 证据和永久重定向。",
@@ -5325,6 +5252,167 @@
       "sdkEvents": []
     },
     {
+      "currentPath": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/hideConversation.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "hideConversation"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；隐藏会话以列表查询校准，ex 归档通过 OnConversationChanged 按 conversationID 合并。",
+        "2026-07-15：第二轮逐页复审；隐藏会话的临时性、ex 归档的整值合并和后端权威索引边界保持准确，无需调整正文。",
+        "2026-07-16：根据用户反馈重新逐页复核；删除基于 ConversationItem.ex 自定义归档的全部说明，只保留 hideConversation 隐藏会话能力，并同步中英文结构标题与导航文案。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：发布前深审补齐 OnConversationChanged 载荷与 conversationID 合并说明。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/conversation/managing-conversations/hide-a-conversation；保留本记录与永久重定向用于追溯。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/setConversation.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/index.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "setConversation"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；setConversation 的 Promise 结果与 OnConversationChanged 增量分开说明，按 conversationID 合并。",
+        "2026-07-15：第二轮逐页复审；删除与属性表重复的四字段说明，收紧 Promise 成功语义，保留统一入口、整值覆盖和消息销毁配置。",
+        "2026-07-16：逐页复核参数与结果组织；将会话字段表明确归入“参数说明”，保留复杂设置对象的集中查阅价值。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：P3 长句润色：拆分认证、环境、通话、设置会话、建群与事件概览中的密集段落。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/conversation/managing-conversations/set-conversation-settings；保留本记录与永久重定向用于追溯。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "targetPath": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getConversationIDBySessionType.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getMultipleConversation.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getOneConversation.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "getConversationIDBySessionType",
+        "getMultipleConversation",
+        "getOneConversation"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；三个会话查询方法均直接使用 Promise 返回值，后续增量变化链接到会话列表事件归属页。",
+        "2026-07-15：第二轮逐页复审；保留首次聊天直接调用 getOneConversation 的场景结论，统一认证页名称并整理查询示例结构。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation；保留本记录与永久重定向用于追溯。"
+      ]
+    },
+    {
       "currentPath": "/sdk/wasm/conversation/synchronizing-conversations/synchronize-conversation-data",
       "targetPath": "/sdk/wasm/conversation/overview-conversation",
       "sourceKind": "openim-specific",
@@ -5379,7 +5467,7 @@
     },
     {
       "currentPath": "/sdk/wasm/conversations/configuring-message-destruction",
-      "targetPath": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "targetPath": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": null,
@@ -5416,7 +5504,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "redirectTo": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "notes": [
         "OpenIM-specific conversation message-destruction capability verified from the pinned SDK snapshot.",
         "2026-07-14：该页面已合并到 /sdk/wasm/conversation/managing-conversations/set-conversation；保留本记录用于追溯原 Sendbird 路径、OpenIM 证据和永久重定向。",
@@ -5502,6 +5590,56 @@
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。",
         "2026-07-15：已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 复核该历史页面的能力边界。",
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/error-codes",
+      "targetPath": "/sdk/wasm/logger",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/errcode.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/initialization/login.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/getAdvancedHistoryMessageList.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/sendMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onConnectFailed.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSyncServerFailed.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onUserTokenExpired.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/logger",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；移除连接、token 与同步事件的重复监听，明确 Promise resolve/reject、连接事件和错误关联日志的边界。",
+        "2026-07-15：第二轮逐页复审；收紧 Promise 错误处理措辞，移除声明式元文案，并为历史消息示例补齐必填 viewType。",
+        "2026-07-17：按要求删除独立错误码页面；诊断日志与 operationID 说明统一归入 /sdk/wasm/logger，并为旧地址保留永久重定向。"
       ]
     },
     {
@@ -6189,8 +6327,53 @@
       "sdkEvents": []
     },
     {
+      "currentPath": "/sdk/wasm/local-data/export-local-database",
+      "targetPath": "/sdk/wasm/local-data/export-local-database",
+      "sourceKind": "openim-specific",
+      "disposition": "remove",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "exportDB"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": null,
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；明确 exportDB 仅通过 Promise 返回 unknown 导出结果、不触发业务事件，并补充运行时校验与失败日志边界。",
+        "2026-07-15：第二轮逐页复审；导出结果类型、安全边界、Promise 结果和不触发业务事件的说明保持准确，无需调整正文。",
+        "2026-07-17：按要求从公开文档删除本地数据库导出页面；固定声明仍保留 exportDB 证据，但公开正文不再描述该方法，也不设置重定向。"
+      ]
+    },
+    {
       "currentPath": "/sdk/wasm/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
-      "targetPath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "targetPath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
@@ -6230,7 +6413,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "redirectTo": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "notes": [
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/message/composing-messages/add-extra-data-to-a-message，保留永久重定向。",
         "2026-07-14：已人工复核该历史页面与固定 WASM 包的能力边界。",
@@ -6309,6 +6492,67 @@
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。"
       ],
       "sdkEvents": []
+    },
+    {
+      "currentPath": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "targetPath": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/createCustomMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/sendMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/setMessageLocalEx.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onRecvNewMessages.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "createCustomMessage",
+        "setMessageLocalEx"
+      ],
+      "sdkEvents": [
+        "OnRecvCustomBusinessMessage"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；补齐自定义业务通知的唯一监听与清理示例，区分消息创建、发送返回、本地扩展和接收事件，并按业务协议幂等键合并。",
+        "2026-07-15：第二轮逐页复审；删除与正文重复的四条类型声明，改为直接说明 CustomMsgParams 字段，并收紧验证清单的成功/失败措辞。",
+        "2026-07-15：第二轮跨页复查；把通用消息接收页的链接名称统一为“接收消息”。",
+        "2026-07-16：根据用户要求重新逐页复核；删除 createAdvancedTextMessage 和高级文本消息说明，结构化共享数据统一使用 createCustomMessage。",
+        "2026-07-16：根据用户反馈再次逐页复核；分别补充 MessageItem.ex 与 localEx 的同步范围、写入时机、完整字符串覆盖规则和适用边界。",
+        "2026-07-16：逐页复核参数与结果组织；createCustomMessage 与 setMessageLocalEx 的多字段对象分别补充操作内参数表，不与后续 sendMessage 参数混合。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/message/composing-messages/custom-message-and-extra-data；保留本记录与永久重定向用于追溯。"
+      ]
     },
     {
       "currentPath": "/sdk/wasm/message/listing-changelogs/list-changelogs-of-messages",
@@ -6500,7 +6744,7 @@
     },
     {
       "currentPath": "/sdk/wasm/message/managing-a-message/delete-a-message",
-      "targetPath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "targetPath": "/sdk/wasm/message/managing-messages/delete-a-message",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/message/managing-a-message/delete-a-message",
@@ -6540,7 +6784,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "redirectTo": "/sdk/wasm/message/managing-messages/delete-a-message",
       "notes": [
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/message/managing-messages/delete-or-revoke-a-message，保留永久重定向。",
         "2026-07-14：已人工复核该历史页面与固定 WASM 包的能力边界。",
@@ -6911,6 +7155,123 @@
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。"
       ],
       "sdkEvents": []
+    },
+    {
+      "currentPath": "/sdk/wasm/message/managing-messages/clear-all-message-history",
+      "targetPath": "/sdk/wasm/message/managing-messages/clear-message-history",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/clearConversationAndDeleteAllMsg.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/deleteConversationAndDeleteAllMsg.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteAllMsgFromLocal.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteAllMsgFromLocalAndSvr.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onConversationChanged.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "deleteAllMsgFromLocal",
+        "deleteAllMsgFromLocalAndSvr"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/managing-messages/clear-message-history",
+      "notes": [
+        "2026-07-20：由 /sdk/wasm/message/managing-messages/clear-message-history 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：路径与标题重命名为 /sdk/wasm/message/managing-messages/clear-message-history；保留永久重定向。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "targetPath": "/sdk/wasm/message/managing-messages/delete-a-message",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/deleteMessageFromLocalStorage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/revokeMessage.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onConversationChanged.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onNewRecvMessageRevoked.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "deleteMessageFromLocalStorage",
+        "deleteMessages",
+        "deleteUserAllMessagesInConv",
+        "revokeMessage"
+      ],
+      "sdkEvents": [
+        "OnDeleteUserAllMsgsInConv",
+        "OnMsgDeleted",
+        "OnNewRecvMessageRevoked",
+        "OnRecvMessageRevoked"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/managing-messages/delete-a-message",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；补齐撤回、修改、同步删除和按用户删除的唯一监听与清理示例，逐项说明载荷、clientMsgID/会话合并和重查校准。",
+        "2026-07-15：第二轮逐页复审；删除、本地删除、撤回、修改和批量管控的影响范围及事件载荷保持准确，仅整理单条删除示例。",
+        "2026-07-16：重写消息删除作用域；明确本地删除、当前账号服务端删除和 isSync 同步删除对重装、其他设备及其他用户的不同影响，并将重复的 deleteMessage 从公开正文合并到 deleteMessages 能力。",
+        "2026-07-16：逐页复核参数与结果组织；deleteMessages 的参数表移动到首次调用位置并统一为“参数说明”，本地删除、撤回、修改和按用户删除保留各自上下文。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：将 modifyMessage 与 OnMessageModified 拆到独立页 /sdk/wasm/message/managing-messages/modify-a-message；本页只保留删除与撤回。",
+        "2026-07-20：拆分为 /sdk/wasm/message/managing-messages/delete-a-message 与 /sdk/wasm/message/managing-messages/revoke-a-message；本记录保留永久重定向到删除页。"
+      ]
     },
     {
       "currentPath": "/sdk/wasm/message/managing-pinned-messages-in-group-channels/list-pinned-messages",
@@ -7794,7 +8155,7 @@
     },
     {
       "currentPath": "/sdk/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
-      "targetPath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "targetPath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/message/managing-read-status-in-a-group-channel/get-read-status",
@@ -7830,7 +8191,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "redirectTo": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
       "notes": [
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/message/managing-read-status/manage-group-message-read-receipts，保留永久重定向。",
         "2026-07-14：已人工复核该历史页面与固定 WASM 包的能力边界。",
@@ -7973,6 +8334,64 @@
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。"
       ],
       "sdkEvents": []
+    },
+    {
+      "currentPath": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "targetPath": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/markConversationMessageAsRead.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "getGroupMessageReaderList",
+        "sendGroupMessageReadReceipt"
+      ],
+      "sdkEvents": [
+        "OnRecvC2CReadReceipt",
+        "OnRecvGroupReadReceipt"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；补齐群回执上报示例及群聊/单聊已读事件的唯一监听与清理代码，说明查询快照、载荷和会话 + clientMsgID 合并。",
+        "2026-07-15：第二轮逐页复审；标题覆盖实际包含的群聊和单聊回执事件，并补充已读成员变化导致分页 offset 失效时的重载策略。",
+        "2026-07-16：逐页复核并补齐单聊回执完整流程；明确阅读端由 markConversationMessageAsRead 产生回执、发送端通过 OnRecvC2CReadReceipt 合并消息状态，同时移除不必要的群成员分页重置建议。",
+        "2026-07-16：逐页复核参数与结果组织；getGroupMessageReaderList 统一使用“参数说明”，补齐类型和必填边界，单聊回执与群聊查询仍保持独立操作。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：统一枚举写法：getGroupMessageReaderList filter 改为 GroupMessageReaderFilter.Read / UnRead。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/message/managing-read-status/manage-message-read-receipts；保留本记录与永久重定向用于追溯。"
+      ]
     },
     {
       "currentPath": "/sdk/wasm/message/managing-scheduled-messages-in-group-channel/cancel-a-scheduled-message",
@@ -8677,7 +9096,7 @@
     },
     {
       "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
-      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/message/retrieving-messages/retrieve-a-list-of-messages",
@@ -8719,7 +9138,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "redirectTo": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
       "notes": [
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/message/retrieving-messages/retrieve-message-list，保留永久重定向。",
         "2026-07-14：已人工复核该历史页面与固定 WASM 包的能力边界。",
@@ -8746,7 +9165,7 @@
     },
     {
       "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-a-message",
-      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/message/retrieving-messages/retrieve-a-message",
@@ -8785,7 +9204,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "redirectTo": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
       "notes": [
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/message/retrieving-messages/retrieve-messages，保留永久重定向。",
         "2026-07-14：已人工复核该历史页面与固定 WASM 包的能力边界。",
@@ -8808,6 +9227,174 @@
       "sdkEvents": [
         "OnNewRecvMessageRevoked",
         "OnSyncServerFinish"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getConversationIDBySessionType.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getOneConversation.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/getAdvancedHistoryMessageList.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onRecvNewMessages.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSyncServerFinish.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "getAdvancedHistoryMessageList",
+        "getAdvancedHistoryMessageListReverse",
+        "getHistoryMessageListReverse"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；明确历史与会话查询均直接返回快照且不触发事件，分页、事件和重查统一按 conversationID + clientMsgID 合并。",
+        "2026-07-15：第二轮逐页复审；用 SessionType.WorkingGroup 替换群聊魔法数字，修复历史参数标题层级并去除“旧接口”暗示。",
+        "2026-07-15：第二轮跨页复查；把相关页面名称统一为“搜索消息”和“接收消息”。",
+        "2026-07-16：逐页复核参数与结果组织；getAdvancedHistoryMessageList 的游标、数量和视图字段统一为“参数说明”，补齐类型与必填边界。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：参数表去掉 ViewType.History 的裸数字补充说明，保持枚举优先。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：路径与标题重命名为 /sdk/wasm/message/retrieving-messages/retrieve-message-history；保留永久重定向。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getOneConversation.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/findMessageList.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onNewRecvMessageRevoked.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSyncServerFinish.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "fetchSurroundingMessages",
+        "findMessageList"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；明确三类查询直接返回快照且不触发事件，按 conversationID + clientMsgID 定位，并链接同步和撤回事件归属页。",
+        "2026-07-15：第二轮逐页复审；修正把 ConversationItem.latestMsg 当作 MessageItem 直接取字段的问题，补充安全解析降级，并用枚举替换魔法数字。",
+        "2026-07-15：第二轮跨页复查；把相关页面名称统一为“搜索消息”和“接收消息”。",
+        "2026-07-16：逐页复核参数与结果组织；拆除混合 findMessageList 与 fetchSurroundingMessages 的页面级参数表，在两个操作内分别说明真实参数和返回结构。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：读取消息上下文补充：搜索命中可直接作 startMessage，且不要用 findMessageList 代替周边查询。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/message/retrieving-messages/retrieve-specified-messages；保留本记录与永久重定向用于追溯。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/message/retrieving-messages/retrieve-specified-messages",
+      "targetPath": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/conversation/getOneConversation.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/message/findMessageList.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onNewRecvMessageRevoked.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSyncServerFinish.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "fetchSurroundingMessages",
+        "findMessageList"
+      ],
+      "sdkEvents": [],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "notes": [
+        "2026-07-20：由 /sdk/wasm/message/retrieving-messages/retrieve-messages 重命名迁入；审核状态继承原路径记录，并按新路径继续维护。",
+        "2026-07-20：路径与标题重命名为 /sdk/wasm/message/retrieving-messages/locate-messages-by-id；保留永久重定向。"
       ]
     },
     {
@@ -10761,7 +11348,7 @@
     },
     {
       "currentPath": "/sdk/wasm/user/managing-user-metadata/manage-user-metadata",
-      "targetPath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "targetPath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": null,
@@ -10809,7 +11396,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "redirectTo": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "notes": [
         "2026-07-15：OpenIM WASM 没有独立用户元数据 API，该页面只是重复组合当前用户、好友关系和公开用户资料中的 ex 字段。",
         "2026-07-15：当前用户 ex 的完整值覆盖规则已合并到更新用户资料；好友 ex 和公开资料 ex 分别由更新好友、获取指定用户资料页面说明，旧地址保留永久重定向。",
@@ -10821,7 +11408,7 @@
     },
     {
       "currentPath": "/sdk/wasm/user/moderating-a-user/ban-and-unban-a-user",
-      "targetPath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "targetPath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "sourceKind": "openim-specific",
       "disposition": "merge",
       "sendbirdSource": "https://sendbird.com/docs/chat/sdk/v4/javascript/user/moderating-a-user/ban-and-unban-a-user",
@@ -10858,7 +11445,7 @@
           }
         }
       },
-      "redirectTo": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "redirectTo": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "notes": [
         "OpenIM uses blacklist relationships rather than a separate global user-ban SDK concept.",
         "2026-07-14：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members，保留永久重定向。",
@@ -10878,6 +11465,65 @@
         "2026-07-15：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members，保留永久重定向。",
         "2026-07-15：已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 复核该历史页面的能力边界。",
         "2026-07-15：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/user/moderating-a-user/block-and-unblock-other-members，保留永久重定向。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "targetPath": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/group/changeGroupMemberMute.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/relation/addBlack.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/relation/removeBlack.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onBlackAdded.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onBlackDeleted.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts"
+      ],
+      "sdkMethods": [
+        "addBlack",
+        "removeBlack"
+      ],
+      "sdkEvents": [
+        "OnBlackAdded",
+        "OnBlackDeleted"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；拉黑和取消拉黑分别通过黑名单新增、删除事件按 userID 合并，查询快照仍由列表页负责。",
+        "2026-07-15：第二轮逐页复审；黑名单单向关系、消息非对称限制、Promise 与新增/删除事件边界保持准确，仅整理示例结构。",
+        "2026-07-17：中文正文文案润色（P0/P1/P2）：修正易误解表述，统一术语与中英混排，并精简重复说明。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/user/moderating-a-user/block-or-unblock-users；保留本记录与永久重定向用于追溯。"
       ]
     },
     {
@@ -11117,6 +11763,66 @@
         "2026-07-15：固定 WASM 包没有与该 Sendbird 主题对应的公开能力，页面移除且不设置重定向。",
         "2026-07-15：已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 复核该历史页面的能力边界。",
         "2026-07-15：旧页面中的真实 OpenIM 能力已合并到 /sdk/wasm/user/retrieving-users/retrieve-users，保留永久重定向。"
+      ]
+    },
+    {
+      "currentPath": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "targetPath": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+      "sourceKind": "openim-specific",
+      "disposition": "merge",
+      "sendbirdSource": null,
+      "openimSources": [
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/initialization/login.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/user/getSelfUserInfo.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/user/setSelfInfo.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onSelfUserInfoUpdate.md",
+        "https://github.com/openimsdk/openim-sdk-core/blob/9267a252faab02bbc8ffab6223e6ae2341a0f7c9/wasm/cmd/main.go",
+        "https://github.com/OpenIMSDK/Open-IM-SDK-Web-Wasm/blob/d99f708a17808e0aab50b034dce51cfbb1e1e9d8/src/sdk/index.ts",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/relation/getSpecifiedFriendsInfo.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/relation/updateFriends.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/api/user/getUsersInfo.md",
+        "https://github.com/openimsdk/docs/blob/a177b296f1abe53ba2cf7d897acf86467a45e7c6/docs/sdks/callback/onFriendInfoChanged.md"
+      ],
+      "sdkMethods": [
+        "getSelfUserInfo",
+        "setSelfInfo"
+      ],
+      "sdkEvents": [
+        "OnSelfInfoUpdated"
+      ],
+      "locales": {
+        "zh": {
+          "reviewStatus": "api-verified",
+          "reviewer": "Codex",
+          "reviewedAt": "2026-07-17",
+          "exampleVerification": {
+            "status": "verified",
+            "evidence": [
+              "2026-07-17：对照 @openim/wasm-client-sdk@3.8.5-hotfix.0 声明复核页面示例中的 API、参数与事件",
+              "scripts/check-wasm-sdk-examples.mjs 与 WASM ownership/structure 测试通过"
+            ],
+            "reason": null
+          }
+        },
+        "en": {
+          "reviewStatus": "deferred",
+          "reviewer": null,
+          "reviewedAt": null,
+          "exampleVerification": {
+            "status": "pending",
+            "evidence": [],
+            "reason": null
+          }
+        }
+      },
+      "redirectTo": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
+      "notes": [
+        "2026-07-15：中文正文已按 @openim/wasm-client-sdk@3.8.5-hotfix.0 的固定声明逐项核对；页面组织参考 Sendbird，能力与数据模型以 OpenIM 为准。",
+        "2026-07-15：新增 API、事件、参数、类型以及概念与能力边界已人工复核，英文内容待中文全量完成后处理。",
+        "2026-07-15：逐页复核事件写作规范；读取方法建立资料快照，setSelfInfo 成功、OnSelfInfoUpdated 和重新查询按三个阶段分别说明。",
+        "2026-07-15：第二轮逐页复审；资料字段、ex 整值覆盖和全局接收设置保持准确，去除重复结论并补充多端事件与清理时机。",
+        "2026-07-17：中文正文完成发布前深审后批量升至 published；示例证据按固定 WASM 声明与仓库示例/归属检查记录。",
+        "2026-07-20：页面路径重命名为 /sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile；保留本记录与永久重定向用于追溯。"
       ]
     },
     {

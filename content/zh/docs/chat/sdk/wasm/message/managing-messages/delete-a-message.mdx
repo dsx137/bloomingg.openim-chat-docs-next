@@ -1,10 +1,12 @@
 ---
-title: '删除或撤回消息'
-description: '使用 OpenIM SDK 删除或撤回消息。'
-sourcePath: '/sdk/wasm/message/managing-messages/delete-or-revoke-a-message'
+title: '删除消息'
+description: '使用 OpenIM SDK 删除本地消息、当前账号保存的消息，或按用户批量删除会话消息。'
+sourcePath: '/sdk/wasm/message/managing-messages/delete-a-message'
 ---
 
-在 OpenIM 中，删除和撤回是不同的产品动作。`deleteMessageFromLocalStorage()` 只删除当前设备上的本地消息；`deleteMessages()` 可以删除当前账号在服务端保存的消息，并通过 `isSync` 决定是否请求把删除动作同步到其他客户端；`revokeMessage()` 则让会话成员看到消息已撤回。
+在 OpenIM 中，删除影响消息是否仍对当前账号可见，不会让其他会话成员看到“消息已撤回”。需要展示撤回态时，使用[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。修改已发送消息内容见[修改消息](/sdk/wasm/message/managing-messages/modify-a-message)。
+
+`deleteMessageFromLocalStorage()` 只删除当前设备上的本地消息；`deleteMessages()` 可以删除当前账号在服务端保存的消息，并通过 `isSync` 决定是否请求把删除动作同步到其他客户端；`deleteUserAllMessagesInConv()` 按用户批量删除会话中的消息。
 
 ## 只删除当前设备上的本地消息
 
@@ -49,44 +51,6 @@ removeMessageFromCurrentList(clientMsgID);
 
 该调用不会删除当前账号其他设备上已经同步到本地的消息，也不会删除会话中其他用户已经收到的消息。它不是撤回，也不能用来让其他成员看到“消息已删除”。
 
-## 撤回消息
-
-如果界面需要让其他会话成员看到“消息已撤回”，不要用普通删除替代撤回。调用 `revokeMessage()` 后，在线客户端会收到 `CbEvents.OnNewRecvMessageRevoked`，接收端应根据事件里的 `clientMsgID` 把对应消息更新为撤回态。
-
-```ts
-const { data } = await OpenIM.revokeMessage({
-  conversationID,
-  clientMsgID,
-});
-
-markMessageRevoked(data?.clientMsgID ?? clientMsgID);
-```
-
-SDK 同时保留 `CbEvents.OnRecvMessageRevoked`。它是旧的单条撤回事件名；新代码优先监听 `OnNewRecvMessageRevoked`。维护既有项目时，应先确认当前部署实际触发的事件；如果只能收到旧事件，则用旧事件名替换下方注册项并复用同一个处理器，不要同时监听两个名称后重复合并同一次撤回。
-
-## 修改消息
-
-`modifyMessage()` 接收消息所在的 `conversationID` 和修改后的完整 `MessageItem`：
-
-```ts
-const { data: modifiedMessage } = await OpenIM.modifyMessage({
-  conversationID,
-  message: {
-    ...message,
-    textElem: {
-      ...message.textElem,
-      content: editedText,
-    },
-  },
-});
-
-replaceMessage(modifiedMessage);
-```
-
-该方法不是局部更新。应从当前消息复制并只修改目标内容，保留 `clientMsgID` 和其他消息字段。允许修改的发送者、时间窗口和消息类型由 OpenIM 服务端校验；失败时不要只在本地保留编辑结果。
-
-其他客户端会通过 `CbEvents.OnMessageModified` 收到修改后的 `MessageItem`，应按 `clientMsgID` 替换现有消息。
-
 ## 同步删除到其他客户端
 
 需要把删除动作同步到其他客户端时，将 `isSync` 设为 `true`：
@@ -114,21 +78,15 @@ await OpenIM.deleteUserAllMessagesInConv({
 
 不要把它放在普通单条消息菜单中。调用权限和适用会话类型由服务端校验；执行前应二次确认目标会话和用户。其他客户端通过 `CbEvents.OnDeleteUserAllMsgsInConv` 获得 `{ conversationID, userID }`，再移除对应消息或重新读取历史记录。
 
-## 监听消息变更
+## 监听删除相关事件
 
-删除、撤回和修改 API 的 Promise 成功表示服务端已完成当前请求。调用端可以先用返回值或请求参数更新当前列表，随后把事件作为幂等增量处理；事件也可能来自其他客户端或其他有权限的用户。
+删除 API 的 Promise 成功表示服务端已完成当前请求。调用端可以先用返回值或请求参数更新当前列表，随后把事件作为幂等增量处理；事件也可能来自其他客户端或其他有权限的用户。
 
-本页是撤回、修改、同步删除和按用户批量删除事件的完整监听示例归属页：
+本页是 `OnMsgDeleted` 和 `OnDeleteUserAllMsgsInConv` 的完整监听示例归属页。撤回事件见[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。
 
 ```ts
 import { CbEvents } from '@openim/wasm-client-sdk';
 
-const handleMessageRevoked = ({ data }) => {
-  markMessageRevoked(data.clientMsgID);
-};
-const handleMessageModified = ({ data }) => {
-  replaceMessage(resolveConversationID(data), data.clientMsgID, data);
-};
 const handleMessageDeleted = ({ data }) => {
   removeMessage(resolveConversationID(data), data.clientMsgID);
 };
@@ -136,36 +94,32 @@ const handleUserMessagesDeleted = ({ data }) => {
   removeUserMessages(data.conversationID, data.userID);
 };
 
-OpenIM.on(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
-OpenIM.on(CbEvents.OnMessageModified, handleMessageModified);
 OpenIM.on(CbEvents.OnMsgDeleted, handleMessageDeleted);
 OpenIM.on(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
 
-function removeMessageChangeListeners() {
-  OpenIM.off(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
-  OpenIM.off(CbEvents.OnMessageModified, handleMessageModified);
+function removeDeleteListeners() {
   OpenIM.off(CbEvents.OnMsgDeleted, handleMessageDeleted);
   OpenIM.off(CbEvents.OnDeleteUserAllMsgsInConv, handleUserMessagesDeleted);
 }
 ```
 
-`OnNewRecvMessageRevoked` 的 `data` 是 `RevokedInfo`；`OnMessageModified` 和 `OnMsgDeleted` 的 `data` 是单个 `MessageItem`；`OnDeleteUserAllMsgsInConv` 的 `data` 是 `{ conversationID, userID }`。消息使用 `clientMsgID` 合并，并结合消息路由字段确定所属会话；按用户删除则直接使用事件中的 `conversationID:userID`。组件卸载、退出登录或切换账号时调用 `removeMessageChangeListeners()`；重新登录后的消息变化由消息事件同步。
+`OnMsgDeleted` 的 `data` 是单个 `MessageItem`；`OnDeleteUserAllMsgsInConv` 的 `data` 是 `{ conversationID, userID }`。消息使用 `clientMsgID` 合并，并结合消息路由字段确定所属会话；按用户删除则直接使用事件中的 `conversationID:userID`。组件卸载、退出登录或切换账号时调用 `removeDeleteListeners()`；重新登录后的消息变化由消息事件同步。
 
 ## 删除结果
 
-删除、撤回和本地删除调用失败时，Promise 会被拒绝。成功分支根据返回数据和后续事件更新界面；失败日志中记录错误对象、`conversationID` 和 `clientMsgID`。
+删除和本地删除调用失败时，Promise 会被拒绝。成功分支根据返回数据和后续事件更新界面；失败日志中记录错误对象、`conversationID` 和 `clientMsgID`。
 
 | 用户动作                       | API                               | 结果                                                                    |
 | ------------------------------ | --------------------------------- | ----------------------------------------------------------------------- |
 | 仅删除当前设备上的本地消息     | `deleteMessageFromLocalStorage()` | 服务端仍保留消息，重新建立本地数据库后还会再次同步。                    |
 | 删除当前账号保存的消息         | `deleteMessages({ isSync: false })` | 同时删除本地和当前账号的服务端消息，不影响其他客户端已经保存的副本。  |
 | 请求把删除动作同步到其他客户端 | `deleteMessages({ isSync: true })`  | 通过服务端向其他客户端同步删除，实际范围和权限以服务端校验为准。      |
-| 让会话成员看到撤回态           | `revokeMessage()`                 | 通过 `OnNewRecvMessageRevoked` 同步撤回展示。                           |
-| 修改消息内容                   | `modifyMessage()`                 | 提交修改后的完整消息，并通过 `OnMessageModified` 同步。                 |
 | 删除某用户的全部会话消息       | `deleteUserAllMessagesInConv()`   | 高影响管控操作，按会话和用户批量处理。                                  |
 
 ## 相关页面
 
+- [撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)
+- [修改消息](/sdk/wasm/message/managing-messages/modify-a-message)
 - [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
-- [获取指定消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

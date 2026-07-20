@@ -1,6 +1,6 @@
 ---
 title: '搜索消息'
-description: '使用 OpenIM SDK 搜索消息。'
+description: '在本地已同步消息中按关键词与会话条件搜索。'
 sourcePath: '/sdk/wasm/message/searching-messages/search-messages'
 ---
 
@@ -127,9 +127,9 @@ const toSearchRows = (result: SearchMessageResult) => {
 
 ## 处理搜索结果变化
 
-搜索命中的消息可能在页面打开后被撤回、删除或由新同步数据补充。聊天页应按[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)和[删除或撤回消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)中的统一事件处理器更新结果；本页只负责搜索查询和分页，不重复注册消息事件。
+搜索命中的消息可能在页面打开后被撤回、删除或由新同步数据补充。聊天页应按[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)、[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)和[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)中的统一事件处理器更新结果；本页只负责搜索查询和分页，不重复注册消息事件。
 
-跳转到某条搜索结果时，使用结果中的 `conversationID` 和 `clientMsgID` 定位目标会话与消息。需要展示该消息前后的聊天记录时，把搜索命中的 `MessageItem` 作为 `startMessage`，调用 `fetchSurroundingMessages()` 读取上下文；不要用 `findMessageList()` 去拼附近的聊天记录。`findMessageList()` 只适合按 ID 取回单条或多条消息本身，周边上下文的参数、示例和返回结构见[获取指定消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)。
+跳转到某条搜索结果时，使用结果中的 `conversationID` 和 `clientMsgID` 定位目标会话与消息。需要展示该消息前后的聊天记录时，把搜索命中的 `MessageItem` 作为 `startMessage`，调用 `fetchSurroundingMessages()` 读取上下文；不要用 `findMessageList()` 去拼附近的聊天记录。`findMessageList()` 只适合按 ID 取回单条或多条消息本身，周边上下文的参数、示例和返回结构见[按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)。
 
 ```ts
 import { ViewType } from '@openim/wasm-client-sdk';
@@ -148,6 +148,6 @@ renderMessages(surrounding.messageList);
 
 ## 相关页面
 
-- [获取单条消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)
-- [获取消息列表](/sdk/wasm/message/retrieving-messages/retrieve-message-list)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)
+- [获取消息历史](/sdk/wasm/message/retrieving-messages/retrieve-message-history)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

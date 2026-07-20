@@ -1,7 +1,7 @@
 ---
-title: '获取指定消息'
-description: '使用 OpenIM SDK 获取指定消息。'
-sourcePath: '/sdk/wasm/message/retrieving-messages/retrieve-messages'
+title: '按 ID 定位消息'
+description: '按 conversationID 与 clientMsgID 定位消息，读取前后上下文，并从会话记录取最新消息预览。'
+sourcePath: '/sdk/wasm/message/retrieving-messages/locate-messages-by-id'
 ---
 
 在消息列表、搜索结果、引用消息或通知跳转场景中，你可以使用 `conversationID` 和消息的 `clientMsgID` 定位一条 OpenIM 消息。需要展示该消息前后的消息内容时，再以已获取的 `MessageItem` 作为起点读取周边消息。
@@ -74,7 +74,7 @@ Promise 成功后，`data.messageList` 是包含起点前后消息的 `MessageIt
 
 `findMessageList()` 返回的匹配结果可能因本地缓存尚未同步、消息已删除或撤回而为空。消息页打开期间可以监听 `CbEvents.OnSyncServerFinish` 后重试定位，也可以监听 `CbEvents.OnNewRecvMessageRevoked` 更新撤回态。
 
-同步生命周期事件的完整监听和清理代码见[事件概览](/sdk/wasm/events/overview-events)，撤回事件见[删除或撤回消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)。本页不重复注册这些事件。
+同步生命周期事件的完整监听和清理代码见[事件概览](/sdk/wasm/events/overview-events)，撤回事件见[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。本页不重复注册这些事件。
 
 ## 获取群聊最新消息
 
@@ -112,6 +112,6 @@ renderConversationPreview({
 
 ## 相关页面
 
-- [获取消息列表](/sdk/wasm/message/retrieving-messages/retrieve-message-list)
+- [获取消息历史](/sdk/wasm/message/retrieving-messages/retrieve-message-history)
 - [搜索消息](/sdk/wasm/message/searching-messages/search-messages)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

@@ -166,7 +166,7 @@ test('every active WASM route title has a Chinese structural label', () => {
     readFileSync('data/structure/wasm-navigation-labels.json', 'utf8'),
   );
 
-  assert.equal(routes.length, 58);
+  assert.equal(routes.length, 60);
   for (const route of routes) {
     const title = resolveLocalizedRouteTitle(route.title, navigationLabels);
     assert.match(title ?? '', /[\u3400-\u9fff]/, route.path);

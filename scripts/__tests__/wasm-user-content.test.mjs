@@ -52,7 +52,7 @@ test('friend search documents required switches and the data type', () => {
 
 test('blacklist pages use real fields and explain asymmetric message behavior', () => {
   const list = read('moderating-a-user/retrieve-a-list-of-blocked-users');
-  const operations = read('moderating-a-user/block-and-unblock-other-members');
+  const operations = read('moderating-a-user/block-or-unblock-users');
 
   assert.doesNotMatch(list, /\| `gender`/);
   assert.match(operations, /对方不能向当前用户发送消息/);
@@ -92,7 +92,7 @@ test('online status documents subscription without exposing getUserStatus', () =
 });
 
 test('profile examples cover extension ownership and whole-value replacement', () => {
-  const source = read('retrieving-and-updating-user-information/update-user-profile');
+  const source = read('retrieving-and-updating-user-information/retrieve-and-update-self-profile');
 
   assert.match(source, /## 更新扩展字段/);
   assert.match(source, /整体覆盖/);
@@ -100,7 +100,7 @@ test('profile examples cover extension ownership and whole-value replacement', (
 });
 
 test('profile updates restrict editable fields and separate refresh errors', () => {
-  const source = read('retrieving-and-updating-user-information/update-user-profile');
+  const source = read('retrieving-and-updating-user-information/retrieve-and-update-self-profile');
 
   assert.doesNotMatch(source, /const payload: PartialUserItem/);
   assert.match(source, /type EditableSelfProfile/);
@@ -112,7 +112,7 @@ test('user overview links every user-owned workflow and leaves group moderation 
 
   assert.match(source, /管理好友申请/);
   assert.match(source, /更新或删除好友/);
-  assert.match(source, /更新用户资料/);
+  assert.match(source, /获取和更新当前用户资料/);
   assert.doesNotMatch(source, /查询群内被禁言成员/);
 });
 
@@ -128,10 +128,10 @@ test('every user-page event example includes matching cleanup', () => {
   const pages = [
     'managing-friends/manage-friend-requests',
     'managing-friends/update-or-delete-friends',
-    'moderating-a-user/block-and-unblock-other-members',
+    'moderating-a-user/block-or-unblock-users',
     'moderating-a-user/retrieve-a-list-of-blocked-users',
     'retrieving-and-updating-user-information/retrieve-the-online-status-of-a-user',
-    'retrieving-and-updating-user-information/update-user-profile',
+    'retrieving-and-updating-user-information/retrieve-and-update-self-profile',
     'retrieving-users/retrieve-a-list-of-friends',
     'retrieving-users/retrieve-friend-information',
   ];
@@ -180,7 +180,7 @@ test('user-page audit records match the reviewed content', () => {
 
   const selfInfoPages = [
     'overview-user',
-    'retrieving-and-updating-user-information/update-user-profile',
+    'retrieving-and-updating-user-information/retrieve-and-update-self-profile',
   ];
   for (const path of selfInfoPages) {
     assert.ok(

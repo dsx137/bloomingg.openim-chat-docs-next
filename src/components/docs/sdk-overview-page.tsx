@@ -48,7 +48,7 @@ const copy = {
       {
         title: 'Read receipts',
         description: 'Show who has read group messages and update receipt state from SDK events.',
-        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        href: '/sdk/wasm/message/managing-read-status/manage-message-read-receipts',
         visual: 'receipt',
       },
       {
@@ -66,7 +66,7 @@ const copy = {
       {
         title: 'Message history',
         description: 'Page through local and synced history with stable message cursors.',
-        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-list',
+        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-history',
         visual: 'history',
       },
     ],
@@ -128,7 +128,7 @@ const copy = {
       {
         title: '已读回执',
         description: '查询群消息已读成员，并通过回执事件更新消息气泡状态。',
-        href: '/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts',
+        href: '/sdk/wasm/message/managing-read-status/manage-message-read-receipts',
         visual: 'receipt',
       },
       {
@@ -146,7 +146,7 @@ const copy = {
       {
         title: '历史消息',
         description: '使用会话 ID 和消息游标读取本地及同步后的历史消息。',
-        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-list',
+        href: '/sdk/wasm/message/retrieving-messages/retrieve-message-history',
         visual: 'history',
       },
     ],

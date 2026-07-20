@@ -1,6 +1,6 @@
 ---
 title: '清理消息历史'
-description: '使用 OpenIM SDK 清理消息历史。'
+description: '清理单个会话或当前账号的全部消息历史，并区分本地与服务端清理范围。'
 sourcePath: '/sdk/wasm/message/managing-messages/clear-message-history'
 ---
 
@@ -21,7 +21,7 @@ async function clearConversationHistory(conversationID: string) {
 }
 ```
 
-如果业务入口只有目标用户 ID 或群组 ID，应先按对应会话类型取得 `ConversationItem`，再把其中的 `conversationID` 传给上述方法。获取单聊和群聊会话的方式见[获取会话](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations)，本页不重复展开会话 ID 的获取流程。
+如果业务入口只有目标用户 ID 或群组 ID，应先按对应会话类型取得 `ConversationItem`，再把其中的 `conversationID` 传给上述方法。获取单聊和群聊会话的方式见[获取会话](/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation)，本页不重复展开会话 ID 的获取流程。
 
 ### 调用后的状态变化
 
@@ -63,6 +63,6 @@ resetAllMessageSnapshots();
 
 ## 相关页面
 
-- [删除消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)
+- [删除消息](/sdk/wasm/message/managing-messages/delete-a-message)
 - [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)
 - [发送消息](/sdk/wasm/message/sending-messages/send-a-message)

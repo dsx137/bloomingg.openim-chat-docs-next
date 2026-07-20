@@ -56,7 +56,7 @@ OpenIM SDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本
 
 历史消息通过 `getAdvancedHistoryMessageList()` 按 `conversationID` 分页读取。第一页把 `startClientMsgID` 设为空字符串；继续加载时，使用边界消息的 `clientMsgID` 作为下一页游标。
 
-读取列表见[获取消息列表](/sdk/wasm/message/retrieving-messages/retrieve-message-list)，定位单条消息见[获取单条消息](/sdk/wasm/message/retrieving-messages/retrieve-messages)。
+读取列表见[获取消息历史](/sdk/wasm/message/retrieving-messages/retrieve-message-history)，定位单条消息见[按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)。
 
 ### 搜索消息
 
@@ -66,9 +66,9 @@ OpenIM SDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本
 
 ### 管理消息
 
-消息发送后可以按业务需要执行转发、合并、删除、撤回、清空历史和发送输入状态等操作。撤回类变化会通过 `CbEvents.OnNewRecvMessageRevoked` 通知接收端，消息列表应使用 `clientMsgID` 更新对应气泡状态。
+消息发送后可以按业务需要执行转发、合并、删除、撤回、修改、清空历史和发送输入状态等操作。撤回类变化会通过 `CbEvents.OnNewRecvMessageRevoked` 通知接收端；修改类变化会通过 `CbEvents.OnMessageModified` 同步。消息列表应使用 `clientMsgID` 更新对应气泡状态。
 
-相关能力见[转发或合并消息](/sdk/wasm/message/managing-messages/forward-or-merge-a-message)、[删除或撤回消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)、[置顶会话消息](/sdk/wasm/message/managing-messages/pin-conversation-messages)、[清理消息历史](/sdk/wasm/message/managing-messages/clear-message-history)和[管理输入状态](/sdk/wasm/message/composing-messages/manage-typing-status)。
+相关能力见[转发或合并消息](/sdk/wasm/message/managing-messages/forward-or-merge-a-message)、[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)、[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)、[修改消息](/sdk/wasm/message/managing-messages/modify-a-message)、[置顶会话消息](/sdk/wasm/message/managing-messages/pin-conversation-messages)、[清理消息历史](/sdk/wasm/message/managing-messages/clear-message-history)和[管理输入状态](/sdk/wasm/message/composing-messages/manage-typing-status)。
 
 音频需要先转换为文字时，先通过 `speechToTextCapabilities()` 查询当前服务限制，再调用 `speechToText()`。完整流程见[将音频转为文字](/sdk/wasm/message/composing-messages/transcribe-audio)。
 
@@ -76,7 +76,7 @@ OpenIM SDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本
 
 会话未读数通过 `markConversationMessageAsRead(conversationID)` 清理。群消息需要展示成员级已读情况时，可以发送群消息已读回执，再查询已读或未读成员列表。
 
-相关能力见[将消息标记为已读](/sdk/wasm/conversation/managing-conversations/manage-read-status)和[获取已读状态](/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts)。
+相关能力见[管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)和[管理消息已读回执](/sdk/wasm/message/managing-read-status/manage-message-read-receipts)。
 
 ### 提及其他用户
 
@@ -90,14 +90,14 @@ OpenIM SDK 的消息能力围绕 `MessageItem` 展开。普通消息以及由本
 
 相关能力见[管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)。
 
-### 为消息添加附加数据
+### 自定义消息与扩展数据
 
 需要同步给其他成员的附加数据，发送前写入自定义消息；只影响当前客户端展示的数据，写入 `localEx`。
 
-相关流程见[为消息添加附加数据](/sdk/wasm/message/composing-messages/add-extra-data-to-a-message)。
+相关流程见[自定义消息与扩展数据](/sdk/wasm/message/composing-messages/custom-message-and-extra-data)。
 
 ### 事件归属
 
-消息事件按职责分散在对应能力页，概览页只说明导航和归属：新消息和离线补偿见[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)，上传进度见[上传文件并跟踪进度](/sdk/wasm/message/sending-messages/upload-files-and-track-progress)，撤回和删除见[删除或撤回消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)，置顶、已读回执和输入状态分别见各自能力页。会话变化的完整监听见[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)。
+消息事件按职责分散在对应能力页，概览页只说明导航和归属：新消息和离线补偿见[接收消息](/sdk/wasm/message/receiving-messages/receive-messages)，上传进度见[上传文件并跟踪进度](/sdk/wasm/message/sending-messages/upload-files-and-track-progress)，删除见[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)，撤回见[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)，置顶、已读回执和输入状态分别见各自能力页。会话变化的完整监听见[获取会话列表](/sdk/wasm/conversation/retrieving-conversations/retrieve-conversation-list)。
 
 创建消息对象和纯查询 API 直接使用 Promise 返回值建立快照，不应描述为触发共享事件。会改变状态的调用则分别处理 Promise 结果和对应事件增量；重新登录后的消息变化由事件同步。

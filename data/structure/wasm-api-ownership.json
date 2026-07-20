@@ -14,13 +14,14 @@
     },
     {
       "name": "addBlack",
-      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "page": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "status": "documented"
     },
     {
       "name": "addConversationsToGroups",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "addFriend",
@@ -64,7 +65,7 @@
     },
     {
       "name": "createAdvancedTextMessage",
-      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "page": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "status": "excluded-consolidated"
     },
     {
@@ -75,11 +76,12 @@
     {
       "name": "createConversationGroup",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "createCustomMessage",
-      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "page": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "status": "documented"
     },
     {
@@ -200,7 +202,8 @@
     {
       "name": "deleteConversationGroup",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "deleteFriend",
@@ -210,31 +213,34 @@
     {
       "name": "deleteFriendRequests",
       "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "deleteGroupRequests",
       "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "deleteMessage",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
       "status": "excluded-consolidated"
     },
     {
       "name": "deleteMessageFromLocalStorage",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
       "status": "documented"
     },
     {
       "name": "deleteMessages",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "deleteUserAllMessagesInConv",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
       "status": "documented"
     },
     {
@@ -249,8 +255,9 @@
     },
     {
       "name": "fetchSurroundingMessages",
-      "page": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
-      "status": "documented"
+      "page": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "fileMapSet",
@@ -259,18 +266,19 @@
     },
     {
       "name": "findMessageList",
-      "page": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+      "page": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id",
       "status": "documented"
     },
     {
       "name": "getAdvancedHistoryMessageList",
-      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
       "status": "documented"
     },
     {
       "name": "getAdvancedHistoryMessageListReverse",
-      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
-      "status": "documented"
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getAllConversationList",
@@ -285,21 +293,24 @@
     {
       "name": "getConversationGroupIDsByConversationID",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getConversationGroupInfoWithConversations",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getConversationGroups",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getConversationIDBySessionType",
-      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
       "status": "documented"
     },
     {
@@ -310,11 +321,12 @@
     {
       "name": "getConversationPinnedMsg",
       "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getConversationRecvMessageOpt",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-consolidated"
     },
     {
@@ -379,12 +391,13 @@
     },
     {
       "name": "getGroupMessageReaderList",
-      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getHistoryMessageListReverse",
-      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+      "page": "/sdk/wasm/message/retrieving-messages/retrieve-message-history",
       "status": "documented"
     },
     {
@@ -414,23 +427,24 @@
     },
     {
       "name": "getMultipleConversation",
-      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
       "status": "documented"
     },
     {
       "name": "getOneConversation",
-      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+      "page": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation",
       "status": "documented"
     },
     {
       "name": "getSelfUserInfo",
-      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "status": "documented"
     },
     {
       "name": "getSignalingInvitationInfoStartApp",
       "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "getSpecifiedFriendsInfo",
@@ -474,7 +488,7 @@
     },
     {
       "name": "hideConversation",
-      "page": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation",
       "status": "documented"
     },
     {
@@ -524,8 +538,9 @@
     },
     {
       "name": "modifyMessage",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-messages/modify-a-message",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "networkStatusChanged",
@@ -534,7 +549,7 @@
     },
     {
       "name": "pinConversation",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-deprecated"
     },
     {
@@ -559,13 +574,14 @@
     },
     {
       "name": "removeBlack",
-      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "page": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "status": "documented"
     },
     {
       "name": "removeConversationsFromGroups",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "resetConversationGroupAtType",
@@ -574,7 +590,7 @@
     },
     {
       "name": "revokeMessage",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/revoke-a-message",
       "status": "documented"
     },
     {
@@ -599,8 +615,9 @@
     },
     {
       "name": "sendGroupMessageReadReceipt",
-      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "sendMessage",
@@ -619,12 +636,12 @@
     },
     {
       "name": "setConversation",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "documented"
     },
     {
       "name": "setConversationBurnDuration",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-deprecated"
     },
     {
@@ -634,37 +651,39 @@
     },
     {
       "name": "setConversationEx",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-deprecated"
     },
     {
       "name": "setConversationGroupOrder",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "setConversationIsMsgDestruct",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-consolidated"
     },
     {
       "name": "setConversationMsgDestructTime",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-consolidated"
     },
     {
       "name": "setConversationPinnedMsg",
       "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "setConversationPrivateChat",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-deprecated"
     },
     {
       "name": "setConversationRecvMessageOpt",
-      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+      "page": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings",
       "status": "excluded-deprecated"
     },
     {
@@ -679,7 +698,7 @@
     },
     {
       "name": "setGlobalRecvMessageOpt",
-      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "status": "excluded-deprecated"
     },
     {
@@ -724,58 +743,66 @@
     },
     {
       "name": "setMessageLocalEx",
-      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "page": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "status": "documented"
     },
     {
       "name": "setSelfInfo",
-      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "status": "documented"
     },
     {
       "name": "SetSelfInfoEx",
-      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "status": "excluded-deprecated"
     },
     {
       "name": "signalingAccept",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingCancel",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingGetRoomByGroupID",
       "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingGetTokenByRoomID",
       "page": "/sdk/wasm/calling/retrieving-call-information/retrieve-call-information",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingHungUp",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingInvite",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingInviteInGroup",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingReject",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "signalingSendCustomSignal",
@@ -785,12 +812,14 @@
     {
       "name": "speechToText",
       "page": "/sdk/wasm/message/composing-messages/transcribe-audio",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "speechToTextCapabilities",
       "page": "/sdk/wasm/message/composing-messages/transcribe-audio",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "subscribeUsersStatus",
@@ -815,7 +844,8 @@
     {
       "name": "updateConversationGroup",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "updateFriends",
@@ -836,18 +866,19 @@
     },
     {
       "name": "OnBlackAdded",
-      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "page": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "status": "documented"
     },
     {
       "name": "OnBlackDeleted",
-      "page": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+      "page": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users",
       "status": "documented"
     },
     {
       "name": "OnChangedPinnedMsg",
       "page": "/sdk/wasm/message/managing-messages/pin-conversation-messages",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConnectFailed",
@@ -872,27 +903,32 @@
     {
       "name": "OnConversationGroupAdded",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConversationGroupChanged",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConversationGroupDeleted",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConversationGroupMemberAdded",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConversationGroupMemberDeleted",
       "page": "/sdk/wasm/conversation/managing-conversation-groups/manage-conversation-groups",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnConversationUserInputStatusChanged",
@@ -901,7 +937,7 @@
     },
     {
       "name": "OnDeleteUserAllMsgsInConv",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
       "status": "documented"
     },
     {
@@ -922,7 +958,8 @@
     {
       "name": "OnFriendApplicationDeleted",
       "page": "/sdk/wasm/user/managing-friends/manage-friend-requests",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnFriendApplicationRejected",
@@ -957,7 +994,8 @@
     {
       "name": "OnGroupApplicationDeleted",
       "page": "/sdk/wasm/group/managing-group-applications/manage-group-applications",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnGroupApplicationRejected",
@@ -992,37 +1030,44 @@
     {
       "name": "OnHangUp",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInvitationCancelled",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInvitationTimeout",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInviteeAccepted",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInviteeAcceptedByOtherDevice",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInviteeRejected",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnInviteeRejectedByOtherDevice",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnJoinedGroupAdded",
@@ -1041,13 +1086,15 @@
     },
     {
       "name": "OnMessageModified",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-messages/modify-a-message",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnMsgDeleted",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-messages/delete-a-message",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnNewConversation",
@@ -1056,7 +1103,7 @@
     },
     {
       "name": "OnNewRecvMessageRevoked",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/revoke-a-message",
       "status": "documented"
     },
     {
@@ -1072,26 +1119,28 @@
     {
       "name": "OnReceiveNewInvitation",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnRecvC2CReadReceipt",
-      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+      "page": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
       "status": "documented"
     },
     {
       "name": "OnRecvCustomBusinessMessage",
-      "page": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+      "page": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data",
       "status": "documented"
     },
     {
       "name": "OnRecvGroupReadReceipt",
-      "page": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
-      "status": "documented"
+      "page": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts",
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnRecvMessageRevoked",
-      "page": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+      "page": "/sdk/wasm/message/managing-messages/revoke-a-message",
       "status": "documented"
     },
     {
@@ -1127,22 +1176,25 @@
     {
       "name": "OnRoomParticipantConnected",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnRoomParticipantDisconnected",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnSelfInfoUpdated",
-      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+      "page": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile",
       "status": "documented"
     },
     {
       "name": "OnStreamChange",
       "page": "/sdk/wasm/calling/managing-calls/start-or-handle-a-call",
-      "status": "documented"
+      "status": "documented",
+      "commercial": true
     },
     {
       "name": "OnSyncServerFailed",

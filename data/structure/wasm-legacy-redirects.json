@@ -33,7 +33,7 @@
   },
   {
     "source": "/sdk/wasm/channel/managing-channels/hide-or-archive-a-group-channel-from-a-list-of-channels",
-    "destination": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation"
+    "destination": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation"
   },
   {
     "source": "/sdk/wasm/channel/managing-channels/refresh-all-data-related-to-a-group-channel",
@@ -77,7 +77,7 @@
   },
   {
     "source": "/sdk/wasm/conversations/configuring-message-destruction",
-    "destination": "/sdk/wasm/conversation/managing-conversations/set-conversation"
+    "destination": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings"
   },
   {
     "source": "/sdk/wasm/error-codes",
@@ -113,7 +113,7 @@
   },
   {
     "source": "/sdk/wasm/message/adding-extra-data-to-a-message/add-extra-data-to-a-message",
-    "destination": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message"
+    "destination": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data"
   },
   {
     "source": "/sdk/wasm/message/managing-a-message/clear-the-chat-history-in-a-group-channel",
@@ -125,7 +125,7 @@
   },
   {
     "source": "/sdk/wasm/message/managing-a-message/delete-a-message",
-    "destination": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message"
+    "destination": "/sdk/wasm/message/managing-messages/delete-a-message"
   },
   {
     "source": "/sdk/wasm/message/managing-a-message/insert-a-local-message",
@@ -149,7 +149,7 @@
   },
   {
     "source": "/sdk/wasm/message/managing-read-status-in-a-group-channel/get-read-status",
-    "destination": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts"
+    "destination": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts"
   },
   {
     "source": "/sdk/wasm/message/managing-read-status-in-a-group-channel/mark-messages-as-read",
@@ -169,11 +169,11 @@
   },
   {
     "source": "/sdk/wasm/message/retrieving-messages/retrieve-a-list-of-messages",
-    "destination": "/sdk/wasm/message/retrieving-messages/retrieve-message-list"
+    "destination": "/sdk/wasm/message/retrieving-messages/retrieve-message-history"
   },
   {
     "source": "/sdk/wasm/message/retrieving-messages/retrieve-a-message",
-    "destination": "/sdk/wasm/message/retrieving-messages/retrieve-messages"
+    "destination": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id"
   },
   {
     "source": "/sdk/wasm/message/retrieving-unread-counts-in-a-group-channel/unread-channels",
@@ -213,11 +213,11 @@
   },
   {
     "source": "/sdk/wasm/user/managing-user-metadata/manage-user-metadata",
-    "destination": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile"
+    "destination": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile"
   },
   {
     "source": "/sdk/wasm/user/moderating-a-user/ban-and-unban-a-user",
-    "destination": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members"
+    "destination": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users"
   },
   {
     "source": "/sdk/wasm/user/moderating-a-user/mute-and-unmute-a-user",
@@ -238,5 +238,53 @@
   {
     "source": "/sdk/wasm/user/retrieving-users/retrieve-a-list-of-users-in-an-application",
     "destination": "/sdk/wasm/user/retrieving-users/retrieve-users"
+  },
+  {
+    "source": "/sdk/wasm/conversation/managing-conversations/hide-or-archive-conversation",
+    "destination": "/sdk/wasm/conversation/managing-conversations/hide-a-conversation"
+  },
+  {
+    "source": "/sdk/wasm/message/managing-read-status/manage-group-message-read-receipts",
+    "destination": "/sdk/wasm/message/managing-read-status/manage-message-read-receipts"
+  },
+  {
+    "source": "/sdk/wasm/user/retrieving-and-updating-user-information/update-user-profile",
+    "destination": "/sdk/wasm/user/retrieving-and-updating-user-information/retrieve-and-update-self-profile"
+  },
+  {
+    "source": "/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members",
+    "destination": "/sdk/wasm/user/moderating-a-user/block-or-unblock-users"
+  },
+  {
+    "source": "/sdk/wasm/conversation/managing-conversations/set-conversation",
+    "destination": "/sdk/wasm/conversation/managing-conversations/set-conversation-settings"
+  },
+  {
+    "source": "/sdk/wasm/conversation/retrieving-conversations/retrieve-conversations",
+    "destination": "/sdk/wasm/conversation/retrieving-conversations/retrieve-a-conversation"
+  },
+  {
+    "source": "/sdk/wasm/message/retrieving-messages/retrieve-messages",
+    "destination": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id"
+  },
+  {
+    "source": "/sdk/wasm/message/composing-messages/add-extra-data-to-a-message",
+    "destination": "/sdk/wasm/message/composing-messages/custom-message-and-extra-data"
+  },
+  {
+    "source": "/sdk/wasm/message/managing-messages/delete-or-revoke-a-message",
+    "destination": "/sdk/wasm/message/managing-messages/delete-a-message"
+  },
+  {
+    "source": "/sdk/wasm/message/retrieving-messages/retrieve-specified-messages",
+    "destination": "/sdk/wasm/message/retrieving-messages/locate-messages-by-id"
+  },
+  {
+    "source": "/sdk/wasm/message/retrieving-messages/retrieve-message-list",
+    "destination": "/sdk/wasm/message/retrieving-messages/retrieve-message-history"
+  },
+  {
+    "source": "/sdk/wasm/message/managing-messages/clear-all-message-history",
+    "destination": "/sdk/wasm/message/managing-messages/clear-message-history"
   }
 ]

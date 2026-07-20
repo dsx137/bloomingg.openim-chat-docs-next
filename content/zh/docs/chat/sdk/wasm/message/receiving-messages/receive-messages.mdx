@@ -1,6 +1,6 @@
 ---
 title: '接收消息'
-description: '使用 OpenIM SDK 接收消息。'
+description: '监听在线、离线与仅在线消息事件，并按 clientMsgID 合并到会话。'
 sourcePath: '/sdk/wasm/message/receiving-messages/receive-messages'
 ---
 
@@ -99,7 +99,7 @@ SDK 同时导出单条事件 `OnRecvNewMessage`、`OnRecvOfflineNewMessage` 和 
 
 本页是这六个消息接收事件的归属页。上方示例使用三个复数事件；它们的 `data` 均为 `MessageItem[]`，先根据消息路由字段确定目标会话，再使用“目标会话 + `clientMsgID`”幂等合并。组件卸载、退出登录或切换账号时调用 `removeMessageListeners()`。
 
-当会话成员撤回消息时，接收端通过 `CbEvents.OnNewRecvMessageRevoked` 得到更新。建议把对应气泡更新为撤回态，而不是直接从列表中删除；事件处理器和删除事件的清理方式见[删除或撤回消息](/sdk/wasm/message/managing-messages/delete-or-revoke-a-message)。
+当会话成员撤回消息时，接收端通过 `CbEvents.OnNewRecvMessageRevoked` 得到更新。建议把对应气泡更新为撤回态，而不是直接从列表中删除；事件处理器和清理方式见[撤回消息](/sdk/wasm/message/managing-messages/revoke-a-message)。
 
 ## 首次进入会话时读取历史
 
@@ -169,5 +169,5 @@ await OpenIM.markConversationMessageAsRead(conversationID);
 
 - [消息概览](/sdk/wasm/message/overview-message)
 - [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
-- [获取消息列表](/sdk/wasm/message/retrieving-messages/retrieve-message-list)
+- [获取消息历史](/sdk/wasm/message/retrieving-messages/retrieve-message-history)
 - [管理会话已读状态](/sdk/wasm/conversation/managing-conversations/manage-read-status)

@@ -1,0 +1,58 @@
+---
+title: '撤回消息'
+description: '使用 OpenIM SDK 撤回消息，并同步撤回态给会话成员。'
+sourcePath: '/sdk/wasm/message/managing-messages/revoke-a-message'
+---
+
+如果界面需要让其他会话成员看到“消息已撤回”，使用 `revokeMessage()`，不要用普通删除替代。删除只影响当前账号侧可见性，见[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)。修改已发送消息内容见[修改消息](/sdk/wasm/message/managing-messages/modify-a-message)。
+
+## 撤回一条消息
+
+`revokeMessage()` 接收消息所在的 `conversationID` 和目标 `clientMsgID`：
+
+```ts
+const { data } = await OpenIM.revokeMessage({
+  conversationID,
+  clientMsgID,
+});
+
+markMessageRevoked(data?.clientMsgID ?? clientMsgID);
+```
+
+Promise 成功后，调用端可先把当前列表中的同 `clientMsgID` 消息更新为撤回态。在线客户端随后通过 `CbEvents.OnNewRecvMessageRevoked` 收到撤回信息，接收端应根据事件里的 `clientMsgID` 更新对应气泡，而不是直接从列表中删除。
+
+允许撤回的发送者、时间窗口和消息类型由 OpenIM 服务端校验；调用失败时不要只在本地保留撤回展示。
+
+SDK 同时保留 `CbEvents.OnRecvMessageRevoked`。它是旧的单条撤回事件名；新代码优先监听 `OnNewRecvMessageRevoked`。维护既有项目时，应先确认当前部署实际触发的事件；如果只能收到旧事件，则用旧事件名替换下方注册项并复用同一个处理器，不要同时监听两个名称后重复合并同一次撤回。
+
+## 返回结果
+
+Promise 成功代表当前撤回请求已完成，不代表所有端界面已经更新。其他客户端通过撤回事件合并增量。
+
+## 监听撤回事件
+
+本页是 `OnNewRecvMessageRevoked` 的完整监听示例归属页。同步删除和按用户批量删除事件见[删除消息](/sdk/wasm/message/managing-messages/delete-a-message)。
+
+```ts
+import { CbEvents } from '@openim/wasm-client-sdk';
+
+const handleMessageRevoked = ({ data }) => {
+  markMessageRevoked(data.clientMsgID);
+};
+
+OpenIM.on(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
+
+function removeRevokeListener() {
+  OpenIM.off(CbEvents.OnNewRecvMessageRevoked, handleMessageRevoked);
+}
+```
+
+`OnNewRecvMessageRevoked` 的 `data` 是 `RevokedInfo`。消息使用 `clientMsgID` 合并。组件卸载、退出登录或切换账号时调用 `removeRevokeListener()`；重新登录后的撤回变化由消息事件同步。
+
+## 相关页面
+
+- [删除消息](/sdk/wasm/message/managing-messages/delete-a-message)
+- [修改消息](/sdk/wasm/message/managing-messages/modify-a-message)
+- [发送消息](/sdk/wasm/message/sending-messages/send-a-message)
+- [按 ID 定位消息](/sdk/wasm/message/retrieving-messages/locate-messages-by-id)
+- [接收消息](/sdk/wasm/message/receiving-messages/receive-messages)

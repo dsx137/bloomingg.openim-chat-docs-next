@@ -56,4 +56,4 @@ function isBlocked(userID: string) {
 
 ## 调用结果与增量变化
 
-`getBlackList()` 成功后，以返回的 `BlackUserItem[]` 完整替换当前黑名单快照。该查询不会触发黑名单新增或删除事件。首次进入页面或用户主动刷新时，应重新调用该方法建立完整列表。拉黑关系的写操作和增量事件统一由[拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-and-unblock-other-members)处理；重新登录后的变化由事件同步。
+`getBlackList()` 成功后，以返回的 `BlackUserItem[]` 完整替换当前黑名单快照。该查询不会触发黑名单新增或删除事件。首次进入页面或用户主动刷新时，应重新调用该方法建立完整列表。拉黑关系的写操作和增量事件统一由[拉黑或取消拉黑用户](/sdk/wasm/user/moderating-a-user/block-or-unblock-users)处理；重新登录后的变化由事件同步。
