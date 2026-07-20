@@ -321,7 +321,7 @@ export async function publishPostman(
     ),
   );
   const reportedTaskUrl = new URL(accepted.url, origin);
-  const expectedTaskPath = `/specs/${encodeURIComponent(target.specId)}/tasks/${encodeURIComponent(accepted.taskId)}`;
+  const expectedTaskPath = `/collections/${encodeURIComponent(target.collectionId)}/tasks/${encodeURIComponent(accepted.taskId)}`;
   if (
     reportedTaskUrl.origin !== origin ||
     reportedTaskUrl.pathname !== expectedTaskPath ||
