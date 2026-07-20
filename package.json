@@ -22,7 +22,6 @@
     "docsets-sync:baseline": "tsx scripts/docsets-sync-utils.ts baseline",
     "platform-api:export": "tsx scripts/openapi.ts export",
     "platform-api:publish-postman": "tsx scripts/openapi.ts publish-postman",
-    "platform-api:publish-postman-spec": "tsx scripts/openapi.ts publish-postman-spec",
     "platform-api:publish-apifox": "tsx scripts/openapi.ts publish-apifox",
     "platform-api:test": "tsx scripts/postman.test.ts && tsx scripts/openapi.test.ts api/chat/platform-api/v3",
     "wasm:examples:check": "node scripts/check-wasm-sdk-examples.mjs",

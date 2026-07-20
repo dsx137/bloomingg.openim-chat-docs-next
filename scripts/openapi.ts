@@ -2,7 +2,6 @@ import { spawnSync } from 'node:child_process';
 import { appendFile, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative, resolve } from 'node:path';
-import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { z } from 'zod';
 
@@ -16,16 +15,6 @@ export class PostmanCollectionUnavailableError extends PlatformApiError {
   constructor(readonly collectionId: string) {
     super(
       `Postman collection does not exist or is not accessible: ${collectionId}. Verify POSTMAN_COLLECTION_ID and that the account owning POSTMAN_API_KEY has edit access.`,
-    );
-  }
-}
-
-export class PostmanSpecUnavailableError extends PlatformApiError {
-  readonly name = 'PostmanSpecUnavailableError';
-
-  constructor(readonly specId: string) {
-    super(
-      `Postman Spec does not exist or is not accessible: ${specId}. Verify POSTMAN_SPEC_ID and that the account owning POSTMAN_API_KEY has edit access.`,
     );
   }
 }
@@ -100,12 +89,6 @@ const publishConfigSchema = z.object({
 export const postmanPublishConfigSchema = publishConfigSchema.extend({
   POSTMAN_API_KEY: z.string().min(1),
   POSTMAN_COLLECTION_ID: z.string().regex(/^\d+-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
-  POSTMAN_SPEC_ID: z.string().regex(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
-});
-const postmanSpecIdSchema = z.string().regex(/^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
-export const postmanSpecPublishConfigSchema = publishConfigSchema.extend({
-  POSTMAN_API_KEY: z.string().min(1),
-  POSTMAN_SPEC_ID: postmanSpecIdSchema,
 });
 export const apifoxPublishConfigSchema = publishConfigSchema.extend({
   APIFOX_ACCESS_TOKEN: z.string().min(1),
@@ -116,36 +99,6 @@ const postmanCollectionSchema = z
     info: z.object({ name: z.string().min(1), schema: z.literal(postmanSchema) }).passthrough(),
     item: z.array(z.unknown()),
   })
-  .passthrough();
-const postmanSpecSchema = z
-  .object({
-    id: postmanSpecIdSchema,
-    type: z.enum(['OPENAPI:2.0', 'OPENAPI:3.0', 'OPENAPI:3.1']),
-  })
-  .passthrough();
-const postmanSpecFileSchema = z
-  .object({ id: postmanSpecIdSchema, path: z.string().min(1) })
-  .extend({ type: z.enum(['ROOT', 'DEFAULT']) })
-  .passthrough();
-const postmanSpecFileListSchema = z
-  .object({
-    files: z.array(postmanSpecFileSchema),
-    meta: z.object({ nextCursor: z.string().nullable() }),
-  })
-  .passthrough();
-const postmanSpecRootFileSchema = z
-  .object({ id: postmanSpecIdSchema, path: z.string().min(1), type: z.literal('ROOT') })
-  .passthrough();
-const postmanSpecFileContentSchema = z.object({ content: z.string() }).passthrough();
-const postmanCollectionStateSchema = z
-  .object({
-    collection: z
-      .object({ info: z.object({ updatedAt: z.string().min(1) }).passthrough() })
-      .passthrough(),
-  })
-  .passthrough();
-const postmanSyncAcceptedSchema = z
-  .object({ taskId: z.string().min(1), url: z.string().min(1) })
   .passthrough();
 const apifoxImportResultSchema = z.object({
   data: z.object({
@@ -160,21 +113,6 @@ const apifoxImportResultSchema = z.object({
   }),
 });
 type PostmanCollection = z.infer<typeof postmanCollectionSchema>;
-type PostmanSpecTarget = {
-  readonly apiKey: string;
-  readonly specId: string;
-};
-type PostmanCollectionSyncTarget = PostmanSpecTarget & {
-  readonly collectionId: string;
-};
-type PostmanSyncPolling = {
-  readonly attempts: number;
-  readonly intervalMs: number;
-};
-type PostmanSyncResult = {
-  readonly taskId: string;
-  readonly updatedAt: string;
-};
 
 export function normalizePostmanCollection(
   value: unknown,
@@ -293,103 +231,23 @@ async function requestJson(
 }
 
 export async function publishPostman(
-  target: PostmanCollectionSyncTarget,
-  polling: PostmanSyncPolling = { attempts: 25, intervalMs: 5_000 },
-): Promise<PostmanSyncResult> {
-  if (!Number.isInteger(polling.attempts) || polling.attempts < 1)
-    throw new PlatformApiError('Postman synchronization polling attempts must be positive.');
-  if (!Number.isInteger(polling.intervalMs) || polling.intervalMs < 0)
-    throw new PlatformApiError('Postman synchronization polling interval must not be negative.');
-
-  const origin = 'https://api.getpostman.com';
-  const collectionUrl = `${origin}/collections/${encodeURIComponent(target.collectionId)}`;
-  const apiKeyHeader = { 'X-API-Key': target.apiKey };
-  const baseline = postmanCollectionStateSchema.parse(
-    await requestJson(
-      collectionUrl,
-      { headers: apiKeyHeader },
-      { notFoundError: new PostmanCollectionUnavailableError(target.collectionId) },
-    ),
-  ).collection.info.updatedAt;
-  const synchronizationUrl = new URL(`${collectionUrl}/synchronizations`);
-  synchronizationUrl.searchParams.set('specId', target.specId);
-  const accepted = postmanSyncAcceptedSchema.parse(
-    await requestJson(
-      synchronizationUrl.toString(),
-      { method: 'PUT', headers: apiKeyHeader },
-      { expectedStatus: 202 },
-    ),
-  );
-  const reportedTaskUrl = new URL(accepted.url, origin);
-  const expectedTaskPath = `/collections/${encodeURIComponent(target.collectionId)}/tasks/${encodeURIComponent(accepted.taskId)}`;
-  if (
-    reportedTaskUrl.origin !== origin ||
-    reportedTaskUrl.pathname !== expectedTaskPath ||
-    reportedTaskUrl.search !== '' ||
-    reportedTaskUrl.hash !== ''
-  )
-    throw new PlatformApiError(
-      `Postman returned an unexpected synchronization task URL: ${accepted.url}.`,
-    );
-  const taskUrl = `${origin}${expectedTaskPath}`;
-
-  for (let attempt = 0; attempt < polling.attempts; attempt += 1) {
-    await requestJson(taskUrl, { headers: apiKeyHeader });
-    const updatedAt = postmanCollectionStateSchema.parse(
-      await requestJson(collectionUrl, { headers: apiKeyHeader }),
-    ).collection.info.updatedAt;
-    if (updatedAt !== baseline) return { taskId: accepted.taskId, updatedAt };
-    if (attempt + 1 < polling.attempts) await delay(polling.intervalMs);
-  }
-  throw new PlatformApiError(
-    `Postman synchronization was accepted as task ${accepted.taskId}, but no observable Collection update occurred.`,
-  );
-}
-
-export async function publishPostmanSpec(
-  target: PostmanSpecTarget,
+  apiKey: string,
+  collectionId: string,
   openApi: string,
-): Promise<string> {
-  const specUrl = `https://api.getpostman.com/specs/${target.specId}`;
-  const apiKeyHeader = { 'X-API-Key': target.apiKey };
-  postmanSpecSchema.parse(
-    await requestJson(
-      specUrl,
-      { headers: apiKeyHeader },
-      { notFoundError: new PostmanSpecUnavailableError(target.specId) },
-    ),
+): Promise<void> {
+  const collectionUrl = `https://api.getpostman.com/collections/${encodeURIComponent(collectionId)}`;
+  const apiKeyHeader = { 'X-API-Key': apiKey };
+  await requestJson(
+    collectionUrl,
+    { headers: apiKeyHeader },
+    { notFoundError: new PostmanCollectionUnavailableError(collectionId) },
   );
-  let cursor: string | null = null;
-  let rootFile: z.infer<typeof postmanSpecFileSchema> | undefined;
-  while (rootFile === undefined) {
-    const query = new URLSearchParams({ limit: '100' });
-    if (cursor !== null) query.set('cursor', cursor);
-    const page = postmanSpecFileListSchema.parse(
-      await requestJson(`${specUrl}/files?${query.toString()}`, { headers: apiKeyHeader }),
-    );
-    rootFile = page.files.find(({ type }) => type === 'ROOT');
-    if (rootFile !== undefined) break;
-    cursor = page.meta.nextCursor;
-    if (cursor === null) throw new PlatformApiError('Postman Spec does not contain a root file.');
-  }
-  const encodedRootPath = rootFile.path.split('/').map(encodeURIComponent).join('/');
-  const file = postmanSpecRootFileSchema.parse(
-    await requestJson(`${specUrl}/files/${encodedRootPath}`, {
-      method: 'PATCH',
-      headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content: openApi }),
-    }),
-  );
-  if (file.path !== rootFile.path)
-    throw new PlatformApiError(
-      `Postman updated an unexpected Spec file: ${file.path}; expected ${rootFile.path}.`,
-    );
-  const remoteFile = postmanSpecFileContentSchema.parse(
-    await requestJson(`${specUrl}/files/${encodedRootPath}`, { headers: apiKeyHeader }),
-  );
-  if (remoteFile.content !== openApi)
-    throw new PlatformApiError('Postman Spec root content does not match the uploaded OpenAPI.');
-  return rootFile.path;
+  const collection = await convertOpenApiToPostman(openApi);
+  await requestJson(collectionUrl, {
+    method: 'PUT',
+    headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ collection }),
+  });
 }
 
 async function publishApifox(
@@ -421,45 +279,19 @@ async function publishApifox(
   );
 }
 
-async function publishPlatformApiPostman(): Promise<void> {
+async function publishPlatformApiPostman(openApiPath: string): Promise<void> {
   const config = postmanPublishConfigSchema.parse(process.env);
-  const result = await publishPostman({
-    apiKey: config.POSTMAN_API_KEY,
-    collectionId: config.POSTMAN_COLLECTION_ID,
-    specId: config.POSTMAN_SPEC_ID,
-  });
-  const summary = [
-    '### Postman Collection synchronization observed',
-    '',
-    `- Source revision: \`${config.GITHUB_SHA ?? 'local'}\``,
-    `- Synchronization accepted: task \`${result.taskId}\``,
-    '- Synchronization task resource observed',
-    `- Collection update observed at: \`${result.updatedAt}\``,
-    '',
-  ].join('\n');
-  if (config.GITHUB_STEP_SUMMARY) await appendFile(config.GITHUB_STEP_SUMMARY, summary);
-  console.log('Synchronized OpenIM Platform API v3 Collection from its Postman Specification.');
-}
-
-async function publishPlatformApiPostmanSpec(openApiPath: string): Promise<void> {
-  const config = postmanSpecPublishConfigSchema.parse(process.env);
   const openApi = await readFile(openApiPath, 'utf8');
-  const rootPath = await publishPostmanSpec(
-    {
-      apiKey: config.POSTMAN_API_KEY,
-      specId: config.POSTMAN_SPEC_ID,
-    },
-    openApi,
-  );
+  await publishPostman(config.POSTMAN_API_KEY, config.POSTMAN_COLLECTION_ID, openApi);
   const summary = [
-    '### Postman OpenAPI Specification publication completed',
+    '### Postman Collection publication completed',
     '',
     `- Source revision: \`${config.GITHUB_SHA ?? 'local'}\``,
-    `- Postman Spec root file updated: \`${rootPath}\``,
+    '- Converted OpenAPI replaced the configured Postman Collection',
     '',
   ].join('\n');
   if (config.GITHUB_STEP_SUMMARY) await appendFile(config.GITHUB_STEP_SUMMARY, summary);
-  console.log('Published OpenIM Platform API v3 Specification to Postman.');
+  console.log('Published OpenIM Platform API v3 to Postman.');
 }
 
 async function publishPlatformApiApifox(openApiPath: string): Promise<void> {
@@ -487,10 +319,8 @@ export function commandArguments(args: readonly string[]): readonly [string, str
 async function runCommand(command: string, inputPath?: string): Promise<void> {
   switch (command) {
     case 'publish-postman':
-      return publishPlatformApiPostman();
-    case 'publish-postman-spec':
-      return publishPlatformApiPostmanSpec(
-        required(inputPath, 'publish-postman-spec requires an OpenAPI path.'),
+      return publishPlatformApiPostman(
+        required(inputPath, 'publish-postman requires an OpenAPI path.'),
       );
     case 'publish-apifox':
       return publishPlatformApiApifox(
@@ -499,12 +329,12 @@ async function runCommand(command: string, inputPath?: string): Promise<void> {
     case '--help':
     case 'help':
       console.log(
-        'Usage: pnpm run platform-api:publish-postman | pnpm run platform-api:<publish-postman-spec|publish-apifox> -- <openapi-path>',
+        'Usage: pnpm run platform-api:<publish-postman|publish-apifox> -- <openapi-path>',
       );
       return;
     default:
       throw new PlatformApiError(
-        `Unknown Platform API command: ${command}. Use publish-postman, publish-postman-spec, publish-apifox, or --help.`,
+        `Unknown Platform API command: ${command}. Use publish-postman, publish-apifox, or --help.`,
       );
   }
 }
