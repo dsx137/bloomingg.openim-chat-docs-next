@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Groups'
-  x-apifox-folder: 'Private/Groups'
   summary: 'GroupGetFullJoinGroupIds'
   description: 'OpenIM Server POST route handled by g.GetFullJoinGroupIDs. It accepts the JSON serialization of group.GetFullJoinGroupIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetFullJoinGroupIds

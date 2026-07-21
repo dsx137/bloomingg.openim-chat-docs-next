@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Users'
-  x-apifox-folder: 'Private/Users'
   summary: 'UserUpdateUserInfo'
   description: 'OpenIM Server POST route handled by u.UpdateUserInfo. It accepts the JSON serialization of user.UpdateUserInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserUpdateUserInfo

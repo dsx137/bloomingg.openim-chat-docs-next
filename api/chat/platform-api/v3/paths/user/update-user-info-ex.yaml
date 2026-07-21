@@ -2,7 +2,6 @@ post:
   tags:
     - 'Public'
     - Users
-  x-apifox-folder: 'Public/Users'
   summary: Update user
   description: Updates selected profile fields for an OpenIM user.
   operationId: userUpdateUserInfoEx

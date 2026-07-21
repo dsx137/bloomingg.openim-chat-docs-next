@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Object storage'
-  x-apifox-folder: 'Private/Object storage'
   summary: 'ObjectCompleteFormData'
   description: 'OpenIM Server POST route handled by t.CompleteFormData. It accepts the JSON serialization of third.CompleteFormDataReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postObjectCompleteFormData

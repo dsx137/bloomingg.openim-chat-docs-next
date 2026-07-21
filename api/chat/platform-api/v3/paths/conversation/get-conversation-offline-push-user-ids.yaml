@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Conversations'
-  x-apifox-folder: 'Private/Conversations'
   summary: 'ConversationGetConversationOfflinePushUserIds'
   description: 'OpenIM Server POST route handled by c.GetConversationOfflinePushUserIDs. It accepts the JSON serialization of conversation.GetConversationOfflinePushUserIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetConversationOfflinePushUserIds

@@ -2,7 +2,6 @@ post:
   tags:
     - 'Public'
     - Messages
-  x-apifox-folder: 'Public/Messages'
   summary: Send message
   description: Sends a new message or imports an existing message into OpenIM.
   operationId: msgSendMsg

@@ -16,8 +16,6 @@ servers:
 tags:
   - name: Public
     description: Operations documented in the Platform API reference.
-  - name: Private
-    description: Operations not documented in the Platform API reference.
   - name: Authentication
     description: OpenIM authentication operations.
   - name: Conversations

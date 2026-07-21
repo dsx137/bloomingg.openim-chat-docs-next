@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Messages'
-  x-apifox-folder: 'Private/Messages'
   summary: 'MsgClearConversationMsg'
   description: 'OpenIM Server POST route handled by m.ClearConversationsMsg. It accepts the JSON serialization of msg.ClearConversationsMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgClearConversationMsg

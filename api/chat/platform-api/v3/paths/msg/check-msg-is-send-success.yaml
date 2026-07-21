@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Messages'
-  x-apifox-folder: 'Private/Messages'
   summary: 'MsgCheckMsgIsSendSuccess'
   description: 'OpenIM Server POST route handled by m.CheckMsgIsSendSuccess. It accepts the JSON serialization of msg.GetSendMsgStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postMsgCheckMsgIsSendSuccess

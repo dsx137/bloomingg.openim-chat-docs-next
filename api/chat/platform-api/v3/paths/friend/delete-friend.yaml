@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Friends'
-  x-apifox-folder: 'Private/Friends'
   summary: 'FriendDeleteFriend'
   description: 'OpenIM Server POST route handled by f.DeleteFriend. It accepts the JSON serialization of relation.DeleteFriendReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendDeleteFriend

@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Users'
-  x-apifox-folder: 'Private/Users'
   summary: 'UserAddNotificationAccount'
   description: 'OpenIM Server POST route handled by u.AddNotificationAccount. It accepts the JSON serialization of user.AddNotificationAccountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserAddNotificationAccount

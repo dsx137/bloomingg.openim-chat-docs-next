@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Conversations'
-  x-apifox-folder: 'Private/Conversations'
   summary: 'ConversationGetNotNotifyConversationIds'
   description: 'OpenIM Server POST route handled by c.GetNotNotifyConversationIDs. It accepts the JSON serialization of conversation.GetNotNotifyConversationIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postConversationGetNotNotifyConversationIds

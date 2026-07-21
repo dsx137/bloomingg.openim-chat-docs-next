@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Users'
-  x-apifox-folder: 'Private/Users'
   summary: 'UserProcessUserCommandGet'
   description: 'OpenIM Server POST route handled by u.ProcessUserCommandGet. It accepts the JSON serialization of user.ProcessUserCommandGetReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserProcessUserCommandGet

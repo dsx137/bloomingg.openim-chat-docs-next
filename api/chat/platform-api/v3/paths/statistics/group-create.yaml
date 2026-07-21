@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Statistics'
-  x-apifox-folder: 'Private/Statistics'
   summary: 'StatisticsGroupCreate'
   description: 'OpenIM Server POST route handled by g.GroupCreateCount. It accepts the JSON serialization of group.GroupCreateCountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postStatisticsGroupCreate

@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Friends'
-  x-apifox-folder: 'Private/Friends'
   summary: 'FriendGetFriendApplyList'
   description: 'OpenIM Server POST route handled by f.GetFriendApplyList. It accepts the JSON serialization of relation.GetPaginationFriendsApplyToReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendGetFriendApplyList

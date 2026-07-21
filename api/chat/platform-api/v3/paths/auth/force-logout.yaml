@@ -2,7 +2,6 @@ post:
   tags:
     - 'Public'
     - Authentication
-  x-apifox-folder: 'Public/Authentication'
   summary: Revoke all session tokens
   description: Revokes every active session token for an OpenIM user.
   operationId: authForceLogout

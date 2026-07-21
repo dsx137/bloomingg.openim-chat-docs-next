@@ -1,8 +1,6 @@
 get:
   tags:
-    - 'Private'
     - 'Service discovery'
-  x-apifox-folder: 'Private/Service discovery'
   summary: 'PrometheusDiscoveryConversation'
   description: 'OpenIM Server GET route handled by pd.Conversation. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: getPrometheusDiscoveryConversation

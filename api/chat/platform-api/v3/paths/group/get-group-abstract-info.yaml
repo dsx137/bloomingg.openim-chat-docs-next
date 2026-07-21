@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Groups'
-  x-apifox-folder: 'Private/Groups'
   summary: 'GroupGetGroupAbstractInfo'
   description: 'OpenIM Server POST route handled by g.GetGroupAbstractInfo. It accepts the JSON serialization of group.GetGroupAbstractInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetGroupAbstractInfo

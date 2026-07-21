@@ -2,7 +2,6 @@ post:
   tags:
     - 'Public'
     - Moderation
-  x-apifox-folder: 'Public/Moderation'
   summary: Block user
   description: Adds an OpenIM user to the current user's block list.
   operationId: friendAddBlack

@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Users'
-  x-apifox-folder: 'Private/Users'
   summary: 'UserProcessUserCommandDelete'
   description: 'OpenIM Server POST route handled by u.ProcessUserCommandDelete. It accepts the JSON serialization of user.ProcessUserCommandDeleteReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserProcessUserCommandDelete

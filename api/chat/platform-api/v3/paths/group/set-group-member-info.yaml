@@ -1,8 +1,6 @@
 post:
   tags:
-    - 'Private'
     - 'Groups'
-  x-apifox-folder: 'Private/Groups'
   summary: 'GroupSetGroupMemberInfo'
   description: 'OpenIM Server POST route handled by g.SetGroupMemberInfo. It accepts the JSON serialization of group.SetGroupMemberInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupSetGroupMemberInfo
