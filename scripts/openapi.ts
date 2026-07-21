@@ -1,5 +1,4 @@
 import { spawnSync } from 'node:child_process';
-import { readFileSync } from 'node:fs';
 import { appendFile, mkdtemp, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
@@ -256,20 +255,27 @@ type AjvConstructor = new (options: { readonly allErrors: boolean; readonly stri
 const projectRequire = createRequire(import.meta.url);
 const converterRequire = createRequire(projectRequire.resolve('openapi-to-postmanv2'));
 
-function schemaValidator(): AjvValidator {
+let postmanCollectionValidator: Promise<AjvValidator> | undefined;
+
+function schemaValidator(): Promise<AjvValidator> {
+  if (postmanCollectionValidator) return postmanCollectionValidator;
   const imported: unknown = converterRequire('ajv-draft-04');
   if (typeof imported !== 'function')
     throw new PlatformApiError('Unable to load Draft-04 Postman validator.');
-  const schema: unknown = JSON.parse(
-    readFileSync(new URL('./schemas/postman-collection-v2.1.0.json', import.meta.url), 'utf8'),
-  );
   const Constructor = imported as AjvConstructor;
-  return new Constructor({ allErrors: true, strict: false }).compile(schema);
+  postmanCollectionValidator = requestJson(postmanSchema, {})
+    .then((schema) => new Constructor({ allErrors: true, strict: false }).compile(schema))
+    .catch((error: unknown) => {
+      postmanCollectionValidator = undefined;
+      throw error;
+    });
+  return postmanCollectionValidator;
 }
 
-const validatePostmanCollection = schemaValidator();
-
-export function parsePostmanCollection(source: string, sourcePath: string): PostmanCollection {
+export async function parsePostmanCollection(
+  source: string,
+  sourcePath: string,
+): Promise<PostmanCollection> {
   let value: unknown;
   try {
     value = JSON.parse(source);
@@ -278,6 +284,7 @@ export function parsePostmanCollection(source: string, sourcePath: string): Post
       throw new PlatformApiError(`Invalid Postman Collection import: ${sourcePath}: invalid JSON.`);
     throw error;
   }
+  const validatePostmanCollection = await schemaValidator();
   if (
     !validatePostmanCollection(value) ||
     !isRecord(value) ||
@@ -336,7 +343,7 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
       '--options',
       'parametersResolution=Example,folderStrategy=Tags,nestedFolderHierarchy=true',
     ]);
-    return parsePostmanCollection(
+    return await parsePostmanCollection(
       JSON.stringify(
         normalizePostmanCollection(JSON.parse(await readFile(collectionPath, 'utf8'))),
       ),
@@ -606,7 +613,7 @@ export async function publishPlatformApiPostman(
     'Postman publication requires at least one --folder.',
     'Converted Postman Collection metadata does not match the first import.',
   );
-  const collection = parsePostmanCollection(
+  const collection = await parsePostmanCollection(
     JSON.stringify({
       ...metadata,
       item: converted.map(({ folder, collection }) => ({ name: folder, item: collection.item })),
