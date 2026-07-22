@@ -1278,6 +1278,7 @@
           "title": "定时任务",
           "href": null,
           "type": "folder",
+          "edition": "enterprise",
           "children": [
             {
               "id": "timer/overview",
@@ -1430,6 +1431,7 @@
           "title": "会议",
           "href": null,
           "type": "folder",
+          "edition": "enterprise",
           "children": [
             {
               "id": "meeting/overview",

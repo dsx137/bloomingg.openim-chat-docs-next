@@ -954,6 +954,7 @@ function buildPlatformNavigationNodes(routes) {
           type: isLeaf ? 'page' : 'folder',
           children: [],
           minIndex: route.navOrder,
+          ...(route.edition ? { edition: route.edition } : {}),
         };
         cursor.children.push(child);
       }
@@ -989,7 +990,22 @@ function sortNavigationNodes(nodes, parentID = '') {
   });
   for (const node of nodes) {
     sortNavigationNodes(node.children ?? [], node.id);
+    if (
+      node.children?.length > 0 &&
+      node.children.every((child) => child.edition === 'enterprise' || childHasOnlyEnterprisePages(child))
+    ) {
+      node.edition = 'enterprise';
+    }
   }
+}
+
+function childHasOnlyEnterprisePages(node) {
+  if (node.children?.length > 0) {
+    return node.children.every(
+      (child) => child.edition === 'enterprise' || childHasOnlyEnterprisePages(child),
+    );
+  }
+  return node.edition === 'enterprise';
 }
 
 function humanizeSegment(segment) {
