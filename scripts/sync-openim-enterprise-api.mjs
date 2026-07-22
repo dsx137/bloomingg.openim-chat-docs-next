@@ -2,15 +2,23 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { format } from 'prettier';
 import { enterpriseEndpoints, meetingEndpoints } from './enterprise-platform-api-specs.mjs';
+import {
+  webhookCategoryTitles,
+  webhookRoute,
+  webhookSpecs,
+} from './openim-webhook-specs.mjs';
 
 const root = process.cwd();
-const serverRoot = process.env.OPENIM_ENTERPRISE_SERVER ?? '/Users/gordon/GolandProjects/open-im-server-enterprise';
-const openSourceServerRoot = process.env.OPENIM_OPEN_SOURCE_SERVER ?? '/Users/gordon/GolandProjects/open-im-server';
+const serverRoot =
+  process.env.OPENIM_ENTERPRISE_SERVER ?? '/Users/gordon/GolandProjects/open-im-server-enterprise';
+const openSourceServerRoot =
+  process.env.OPENIM_OPEN_SOURCE_SERVER ?? '/Users/gordon/GolandProjects/open-im-server';
 const protocolRoot = resolve(serverRoot, 'pkg/protocol');
 const routesPath = resolve(root, 'src/generated/routes.json');
 const navigationPath = resolve(root, 'src/generated/navigation.json');
 const localizedPath = resolve(root, 'src/generated/platform-api-zh-content.json');
 const allEndpoints = [...enterpriseEndpoints, ...meetingEndpoints];
+const metadataOnly = process.env.OPENIM_ENTERPRISE_METADATA_ONLY === '1';
 let activeProtocol;
 
 async function main() {
@@ -18,29 +26,41 @@ async function main() {
   const schema = await loadProtocol(protocolRoot);
   activeProtocol = schema;
   validateSpecs(allEndpoints, schema);
-  await removeGeneratedDirectories();
-  await writeOverviewPages(schema);
+  if (!metadataOnly) {
+    await removeGeneratedDirectories();
+    await writeOverviewPages(schema);
 
-  for (const spec of allEndpoints) {
-    const rpc = getRpc(spec, schema);
-    const body =
-      spec.special === 'stream-put'
-        ? renderStreamPutPage(spec)
-        : renderApiPage(spec, rpc, schema);
-    await writePage(contentFile(spec), body);
+    for (const spec of allEndpoints) {
+      const rpc = getRpc(spec, schema);
+      const body =
+        spec.special === 'stream-put' ? renderStreamPutPage(spec) : renderApiPage(spec, rpc, schema);
+      await writePage(contentFile(spec), body);
+    }
   }
 
   await updateGeneratedData(allEndpoints);
-  console.log(`Wrote ${allEndpoints.length + 2} Chinese commercial Platform API pages.`);
+  console.log(
+    metadataOnly
+      ? 'Updated Chinese commercial Platform API navigation and routes.'
+      : `Wrote ${allEndpoints.length + 2} Chinese commercial Platform API pages.`,
+  );
 }
 
 async function validateRouteCoverage() {
-  const enterpriseRoutes = parseRouter(await readFile(resolve(serverRoot, 'internal/api/router.go'), 'utf8'));
-  const openSourceRoutes = parseRouter(await readFile(resolve(openSourceServerRoot, 'internal/api/router.go'), 'utf8'));
+  const enterpriseRoutes = parseRouter(
+    await readFile(resolve(serverRoot, 'internal/api/router.go'), 'utf8'),
+  );
+  const openSourceRoutes = parseRouter(
+    await readFile(resolve(openSourceServerRoot, 'internal/api/router.go'), 'utf8'),
+  );
   const openSourceKeys = new Set(openSourceRoutes.map(routeKey));
   const expected = new Set(
     enterpriseRoutes
-      .filter((route) => route.path.startsWith('/rtc-meeting/') || (route.marked && !openSourceKeys.has(routeKey(route))))
+      .filter(
+        (route) =>
+          route.path.startsWith('/rtc-meeting/') ||
+          (route.marked && !openSourceKeys.has(routeKey(route))),
+      )
       .map(routeKey),
   );
   const documented = new Set(allEndpoints.map((spec) => routeKey(spec)));
@@ -136,25 +156,37 @@ async function writeOverviewPages(protocol) {
     title: '概述',
     description: 'OpenIM 商业版定时任务能力概览。',
     route: '/docs/chat/platform-api/v3/timer/overview',
-    introduction: '定时任务模块用于由业务服务端登记延迟执行任务，并在到达执行时间后按配置回调业务地址。该模块适合消息提醒、预约操作和业务补偿，不用于替代高频实时调度系统。',
+    introduction:
+      '定时任务模块用于由业务服务端登记延迟执行任务，并在到达执行时间后按配置回调业务地址。该模块适合消息提醒、预约操作和业务补偿，不用于替代高频实时调度系统。',
     endpoints: enterpriseEndpoints.filter((item) => item.module === 'timer'),
-    resources: timerResources.map((name) => findMessage(protocol, 'openim.third', name)).filter(Boolean),
+    resources: timerResources
+      .map((name) => findMessage(protocol, 'openim.third', name))
+      .filter(Boolean),
+    enums: timerEnumDocumentation,
   });
   const meeting = renderOverview({
     title: '概述',
     description: 'OpenIM 商业版会议、实时通话、会议聊天和录制能力概览。',
     route: '/docs/chat/platform-api/v3/meeting/overview',
-    introduction: '会议模块提供预约会议、即时会议、参会控制、重复会议、会议聊天、录制查询和实时通话恢复能力。全部会议接口均属于 OpenIM 商业版，调用方应在自己的业务服务端校验用户和会议权限。',
+    introduction:
+      '会议模块提供预约会议、即时会议、参会控制、重复会议、会议聊天、录制查询和实时通话恢复能力。全部会议接口均属于 OpenIM 商业版，调用方应在自己的业务服务端校验用户和会议权限。',
     endpoints: meetingEndpoints,
     resources: meetingResources
-      .map((name) => findMessage(protocol, name === 'InvitationInfo' ? 'openmeeting.signal' : 'openmeeting.meeting', name))
+      .map((name) =>
+        findMessage(
+          protocol,
+          name === 'InvitationInfo' ? 'openmeeting.signal' : 'openmeeting.meeting',
+          name,
+        ),
+      )
       .filter(Boolean),
+    enums: meetingEnumDocumentation,
   });
   await writePage('content/zh/docs/chat/platform-api/v3/timer/overview.mdx', timer);
   await writePage('content/zh/docs/chat/platform-api/v3/meeting/overview.mdx', meeting);
 }
 
-function renderOverview({ title, description, route, introduction, endpoints, resources }) {
+function renderOverview({ title, description, route, introduction, endpoints, resources, enums }) {
   const grouped = Map.groupBy(endpoints, (item) => categoryTitles[item.category] ?? item.category);
   const capabilitySections = [...grouped.entries()]
     .map(
@@ -168,7 +200,7 @@ function renderOverview({ title, description, route, introduction, endpoints, re
         `### ${message.name}\n\n${resourceIntroduction(message.name)}\n\n${renderResourceTable(message)}`,
     )
     .join('\n\n');
-  return `${frontmatter({ title, description, route, template: 'overview' })}\n\n${introduction}\n\n## 能力范围\n\n${capabilitySections}\n\n## 资源结构\n\n${resourceSections}\n\n## 接入建议\n\n- 会议、任务和实时通话接口应由可信业务服务端调用。\n- 调用方应校验操作用户、目标资源和租户边界，不要仅依赖请求体中的用户 ID。\n- 使用唯一的 \`operationID\` 关联业务日志和 OpenIM 服务端日志。\n`;
+  return `${frontmatter({ title, description, route, template: 'overview' })}\n\n${introduction}\n\n## 能力范围\n\n${capabilitySections}\n\n## 资源结构\n\n${resourceSections}\n\n${enums}\n\n## 接入建议\n\n- 会议、任务和实时通话接口应由可信业务服务端调用。\n- 调用方应校验操作用户、目标资源和租户边界，不要仅依赖请求体中的用户 ID。\n- 使用唯一的 \`operationID\` 关联业务日志和 OpenIM 服务端日志。\n`;
 }
 
 function renderApiPage(spec, rpc, protocol) {
@@ -176,7 +208,12 @@ function renderApiPage(spec, rpc, protocol) {
   const response = protocol.messages.get(rpc.responseKey);
   const requestSample = sampleMessage(request, protocol, 0);
   const responseData = sampleMessage(response, protocol, 0);
-  const success = { errCode: 0, errMsg: '', errDlt: '', ...(Object.keys(responseData).length ? { data: responseData } : {}) };
+  const success = {
+    errCode: 0,
+    errMsg: '',
+    errDlt: '',
+    ...(Object.keys(responseData).length ? { data: responseData } : {}),
+  };
   const relatedOverview = `/docs/chat/platform-api/v3/${spec.module}/overview`;
   return `${frontmatter({
     title: spec.title,
@@ -201,7 +238,12 @@ function frontmatter({ title, description, route, template }) {
 
 function renderRequestTable(message) {
   if (!message?.fields.length) return '此接口不需要请求体字段。';
-  const rows = message.fields.map((field) => [field.name, isRequired(field) ? '是' : '否', displayType(field), describeField(field)]);
+  const rows = message.fields.map((field) => [
+    field.name,
+    isRequired(field) ? '是' : '否',
+    displayType(field),
+    describeField(field),
+  ]);
   return table(['参数名', '是否必填', '类型', '说明'], rows);
 }
 
@@ -211,7 +253,8 @@ function renderResponseTable(message) {
     ['errMsg', 'string', '错误简要信息，成功时通常为空。'],
     ['errDlt', 'string', '错误详细信息，成功时通常为空。'],
   ];
-  for (const field of message?.fields ?? []) rows.push([`data.${field.name}`, displayType(field), describeField(field)]);
+  for (const field of message?.fields ?? [])
+    rows.push([`data.${field.name}`, displayType(field), describeField(field)]);
   return table(['参数名', '类型', '说明'], rows);
 }
 
@@ -233,7 +276,8 @@ function json(value) {
 function sampleMessage(message, protocol, depth) {
   if (!message || depth > 3) return {};
   const value = {};
-  for (const field of message.fields) value[field.name] = sampleField(field, message.package, protocol, depth + 1);
+  for (const field of message.fields)
+    value[field.name] = sampleField(field, message.package, protocol, depth + 1);
   return value;
 }
 
@@ -258,7 +302,8 @@ function sampleScalar(name, type) {
   if (scalarType === 'string' || scalarType === 'bytes') return sampleString(name);
   if (scalarType === 'bool') return false;
   if (/^(?:u?int|sint|fixed|sfixed|float|double)/.test(scalarType)) {
-    if (/(?:Time|Date|At|Ms)$/i.test(name) && !/(?:Times|Timeout)$/i.test(name)) return 1719800000000;
+    if (/(?:Time|Date|At|Ms)$/i.test(name) && !/(?:Times|Timeout)$/i.test(name))
+      return 1719800000000;
     if (/duration/i.test(name)) return 3600;
     if (/page|count|number|size|seq|order|status|type|index|retry|interval/i.test(name)) return 1;
     return 0;
@@ -321,13 +366,17 @@ function describeField(field) {
   const resourceLink = resourceLinks[typeName];
   if (resourceLink)
     return `结构为[${resourceLink.label}的 \`${resourceLink.displayName ?? typeName}\`](${resourceLink.href}#${resourceLink.anchor ?? anchor(typeName)})。`;
+  const enumLink = enumResourceLinks[typeName];
+  if (enumLink) return `枚举值参见[会议模块的 \`${typeName}\`](${enumLink})。`;
   const enumType = resolveEnum(activeProtocol, field.package, field.type);
-  if (enumType) return `枚举值：${enumType.values.map((item) => `\`${item.name}=${item.number}\``).join('、')}。`;
+  if (enumType)
+    return `枚举值：${enumType.values.map((item) => `\`${item.name}=${item.number}\``).join('、')}。`;
   const exact = fieldDescriptions[field.name];
   if (exact) return exact;
   const translated = field.comment ? translateComment(field.comment) : undefined;
   if (translated) return translated;
-  if (!isScalar(field.type)) return `结构为 \`${typeName}${field.label === 'repeated' ? '[]' : ''}\`。`;
+  if (!isScalar(field.type))
+    return `结构为 \`${typeName}${field.label === 'repeated' ? '[]' : ''}\`。`;
   return `${humanize(field.name)}。`;
 }
 
@@ -347,7 +396,10 @@ function translateComment(comment) {
 }
 
 function humanize(name) {
-  return name.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replaceAll('ID', ' ID').trim();
+  return name
+    .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+    .replaceAll('ID', ' ID')
+    .trim();
 }
 
 function isScalar(type) {
@@ -378,10 +430,13 @@ function findMessage(protocol, packageName, name) {
 function resolveMessage(protocol, currentPackage, type) {
   const normalized = type.replace(/^\./, '');
   if (protocol.messages.has(normalized)) return protocol.messages.get(normalized);
-  if (protocol.messages.has(`${currentPackage}.${normalized}`)) return protocol.messages.get(`${currentPackage}.${normalized}`);
+  if (protocol.messages.has(`${currentPackage}.${normalized}`))
+    return protocol.messages.get(`${currentPackage}.${normalized}`);
   if (normalized.includes('.')) {
     const qualifiedSuffix = `.${normalized}`;
-    const qualifiedCandidates = [...protocol.messages.entries()].filter(([key]) => key.endsWith(qualifiedSuffix));
+    const qualifiedCandidates = [...protocol.messages.entries()].filter(([key]) =>
+      key.endsWith(qualifiedSuffix),
+    );
     if (qualifiedCandidates.length === 1) return qualifiedCandidates[0][1];
   }
   const suffix = `.${normalized.split('.').at(-1)}`;
@@ -399,8 +454,10 @@ async function loadProtocol(directory) {
     const packageName = source.match(/\bpackage\s+([\w.]+)\s*;/)?.[1];
     if (!packageName) continue;
     const moduleName = relative(directory, dirname(file)).replaceAll('\\', '/');
-    for (const message of parseBlocks(source, 'message', packageName)) messages.set(`${packageName}.${message.name}`, message);
-    for (const enumType of parseEnums(source, packageName)) enums.set(`${packageName}.${enumType.name}`, enumType);
+    for (const message of parseBlocks(source, 'message', packageName))
+      messages.set(`${packageName}.${message.name}`, message);
+    for (const enumType of parseEnums(source, packageName))
+      enums.set(`${packageName}.${enumType.name}`, enumType);
     const rpcPattern = /\brpc\s+(\w+)\s*\(\s*([\w.]+)\s*\)\s*returns\s*\(\s*([\w.]+)\s*\)/g;
     let match;
     while ((match = rpcPattern.exec(source))) {
@@ -460,7 +517,9 @@ function parseFields(body) {
       continue;
     }
     if (depth === 0) {
-      const field = line.match(/^(optional|required|repeated)?\s*(map<[^>]+>|[\w.]+)\s+(\w+)\s*=\s*(\d+)(?:\s*\[[^\]]+\])?\s*;?(?:\s*\/\/\s*(.*))?$/);
+      const field = line.match(
+        /^(optional|required|repeated)?\s*(map<[^>]+>|[\w.]+)\s+(\w+)\s*=\s*(\d+)(?:\s*\[[^\]]+\])?\s*;?(?:\s*\/\/\s*(.*))?$/,
+      );
       if (field) {
         fields.push({
           label: field[1] ?? '',
@@ -499,10 +558,13 @@ function resolveEnum(protocol, currentPackage, type) {
   if (!protocol?.enums) return undefined;
   const normalized = type.replace(/^\./, '');
   if (protocol.enums.has(normalized)) return protocol.enums.get(normalized);
-  if (protocol.enums.has(`${currentPackage}.${normalized}`)) return protocol.enums.get(`${currentPackage}.${normalized}`);
+  if (protocol.enums.has(`${currentPackage}.${normalized}`))
+    return protocol.enums.get(`${currentPackage}.${normalized}`);
   if (normalized.includes('.')) {
     const qualifiedSuffix = `.${normalized}`;
-    const qualifiedCandidates = [...protocol.enums.entries()].filter(([key]) => key.endsWith(qualifiedSuffix));
+    const qualifiedCandidates = [...protocol.enums.entries()].filter(([key]) =>
+      key.endsWith(qualifiedSuffix),
+    );
     if (qualifiedCandidates.length === 1) return qualifiedCandidates[0][1];
   }
   const suffix = `.${normalized.split('.').at(-1)}`;
@@ -526,10 +588,29 @@ async function updateGeneratedData(specs) {
   const routes = JSON.parse(await readFile(routesPath, 'utf8'));
   const navigation = JSON.parse(await readFile(navigationPath, 'utf8'));
   const localized = JSON.parse(await readFile(localizedPath, 'utf8'));
-  const retainedRoutes = routes.filter((route) => route.edition !== 'enterprise');
+  const retainedRoutes = routes.filter(
+    (route) =>
+      route.edition !== 'enterprise' &&
+      !route.path.startsWith('/docs/chat/platform-api/v3/webhooks/'),
+  );
   let id = Math.max(...retainedRoutes.map((route) => route.id)) + 1;
-  const docs = [overviewRoute('timer', '概述', 750), overviewRoute('meeting', '概述', 770), ...specs.map(routeRecord)];
-  for (const doc of docs) retainedRoutes.push({ id: id++, ...doc, edition: 'enterprise', locales: ['zh'] });
+  const docs = [
+    overviewRoute('timer', '概述', 750),
+    overviewRoute('meeting', '概述', 770),
+    ...specs.map(routeRecord),
+  ];
+  retainedRoutes.push({ id: id++, ...webhooksOverviewRoute(), locales: ['zh'] });
+  for (const spec of webhookSpecs) {
+    const route = webhookRouteRecord(spec);
+    retainedRoutes.push({
+      id: id++,
+      ...route,
+      ...(spec.edition === 'enterprise' ? { edition: 'enterprise' } : {}),
+      locales: ['zh'],
+    });
+  }
+  for (const doc of docs)
+    retainedRoutes.push({ id: id++, ...doc, edition: 'enterprise', locales: ['zh'] });
   await writeFile(routesPath, `${JSON.stringify(retainedRoutes, null, 2)}\n`, 'utf8');
 
   const context = navigation.contexts.find((item) => item.key === 'chat/platform-api/v3');
@@ -546,6 +627,7 @@ async function updateGeneratedData(specs) {
   addModuleFolder(context, 'conversation', 'conversation-groups', '会话分组', specs);
   insertTopLevelModule(context, 'timer', '定时任务', specs, 'logs');
   insertTopLevelModule(context, 'meeting', '会议', specs, 'migration-to-openim');
+  insertWebhooksModule(context, webhookSpecs);
   context.pageCount = retainedRoutes.filter((route) => route.contextKey === context.key).length;
   await writeFile(navigationPath, `${JSON.stringify(navigation, null, 2)}\n`, 'utf8');
 
@@ -558,6 +640,13 @@ async function updateGeneratedData(specs) {
     timer: '定时任务',
     'managing-tasks': '管理任务',
     meeting: '会议',
+    webhooks: 'Webhooks',
+    ...Object.fromEntries(
+      Object.entries(webhookCategoryTitles).map(([segment, title]) => [
+        `webhooks-${segment}`,
+        title,
+      ]),
+    ),
     'meeting-management': '会议管理',
     'meeting-settings': '会议控制',
     'recurring-meetings': '重复会议',
@@ -612,10 +701,65 @@ function overviewRoute(module, title, navOrder) {
   };
 }
 
+function webhooksOverviewRoute() {
+  const path = '/docs/chat/platform-api/v3/webhooks/overview';
+  return {
+    path,
+    relativePath: path.replace(/^\/docs\//, ''),
+    sourcePath: path,
+    title: '概述',
+    description: 'OpenIM Webhooks 回调机制、配置方式和能力范围概览。',
+    product: 'platform-api',
+    version: 'v3',
+    platform: null,
+    contextKey: 'chat/platform-api/v3',
+    contextTitle: 'Platform API',
+    template: 'overview',
+    status: 'published',
+    sourceIndex: 780,
+    contentFile: `content/zh${path}.mdx`,
+    navOrder: 780,
+  };
+}
+
+function webhookRouteRecord(spec) {
+  const path = webhookRoute(spec);
+  const categoryIndex = Object.keys(webhookCategoryTitles).indexOf(spec.category);
+  const itemIndex = webhookSpecs.filter((item) => item.category === spec.category).indexOf(spec);
+  const navOrder = webhookNavOrder(categoryIndex, itemIndex);
+  return {
+    path,
+    relativePath: path.replace(/^\/docs\//, ''),
+    sourcePath: path,
+    title: spec.title,
+    description: `OpenIM Webhooks：${spec.summary}`,
+    product: 'platform-api',
+    version: 'v3',
+    platform: null,
+    contextKey: 'chat/platform-api/v3',
+    contextTitle: 'Platform API',
+    template: 'api',
+    status: 'published',
+    sourceIndex: navOrder,
+    contentFile: `content/zh${path}.mdx`,
+    navOrder,
+  };
+}
+
+function webhookNavOrder(categoryIndex, itemIndex = 0) {
+  return Number((780.01 + categoryIndex / 100 + itemIndex / 10000).toFixed(4));
+}
+
 function removeEnterpriseNodes(nodes) {
   for (let index = nodes.length - 1; index >= 0; index--) {
     const node = nodes[index];
-    if (node.edition === 'enterprise' || node.id === 'timer' || node.id === 'meeting') nodes.splice(index, 1);
+    if (
+      node.edition === 'enterprise' ||
+      node.id === 'timer' ||
+      node.id === 'meeting' ||
+      node.id === 'webhooks'
+    )
+      nodes.splice(index, 1);
     else removeEnterpriseNodes(node.children ?? []);
   }
 }
@@ -641,21 +785,113 @@ function insertTopLevelModule(context, moduleID, title, specs, beforeID) {
   const grouped = Map.groupBy(pages, (item) => item.category);
   const children = [
     {
-      id: `${moduleID}/overview`, segment: 'overview', title: '概述', href: `/docs/chat/platform-api/v3/${moduleID}/overview`, type: 'page', children: [], minIndex: moduleBaseOrder[moduleID], edition: 'enterprise', locales: ['zh'],
+      id: `${moduleID}/overview`,
+      segment: 'overview',
+      title: '概述',
+      href: `/docs/chat/platform-api/v3/${moduleID}/overview`,
+      type: 'page',
+      children: [],
+      minIndex: moduleBaseOrder[moduleID],
+      edition: 'enterprise',
+      locales: ['zh'],
     },
-    ...[...grouped.entries()].map(([category, items]) => folderNode(`${moduleID}/${category}`, category, categoryTitles[category] ?? category, items)),
+    ...[...grouped.entries()].map(([category, items]) =>
+      folderNode(`${moduleID}/${category}`, category, categoryTitles[category] ?? category, items),
+    ),
   ];
-  const node = { id: moduleID, segment: moduleID, title, href: null, type: 'folder', children, minIndex: moduleBaseOrder[moduleID], edition: 'enterprise', locales: ['zh'] };
+  const node = {
+    id: moduleID,
+    segment: moduleID,
+    title,
+    href: null,
+    type: 'folder',
+    children,
+    minIndex: moduleBaseOrder[moduleID],
+    edition: 'enterprise',
+    locales: ['zh'],
+  };
   const index = context.nodes.findIndex((item) => item.id === beforeID);
   context.nodes.splice(index >= 0 ? index : context.nodes.length, 0, node);
 }
 
+function insertWebhooksModule(context, specs) {
+  const categories = Object.entries(webhookCategoryTitles).map(([category, title], categoryIndex) => {
+    const pages = specs.filter((item) => item.category === category);
+    const enterpriseCategory = pages.every((item) => item.edition === 'enterprise');
+    return {
+      id: `webhooks/${category}`,
+      segment: category,
+      title,
+      href: null,
+      type: 'folder',
+      children: pages.map((spec, itemIndex) => ({
+        id: `webhooks/${category}/${spec.slug}`,
+        segment: spec.slug,
+        title: spec.title,
+        href: webhookRoute(spec),
+        type: 'page',
+        children: [],
+        minIndex: webhookNavOrder(categoryIndex, itemIndex),
+        ...(spec.edition === 'enterprise' ? { edition: 'enterprise' } : {}),
+        locales: ['zh'],
+      })),
+      minIndex: webhookNavOrder(categoryIndex),
+      ...(enterpriseCategory ? { edition: 'enterprise' } : {}),
+      locales: ['zh'],
+    };
+  });
+  const node = {
+    id: 'webhooks',
+    segment: 'webhooks',
+    title: 'Webhooks',
+    href: null,
+    type: 'folder',
+    children: [
+      {
+        id: 'webhooks/overview',
+        segment: 'overview',
+        title: '概述',
+        href: '/docs/chat/platform-api/v3/webhooks/overview',
+        type: 'page',
+        children: [],
+        minIndex: 780,
+        locales: ['zh'],
+      },
+      ...categories,
+    ],
+    minIndex: 780,
+    locales: ['zh'],
+  };
+  const index = context.nodes.findIndex((item) => item.id === 'migration-to-openim');
+  context.nodes.splice(index >= 0 ? index : context.nodes.length, 0, node);
+}
+
 function folderNode(id, segment, title, pages) {
-  return { id, segment, title, href: null, type: 'folder', children: pages.map(pageNode), minIndex: moduleBaseOrder[pages[0].module], edition: 'enterprise', locales: ['zh'] };
+  return {
+    id,
+    segment,
+    title,
+    href: null,
+    type: 'folder',
+    children: pages.map(pageNode),
+    minIndex: moduleBaseOrder[pages[0].module],
+    edition: 'enterprise',
+    locales: ['zh'],
+  };
 }
 
 function pageNode(spec) {
-  return { id: `${spec.module}/${spec.category}/${spec.slug}`, segment: spec.slug, title: spec.title, href: routePath(spec), type: 'page', children: [], minIndex: moduleBaseOrder[spec.module], edition: 'enterprise', locales: ['zh'] };
+  return {
+    id: `${spec.module}/${spec.category}/${spec.slug}`,
+    segment: spec.slug,
+    title: spec.title,
+    href: routePath(spec),
+    type: 'page',
+    children: [],
+    minIndex: moduleBaseOrder[spec.module],
+    edition: 'enterprise',
+    locales: ['zh'],
+  };
 }
 
 function routePath(spec) {
@@ -672,7 +908,15 @@ async function writePage(file, body) {
   await writeFile(output, await format(body, { parser: 'mdx' }), 'utf8');
 }
 
-const moduleBaseOrder = { user: 624.1, relation: 639.1, group: 694.1, message: 725.1, conversation: 745.1, timer: 750, meeting: 770 };
+const moduleBaseOrder = {
+  user: 624.1,
+  relation: 639.1,
+  group: 694.1,
+  message: 725.1,
+  conversation: 745.1,
+  timer: 750,
+  meeting: 770,
+};
 
 const categoryTitles = {
   'account-governance': '账号治理',
@@ -693,9 +937,71 @@ const categoryTitles = {
   'meeting-chat': '会议聊天',
 };
 
+const timerEnumDocumentation = `## 枚举
+
+### TimerTaskStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | \`Pending\` | 等待执行。 |
+| 1 | \`Processing\` | 正在执行。 |
+
+### TimerTaskCallbackMethod
+
+| 值 | 说明 |
+| --- | --- |
+| \`openim-message\` | 回调 OpenIM 消息能力。 |
+| \`openim-http\` | 调用 HTTP 回调地址。 |
+| \`openim-rpc\` | 调用预配置 RPC 能力。 |
+| \`preset\` | 调用服务端预置处理逻辑。 |`;
+
+const meetingEnumDocumentation = `## 枚举
+
+### RepeatType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | \`REPEAT_TYPE_NONE\` | 不重复。 |
+| 1 | \`REPEAT_TYPE_DAILY\` | 每日重复。 |
+| 2 | \`REPEAT_TYPE_WEEKLY\` | 每周重复。 |
+| 3 | \`REPEAT_TYPE_WEEKDAY\` | 工作日重复。 |
+| 4 | \`REPEAT_TYPE_MONTHLY\` | 每月重复。 |
+| 5 | \`REPEAT_TYPE_YEARLY\` | 每年重复。 |
+| 6 | \`REPEAT_TYPE_HOURLY\` | 每小时重复。 |
+
+### DayOfWeek
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | \`SUNDAY\` | 星期日。 |
+| 1 | \`MONDAY\` | 星期一。 |
+| 2 | \`TUESDAY\` | 星期二。 |
+| 3 | \`WEDNESDAY\` | 星期三。 |
+| 4 | \`THURSDAY\` | 星期四。 |
+| 5 | \`FRIDAY\` | 星期五。 |
+| 6 | \`SATURDAY\` | 星期六。 |
+
+### RepeatStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | \`REPEAT_STATUS_UNKNOWN\` | 未知状态。 |
+| 1 | \`REPEAT_STATUS_ACTIVE\` | 生效中。 |
+| 2 | \`REPEAT_STATUS_COMPLETED\` | 已完成。 |
+
+### RecordStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | \`NotStarted\` | 未开始。 |
+| 1 | \`Completed\` | 已完成。 |
+| 2 | \`Failed\` | 失败。 |
+| 3 | \`Processing\` | 进行中。 |`;
+
 const resourceDescriptions = {
   LiveKit: '`LiveKit` 表示客户端加入会议所需的实时音视频访问地址和 Token。',
-  CreatorDefinedMeetingInfo: '`CreatorDefinedMeetingInfo` 表示创建者可配置的会议标题、时间、密码、主持人和受邀用户。',
+  CreatorDefinedMeetingInfo:
+    '`CreatorDefinedMeetingInfo` 表示创建者可配置的会议标题、时间、密码、主持人和受邀用户。',
   MeetingSetting: '`MeetingSetting` 表示会议级摄像头、麦克风、屏幕共享、锁定和录制设置。',
   MeetingInfoSetting: '`MeetingInfoSetting` 汇总会议资料、会议设置和重复会议信息。',
   MeetingRepeatInfoReq: '`MeetingRepeatInfoReq` 表示创建或更新重复会议时提交的重复规则。',
@@ -706,7 +1012,8 @@ const resourceDescriptions = {
   MeetingChatMessage: '`MeetingChatMessage` 表示会议聊天消息及其 Seq、发送者和接收范围。',
   InviteeInfo: '`InviteeInfo` 表示更新会议时需要替换的受邀用户列表。',
   InvitationInfo: '`InvitationInfo` 表示实时通话邀请、房间和参与者信息。',
-  TimerTaskCallbackConfig: '`TimerTaskCallbackConfig` 表示定时任务执行时调用的业务回调地址、方法和请求头。',
+  TimerTaskCallbackConfig:
+    '`TimerTaskCallbackConfig` 表示定时任务执行时调用的业务回调地址、方法和请求头。',
   TimerTask: '`TimerTask` 表示服务端保存的定时任务及执行、重试和回调配置。',
 };
 
@@ -730,7 +1037,10 @@ const resourceLinks = Object.fromEntries([
     'MeetingChatMessage',
     'InviteeInfo',
     'InvitationInfo',
-  ].map((name) => [name, { label: '会议模块', href: '/docs/chat/platform-api/v3/meeting/overview' }]),
+  ].map((name) => [
+    name,
+    { label: '会议模块', href: '/docs/chat/platform-api/v3/meeting/overview' },
+  ]),
   ...['TimerTaskCallbackConfig', 'TimerTask'].map((name) => [
     name,
     { label: '定时任务模块', href: '/docs/chat/platform-api/v3/timer/overview' },
@@ -747,8 +1057,22 @@ const resourceLinks = Object.fromEntries([
     name,
     { label: '群组模块', href: '/docs/chat/platform-api/v3/group/overview' },
   ]),
-  ['GroupMemberFullInfo', { label: '群组模块', displayName: 'GroupMemberInfo', anchor: 'groupmemberinfo', href: '/docs/chat/platform-api/v3/group/overview' }],
+  [
+    'GroupMemberFullInfo',
+    {
+      label: '群组模块',
+      displayName: 'GroupMemberInfo',
+      anchor: 'groupmemberinfo',
+      href: '/docs/chat/platform-api/v3/group/overview',
+    },
+  ],
 ]);
+
+const enumResourceLinks = {
+  RepeatType: '/docs/chat/platform-api/v3/meeting/overview#repeattype',
+  DayOfWeek: '/docs/chat/platform-api/v3/meeting/overview#dayofweek',
+  RepeatStatus: '/docs/chat/platform-api/v3/meeting/overview#repeatstatus',
+};
 
 const fieldDescriptions = {
   userID: 'OpenIM 用户 ID。',
@@ -842,7 +1166,8 @@ const fieldDescriptions = {
   recordOn: '是否按服务端录制策略录制会议。',
   endDate: '重复会议结束日期，Unix 毫秒时间戳。',
   repeatTimes: '重复会议计划生成次数。',
-  repeatType: '重复规则类型。',
+  repeatType: '重复规则类型，参见[会议模块的 `RepeatType`](/docs/chat/platform-api/v3/meeting/overview#repeattype)。',
+  repeatDaysOfWeek: '重复星期，参见[会议模块的 `DayOfWeek`](/docs/chat/platform-api/v3/meeting/overview#dayofweek)。',
   interval: '重复规则间隔。',
   repeatDaysOfWeek: '每周重复日期列表。',
   repeatSequence: '当前会议在重复会议中的序号。',
@@ -862,7 +1187,7 @@ const fieldDescriptions = {
   egressID: '录制任务 ID。',
   downloadUrl: '录制文件下载地址。',
   egressUploading: '录制文件是否仍在上传。',
-  recordStatus: '录制状态：`0` 未开始、`1` 已完成、`2` 失败、`3` 进行中。',
+  recordStatus: '录制状态，参见[会议模块的 `RecordStatus`](/docs/chat/platform-api/v3/meeting/overview#recordstatus)。',
   videoFileSize: '录制视频文件大小，单位为字节。',
   videoCoverUrl: '录制视频封面地址。',
   videoName: '录制视频文件名。',
@@ -875,15 +1200,15 @@ const fieldDescriptions = {
   sendID: '消息发送者用户 ID。',
   nickname: '用户展示名称。',
   faceURL: '用户头像地址。',
-  contentType: '消息内容类型。',
+  contentType: '消息内容类型，参见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。',
   payload: '会议聊天消息内容。',
   type: '业务类型。',
   currentSeq: '客户端最后接收的消息 Seq。',
   initiateTime: '实时通话邀请发起时间。',
   timeout: '邀请超时时间。',
   mediaType: '实时通话媒体类型。',
-  platformID: '发起端平台 ID。',
-  sessionType: '实时通话会话类型。',
+  platformID: '发起端平台 ID，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。',
+  sessionType: '实时通话会话类型，参见[会话模块的 `ConversationType`](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。',
   busyLineUserIDList: '忙线用户 ID 列表。',
   inviteeUserIDList: '受邀用户 ID 列表。',
   customData: '实时通话邀请的业务扩展数据。',
@@ -892,7 +1217,7 @@ const fieldDescriptions = {
   offlinePushInfo: '离线推送配置。',
   participant: '通话参与者资料。',
   roomList: '实时通话房间列表。',
-  callbackMethod: '业务回调使用的 HTTP 方法。',
+  callbackMethod: '任务回调方式，参见[定时任务模块的 `TimerTaskCallbackMethod`](/docs/chat/platform-api/v3/timer/overview#timertaskcallbackmethod)。',
   callbackPayload: '业务回调请求体。',
   callbackHeader: '业务回调请求头。',
   callbackURL: '业务回调地址。',

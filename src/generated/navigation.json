@@ -2017,6 +2017,726 @@
           ]
         },
         {
+          "id": "webhooks",
+          "segment": "webhooks",
+          "title": "Webhooks",
+          "href": null,
+          "type": "folder",
+          "children": [
+            {
+              "id": "webhooks/overview",
+              "segment": "overview",
+              "title": "概述",
+              "href": "/docs/chat/platform-api/v3/webhooks/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 780,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/user",
+              "segment": "user",
+              "title": "用户",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/user/before-user-register",
+                  "segment": "before-user-register",
+                  "title": "用户注册前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/before-user-register",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.01,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/user/after-user-register",
+                  "segment": "after-user-register",
+                  "title": "用户注册后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/after-user-register",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0101,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/user/before-update-user-info",
+                  "segment": "before-update-user-info",
+                  "title": "更新用户资料前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/before-update-user-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0102,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/user/after-update-user-info",
+                  "segment": "after-update-user-info",
+                  "title": "更新用户资料后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/after-update-user-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0103,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/user/before-update-user-info-ex",
+                  "segment": "before-update-user-info-ex",
+                  "title": "按字段更新用户资料前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/before-update-user-info-ex",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0104,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/user/after-update-user-info-ex",
+                  "segment": "after-update-user-info-ex",
+                  "title": "按字段更新用户资料后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/user/after-update-user-info-ex",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0105,
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.01,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/relation",
+              "segment": "relation",
+              "title": "关系",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/relation/before-add-friend",
+                  "segment": "before-add-friend",
+                  "title": "发起好友申请前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/before-add-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.02,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-add-friend",
+                  "segment": "after-add-friend",
+                  "title": "发起好友申请后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-add-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0201,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/before-add-friend-agree",
+                  "segment": "before-add-friend-agree",
+                  "title": "同意好友申请前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/before-add-friend-agree",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0202,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-add-friend-agree",
+                  "segment": "after-add-friend-agree",
+                  "title": "同意好友申请后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-add-friend-agree",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0203,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-delete-friend",
+                  "segment": "after-delete-friend",
+                  "title": "删除好友后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-delete-friend",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0204,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/before-set-friend-remark",
+                  "segment": "before-set-friend-remark",
+                  "title": "设置好友备注前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/before-set-friend-remark",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0205,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-set-friend-remark",
+                  "segment": "after-set-friend-remark",
+                  "title": "设置好友备注后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-set-friend-remark",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0206,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/before-add-black",
+                  "segment": "before-add-black",
+                  "title": "加入黑名单前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/before-add-black",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0207,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-remove-black",
+                  "segment": "after-remove-black",
+                  "title": "移出黑名单后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-remove-black",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0208,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/before-import-friends",
+                  "segment": "before-import-friends",
+                  "title": "导入好友前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/before-import-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0209,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/relation/after-import-friends",
+                  "segment": "after-import-friends",
+                  "title": "导入好友后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/relation/after-import-friends",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.021,
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.02,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/group",
+              "segment": "group",
+              "title": "群组",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/group/before-create-group",
+                  "segment": "before-create-group",
+                  "title": "创建群组前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-create-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.03,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-create-group",
+                  "segment": "after-create-group",
+                  "title": "创建群组后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-create-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0301,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-member-join-group",
+                  "segment": "before-member-join-group",
+                  "title": "成员加入群组前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-member-join-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0302,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-invite-user-to-group",
+                  "segment": "before-invite-user-to-group",
+                  "title": "邀请用户入群前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-invite-user-to-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0303,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-apply-join-group",
+                  "segment": "before-apply-join-group",
+                  "title": "申请加入群组前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-apply-join-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0304,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-join-group",
+                  "segment": "after-join-group",
+                  "title": "加入群组后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-join-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0305,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-quit-group",
+                  "segment": "after-quit-group",
+                  "title": "退出群组后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-quit-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0306,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-kick-group-member",
+                  "segment": "after-kick-group-member",
+                  "title": "移出群成员后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-kick-group-member",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0307,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-dismiss-group",
+                  "segment": "after-dismiss-group",
+                  "title": "解散群组后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-dismiss-group",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0308,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-transfer-group-owner",
+                  "segment": "after-transfer-group-owner",
+                  "title": "转让群主后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-transfer-group-owner",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0309,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-set-group-member-info",
+                  "segment": "before-set-group-member-info",
+                  "title": "设置群成员资料前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-set-group-member-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.031,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-set-group-member-info",
+                  "segment": "after-set-group-member-info",
+                  "title": "设置群成员资料后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-set-group-member-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0311,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-set-group-info",
+                  "segment": "before-set-group-info",
+                  "title": "设置群资料前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-set-group-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0312,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-set-group-info",
+                  "segment": "after-set-group-info",
+                  "title": "设置群资料后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-set-group-info",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0313,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/before-set-group-info-ex",
+                  "segment": "before-set-group-info-ex",
+                  "title": "按字段设置群资料前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/before-set-group-info-ex",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0314,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/group/after-set-group-info-ex",
+                  "segment": "after-set-group-info-ex",
+                  "title": "按字段设置群资料后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/group/after-set-group-info-ex",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0315,
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.03,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/message",
+              "segment": "message",
+              "title": "消息",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/message/before-send-single-message",
+                  "segment": "before-send-single-message",
+                  "title": "发送单聊消息前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/before-send-single-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.04,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/after-send-single-message",
+                  "segment": "after-send-single-message",
+                  "title": "发送单聊消息后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/after-send-single-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0401,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/before-send-group-message",
+                  "segment": "before-send-group-message",
+                  "title": "发送群聊消息前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/before-send-group-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0402,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/after-send-group-message",
+                  "segment": "after-send-group-message",
+                  "title": "发送群聊消息后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/after-send-group-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0403,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/before-message-modify",
+                  "segment": "before-message-modify",
+                  "title": "消息写入前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/before-message-modify",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0404,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/after-single-message-read",
+                  "segment": "after-single-message-read",
+                  "title": "单聊消息已读后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/after-single-message-read",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0405,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/after-group-message-read",
+                  "segment": "after-group-message-read",
+                  "title": "群聊消息已读后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/after-group-message-read",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0406,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/message/after-revoke-message",
+                  "segment": "after-revoke-message",
+                  "title": "消息撤回后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/message/after-revoke-message",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0407,
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.04,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/push",
+              "segment": "push",
+              "title": "推送与在线状态",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/push/before-online-push",
+                  "segment": "before-online-push",
+                  "title": "单聊在线推送前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/before-online-push",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.05,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/push/before-group-online-push",
+                  "segment": "before-group-online-push",
+                  "title": "群聊在线推送前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/before-group-online-push",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0501,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/push/before-offline-push",
+                  "segment": "before-offline-push",
+                  "title": "离线推送前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/before-offline-push",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0502,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/push/after-user-online",
+                  "segment": "after-user-online",
+                  "title": "用户上线后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/after-user-online",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0503,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/push/after-user-offline",
+                  "segment": "after-user-offline",
+                  "title": "用户离线后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/after-user-offline",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0504,
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/push/after-user-kick-off",
+                  "segment": "after-user-kick-off",
+                  "title": "用户被强制下线后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/push/after-user-kick-off",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0505,
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.05,
+              "locales": [
+                "zh"
+              ]
+            },
+            {
+              "id": "webhooks/conversation",
+              "segment": "conversation",
+              "title": "会话",
+              "href": null,
+              "type": "folder",
+              "children": [
+                {
+                  "id": "webhooks/conversation/before-create-single-chat-conversations",
+                  "segment": "before-create-single-chat-conversations",
+                  "title": "创建单聊会话前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/conversation/before-create-single-chat-conversations",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.06,
+                  "edition": "enterprise",
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/conversation/after-create-single-chat-conversations",
+                  "segment": "after-create-single-chat-conversations",
+                  "title": "创建单聊会话后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/conversation/after-create-single-chat-conversations",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0601,
+                  "edition": "enterprise",
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/conversation/before-create-group-chat-conversations",
+                  "segment": "before-create-group-chat-conversations",
+                  "title": "创建群聊会话前",
+                  "href": "/docs/chat/platform-api/v3/webhooks/conversation/before-create-group-chat-conversations",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0602,
+                  "edition": "enterprise",
+                  "locales": [
+                    "zh"
+                  ]
+                },
+                {
+                  "id": "webhooks/conversation/after-create-group-chat-conversations",
+                  "segment": "after-create-group-chat-conversations",
+                  "title": "创建群聊会话后",
+                  "href": "/docs/chat/platform-api/v3/webhooks/conversation/after-create-group-chat-conversations",
+                  "type": "page",
+                  "children": [],
+                  "minIndex": 780.0603,
+                  "edition": "enterprise",
+                  "locales": [
+                    "zh"
+                  ]
+                }
+              ],
+              "minIndex": 780.06,
+              "edition": "enterprise",
+              "locales": [
+                "zh"
+              ]
+            }
+          ],
+          "minIndex": 780,
+          "locales": [
+            "zh"
+          ]
+        },
+        {
           "id": "migration-to-openim",
           "segment": "migration-to-openim",
           "title": "Migrate to OpenIM",
@@ -2035,7 +2755,7 @@
           "minIndex": 635
         }
       ],
-      "pageCount": 142
+      "pageCount": 194
     },
     {
       "key": "chat/sdk/v4/ios",

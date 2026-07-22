@@ -29,10 +29,10 @@ sourcePath: "/docs/chat/platform-api/v3/timer/overview"
 
 `TimerTaskCallbackConfig` 表示定时任务执行时调用的业务回调地址、方法和请求头。
 
-| 字段            | 类型   | 说明                       |
-| --------------- | ------ | -------------------------- |
-| callbackMethod  | string | 业务回调使用的 HTTP 方法。 |
-| callbackPayload | string | 业务回调请求体。           |
+| 字段            | 类型   | 说明                                                                                                                              |
+| --------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| callbackMethod  | string | 任务回调方式，参见[定时任务模块的 `TimerTaskCallbackMethod`](/docs/chat/platform-api/v3/timer/overview#timertaskcallbackmethod)。 |
+| callbackPayload | string | 业务回调请求体。                                                                                                                  |
 
 ### TimerTask
 
@@ -51,6 +51,24 @@ sourcePath: "/docs/chat/platform-api/v3/timer/overview"
 | createdAt      | int                     | 创建时间，Unix 毫秒时间戳。                                                                                           |
 | updatedAt      | int                     | 更新时间，Unix 毫秒时间戳。                                                                                           |
 | dedupKey       | string                  | 业务幂等键，用于避免重复创建任务。                                                                                    |
+
+## 枚举
+
+### TimerTaskStatus
+
+| 值  | 名称         | 说明       |
+| --- | ------------ | ---------- |
+| 0   | `Pending`    | 等待执行。 |
+| 1   | `Processing` | 正在执行。 |
+
+### TimerTaskCallbackMethod
+
+| 值               | 说明                     |
+| ---------------- | ------------------------ |
+| `openim-message` | 回调 OpenIM 消息能力。   |
+| `openim-http`    | 调用 HTTP 回调地址。     |
+| `openim-rpc`     | 调用预配置 RPC 能力。    |
+| `preset`         | 调用服务端预置处理逻辑。 |
 
 ## 接入建议
 

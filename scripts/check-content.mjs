@@ -201,11 +201,11 @@ const platformApiZhOverviewHeadingExpectations = new Map([
   ],
   [
     '/docs/chat/platform-api/v3/user/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/docs/chat/platform-api/v3/relation/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/docs/chat/platform-api/v3/auth/overview',
@@ -213,22 +213,40 @@ const platformApiZhOverviewHeadingExpectations = new Map([
   ],
   [
     '/docs/chat/platform-api/v3/group/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/docs/chat/platform-api/v3/conversation/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/docs/chat/platform-api/v3/message/overview',
-    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/docs/chat/platform-api/v3/logs/overview',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
   ],
-  ['/docs/chat/platform-api/v3/timer/overview', ['## 能力范围', '## 资源结构', '## 接入建议']],
-  ['/docs/chat/platform-api/v3/meeting/overview', ['## 能力范围', '## 资源结构', '## 接入建议']],
+  [
+    '/docs/chat/platform-api/v3/timer/overview',
+    ['## 能力范围', '## 资源结构', '## 枚举', '## 接入建议'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/meeting/overview',
+    ['## 能力范围', '## 资源结构', '## 枚举', '## 接入建议'],
+  ],
+  [
+    '/docs/chat/platform-api/v3/webhooks/overview',
+    [
+      '## 工作方式',
+      '## 配置 Webhooks',
+      '## 调用协议',
+      '## 枚举',
+      '## 回调能力',
+      '## 接入建议',
+      '## 相关页面',
+    ],
+  ],
   [
     '/docs/chat/platform-api/v3/migration-to-openim',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
@@ -304,7 +322,10 @@ for (const route of routes) {
     );
   }
   if (route.contentFile.startsWith('content/docs/')) {
-    if (!isZhOnly && (containsCjk(frontmatter.title ?? '') || containsCjk(frontmatter.description ?? ''))) {
+    if (
+      !isZhOnly &&
+      (containsCjk(frontmatter.title ?? '') || containsCjk(frontmatter.description ?? ''))
+    ) {
       errors.push(`${route.contentFile}: English frontmatter contains Chinese text`);
     }
     if (!isZhOnly && containsCjk(bodyWithoutFrontmatter)) {

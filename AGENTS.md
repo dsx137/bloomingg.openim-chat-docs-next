@@ -23,8 +23,8 @@
 - For Platform API requests, default to the Chinese docs and Chinese navigation.
 - Module overview pages should be child pages titled `概述` inside module folders.
 - Single top-level Platform API pages, such as `迁移到 OpenIM` and `错误码`, must keep their own page titles and must not be converted into child `概述` pages.
-- Keep the Chinese Platform API navigation model aligned with the current module names: `认证`, `用户`, `关系`, `群组`, `会话`, `消息`, `日志`, `定时任务`, `会议`, `迁移到 OpenIM`, `错误码`.
-- Open-source and commercial Platform APIs are maintained in the same Chinese documentation tree. Commercial-only pages must set `edition: "enterprise"`; shared open-source pages remain open-source pages and describe commercial-only request, response, or resource fields in a scoped `商业版扩展` section.
+- Keep the Chinese Platform API navigation model aligned with the current module names: `认证`, `用户`, `关系`, `群组`, `会话`, `消息`, `日志`, `定时任务`, `会议`, `Webhooks`, `迁移到 OpenIM`, `错误码`.
+- Open-source and commercial Platform APIs are maintained in the same Chinese documentation tree. Commercial-only pages must set `edition: "enterprise"`; shared open-source pages remain open-source pages and mark commercial-only request, response, resource, configuration, or Webhook fields with the inline `商业版` badge.
 - Build commercial-only API pages from `/Users/gordon/GolandProjects/open-im-server-enterprise` with `npm run enterprise-api:sync`. Do not add this command to `predev`, `prebuild`, or broad default content synchronization.
 - Every documented `/rtc-meeting` route is commercial, including routes without a trailing documentation marker in the enterprise router.
 

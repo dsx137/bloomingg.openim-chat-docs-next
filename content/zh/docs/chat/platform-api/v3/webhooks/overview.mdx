@@ -1,0 +1,200 @@
+---
+title: "概述"
+description: "OpenIM Webhooks 概览，说明回调时机、配置方式、调用协议以及用户、关系、群组、消息、推送和会话回调能力。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/webhooks/overview"
+---
+
+Webhooks 用于在 OpenIM 事件发生前或发生后，通过 HTTP/HTTPS 主动通知业务服务端。业务方可以使用前置回调校验或调整即将执行的操作，也可以使用后置回调同步用户、关系、群组、消息和在线状态等业务数据。
+
+Webhook 接收地址属于服务端配置，不应由客户端设置。业务服务端应校验请求来源、限制请求体大小，并使用 `operationID` 关联 OpenIM 日志和业务日志。
+
+## 工作方式
+
+| 类型     | 调用方式 | 适用场景                               | 对 OpenIM 流程的影响                                                                        |
+| -------- | -------- | -------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 前置回调 | 同步调用 | 内容审核、权限校验、字段修改和业务风控 | OpenIM 等待业务服务端响应，并根据响应和 `failedContinue` 决定继续、拒绝或使用修改后的数据。 |
+| 后置回调 | 异步调用 | 数据同步、审计、统计和业务通知         | 事件已经完成，业务服务端响应不会改变本次 OpenIM 操作结果。                                  |
+
+前置回调位于 OpenIM 业务链路中。业务服务端应保证低延迟和高可用，不要在回调处理中执行耗时任务。后置回调仍可能因为网络、进程退出或队列容量等原因丢失，不应作为唯一的数据持久化或资金类事件依据。
+
+## 配置 Webhooks
+
+在 OpenIM Server 的 `config/webhooks.yml` 中设置统一回调地址，并按需启用具体回调：
+
+```yaml
+url: https://api.example.com/openim/webhooks
+
+beforeSendSingleMsg:
+  enable: true
+  timeout: 5
+  failedContinue: false
+  deniedTypes: []
+
+afterUserRegister:
+  enable: true
+  timeout: 5
+```
+
+| 配置项                                                                           | 说明                                                                                               |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| url                                                                              | 业务服务端的 Webhook 基础地址。OpenIM 会在该地址后追加 `callbackCommand`。                         |
+| enable                                                                           | 是否启用当前回调。                                                                                 |
+| timeout                                                                          | 等待业务服务端响应的超时时间，单位为秒。                                                           |
+| failedContinue                                                                   | 前置回调请求失败或超时时，是否继续执行原 OpenIM 流程。                                             |
+| attentionIds                                                                     | 后置回调关注的用户 ID 或群组 ID；为空时不按该字段过滤。                                            |
+| allowedTypes                                                                     | 允许触发消息回调的内容类型。具体格式以当前开源版配置为准。                                         |
+| deniedTypes                                                                      | 不触发消息回调的内容类型。                                                                         |
+| insecureSkipVerify <span className="enterprise-field-badge">商业版</span>        | 是否跳过 HTTPS 服务端证书校验。仅建议在受控测试环境使用。                                          |
+| signature.algorithm <span className="enterprise-field-badge">商业版</span>       | Webhook 签名算法，支持 `HMAC-SHA1`、`HMAC-SHA256`、`HMAC-SHA512`、`RSA-SHA256` 和 `ECDSA-SHA256`。 |
+| signature.signatureHeader <span className="enterprise-field-badge">商业版</span> | 签名值所在的 HTTP Header 名称。                                                                    |
+| signature.nonceHeader <span className="enterprise-field-badge">商业版</span>     | 签名原文对应的随机数 Header 名称。                                                                 |
+| signature.secret <span className="enterprise-field-badge">商业版</span>          | HMAC 密钥或非对称签名私钥。必须通过安全配置系统管理。                                              |
+
+当前商业版实现对随机数 Header 进行签名，签名本身不绑定完整请求体。接收方应同时校验签名、随机数时效和重放情况，并始终使用 HTTPS 保护请求内容。
+
+## 调用协议
+
+OpenIM 使用 `POST` 请求发送 JSON 数据。实际请求地址由基础地址和回调命令组成：
+
+```text
+{WEBHOOK_ADDRESS}/{callbackCommand}
+```
+
+| 项目            | 说明                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------- |
+| Content-Type    | `application/json`。                                                                  |
+| operationID     | 当前 OpenIM 操作的链路追踪 ID，通过 Header 发送。                                     |
+| callbackCommand | 当前事件对应的回调命令，同时会出现在部分请求体中。                                    |
+| 请求体          | 由具体回调事件决定。消息类回调通常包含发送者、会话类型、内容类型、消息内容和消息 ID。 |
+| 响应体          | 前置回调必须返回对应的 JSON 响应结构；后置回调应快速返回成功状态。                    |
+
+业务服务端应按 `callbackCommand` 分发处理逻辑，不要根据请求到达顺序推断事件顺序。对于可能重复到达的事件，应使用业务主键、消息 ID 或 `operationID` 实现幂等处理。
+
+## 枚举
+
+### CallbackAction
+
+前置回调响应中的 `actionCode` 使用以下值：
+
+| 值  | 名称              | 说明                                                                                                                 |
+| --- | ----------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 0   | `ActionAllow`     | 使用 `nextCode` 决定继续或终止。当前通用响应解析要求使用该值。                                                       |
+| 1   | `ActionForbidden` | 保留的禁止标记；当前版本不会仅根据该值终止流程。需要拒绝操作时应返回 `actionCode: 0`、`nextCode: 1` 和业务错误信息。 |
+
+### CallbackNextCode
+
+| 值  | 名称       | 说明                                                |
+| --- | ---------- | --------------------------------------------------- |
+| 0   | `Continue` | 继续 OpenIM 原流程。                                |
+| 1   | `Stop`     | 结合 `errCode`、`errMsg` 和 `errDlt` 终止前置操作。 |
+
+消息类 Webhook 中的 `contentType`、`sessionType`、`platformID` 等字段分别引用[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)、[会话模块枚举](/docs/chat/platform-api/v3/conversation/overview#conversationtype)和[用户模块枚举](/docs/chat/platform-api/v3/user/overview#platformid)。
+
+## 回调能力
+
+### 用户
+
+| 回调配置                                                                                      | 时机 | 用途                                       |
+| --------------------------------------------------------------------------------------------- | ---- | ------------------------------------------ |
+| [beforeUserRegister](/docs/chat/platform-api/v3/webhooks/user/before-user-register)           | 前置 | 用户注册到 OpenIM 前校验或调整用户资料。   |
+| [afterUserRegister](/docs/chat/platform-api/v3/webhooks/user/after-user-register)             | 后置 | 用户注册完成后同步业务数据。               |
+| [beforeUpdateUserInfo](/docs/chat/platform-api/v3/webhooks/user/before-update-user-info)      | 前置 | 更新用户资料前进行校验或修改。             |
+| [afterUpdateUserInfo](/docs/chat/platform-api/v3/webhooks/user/after-update-user-info)        | 后置 | 用户资料更新完成后同步变更。               |
+| [beforeUpdateUserInfoEx](/docs/chat/platform-api/v3/webhooks/user/before-update-user-info-ex) | 前置 | 使用可选字段更新用户资料前进行校验或修改。 |
+| [afterUpdateUserInfoEx](/docs/chat/platform-api/v3/webhooks/user/after-update-user-info-ex)   | 后置 | 可选字段用户资料更新完成后同步变更。       |
+
+### 关系
+
+| 回调配置                                                                                       | 时机 | 用途                               |
+| ---------------------------------------------------------------------------------------------- | ---- | ---------------------------------- |
+| [beforeAddFriend](/docs/chat/platform-api/v3/webhooks/relation/before-add-friend)              | 前置 | 发起好友申请前进行权限或风控校验。 |
+| [afterAddFriend](/docs/chat/platform-api/v3/webhooks/relation/after-add-friend)                | 后置 | 好友申请创建后同步业务数据。       |
+| [beforeAddFriendAgree](/docs/chat/platform-api/v3/webhooks/relation/before-add-friend-agree)   | 前置 | 同意好友申请前进行校验。           |
+| [afterAddFriendAgree](/docs/chat/platform-api/v3/webhooks/relation/after-add-friend-agree)     | 后置 | 好友关系建立后同步业务数据。       |
+| [afterDeleteFriend](/docs/chat/platform-api/v3/webhooks/relation/after-delete-friend)          | 后置 | 好友关系删除后同步业务数据。       |
+| [beforeSetFriendRemark](/docs/chat/platform-api/v3/webhooks/relation/before-set-friend-remark) | 前置 | 修改好友备注前进行校验或修改。     |
+| [afterSetFriendRemark](/docs/chat/platform-api/v3/webhooks/relation/after-set-friend-remark)   | 后置 | 好友备注更新后同步业务数据。       |
+| [beforeAddBlack](/docs/chat/platform-api/v3/webhooks/relation/before-add-black)                | 前置 | 加入黑名单前进行校验。             |
+| [afterRemoveBlack](/docs/chat/platform-api/v3/webhooks/relation/after-remove-black)            | 后置 | 移出黑名单后同步业务数据。         |
+| [beforeImportFriends](/docs/chat/platform-api/v3/webhooks/relation/before-import-friends)      | 前置 | 批量导入好友前进行校验。           |
+| [afterImportFriends](/docs/chat/platform-api/v3/webhooks/relation/after-import-friends)        | 后置 | 好友导入完成后同步结果。           |
+
+### 群组
+
+| 回调配置                                                                                           | 时机 | 用途                                     |
+| -------------------------------------------------------------------------------------------------- | ---- | ---------------------------------------- |
+| [beforeCreateGroup](/docs/chat/platform-api/v3/webhooks/group/before-create-group)                 | 前置 | 创建群组前校验或调整群资料。             |
+| [afterCreateGroup](/docs/chat/platform-api/v3/webhooks/group/after-create-group)                   | 后置 | 群组创建完成后同步业务数据。             |
+| [beforeMemberJoinGroup](/docs/chat/platform-api/v3/webhooks/group/before-member-join-group)        | 前置 | 用户成为群成员前进行权限或风控校验。     |
+| [beforeInviteUserToGroup](/docs/chat/platform-api/v3/webhooks/group/before-invite-user-to-group)   | 前置 | 邀请用户进群前进行校验。                 |
+| [beforeApplyJoinGroup](/docs/chat/platform-api/v3/webhooks/group/before-apply-join-group)          | 前置 | 用户申请入群前进行校验。                 |
+| [afterJoinGroup](/docs/chat/platform-api/v3/webhooks/group/after-join-group)                       | 后置 | 用户加入群组后同步业务数据。             |
+| [afterQuitGroup](/docs/chat/platform-api/v3/webhooks/group/after-quit-group)                       | 后置 | 用户退出群组后同步业务数据。             |
+| [afterKickGroupMember](/docs/chat/platform-api/v3/webhooks/group/after-kick-group-member)          | 后置 | 用户被移出群组后同步业务数据。           |
+| [afterDismissGroup](/docs/chat/platform-api/v3/webhooks/group/after-dismiss-group)                 | 后置 | 群组解散后同步业务数据。                 |
+| [afterTransferGroupOwner](/docs/chat/platform-api/v3/webhooks/group/after-transfer-group-owner)    | 后置 | 群主转让后同步业务数据。                 |
+| [beforeSetGroupMemberInfo](/docs/chat/platform-api/v3/webhooks/group/before-set-group-member-info) | 前置 | 修改群成员资料前进行校验或调整。         |
+| [afterSetGroupMemberInfo](/docs/chat/platform-api/v3/webhooks/group/after-set-group-member-info)   | 后置 | 群成员资料修改后同步业务数据。           |
+| [beforeSetGroupInfo](/docs/chat/platform-api/v3/webhooks/group/before-set-group-info)              | 前置 | 修改群资料前进行校验或调整。             |
+| [afterSetGroupInfo](/docs/chat/platform-api/v3/webhooks/group/after-set-group-info)                | 后置 | 群资料修改后同步业务数据。               |
+| [beforeSetGroupInfoEx](/docs/chat/platform-api/v3/webhooks/group/before-set-group-info-ex)         | 前置 | 使用可选字段修改群资料前进行校验或调整。 |
+| [afterSetGroupInfoEx](/docs/chat/platform-api/v3/webhooks/group/after-set-group-info-ex)           | 后置 | 可选字段群资料修改后同步业务数据。       |
+
+### 消息
+
+| 回调配置                                                                                      | 时机 | 用途                                     |
+| --------------------------------------------------------------------------------------------- | ---- | ---------------------------------------- |
+| [beforeSendSingleMsg](/docs/chat/platform-api/v3/webhooks/message/before-send-single-message) | 前置 | 单聊消息发送前进行内容审核、拦截或修改。 |
+| [afterSendSingleMsg](/docs/chat/platform-api/v3/webhooks/message/after-send-single-message)   | 后置 | 单聊消息发送完成后同步消息事件。         |
+| [beforeSendGroupMsg](/docs/chat/platform-api/v3/webhooks/message/before-send-group-message)   | 前置 | 群聊消息发送前进行内容审核、拦截或修改。 |
+| [afterSendGroupMsg](/docs/chat/platform-api/v3/webhooks/message/after-send-group-message)     | 后置 | 群聊消息发送完成后同步消息事件。         |
+| [beforeMsgModify](/docs/chat/platform-api/v3/webhooks/message/before-message-modify)          | 前置 | 服务端最终写入消息前修改消息字段。       |
+| [afterSingleMsgRead](/docs/chat/platform-api/v3/webhooks/message/after-single-message-read)   | 后置 | 单聊消息已读状态变化后同步业务数据。     |
+| [afterGroupMsgRead](/docs/chat/platform-api/v3/webhooks/message/after-group-message-read)     | 后置 | 群聊消息已读状态变化后同步业务数据。     |
+| [afterRevokeMsg](/docs/chat/platform-api/v3/webhooks/message/after-revoke-message)            | 后置 | 消息撤回完成后同步业务数据。             |
+
+### 推送与在线状态
+
+| 回调配置                                                                                   | 时机 | 用途                                   |
+| ------------------------------------------------------------------------------------------ | ---- | -------------------------------------- |
+| [beforeOnlinePush](/docs/chat/platform-api/v3/webhooks/push/before-online-push)            | 前置 | 单聊在线推送前调整目标用户或推送策略。 |
+| [beforeGroupOnlinePush](/docs/chat/platform-api/v3/webhooks/push/before-group-online-push) | 前置 | 群聊在线推送前调整目标用户或推送策略。 |
+| [beforeOfflinePush](/docs/chat/platform-api/v3/webhooks/push/before-offline-push)          | 前置 | 离线推送前调整实际推送用户。           |
+| [afterUserOnline](/docs/chat/platform-api/v3/webhooks/push/after-user-online)              | 后置 | 用户上线后同步在线状态。               |
+| [afterUserOffline](/docs/chat/platform-api/v3/webhooks/push/after-user-offline)            | 后置 | 用户离线后同步在线状态。               |
+| [afterUserKickOff](/docs/chat/platform-api/v3/webhooks/push/after-user-kick-off)           | 后置 | 用户被强制下线后同步状态。             |
+
+### 会话
+
+以下回调仅在 OpenIM 商业版中提供，用于在会话首次创建时介入会话默认属性或同步创建结果。
+
+| 回调配置                                                                                                                                                                               | 时机 | 用途                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | ---------------------------------------------------------- |
+| [beforeCreateSingleChatConversations](/docs/chat/platform-api/v3/webhooks/conversation/before-create-single-chat-conversations) <span className="enterprise-field-badge">商业版</span> | 前置 | 创建单聊会话前调整免打扰、置顶、标记、阅后即焚和扩展字段。 |
+| [afterCreateSingleChatConversations](/docs/chat/platform-api/v3/webhooks/conversation/after-create-single-chat-conversations) <span className="enterprise-field-badge">商业版</span>   | 后置 | 单聊会话创建完成后同步会话资料。                           |
+| [beforeCreateGroupChatConversations](/docs/chat/platform-api/v3/webhooks/conversation/before-create-group-chat-conversations) <span className="enterprise-field-badge">商业版</span>   | 前置 | 创建群聊会话前调整免打扰、置顶、标记、阅后即焚和扩展字段。 |
+| [afterCreateGroupChatConversations](/docs/chat/platform-api/v3/webhooks/conversation/after-create-group-chat-conversations) <span className="enterprise-field-badge">商业版</span>     | 后置 | 群聊会话创建完成后同步会话资料。                           |
+
+## 接入建议
+
+- Webhook 接收服务应部署在稳定的业务服务端，不要直接指向客户端或不受控的公网函数。
+- 前置回调应设置严格超时，并明确 `failedContinue` 策略。内容审核和权限校验通常不应在回调失败时无条件放行。
+- 后置回调处理应先快速确认接收，再将耗时逻辑投递到业务消息队列。
+- 使用 HTTPS，并在网关限制来源地址、请求频率和请求体大小。商业版启用签名后，还应校验随机数是否重放。
+- 配置变更前先在测试环境验证回调响应结构。错误响应或超时可能直接影响消息发送、用户注册和群组操作。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [用户概述](/docs/chat/platform-api/v3/user/overview)
+- [关系概述](/docs/chat/platform-api/v3/relation/overview)
+- [群组概述](/docs/chat/platform-api/v3/group/overview)
+- [消息概述](/docs/chat/platform-api/v3/message/overview)
+- [会话概述](/docs/chat/platform-api/v3/conversation/overview)
+- [迁移到 OpenIM](/docs/chat/platform-api/v3/migration-to-openim)

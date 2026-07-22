@@ -1,0 +1,118 @@
+---
+title: "创建群聊会话前"
+description: "OpenIM Webhooks：在首次创建群聊会话前调整会话默认属性。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+edition: "enterprise"
+sourcePath: "/docs/chat/platform-api/v3/webhooks/conversation/before-create-group-chat-conversations"
+---
+
+在首次创建群聊会话前调整会话默认属性。 此回调仅在 OpenIM 商业版中提供。
+
+## 触发时机
+
+| 项目     | 说明                                                |
+| -------- | --------------------------------------------------- |
+| 类型     | 前置回调                                            |
+| 配置项   | `beforeCreateGroupChatConversations`                |
+| 回调命令 | `callbackBeforeCreateGroupChatConversationsCommand` |
+
+## HTTP 请求
+
+```http
+POST {WEBHOOK_ADDRESS}/callbackBeforeCreateGroupChatConversationsCommand
+Content-Type: application/json
+operationID: {OPERATION_ID}
+```
+
+```json
+{
+  "callbackCommand": "callbackBeforeCreateGroupChatConversationsCommand",
+  "owner_user_id": "user_001",
+  "conversation_id": "si_user_001_user_002",
+  "conversation_type": 1,
+  "group_id": "group_001",
+  "recv_msg_opt": 1,
+  "is_pinned": false,
+  "is_marked": false,
+  "is_private_chat": false,
+  "burn_duration": 1,
+  "group_at_type": 1,
+  "attached_info": "",
+  "ex": ""
+}
+```
+
+### 请求体参数
+
+| 参数名            | 是否必填 | 类型    | 说明                                   |
+| ----------------- | -------- | ------- | -------------------------------------- |
+| callbackCommand   | 是       | string  | 回调命令，值与当前页面的回调命令一致。 |
+| owner_user_id     | 是       | string  | 会话所属用户 ID。                      |
+| conversation_id   | 是       | string  | 会话 ID。                              |
+| conversation_type | 是       | int     | 会话类型。                             |
+| group_id          | 是       | string  | 群组 ID。                              |
+| recv_msg_opt      | 是       | int     | 会话消息接收选项。                     |
+| is_pinned         | 是       | boolean | 是否置顶会话。                         |
+| is_marked         | 是       | boolean | 是否标记会话。                         |
+| is_private_chat   | 是       | boolean | 是否为阅后即焚会话。                   |
+| burn_duration     | 是       | int     | 阅后即焚时长。                         |
+| group_at_type     | 是       | int     | 群会话 @ 提醒类型。                    |
+| attached_info     | 是       | string  | 会话附加信息。                         |
+| ex                | 是       | string  | 业务扩展字段。                         |
+
+## 响应
+
+业务服务端应返回 HTTP 成功状态和 JSON 响应体。
+
+```json
+{
+  "actionCode": 0,
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "nextCode": 0,
+  "recv_msg_opt": 1,
+  "is_pinned": false,
+  "is_marked": false,
+  "is_private_chat": false,
+  "burn_duration": 1,
+  "group_at_type": 1,
+  "attached_info": "",
+  "ex": ""
+}
+```
+
+### 响应参数
+
+| 参数名          | 类型    | 说明                                                                                                                  |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------------------------- |
+| actionCode      | int     | 处理状态，参见[Webhooks 概述的 `CallbackAction`](/docs/chat/platform-api/v3/webhooks/overview#callbackaction)。       |
+| errCode         | int     | 业务错误码；拒绝前置操作时返回业务约定的非零错误码。                                                                  |
+| errMsg          | string  | 错误简要信息。                                                                                                        |
+| errDlt          | string  | 错误详细信息。                                                                                                        |
+| nextCode        | int     | 处理下一步，参见[Webhooks 概述的 `CallbackNextCode`](/docs/chat/platform-api/v3/webhooks/overview#callbacknextcode)。 |
+| recv_msg_opt    | int     | 会话消息接收选项。                                                                                                    |
+| is_pinned       | boolean | 是否置顶会话。                                                                                                        |
+| is_marked       | boolean | 是否标记会话。                                                                                                        |
+| is_private_chat | boolean | 是否为阅后即焚会话。                                                                                                  |
+| burn_duration   | int     | 阅后即焚时长。                                                                                                        |
+| group_at_type   | int     | 群会话 @ 提醒类型。                                                                                                   |
+| attached_info   | string  | 会话附加信息。                                                                                                        |
+| ex              | string  | 业务扩展字段。                                                                                                        |
+
+## 处理规则
+
+- OpenIM 同步等待业务服务端响应。
+- 返回 `nextCode: 0` 时继续原流程；返回 `nextCode: 1` 时，OpenIM 使用响应中的错误信息终止本次操作。
+- 请求失败或超时后的行为由该回调的 `failedContinue` 配置决定。
+- 响应中的业务字段仅在对应字段存在时覆盖 OpenIM 即将处理的数据。
+
+## 相关页面
+
+- [Webhooks 概述](/docs/chat/platform-api/v3/webhooks/overview)
+- [会话模块概述](/docs/chat/platform-api/v3/conversation/overview)

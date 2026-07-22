@@ -148,27 +148,27 @@ sourcePath: "/docs/chat/platform-api/v3/meeting/overview"
 
 `MeetingRepeatInfoReq` 表示创建或更新重复会议时提交的重复规则。
 
-| 字段             | 类型        | 说明                                                                                                                                                                            |
-| ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| endDate          | int         | 重复会议结束日期，Unix 毫秒时间戳。                                                                                                                                             |
-| repeatTimes      | int         | 重复会议计划生成次数。                                                                                                                                                          |
-| repeatType       | RepeatType  | 枚举值：`REPEAT_TYPE_NONE=0`、`REPEAT_TYPE_DAILY=1`、`REPEAT_TYPE_WEEKLY=2`、`REPEAT_TYPE_WEEKDAY=3`、`REPEAT_TYPE_MONTHLY=4`、`REPEAT_TYPE_YEARLY=5`、`REPEAT_TYPE_HOURLY=6`。 |
-| interval         | int         | 重复规则间隔。                                                                                                                                                                  |
-| repeatDaysOfWeek | DayOfWeek[] | 枚举值：`SUNDAY=0`、`MONDAY=1`、`TUESDAY=2`、`WEDNESDAY=3`、`THURSDAY=4`、`FRIDAY=5`、`SATURDAY=6`。                                                                            |
+| 字段             | 类型        | 说明                                                                                          |
+| ---------------- | ----------- | --------------------------------------------------------------------------------------------- |
+| endDate          | int         | 重复会议结束日期，Unix 毫秒时间戳。                                                           |
+| repeatTimes      | int         | 重复会议计划生成次数。                                                                        |
+| repeatType       | RepeatType  | 枚举值参见[会议模块的 `RepeatType`](/docs/chat/platform-api/v3/meeting/overview#repeattype)。 |
+| interval         | int         | 重复规则间隔。                                                                                |
+| repeatDaysOfWeek | DayOfWeek[] | 枚举值参见[会议模块的 `DayOfWeek`](/docs/chat/platform-api/v3/meeting/overview#dayofweek)。   |
 
 ### MeetingRepeatInfo
 
 `MeetingRepeatInfo` 是商业版接口使用的资源结构。
 
-| 字段             | 类型        | 说明                                                                                                                                                                            |
-| ---------------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| endDate          | int         | 重复会议结束日期，Unix 毫秒时间戳。                                                                                                                                             |
-| repeatTimes      | int         | 重复会议计划生成次数。                                                                                                                                                          |
-| repeatType       | RepeatType  | 枚举值：`REPEAT_TYPE_NONE=0`、`REPEAT_TYPE_DAILY=1`、`REPEAT_TYPE_WEEKLY=2`、`REPEAT_TYPE_WEEKDAY=3`、`REPEAT_TYPE_MONTHLY=4`、`REPEAT_TYPE_YEARLY=5`、`REPEAT_TYPE_HOURLY=6`。 |
-| interval         | int         | 重复规则间隔。                                                                                                                                                                  |
-| repeatDaysOfWeek | DayOfWeek[] | 枚举值：`SUNDAY=0`、`MONDAY=1`、`TUESDAY=2`、`WEDNESDAY=3`、`THURSDAY=4`、`FRIDAY=5`、`SATURDAY=6`。                                                                            |
-| repeatMeetingID  | string      | 重复会议 ID。                                                                                                                                                                   |
-| repeatSequence   | int         | 当前会议在重复会议中的序号。                                                                                                                                                    |
+| 字段             | 类型        | 说明                                                                                          |
+| ---------------- | ----------- | --------------------------------------------------------------------------------------------- |
+| endDate          | int         | 重复会议结束日期，Unix 毫秒时间戳。                                                           |
+| repeatTimes      | int         | 重复会议计划生成次数。                                                                        |
+| repeatType       | RepeatType  | 枚举值参见[会议模块的 `RepeatType`](/docs/chat/platform-api/v3/meeting/overview#repeattype)。 |
+| interval         | int         | 重复规则间隔。                                                                                |
+| repeatDaysOfWeek | DayOfWeek[] | 枚举值参见[会议模块的 `DayOfWeek`](/docs/chat/platform-api/v3/meeting/overview#dayofweek)。   |
+| repeatMeetingID  | string      | 重复会议 ID。                                                                                 |
+| repeatSequence   | int         | 当前会议在重复会议中的序号。                                                                  |
 
 ### RepeatMeetingData
 
@@ -183,7 +183,7 @@ sourcePath: "/docs/chat/platform-api/v3/meeting/overview"
 | repeatInfo                | MeetingRepeatInfo         | 结构为[会议模块的 `MeetingRepeatInfo`](/docs/chat/platform-api/v3/meeting/overview#meetingrepeatinfo)。                 |
 | generatedCount            | int                       | 已生成的会议实例数量。                                                                                                  |
 | nextScheduleTime          | int                       | 下一次计划生成会议的时间。                                                                                              |
-| status                    | RepeatStatus              | 枚举值：`REPEAT_STATUS_UNKNOWN=0`、`REPEAT_STATUS_ACTIVE=1`、`REPEAT_STATUS_COMPLETED=2`。                              |
+| status                    | RepeatStatus              | 枚举值参见[会议模块的 `RepeatStatus`](/docs/chat/platform-api/v3/meeting/overview#repeatstatus)。                       |
 
 ### PersonalMeetingSetting
 
@@ -216,26 +216,26 @@ sourcePath: "/docs/chat/platform-api/v3/meeting/overview"
 
 `MeetingRecord` 表示会议录制文件、主持人、参会者和录制状态。
 
-| 字段             | 类型          | 说明                                                                                        |
-| ---------------- | ------------- | ------------------------------------------------------------------------------------------- |
-| roomID           | string        | 会议或实时通话房间 ID。                                                                     |
-| meetingName      | string        | 会议名称。                                                                                  |
-| ex               | string        | 业务扩展字段。                                                                              |
-| hostUserID       | string        | 会议主持人用户 ID。                                                                         |
-| hostUserNickname | string        | 会议主持人昵称。                                                                            |
-| createTime       | int           | 创建时间，Unix 毫秒时间戳。                                                                 |
-| startTime        | int           | 起始时间，Unix 毫秒时间戳。                                                                 |
-| endTime          | int           | 结束时间，Unix 毫秒时间戳。                                                                 |
-| joinedUsers      | MeetingUser[] | 结构为[会议模块的 `MeetingUser`](/docs/chat/platform-api/v3/meeting/overview#meetinguser)。 |
-| status           | int           | 状态筛选条件。                                                                              |
-| fileRecords      | FileRecord[]  | 结构为[会议模块的 `FileRecord`](/docs/chat/platform-api/v3/meeting/overview#filerecord)。   |
-| egressID         | string        | 录制任务 ID。                                                                               |
-| downloadUrl      | string        | 录制文件下载地址。                                                                          |
-| egressUploading  | bool          | 录制文件是否仍在上传。                                                                      |
-| recordStatus     | int           | 录制状态：`0` 未开始、`1` 已完成、`2` 失败、`3` 进行中。                                    |
-| videoFileSize    | int           | 录制视频文件大小，单位为字节。                                                              |
-| videoCoverUrl    | string        | 录制视频封面地址。                                                                          |
-| videoName        | string        | 录制视频文件名。                                                                            |
+| 字段             | 类型          | 说明                                                                                                  |
+| ---------------- | ------------- | ----------------------------------------------------------------------------------------------------- |
+| roomID           | string        | 会议或实时通话房间 ID。                                                                               |
+| meetingName      | string        | 会议名称。                                                                                            |
+| ex               | string        | 业务扩展字段。                                                                                        |
+| hostUserID       | string        | 会议主持人用户 ID。                                                                                   |
+| hostUserNickname | string        | 会议主持人昵称。                                                                                      |
+| createTime       | int           | 创建时间，Unix 毫秒时间戳。                                                                           |
+| startTime        | int           | 起始时间，Unix 毫秒时间戳。                                                                           |
+| endTime          | int           | 结束时间，Unix 毫秒时间戳。                                                                           |
+| joinedUsers      | MeetingUser[] | 结构为[会议模块的 `MeetingUser`](/docs/chat/platform-api/v3/meeting/overview#meetinguser)。           |
+| status           | int           | 状态筛选条件。                                                                                        |
+| fileRecords      | FileRecord[]  | 结构为[会议模块的 `FileRecord`](/docs/chat/platform-api/v3/meeting/overview#filerecord)。             |
+| egressID         | string        | 录制任务 ID。                                                                                         |
+| downloadUrl      | string        | 录制文件下载地址。                                                                                    |
+| egressUploading  | bool          | 录制文件是否仍在上传。                                                                                |
+| recordStatus     | int           | 录制状态，参见[会议模块的 `RecordStatus`](/docs/chat/platform-api/v3/meeting/overview#recordstatus)。 |
+| videoFileSize    | int           | 录制视频文件大小，单位为字节。                                                                        |
+| videoCoverUrl    | string        | 录制视频封面地址。                                                                                    |
+| videoName        | string        | 录制视频文件名。                                                                                      |
 
 ### UserMeetingHistory
 
@@ -269,16 +269,16 @@ sourcePath: "/docs/chat/platform-api/v3/meeting/overview"
 
 `MeetingChatMessage` 表示会议聊天消息及其 Seq、发送者和接收范围。
 
-| 字段         | 类型     | 说明                                         |
-| ------------ | -------- | -------------------------------------------- |
-| seq          | int      | 消息 Seq。                                   |
-| sendID       | string   | 消息发送者用户 ID。                          |
-| contentType  | int      | 消息内容类型。                               |
-| content      | string   | 文本内容，具体格式由当前接口和内容类型决定。 |
-| createTimeMs | int      | 消息创建时间，Unix 毫秒时间戳。              |
-| dstUserIDs   | string[] | 定向接收用户 ID 列表；为空时向会议全员广播。 |
-| nickname     | string   | 用户展示名称。                               |
-| faceURL      | string   | 用户头像地址。                               |
+| 字段         | 类型     | 说明                                                                                         |
+| ------------ | -------- | -------------------------------------------------------------------------------------------- |
+| seq          | int      | 消息 Seq。                                                                                   |
+| sendID       | string   | 消息发送者用户 ID。                                                                          |
+| contentType  | int      | 消息内容类型，参见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。 |
+| content      | string   | 文本内容，具体格式由当前接口和内容类型决定。                                                 |
+| createTimeMs | int      | 消息创建时间，Unix 毫秒时间戳。                                                              |
+| dstUserIDs   | string[] | 定向接收用户 ID 列表；为空时向会议全员广播。                                                 |
+| nickname     | string   | 用户展示名称。                                                                               |
+| faceURL      | string   | 用户头像地址。                                                                               |
 
 ### InviteeInfo
 
@@ -292,19 +292,62 @@ sourcePath: "/docs/chat/platform-api/v3/meeting/overview"
 
 `InvitationInfo` 表示实时通话邀请、房间和参与者信息。
 
-| 字段               | 类型     | 说明                         |
-| ------------------ | -------- | ---------------------------- |
-| inviterUserID      | string   | 邀请发起者用户 ID。          |
-| inviteeUserIDList  | string[] | 受邀用户 ID 列表。           |
-| customData         | string   | 实时通话邀请的业务扩展数据。 |
-| groupID            | string   | OpenIM 群组 ID。             |
-| roomID             | string   | 会议或实时通话房间 ID。      |
-| timeout            | int      | 邀请超时时间。               |
-| mediaType          | string   | 实时通话媒体类型。           |
-| platformID         | int      | 发起端平台 ID。              |
-| sessionType        | int      | 实时通话会话类型。           |
-| initiateTime       | int      | 实时通话邀请发起时间。       |
-| busyLineUserIDList | string[] | 忙线用户 ID 列表。           |
+| 字段               | 类型     | 说明                                                                                                                       |
+| ------------------ | -------- | -------------------------------------------------------------------------------------------------------------------------- |
+| inviterUserID      | string   | 邀请发起者用户 ID。                                                                                                        |
+| inviteeUserIDList  | string[] | 受邀用户 ID 列表。                                                                                                         |
+| customData         | string   | 实时通话邀请的业务扩展数据。                                                                                               |
+| groupID            | string   | OpenIM 群组 ID。                                                                                                           |
+| roomID             | string   | 会议或实时通话房间 ID。                                                                                                    |
+| timeout            | int      | 邀请超时时间。                                                                                                             |
+| mediaType          | string   | 实时通话媒体类型。                                                                                                         |
+| platformID         | int      | 发起端平台 ID，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。                        |
+| sessionType        | int      | 实时通话会话类型，参见[会话模块的 `ConversationType`](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。 |
+| initiateTime       | int      | 实时通话邀请发起时间。                                                                                                     |
+| busyLineUserIDList | string[] | 忙线用户 ID 列表。                                                                                                         |
+
+## 枚举
+
+### RepeatType
+
+| 值  | 名称                  | 说明         |
+| --- | --------------------- | ------------ |
+| 0   | `REPEAT_TYPE_NONE`    | 不重复。     |
+| 1   | `REPEAT_TYPE_DAILY`   | 每日重复。   |
+| 2   | `REPEAT_TYPE_WEEKLY`  | 每周重复。   |
+| 3   | `REPEAT_TYPE_WEEKDAY` | 工作日重复。 |
+| 4   | `REPEAT_TYPE_MONTHLY` | 每月重复。   |
+| 5   | `REPEAT_TYPE_YEARLY`  | 每年重复。   |
+| 6   | `REPEAT_TYPE_HOURLY`  | 每小时重复。 |
+
+### DayOfWeek
+
+| 值  | 名称        | 说明     |
+| --- | ----------- | -------- |
+| 0   | `SUNDAY`    | 星期日。 |
+| 1   | `MONDAY`    | 星期一。 |
+| 2   | `TUESDAY`   | 星期二。 |
+| 3   | `WEDNESDAY` | 星期三。 |
+| 4   | `THURSDAY`  | 星期四。 |
+| 5   | `FRIDAY`    | 星期五。 |
+| 6   | `SATURDAY`  | 星期六。 |
+
+### RepeatStatus
+
+| 值  | 名称                      | 说明       |
+| --- | ------------------------- | ---------- |
+| 0   | `REPEAT_STATUS_UNKNOWN`   | 未知状态。 |
+| 1   | `REPEAT_STATUS_ACTIVE`    | 生效中。   |
+| 2   | `REPEAT_STATUS_COMPLETED` | 已完成。   |
+
+### RecordStatus
+
+| 值  | 名称         | 说明     |
+| --- | ------------ | -------- |
+| 0   | `NotStarted` | 未开始。 |
+| 1   | `Completed`  | 已完成。 |
+| 2   | `Failed`     | 失败。   |
+| 3   | `Processing` | 进行中。 |
 
 ## 接入建议
 

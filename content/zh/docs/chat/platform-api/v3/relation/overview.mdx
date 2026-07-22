@@ -50,7 +50,7 @@ sourcePath: "/docs/chat/platform-api/v3/relation/overview"
 | remark | string | 好友备注。 |
 | createTime | int64 | 好友关系创建时间，通常为 Unix 毫秒时间戳。 |
 | friendUser | object | 好友用户资料，结构为[用户模块的 `UserInfo`](/docs/chat/platform-api/v3/user/overview#userinfo)。 |
-| addSource | int | 好友添加来源。 |
+| addSource | int | 好友添加来源，参见 [`AddSource`](#addsource)。 |
 | operatorUserID | string | 建立或更新该关系的操作者用户 ID。 |
 | ex | string | 好友关系扩展字段。 |
 | isPinned | boolean | 是否置顶该好友关系。 |
@@ -67,7 +67,7 @@ sourcePath: "/docs/chat/platform-api/v3/relation/overview"
 | toUserID | string | 申请接收用户 ID。 |
 | toNickname | string | 申请接收用户昵称。 |
 | toFaceURL | string | 申请接收用户头像 URL。 |
-| handleResult | int | 处理结果，例如待处理、同意或拒绝。 |
+| handleResult | int | 处理结果，参见 [`FriendRequestResult`](#friendrequestresult)。 |
 | reqMsg | string | 申请说明。 |
 | createTime | int64 | 申请创建时间。 |
 | handlerUserID | string | 处理申请的用户 ID。 |
@@ -84,9 +84,30 @@ sourcePath: "/docs/chat/platform-api/v3/relation/overview"
 | ownerUserID | string | 黑名单所有者用户 ID。 |
 | createTime | int64 | 加入黑名单时间。 |
 | blackUserInfo | object | 被加入黑名单的用户公开资料，结构为[用户模块的 `PublicUserInfo`](/docs/chat/platform-api/v3/user/overview#publicuserinfo)。 |
-| addSource | int | 加入黑名单来源。 |
+| addSource | int | 加入黑名单来源，参见 [`AddSource`](#addsource)。 |
 | operatorUserID | string | 操作者用户 ID。 |
 | ex | string | 黑名单扩展字段。 |
+
+## 枚举
+
+### AddSource
+
+`AddSource` 表示好友关系或黑名单关系的建立来源。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `BecomeFriendByImport` | 由管理员或服务端导入。 |
+| 2 | `BecomeFriendByApply` | 由好友申请建立。 |
+
+### FriendRequestResult
+
+`FriendRequestResult` 表示好友申请的处理结果。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| -1 | `Refuse` | 拒绝。 |
+| 0 | `NotHandle` | 待处理。 |
+| 1 | `Agree` | 同意。 |
 
 ## 接入建议
 

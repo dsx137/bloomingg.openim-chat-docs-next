@@ -49,6 +49,13 @@
     "recurring-meetings": "重复会议",
     "meeting-records": "会议记录",
     "meeting-signaling": "实时通话",
-    "meeting-chat": "会议聊天"
+    "meeting-chat": "会议聊天",
+    "webhooks": "Webhooks",
+    "webhooks-user": "用户",
+    "webhooks-relation": "关系",
+    "webhooks-group": "群组",
+    "webhooks-message": "消息",
+    "webhooks-push": "推送与在线状态",
+    "webhooks-conversation": "会话"
   }
 }

@@ -87,7 +87,8 @@ function SidebarNode({
       activeOpen={containsActive || hrefPath(node.href) === currentPath}
       depth={depth}
       href={node.href ? toLocalizedPath(node.href, locale) : undefined}
-      initialOpen={containsActive || hrefPath(node.href) === currentPath || depth === 0}
+      initialOpen={containsActive || hrefPath(node.href) === currentPath}
+      stateKey={`${stateKey}:${node.id}`}
       title={renderedTitle}
     >
       {node.children.map((child) => (

@@ -31,6 +31,30 @@ sourcePath: "/docs/chat/platform-api/v3/message/overview"
 - [撤回消息](/docs/chat/platform-api/v3/message/managing-messages/revoke-msg)
 - [获取服务器时间](/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time)
 
+## 枚举
+
+### ContentType
+
+`contentType` 决定 `content` 的 JSON 结构。完整的消息类型、字段和示例见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。
+
+### SessionType
+
+消息中的 `sessionType` 与会话模块的 `ConversationType` 使用相同取值，详见[会话模块的 ConversationType](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。
+
+### MsgFrom
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 100 | `UserMsgType` | 用户消息。 |
+| 200 | `SysMsgType` | 系统消息。 |
+
+### MessageStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `MsgNormal` | 正常消息。 |
+| 4 | `MsgDeleted` | 已删除消息。 |
+
 ## 接入建议
 
 后端发送消息前，应确认发送身份、目标用户或群组、消息内容类型和推送参数都来自可信业务流程。普通用户聊天消息通常由客户端 SDK 按登录用户身份发送，Platform API 更适合系统消息、运营通知、迁移导入和后台管理场景。

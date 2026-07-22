@@ -39,14 +39,14 @@ sourcePath: "/docs/chat/platform-api/v3/conversation/overview"
 | ---- | ---- | ---- |
 | ownerUserID | string | 会话所属用户 ID。 |
 | conversationID | string | 会话 ID。 |
-| conversationType | int | 会话类型，例如单聊或群聊。 |
+| conversationType | int | 会话类型，参见 [`ConversationType`](#conversationtype)。 |
 | userID | string | 单聊目标用户 ID。 |
 | groupID | string | 群聊目标群 ID。 |
-| recvMsgOpt | int | 收消息选项，例如正常接收或免打扰。 |
+| recvMsgOpt | int | 收消息选项，参见 [`RecvMsgOpt`](#recvmsgopt)。 |
 | isPinned | boolean | 是否置顶会话。 |
 | attachedInfo | string | 会话附加信息。 |
 | isPrivateChat | boolean | 是否为私聊会话。 |
-| groupAtType | int | 群会话 @ 状态。 |
+| groupAtType | int | 群会话 @ 状态，参见 [`GroupAtType`](#groupattype)。 |
 | ex | string | 会话扩展字段。 |
 | burnDuration | int | 阅后即焚时长。 |
 | minSeq | int64 | 当前用户侧会话最小消息序列号。 |
@@ -71,7 +71,7 @@ sourcePath: "/docs/chat/platform-api/v3/conversation/overview"
 | ex | string | 业务扩展字段。 |
 | conversationIDs | string[] | 分组中的会话 ID 列表。 |
 | hidden | boolean | 是否隐藏该分组。 |
-| conversationGroupType | int | 分组类型：`0` 普通分组，`1` 筛选分组。 |
+| conversationGroupType | int | 分组类型，参见 [`ConversationGroupType`](#conversationgrouptype)。 |
 | createTime | int64 | 创建时间，Unix 毫秒时间戳。 |
 
 ### ConversationGroupOrder
@@ -82,6 +82,44 @@ sourcePath: "/docs/chat/platform-api/v3/conversation/overview"
 | ---- | ---- | ---- |
 | conversationGroupID | string | 会话分组 ID。 |
 | order | int64 | 目标展示顺序。 |
+
+## 枚举
+
+### ConversationType
+
+`ConversationType` 也用于消息和 Webhooks 中的 `sessionType`，字段值保持一致。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `SingleChatType` | 单聊。 |
+| 2 | `WriteGroupChatType` | 写群聊类型；当前服务端暂不建议直接使用。 |
+| 3 | `ReadGroupChatType` | 群聊。 |
+| 4 | `NotificationChatType` | 通知会话。 |
+
+### RecvMsgOpt
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `ReceiveMessage` | 接收消息。 |
+| 1 | `NotReceiveMessage` | 不接收消息。 |
+| 2 | `ReceiveNotNotifyMessage` | 接收消息，但不触发通知。 |
+
+### GroupAtType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `AtNormal` | 没有 @ 提醒。 |
+| 1 | `AtMe` | @ 当前用户。 |
+| 2 | `AtAll` | @ 全体成员。 |
+| 3 | `AtAllAtMe` | 同时 @ 全体成员和当前用户。 |
+| 4 | `GroupNotification` | 群通知。 |
+
+### ConversationGroupType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `Normal` | 普通会话分组。 |
+| 1 | `Filter` | 筛选分组。 |
 
 ## 接入建议
 

@@ -52,9 +52,9 @@ sourcePath: "/docs/chat/platform-api/v3/user/overview"
 | ex | string | 业务扩展字段，通常由业务服务端写入和解析。 |
 | createTime | int64 | 用户创建时间，通常为 Unix 毫秒时间戳。 |
 | appMangerLevel | int | 应用管理级别字段，字段名以服务端响应为准。 |
-| globalRecvMsgOpt | int | 用户全局消息接收选项。 |
-| status <span className="enterprise-field-badge">商业版</span> | int | 用户账号状态，用于账号治理和状态筛选。 |
-| addFriendPermission <span className="enterprise-field-badge">商业版</span> | int | 用户的加好友权限设置。 |
+| globalRecvMsgOpt | int | 用户全局消息接收选项，参见 [`GlobalRecvMsgOpt`](#globalrecvmsgopt)。 |
+| status <span className="enterprise-field-badge">商业版</span> | int | 用户账号状态，参见 [`UserStatus`](#userstatus)。 |
+| addFriendPermission <span className="enterprise-field-badge">商业版</span> | int | 用户的加好友权限设置，参见 [`AddFriendPermission`](#addfriendpermission)。 |
 | category <span className="enterprise-field-badge">商业版</span> | string | 用户所属的业务分类。 |
 
 ### PublicUserInfo
@@ -67,6 +67,62 @@ sourcePath: "/docs/chat/platform-api/v3/user/overview"
 | nickname | string | 用户昵称。 |
 | faceURL | string | 用户头像 URL。 |
 | ex | string | 公开扩展字段。 |
+
+## 枚举
+
+### UserStatus
+
+`UserStatus` 表示用户账号状态，仅适用于商业版账号治理字段。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `Normal` | 正常。 |
+| 1 | `Banned` | 已封禁。 |
+| 2 | `Expunged` | 已注销或移除。 |
+
+### GlobalRecvMsgOpt
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `ReceiveMessage` | 接收消息。 |
+| 1 | `NotReceiveMessage` | 不接收消息。 |
+| 2 | `ReceiveNotNotifyMessage` | 接收消息，但不触发通知。 |
+
+### OnlineStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `Offline` | 离线。 |
+| 1 | `Online` | 在线。 |
+
+### AddFriendPermission
+
+`AddFriendPermission` 仅适用于商业版用户资料。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `AddFriendAllowed` | 允许添加，但需要对方审批。 |
+| 1 | `AddFriendAllowedNoReview` | 允许添加，不需要审批。 |
+| 2 | `AddFriendDenied` | 不允许被添加为好友。 |
+
+### PlatformID
+
+`PlatformID` 表示用户连接所在的终端平台。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `IOS` | iOS。 |
+| 2 | `Android` | Android。 |
+| 3 | `Windows` | Windows。 |
+| 4 | `OSX` | macOS。 |
+| 5 | `Web` | Web。 |
+| 6 | `MiniWeb` | 小程序或轻量 Web。 |
+| 7 | `Linux` | Linux。 |
+| 8 | `APad` | Android 平板。 |
+| 9 | `IPad` | iPad。 |
+| 10 | `Admin` | 管理端。 |
+| 11 | `HarmonyOS` | HarmonyOS。 |
+| 12 | `Bot` | Bot。 |
 
 ## 接入建议
 

@@ -57,7 +57,7 @@ curl --request POST "${API_ADDRESS}/group/group_application_response" \
 | groupID | 是 | string | 目标群 ID。 |
 | fromUserID | 是 | string | 申请入群的用户 ID。 |
 | handledMsg | 否 | string | 处理说明。 |
-| handleResult | 是 | int | 处理结果：1 同意，-1 拒绝。 |
+| handleResult | 是 | int | 处理结果，参见[群组模块的 `GroupRequestResult`](/docs/chat/platform-api/v3/group/overview#grouprequestresult)。 |
 
 ## 响应
 

@@ -67,7 +67,7 @@ curl --request POST "${API_ADDRESS}/friend/add_friend_response" \
 | :--- | :--- | :--- | :--- |
 | fromUserID | 必填 | string | 发起好友申请的用户 ID。 |
 | toUserID | 必填 | string | 接收好友申请的用户 ID。 |
-| handleResult | 必填 | int | 处理结果。常见取值为同意或拒绝，以服务端常量为准。 |
+| handleResult | 必填 | int | 处理结果，参见[关系模块的 `FriendRequestResult`](/docs/chat/platform-api/v3/relation/overview#friendrequestresult)。 |
 | handleMsg | 选填 | string | 处理说明。 |
 
 ---

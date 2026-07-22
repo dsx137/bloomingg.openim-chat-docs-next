@@ -91,10 +91,10 @@ curl --request POST "${API_ADDRESS}/conversation/set_conversations" \
 | userIDs | 是 | array | 需要设置会话字段的用户 ID 列表。 |
 | conversation | 是 | object | 要设置的会话字段，结构为[会话模块的 `ConversationInfo`](/docs/chat/platform-api/v3/conversation/overview#conversationinfo)。 |
 | conversation.conversationID | 是 | string | 会话 ID。 |
-| conversation.conversationType | 是 | int | 会话类型，例如 1 单聊、3 群聊。 |
+| conversation.conversationType | 是 | int | 会话类型，参见[会话模块的 `ConversationType`](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。 |
 | conversation.userID | 否 | string | 单聊目标用户 ID；单聊会话必填。 |
 | conversation.groupID | 否 | string | 群组 ID；群聊会话必填。 |
-| conversation.recvMsgOpt | 否 | int | 收消息选项，例如正常接收、免打扰等。 |
+| conversation.recvMsgOpt | 否 | int | 收消息选项，参见[会话模块的 `RecvMsgOpt`](/docs/chat/platform-api/v3/conversation/overview#recvmsgopt)。 |
 | conversation.isPinned | 否 | boolean | 是否置顶会话；传入字段时会更新。 |
 | conversation.attachedInfo | 否 | string | 会话附加信息。 |
 | conversation.isPrivateChat | 否 | boolean | 是否为私聊/阅后即焚类会话。 |
@@ -102,7 +102,7 @@ curl --request POST "${API_ADDRESS}/conversation/set_conversations" \
 | conversation.burnDuration | 否 | int | 阅后即焚时长，单位秒。 |
 | conversation.minSeq | 否 | int | 会话最小消息序列号。 |
 | conversation.maxSeq | 否 | int | 会话最大消息序列号。 |
-| conversation.groupAtType | 否 | int | 群聊 @ 状态。 |
+| conversation.groupAtType | 否 | int | 群聊 @ 状态，参见[会话模块的 `GroupAtType`](/docs/chat/platform-api/v3/conversation/overview#groupattype)。 |
 | conversation.msgDestructTime | 否 | int | 消息销毁时间配置。 |
 | conversation.isMsgDestruct | 否 | boolean | 是否开启消息销毁。 |
 | conversation.isMarked <span className="enterprise-field-badge">商业版</span> | 否 | boolean | 是否标记该会话。 |
