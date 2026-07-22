@@ -63,17 +63,15 @@ test('parses category export options when every value is present', () => {
 
 test('parses one target publication for both publication platforms', () => {
   const postmanPublication = {
-    title: 'OpenIM Public',
     targetId: 'target-id',
     inputPath: 'public.json',
   };
-  assert.deepEqual(parse(['publish-postman', 'OpenIM Public', 'target-id', 'public.json']), {
+  assert.deepEqual(parse(['publish-postman', 'target-id', 'public.json']), {
     command: 'publish-postman',
     ...postmanPublication,
   });
-  assert.deepEqual(parse(['publish-apifox', 'OpenIM Public', '123', '456', 'public.json']), {
+  assert.deepEqual(parse(['publish-apifox', '123', '456', 'public.json']), {
     command: 'publish-apifox',
-    title: 'OpenIM Public',
     targetId: '123',
     moduleId: '456',
     inputPath: 'public.json',
@@ -85,23 +83,19 @@ test('parses one target publication for both publication platforms', () => {
 
 for (const [name, args, message] of [
   ['unknown commands', ['publish-other', 'collection.json'], /publish-other/],
-  ['unknown options', ['publish-postman', 'Title', 'target', '--unknown'], /--unknown/],
+  ['unknown options', ['publish-postman', 'target', '--unknown'], /--unknown/],
   ['equals-form options', ['export', 'in', 'out', '--category=Public'], /--category=Public/],
-  [
-    'missing publication arguments',
-    ['publish-apifox'],
-    /TITLE.*PROJECT_ID.*MODULE_ID.*INPUT_FILE/i,
-  ],
+  ['missing publication arguments', ['publish-apifox'], /PROJECT_ID.*MODULE_ID.*INPUT_FILE/i],
   [
     'extra positionals',
-    ['publish-apifox', 'Title', 'project', 'module', 'input.json', 'extra'],
-    /TITLE.*PROJECT_ID.*MODULE_ID.*INPUT_FILE/i,
+    ['publish-apifox', 'project', 'module', 'input.json', 'extra'],
+    /PROJECT_ID.*MODULE_ID.*INPUT_FILE/i,
   ],
   ['option tokens as positionals', ['export', 'input.json', '--category', 'Public'], /OUTPUT/],
   [
     'misplaced separators',
-    ['publish-postman', 'Title', 'target', 'file.json', '--', 'extra'],
-    /TITLE.*TARGET_ID.*INPUT_FILE/i,
+    ['publish-postman', 'target', 'file.json', '--', 'extra'],
+    /COLLECTION_ID.*INPUT_FILE/i,
   ],
   ['missing option values', ['export', 'in', 'out', '--category'], /--category/],
   [
@@ -109,10 +103,9 @@ for (const [name, args, message] of [
     ['export', 'in', 'out', '--category', 'Public', '--category', 'Full'],
     /--category/,
   ],
-  ['blank title', ['publish-postman', '', 'target', 'input.json'], /TITLE/i],
-  ['blank target ID', ['publish-postman', 'Title', '', 'input.json'], /TARGET_ID/i],
-  ['blank module ID', ['publish-apifox', 'Title', '123', '', 'input.json'], /MODULE_ID/i],
-  ['blank input path', ['publish-postman', 'Title', 'target', ''], /INPUT_FILE/i],
+  ['blank target ID', ['publish-postman', '', 'input.json'], /COLLECTION_ID/i],
+  ['blank module ID', ['publish-apifox', 'project', '', 'input.json'], /MODULE_ID/i],
+  ['blank input path', ['publish-postman', 'target', ''], /INPUT_FILE/i],
 ] as const)
   test(`rejects ${name} with a PlatformApiError`, () => {
     assert.throws(

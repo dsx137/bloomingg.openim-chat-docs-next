@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { appendFile, mkdtemp, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join, relative, resolve } from 'node:path';
@@ -42,13 +42,11 @@ export type PlatformApiCommand =
   | { readonly command: 'help' }
   | {
       readonly command: 'publish-postman';
-      readonly title: string;
       readonly targetId: string;
       readonly inputPath: string;
     }
   | {
       readonly command: 'publish-apifox';
-      readonly title: string;
       readonly targetId: string;
       readonly moduleId: string;
       readonly inputPath: string;
@@ -351,19 +349,14 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
   }
 }
 
-const publishConfigSchema = z.object({
-  GITHUB_SHA: z.string().min(1).optional(),
-  GITHUB_STEP_SUMMARY: z.string().min(1).optional(),
-});
-
-export const postmanPublishConfigSchema = publishConfigSchema.extend({
+export const postmanPublishConfigSchema = z.object({
   POSTMAN_API_KEY: z.string().min(1),
 });
 export const postmanCollectionIdSchema = z
   .string()
   .regex(/^\d+-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
 
-export const apifoxPublishConfigSchema = publishConfigSchema.extend({
+export const apifoxPublishConfigSchema = z.object({
   APIFOX_ACCESS_TOKEN: z.string().min(1),
 });
 export const apifoxProjectIdSchema = z.string().regex(/^\d+$/);
@@ -372,7 +365,6 @@ export const apifoxModuleIdSchema = z
   .regex(/^\d+$/)
   .transform(Number)
   .pipe(z.number().int().positive().safe());
-
 const apifoxCountersSchema = z
   .object({
     endpointCreated: z.number().int().nonnegative(),
@@ -452,6 +444,17 @@ async function requestJson(
   }
 }
 
+function postmanCollectionName(value: unknown): string {
+  if (
+    !isRecord(value) ||
+    !isRecord(value.collection) ||
+    !isRecord(value.collection.info) ||
+    typeof value.collection.info.name !== 'string'
+  )
+    throw new PlatformApiError('Postman collection response did not include info.name.');
+  return value.collection.info.name;
+}
+
 export async function publishPostman(
   apiKey: string,
   collectionId: string,
@@ -459,17 +462,21 @@ export async function publishPostman(
 ): Promise<void> {
   const url = `https://api.getpostman.com/collections/${encodeURIComponent(collectionId)}`;
   const apiKeyHeader = { 'X-API-Key': apiKey };
-  await requestJson(
+  const existingCollection = await requestJson(
     url,
     { headers: apiKeyHeader },
     {
       notFoundError: new PostmanCollectionUnavailableError(collectionId),
     },
   );
+  const replacement = {
+    ...collection,
+    info: { ...collection.info, name: postmanCollectionName(existingCollection) },
+  };
   await requestJson(url, {
     method: 'PUT',
     headers: { ...apiKeyHeader, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ collection }),
+    body: JSON.stringify({ collection: replacement }),
   });
 }
 
@@ -541,17 +548,7 @@ export async function publishApifox(
   );
 }
 
-async function appendSummary(
-  path: string | undefined,
-  title: string,
-  sha: string | undefined,
-): Promise<void> {
-  if (path === undefined) return;
-  await appendFile(path, `### ${title}\n\n- Source revision: \`${sha ?? 'local'}\`\n\n`);
-}
-
 export async function publishPlatformApiPostman(
-  title: string,
   collectionId: string,
   filePath: string,
   env: unknown = process.env,
@@ -561,16 +558,11 @@ export async function publishPlatformApiPostman(
   const collection = await convertOpenApiToPostman(
     JSON.stringify(parseOpenApiJson(await readFile(filePath, 'utf8'), filePath)),
   );
-  await publishPostman(config.POSTMAN_API_KEY, validCollectionId, {
-    ...collection,
-    info: { ...collection.info, name: title },
-  });
-  await appendSummary(config.GITHUB_STEP_SUMMARY, title, config.GITHUB_SHA);
-  console.log(`${title} published to Postman.`);
+  await publishPostman(config.POSTMAN_API_KEY, validCollectionId, collection);
+  console.log(`${filePath} published to Postman collection ${validCollectionId}.`);
 }
 
 export async function publishPlatformApiApifox(
-  title: string,
   projectId: string,
   moduleId: string,
   filePath: string,
@@ -579,16 +571,11 @@ export async function publishPlatformApiApifox(
   const config = apifoxPublishConfigSchema.parse(env);
   const validProjectId = apifoxProjectIdSchema.parse(projectId);
   const validModuleId = apifoxModuleIdSchema.parse(moduleId);
-  const sourceDocument = parseOpenApiJson(await readFile(filePath, 'utf8'), filePath);
-  if (!isRecord(sourceDocument.info))
-    throw new PlatformApiError('Apifox OpenAPI info must be an object.');
-  const document = apifoxDocument({
-    ...sourceDocument,
-    info: { ...sourceDocument.info, title },
-  });
+  const document = apifoxDocument(parseOpenApiJson(await readFile(filePath, 'utf8'), filePath));
   await publishApifox(config.APIFOX_ACCESS_TOKEN, validProjectId, validModuleId, document);
-  await appendSummary(config.GITHUB_STEP_SUMMARY, title, config.GITHUB_SHA);
-  console.log(`${title} published to Apifox.`);
+  console.log(
+    `${filePath} published to Apifox project ${validProjectId}, module ${validModuleId}.`,
+  );
 }
 
 function requiredValue(command: string, name: string, value: string | undefined): string {
@@ -633,27 +620,25 @@ function parsePublish(
   command: 'publish-apifox' | 'publish-postman',
   values: readonly string[],
 ): PlatformApiCommand {
+  const targetName = command === 'publish-apifox' ? 'PROJECT_ID' : 'COLLECTION_ID';
   const expectedValues =
     command === 'publish-apifox'
-      ? 'TITLE, PROJECT_ID, MODULE_ID, and INPUT_FILE'
-      : 'TITLE, TARGET_ID, and INPUT_FILE';
-  const expectedLength = command === 'publish-apifox' ? 4 : 3;
-  if (values.length !== expectedLength)
+      ? 'PROJECT_ID, MODULE_ID, and INPUT_FILE'
+      : 'COLLECTION_ID and INPUT_FILE';
+  if (values.length !== (command === 'publish-apifox' ? 3 : 2))
     throw new PlatformApiError(`${command} requires ${expectedValues}.`);
   for (const value of values) if (value.startsWith('--')) rejectArgument(command, value);
   if (command === 'publish-apifox')
     return {
       command,
-      title: requiredValue(command, 'TITLE', values[0]),
-      targetId: requiredValue(command, 'PROJECT_ID', values[1]),
-      moduleId: requiredValue(command, 'MODULE_ID', values[2]),
-      inputPath: requiredValue(command, 'INPUT_FILE', values[3]),
+      targetId: requiredValue(command, targetName, values[0]),
+      moduleId: requiredValue(command, 'MODULE_ID', values[1]),
+      inputPath: requiredValue(command, 'INPUT_FILE', values[2]),
     };
   return {
     command,
-    title: requiredValue(command, 'TITLE', values[0]),
-    targetId: requiredValue(command, 'TARGET_ID', values[1]),
-    inputPath: requiredValue(command, 'INPUT_FILE', values[2]),
+    targetId: requiredValue(command, targetName, values[0]),
+    inputPath: requiredValue(command, 'INPUT_FILE', values[1]),
   };
 }
 
@@ -686,21 +671,16 @@ export async function runCommand(command: PlatformApiCommand): Promise<void> {
     case 'export':
       return exportOpenApi(command.inputPath, command.outputPath, { category: command.category });
     case 'publish-postman':
-      return publishPlatformApiPostman(command.title, command.targetId, command.inputPath);
+      return publishPlatformApiPostman(command.targetId, command.inputPath);
     case 'publish-apifox':
-      return publishPlatformApiApifox(
-        command.title,
-        command.targetId,
-        command.moduleId,
-        command.inputPath,
-      );
+      return publishPlatformApiApifox(command.targetId, command.moduleId, command.inputPath);
     case 'help':
       console.log(
         [
           'Usage:',
           '  pnpm run platform-api:export -- <input> <output> [--category <category>]',
-          '  pnpm run platform-api:publish-postman -- <title> <collection-id> <input-file>',
-          '  pnpm run platform-api:publish-apifox -- <title> <project-id> <module-id> <input-file>',
+          '  pnpm run platform-api:publish-postman -- <collection-id> <input-file>',
+          '  pnpm run platform-api:publish-apifox -- <project-id> <module-id> <input-file>',
         ].join('\n'),
       );
   }

@@ -566,7 +566,6 @@ test('rejects malformed Postman collection identifiers', () => {
 test('accepts package-manager argument separators', () => {
   const expected = {
     command: 'publish-postman',
-    title: 'OpenIM Public',
     targetId: '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
     inputPath: '/tmp/public.json',
   };
@@ -574,7 +573,6 @@ test('accepts package-manager argument separators', () => {
     parseCommandArguments([
       'publish-postman',
       '--',
-      'OpenIM Public',
       '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
       '/tmp/public.json',
     ]),
@@ -583,7 +581,6 @@ test('accepts package-manager argument separators', () => {
   assert.deepEqual(
     parseCommandArguments([
       'publish-postman',
-      'OpenIM Public',
       '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
       '/tmp/public.json',
     ]),
@@ -705,14 +702,9 @@ test('rejects malformed local OpenAPI before any Postman request', async (contex
     return Response.json({});
   });
   await assert.rejects(() =>
-    publishPlatformApiPostman(
-      'OpenIM Public',
-      '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
-      path,
-      {
-        POSTMAN_API_KEY: 'key',
-      },
-    ),
+    publishPlatformApiPostman('56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2', path, {
+      POSTMAN_API_KEY: 'key',
+    }),
   );
   assert.deepEqual(requests, []);
 });
@@ -734,30 +726,29 @@ test('publishes one Postman collection per invocation', async (context) => {
     globalThis,
     'fetch',
     async (input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      const url = input instanceof Request ? input.url : input.toString();
       requests.push({
         body: init?.body,
         method: init?.method ?? 'GET',
         url: input instanceof Request ? input.url : input.toString(),
       });
-      return init?.method === 'PUT' ? Response.json({}) : Response.json({ collection: {} });
+      return init?.method === 'PUT'
+        ? Response.json({})
+        : Response.json({
+            collection: {
+              info: {
+                name: url.includes('66471833') ? 'Remote Full Title' : 'Remote Public Title',
+              },
+            },
+          });
     },
   );
-  await publishPlatformApiPostman(
-    'OpenIM Public',
-    '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
-    publicPath,
-    {
-      POSTMAN_API_KEY: 'secret-key',
-    },
-  );
-  await publishPlatformApiPostman(
-    'OpenIM Full',
-    '66471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
-    fullPath,
-    {
-      POSTMAN_API_KEY: 'secret-key',
-    },
-  );
+  await publishPlatformApiPostman('56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2', publicPath, {
+    POSTMAN_API_KEY: 'secret-key',
+  });
+  await publishPlatformApiPostman('66471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2', fullPath, {
+    POSTMAN_API_KEY: 'secret-key',
+  });
   assert.deepEqual(
     requests.map(({ method }) => method),
     ['GET', 'PUT', 'GET', 'PUT'],
@@ -781,7 +772,10 @@ test('publishes one Postman collection per invocation', async (context) => {
     assert.ok(isRecord(payload));
     assert.ok(isRecord(payload.collection));
     assert.ok(isRecord(payload.collection.info));
-    assert.equal(payload.collection.info.name, index === 1 ? 'OpenIM Public' : 'OpenIM Full');
+    assert.equal(
+      payload.collection.info.name,
+      index === 1 ? 'Remote Public Title' : 'Remote Full Title',
+    );
     assert.equal(countPostmanRequests(payload.collection), requestCount);
     assert.equal(JSON.stringify(payload).includes('x-export-category'), false);
     assert.equal(JSON.stringify(payload).includes('secret-key'), false);
@@ -845,7 +839,7 @@ test('retries transient platform responses before publishing', async (context) =
       requests.push(init?.method ?? 'GET');
       const status = required(statuses.shift(), 'Unexpected platform request.');
       return status === 200
-        ? Response.json({})
+        ? Response.json({ collection: { info: { name: 'Remote title' } } })
         : new Response('transient', { status, headers: { 'Retry-After': '0' } });
     },
   );
@@ -895,8 +889,8 @@ test('publishes one Apifox project per invocation', async (context) => {
     },
   );
 
-  await publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment);
-  await publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment);
+  await publishPlatformApiApifox('123', '1001', publicPath, apifoxEnvironment);
+  await publishPlatformApiApifox('456', '1002', fullPath, apifoxEnvironment);
 
   assert.deepEqual(
     requests.map(({ authorization, contentType, method, url, version }) => ({
@@ -961,7 +955,7 @@ test('publishes one Apifox project per invocation', async (context) => {
     const document: unknown = JSON.parse(payload.input);
     if (!isRecord(document) || !isRecord(document.info))
       throw new Error(`Missing Apifox request ${index} document info.`);
-    assert.equal(document.info.title, index === 0 ? 'OpenIM Public' : 'OpenIM Full');
+    assert.equal(document.info.title, 'OpenIM Platform API v3');
     const operations = apifoxOperations(document);
     assert.equal(operations.length, expected.operationCount);
     for (const operation of operations) {
@@ -987,7 +981,7 @@ test('validates the Apifox OpenAPI document before making a request', async (con
   });
 
   await assert.rejects(
-    () => publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment),
+    () => publishPlatformApiApifox('456', '1002', fullPath, apifoxEnvironment),
     /OpenAPI.*apifox-validation-full\.json/i,
   );
   assert.deepEqual(requests, []);
@@ -1010,7 +1004,7 @@ test('validates Apifox operation shapes before making a request', async (context
   });
 
   await assert.rejects(
-    () => publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment),
+    () => publishPlatformApiApifox('456', '1002', fullPath, apifoxEnvironment),
     /requires operationId/i,
   );
   assert.deepEqual(requests, []);
@@ -1028,7 +1022,7 @@ test('does not import a later folder after Apifox reports failure counters', asy
   });
 
   await assert.rejects(
-    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
+    () => publishPlatformApiApifox('123', '1001', publicPath, apifoxEnvironment),
     /Apifox import failed/i,
   );
   assert.deepEqual(requests, ['fetch']);
@@ -1049,7 +1043,7 @@ test('does not import a later folder after Apifox reports errors', async (contex
   });
 
   await assert.rejects(
-    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
+    () => publishPlatformApiApifox('123', '1001', publicPath, apifoxEnvironment),
     /Full import failed/i,
   );
   assert.deepEqual(requests, ['fetch']);
@@ -1065,7 +1059,7 @@ test('does not import a later folder after an incomplete Apifox response', async
   });
 
   await assert.rejects(
-    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
+    () => publishPlatformApiApifox('123', '1001', publicPath, apifoxEnvironment),
     /endpointCreated/i,
   );
   assert.deepEqual(requests, ['fetch']);
