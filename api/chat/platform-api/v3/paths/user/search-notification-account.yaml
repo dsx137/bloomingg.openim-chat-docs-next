@@ -1,5 +1,6 @@
 post:
   tags:
+    - 'Public'
     - 'Users'
   summary: 'UserSearchNotificationAccount'
   description: 'OpenIM Server POST route handled by u.SearchNotificationAccount. It accepts the JSON serialization of user.SearchNotificationAccountReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'

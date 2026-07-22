@@ -1,5 +1,6 @@
 post:
   tags:
+    - 'Public'
     - 'Groups'
   summary: 'GroupGetGroupsInfo'
   description: 'OpenIM Server POST route handled by g.GetGroupsInfo. It accepts the JSON serialization of group.GetGroupsInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'

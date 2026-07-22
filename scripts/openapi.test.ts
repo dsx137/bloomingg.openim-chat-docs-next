@@ -172,25 +172,27 @@ async function platformApiDocumentationOperations(): Promise<Set<string>> {
     .filter(
       (route): route is RouteRecord =>
         route !== undefined &&
-        route.contextKey === 'chat/platform-api/v3' &&
+        route.contextKey === 'chat/platform-api' &&
         route.status === 'published' &&
         route.template === 'api',
     );
-  assert.equal(apiPages.length, 22);
+  assert.equal(apiPages.length, 61);
   const operations = new Set<string>();
   for (const page of apiPages) {
     const defaultOperation = pageOperation(
       await readFile(resolve(repoRoot, page.contentFile), 'utf8'),
       page.contentFile,
     );
-    const localizedContentFile = page.contentFile.replace(/^content\//, 'content/zh/');
-    assert.equal(
-      pageOperation(
-        await readFile(resolve(repoRoot, localizedContentFile), 'utf8'),
-        localizedContentFile,
-      ),
-      defaultOperation,
-    );
+    if (!page.contentFile.startsWith('content/zh/')) {
+      const localizedContentFile = page.contentFile.replace(/^content\//, 'content/zh/');
+      assert.equal(
+        pageOperation(
+          await readFile(resolve(repoRoot, localizedContentFile), 'utf8'),
+          localizedContentFile,
+        ),
+        defaultOperation,
+      );
+    }
     operations.add(defaultOperation);
   }
   return operations;
@@ -442,7 +444,7 @@ test('classifies routes by Platform API documentation visibility', async () => {
     [...publicOperations].filter((operation) => !routeOperations.has(operation)),
     [],
   );
-  assert.equal(publicOperations.size, 20);
+  assert.equal(publicOperations.size, 61);
   assert.deepEqual(
     openApiDocument.tags
       .filter(({ name }) => name === 'Public' || name === 'Private')
@@ -657,8 +659,8 @@ test('converts the bundled OpenAPI into a Postman collection with every document
     ],
   );
   assert.equal(countPostmanRequests(collection), 140);
-  assert.equal(countPostmanRequests(postmanFolderItems(collection, 'Public')), 20);
-  assert.equal(countPostmanRequests(rootFolders.filter(({ name }) => name !== 'Public')), 120);
+  assert.equal(countPostmanRequests(postmanFolderItems(collection, 'Public')), 61);
+  assert.equal(countPostmanRequests(rootFolders.filter(({ name }) => name !== 'Public')), 79);
 });
 
 test('reports an inaccessible Postman collection before conversion', async (context) => {
@@ -716,7 +718,7 @@ test('rejects malformed local OpenAPI before any Postman request', async (contex
   assert.deepEqual(requests, []);
 });
 
-test('converts and publishes ordered OpenAPI folders as one 160-request Collection', async (context) => {
+test('converts and publishes ordered OpenAPI folders as one 201-request Collection', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
   const publicPath = join(directory, 'public.json');
   const fullPath = join(directory, 'full.json');
@@ -755,7 +757,7 @@ test('converts and publishes ordered OpenAPI folders as one 160-request Collecti
   const payload: unknown = JSON.parse(body);
   assert.ok(isRecord(payload));
   assert.ok(isRecord(payload.collection));
-  assert.equal(countPostmanRequests(payload.collection), 160);
+  assert.equal(countPostmanRequests(payload.collection), 201);
   assert.ok(Array.isArray(payload.collection.item));
   assert.deepEqual(
     payload.collection.item.filter(isRecord).map((item) => item.name),
@@ -915,7 +917,7 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
         schemaOverwriteBehavior: 'OVERWRITE_EXISTING',
         updateFolderOfChangedEndpoint: true,
       },
-      operationCount: 20,
+      operationCount: 61,
     },
     {
       edition: 'Full',

@@ -1,5 +1,6 @@
 post:
   tags:
+    - 'Public'
     - 'Messages'
   summary: 'MsgRevokeMsg'
   description: 'OpenIM Server POST route handled by m.RevokeMsg. It accepts the JSON serialization of msg.RevokeMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'

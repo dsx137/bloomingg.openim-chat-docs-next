@@ -1,5 +1,6 @@
 post:
   tags:
+    - 'Public'
     - 'Friends'
   summary: 'FriendAddFriendResponse'
   description: 'OpenIM Server POST route handled by f.RespondFriendApply. It accepts the JSON serialization of relation.RespondFriendApplyReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
