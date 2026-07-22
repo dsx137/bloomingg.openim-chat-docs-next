@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Groups
+  x-export-category: Public
   summary: Mute group member
   description: Prevents a group member from sending messages for a specified duration.
   operationId: groupMuteGroupMember

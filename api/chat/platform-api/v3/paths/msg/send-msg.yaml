@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Messages
+  x-export-category: Public
   summary: Send message
   description: Sends a new message or imports an existing message into OpenIM.
   operationId: msgSendMsg

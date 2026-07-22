@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - 'Friends'
+  x-export-category: Public
   summary: 'FriendAddFriend'
   description: 'OpenIM Server POST route handled by f.ApplyToAddFriend. It accepts the JSON serialization of relation.ApplyToAddFriendReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postFriendAddFriend

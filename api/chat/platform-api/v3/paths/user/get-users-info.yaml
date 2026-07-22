@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Users
+  x-export-category: Public
   summary: Get users
   description: Returns public profile information for specified OpenIM users.
   operationId: userGetUsersInfo

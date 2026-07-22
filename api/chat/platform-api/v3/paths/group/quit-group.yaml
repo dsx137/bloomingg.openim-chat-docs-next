@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Groups
+  x-export-category: Public
   summary: Leave group
   description: Removes the current OpenIM user from a group.
   operationId: groupQuitGroup

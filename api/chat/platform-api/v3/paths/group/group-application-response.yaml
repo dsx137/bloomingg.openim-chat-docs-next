@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Groups
+  x-export-category: Public
   summary: Handle group application
   description: Accepts or rejects a user's application to join an OpenIM group.
   operationId: groupGroupApplicationResponse

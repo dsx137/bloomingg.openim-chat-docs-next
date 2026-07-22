@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Groups
+  x-export-category: Public
   summary: Invite members
   description: Invites one or more OpenIM users to a group.
   operationId: groupInviteUserToGroup

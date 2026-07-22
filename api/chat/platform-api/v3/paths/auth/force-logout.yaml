@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Authentication
+  x-export-category: Public
   summary: Revoke all session tokens
   description: Revokes every active session token for an OpenIM user.
   operationId: authForceLogout

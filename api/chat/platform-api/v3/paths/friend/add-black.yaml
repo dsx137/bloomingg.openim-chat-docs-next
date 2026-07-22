@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Moderation
+  x-export-category: Public
   summary: Block user
   description: Adds an OpenIM user to the current user's block list.
   operationId: friendAddBlack

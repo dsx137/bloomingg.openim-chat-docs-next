@@ -14,8 +14,6 @@ servers:
         default: api.example.invalid
         description: Hostname of the deployed OpenIM API service.
 tags:
-  - name: Public
-    description: Operations documented in the Platform API reference.
   - name: Authentication
     description: OpenIM authentication operations.
   - name: Conversations

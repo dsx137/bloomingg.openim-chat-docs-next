@@ -8,6 +8,8 @@ import { fileURLToPath } from 'node:url';
 import Ajv, { type ValidateFunction } from 'ajv';
 import {
   apifoxPublishConfigSchema,
+  apifoxModuleIdSchema,
+  apifoxProjectIdSchema,
   convertOpenApiToPostman,
   exportOpenApi,
   listFiles,
@@ -15,6 +17,7 @@ import {
   parseApifoxImportResult,
   parseCommandArguments,
   postmanPublishConfigSchema,
+  postmanCollectionIdSchema,
   publishPlatformApiApifox,
   publishPlatformApiPostman,
   publishPostman,
@@ -36,6 +39,7 @@ type TestOperation = {
   readonly requestBody?: { readonly content: { readonly 'application/json': JsonContent } };
   readonly responses: Record<string, unknown>;
   readonly tags: readonly string[];
+  readonly 'x-export-category'?: string;
 };
 type OpenApiDocument = {
   readonly paths: Record<string, Partial<Record<HttpMethod, TestOperation>>>;
@@ -103,7 +107,6 @@ let referencedOpenApiDocument: OpenApiDocument;
 let validateSendMessage: ValidateFunction;
 const apifoxEnvironment = {
   APIFOX_ACCESS_TOKEN: 'apifox-token',
-  APIFOX_PROJECT_ID: '123',
 } as const;
 const zeroApifoxCounters = {
   endpointCreated: 0,
@@ -217,18 +220,6 @@ function countPostmanRequests(value: unknown): number {
   );
 }
 
-function postmanFolderItems(value: unknown, name: string): readonly unknown[] {
-  assert.ok(isRecord(value));
-  assert.ok(Array.isArray(value.item));
-  const folder = required(
-    value.item.find((item) => isRecord(item) && item.name === name),
-    `Missing Postman folder ${name}.`,
-  );
-  assert.ok(isRecord(folder));
-  assert.ok(Array.isArray(folder.item));
-  return folder.item;
-}
-
 async function exportOpenApiDocuments(
   directory: string,
   prefix: string,
@@ -236,8 +227,8 @@ async function exportOpenApiDocuments(
   const publicPath = join(directory, `${prefix}-public.json`);
   const fullPath = join(directory, `${prefix}-full.json`);
   const bundledPath = join(directory, 'openapi.json');
-  await exportOpenApi(bundledPath, publicPath, { stripTags: [], tag: 'Public' });
-  await exportOpenApi(bundledPath, fullPath, { stripTags: ['Public'] });
+  await exportOpenApi(bundledPath, publicPath, { category: 'Public' });
+  await exportOpenApi(bundledPath, fullPath, {});
   return { fullPath, publicPath };
 }
 
@@ -445,11 +436,9 @@ test('classifies routes by Platform API documentation visibility', async () => {
     [],
   );
   assert.equal(publicOperations.size, 61);
-  assert.deepEqual(
-    openApiDocument.tags
-      .filter(({ name }) => name === 'Public' || name === 'Private')
-      .map(({ name }) => name),
-    ['Public'],
+  assert.equal(
+    openApiDocument.tags.some(({ name }) => name === 'Public'),
+    false,
   );
   for (const [path, pathItem] of Object.entries(openApiDocument.paths))
     for (const method of httpMethods) {
@@ -457,11 +446,10 @@ test('classifies routes by Platform API documentation visibility', async () => {
       if (operation === undefined) continue;
       const operationKey = `${method} ${path}`;
       assert.equal(operation.tags.includes('Private'), false, operationKey);
-      const domainTags = operation.tags.filter((tag) => tag !== 'Public');
-      assert.equal(domainTags.length, 1, operationKey);
-      assert.deepEqual(
-        operation.tags,
-        publicOperations.has(operationKey) ? ['Public', ...domainTags] : domainTags,
+      assert.equal(operation.tags.length, 1, operationKey);
+      assert.equal(
+        operation['x-export-category'],
+        publicOperations.has(operationKey) ? 'Public' : undefined,
         operationKey,
       );
     }
@@ -548,52 +536,57 @@ test('keeps descriptions off OpenAPI 3.0 reference siblings', () => {
   assert.deepEqual(violations, []);
 });
 
-test('rejects incomplete target publishing configuration', () => {
-  assert.throws(
-    () => postmanPublishConfigSchema.parse({ POSTMAN_API_KEY: 'postman-key' }),
-    /POSTMAN_COLLECTION_ID/,
-  );
-  assert.throws(
-    () => apifoxPublishConfigSchema.parse({ APIFOX_ACCESS_TOKEN: 'apifox-token' }),
-    /APIFOX_PROJECT_ID/,
-  );
+test('rejects incomplete publishing credentials', () => {
+  assert.throws(() => postmanPublishConfigSchema.parse({}), /POSTMAN_API_KEY/);
+  assert.throws(() => apifoxPublishConfigSchema.parse({}), /APIFOX_ACCESS_TOKEN/);
 });
 
-test('accepts isolated target configuration without Apifox folder IDs', () => {
+test('accepts isolated target configuration', () => {
   const postman = postmanPublishConfigSchema.parse({
     POSTMAN_API_KEY: 'postman-key',
-    POSTMAN_COLLECTION_ID: '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
   });
   const apifox = apifoxPublishConfigSchema.parse({
     APIFOX_ACCESS_TOKEN: 'apifox-token',
-    APIFOX_PROJECT_ID: '123',
   });
-  assert.equal(postman.POSTMAN_COLLECTION_ID, '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2');
-  assert.equal(apifox.APIFOX_PROJECT_ID, '123');
+  assert.equal(postman.POSTMAN_API_KEY, 'postman-key');
+  assert.equal(apifox.APIFOX_ACCESS_TOKEN, 'apifox-token');
 });
 
 test('rejects malformed Postman collection identifiers', () => {
-  assert.throws(
-    () =>
-      postmanPublishConfigSchema.parse({
-        POSTMAN_API_KEY: 'postman-key',
-        POSTMAN_COLLECTION_ID: 'collection-id',
-      }),
-    /POSTMAN_COLLECTION_ID/,
+  assert.throws(() => postmanCollectionIdSchema.parse('collection-id'), /Invalid/);
+  assert.doesNotThrow(() =>
+    postmanCollectionIdSchema.parse('56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2'),
   );
+  assert.throws(() => apifoxProjectIdSchema.parse('project-id'), /Invalid/);
+  assert.doesNotThrow(() => apifoxProjectIdSchema.parse('123'));
+  assert.throws(() => apifoxModuleIdSchema.parse('module-id'), /Invalid/);
+  assert.equal(apifoxModuleIdSchema.parse('456'), 456);
 });
 
 test('accepts package-manager argument separators', () => {
   const expected = {
     command: 'publish-postman',
-    imports: [{ folder: 'Public', path: '/tmp/public.json' }],
+    title: 'OpenIM Public',
+    targetId: '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+    inputPath: '/tmp/public.json',
   };
   assert.deepEqual(
-    parseCommandArguments(['publish-postman', '--', '--folder', 'Public:/tmp/public.json']),
+    parseCommandArguments([
+      'publish-postman',
+      '--',
+      'OpenIM Public',
+      '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      '/tmp/public.json',
+    ]),
     expected,
   );
   assert.deepEqual(
-    parseCommandArguments(['publish-postman', '--folder', 'Public:/tmp/public.json']),
+    parseCommandArguments([
+      'publish-postman',
+      'OpenIM Public',
+      '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      '/tmp/public.json',
+    ]),
     expected,
   );
   assert.deepEqual(parseCommandArguments(['publish-postman', '--help']), { command: 'help' });
@@ -644,9 +637,9 @@ test('converts the bundled OpenAPI into a Postman collection with every document
   assert.deepEqual(
     rootFolders.map(({ name }) => name),
     [
-      'Public',
       'Authentication',
       'Conversations',
+      'Moderation',
       'Friends',
       'Groups',
       'JavaScript SDK',
@@ -659,8 +652,10 @@ test('converts the bundled OpenAPI into a Postman collection with every document
     ],
   );
   assert.equal(countPostmanRequests(collection), 140);
-  assert.equal(countPostmanRequests(postmanFolderItems(collection, 'Public')), 61);
-  assert.equal(countPostmanRequests(rootFolders.filter(({ name }) => name !== 'Public')), 79);
+  assert.equal(
+    rootFolders.some(({ name }) => name === 'Public'),
+    false,
+  );
 });
 
 test('reports an inaccessible Postman collection before conversion', async (context) => {
@@ -688,7 +683,7 @@ test('reports an inaccessible Postman collection before conversion', async (cont
     convertOpenApiToPostman(bundledOpenApi).then((collection) =>
       publishPostman('postman-key', '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2', collection),
     ),
-    /collection does not exist or is not accessible.*POSTMAN_COLLECTION_ID.*POSTMAN_API_KEY/is,
+    /collection does not exist or is not accessible.*POSTMAN_API_KEY/is,
   );
   assert.deepEqual(requests, [
     {
@@ -710,60 +705,87 @@ test('rejects malformed local OpenAPI before any Postman request', async (contex
     return Response.json({});
   });
   await assert.rejects(() =>
-    publishPlatformApiPostman([{ folder: 'Broken', path }], {
-      POSTMAN_API_KEY: 'key',
-      POSTMAN_COLLECTION_ID: '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
-    }),
+    publishPlatformApiPostman(
+      'OpenIM Public',
+      '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      path,
+      {
+        POSTMAN_API_KEY: 'key',
+      },
+    ),
   );
   assert.deepEqual(requests, []);
 });
 
-test('converts and publishes ordered OpenAPI folders as one 201-request Collection', async (context) => {
+test('publishes one Postman collection per invocation', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
   const publicPath = join(directory, 'public.json');
   const fullPath = join(directory, 'full.json');
   await exportOpenApi(join(directory, 'openapi.json'), publicPath, {
-    stripTags: [],
-    tag: 'Public',
+    category: 'Public',
   });
-  await exportOpenApi(join(directory, 'openapi.json'), fullPath, {
-    stripTags: ['Public'],
-  });
-  const requests: RequestInit[] = [];
+  await exportOpenApi(join(directory, 'openapi.json'), fullPath, {});
+  const requests: {
+    readonly body: BodyInit | null | undefined;
+    readonly method: string;
+    readonly url: string;
+  }[] = [];
   context.mock.method(
     globalThis,
     'fetch',
-    async (_input: string | URL | Request, init?: RequestInit): Promise<Response> => {
-      requests.push(init ?? {});
+    async (input: string | URL | Request, init?: RequestInit): Promise<Response> => {
+      requests.push({
+        body: init?.body,
+        method: init?.method ?? 'GET',
+        url: input instanceof Request ? input.url : input.toString(),
+      });
       return init?.method === 'PUT' ? Response.json({}) : Response.json({ collection: {} });
     },
   );
   await publishPlatformApiPostman(
-    [
-      { folder: 'Public', path: publicPath },
-      { folder: 'Full', path: fullPath },
-    ],
+    'OpenIM Public',
+    '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+    publicPath,
     {
       POSTMAN_API_KEY: 'secret-key',
-      POSTMAN_COLLECTION_ID: '56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+    },
+  );
+  await publishPlatformApiPostman(
+    'OpenIM Full',
+    '66471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+    fullPath,
+    {
+      POSTMAN_API_KEY: 'secret-key',
     },
   );
   assert.deepEqual(
-    requests.map((request) => request.method ?? 'GET'),
-    ['GET', 'PUT'],
+    requests.map(({ method }) => method),
+    ['GET', 'PUT', 'GET', 'PUT'],
   );
-  const body = required(requests[1]?.body, 'Missing PUT body.');
-  if (typeof body !== 'string') throw new Error('Postman PUT body must be a string.');
-  const payload: unknown = JSON.parse(body);
-  assert.ok(isRecord(payload));
-  assert.ok(isRecord(payload.collection));
-  assert.equal(countPostmanRequests(payload.collection), 201);
-  assert.ok(Array.isArray(payload.collection.item));
   assert.deepEqual(
-    payload.collection.item.filter(isRecord).map((item) => item.name),
-    ['Public', 'Full'],
+    requests.map(({ url }) => url),
+    [
+      'https://api.getpostman.com/collections/56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      'https://api.getpostman.com/collections/56471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      'https://api.getpostman.com/collections/66471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+      'https://api.getpostman.com/collections/66471833-1905b9f0-c8a4-4c68-91e6-64f681924bd2',
+    ],
   );
-  assert.equal(JSON.stringify(payload).includes('secret-key'), false);
+  for (const [index, requestCount] of [
+    [1, 61],
+    [3, 140],
+  ] as const) {
+    const body = required(requests[index]?.body, `Missing PUT body ${index}.`);
+    if (typeof body !== 'string') throw new Error('Postman PUT body must be a string.');
+    const payload: unknown = JSON.parse(body);
+    assert.ok(isRecord(payload));
+    assert.ok(isRecord(payload.collection));
+    assert.ok(isRecord(payload.collection.info));
+    assert.equal(payload.collection.info.name, index === 1 ? 'OpenIM Public' : 'OpenIM Full');
+    assert.equal(countPostmanRequests(payload.collection), requestCount);
+    assert.equal(JSON.stringify(payload).includes('x-export-category'), false);
+    assert.equal(JSON.stringify(payload).includes('secret-key'), false);
+  }
 });
 
 test('replaces an accessible Postman collection with the converted OpenAPI', async (context) => {
@@ -845,7 +867,7 @@ function apifoxOperations(document: unknown): readonly Record<string, unknown>[]
   });
 }
 
-test('publishes validated ordered OpenAPI folders to Apifox', async (context) => {
+test('publishes one Apifox project per invocation', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
   const { fullPath, publicPath } = await exportOpenApiDocuments(directory, 'apifox-success');
   const requests: {
@@ -873,15 +895,9 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
     },
   );
 
-  await publishPlatformApiApifox(
-    [
-      { folder: 'Public', path: publicPath },
-      { folder: 'Full', path: fullPath },
-    ],
-    apifoxEnvironment,
-  );
+  await publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment);
+  await publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment);
 
-  const project = 'https://api.apifox.com/v1/projects/123';
   assert.deepEqual(
     requests.map(({ authorization, contentType, method, url, version }) => ({
       authorization,
@@ -895,24 +911,24 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
         authorization: 'Bearer apifox-token',
         contentType: 'application/json',
         method: 'POST',
-        url: `${project}/import-openapi?locale=en-US`,
+        url: 'https://api.apifox.com/v1/projects/123/import-openapi?locale=en-US',
         version: '2024-03-28',
       },
       {
         authorization: 'Bearer apifox-token',
         contentType: 'application/json',
         method: 'POST',
-        url: `${project}/import-openapi?locale=en-US`,
+        url: 'https://api.apifox.com/v1/projects/456/import-openapi?locale=en-US',
         version: '2024-03-28',
       },
     ],
   );
   const expectedImports = [
     {
-      edition: 'Public',
       options: {
         deleteUnmatchedResources: true,
         endpointOverwriteBehavior: 'OVERWRITE_EXISTING',
+        moduleId: 1001,
         prependBasePath: false,
         schemaOverwriteBehavior: 'OVERWRITE_EXISTING',
         updateFolderOfChangedEndpoint: true,
@@ -920,20 +936,18 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
       operationCount: 61,
     },
     {
-      edition: 'Full',
       options: {
-        deleteUnmatchedResources: false,
-        endpointOverwriteBehavior: 'CREATE_NEW',
+        deleteUnmatchedResources: true,
+        endpointOverwriteBehavior: 'OVERWRITE_EXISTING',
+        moduleId: 1002,
         prependBasePath: false,
-        schemaOverwriteBehavior: 'KEEP_EXISTING',
+        schemaOverwriteBehavior: 'OVERWRITE_EXISTING',
         updateFolderOfChangedEndpoint: true,
       },
       operationCount: 140,
     },
   ] as const;
-  const domainTags = new Set(
-    openApiDocument.tags.map(({ name }) => name).filter((name) => name !== 'Public'),
-  );
+  const domainTags = new Set(openApiDocument.tags.map(({ name }) => name));
   for (const [index, expected] of expectedImports.entries()) {
     const request = required(requests[index], `Missing Apifox request ${index}.`);
     const payload: unknown = JSON.parse(
@@ -945,6 +959,9 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
     if (!isRecord(payload.options)) throw new Error(`Missing Apifox request ${index} options.`);
     assert.deepEqual(payload.options, expected.options);
     const document: unknown = JSON.parse(payload.input);
+    if (!isRecord(document) || !isRecord(document.info))
+      throw new Error(`Missing Apifox request ${index} document info.`);
+    assert.equal(document.info.title, index === 0 ? 'OpenIM Public' : 'OpenIM Full');
     const operations = apifoxOperations(document);
     assert.equal(operations.length, expected.operationCount);
     for (const operation of operations) {
@@ -952,17 +969,16 @@ test('publishes validated ordered OpenAPI folders to Apifox', async (context) =>
       const folder = required(operation['x-apifox-folder'], `Missing Apifox folder ${index}.`);
       if (typeof operationId !== 'string' || typeof folder !== 'string')
         throw new Error(`Invalid Apifox operation identity ${index}.`);
-      assert.match(operationId, new RegExp(`^${expected.edition}__`));
-      assert.match(folder, new RegExp(`^${expected.edition}/`));
-      const domain = folder.slice(expected.edition.length + 1);
-      assert.ok(domainTags.has(domain));
+      assert.equal(operationId.includes('__'), false);
+      assert.ok(domainTags.has(folder));
+      assert.equal('x-export-category' in operation, false);
     }
   }
 });
 
-test('validates both Apifox OpenAPI documents before making the first request', async (context) => {
+test('validates the Apifox OpenAPI document before making a request', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
-  const { fullPath, publicPath } = await exportOpenApiDocuments(directory, 'apifox-validation');
+  const { fullPath } = await exportOpenApiDocuments(directory, 'apifox-validation');
   const requests: string[] = [];
   await writeFile(fullPath, '{}');
   context.mock.method(globalThis, 'fetch', async (): Promise<Response> => {
@@ -971,25 +987,38 @@ test('validates both Apifox OpenAPI documents before making the first request', 
   });
 
   await assert.rejects(
-    () =>
-      publishPlatformApiApifox(
-        [
-          { folder: 'Public', path: publicPath },
-          { folder: 'Full', path: fullPath },
-        ],
-        apifoxEnvironment,
-      ),
+    () => publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment),
     /OpenAPI.*apifox-validation-full\.json/i,
+  );
+  assert.deepEqual(requests, []);
+});
+
+test('validates Apifox operation shapes before making a request', async (context) => {
+  const directory = required(temporaryDirectory, 'Missing temporary directory.');
+  const { fullPath } = await exportOpenApiDocuments(directory, 'apifox-operation-validation');
+  const fullDocument: unknown = JSON.parse(await readFile(fullPath, 'utf8'));
+  const firstOperation = required(
+    apifoxOperations(fullDocument)[0],
+    'Missing Full operation for validation test.',
+  );
+  delete firstOperation.operationId;
+  await writeFile(fullPath, JSON.stringify(fullDocument));
+  const requests: string[] = [];
+  context.mock.method(globalThis, 'fetch', async (): Promise<Response> => {
+    requests.push('fetch');
+    return Response.json({ data: { counters: zeroApifoxCounters, errors: [] } });
+  });
+
+  await assert.rejects(
+    () => publishPlatformApiApifox('OpenIM Full', '456', '1002', fullPath, apifoxEnvironment),
+    /requires operationId/i,
   );
   assert.deepEqual(requests, []);
 });
 
 test('does not import a later folder after Apifox reports failure counters', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
-  const { fullPath, publicPath } = await exportOpenApiDocuments(
-    directory,
-    'apifox-counter-failure',
-  );
+  const { publicPath } = await exportOpenApiDocuments(directory, 'apifox-counter-failure');
   const requests: string[] = [];
   context.mock.method(globalThis, 'fetch', async (): Promise<Response> => {
     requests.push('fetch');
@@ -999,14 +1028,7 @@ test('does not import a later folder after Apifox reports failure counters', asy
   });
 
   await assert.rejects(
-    () =>
-      publishPlatformApiApifox(
-        [
-          { folder: 'Public', path: publicPath },
-          { folder: 'Full', path: fullPath },
-        ],
-        apifoxEnvironment,
-      ),
+    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
     /Apifox import failed/i,
   );
   assert.deepEqual(requests, ['fetch']);
@@ -1014,7 +1036,7 @@ test('does not import a later folder after Apifox reports failure counters', asy
 
 test('does not import a later folder after Apifox reports errors', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
-  const { fullPath, publicPath } = await exportOpenApiDocuments(directory, 'apifox-error-failure');
+  const { publicPath } = await exportOpenApiDocuments(directory, 'apifox-error-failure');
   const requests: string[] = [];
   context.mock.method(globalThis, 'fetch', async (): Promise<Response> => {
     requests.push('fetch');
@@ -1027,14 +1049,7 @@ test('does not import a later folder after Apifox reports errors', async (contex
   });
 
   await assert.rejects(
-    () =>
-      publishPlatformApiApifox(
-        [
-          { folder: 'Public', path: publicPath },
-          { folder: 'Full', path: fullPath },
-        ],
-        apifoxEnvironment,
-      ),
+    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
     /Full import failed/i,
   );
   assert.deepEqual(requests, ['fetch']);
@@ -1042,7 +1057,7 @@ test('does not import a later folder after Apifox reports errors', async (contex
 
 test('does not import a later folder after an incomplete Apifox response', async (context) => {
   const directory = required(temporaryDirectory, 'Missing temporary directory.');
-  const { fullPath, publicPath } = await exportOpenApiDocuments(directory, 'apifox-incomplete');
+  const { publicPath } = await exportOpenApiDocuments(directory, 'apifox-incomplete');
   const requests: string[] = [];
   context.mock.method(globalThis, 'fetch', async (): Promise<Response> => {
     requests.push('fetch');
@@ -1050,14 +1065,7 @@ test('does not import a later folder after an incomplete Apifox response', async
   });
 
   await assert.rejects(
-    () =>
-      publishPlatformApiApifox(
-        [
-          { folder: 'Public', path: publicPath },
-          { folder: 'Full', path: fullPath },
-        ],
-        apifoxEnvironment,
-      ),
+    () => publishPlatformApiApifox('OpenIM Public', '123', '1001', publicPath, apifoxEnvironment),
     /endpointCreated/i,
   );
   assert.deepEqual(requests, ['fetch']);

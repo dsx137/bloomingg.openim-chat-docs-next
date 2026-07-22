@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - 'Groups'
+  x-export-category: Public
   summary: 'GroupGetSpecifiedUserGroupRequestInfo'
   description: 'OpenIM Server POST route handled by g.GetSpecifiedUserGroupRequestInfo. It accepts the JSON serialization of group.GetSpecifiedUserGroupRequestInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postGroupGetSpecifiedUserGroupRequestInfo

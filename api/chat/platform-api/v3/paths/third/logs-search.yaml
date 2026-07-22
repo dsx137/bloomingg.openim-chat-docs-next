@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - 'Third-party services'
+  x-export-category: Public
   summary: 'ThirdLogsSearch'
   description: 'OpenIM Server POST route handled by t.SearchLogs. It accepts the JSON serialization of third.SearchLogsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postThirdLogsSearch

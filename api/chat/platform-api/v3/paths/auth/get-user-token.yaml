@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Authentication
+  x-export-category: Public
   summary: Issue session token
   description: Issues a session token for an OpenIM user on the selected platform.
   operationId: authGetUserToken

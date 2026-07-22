@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - Users
+  x-export-category: Public
   summary: List users
   description: Returns a paginated list of OpenIM users.
   operationId: userGetUsers

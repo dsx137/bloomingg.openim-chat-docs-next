@@ -1,7 +1,7 @@
 post:
   tags:
-    - 'Public'
     - 'Users'
+  x-export-category: Public
   summary: 'UserGetUsersOnlineStatus'
   description: 'OpenIM Server POST route handled by u.GetUsersOnlineStatus. It accepts the JSON serialization of msggateway.GetUsersOnlineStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
   operationId: postUserGetUsersOnlineStatus

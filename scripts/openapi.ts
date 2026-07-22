@@ -4,7 +4,6 @@ import { createRequire } from 'node:module';
 import { tmpdir } from 'node:os';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isDeepStrictEqual } from 'node:util';
 import { z } from 'zod';
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -20,17 +19,12 @@ export class PostmanCollectionUnavailableError extends PlatformApiError {
 
   constructor(readonly collectionId: string) {
     super(
-      `Postman collection does not exist or is not accessible: ${collectionId}. Verify POSTMAN_COLLECTION_ID and that the account owning POSTMAN_API_KEY has edit access.`,
+      `Postman collection does not exist or is not accessible: ${collectionId}. Verify the configured collection ID and that the account owning POSTMAN_API_KEY has edit access.`,
     );
   }
 }
 
-export type OpenApiProjectionOptions = {
-  readonly stripTags: readonly string[];
-  readonly tag?: string;
-};
-
-export type PlatformApiImport = { readonly folder: string; readonly path: string };
+export type OpenApiProjectionOptions = { readonly category?: string };
 
 export type PostmanCollection = {
   readonly info: Record<string, unknown>;
@@ -43,13 +37,21 @@ export type PlatformApiCommand =
       readonly command: 'export';
       readonly inputPath: string;
       readonly outputPath: string;
-      readonly stripTags: readonly string[];
-      readonly tag?: string;
+      readonly category?: string;
     }
   | { readonly command: 'help' }
   | {
-      readonly command: 'publish-apifox' | 'publish-postman';
-      readonly imports: readonly PlatformApiImport[];
+      readonly command: 'publish-postman';
+      readonly title: string;
+      readonly targetId: string;
+      readonly inputPath: string;
+    }
+  | {
+      readonly command: 'publish-apifox';
+      readonly title: string;
+      readonly targetId: string;
+      readonly moduleId: string;
+      readonly inputPath: string;
     };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -62,7 +64,9 @@ const openApiDocumentSchema = z
     tags: z.unknown().optional(),
   })
   .passthrough();
-const openApiOperationSchema = z.object({ tags: z.array(z.string()).optional() }).passthrough();
+const openApiOperationSchema = z
+  .object({ tags: z.array(z.string()).optional(), 'x-export-category': z.string().optional() })
+  .passthrough();
 
 function parsedOpenApiDocument(value: unknown): z.infer<typeof openApiDocumentSchema> {
   const result = openApiDocumentSchema.safeParse(value);
@@ -73,18 +77,17 @@ function parsedOpenApiDocument(value: unknown): z.infer<typeof openApiDocumentSc
 function projectOperation(
   value: unknown,
   options: OpenApiProjectionOptions,
-  strippedTags: ReadonlySet<string>,
 ): Record<string, unknown> | undefined {
   const result = openApiOperationSchema.safeParse(value);
   if (!result.success)
     throw new PlatformApiError('OpenAPI operations must be objects in bundled JSON; bundle first.');
   if ('$ref' in result.data)
     throw new PlatformApiError('OpenAPI operations must be self-contained objects; bundle first.');
-  const tags = result.data.tags ?? [];
-  if (options.tag !== undefined && !tags.includes(options.tag)) return undefined;
-  return result.data.tags === undefined
-    ? result.data
-    : { ...result.data, tags: tags.filter((tag) => !strippedTags.has(tag)) };
+  if (options.category !== undefined && result.data['x-export-category'] !== options.category)
+    return undefined;
+  const operation = { ...result.data };
+  delete operation['x-export-category'];
+  return operation;
 }
 
 export function projectOpenApiDocument(
@@ -92,8 +95,6 @@ export function projectOpenApiDocument(
   options: OpenApiProjectionOptions,
 ): Record<string, unknown> {
   const document = parsedOpenApiDocument(value);
-  const strippedTags = new Set(options.stripTags);
-  if (options.tag !== undefined) strippedTags.add(options.tag);
   const paths: Record<string, unknown> = {};
   let operationCount = 0;
   for (const [path, value] of Object.entries(document.paths)) {
@@ -106,7 +107,7 @@ export function projectOpenApiDocument(
         pathItem[key] = entry;
         continue;
       }
-      const operation = projectOperation(entry, options, strippedTags);
+      const operation = projectOperation(entry, options);
       if (operation === undefined) continue;
       pathItem[key] = operation;
       hasOperation = true;
@@ -114,19 +115,16 @@ export function projectOpenApiDocument(
     }
     if (hasOperation) paths[path] = pathItem;
   }
-  if (options.tag !== undefined && operationCount === 0)
-    throw new PlatformApiError(`OpenAPI contains no operations tagged ${options.tag}.`);
-  const projected = { ...document, paths };
-  if (Array.isArray(document.tags))
-    projected.tags = document.tags.filter(
-      (tag) => !isRecord(tag) || typeof tag.name !== 'string' || !strippedTags.has(tag.name),
+  if (options.category !== undefined && operationCount === 0)
+    throw new PlatformApiError(
+      `OpenAPI contains no operations in export category ${options.category}.`,
     );
-  return projected;
+  return { ...document, paths };
 }
 
-function parseOpenApiJson(source: string, sourcePath: string): Record<string, unknown> {
+export function parseOpenApiJson(source: string, sourcePath: string): Record<string, unknown> {
   try {
-    return projectOpenApiDocument(JSON.parse(source), { stripTags: [] });
+    return projectOpenApiDocument(JSON.parse(source), {});
   } catch (error) {
     if (error instanceof SyntaxError)
       throw new PlatformApiError(
@@ -232,7 +230,7 @@ export function normalizePostmanCollection(
   }
   if (Array.isArray(value))
     return value.map((entry) => normalizePostmanCollection(entry, '', stripPostmanIdentity));
-  if (!isRecord(value)) return value;
+  if (typeof value !== 'object' || value === null) return value;
   return Object.fromEntries(
     Object.entries(value)
       .filter(
@@ -254,7 +252,6 @@ type AjvConstructor = new (options: { readonly allErrors: boolean; readonly stri
 
 const projectRequire = createRequire(import.meta.url);
 const converterRequire = createRequire(projectRequire.resolve('openapi-to-postmanv2'));
-
 let postmanCollectionValidator: Promise<AjvValidator> | undefined;
 
 function schemaValidator(): Promise<AjvValidator> {
@@ -354,62 +351,27 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
   }
 }
 
-function collectionMetadata(collection: PostmanCollection): Record<string, unknown> {
-  return Object.fromEntries(Object.entries(collection).filter(([key]) => key !== 'item'));
-}
-
-function assertUniformCollectionMetadata(
-  collections: readonly PostmanCollection[],
-  emptyMessage: string,
-  mismatchMessage: string,
-): Record<string, unknown> {
-  const first = collections[0];
-  if (first === undefined) throw new PlatformApiError(emptyMessage);
-  const metadata = collectionMetadata(first);
-  for (const collection of collections.slice(1))
-    if (!isDeepStrictEqual(metadata, collectionMetadata(collection)))
-      throw new PlatformApiError(mismatchMessage);
-  return metadata;
-}
-
-export async function assemblePostmanCollections(
-  outputPath: string,
-  imports: readonly PlatformApiImport[],
-): Promise<void> {
-  if (imports.length === 0)
-    throw new PlatformApiError('Postman assembly requires at least one import.');
-  const folders = new Set<string>();
-  for (const { folder } of imports) {
-    if (folders.has(folder))
-      throw new PlatformApiError(`Duplicate Postman assembly folder: ${folder}.`);
-    folders.add(folder);
-  }
-  const collections = await Promise.all(
-    imports.map(async ({ path }) => parsePostmanCollection(await readFile(path, 'utf8'), path)),
-  );
-  const metadata = assertUniformCollectionMetadata(
-    collections,
-    'Postman assembly requires at least one import.',
-    'Postman Collection import metadata does not match the first import.',
-  );
-  await writeJsonAtomically(outputPath, {
-    ...metadata,
-    item: imports.map(({ folder }, index) => ({ item: collections[index]?.item, name: folder })),
-  });
-}
-
 const publishConfigSchema = z.object({
   GITHUB_SHA: z.string().min(1).optional(),
   GITHUB_STEP_SUMMARY: z.string().min(1).optional(),
 });
+
 export const postmanPublishConfigSchema = publishConfigSchema.extend({
   POSTMAN_API_KEY: z.string().min(1),
-  POSTMAN_COLLECTION_ID: z.string().regex(/^\d+-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i),
 });
+export const postmanCollectionIdSchema = z
+  .string()
+  .regex(/^\d+-[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i);
+
 export const apifoxPublishConfigSchema = publishConfigSchema.extend({
   APIFOX_ACCESS_TOKEN: z.string().min(1),
-  APIFOX_PROJECT_ID: z.string().regex(/^\d+$/),
 });
+export const apifoxProjectIdSchema = z.string().regex(/^\d+$/);
+export const apifoxModuleIdSchema = z
+  .string()
+  .regex(/^\d+$/)
+  .transform(Number)
+  .pipe(z.number().int().positive().safe());
 
 const apifoxCountersSchema = z
   .object({
@@ -511,10 +473,7 @@ export async function publishPostman(
   });
 }
 
-function apifoxDocument(
-  document: Record<string, unknown>,
-  folder: string,
-): Record<string, unknown> {
+function apifoxDocument(document: Record<string, unknown>): Record<string, unknown> {
   const paths: Record<string, unknown> = {};
   const sourcePaths = document.paths;
   if (!isRecord(sourcePaths)) throw new PlatformApiError('Apifox OpenAPI paths must be objects.');
@@ -543,11 +502,7 @@ function apifoxDocument(
         throw new PlatformApiError(
           `Apifox OpenAPI ${method.toUpperCase()} ${path} requires exactly one Domain tag.`,
         );
-      pathItem[method] = {
-        ...operation,
-        operationId: `${folder}__${operation.operationId}`,
-        'x-apifox-folder': `${folder}/${operation.tags[0]}`,
-      };
+      pathItem[method] = { ...operation, 'x-apifox-folder': operation.tags[0] };
     }
     paths[path] = pathItem;
   }
@@ -557,9 +512,8 @@ function apifoxDocument(
 export async function publishApifox(
   accessToken: string,
   projectId: string,
+  moduleId: number,
   document: Record<string, unknown>,
-  folder: string,
-  replace: boolean,
 ): Promise<void> {
   parseApifoxImportResult(
     await requestJson(
@@ -572,12 +526,13 @@ export async function publishApifox(
           'X-Apifox-Api-Version': '2024-03-28',
         },
         body: JSON.stringify({
-          input: JSON.stringify(apifoxDocument(document, folder)),
+          input: JSON.stringify(document),
           options: {
-            deleteUnmatchedResources: replace,
-            endpointOverwriteBehavior: replace ? 'OVERWRITE_EXISTING' : 'CREATE_NEW',
+            deleteUnmatchedResources: true,
+            endpointOverwriteBehavior: 'OVERWRITE_EXISTING',
+            moduleId,
             prependBasePath: false,
-            schemaOverwriteBehavior: replace ? 'OVERWRITE_EXISTING' : 'KEEP_EXISTING',
+            schemaOverwriteBehavior: 'OVERWRITE_EXISTING',
             updateFolderOfChangedEndpoint: true,
           },
         }),
@@ -596,89 +551,44 @@ async function appendSummary(
 }
 
 export async function publishPlatformApiPostman(
-  imports: readonly PlatformApiImport[],
+  title: string,
+  collectionId: string,
+  filePath: string,
   env: unknown = process.env,
 ): Promise<void> {
   const config = postmanPublishConfigSchema.parse(env);
-  const converted = await Promise.all(
-    imports.map(async ({ folder, path }) => ({
-      folder,
-      collection: await convertOpenApiToPostman(
-        JSON.stringify(parseOpenApiJson(await readFile(path, 'utf8'), path)),
-      ),
-    })),
+  const validCollectionId = postmanCollectionIdSchema.parse(collectionId);
+  const collection = await convertOpenApiToPostman(
+    JSON.stringify(parseOpenApiJson(await readFile(filePath, 'utf8'), filePath)),
   );
-  const metadata = assertUniformCollectionMetadata(
-    converted.map(({ collection }) => collection),
-    'Postman publication requires at least one --folder.',
-    'Converted Postman Collection metadata does not match the first import.',
-  );
-  const collection = await parsePostmanCollection(
-    JSON.stringify({
-      ...metadata,
-      item: converted.map(({ folder, collection }) => ({ name: folder, item: collection.item })),
-    }),
-    'assembled publication',
-  );
-  await publishPostman(config.POSTMAN_API_KEY, config.POSTMAN_COLLECTION_ID, collection);
-  await appendSummary(
-    config.GITHUB_STEP_SUMMARY,
-    'Postman Collection publication completed',
-    config.GITHUB_SHA,
-  );
-  console.log('Published OpenIM Platform API v3 to Postman.');
+  await publishPostman(config.POSTMAN_API_KEY, validCollectionId, {
+    ...collection,
+    info: { ...collection.info, name: title },
+  });
+  await appendSummary(config.GITHUB_STEP_SUMMARY, title, config.GITHUB_SHA);
+  console.log(`${title} published to Postman.`);
 }
 
 export async function publishPlatformApiApifox(
-  imports: readonly PlatformApiImport[],
+  title: string,
+  projectId: string,
+  moduleId: string,
+  filePath: string,
   env: unknown = process.env,
 ): Promise<void> {
   const config = apifoxPublishConfigSchema.parse(env);
-  if (imports.length === 0)
-    throw new PlatformApiError('Apifox publication requires at least one --folder.');
-  const documents = await Promise.all(
-    imports.map(async ({ folder, path }) => ({
-      document: parseOpenApiJson(await readFile(path, 'utf8'), path),
-      folder,
-    })),
-  );
-  for (const [index, { document, folder }] of documents.entries())
-    await publishApifox(
-      config.APIFOX_ACCESS_TOKEN,
-      config.APIFOX_PROJECT_ID,
-      document,
-      folder,
-      index === 0,
-    );
-  await appendSummary(
-    config.GITHUB_STEP_SUMMARY,
-    'Apifox OpenAPI publication completed',
-    config.GITHUB_SHA,
-  );
-  console.log('Published OpenIM Platform API v3 to Apifox.');
-}
-
-const nonBlankTextSchema = z.string().min(1);
-const importSchema = z.strictObject({ folder: nonBlankTextSchema, path: nonBlankTextSchema });
-const commandSchema = z.discriminatedUnion('command', [
-  z.strictObject({ command: z.literal('help') }),
-  z.strictObject({
-    command: z.literal('export'),
-    inputPath: nonBlankTextSchema,
-    outputPath: nonBlankTextSchema,
-    stripTags: z.array(nonBlankTextSchema),
-    tag: nonBlankTextSchema.optional(),
-  }),
-  z.strictObject({
-    command: z.union([z.literal('publish-postman'), z.literal('publish-apifox')]),
-    imports: z.array(importSchema).min(1),
-  }),
-]);
-
-function parsedCommand(value: unknown): PlatformApiCommand {
-  const result = commandSchema.safeParse(value);
-  if (result.success) return result.data;
-  throw new PlatformApiError(result.error.issues.map(({ message }) => message).join('; '));
+  const validProjectId = apifoxProjectIdSchema.parse(projectId);
+  const validModuleId = apifoxModuleIdSchema.parse(moduleId);
+  const sourceDocument = parseOpenApiJson(await readFile(filePath, 'utf8'), filePath);
+  if (!isRecord(sourceDocument.info))
+    throw new PlatformApiError('Apifox OpenAPI info must be an object.');
+  const document = apifoxDocument({
+    ...sourceDocument,
+    info: { ...sourceDocument.info, title },
+  });
+  await publishApifox(config.APIFOX_ACCESS_TOKEN, validProjectId, validModuleId, document);
+  await appendSummary(config.GITHUB_STEP_SUMMARY, title, config.GITHUB_SHA);
+  console.log(`${title} published to Apifox.`);
 }
 
 function requiredValue(command: string, name: string, value: string | undefined): string {
@@ -699,33 +609,23 @@ function rejectArgument(command: string, value: string): never {
 function parseExport(values: readonly string[]): PlatformApiCommand {
   const inputPath = requiredValue('export', 'INPUT', values[0]);
   const outputPath = requiredValue('export', 'OUTPUT', values[1]);
-  let tag: string | undefined;
-  const stripTags: string[] = [];
+  let category: string | undefined;
   for (let index = 2; index < values.length; index += 1) {
     const option = values[index];
-    if (option === '--tag') {
-      if (tag !== undefined) throw new PlatformApiError('export accepts --tag only once.');
-      tag = requiredValue('export', '--tag value', values[index + 1]);
-    } else if (option === '--strip-tag') {
-      stripTags.push(requiredValue('export', '--strip-tag value', values[index + 1]));
-    } else rejectArgument('export', option ?? '');
-    index += 1;
+    if (option === '--category') {
+      if (category !== undefined)
+        throw new PlatformApiError('export accepts --category only once.');
+      category = requiredValue('export', '--category value', values[index + 1]);
+      index += 1;
+      continue;
+    }
+    rejectArgument('export', option ?? '');
   }
-  return parsedCommand({
+  return {
     command: 'export',
     inputPath,
     outputPath,
-    stripTags,
-    ...(tag === undefined ? {} : { tag }),
-  });
-}
-
-function parseFolder(value: string): PlatformApiImport {
-  const separator = value.indexOf(':');
-  if (separator === -1) throw new PlatformApiError('--folder requires NAME:FILE.');
-  return {
-    folder: requiredValue('publish', '--folder name', value.slice(0, separator)),
-    path: requiredValue('publish', '--folder path', value.slice(separator + 1)),
+    ...(category === undefined ? {} : { category }),
   };
 }
 
@@ -733,19 +633,28 @@ function parsePublish(
   command: 'publish-apifox' | 'publish-postman',
   values: readonly string[],
 ): PlatformApiCommand {
-  if (values.length === 0)
-    throw new PlatformApiError(`${command} requires at least one --folder NAME:FILE.`);
-  const imports: PlatformApiImport[] = [];
-  const folders = new Set<string>();
-  for (let index = 0; index < values.length; index += 2) {
-    if (values[index] !== '--folder') rejectArgument(command, values[index] ?? '');
-    const entry = parseFolder(requiredValue(command, '--folder NAME:FILE', values[index + 1]));
-    if (folders.has(entry.folder))
-      throw new PlatformApiError(`${command} received duplicate --folder ${entry.folder}.`);
-    folders.add(entry.folder);
-    imports.push(entry);
-  }
-  return parsedCommand({ command, imports });
+  const expectedValues =
+    command === 'publish-apifox'
+      ? 'TITLE, PROJECT_ID, MODULE_ID, and INPUT_FILE'
+      : 'TITLE, TARGET_ID, and INPUT_FILE';
+  const expectedLength = command === 'publish-apifox' ? 4 : 3;
+  if (values.length !== expectedLength)
+    throw new PlatformApiError(`${command} requires ${expectedValues}.`);
+  for (const value of values) if (value.startsWith('--')) rejectArgument(command, value);
+  if (command === 'publish-apifox')
+    return {
+      command,
+      title: requiredValue(command, 'TITLE', values[0]),
+      targetId: requiredValue(command, 'PROJECT_ID', values[1]),
+      moduleId: requiredValue(command, 'MODULE_ID', values[2]),
+      inputPath: requiredValue(command, 'INPUT_FILE', values[3]),
+    };
+  return {
+    command,
+    title: requiredValue(command, 'TITLE', values[0]),
+    targetId: requiredValue(command, 'TARGET_ID', values[1]),
+    inputPath: requiredValue(command, 'INPUT_FILE', values[2]),
+  };
 }
 
 export function parseCommandArguments(args: readonly string[]): PlatformApiCommand {
@@ -756,12 +665,12 @@ export function parseCommandArguments(args: readonly string[]): PlatformApiComma
     values.length === 1 &&
     values[0] === '--help'
   )
-    return parsedCommand({ command: 'help' });
+    return { command: 'help' };
   switch (command) {
     case 'help':
     case '--help':
       if (values.length > 0) rejectArgument('help', values[0] ?? '');
-      return parsedCommand({ command: 'help' });
+      return { command: 'help' };
     case 'export':
       return parseExport(values);
     case 'publish-postman':
@@ -772,24 +681,26 @@ export function parseCommandArguments(args: readonly string[]): PlatformApiComma
   }
 }
 
-async function runCommand(command: PlatformApiCommand): Promise<void> {
+export async function runCommand(command: PlatformApiCommand): Promise<void> {
   switch (command.command) {
     case 'export':
-      return exportOpenApi(command.inputPath, command.outputPath, {
-        stripTags: command.stripTags,
-        tag: command.tag,
-      });
+      return exportOpenApi(command.inputPath, command.outputPath, { category: command.category });
     case 'publish-postman':
-      return publishPlatformApiPostman(command.imports);
+      return publishPlatformApiPostman(command.title, command.targetId, command.inputPath);
     case 'publish-apifox':
-      return publishPlatformApiApifox(command.imports);
+      return publishPlatformApiApifox(
+        command.title,
+        command.targetId,
+        command.moduleId,
+        command.inputPath,
+      );
     case 'help':
       console.log(
         [
           'Usage:',
-          '  pnpm run platform-api:export -- <input> <output> [--tag <tag>] [--strip-tag <tag>]...',
-          '  pnpm run platform-api:publish-postman -- --folder <name:file>...',
-          '  pnpm run platform-api:publish-apifox -- --folder <name:file>...',
+          '  pnpm run platform-api:export -- <input> <output> [--category <category>]',
+          '  pnpm run platform-api:publish-postman -- <title> <collection-id> <input-file>',
+          '  pnpm run platform-api:publish-apifox -- <title> <project-id> <module-id> <input-file>',
         ].join('\n'),
       );
   }
