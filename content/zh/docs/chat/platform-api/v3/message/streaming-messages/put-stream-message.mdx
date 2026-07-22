@@ -1,0 +1,54 @@
+---
+title: "上传流式消息分片"
+description: "OpenIM 商业版 Platform API：通过 HTTP PUT 持续上传 UTF-8 流式消息内容。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+edition: "enterprise"
+sourcePath: "/docs/chat/platform-api/v3/message/streaming-messages/put-stream-message"
+---
+
+通过 HTTP PUT 持续上传 UTF-8 流式消息内容。 此接口仅在 OpenIM 商业版中提供，适合将模型或业务系统持续产生的 UTF-8 文本写入同一条流式消息。
+
+## HTTP 请求
+
+```bash
+PUT {API_ADDRESS}/msg/append_stream_msg?conversationID={CONVERSATION_ID}&clientMsgID={CLIENT_MSG_ID}&operationID={OPERATION_ID}
+```
+
+### 请求示例
+
+```bash
+curl --request PUT "${API_ADDRESS}/msg/append_stream_msg?conversationID=si_user_001_user_002&clientMsgID=client_msg_001&operationID=${OPERATION_ID}" \
+  --header "Content-Type: text/plain; charset=utf-8" \
+  --header "token: ${TOKEN}" \
+  --data-binary '正在生成回复内容'
+```
+
+## 请求参数
+
+| 参数           | 位置            | 必填 | 类型   | 说明                              |
+| -------------- | --------------- | ---- | ------ | --------------------------------- |
+| conversationID | Query 或 Header | 是   | string | OpenIM 会话 ID。                  |
+| clientMsgID    | Query 或 Header | 是   | string | 已创建流式消息的客户端消息 ID。   |
+| operationID    | Query 或 Header | 是   | string | 本次请求的唯一链路追踪 ID。       |
+| token          | Header          | 是   | string | 有效的用户 Token 或管理员 Token。 |
+| body           | Body            | 是   | bytes  | UTF-8 编码的流式消息分片。        |
+
+## 响应
+
+服务端以流式方式返回写入结果。调用方应处理网络中断和部分写入，不要在未确认消息状态时盲目重试同一分片。
+
+## 权限和限制
+
+- 仅在 OpenIM 商业版中提供。
+- 请求体必须是有效的 UTF-8 内容。
+- `conversationID` 和 `clientMsgID` 必须指向同一条可追加的流式消息。
+
+## 相关页面
+
+- [追加流式消息分片](/docs/chat/platform-api/v3/message/streaming-messages/append-stream-message)
+- [消息概述](/docs/chat/platform-api/v3/message/overview)

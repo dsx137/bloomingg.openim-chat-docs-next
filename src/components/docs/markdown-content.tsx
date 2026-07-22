@@ -300,7 +300,7 @@ function parseCodeTabTitle(meta: string | undefined, language: string) {
 
 function renderInlineMarkdown(value: string, options: InlineRenderOptions): ReactNode[] {
   const nodes: ReactNode[] = [];
-  const pattern = /!\[([^\]]*)]\(([^)]+)\)|\[([^\]]+)]\(([^)]+)\)|`([^`]+)`|\*\*([^*]+)\*\*/g;
+  const pattern = /!\[([^\]]*)]\(([^)]+)\)|\[([^\]]+)]\(([^)]+)\)|`([^`]+)`|\*\*([^*]+)\*\*|(<span className="enterprise-field-badge">商业版<\/span>)/g;
   let cursor = 0;
   const badgeLabel = t(options.locale).article.commercialBadge;
 
@@ -344,6 +344,12 @@ function renderInlineMarkdown(value: string, options: InlineRenderOptions): Reac
     } else if (match[6] !== undefined) {
       nodes.push(
         <strong key={`${match.index}-strong`}>{renderInlineMarkdown(match[6], options)}</strong>,
+      );
+    } else if (match[7] !== undefined) {
+      nodes.push(
+        <span className="enterprise-field-badge" key={`${match.index}-enterprise`}>
+          商业版
+        </span>,
       );
     }
     cursor = match.index + match[0].length;

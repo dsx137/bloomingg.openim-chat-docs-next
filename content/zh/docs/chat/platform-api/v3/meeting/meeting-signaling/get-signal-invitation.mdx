@@ -1,0 +1,107 @@
+---
+title: "获取通话邀请"
+description: "OpenIM 商业版 Platform API：获取指定房间的实时通话邀请信息。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+edition: "enterprise"
+sourcePath: "/docs/chat/platform-api/v3/meeting/meeting-signaling/get-signal-invitation"
+---
+
+获取指定房间的实时通话邀请信息。 此接口仅在 OpenIM 商业版中提供。请先在[接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)中配置 API 地址和有效 Token。
+
+## HTTP 请求
+
+```bash
+POST {API_ADDRESS}/rtc-meeting/get_signal_invitation_info
+```
+
+### 请求示例
+
+```bash
+curl --request POST "${API_ADDRESS}/rtc-meeting/get_signal_invitation_info" \
+  --header "Content-Type: application/json; charset=utf-8" \
+  --header "operationID: ${OPERATION_ID}" \
+  --header "token: ${TOKEN}" \
+  --data-raw '{
+  "roomID": "room_001"
+}'
+```
+
+> 商业版：此接口需要部署对应的商业版服务。接口是否可用以及具体权限以客户交付版本为准。
+
+## 请求体
+
+```json
+{
+  "roomID": "room_001"
+}
+```
+
+| 参数名 | 是否必填 | 类型   | 说明                    |
+| ------ | -------- | ------ | ----------------------- |
+| roomID | 是       | string | 会议或实时通话房间 ID。 |
+
+## 响应
+
+请求被 OpenIM 正常处理时通常返回 `200 OK`。业务是否成功以响应体中的 `errCode` 为准。
+
+```json
+{
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "data": {
+    "invitationInfo": {
+      "inviterUserID": "user_001",
+      "inviteeUserIDList": ["user_001"],
+      "customData": "{}",
+      "groupID": "group_001",
+      "roomID": "room_001",
+      "timeout": 0,
+      "mediaType": "example",
+      "platformID": 0,
+      "sessionType": 1,
+      "initiateTime": 1719800000000,
+      "busyLineUserIDList": ["user_001"]
+    },
+    "offlinePushInfo": {
+      "title": "示例名称",
+      "desc": "example",
+      "ex": "{}",
+      "iOSPushSound": "example",
+      "iOSBadgeCount": false,
+      "signalInfo": "example"
+    }
+  }
+}
+```
+
+### 响应参数
+
+| 参数名               | 类型            | 说明                                                                                              |
+| -------------------- | --------------- | ------------------------------------------------------------------------------------------------- |
+| errCode              | int             | 业务错误码，`0` 表示成功。                                                                        |
+| errMsg               | string          | 错误简要信息，成功时通常为空。                                                                    |
+| errDlt               | string          | 错误详细信息，成功时通常为空。                                                                    |
+| data.invitationInfo  | InvitationInfo  | 结构为[会议模块的 `InvitationInfo`](/docs/chat/platform-api/v3/meeting/overview#invitationinfo)。 |
+| data.offlinePushInfo | OfflinePushInfo | 离线推送配置。                                                                                    |
+
+### 错误
+
+错误响应使用 Platform API 通用结构，处理方式见[错误码](/docs/chat/platform-api/v3/error-codes)。
+
+## 权限和限制
+
+- 仅在 OpenIM 商业版中提供。
+- 调用方必须校验操作用户和目标资源的业务权限。
+- 请求数组和分页大小应遵循客户交付版本的服务端限制。
+
+## 相关页面
+
+- [接入准备](/docs/chat/platform-api/v3/prepare-to-use-api)
+- [会议概述](/docs/chat/platform-api/v3/meeting/overview)
+- [错误码](/docs/chat/platform-api/v3/error-codes)

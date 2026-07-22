@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["dom", "dom.iterable", "es2022"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es2022"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
@@ -19,8 +23,12 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "collections/*": ["./.source/*"]
+      "@/*": [
+        "./*"
+      ],
+      "collections/*": [
+        "./.source-local/*"
+      ]
     }
   },
   "include": [
@@ -30,7 +38,12 @@
     "**/*.tsx",
     "**/*.mts",
     "**/*.mjs",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".next-local/types/**/*.ts",
+    ".next-local/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", "content/docs"]
+  "exclude": [
+    "node_modules",
+    "content/docs"
+  ]
 }

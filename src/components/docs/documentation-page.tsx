@@ -17,6 +17,7 @@ import {
   getNeighbors,
   getRouteRecord,
   pathFromSlug,
+  routeSupportsLocale,
 } from '@/src/lib/routes';
 import { source } from '@/src/lib/source';
 import { shouldShowVersion } from '@/src/lib/version-visibility';
@@ -54,7 +55,7 @@ export async function generateDocumentationMetadata(
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
 
-  if (!route) return {};
+  if (!route || !routeSupportsLocale(route, locale)) return {};
   const localized = getLocalizedDocPage(route.path, locale);
   const routeFilePage =
     !page && route.contentFile.startsWith('content/zh/')
@@ -114,7 +115,7 @@ export async function renderDocumentationPage(
   const route = getRouteRecord(path);
   const page = source.getPage(pageSlugs);
 
-  if (!route) notFound();
+  if (!route || !routeSupportsLocale(route, locale)) notFound();
 
   const localizedPage = getLocalizedDocPage(route.path, locale);
   const routeFilePage =
@@ -172,7 +173,7 @@ export async function renderDocumentationPage(
     href: toLocalizedPath(item.overviewPath, locale),
     pageCount: item.pageCount,
   }));
-  const rawNeighbors = getNeighbors(effectiveRoute);
+  const rawNeighbors = getNeighbors(effectiveRoute, locale);
   const neighbors = {
     previous: rawNeighbors.previous
       ? localizeRouteRecord(rawNeighbors.previous, locale)

@@ -26,6 +26,7 @@ export function SidebarNav({
         <SidebarNode
           currentPath={currentPath}
           depth={0}
+          inheritedEnterprise={false}
           key={node.id}
           locale={locale}
           node={node}
@@ -41,6 +42,7 @@ function SidebarNode({
   node,
   currentPath,
   depth,
+  inheritedEnterprise,
   locale,
   sidebarExpansion,
   stateScope,
@@ -48,6 +50,7 @@ function SidebarNode({
   node: NavNode;
   currentPath: string;
   depth: number;
+  inheritedEnterprise: boolean;
   locale: Locale;
   sidebarExpansion: NavContext['sidebarExpansion'];
   stateScope: string;
@@ -65,7 +68,12 @@ function SidebarNode({
         href={toLocalizedPath(node.href, locale)}
         style={{ '--nav-depth': depth } as CSSProperties}
       >
-        {title}
+        <SidebarNodeLabel
+          inheritedEnterprise={inheritedEnterprise}
+          locale={locale}
+          node={node}
+          title={title}
+        />
       </Link>
     );
   }
@@ -82,10 +90,20 @@ function SidebarNode({
             aria-current={active ? 'page' : undefined}
             href={toLocalizedPath(node.href, locale)}
           >
-            {title}
+            <SidebarNodeLabel
+              inheritedEnterprise={inheritedEnterprise}
+              locale={locale}
+              node={node}
+              title={title}
+            />
           </Link>
         ) : (
-          <span>{title}</span>
+          <SidebarNodeLabel
+            inheritedEnterprise={inheritedEnterprise}
+            locale={locale}
+            node={node}
+            title={title}
+          />
         )}
       </summary>
       <div>
@@ -93,6 +111,7 @@ function SidebarNode({
           <SidebarNode
             currentPath={currentPath}
             depth={depth + 1}
+            inheritedEnterprise={inheritedEnterprise || node.edition === 'enterprise'}
             key={child.id}
             locale={locale}
             node={child}
@@ -102,5 +121,28 @@ function SidebarNode({
         ))}
       </div>
     </SidebarDisclosure>
+  );
+}
+
+function SidebarNodeLabel({
+  inheritedEnterprise,
+  locale,
+  node,
+  title,
+}: {
+  inheritedEnterprise: boolean;
+  locale: Locale;
+  node: NavNode;
+  title: string;
+}) {
+  return (
+    <span className="sidebar-label-row">
+      <span className="sidebar-label-text">{title}</span>
+      {node.edition === 'enterprise' && !inheritedEnterprise ? (
+        <span className="sidebar-enterprise-badge">
+          {locale === 'zh' ? '商业版' : 'Enterprise'}
+        </span>
+      ) : null}
+    </span>
   );
 }

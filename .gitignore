@@ -1,7 +1,9 @@
 node_modules
 .next
+.next-local
 out
 .source
+.source-local
 .tmp
 .env
 .env.local

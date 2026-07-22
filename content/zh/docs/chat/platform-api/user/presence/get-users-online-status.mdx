@@ -108,9 +108,9 @@ curl --request POST "${API_ADDRESS}/user/get_users_online_status" \
 | 参数名 | 类型 | 说明 |
 | --- | --- | --- |
 | data[].userID | string | 用户 ID。 |
-| data[].status | int | 在线状态。`1` 表示在线，`0` 表示离线。 |
+| data[].status | int | 在线状态，参见[用户模块的 `OnlineStatus`](/docs/chat/platform-api/v3/user/overview#onlinestatus)。 |
 | data[].detailPlatformStatus | array | 用户在线时的终端连接明细。 |
-| data[].detailPlatformStatus[].platformID | int | 在线终端类型。 |
+| data[].detailPlatformStatus[].platformID | int | 在线终端类型，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。 |
 | data[].detailPlatformStatus[].connID | string | 网关连接 ID。 |
 | data[].detailPlatformStatus[].isBackground | bool | 该连接是否处于后台状态。 |
 | data[].detailPlatformStatus[].token | string | 当前连接使用的用户 Token。 |

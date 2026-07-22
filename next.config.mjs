@@ -11,6 +11,7 @@ import { buildWasmLegacyRedirects } from './scripts/lib/wasm-legacy-redirects.mj
 const nextConfig = {
   // Keep standalone for Docker/self-host; Vercel uses its own Next.js runtime.
   ...(process.env.VERCEL ? {} : { output: 'standalone' }),
+  distDir: process.env.NODE_ENV === 'development' ? '.next-local' : '.next',
   reactStrictMode: true,
   // `npm run check` performs strict TypeScript validation. Skipping the duplicate
   // Next.js build-time pass avoids reparsing the dynamic MDX manifest.
@@ -54,5 +55,5 @@ const nextConfig = {
   },
 };
 
-const withMDX = createMDX();
+const withMDX = createMDX({ outDir: '.source-local' });
 export default withMDX(nextConfig);

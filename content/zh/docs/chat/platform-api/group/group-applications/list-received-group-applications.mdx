@@ -73,7 +73,7 @@ curl --request POST "${API_ADDRESS}/group/get_recv_group_applicationList" \
 | pagination.showNumber | 是 | int | 每页数量，必须大于 0。 |
 | fromUserID | 是 | string | 群主或管理员用户 ID。 |
 | groupIDs | 否 | array | 要过滤的群 ID 列表。 |
-| handleResults | 否 | array | 按处理状态过滤，例如 0 未处理、1 同意、-1 拒绝。 |
+| handleResults | 否 | array | 按处理状态过滤，元素参见[群组模块的 `GroupRequestResult`](/docs/chat/platform-api/v3/group/overview#grouprequestresult)。 |
 
 ## 响应
 

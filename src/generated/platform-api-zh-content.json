@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-09",
+  "generatedAt": "2026-07-21",
   "navigationLabels": {
     "overview": "概述",
     "prepare-to-use-api": "接入准备",
@@ -35,6 +35,28 @@
     "logs": "日志",
     "migration-to-openim": "迁移到 OpenIM",
     "error-codes": "错误码",
-    "message-content-types": "消息内容类型"
+    "message-content-types": "消息内容类型",
+    "account-governance": "账号治理",
+    "content-processing": "内容处理",
+    "streaming-messages": "流式消息",
+    "unread-count": "未读数管理",
+    "conversation-groups": "会话分组",
+    "timer": "定时任务",
+    "managing-tasks": "管理任务",
+    "meeting": "会议",
+    "meeting-management": "会议管理",
+    "meeting-settings": "会议控制",
+    "recurring-meetings": "重复会议",
+    "meeting-records": "会议记录",
+    "meeting-signaling": "实时通话",
+    "meeting-chat": "会议聊天",
+    "webhooks": "Webhooks",
+    "webhooks-user": "用户",
+    "webhooks-relation": "关系",
+    "webhooks-group": "群组",
+    "webhooks-message": "消息",
+    "webhooks-push": "推送与在线状态",
+    "push": "推送与在线状态",
+    "webhooks-conversation": "会话"
   }
 }

@@ -1,0 +1,151 @@
+---
+title: "消息写入前"
+description: "OpenIM Webhooks：在消息最终写入前调整允许修改的消息字段。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/webhooks/message/before-message-modify"
+---
+
+在消息最终写入前调整允许修改的消息字段。
+
+## 触发时机
+
+| 项目     | 说明                             |
+| -------- | -------------------------------- |
+| 类型     | 前置回调                         |
+| 配置项   | `beforeMsgModify`                |
+| 回调命令 | `callbackBeforeMsgModifyCommand` |
+
+## HTTP 请求
+
+```http
+POST {WEBHOOK_ADDRESS}/callbackBeforeMsgModifyCommand
+Content-Type: application/json
+operationID: {OPERATION_ID}
+```
+
+```json
+{
+  "sendID": "user_001",
+  "recvID": "user_001",
+  "callbackCommand": "callbackBeforeMsgModifyCommand",
+  "serverMsgID": "server_msg_001",
+  "clientMsgID": "client_msg_001",
+  "operationID": "operation_001",
+  "senderPlatformID": 1,
+  "senderNickname": "user_001",
+  "sessionType": 1,
+  "msgFrom": 1,
+  "contentType": 1,
+  "status": 1,
+  "sendTime": 1719800000000,
+  "createTime": 1719800000000,
+  "content": "{\"text\":\"hello\"}",
+  "seq": 1,
+  "atUserList": ["user_001"],
+  "faceURL": "https://example.com/avatar.png",
+  "ex": "",
+  "keyVersion": 1
+}
+```
+
+### 请求体参数
+
+| 参数名                                                            | 是否必填 | 类型     | 说明                                                                                                               |
+| ----------------------------------------------------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------------------ |
+| sendID                                                            | 是       | string   | 消息发送者用户 ID。                                                                                                |
+| recvID <span className="enterprise-field-badge">商业版</span>     | 是       | string   | 消息接收者用户 ID；单聊时为对端用户 ID。                                                                           |
+| callbackCommand                                                   | 是       | string   | 回调命令，值与当前页面的回调命令一致。                                                                             |
+| serverMsgID                                                       | 是       | string   | OpenIM 服务端消息 ID。                                                                                             |
+| clientMsgID                                                       | 是       | string   | 客户端消息 ID。                                                                                                    |
+| operationID                                                       | 是       | string   | OpenIM 操作的链路追踪 ID。                                                                                         |
+| senderPlatformID                                                  | 是       | int      | 发送端平台 ID，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。                |
+| senderNickname                                                    | 是       | string   | 发送者昵称。                                                                                                       |
+| sessionType                                                       | 是       | int      | 会话类型，参见[会话模块的 `ConversationType`](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。 |
+| msgFrom                                                           | 是       | int      | msgFrom 字段。                                                                                                     |
+| contentType                                                       | 是       | int      | 消息内容类型，参见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。                       |
+| status                                                            | 是       | int      | status 字段。                                                                                                      |
+| sendTime                                                          | 是       | int      | sendTime 字段。                                                                                                    |
+| createTime                                                        | 是       | int      | createTime 字段。                                                                                                  |
+| content                                                           | 是       | string   | 消息内容；通常是与消息类型对应的 JSON 字符串。                                                                     |
+| seq                                                               | 是       | int      | 消息或连接序列号。                                                                                                 |
+| atUserList                                                        | 是       | string[] | 被 @ 的用户 ID 列表。                                                                                              |
+| faceURL                                                           | 是       | string   | 头像地址。                                                                                                         |
+| ex                                                                | 是       | string   | 业务扩展字段。                                                                                                     |
+| keyVersion <span className="enterprise-field-badge">商业版</span> | 是       | int      | 消息加密密钥版本号。                                                                                               |
+
+## 响应
+
+业务服务端应返回 HTTP 成功状态和 JSON 响应体。
+
+```json
+{
+  "actionCode": 0,
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "nextCode": 0,
+  "content": "{\"text\":\"hello\"}",
+  "recvID": "user_001",
+  "groupID": "group_001",
+  "clientMsgID": "client_msg_001",
+  "serverMsgID": "server_msg_001",
+  "senderPlatformID": 1,
+  "senderNickname": "user_001",
+  "senderFaceURL": "user_001",
+  "sessionType": 1,
+  "msgFrom": 1,
+  "contentType": 1,
+  "status": 1,
+  "options": {},
+  "offlinePushInfo": {},
+  "atUserIDList": ["user_001"],
+  "msgDataList": [{}],
+  "attachedInfo": "",
+  "ex": ""
+}
+```
+
+### 响应参数
+
+| 参数名           | 类型     | 说明                                                                                                                  |
+| ---------------- | -------- | --------------------------------------------------------------------------------------------------------------------- |
+| actionCode       | int      | 处理状态，参见[Webhooks 概述的 `CallbackAction`](/docs/chat/platform-api/v3/webhooks/overview#callbackaction)。       |
+| errCode          | int      | 业务错误码；拒绝前置操作时返回业务约定的非零错误码。                                                                  |
+| errMsg           | string   | 错误简要信息。                                                                                                        |
+| errDlt           | string   | 错误详细信息。                                                                                                        |
+| nextCode         | int      | 处理下一步，参见[Webhooks 概述的 `CallbackNextCode`](/docs/chat/platform-api/v3/webhooks/overview#callbacknextcode)。 |
+| content          | string   | 消息内容；通常是与消息类型对应的 JSON 字符串。                                                                        |
+| recvID           | string   | 消息接收者用户 ID；单聊时为对端用户 ID。                                                                              |
+| groupID          | string   | 群组 ID。                                                                                                             |
+| clientMsgID      | string   | 客户端消息 ID。                                                                                                       |
+| serverMsgID      | string   | OpenIM 服务端消息 ID。                                                                                                |
+| senderPlatformID | int      | 发送端平台 ID，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。                   |
+| senderNickname   | string   | 发送者昵称。                                                                                                          |
+| senderFaceURL    | string   | 发送者头像地址。                                                                                                      |
+| sessionType      | int      | 会话类型，参见[会话模块的 `ConversationType`](/docs/chat/platform-api/v3/conversation/overview#conversationtype)。    |
+| msgFrom          | int      | msgFrom 字段。                                                                                                        |
+| contentType      | int      | 消息内容类型，参见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。                          |
+| status           | int      | status 字段。                                                                                                         |
+| options          | object   | 消息发送选项。                                                                                                        |
+| offlinePushInfo  | object   | 离线推送配置。                                                                                                        |
+| atUserIDList     | string[] | 被 @ 的用户 ID 列表。                                                                                                 |
+| msgDataList      | object[] | msgDataList 字段。                                                                                                    |
+| attachedInfo     | string   | 附加信息。                                                                                                            |
+| ex               | string   | 业务扩展字段。                                                                                                        |
+
+## 处理规则
+
+- OpenIM 同步等待业务服务端响应。
+- 返回 `nextCode: 0` 时继续原流程；返回 `nextCode: 1` 时，OpenIM 使用响应中的错误信息终止本次操作。
+- 请求失败或超时后的行为由该回调的 `failedContinue` 配置决定。
+- 响应中的业务字段仅在对应字段存在时覆盖 OpenIM 即将处理的数据。
+
+## 相关页面
+
+- [Webhooks 概述](/docs/chat/platform-api/v3/webhooks/overview)
+- [消息模块概述](/docs/chat/platform-api/v3/message/overview)

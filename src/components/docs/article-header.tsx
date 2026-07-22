@@ -34,6 +34,7 @@ export function ArticleHeader({
     getProductLabel(route.product, locale),
     getPlatformLabel(route.platform),
     showVersion ? route.version : undefined,
+    route.edition === 'enterprise' ? (locale === 'zh' ? '商业版' : 'Enterprise') : undefined,
     route.status === 'scaffold' ? text.article.scaffold : undefined,
     commercialBadge,
   ].filter(Boolean);
@@ -46,10 +47,7 @@ export function ArticleHeader({
       <Breadcrumbs items={breadcrumbs} />
       <div className="article-badges">
         {badges.map((badge) => (
-          <span
-            className={badge === commercialBadge ? 'article-badge-commercial' : undefined}
-            key={badge}
-          >
+          <span className={badge === '商业版' || badge === 'Enterprise' ? 'enterprise-badge' : undefined} key={badge}>
             {badge}
           </span>
         ))}

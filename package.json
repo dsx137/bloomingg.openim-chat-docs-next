@@ -42,6 +42,8 @@
     "third-api:sync": "node scripts/sync-openim-third-api.mjs",
     "msg-api:sync": "node scripts/sync-openim-msg-api.mjs",
     "conversation-api:sync": "node scripts/sync-openim-conversation-api.mjs",
+    "enterprise-api:sync": "node scripts/sync-openim-webhooks.mjs && node scripts/sync-openim-enterprise-api.mjs && node scripts/build-search-index.mjs",
+    "webhooks:sync": "node scripts/sync-openim-webhooks.mjs && OPENIM_ENTERPRISE_METADATA_ONLY=1 node scripts/sync-openim-enterprise-api.mjs && node scripts/build-search-index.mjs",
     "platform-api:order": "node scripts/sync-openim-platform-api-order.mjs",
     "group-api:sync": "node scripts/sync-openim-group-api.mjs",
     "predev": "pnpm run content:sync",

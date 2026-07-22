@@ -1,0 +1,85 @@
+---
+title: "单聊消息已读后"
+description: "OpenIM Webhooks：在单聊消息已读状态更新后同步已读事件。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/webhooks/message/after-single-message-read"
+---
+
+在单聊消息已读状态更新后同步已读事件。
+
+## 触发时机
+
+| 项目     | 说明                                |
+| -------- | ----------------------------------- |
+| 类型     | 后置回调                            |
+| 配置项   | `afterSingleMsgRead`                |
+| 回调命令 | `callbackAfterSingleMsgReadCommand` |
+
+## HTTP 请求
+
+```http
+POST {WEBHOOK_ADDRESS}/callbackAfterSingleMsgReadCommand
+Content-Type: application/json
+operationID: {OPERATION_ID}
+```
+
+```json
+{
+  "callbackCommand": "callbackAfterSingleMsgReadCommand",
+  "conversationID": "si_user_001_user_002",
+  "userID": "user_001",
+  "Seqs": [{}],
+  "contentType": 1
+}
+```
+
+### 请求体参数
+
+| 参数名          | 是否必填 | 类型   | 说明                                                                                         |
+| --------------- | -------- | ------ | -------------------------------------------------------------------------------------------- |
+| callbackCommand | 是       | string | 回调命令，值与当前页面的回调命令一致。                                                       |
+| conversationID  | 是       | string | 会话 ID。                                                                                    |
+| userID          | 是       | string | 用户 ID。                                                                                    |
+| Seqs            | 是       | int[]  | 本次标记已读的消息 Seq 列表。                                                                |
+| contentType     | 是       | int    | 消息内容类型，参见[消息内容类型](/docs/chat/platform-api/v3/message/message-content-types)。 |
+
+## 响应
+
+业务服务端应返回 HTTP 成功状态和 JSON 响应体。
+
+```json
+{
+  "actionCode": 0,
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "nextCode": 0
+}
+```
+
+### 响应参数
+
+| 参数名     | 类型   | 说明                                                                                                                  |
+| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| actionCode | int    | 处理状态，参见[Webhooks 概述的 `CallbackAction`](/docs/chat/platform-api/v3/webhooks/overview#callbackaction)。       |
+| errCode    | int    | 业务错误码；拒绝前置操作时返回业务约定的非零错误码。                                                                  |
+| errMsg     | string | 错误简要信息。                                                                                                        |
+| errDlt     | string | 错误详细信息。                                                                                                        |
+| nextCode   | int    | 处理下一步，参见[Webhooks 概述的 `CallbackNextCode`](/docs/chat/platform-api/v3/webhooks/overview#callbacknextcode)。 |
+
+## 处理规则
+
+- 事件发生后，OpenIM 异步调用该地址。
+- 回调响应不能改变已经完成的 OpenIM 操作。
+- 接收方应快速返回成功状态，再异步执行耗时业务。
+- 接收方应按业务主键或 `operationID` 做幂等处理。
+
+## 相关页面
+
+- [Webhooks 概述](/docs/chat/platform-api/v3/webhooks/overview)
+- [消息模块概述](/docs/chat/platform-api/v3/message/overview)

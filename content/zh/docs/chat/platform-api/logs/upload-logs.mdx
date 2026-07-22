@@ -70,7 +70,7 @@ curl --request POST "${API_ADDRESS}/third/logs/upload" \
 
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| platform | 是 | int | 日志来源终端平台 ID。 |
+| platform | 是 | int | 日志来源终端平台 ID，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)。 |
 | fileURLs | 是 | array | 已上传日志文件列表。 |
 | fileURLs[].filename | 是 | string | 日志文件名。 |
 | fileURLs[].URL | 是 | string | 日志文件可访问 URL。 |

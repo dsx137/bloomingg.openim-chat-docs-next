@@ -58,7 +58,7 @@ curl --request POST "${API_ADDRESS}/group/join_group" \
 | --- | --- | --- | --- |
 | groupID | 是 | string | 目标群 ID。 |
 | reqMessage | 否 | string | 申请说明。 |
-| joinSource | 是 | int | 入群来源：1 管理员邀请，2 被邀请，3 搜索加入，4 扫码加入。 |
+| joinSource | 是 | int | 入群来源，参见[群组模块的 `JoinSource`](/docs/chat/platform-api/v3/group/overview#joinsource)。 |
 | inviterUserID | 是 | string | 申请加入群组的用户 ID；当前服务端沿用该字段名承载申请用户。 |
 | ex | 否 | string | 扩展字段。 |
 

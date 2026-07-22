@@ -185,11 +185,11 @@ const platformApiZhOverviewHeadingExpectations = new Map([
   ['/platform-api/prepare-to-use-api', ['## 基础地址', '## 请求头', '## 鉴权', '## 请求体']],
   [
     '/platform-api/user/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/relation/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/auth/overview',
@@ -197,19 +197,31 @@ const platformApiZhOverviewHeadingExpectations = new Map([
   ],
   [
     '/platform-api/group/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/conversation/overview',
-    ['## 能力范围', '## 常用接口', '## 资源表示', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 资源表示', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/message/overview',
-    ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+    ['## 能力范围', '## 常用接口', '## 枚举', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/logs/overview',
     ['## 能力范围', '## 常用接口', '## 接入建议', '## 相关页面'],
+  ],
+  [
+    '/platform-api/timer/overview',
+    ['## 能力范围', '## 资源结构', '## 枚举', '## 接入建议'],
+  ],
+  [
+    '/platform-api/meeting/overview',
+    ['## 能力范围', '## 资源结构', '## 枚举', '## 接入建议'],
+  ],
+  [
+    '/platform-api/webhooks/overview',
+    ['## 工作方式', '## 配置 Webhooks', '## 调用协议', '## 枚举', '## 回调能力', '## 接入建议', '## 相关页面'],
   ],
   [
     '/platform-api/migration-to-openim',
@@ -350,6 +362,7 @@ for (const route of routes) {
         }
         if (
           !bodyWithoutFrontmatter.includes('## 参数') &&
+          !bodyWithoutFrontmatter.includes('## 请求参数') &&
           !bodyWithoutFrontmatter.includes('## 请求体')
         ) {
           errors.push(
@@ -455,7 +468,11 @@ for (const route of routes) {
               errors.push(`${localizedFile}: missing Chinese heading "${heading}"`);
             }
           }
-          if (!localizedBody.includes('## 参数') && !localizedBody.includes('## 请求体')) {
+          if (
+            !localizedBody.includes('## 参数') &&
+            !localizedBody.includes('## 请求参数') &&
+            !localizedBody.includes('## 请求体')
+          ) {
             errors.push(
               `${localizedFile}: missing Sendbird-style parameter/request-body section`,
             );

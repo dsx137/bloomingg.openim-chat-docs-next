@@ -29,7 +29,9 @@ export function toLocalizedPath(href: string | null | undefined, locale: Locale)
   if (/^(https?:)?\/\//.test(href) || href.startsWith('mailto:')) return href;
 
   const [pathPart, suffix = ''] = href.split(/(?=[?#])/, 2);
-  const path = stripLocaleFromPath(pathPart);
+  const path = stripLocaleFromPath(pathPart)
+    .replace(/^\/docs\/chat\/platform-api\/v3(?=\/|$)/, '/platform-api')
+    .replace(/^\/docs\/chat\/sdk\/v4(?=\/|$)/, '/sdk');
   return `${localePrefix(locale)}${path}${suffix}`;
 }
 

@@ -70,9 +70,10 @@ curl --request POST "${API_ADDRESS}/group/set_group_info_ex" \
 | introduction | 否 | string | 新的群介绍。 |
 | faceURL | 否 | string | 新的群头像 URL。 |
 | ex | 否 | string | 新的群扩展字段。 |
-| needVerification | 否 | int | 新的入群验证策略。 |
+| needVerification | 否 | int | 新的入群验证策略，参见[群组模块的 `GroupVerification`](/docs/chat/platform-api/v3/group/overview#groupverification)。 |
 | lookMemberInfo | 否 | int | 是否允许查看群成员资料。 |
 | applyMemberFriend | 否 | int | 是否允许从群成员处添加好友。 |
+| displayIsRead <span className="enterprise-field-badge">商业版</span> | 否 | boolean | 是否展示群消息已读状态。当前商业版接口只允许将该值设置为 `false`。 |
 
 ## 响应
 

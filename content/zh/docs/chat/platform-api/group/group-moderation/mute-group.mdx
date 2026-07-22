@@ -49,6 +49,7 @@ curl --request POST "${API_ADDRESS}/group/mute_group" \
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
 | groupID | 是 | string | 目标群 ID。 |
+| muteBypassUserIDs <span className="enterprise-field-badge">商业版</span> | 否 | string[] | 全群禁言期间仍允许发送消息的用户 ID 列表。 |
 
 ## 响应
 

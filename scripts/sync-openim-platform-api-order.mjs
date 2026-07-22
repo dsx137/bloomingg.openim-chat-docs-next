@@ -3,10 +3,11 @@ import { dirname, join, resolve } from 'node:path';
 
 const root = process.cwd();
 const today = new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Taipei' });
-const localRoot = '/docs/chat/platform-api/v3';
-const contextKey = 'chat/platform-api/v3';
-const contentRoot = 'content/docs/chat/platform-api/v3';
-const zhContentRoot = 'content/zh/docs/chat/platform-api/v3';
+const localRoot = '/platform-api';
+const legacyPlatformRoot = '/docs/chat/platform-api/v3';
+const contextKey = 'chat/platform-api';
+const contentRoot = 'content/docs/chat/platform-api';
+const zhContentRoot = 'content/zh/docs/chat/platform-api';
 
 const routesPath = resolve(root, 'src/generated/routes.json');
 const navigationPath = resolve(root, 'src/generated/navigation.json');
@@ -23,7 +24,12 @@ const desiredPlatformOrder = [
   'conversation',
   'message',
   'third',
+  'logs',
+  'timer',
+  'meeting',
+  'webhooks',
   'migration-to-openim',
+  'error-codes',
 ];
 
 const removedPlatformRoots = [
@@ -54,8 +60,9 @@ const moduleOverviews = [
       ['用户注册', '注册业务用户 ID，并写入昵称、头像和扩展字段。'],
       ['资料维护', '更新用户基础资料、扩展资料和全局消息接收选项。'],
       ['用户查询', '分页读取用户、批量获取用户资料、校验账号是否存在。'],
-      ['在线状态', '查询用户在线状态、订阅状态和在线 Token 详情。'],
+      ['在线状态', '查询用户在线状态和在线 Token 聚合明细。'],
       ['通知账号', '创建、更新和搜索系统通知账号。'],
+      ['账号治理 <span className="enterprise-field-badge">商业版</span>', '封禁、解封、注销用户，并分页查询停用账号。'],
     ],
     commonLinks: [
       ['注册用户', '/docs/chat/platform-api/v3/user/creating-users/create-a-user'],
@@ -66,6 +73,8 @@ const moduleOverviews = [
         '新增系统通知账号',
         '/docs/chat/platform-api/v3/user/notification-accounts/add-notification-account',
       ],
+      ['封禁用户 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/user/account-governance/ban-user'],
+      ['查询停用用户 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/user/account-governance/list-disabled-users'],
     ],
     advice: [
       '用户 ID 应以业务系统为权威来源。创建 OpenIM 用户前，先确认业务账号已经完成注册、风控和权限校验。',
@@ -102,11 +111,10 @@ const moduleOverviews = [
     intro:
       '关系模块用于维护用户之间的好友关系、好友申请流程和黑名单数据。所有接口都应由可信后端根据业务规则调用。',
     capabilities: [
-      ['好友关系', '添加、删除、导入、校验好友关系，并读取好友 ID 或好友资料。'],
-      ['好友申请', '查询收到或发出的申请，处理好友申请和查询指定申请。'],
+      ['好友关系', '删除、导入和更新好友关系，并读取好友列表或指定好友资料。'],
+      ['好友申请', '发起、处理并查询收到或发出的好友申请。'],
       ['黑名单', '加入黑名单、移出黑名单，以及分页查询黑名单数据。'],
-      ['资料维护', '设置好友备注、更新好友扩展信息。'],
-      ['未处理计数', '获取当前用户未处理好友申请数量。'],
+      ['申请记录治理 <span className="enterprise-field-badge">商业版</span>', '删除指定用户发出或收到的好友申请记录。'],
     ],
     commonLinks: [
       [
@@ -120,6 +128,7 @@ const moduleOverviews = [
       ['获取好友列表', '/docs/chat/platform-api/v3/relation/listing-friends/list-friends'],
       ['加入黑名单', '/docs/chat/platform-api/v3/relation/blacklist/add-black'],
       ['删除好友', '/docs/chat/platform-api/v3/relation/managing-friends/delete-friend'],
+      ['删除发出的好友申请 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/relation/managing-friend-requests/delete-sent-friend-requests'],
     ],
     advice: [
       '好友关系通常需要结合业务侧隐私、风控和通知策略处理，后端应在调用前完成权限校验。',
@@ -135,20 +144,21 @@ const moduleOverviews = [
       '群组模块用于由后端创建和管理群聊，包括群资料、群成员、入群申请、群主转让、禁言和全量数据读取。',
     capabilities: [
       ['群组管理', '创建群组、更新群资料、解散群组和转让群主。'],
-      ['入群流程', '申请入群、处理入群申请、查询收到或发出的申请。'],
-      ['成员管理', '邀请成员、移除成员、查询成员资料和成员列表。'],
+      ['群组查询', '批量获取群资料，以及查询用户已经加入的群组。'],
+      ['入群流程', '申请入群、处理入群申请，并按群组、用户或申请方向查询申请记录。'],
+      ['成员管理', '邀请、移除或退出群组，查询并更新群成员资料。'],
       ['禁言控制', '禁言群成员、取消成员禁言、禁言群组和取消群组禁言。'],
-      ['全量读取', '读取群成员用户 ID、用户加入群组 ID 和未处理申请数量。'],
+      ['申请提醒与清理 <span className="enterprise-field-badge">商业版</span>', '获取或清除入群申请角标，并删除用户发出或群组收到的申请记录。'],
     ],
     commonLinks: [
       ['创建群组', '/docs/chat/platform-api/v3/group/managing-groups/create-group'],
+      ['获取群组信息', '/docs/chat/platform-api/v3/group/managing-groups/get-groups-info'],
+      ['获取已加入群组列表', '/docs/chat/platform-api/v3/group/group-membership/get-joined-group-list'],
       ['邀请用户进群', '/docs/chat/platform-api/v3/group/group-members/invite-users-to-group'],
       ['获取群成员列表', '/docs/chat/platform-api/v3/group/group-members/get-group-member-list'],
       ['禁言群成员', '/docs/chat/platform-api/v3/group/group-moderation/mute-group-member'],
-      [
-        '获取未处理入群申请数量',
-        '/docs/chat/platform-api/v3/group/group-applications/get-group-application-unhandled-count',
-      ],
+      ['查询收到的入群申请', '/docs/chat/platform-api/v3/group/group-applications/list-received-group-applications'],
+      ['获取入群申请角标 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/group/group-applications/get-group-application-badge-count'],
     ],
     advice: [
       '群组操作通常影响多个用户，建议后端记录 `operationID`、操作人、目标群组和成员列表。',
@@ -159,15 +169,13 @@ const moduleOverviews = [
     id: 'conversation',
     title: '概述',
     navLabel: '会话',
-    description: 'OpenIM Platform API 会话模块概览，覆盖会话读取、批量设置、置顶、免打扰和离线推送用户。',
+    description: 'OpenIM Platform API 会话模块概览，覆盖会话读取、批量设置和商业版会话分组。',
     intro:
-      '会话模块用于后端读取和维护用户会话数据，包括排序会话、批量会话、置顶会话、免打扰会话和离线推送关联用户。',
+      '会话模块用于后端读取和维护用户会话数据，包括排序会话、单个或批量会话、分页读取用户会话、批量设置会话，以及商业版会话分组。',
     capabilities: [
-      ['会话读取', '获取排序会话列表、全部会话、单个会话或批量会话。'],
+      ['会话读取', '获取排序会话列表、单个会话、批量会话或分页读取用户会话。'],
       ['会话设置', '批量设置会话属性和扩展数据。'],
-      ['离线推送', '读取会话离线推送关联的用户 ID。'],
-      ['全量同步', '全量获取用户会话 ID。'],
-      ['状态筛选', '读取置顶会话 ID 和免打扰会话 ID。'],
+      ['会话分组 <span className="enterprise-field-badge">商业版</span>', '创建、更新、删除和查询用户会话分组，维护分组顺序及分组中的会话。'],
     ],
     commonLinks: [
       [
@@ -175,8 +183,8 @@ const moduleOverviews = [
         '/docs/chat/platform-api/v3/conversation/listing-conversations/get-sorted-conversation-list',
       ],
       [
-        '获取全部会话',
-        '/docs/chat/platform-api/v3/conversation/listing-conversations/get-all-conversations',
+        '获取单个会话',
+        '/docs/chat/platform-api/v3/conversation/listing-conversations/get-conversation',
       ],
       [
         '批量获取会话',
@@ -186,10 +194,8 @@ const moduleOverviews = [
         '批量设置会话',
         '/docs/chat/platform-api/v3/conversation/managing-conversations/set-conversations',
       ],
-      [
-        '获取置顶会话 ID',
-        '/docs/chat/platform-api/v3/conversation/conversation-state/get-pinned-conversation-ids',
-      ],
+      ['查询会话分组 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/conversation/conversation-groups/list-conversation-groups'],
+      ['创建会话分组 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/conversation/conversation-groups/create-conversation-group'],
     ],
     advice: [
       '会话数据通常用于后台管理、数据修复和多端同步辅助，不建议由客户端直接调用管理端接口。',
@@ -200,22 +206,30 @@ const moduleOverviews = [
     id: 'message',
     title: '概述',
     navLabel: '消息',
-    description: 'OpenIM Platform API 消息模块概览，覆盖后端发送消息、系统通知、消息查询、已读标记和消息删除。',
+    description: 'OpenIM Platform API 消息模块概览，覆盖消息发送、业务通知、内容处理、流式消息、消息管理和读状态维护。',
     intro:
-      '消息模块用于让可信后端发送消息、发送业务通知、查询消息、维护已读序列号，并在管理场景中撤回、清理或删除消息。',
+      '消息模块用于让业务服务端通过 Platform API 写入和管理消息，并提供内容处理、流式消息、未读数与已读状态维护等商业版扩展能力。',
     capabilities: [
-      ['后端发送', '发送单条消息、批量发送消息或发送业务通知。'],
-      ['消息查询', '按条件搜索消息，或按序列号拉取消息。'],
-      ['已读维护', '标记消息或会话已读，设置会话已读序列号。'],
-      ['消息删除', '清空会话消息、清空用户全部消息、逻辑删除或物理删除消息。'],
-      ['状态辅助', '获取最新序列号、检查发送结果和获取服务器时间。'],
+      ['发送消息', '向单聊或群聊发送单条消息，或向多个用户批量发送消息。'],
+      ['业务通知', '通过 OpenIM 向单聊或群聊客户端实时传递自定义业务事件。'],
+      ['消息管理', '撤回消息并向相关客户端同步撤回事件。'],
+      ['时间同步', '获取消息服务端当前时间。'],
+      ['消息修改 <span className="enterprise-field-badge">商业版</span>', '修改指定消息的内容或扩展字段。'],
+      ['内容处理 <span className="enterprise-field-badge">商业版</span>', '调用服务端文本翻译能力处理消息或业务文本。'],
+      ['流式消息 <span className="enterprise-field-badge">商业版</span>', '创建流式消息并持续追加内容。'],
+      ['未读与已读状态 <span className="enterprise-field-badge">商业版</span>', '查询、清除或重置会话未读数，并将会话标记为已读。'],
     ],
     commonLinks: [
       ['发送单条消息', '/docs/chat/platform-api/v3/message/sending-messages/send-msg'],
       ['批量发送消息', '/docs/chat/platform-api/v3/message/sending-messages/batch-send-msg'],
-      ['搜索消息', '/docs/chat/platform-api/v3/message/retrieving-messages/search-msg'],
+      ['发送业务通知', '/docs/chat/platform-api/v3/message/sending-messages/send-business-notification'],
       ['撤回消息', '/docs/chat/platform-api/v3/message/managing-messages/revoke-msg'],
       ['获取服务器时间', '/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time'],
+      ['修改消息 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/message/managing-messages/modify-message'],
+      ['翻译文本 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/message/content-processing/translate-text'],
+      ['创建流式消息 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/message/streaming-messages/put-stream-message'],
+      ['查询会话未读数 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/message/unread-count/get-conversations-unread-count'],
+      ['标记会话已读 <span className="enterprise-field-badge">商业版</span>', '/docs/chat/platform-api/v3/message/read-status/mark-conversation-read'],
     ],
     advice: [
       '后端发送消息前，应确认发送身份、目标会话和消息内容都来自可信业务流程。',
@@ -530,9 +544,12 @@ const linkReplacements = [
     '/docs/chat/platform-api/v3/relation/overview',
   ],
 ];
-const allLinkReplacements = [...routeRelocations, ...linkReplacements].sort(
-  (a, b) => b[0].length - a[0].length,
-);
+const allLinkReplacements = [...routeRelocations, ...linkReplacements]
+  .map(([from, to]) => [
+    from.replaceAll(legacyPlatformRoot, localRoot),
+    to.replaceAll(legacyPlatformRoot, localRoot),
+  ])
+  .sort((a, b) => b[0].length - a[0].length);
 
 const textReplacements = [
   ['### 群组频道', '### 群组'],
@@ -954,6 +971,7 @@ function buildPlatformNavigationNodes(routes) {
           type: isLeaf ? 'page' : 'folder',
           children: [],
           minIndex: route.navOrder,
+          ...(route.edition ? { edition: route.edition } : {}),
         };
         cursor.children.push(child);
       }
@@ -989,7 +1007,22 @@ function sortNavigationNodes(nodes, parentID = '') {
   });
   for (const node of nodes) {
     sortNavigationNodes(node.children ?? [], node.id);
+    if (
+      node.children?.length > 0 &&
+      node.children.every((child) => child.edition === 'enterprise' || childHasOnlyEnterprisePages(child))
+    ) {
+      node.edition = 'enterprise';
+    }
   }
+}
+
+function childHasOnlyEnterprisePages(node) {
+  if (node.children?.length > 0) {
+    return node.children.every(
+      (child) => child.edition === 'enterprise' || childHasOnlyEnterprisePages(child),
+    );
+  }
+  return node.edition === 'enterprise';
 }
 
 function humanizeSegment(segment) {
@@ -1019,7 +1052,7 @@ async function rewritePlatformContent(dir) {
       if (!entry.isFile() || !entry.name.endsWith('.mdx')) return;
 
       const original = await readFile(file, 'utf8');
-      let next = original;
+      let next = original.replaceAll(legacyPlatformRoot, localRoot);
       for (const [from, to] of allLinkReplacements) {
         next = next.split(from).join(to);
       }

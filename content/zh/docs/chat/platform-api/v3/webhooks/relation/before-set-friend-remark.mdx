@@ -1,0 +1,85 @@
+---
+title: "设置好友备注前"
+description: "OpenIM Webhooks：在设置好友备注前校验或调整备注内容。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "api"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+sourcePath: "/docs/chat/platform-api/v3/webhooks/relation/before-set-friend-remark"
+---
+
+在设置好友备注前校验或调整备注内容。
+
+## 触发时机
+
+| 项目     | 说明                                   |
+| -------- | -------------------------------------- |
+| 类型     | 前置回调                               |
+| 配置项   | `beforeSetFriendRemark`                |
+| 回调命令 | `callbackBeforeSetFriendRemarkCommand` |
+
+## HTTP 请求
+
+```http
+POST {WEBHOOK_ADDRESS}/callbackBeforeSetFriendRemarkCommand
+Content-Type: application/json
+operationID: {OPERATION_ID}
+```
+
+```json
+{
+  "callbackCommand": "callbackBeforeSetFriendRemarkCommand",
+  "ownerUserID": "user_001",
+  "friendUserID": "user_001",
+  "remark": "同事"
+}
+```
+
+### 请求体参数
+
+| 参数名          | 是否必填 | 类型   | 说明                                   |
+| --------------- | -------- | ------ | -------------------------------------- |
+| callbackCommand | 是       | string | 回调命令，值与当前页面的回调命令一致。 |
+| ownerUserID     | 是       | string | 会话或关系所属用户 ID。                |
+| friendUserID    | 是       | string | 好友用户 ID。                          |
+| remark          | 是       | string | 好友备注。                             |
+
+## 响应
+
+业务服务端应返回 HTTP 成功状态和 JSON 响应体。
+
+```json
+{
+  "actionCode": 0,
+  "errCode": 0,
+  "errMsg": "",
+  "errDlt": "",
+  "nextCode": 0,
+  "remark": "同事"
+}
+```
+
+### 响应参数
+
+| 参数名     | 类型   | 说明                                                                                                                  |
+| ---------- | ------ | --------------------------------------------------------------------------------------------------------------------- |
+| actionCode | int    | 处理状态，参见[Webhooks 概述的 `CallbackAction`](/docs/chat/platform-api/v3/webhooks/overview#callbackaction)。       |
+| errCode    | int    | 业务错误码；拒绝前置操作时返回业务约定的非零错误码。                                                                  |
+| errMsg     | string | 错误简要信息。                                                                                                        |
+| errDlt     | string | 错误详细信息。                                                                                                        |
+| nextCode   | int    | 处理下一步，参见[Webhooks 概述的 `CallbackNextCode`](/docs/chat/platform-api/v3/webhooks/overview#callbacknextcode)。 |
+| remark     | string | 好友备注。                                                                                                            |
+
+## 处理规则
+
+- OpenIM 同步等待业务服务端响应。
+- 返回 `nextCode: 0` 时继续原流程；返回 `nextCode: 1` 时，OpenIM 使用响应中的错误信息终止本次操作。
+- 请求失败或超时后的行为由该回调的 `failedContinue` 配置决定。
+- 响应中的业务字段仅在对应字段存在时覆盖 OpenIM 即将处理的数据。
+
+## 相关页面
+
+- [Webhooks 概述](/docs/chat/platform-api/v3/webhooks/overview)
+- [关系模块概述](/docs/chat/platform-api/v3/relation/overview)

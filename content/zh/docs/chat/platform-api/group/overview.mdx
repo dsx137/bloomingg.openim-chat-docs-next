@@ -17,17 +17,24 @@ sourcePath: "/platform-api/group/overview"
 | 能力 | 说明 |
 | ---- | ---- |
 | 群组管理 | 创建群组、更新群资料、解散群组和转让群主。 |
-| 入群流程 | 申请入群、处理入群申请、查询收到或发出的申请。 |
-| 成员管理 | 邀请成员、移除成员、查询成员资料和成员列表。 |
+| 群组查询 | 批量获取群资料，以及查询用户已经加入的群组。 |
+| 入群流程 | 申请入群、处理入群申请，并按群组、用户或申请方向查询申请记录。 |
+| 成员管理 | 邀请、移除或退出群组，查询成员资料和成员列表，并更新成员角色、昵称或扩展字段。 |
 | 禁言控制 | 禁言群成员、取消成员禁言、禁言群组和取消群组禁言。 |
+| 申请提醒与清理 <span className="enterprise-field-badge">商业版</span> | 获取或清除入群申请角标，并删除用户发出或群组收到的申请记录。 |
 
 ## 常用接口
 
 - [创建群组](/platform-api/group/managing-groups/create-group)
+- [获取群组信息](/platform-api/group/managing-groups/get-groups-info)
+- [更新群组信息](/platform-api/group/managing-groups/set-group-info-ex)
+- [获取已加入群组列表](/platform-api/group/group-membership/get-joined-group-list)
 - [邀请用户进群](/platform-api/group/group-members/invite-users-to-group)
 - [获取群成员列表](/platform-api/group/group-members/get-group-member-list)
+- [更新群成员信息](/platform-api/group/group-members/set-group-member-info)
 - [禁言群成员](/platform-api/group/group-moderation/mute-group-member)
 - [查询收到的入群申请](/platform-api/group/group-applications/list-received-group-applications)
+- [获取入群申请角标](/platform-api/group/group-applications/get-group-application-badge-count) <span className="enterprise-field-badge">商业版</span>
 
 ## 资源表示
 
@@ -48,14 +55,16 @@ sourcePath: "/platform-api/group/overview"
 | creatorUserID | string | 创建者用户 ID。 |
 | createTime | int64 | 群创建时间，通常为 Unix 毫秒时间戳。 |
 | memberCount | int | 群成员数量。 |
-| status | int | 群状态。 |
-| groupType | int | 群类型；当前服务端常用工作群类型。 |
-| needVerification | int | 入群验证策略。 |
+| status | int | 群状态，参见 [`GroupStatus`](#groupstatus)。 |
+| groupType | int | 群类型，参见 [`GroupType`](#grouptype)。 |
+| needVerification | int | 入群验证策略，参见 [`GroupVerification`](#groupverification)。 |
 | lookMemberInfo | int | 是否允许查看群成员资料。 |
 | applyMemberFriend | int | 是否允许从群成员处添加好友。 |
 | notificationUpdateTime | int64 | 群公告更新时间。 |
 | notificationUserID | string | 更新群公告的用户 ID。 |
 | ex | string | 群扩展字段。 |
+| displayIsRead <span className="enterprise-field-badge">商业版</span> | boolean | 是否展示群消息已读状态。服务端可能根据群规模自动关闭该能力。 |
+| muteBypassUserIDs <span className="enterprise-field-badge">商业版</span> | string[] | 全群禁言时仍可发送消息的用户 ID 列表。 |
 
 ### GroupMemberInfo
 
@@ -68,9 +77,9 @@ sourcePath: "/platform-api/group/overview"
 | nickname | string | 用户昵称。 |
 | faceURL | string | 用户头像 URL。 |
 | appMangerLevel | int | 应用管理级别字段，字段名以服务端响应为准。 |
-| roleLevel | int | 成员角色，例如群主、管理员或普通成员。 |
+| roleLevel | int | 成员角色，参见 [`GroupMemberRole`](#groupmemberrole)。 |
 | joinTime | int64 | 入群时间。 |
-| joinSource | int | 入群来源。 |
+| joinSource | int | 入群来源，参见 [`JoinSource`](#joinsource)。 |
 | operatorUserID | string | 邀请、导入或处理入群的操作者用户 ID。 |
 | muteEndTime | int64 | 成员禁言结束时间。 |
 | inviterUserID | string | 邀请者用户 ID。 |
@@ -84,15 +93,70 @@ sourcePath: "/platform-api/group/overview"
 | ---- | ---- | ---- |
 | userInfo | object | 申请用户公开资料，结构为[用户模块的 `PublicUserInfo`](/platform-api/user/overview#publicuserinfo)。 |
 | groupInfo | object | 群资料，结构为本页 `GroupInfo`。 |
-| handleResult | int | 处理结果，例如待处理、同意或拒绝。 |
+| handleResult | int | 处理结果，参见 [`GroupRequestResult`](#grouprequestresult)。 |
 | reqMsg | string | 入群申请说明。 |
 | handleMsg | string | 处理说明。 |
 | reqTime | int64 | 申请时间。 |
 | handleUserID | string | 处理申请的用户 ID。 |
 | handleTime | int64 | 申请处理时间。 |
 | ex | string | 入群申请扩展字段。 |
-| joinSource | int | 入群来源。 |
+| joinSource | int | 入群来源，参见 [`JoinSource`](#joinsource)。 |
 | inviterUserID | string | 邀请者用户 ID。 |
+
+## 枚举
+
+### GroupType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `NormalGroup` | 普通群。 |
+| 1 | `SuperGroup` | 超级群。 |
+| 2 | `WorkingGroup` | 工作群。 |
+
+### GroupStatus
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `GroupOk` | 正常。 |
+| 1 | `GroupBanChat` | 群组禁言。 |
+| 2 | `GroupStatusDismissed` | 群组已解散。 |
+| 3 | `GroupStatusMuted` | 群组被禁言。 |
+| 4 | `GroupBanPrivateChat` | 禁止私聊。 |
+
+### GroupMemberRole
+
+`roleLevel` 表示群成员角色。普通成员和管理员可以由群管理接口设置，群主不能通过普通成员资料接口设置。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 20 | `GroupOrdinaryUsers` | 普通成员。 |
+| 60 | `GroupAdmin` | 群管理员。 |
+| 100 | `GroupOwner` | 群主。 |
+
+### GroupVerification
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `ApplyNeedVerificationInviteDirectly` | 申请入群需要审批，邀请可直接入群。 |
+| 1 | `AllNeedVerification` | 除群主或管理员邀请外，其他入群方式均需要审批。 |
+| 2 | `Directly` | 直接入群，不需要审批。 |
+
+### JoinSource
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `JoinByAdmin` | 管理员直接添加。 |
+| 2 | `JoinByInvitation` | 通过邀请加入。 |
+| 3 | `JoinBySearch` | 通过搜索申请加入。 |
+| 4 | `JoinByQRCode` | 通过二维码加入。 |
+
+### GroupRequestResult
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| -1 | `GroupResponseRefuse` | 拒绝。 |
+| 0 | `Pending` | 待处理。 |
+| 1 | `GroupResponseAgree` | 同意。 |
 
 ## 接入建议
 

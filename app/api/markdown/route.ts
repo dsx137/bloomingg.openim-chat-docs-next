@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getGuideMarkdownPage } from '@/src/lib/guide-markdown';
 import { getLocalizedDocPage } from '@/src/lib/localized-docs';
 import { isLocale, stripLocaleFromPath, type Locale } from '@/src/lib/i18n';
-import { getRouteRecord } from '@/src/lib/routes';
+import { getRouteRecord, routeSupportsLocale } from '@/src/lib/routes';
 import { getSourceDocPage } from '@/src/lib/source-docs';
 
 export const dynamic = 'force-dynamic';
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
 
   const route = getRouteRecord(path);
 
-  if (!route) {
+  if (!route || !routeSupportsLocale(route, locale)) {
     return NextResponse.json({ error: 'Markdown source not found.' }, { status: 404 });
   }
 

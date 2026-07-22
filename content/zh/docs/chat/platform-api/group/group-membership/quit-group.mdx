@@ -52,6 +52,7 @@ curl --request POST "${API_ADDRESS}/group/quit_group" \
 | --- | --- | --- | --- |
 | groupID | 是 | string | 目标群 ID。 |
 | userID | 否 | string | 要退出群组的用户 ID；不传时服务端使用当前操作用户 ID。 |
+| deleteMember <span className="enterprise-field-badge">商业版</span> | 否 | boolean | 是否同时删除退出用户的群成员数据。 |
 
 ## 响应
 

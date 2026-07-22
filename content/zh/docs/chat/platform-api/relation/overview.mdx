@@ -20,6 +20,7 @@ sourcePath: "/platform-api/relation/overview"
 | 好友查询 | 分页读取好友列表，或按指定好友 ID 批量获取好友资料。 |
 | 好友管理 | 删除好友、导入好友关系，并批量更新备注、置顶和扩展字段。 |
 | 黑名单 | 将用户加入黑名单、移出黑名单，并分页查询黑名单列表。 |
+| 申请记录治理 <span className="enterprise-field-badge">商业版</span> | 删除指定用户发出或收到的好友申请记录。 |
 
 ## 常用接口
 
@@ -35,6 +36,8 @@ sourcePath: "/platform-api/relation/overview"
 - [加入黑名单](/platform-api/relation/blacklist/add-black)
 - [查询黑名单](/platform-api/relation/blacklist/list-blacks)
 - [移出黑名单](/platform-api/relation/blacklist/remove-black)
+- [删除发出的好友申请](/platform-api/relation/managing-friend-requests/delete-sent-friend-requests) <span className="enterprise-field-badge">商业版</span>
+- [删除收到的好友申请](/platform-api/relation/managing-friend-requests/delete-received-friend-requests) <span className="enterprise-field-badge">商业版</span>
 
 ## 资源表示
 
@@ -50,7 +53,7 @@ sourcePath: "/platform-api/relation/overview"
 | remark | string | 好友备注。 |
 | createTime | int64 | 好友关系创建时间，通常为 Unix 毫秒时间戳。 |
 | friendUser | object | 好友用户资料，结构为[用户模块的 `UserInfo`](/platform-api/user/overview#userinfo)。 |
-| addSource | int | 好友添加来源。 |
+| addSource | int | 好友添加来源，参见 [`AddSource`](#addsource)。 |
 | operatorUserID | string | 建立或更新该关系的操作者用户 ID。 |
 | ex | string | 好友关系扩展字段。 |
 | isPinned | boolean | 是否置顶该好友关系。 |
@@ -67,7 +70,7 @@ sourcePath: "/platform-api/relation/overview"
 | toUserID | string | 申请接收用户 ID。 |
 | toNickname | string | 申请接收用户昵称。 |
 | toFaceURL | string | 申请接收用户头像 URL。 |
-| handleResult | int | 处理结果，例如待处理、同意或拒绝。 |
+| handleResult | int | 处理结果，参见 [`FriendRequestResult`](#friendrequestresult)。 |
 | reqMsg | string | 申请说明。 |
 | createTime | int64 | 申请创建时间。 |
 | handlerUserID | string | 处理申请的用户 ID。 |
@@ -84,9 +87,30 @@ sourcePath: "/platform-api/relation/overview"
 | ownerUserID | string | 黑名单所有者用户 ID。 |
 | createTime | int64 | 加入黑名单时间。 |
 | blackUserInfo | object | 被加入黑名单的用户公开资料，结构为[用户模块的 `PublicUserInfo`](/platform-api/user/overview#publicuserinfo)。 |
-| addSource | int | 加入黑名单来源。 |
+| addSource | int | 加入黑名单来源，参见 [`AddSource`](#addsource)。 |
 | operatorUserID | string | 操作者用户 ID。 |
 | ex | string | 黑名单扩展字段。 |
+
+## 枚举
+
+### AddSource
+
+`AddSource` 表示好友关系或黑名单关系的建立来源。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `BecomeFriendByImport` | 由管理员或服务端导入。 |
+| 2 | `BecomeFriendByApply` | 由好友申请建立。 |
+
+### FriendRequestResult
+
+`FriendRequestResult` 表示好友申请的处理结果。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| -1 | `Refuse` | 拒绝。 |
+| 0 | `NotHandle` | 待处理。 |
+| 1 | `Agree` | 同意。 |
 
 ## 接入建议
 

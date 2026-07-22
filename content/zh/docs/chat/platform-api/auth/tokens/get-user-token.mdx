@@ -48,7 +48,7 @@ curl --request POST "${API_ADDRESS}/auth/get_user_token" \
 
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| platformID | 是 | int | 用户登录终端类型，例如 iOS、Android、Web 等；不能传管理员平台 ID。 |
+| platformID | 是 | int | 用户登录终端类型，参见[用户模块的 `PlatformID`](/docs/chat/platform-api/v3/user/overview#platformid)；不能传管理员平台 ID。 |
 | userID | 是 | string | 需要签发 Token 的普通用户 ID。 |
 
 ## 响应

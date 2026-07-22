@@ -17,6 +17,7 @@ export const docs = defineDocs({
       platform: z.string().optional(),
       lastUpdated: z.string().optional(),
       sourcePath: z.string().optional(),
+      edition: z.enum(['open-source', 'enterprise']).optional(),
     }),
   },
 });

@@ -1,16 +1,20 @@
 ---
 title: "发送业务通知"
-description: "OpenIM 消息 REST API：发送业务通知。"
+description: "通过 OpenIM 向单聊或群聊客户端实时下发业务事件，并由客户端业务回调接收。"
 product: "platform-api"
 context: "chat/platform-api"
 template: "api"
 status: "published"
-lastUpdated: "2026-07-10"
+lastUpdated: "2026-07-22"
 version: "v3"
 sourcePath: "/platform-api/message/sending-messages/send-business-notification"
 ---
 
-使用 **发送业务通知** 从业务服务端调用 OpenIM 消息 REST 接口，向指定用户发送一条自定义业务通知。客户端通过业务通知回调接收 `key` 和 `data`，再按业务协议处理。
+**发送业务通知** 用于让外部业务服务通过 OpenIM 向客户端实时传递业务事件。OpenIM 在这里作为业务系统与客户端之间的消息传递中间件：业务服务只需要调用一次接口，OpenIM 负责将通知路由到指定的单聊或群聊，客户端通过 `OnRecvCustomBusinessMessage` 回调接收并处理。
+
+它适合承载订单状态、审核结果、运营指令、业务数据同步信号等不需要由 OpenIM 解析的自定义事件。`key` 用于标识事件类型，`data` 由业务方定义格式；客户端收到的 `sendMsg` 字段会反映本次通知是否同时作为消息写入会话。
+
+这不是普通聊天消息接口。业务服务调用后，客户端不会通过普通文本消息回调处理，而是通过 SDK 的 `OnRecvCustomBusinessMessage` 接收业务通知；业务方应在客户端注册对应监听器，并自行解析 `data`。
 
 请先在[接入准备](/platform-api/prepare-to-use-api)中配置 API 地址和 Token；接口参数通过请求头和 JSON 请求体传递。
 
@@ -31,7 +35,9 @@ curl --request POST "${API_ADDRESS}/msg/send_business_notification" \
   "key": "order_paid",
   "data": "{\"orderID\":\"order_001\"}",
   "sendUserID": "openIMAdmin",
-  "recvUserID": "user_001"
+  "recvUserID": "user_001",
+  "sendMsg": true,
+  "reliabilityLevel": 1
 }'
 ```
 
@@ -46,7 +52,7 @@ curl --request POST "${API_ADDRESS}/msg/send_business_notification" \
 | Header | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
 | operationID | 是 | string | 每次请求的唯一链路追踪 ID，建议由后端生成并写入日志。 |
-| token | 是 | string | APP 管理员 Token 或具备该用户访问权限的用户 Token；仅保存在可信后端服务中。 |
+| token | 是 | string | APP 管理员 Token；仅保存在业务服务端或 OpenIM Chat 服务端。 |
 | Content-Type: application/json | 是 | string | 请求体为 JSON 时必须设置。 |
 
 ## 请求体
@@ -56,16 +62,32 @@ curl --request POST "${API_ADDRESS}/msg/send_business_notification" \
   "key": "order_paid",
   "data": "{\"orderID\":\"order_001\"}",
   "sendUserID": "openIMAdmin",
-  "recvUserID": "user_001"
+  "recvUserID": "user_001",
+  "sendMsg": true,
+  "reliabilityLevel": 1
 }
 ```
 
 | 参数名 | 是否必填 | 类型 | 说明 |
 | --- | --- | --- | --- |
-| key | 否 | string | 业务通知分类。 |
-| data | 否 | string | 业务通知数据字符串。 |
-| sendUserID | 是 | string | 发送者用户 ID。 |
-| recvUserID | 是 | string | 接收者用户 ID。 |
+| key | 否 | string | 业务事件类型或业务通知分类。建议使用稳定、可向后兼容的事件名，例如 `order_paid`。 |
+| data | 否 | string | 业务通知数据字符串。格式由业务方约定，通常传入 JSON 字符串；客户端会在 `OnRecvCustomBusinessMessage` 回调中自行解析。 |
+| sendUserID | 是 | string | 发送者用户 ID。通常使用业务通知专用账号或 APP 管理员账号。 |
+| recvUserID | 与 `recvGroupID` 二选一 | string | 单聊接收者用户 ID。与 `recvGroupID` 不能同时为空或同时设置。 |
+| recvGroupID | 与 `recvUserID` 二选一 | string | 群聊接收者群组 ID。与 `recvUserID` 不能同时为空或同时设置。 |
+| sendMsg | 否 | boolean | 是否同时将业务通知作为消息写入会话。默认值由服务端通知配置决定；设为 `true` 时，通知会产生对应的单聊或群聊消息。 |
+| reliabilityLevel | 否 | int | 通知消息的可靠性等级，参见下方枚举。未传时默认为 `1`。 |
+
+### reliabilityLevel
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| `1` | `UnreliableNotification` | 在线推送。客户端在线时实时触发业务通知回调；客户端离线期间的通知不会在重连或重新登录后补发。默认值。 |
+| `2` | `ReliableNotificationNoMsg` | 必达通知。客户端断线重连或重新登录后仍会同步并触发业务通知回调，适用于通知必须送达的场景。该等级不产生普通会话消息。 |
+
+`reliabilityLevel: 2` 的通知会按顺序进行全量同步。不要使用该等级高频或批量发送大量通知，否则积压的必达通知会延长客户端断线重连、重新登录及消息同步所需的时间，影响客户端消息同步性能。
+
+可靠性等级描述的是 OpenIM 对通知的投递处理方式，不代表客户端业务处理一定成功。对于必须完成的业务动作，仍建议在 `data` 中携带唯一事件 ID，并在客户端实现幂等处理和必要的业务确认机制。
 
 ## 响应
 
@@ -98,9 +120,18 @@ curl --request POST "${API_ADDRESS}/msg/send_business_notification" \
 | data.sendTime | int | 消息发送时间，Unix 毫秒时间戳。 |
 | data.modify | object | 回调或服务端逻辑修改后的消息数据，可能为空。 |
 
+## 客户端接收流程
+
+1. 业务服务端调用本接口，指定 `recvUserID` 或 `recvGroupID`。
+2. OpenIM 将业务通知路由到目标用户或群组；如果 `sendMsg` 为 `true`，同时在对应会话中产生消息。
+3. 客户端 SDK 触发 `OnRecvCustomBusinessMessage` 回调。
+4. 客户端从回调数据中读取业务通知内容，按 `key` 分发事件，并解析 `data`。
+
+客户端收到的业务通知内容由业务方定义。建议在 `data` 中包含唯一事件 ID、事件版本和必要的业务数据，客户端按事件 ID 做幂等处理，并为未知 `key` 保留兼容逻辑。
+
 ## 使用建议
 
-业务通知适合承载订单状态、审核结果、系统事件等轻量业务信号。如果通知需要在聊天窗口中作为普通消息展示，优先使用[发送单条消息](/platform-api/message/sending-messages/send-msg)并选择合适的 `contentType`。
+业务通知适合承载订单状态、审核结果、系统事件和实时同步信号等轻量业务数据。如果业务事件需要在聊天窗口中作为普通消息展示，将 `sendMsg` 设为 `true`；如果只需要触发客户端业务回调而不希望增加会话消息，则使用 `sendMsg: false`，并根据场景选择合适的 `reliabilityLevel`。
 
 ### 错误
 
@@ -122,14 +153,19 @@ curl --request POST "${API_ADDRESS}/msg/send_business_notification" \
 
 ## 权限和限制
 
-- 写入一条业务通知消息，并触发客户端业务通知回调。
+- 通过 OpenIM 向单聊或群聊客户端传递业务通知，并触发 `OnRecvCustomBusinessMessage` 回调。
 - 必须使用 APP 管理员 Token 调用。
-- `sendUserID` 和 `recvUserID` 必填。
-- `key` 建议使用稳定的业务事件名，`data` 建议使用 JSON 字符串并保持向后兼容。
+- `sendUserID` 必填，`recvUserID` 和 `recvGroupID` 必须二选一。
+- `sendMsg` 决定是否同时产生会话消息，不决定客户端是否触发业务通知回调。
+- `key` 建议使用稳定的业务事件名，`data` 建议使用带版本的 JSON 字符串并保持向后兼容。
+- `reliabilityLevel` 未传时使用 `1`。只有确实需要客户端断线后补发的事件才应使用 `2`，并严格控制发送量。
+- 必达通知采用顺序全量同步，发送过多会影响客户端重连、登录和消息同步性能。
+- 可靠性等级不能替代业务幂等和业务状态确认。
 
 ## 相关页面
 
 - [接入准备](/platform-api/prepare-to-use-api)
 - [消息概览](/platform-api/message/overview)
+- [监听自定义业务事件](/sdk/android/event-handler/methods/set-custom-business-listener)
 - [发送单条消息](/platform-api/message/sending-messages/send-msg)
 - [错误码](/platform-api/error-codes)

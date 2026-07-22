@@ -1,0 +1,77 @@
+---
+title: "概述"
+description: "OpenIM 商业版定时任务能力概览。"
+product: "platform-api"
+context: "chat/platform-api/v3"
+template: "overview"
+status: "published"
+lastUpdated: "2026-07-21"
+version: "v3"
+edition: "enterprise"
+sourcePath: "/docs/chat/platform-api/v3/timer/overview"
+---
+
+定时任务模块用于由业务服务端登记延迟执行任务，并在到达执行时间后按配置回调业务地址。该模块适合消息提醒、预约操作和业务补偿，不用于替代高频实时调度系统。
+
+## 能力范围
+
+### 管理任务
+
+- [创建定时任务](/docs/chat/platform-api/v3/timer/managing-tasks/create-timer-task)：创建一个按指定时间执行并回调业务服务的定时任务。
+- [更新定时任务](/docs/chat/platform-api/v3/timer/managing-tasks/update-timer-task)：更新定时任务的执行时间、分类、重试和回调配置。
+- [删除定时任务](/docs/chat/platform-api/v3/timer/managing-tasks/delete-timer-task)：删除用户创建的指定定时任务。
+- [获取定时任务](/docs/chat/platform-api/v3/timer/managing-tasks/get-timer-task)：获取指定定时任务的完整信息。
+- [查询定时任务](/docs/chat/platform-api/v3/timer/managing-tasks/list-timer-tasks)：按用户和任务分类分页查询定时任务。
+
+## 资源结构
+
+### TimerTaskCallbackConfig
+
+`TimerTaskCallbackConfig` 表示定时任务执行时调用的业务回调地址、方法和请求头。
+
+| 字段            | 类型   | 说明                                                                                                                              |
+| --------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| callbackMethod  | string | 任务回调方式，参见[定时任务模块的 `TimerTaskCallbackMethod`](/docs/chat/platform-api/v3/timer/overview#timertaskcallbackmethod)。 |
+| callbackPayload | string | 业务回调请求体。                                                                                                                  |
+
+### TimerTask
+
+`TimerTask` 表示服务端保存的定时任务及执行、重试和回调配置。
+
+| 字段           | 类型                    | 说明                                                                                                                  |
+| -------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| taskID         | string                  | 定时任务 ID。                                                                                                         |
+| taskName       | string                  | 定时任务名称。                                                                                                        |
+| taskCategory   | string                  | 定时任务业务分类。                                                                                                    |
+| srcUserID      | string                  | 操作或消息发送者用户 ID。                                                                                             |
+| executeAt      | int                     | 计划执行时间，Unix 毫秒时间戳。                                                                                       |
+| executeBefore  | int                     | 允许执行的最晚时间，Unix 毫秒时间戳。                                                                                 |
+| maxRetry       | int                     | 任务执行失败后的最大重试次数。                                                                                        |
+| callbackConfig | TimerTaskCallbackConfig | 结构为[定时任务模块的 `TimerTaskCallbackConfig`](/docs/chat/platform-api/v3/timer/overview#timertaskcallbackconfig)。 |
+| createdAt      | int                     | 创建时间，Unix 毫秒时间戳。                                                                                           |
+| updatedAt      | int                     | 更新时间，Unix 毫秒时间戳。                                                                                           |
+| dedupKey       | string                  | 业务幂等键，用于避免重复创建任务。                                                                                    |
+
+## 枚举
+
+### TimerTaskStatus
+
+| 值  | 名称         | 说明       |
+| --- | ------------ | ---------- |
+| 0   | `Pending`    | 等待执行。 |
+| 1   | `Processing` | 正在执行。 |
+
+### TimerTaskCallbackMethod
+
+| 值               | 说明                     |
+| ---------------- | ------------------------ |
+| `openim-message` | 回调 OpenIM 消息能力。   |
+| `openim-http`    | 调用 HTTP 回调地址。     |
+| `openim-rpc`     | 调用预配置 RPC 能力。    |
+| `preset`         | 调用服务端预置处理逻辑。 |
+
+## 接入建议
+
+- 会议、任务和实时通话接口应由可信业务服务端调用。
+- 调用方应校验操作用户、目标资源和租户边界，不要仅依赖请求体中的用户 ID。
+- 使用唯一的 `operationID` 关联业务日志和 OpenIM 服务端日志。

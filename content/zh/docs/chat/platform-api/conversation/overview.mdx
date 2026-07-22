@@ -18,6 +18,7 @@ sourcePath: "/platform-api/conversation/overview"
 | ---- | ---- |
 | 会话读取 | 获取排序会话列表、单个会话、批量会话或分页读取用户会话。 |
 | 会话设置 | 批量设置会话属性和扩展数据。 |
+| 会话分组 <span className="enterprise-field-badge">商业版</span> | 创建、更新、删除和查询用户会话分组，维护分组顺序及分组中的会话。 |
 
 ## 常用接口
 
@@ -26,6 +27,9 @@ sourcePath: "/platform-api/conversation/overview"
 - [批量获取会话](/platform-api/conversation/listing-conversations/get-conversations)
 - [分页获取用户会话](/platform-api/conversation/listing-conversations/get-owner-conversation)
 - [批量设置会话](/platform-api/conversation/managing-conversations/set-conversations)
+- [查询会话分组](/platform-api/conversation/conversation-groups/list-conversation-groups) <span className="enterprise-field-badge">商业版</span>
+- [创建会话分组](/platform-api/conversation/conversation-groups/create-conversation-group) <span className="enterprise-field-badge">商业版</span>
+- [向分组添加会话](/platform-api/conversation/conversation-groups/add-conversations-to-groups) <span className="enterprise-field-badge">商业版</span>
 
 ## 资源表示
 
@@ -39,14 +43,14 @@ sourcePath: "/platform-api/conversation/overview"
 | ---- | ---- | ---- |
 | ownerUserID | string | 会话所属用户 ID。 |
 | conversationID | string | 会话 ID。 |
-| conversationType | int | 会话类型，例如单聊或群聊。 |
+| conversationType | int | 会话类型，参见 [`ConversationType`](#conversationtype)。 |
 | userID | string | 单聊目标用户 ID。 |
 | groupID | string | 群聊目标群 ID。 |
-| recvMsgOpt | int | 收消息选项，例如正常接收或免打扰。 |
+| recvMsgOpt | int | 收消息选项，参见 [`RecvMsgOpt`](#recvmsgopt)。 |
 | isPinned | boolean | 是否置顶会话。 |
 | attachedInfo | string | 会话附加信息。 |
 | isPrivateChat | boolean | 是否为私聊会话。 |
-| groupAtType | int | 群会话 @ 状态。 |
+| groupAtType | int | 群会话 @ 状态，参见 [`GroupAtType`](#groupattype)。 |
 | ex | string | 会话扩展字段。 |
 | burnDuration | int | 阅后即焚时长。 |
 | minSeq | int64 | 当前用户侧会话最小消息序列号。 |
@@ -54,6 +58,72 @@ sourcePath: "/platform-api/conversation/overview"
 | msgDestructTime | int64 | 消息销毁时间。 |
 | latestMsgDestructTime | int64 | 最新消息销毁时间。 |
 | isMsgDestruct | boolean | 是否开启消息销毁。 |
+| isMarked <span className="enterprise-field-badge">商业版</span> | boolean | 是否标记该会话。 |
+| remark <span className="enterprise-field-badge">商业版</span> | string | 当前用户为会话设置的备注。 |
+
+### ConversationGroup
+
+`ConversationGroup` 表示商业版中的用户会话分组。会话分组接口均为商业版接口。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| conversationGroupID | string | 会话分组 ID。 |
+| ownerUserID | string | 分组所属用户 ID。 |
+| name | string | 分组名称。 |
+| order | int64 | 分组展示顺序。 |
+| version | int64 | 分组版本号。 |
+| ex | string | 业务扩展字段。 |
+| conversationIDs | string[] | 分组中的会话 ID 列表。 |
+| hidden | boolean | 是否隐藏该分组。 |
+| conversationGroupType | int | 分组类型，参见 [`ConversationGroupType`](#conversationgrouptype)。 |
+| createTime | int64 | 创建时间，Unix 毫秒时间戳。 |
+
+### ConversationGroupOrder
+
+`ConversationGroupOrder` 表示商业版会话分组的排序设置。
+
+| 字段 | 类型 | 说明 |
+| ---- | ---- | ---- |
+| conversationGroupID | string | 会话分组 ID。 |
+| order | int64 | 目标展示顺序。 |
+
+## 枚举
+
+### ConversationType
+
+`ConversationType` 也用于消息和 Webhooks 中的 `sessionType`，字段值保持一致。
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 1 | `SingleChatType` | 单聊。 |
+| 2 | `WriteGroupChatType` | 写群聊类型；当前服务端暂不建议直接使用。 |
+| 3 | `ReadGroupChatType` | 群聊。 |
+| 4 | `NotificationChatType` | 通知会话。 |
+
+### RecvMsgOpt
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `ReceiveMessage` | 接收消息。 |
+| 1 | `NotReceiveMessage` | 不接收消息。 |
+| 2 | `ReceiveNotNotifyMessage` | 接收消息，但不触发通知。 |
+
+### GroupAtType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `AtNormal` | 没有 @ 提醒。 |
+| 1 | `AtMe` | @ 当前用户。 |
+| 2 | `AtAll` | @ 全体成员。 |
+| 3 | `AtAllAtMe` | 同时 @ 全体成员和当前用户。 |
+| 4 | `GroupNotification` | 群通知。 |
+
+### ConversationGroupType
+
+| 值 | 名称 | 说明 |
+| --- | --- | --- |
+| 0 | `Normal` | 普通会话分组。 |
+| 1 | `Filter` | 筛选分组。 |
 
 ## 接入建议
 
