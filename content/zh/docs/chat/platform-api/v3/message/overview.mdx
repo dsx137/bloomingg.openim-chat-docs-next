@@ -1,6 +1,6 @@
 ---
 title: "概述"
-description: "OpenIM Platform API 消息模块概览，覆盖服务端发送消息、业务通知、批量发送、消息撤回和时间同步。"
+description: "OpenIM Platform API 消息模块概览，覆盖消息发送、业务通知、内容处理、流式消息、消息管理和读状态维护。"
 product: "platform-api"
 context: "chat/platform-api/v3"
 template: "overview"
@@ -10,7 +10,7 @@ version: "v3"
 sourcePath: "/docs/chat/platform-api/v3/message/overview"
 ---
 
-消息模块用于让业务服务端通过 Platform API 写入和管理消息。常见场景包括由服务端发送系统消息、向多个用户批量下发通知、在管理后台撤回消息，以及在消息迁移时保留原始发送时间。
+消息模块用于让业务服务端通过 Platform API 写入和管理消息。除普通消息发送、批量发送和业务通知外，还提供消息内容处理、流式消息、未读数与已读状态维护等商业版扩展能力。
 
 ## 能力范围
 
@@ -18,9 +18,14 @@ sourcePath: "/docs/chat/platform-api/v3/message/overview"
 | ---- | ---- |
 | 发送消息 | 向单聊或群聊会话写入一条消息，可指定发送者、目标会话、内容类型、推送参数和发送时间。 |
 | 批量发送 | 向多个用户发送同一条消息，或面向全量用户下发低频系统通知。 |
-| 业务通知 | 下发自定义业务事件，由客户端业务通知回调处理 `key` 和 `data`。 |
-| 消息撤回 | 按会话 ID 和消息 Seq 撤回已发送消息，并向相关用户同步撤回事件。 |
+| 业务通知 | 让外部业务服务通过 OpenIM 向单聊或群聊客户端实时传递自定义业务事件，由客户端 `OnRecvCustomBusinessMessage` 回调处理；可选择是否同时产生会话消息，并设置通知可靠性等级。 |
+| 消息管理 | 按会话 ID 和消息 Seq 撤回已发送消息，并向相关用户同步撤回事件。 |
 | 时间同步 | 获取消息服务端当前时间，用于发送时间、迁移导入和业务日志对齐。 |
+| 消息修改 <span className="enterprise-field-badge">商业版</span> | 修改指定消息的内容或扩展字段，并向相关客户端同步变更。 |
+| 内容处理 <span className="enterprise-field-badge">商业版</span> | 调用服务端文本翻译能力处理消息或业务文本。 |
+| 流式消息 <span className="enterprise-field-badge">商业版</span> | 创建流式消息并持续追加内容，适用于 AI 回复等渐进式生成场景。 |
+| 未读数管理 <span className="enterprise-field-badge">商业版</span> | 查询、清除或重置指定用户会话的未读数。 |
+| 已读状态 <span className="enterprise-field-badge">商业版</span> | 将用户的指定会话标记为已读。 |
 
 ## 常用接口
 
@@ -30,6 +35,12 @@ sourcePath: "/docs/chat/platform-api/v3/message/overview"
 - [发送业务通知](/docs/chat/platform-api/v3/message/sending-messages/send-business-notification)
 - [撤回消息](/docs/chat/platform-api/v3/message/managing-messages/revoke-msg)
 - [获取服务器时间](/docs/chat/platform-api/v3/message/retrieving-messages/get-server-time)
+- [修改消息](/docs/chat/platform-api/v3/message/managing-messages/modify-message) <span className="enterprise-field-badge">商业版</span>
+- [翻译文本](/docs/chat/platform-api/v3/message/content-processing/translate-text) <span className="enterprise-field-badge">商业版</span>
+- [创建流式消息](/docs/chat/platform-api/v3/message/streaming-messages/put-stream-message) <span className="enterprise-field-badge">商业版</span>
+- [追加流式消息](/docs/chat/platform-api/v3/message/streaming-messages/append-stream-message) <span className="enterprise-field-badge">商业版</span>
+- [查询会话未读数](/docs/chat/platform-api/v3/message/unread-count/get-conversations-unread-count) <span className="enterprise-field-badge">商业版</span>
+- [标记会话已读](/docs/chat/platform-api/v3/message/read-status/mark-conversation-read) <span className="enterprise-field-badge">商业版</span>
 
 ## 枚举
 

@@ -1273,6 +1273,52 @@
           "minIndex": 719.9
         },
         {
+          "id": "logs",
+          "segment": "logs",
+          "title": "Logs",
+          "href": null,
+          "type": "folder",
+          "children": [
+            {
+              "id": "logs/overview",
+              "segment": "overview",
+              "title": "Overview",
+              "href": "/docs/chat/platform-api/v3/logs/overview",
+              "type": "page",
+              "children": [],
+              "minIndex": 761.9
+            },
+            {
+              "id": "logs/upload-logs",
+              "segment": "upload-logs",
+              "title": "Upload logs",
+              "href": "/docs/chat/platform-api/v3/logs/upload-logs",
+              "type": "page",
+              "children": [],
+              "minIndex": 762.9
+            },
+            {
+              "id": "logs/search-logs",
+              "segment": "search-logs",
+              "title": "Search logs",
+              "href": "/docs/chat/platform-api/v3/logs/search-logs",
+              "type": "page",
+              "children": [],
+              "minIndex": 763.9
+            },
+            {
+              "id": "logs/delete-logs",
+              "segment": "delete-logs",
+              "title": "Delete logs",
+              "href": "/docs/chat/platform-api/v3/logs/delete-logs",
+              "type": "page",
+              "children": [],
+              "minIndex": 764.9
+            }
+          ],
+          "minIndex": 761.9
+        },
+        {
           "id": "timer",
           "segment": "timer",
           "title": "定时任务",
@@ -1374,56 +1420,9 @@
             }
           ],
           "minIndex": 750,
-          "edition": "enterprise",
           "locales": [
             "zh"
           ]
-        },
-        {
-          "id": "logs",
-          "segment": "logs",
-          "title": "Logs",
-          "href": null,
-          "type": "folder",
-          "children": [
-            {
-              "id": "logs/overview",
-              "segment": "overview",
-              "title": "Overview",
-              "href": "/docs/chat/platform-api/v3/logs/overview",
-              "type": "page",
-              "children": [],
-              "minIndex": 761.9
-            },
-            {
-              "id": "logs/upload-logs",
-              "segment": "upload-logs",
-              "title": "Upload logs",
-              "href": "/docs/chat/platform-api/v3/logs/upload-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 762.9
-            },
-            {
-              "id": "logs/search-logs",
-              "segment": "search-logs",
-              "title": "Search logs",
-              "href": "/docs/chat/platform-api/v3/logs/search-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 763.9
-            },
-            {
-              "id": "logs/delete-logs",
-              "segment": "delete-logs",
-              "title": "Delete logs",
-              "href": "/docs/chat/platform-api/v3/logs/delete-logs",
-              "type": "page",
-              "children": [],
-              "minIndex": 764.9
-            }
-          ],
-          "minIndex": 761.9
         },
         {
           "id": "meeting",
@@ -2013,7 +2012,6 @@
             }
           ],
           "minIndex": 770,
-          "edition": "enterprise",
           "locales": [
             "zh"
           ]

@@ -17,17 +17,24 @@ sourcePath: "/docs/chat/platform-api/v3/group/overview"
 | 能力 | 说明 |
 | ---- | ---- |
 | 群组管理 | 创建群组、更新群资料、解散群组和转让群主。 |
-| 入群流程 | 申请入群、处理入群申请、查询收到或发出的申请。 |
-| 成员管理 | 邀请成员、移除成员、查询成员资料和成员列表。 |
+| 群组查询 | 批量获取群资料，以及查询用户已经加入的群组。 |
+| 入群流程 | 申请入群、处理入群申请，并按群组、用户或申请方向查询申请记录。 |
+| 成员管理 | 邀请、移除或退出群组，查询成员资料和成员列表，并更新成员角色、昵称或扩展字段。 |
 | 禁言控制 | 禁言群成员、取消成员禁言、禁言群组和取消群组禁言。 |
+| 申请提醒与清理 <span className="enterprise-field-badge">商业版</span> | 获取或清除入群申请角标，并删除用户发出或群组收到的申请记录。 |
 
 ## 常用接口
 
 - [创建群组](/docs/chat/platform-api/v3/group/managing-groups/create-group)
+- [获取群组信息](/docs/chat/platform-api/v3/group/managing-groups/get-groups-info)
+- [更新群组信息](/docs/chat/platform-api/v3/group/managing-groups/set-group-info-ex)
+- [获取已加入群组列表](/docs/chat/platform-api/v3/group/group-membership/get-joined-group-list)
 - [邀请用户进群](/docs/chat/platform-api/v3/group/group-members/invite-users-to-group)
 - [获取群成员列表](/docs/chat/platform-api/v3/group/group-members/get-group-member-list)
+- [更新群成员信息](/docs/chat/platform-api/v3/group/group-members/set-group-member-info)
 - [禁言群成员](/docs/chat/platform-api/v3/group/group-moderation/mute-group-member)
 - [查询收到的入群申请](/docs/chat/platform-api/v3/group/group-applications/list-received-group-applications)
+- [获取入群申请角标](/docs/chat/platform-api/v3/group/group-applications/get-group-application-badge-count) <span className="enterprise-field-badge">商业版</span>
 
 ## 资源表示
 

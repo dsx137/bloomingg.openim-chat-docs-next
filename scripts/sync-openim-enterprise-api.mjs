@@ -625,7 +625,7 @@ async function updateGeneratedData(specs) {
   addModuleFolder(context, 'message', 'read-status', '已读状态', specs);
   appendCategoryPages(context, 'message', 'managing-messages', specs);
   addModuleFolder(context, 'conversation', 'conversation-groups', '会话分组', specs);
-  insertTopLevelModule(context, 'timer', '定时任务', specs, 'logs');
+  insertTopLevelModule(context, 'timer', '定时任务', specs, 'migration-to-openim');
   insertTopLevelModule(context, 'meeting', '会议', specs, 'migration-to-openim');
   insertWebhooksModule(context, webhookSpecs);
   context.pageCount = retainedRoutes.filter((route) => route.contextKey === context.key).length;
