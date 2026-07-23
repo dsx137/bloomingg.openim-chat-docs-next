@@ -9,7 +9,7 @@
     },
     {
       "path": "api/chat/platform-api/v3",
-      "instructions": "Maintain the Platform API v3 OpenAPI descriptions. Derive every API fact from the upstream source and organize files and references as appropriate for the specification. Do not use additionalProperties: true anywhere in path schemas. Every explicitly enumerated object must use additionalProperties: false; protobuf map fields must use an explicit additionalProperties value schema matching the map value type. Every JSON request-body operation must have a concrete example block using real upstream protocol field values; never leave example values as type placeholders.",
+      "instructions": "Maintain the Platform API v3 OpenAPI descriptions. Derive every API fact from the upstream source and organize files and references as appropriate for the specification. Do not use additionalProperties: true anywhere in path schemas. Every explicitly enumerated object must use additionalProperties: false; protobuf map fields must use an explicit additionalProperties value schema matching the map value type. Every JSON request-body operation must have a concrete example block using real upstream protocol field values; never leave example values as type placeholders. Postman exports must resolve request and response bodies from schemas and normalize primitive values to base JSON type placeholders such as <string>, <integer>, and <boolean>, while the OpenAPI examples remain concrete.",
       "repoUrl": "https://github.com/openimsdk/open-im-server",
       "sourceRef": "v3.8.3-patch.16",
       "targetTagPattern": "^v?(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(?:-patch\\.(?<build>\\d+))?$"

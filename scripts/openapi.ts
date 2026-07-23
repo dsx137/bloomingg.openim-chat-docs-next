@@ -213,6 +213,12 @@ export async function lintApiOpenApiDocuments(root: string): Promise<void> {
     throw new PlatformApiError(`Redocly lint failed with exit code ${result.status ?? 'unknown'}.`);
 }
 
+const postmanPrimitivePlaceholders: Readonly<Record<string, string>> = {
+  '<byte>': '<string>',
+  '<long>': '<integer>',
+  '<uri>': '<string>',
+};
+
 export function normalizePostmanCollection(
   value: unknown,
   property = '',
@@ -226,6 +232,8 @@ export function normalizePostmanCollection(
       throw error;
     }
   }
+  if (typeof value === 'string')
+    return stripPostmanIdentity ? value : (postmanPrimitivePlaceholders[value] ?? value);
   if (Array.isArray(value))
     return value.map((entry) => normalizePostmanCollection(entry, '', stripPostmanIdentity));
   if (typeof value !== 'object' || value === null) return value;
@@ -336,7 +344,7 @@ export async function convertOpenApiToPostman(openApi: string): Promise<PostmanC
       '--output',
       collectionPath,
       '--options',
-      'parametersResolution=Example,folderStrategy=Tags,nestedFolderHierarchy=true',
+      'parametersResolution=Schema,folderStrategy=Tags,nestedFolderHierarchy=true',
     ]);
     return await parsePostmanCollection(
       JSON.stringify(

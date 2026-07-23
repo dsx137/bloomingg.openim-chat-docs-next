@@ -221,6 +221,22 @@ function countPostmanRequests(value: unknown): number {
   );
 }
 
+function postmanResponseBodies(value: unknown): string[] {
+  if (Array.isArray(value)) return value.flatMap(postmanResponseBodies);
+  if (!isRecord(value)) return [];
+  const bodies = Array.isArray(value.response)
+    ? value.response.flatMap((response) =>
+        isRecord(response) && typeof response.body === 'string' ? [response.body] : [],
+      )
+    : [];
+  return [
+    ...bodies,
+    ...Object.entries(value).flatMap(([key, entry]) =>
+      key === 'response' ? [] : postmanResponseBodies(entry),
+    ),
+  ];
+}
+
 async function exportOpenApiDocuments(
   directory: string,
   prefix: string,
@@ -708,11 +724,33 @@ test('keeps the bundled OpenAPI free of additionalProperties true', () => {
   assert.equal(bundledOpenApi.includes('"additionalProperties": true'), false);
 });
 
-test('converts request examples without schema type placeholders', async () => {
+test('converts request bodies with schema type placeholders', async () => {
   const collection = await convertOpenApiToPostman(bundledOpenApi);
   const collectionJson = JSON.stringify(collection);
   for (const placeholder of ['<integer>', '<string>', '<boolean>'])
-    assert.equal(collectionJson.includes(placeholder), false, placeholder);
+    assert.equal(collectionJson.includes(placeholder), true, placeholder);
+});
+
+test('converts response bodies with schema type placeholders', async () => {
+  const collection = await convertOpenApiToPostman(bundledOpenApi);
+  const response = postmanResponseBodies(collection)
+    .map((body): unknown => JSON.parse(body))
+    .find(
+      (body) =>
+        isRecord(body) &&
+        isRecord(body.data) &&
+        Object.hasOwn(body.data, 'conversationTotal') &&
+        Array.isArray(body.data.conversationElems),
+    );
+  assert.ok(isRecord(response));
+  assert.ok(isRecord(response.data));
+  assert.equal(response.data.conversationTotal, '<integer>');
+  assert.equal(response.data.unreadTotal, '<integer>');
+  assert.ok(Array.isArray(response.data.conversationElems));
+  const conversation = required(response.data.conversationElems[0], 'Missing conversation item.');
+  assert.ok(isRecord(conversation));
+  assert.equal(conversation.conversationID, '<string>');
+  assert.equal(conversation.IsPinned, '<boolean>');
 });
 
 test('reports an inaccessible Postman collection before conversion', async (context) => {
