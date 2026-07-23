@@ -22,6 +22,7 @@ import {
 import { source } from '@/src/lib/source';
 import { shouldShowVersion } from '@/src/lib/version-visibility';
 import { siteConfig } from '@/src/config/site';
+import { isSdkPlatformVisible } from '@/src/config/docs';
 import type { Locale } from '@/src/lib/i18n';
 import { toLocalizedPath } from '@/src/lib/i18n';
 import {
@@ -165,14 +166,21 @@ export async function renderDocumentationPage(
   const context = getNavigationContext(effectiveRoute.path);
   if (!context) notFound();
 
-  const contextOptions: ContextOption[] = getNavigationContexts().map((item) => ({
-    key: item.key,
-    product: item.product,
-    platform: item.platform,
-    version: item.version,
-    href: toLocalizedPath(item.overviewPath, locale),
-    pageCount: item.pageCount,
-  }));
+  const contextOptions: ContextOption[] = getNavigationContexts()
+    .filter(
+      (item) =>
+        item.product !== 'sdk' ||
+        isSdkPlatformVisible(item.platform) ||
+        item.platform === effectiveRoute.platform,
+    )
+    .map((item) => ({
+      key: item.key,
+      product: item.product,
+      platform: item.platform,
+      version: item.version,
+      href: toLocalizedPath(item.overviewPath, locale),
+      pageCount: item.pageCount,
+    }));
   const rawNeighbors = getNeighbors(effectiveRoute, locale);
   const neighbors = {
     previous: rawNeighbors.previous

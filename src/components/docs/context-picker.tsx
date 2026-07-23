@@ -1,7 +1,11 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { getPlatformLabel, webCompatibleSdkPlatforms } from '@/src/config/docs';
+import {
+  getPlatformLabel,
+  isSdkPlatformVisible,
+  webCompatibleSdkPlatforms,
+} from '@/src/config/docs';
 import type { Locale } from '@/src/lib/i18n';
 import { shouldShowVersion, uniqueVersions } from '@/src/lib/version-visibility';
 
@@ -31,7 +35,13 @@ export function ContextPicker({
   const platforms = unique(
     productOptions
       .map((option) => option.platform)
-      .filter((value): value is string => Boolean(value)),
+      .filter((value): value is string => Boolean(value))
+      .filter(
+        (platform) =>
+          current.product !== 'sdk' ||
+          isSdkPlatformVisible(platform) ||
+          platform === current.platform,
+      ),
   );
   const versions = uniqueVersions(
     productOptions
@@ -142,12 +152,8 @@ function groupPlatforms(
     (webCompatibleSdkPlatforms as readonly string[]).includes(platform),
   );
   const groups = [
-    platforms.filter(
-      (platform) =>
-        !webCompatible.includes(platform) && platform !== 'react-native' && platform !== 'unity',
-    ),
+    platforms.filter((platform) => !webCompatible.includes(platform)),
     webCompatible,
-    platforms.filter((platform) => platform === 'react-native' || platform === 'unity'),
   ];
 
   return groups

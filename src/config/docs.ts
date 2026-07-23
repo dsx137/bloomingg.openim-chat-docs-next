@@ -26,6 +26,19 @@ export const platformLabels: Record<string, string> = {
 
 export const webCompatibleSdkPlatforms = ['wasm', 'electron', 'miniprogram'] as const;
 
+/** Temporarily hidden from SDK nav, home cards, and platform switcher. Routes remain. */
+export const hiddenSdkPlatforms = [
+  'android',
+  'uniapp',
+  'react-native',
+  'unity',
+] as const;
+
+export function isSdkPlatformVisible(platform?: string | null): boolean {
+  if (!platform) return true;
+  return !(hiddenSdkPlatforms as readonly string[]).includes(platform);
+}
+
 export type SdkPlatformItem = {
   href: string;
   label: string;
@@ -44,9 +57,7 @@ export const sdkPlatformSections: SdkPlatformSection[] = [
   {
     items: [
       { label: 'iOS', platform: 'ios', href: '/sdk/ios/overview' },
-      { label: 'Android', platform: 'android', href: '/sdk/android/overview' },
       { label: 'Flutter', platform: 'flutter', href: '/sdk/flutter/overview' },
-      { label: 'uni-app', platform: 'uniapp', href: '/sdk/uniapp/overview' },
     ],
   },
   {
@@ -62,16 +73,6 @@ export const sdkPlatformSections: SdkPlatformSection[] = [
         platform: 'miniprogram',
         href: '/sdk/miniprogram/overview',
       },
-    ],
-  },
-  {
-    items: [
-      {
-        label: 'React Native',
-        platform: 'react-native',
-        href: '/sdk/react-native/overview',
-      },
-      { label: 'Unity', platform: 'unity', href: '/sdk/unity/overview' },
     ],
   },
 ];

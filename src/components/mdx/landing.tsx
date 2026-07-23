@@ -101,23 +101,10 @@ const sdkCards: HomeCard[] = [
     meta: 'Swift',
   },
   {
-    title: 'Android',
-    href: '/sdk/android/overview',
-    description:
-      'Integrate login, users, conversations, groups, and messages in native Android apps.',
-    meta: 'Kotlin / Java',
-  },
-  {
     title: 'Flutter',
     href: '/sdk/flutter/overview',
     description: 'Use one OpenIM integration path across mobile and supported desktop targets.',
     meta: 'Dart',
-  },
-  {
-    title: 'uni-app',
-    href: '/sdk/uniapp/overview',
-    description: 'Integrate OpenIM once for App, H5, and supported mini program targets.',
-    meta: 'Vue / uni-app',
   },
   {
     title: 'WASM',
@@ -128,18 +115,6 @@ const sdkCards: HomeCard[] = [
       { title: 'Electron', href: '/sdk/electron/overview' },
       { title: 'Mini Program', href: '/sdk/miniprogram/overview' },
     ],
-  },
-  {
-    title: 'React Native',
-    href: '/sdk/react-native/overview',
-    description: 'Add OpenIM messaging to React Native apps and handle mobile runtime differences.',
-    meta: 'RN',
-  },
-  {
-    title: 'Unity',
-    href: '/sdk/unity/overview',
-    description: 'Add users, groups, and realtime messaging to Unity games and interactive apps.',
-    meta: 'C#',
   },
 ];
 
@@ -186,34 +161,10 @@ const sampleApps: HomeCard[] = [
     meta: 'GitHub / iOS',
   },
   {
-    title: 'Android demo',
-    href: 'https://github.com/openimsdk/open-im-android-demo',
-    description: 'Native Android demo for login, conversations, and messages.',
-    meta: 'GitHub / Android',
-  },
-  {
     title: 'Flutter demo',
     href: 'https://github.com/openimsdk/openim-flutter-demo',
     description: 'Flutter demo for a single codebase covering mobile targets.',
     meta: 'GitHub / Flutter',
-  },
-  {
-    title: 'uni-app demo',
-    href: 'https://github.com/openimsdk/open-im-uniapp-demo',
-    description: 'uni-app demo covering App, H5, and supported mini program targets.',
-    meta: 'GitHub / uni-app',
-  },
-  {
-    title: 'React Native demo',
-    href: 'https://github.com/openimsdk/openim-reactnative-demo',
-    description: 'React Native demo for mobile runtime and SDK integration.',
-    meta: 'GitHub / RN',
-  },
-  {
-    title: 'Unity demo',
-    href: 'https://github.com/openimsdk/open-im-unity-demo',
-    description: 'Unity demo for game and interactive app chat scenarios.',
-    meta: 'GitHub / Unity',
   },
 ];
 
@@ -437,16 +388,16 @@ const featureGroups: FeatureGroup[] = [
         meta: 'WASM',
       },
       {
-        title: 'uni-app',
-        href: '/sdk/uniapp/overview',
-        description: 'Reuse one integration path across App, H5, and supported mini program targets.',
-        meta: 'uni-app',
+        title: 'iOS SDK',
+        href: '/sdk/ios/overview',
+        description: 'Integrate OpenIM into native iOS apps.',
+        meta: 'iOS',
       },
       {
-        title: 'React Native',
-        href: '/sdk/react-native/overview',
-        description: 'Bring OpenIM messaging into React Native mobile apps.',
-        meta: 'RN',
+        title: 'Flutter SDK',
+        href: '/sdk/flutter/overview',
+        description: 'Use one OpenIM integration path across mobile and supported desktop targets.',
+        meta: 'Flutter',
       },
       {
         title: 'API setup',
@@ -721,6 +672,16 @@ const zhCardText: Record<string, Pick<HomeCard, 'title' | 'description'> & { met
     title: 'WASM SDK',
     description: '通过 WebAssembly 在浏览器应用中接入 OpenIM。',
     meta: 'WASM',
+  },
+  'iOS SDK': {
+    title: 'iOS SDK',
+    description: '在 iOS 原生应用中接入 OpenIM。',
+    meta: 'iOS',
+  },
+  'Flutter SDK': {
+    title: 'Flutter SDK',
+    description: '用同一套 OpenIM 接入路径覆盖移动端和支持的桌面平台。',
+    meta: 'Flutter',
   },
 };
 
