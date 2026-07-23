@@ -13,13 +13,15 @@ post:
         schema:
           description: 'JSON serialization of relation.GetFriendIDsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.getFriendIDsReq'
+        example:
+          userID: user_1001
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -33,7 +35,7 @@ post:
                   data:
                     description: Friend user identifiers.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'friendIDs':
                         description: Friend user identifiers.

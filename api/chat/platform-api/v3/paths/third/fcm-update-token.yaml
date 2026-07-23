@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.FcmUpdateTokenReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'platformID':
               type: integer
@@ -28,6 +28,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.FcmUpdateTokenReq'
+        example:
+          platformID: 1
+          fcmToken: fcm-token-example
+          account: user_1001
+          expireTime: 1712592000000
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -41,7 +46,7 @@ post:
                   data:
                     type: object
                     description: No additional result data is returned after the token update.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

@@ -14,11 +14,11 @@ post:
         schema:
           description: 'JSON serialization of user.GetAllUserIDReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -32,6 +32,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.user.getAllUserIDReq'
+        example:
+          pagination:
+            pageNumber: 1
+            showNumber: 100
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -45,7 +49,7 @@ post:
                   data:
                     description: Registered user IDs and their total count.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'total':
                         description: Total number of records in this result.

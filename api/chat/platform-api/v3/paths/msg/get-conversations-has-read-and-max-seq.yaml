@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of msg.GetConversationsHasReadAndMaxSeqReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -26,6 +26,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.GetConversationsHasReadAndMaxSeqReq'
+        example:
+          userID: user_1001
+          conversationIDs:
+            - si_1001_2002
+          returnPinned: true
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -39,14 +44,14 @@ post:
                   data:
                     description: Conversation read and sequence summaries.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'seqs':
                         description: Read and maximum sequence summaries by conversation.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Conversation ID for this sequence summary.
@@ -54,7 +59,7 @@ post:
                             'value':
                               description: Read and maximum sequence values for this conversation.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'maxSeq':
                                   description: Latest message sequence number for this conversation.

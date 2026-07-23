@@ -14,17 +14,12 @@ post:
         schema:
           description: 'JSON serialization of internal.SendBusinessNotificationReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'key':
               type: string
             'data':
-              type: object
-              additionalProperties: true
-              properties: {}
-              x-source-schema-status: field-level
-              x-source-schema-kind: go
-              x-source-go-type: 'openim.apistruct.JsonObject'
+              type: string
             'sendUserID':
               type: string
             'recvUserID':
@@ -32,6 +27,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: go
           x-source-go-type: 'openim.internal.SendBusinessNotificationReq'
+        example:
+          key: account_alert
+          data: '{"kind":"account_alert"}'
+          sendUserID: openIMAdmin
+          recvUserID: user_1001
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -45,7 +45,7 @@ post:
                   data:
                     description: Business notification send result.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'serverMsgID':
                         description: Server-generated message ID.
@@ -60,7 +60,7 @@ post:
                       'modify':
                         description: Message data returned after send processing.
                         type: object
-                        additionalProperties: true
+                        additionalProperties: false
                         properties:
                           'sendID':
                             description: User ID of the message sender.
@@ -127,7 +127,7 @@ post:
                             type: array
                             items:
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'key':
                                   description: Name of this message option.
@@ -141,7 +141,7 @@ post:
                           'offlinePushInfo':
                             description: Offline push notification settings.
                             type: object
-                            additionalProperties: true
+                            additionalProperties: false
                             properties:
                               'title':
                                 description: Title for the offline push notification.

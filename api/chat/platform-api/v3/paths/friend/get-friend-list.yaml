@@ -14,11 +14,11 @@ post:
         schema:
           description: 'JSON serialization of relation.GetPaginationFriendsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -34,6 +34,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.getPaginationFriendsReq'
+        example:
+          pagination:
+            pageNumber: 1
+            showNumber: 50
+          userID: user_1001
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -47,14 +52,14 @@ post:
                   data:
                     description: Friend information and the total friend count.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'friendsInfo':
                         description: Friend information records.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'ownerUserID':
                               description: User identifier that owns the relationship.
@@ -69,7 +74,7 @@ post:
                             'friendUser':
                               description: User information for the friend.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: Unique user identifier.

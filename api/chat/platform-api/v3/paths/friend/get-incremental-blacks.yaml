@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of relation.GetIncrementalBlacksReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -25,6 +25,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.getIncrementalBlacksReq'
+        example:
+          userID: user_1001
+          versionID: blacks-v4
+          version: 4
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -38,7 +42,7 @@ post:
                   data:
                     description: Incremental blacklist synchronization changes.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'version':
                         description: Synchronization version.
@@ -60,7 +64,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'ownerUserID':
                               description: User identifier that owns the relationship.
@@ -72,7 +76,7 @@ post:
                             'blackUserInfo':
                               description: Public user information for the blocked user.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: Unique user identifier.
@@ -107,7 +111,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'ownerUserID':
                               description: User identifier that owns the relationship.
@@ -119,7 +123,7 @@ post:
                             'blackUserInfo':
                               description: Public user information for the blocked user.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: Unique user identifier.

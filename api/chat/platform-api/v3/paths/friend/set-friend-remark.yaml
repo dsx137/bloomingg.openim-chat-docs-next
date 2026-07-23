@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of relation.SetFriendRemarkReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'ownerUserID':
               type: string
@@ -24,6 +24,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.setFriendRemarkReq'
+        example:
+          ownerUserID: user_1001
+          friendUserID: user_2002
+          remark: Alex Chen
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -37,7 +41,7 @@ post:
                   data:
                     description: No additional data is returned on success.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

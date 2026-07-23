@@ -15,7 +15,7 @@ get:
             type: array
             items:
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'targets':
                   type: array
@@ -25,7 +25,7 @@ get:
                 'labels':
                   type: object
                   description: Labels applied to the discovered targets.
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'entries':
                       type: array

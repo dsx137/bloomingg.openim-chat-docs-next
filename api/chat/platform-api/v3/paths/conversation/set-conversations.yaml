@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of conversation.SetConversationsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userIDs':
               type: array
@@ -22,7 +22,7 @@ post:
                 type: string
             'conversation':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'conversationID':
                   type: string
@@ -35,7 +35,7 @@ post:
                   type: string
                 'recvMsgOpt':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -45,7 +45,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int32Value'
                 'isPinned':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: boolean
@@ -54,7 +54,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.BoolValue'
                 'attachedInfo':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: string
@@ -63,7 +63,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.StringValue'
                 'isPrivateChat':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: boolean
@@ -72,7 +72,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.BoolValue'
                 'ex':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: string
@@ -81,7 +81,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.StringValue'
                 'burnDuration':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -91,7 +91,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int32Value'
                 'minSeq':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -101,7 +101,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int64Value'
                 'maxSeq':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -111,7 +111,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int64Value'
                 'groupAtType':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -121,7 +121,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int32Value'
                 'msgDestructTime':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -131,7 +131,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int64Value'
                 'isMsgDestruct':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: boolean
@@ -144,6 +144,36 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.conversation.SetConversationsReq'
+        example:
+          userIDs:
+            - user_1001
+            - user_2002
+          conversation:
+            conversationID: si_1001_2002
+            conversationType: 1
+            userID: user_2002
+            recvMsgOpt:
+              value: 0
+            isPinned:
+              value: true
+            attachedInfo:
+              value: priority
+            isPrivateChat:
+              value: false
+            ex:
+              value: source=admin
+            burnDuration:
+              value: 86400
+            minSeq:
+              value: 1
+            maxSeq:
+              value: 120
+            groupAtType:
+              value: 0
+            msgDestructTime:
+              value: 1735689600
+            isMsgDestruct:
+              value: true
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -157,7 +187,7 @@ post:
                   data:
                     description: 'Empty result confirming the conversation settings update was processed.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

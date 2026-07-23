@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.CompleteFormDataReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'id':
               type: string
@@ -22,6 +22,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.CompleteFormDataReq'
+        example:
+          id: upload-001
+          urlPrefix: https://cdn.example.com/
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -35,7 +38,7 @@ post:
                   data:
                     type: object
                     description: Completed form-upload result.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'url':
                         type: string

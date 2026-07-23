@@ -13,11 +13,11 @@ post:
         schema:
           description: 'JSON serialization of user.UpdateUserInfoReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userInfo':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'userID':
                   type: string
@@ -43,6 +43,15 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.user.updateUserInfoReq'
+        example:
+          userInfo:
+            userID: user_1001
+            nickname: Alice
+            faceURL: https://cdn.example.com/users/1001.png
+            ex: team=support
+            createTime: 1710000000000
+            appMangerLevel: 1
+            globalRecvMsgOpt: 1
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -56,7 +65,7 @@ post:
                   data:
                     description: No additional data is returned on success.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

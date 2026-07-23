@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of jssdk.GetActiveConversationsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'ownerUserID':
               type: string
@@ -23,6 +23,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.jssdk.GetActiveConversationsReq'
+        example:
+          ownerUserID: user_1001
+          count: 20
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -36,7 +39,7 @@ post:
                   data:
                     description: 'Active conversation summaries, latest messages, and total unread count.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'unreadCount':
                         description: 'Number of unread messages.'
@@ -47,12 +50,12 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'conversation':
                               description: 'Conversation details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'ownerUserID':
                                   description: 'Identifier of the user who owns the record.'
@@ -119,7 +122,7 @@ post:
                             'lastMsg':
                               description: 'Latest message in the conversation.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'sendID':
                                   description: 'Identifier of the message sender.'
@@ -186,7 +189,7 @@ post:
                                   type: array
                                   items:
                                     type: object
-                                    additionalProperties: true
+                                    additionalProperties: false
                                     properties:
                                       'key':
                                         description: 'Name of the message option.'
@@ -200,7 +203,7 @@ post:
                                 'offlinePushInfo':
                                   description: 'Offline push notification settings.'
                                   type: object
-                                  additionalProperties: true
+                                  additionalProperties: false
                                   properties:
                                     'title':
                                       description: 'Offline push notification title.'
@@ -240,7 +243,7 @@ post:
                             'user':
                               description: 'User profile details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: 'Unique OpenIM user identifier.'
@@ -272,7 +275,7 @@ post:
                             'friend':
                               description: 'Friend relationship details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'ownerUserID':
                                   description: 'Identifier of the user who owns the record.'
@@ -306,7 +309,7 @@ post:
                             'group':
                               description: 'Group details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'groupID':
                                   description: 'Unique group identifier.'

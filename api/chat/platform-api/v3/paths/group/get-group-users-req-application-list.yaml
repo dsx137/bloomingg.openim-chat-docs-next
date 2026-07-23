@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of group.GetGroupUsersReqApplicationListReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupID':
               type: string
@@ -25,6 +25,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.getGroupUsersReqApplicationListReq'
+        example:
+          groupID: grp_product_2026
+          userIDs:
+            - user_1002
+            - user_1003
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -38,7 +43,7 @@ post:
                   data:
                     description: 'Group join applications submitted by the specified users.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'total':
                         description: 'Total number of records in the result.'
@@ -49,12 +54,12 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'userInfo':
                               description: 'Public information about the applicant.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: 'Unique OpenIM user identifier.'
@@ -74,7 +79,7 @@ post:
                             'groupInfo':
                               description: 'Group details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'groupID':
                                   description: 'Unique group identifier.'

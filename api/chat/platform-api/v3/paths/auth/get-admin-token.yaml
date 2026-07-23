@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of auth.GetAdminTokenReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'secret':
               type: string
@@ -23,6 +23,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.auth.getAdminTokenReq'
+        example:
+          secret: admin-secret-2026
+          userID: admin_001
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -36,7 +39,7 @@ post:
                   data:
                     description: Administrator token and its configured lifetime.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'token':
                         description: Authentication token.

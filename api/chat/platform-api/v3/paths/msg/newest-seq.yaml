@@ -13,13 +13,15 @@ post:
         schema:
           description: 'JSON serialization of sdkws.GetMaxSeqReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.sdkws.GetMaxSeqReq'
+        example:
+          userID: user_1001
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -33,14 +35,14 @@ post:
                   data:
                     description: Newest and minimum conversation sequence numbers.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'maxSeqs':
                         description: Newest sequence numbers by conversation.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Conversation ID for this newest sequence.
@@ -57,7 +59,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Conversation ID for this minimum sequence.

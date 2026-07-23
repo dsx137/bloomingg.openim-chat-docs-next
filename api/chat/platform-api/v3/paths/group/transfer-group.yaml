@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of group.TransferGroupOwnerReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupID':
               type: string
@@ -25,6 +25,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.TransferGroupOwnerReq'
+        example:
+          groupID: grp_product_2026
+          oldOwnerUserID: user_1001
+          newOwnerUserID: user_1002
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -38,7 +42,7 @@ post:
                   data:
                     description: 'Empty result confirming group ownership was transferred.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

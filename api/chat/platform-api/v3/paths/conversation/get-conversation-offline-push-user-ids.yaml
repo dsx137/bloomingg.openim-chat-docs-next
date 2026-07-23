@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of conversation.GetConversationOfflinePushUserIDsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'conversationID':
               type: string
@@ -24,6 +24,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.conversation.GetConversationOfflinePushUserIDsReq'
+        example:
+          conversationID: sg_group_3001
+          userIDs:
+            - user_1001
+            - user_2002
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -37,7 +42,7 @@ post:
                   data:
                     description: 'User identifiers eligible for offline push in the conversation.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'userIDs':
                         description: 'Identifiers of the returned users.'

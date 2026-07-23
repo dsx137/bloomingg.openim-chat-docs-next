@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of relation.GetDesignatedFriendsApplyReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'fromUserID':
               type: string
@@ -22,6 +22,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.getDesignatedFriendsApplyReq'
+        example:
+          fromUserID: user_1001
+          toUserID: user_2002
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -35,14 +38,14 @@ post:
                   data:
                     description: Friend applications for the requested users.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'friendRequests':
                         description: Friend application records.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'fromUserID':
                               description: User identifier of the friend applicant.

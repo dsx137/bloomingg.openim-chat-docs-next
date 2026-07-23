@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.PartSizeReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'size':
               type: integer
@@ -21,6 +21,8 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.PartSizeReq'
+        example:
+          size: 10485760
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -34,7 +36,7 @@ post:
                   data:
                     type: object
                     description: Multipart part-size calculation result.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'size':
                         type: integer

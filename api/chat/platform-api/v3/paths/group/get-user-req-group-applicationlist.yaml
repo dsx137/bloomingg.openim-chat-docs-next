@@ -14,11 +14,11 @@ post:
         schema:
           description: 'JSON serialization of group.GetUserReqApplicationListReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -43,6 +43,15 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.GetUserReqApplicationListReq'
+        example:
+          pagination:
+            pageNumber: 1
+            showNumber: 20
+          userID: user_1001
+          groupIDs:
+            - grp_product_2026
+          handleResults:
+            - 0
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -56,7 +65,7 @@ post:
                   data:
                     description: 'Group join applications submitted by the user.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'total':
                         description: 'Total number of records in the result.'
@@ -67,12 +76,12 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'userInfo':
                               description: 'Public information about the applicant.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: 'Unique OpenIM user identifier.'
@@ -92,7 +101,7 @@ post:
                             'groupInfo':
                               description: 'Group details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'groupID':
                                   description: 'Unique group identifier.'

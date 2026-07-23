@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of group.GetGroupApplicationUnhandledCountReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -23,6 +23,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.GetGroupApplicationUnhandledCountReq'
+        example:
+          userID: user_1001
+          time: 1719792000000
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -36,7 +39,7 @@ post:
                   data:
                     description: 'Count of unhandled group applications.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'count':
                         description: 'Number of unhandled group applications.'

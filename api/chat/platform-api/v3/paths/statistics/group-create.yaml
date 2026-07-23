@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of group.GroupCreateCountReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'start':
               type: integer
@@ -24,6 +24,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.GroupCreateCountReq'
+        example:
+          start: 1710000000000
+          end: 1710086400000
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -37,7 +40,7 @@ post:
                   data:
                     description: Group creation statistics result.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'total':
                         description: Total groups created returned by the query.
@@ -52,7 +55,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Aggregation key for this group-creation count.

@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.InitiateFormDataReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'name':
               type: string
@@ -32,6 +32,13 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.InitiateFormDataReq'
+        example:
+          name: avatar.png
+          size: 2048
+          contentType: image/png
+          group: avatars
+          millisecond: 1710000000123
+          absolute: false
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -45,7 +52,7 @@ post:
                   data:
                     type: object
                     description: Form-upload credentials and submission parameters.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'id':
                         type: string
@@ -61,7 +68,7 @@ post:
                         description: HTTP headers to add to the direct-upload request.
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               type: string
@@ -79,7 +86,7 @@ post:
                         description: Form fields to submit unchanged with the upload.
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               type: string

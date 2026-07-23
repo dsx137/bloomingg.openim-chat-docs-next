@@ -13,11 +13,11 @@ post:
         schema:
           description: 'JSON serialization of group.SetGroupInfoReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupInfoForSet':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'groupID':
                   type: string
@@ -31,7 +31,7 @@ post:
                   type: string
                 'ex':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: string
@@ -40,7 +40,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.StringValue'
                 'needVerification':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -50,7 +50,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int32Value'
                 'lookMemberInfo':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -60,7 +60,7 @@ post:
                   x-source-protobuf-type: 'openim.protobuf.Int32Value'
                 'applyMemberFriend':
                   type: object
-                  additionalProperties: true
+                  additionalProperties: false
                   properties:
                     'value':
                       type: integer
@@ -74,6 +74,21 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.SetGroupInfoReq'
+        example:
+          groupInfoForSet:
+            groupID: grp_product_2026
+            groupName: Product Team
+            notification: Sprint review Friday
+            introduction: Internal product discussion
+            faceURL: https://cdn.example.com/groups/product.png
+            ex:
+              value: tier=premium
+            needVerification:
+              value: 1
+            lookMemberInfo:
+              value: 1
+            applyMemberFriend:
+              value: 0
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -87,7 +102,7 @@ post:
                   data:
                     description: 'Empty result confirming the group update was processed.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

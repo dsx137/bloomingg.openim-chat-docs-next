@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.SetAppBadgeReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -23,6 +23,9 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.SetAppBadgeReq'
+        example:
+          userID: user_1001
+          appUnreadCount: 3
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -36,7 +39,7 @@ post:
                   data:
                     type: object
                     description: No additional result data is returned after the app badge update.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

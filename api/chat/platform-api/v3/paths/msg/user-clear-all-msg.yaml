@@ -13,13 +13,13 @@ post:
         schema:
           description: 'JSON serialization of msg.UserClearAllMsgReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
             'deleteSyncOpt':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'IsSyncSelf':
                   type: boolean
@@ -31,6 +31,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.UserClearAllMsgReq'
+        example:
+          userID: user_1001
+          deleteSyncOpt:
+            IsSyncSelf: true
+            IsSyncOther: false
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -44,7 +49,7 @@ post:
                   data:
                     description: Empty payload returned after all user messages are cleared.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

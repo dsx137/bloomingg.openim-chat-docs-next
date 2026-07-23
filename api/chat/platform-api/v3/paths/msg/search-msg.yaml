@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of msg.SearchMessageReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'sendID':
               type: string
@@ -29,7 +29,7 @@ post:
               format: int32
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -43,6 +43,15 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.SearchMessageReq'
+        example:
+          sendID: user_1001
+          recvID: user_2002
+          contentType: 101
+          sendTime: '1710000000000'
+          sessionType: 1
+          pagination:
+            pageNumber: 1
+            showNumber: 20
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -56,19 +65,19 @@ post:
                   data:
                     description: Message search result.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'chatLogs':
                         description: Matched chat log entries.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'chatLog':
                               description: Message and conversation details for this match.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'serverMsgID':
                                   description: Server-generated message ID.

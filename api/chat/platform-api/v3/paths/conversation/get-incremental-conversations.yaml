@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of conversation.GetIncrementalConversationReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -25,6 +25,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.conversation.GetIncrementalConversationReq'
+        example:
+          userID: user_1001
+          versionID: conversations-v42
+          version: 42
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -38,7 +42,7 @@ post:
                   data:
                     description: 'Conversation synchronization version and changes since the requested version.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'version':
                         description: 'Server version used for synchronization.'
@@ -60,7 +64,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'ownerUserID':
                               description: 'Identifier of the user who owns the record.'
@@ -129,7 +133,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'ownerUserID':
                               description: 'Identifier of the user who owns the record.'

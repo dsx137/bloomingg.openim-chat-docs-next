@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of group.GetGroupsInfoReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupIDs':
               type: array
@@ -23,6 +23,10 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.GetGroupsInfoReq'
+        example:
+          groupIDs:
+            - grp_product_2026
+            - grp_design_2026
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -36,14 +40,14 @@ post:
                   data:
                     description: 'Detailed records for the requested groups.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'groupInfos':
                         description: 'Group detail records.'
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'groupID':
                               description: 'Unique group identifier.'

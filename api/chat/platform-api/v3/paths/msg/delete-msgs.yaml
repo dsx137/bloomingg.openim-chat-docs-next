@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of msg.DeleteMsgsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'conversationID':
               type: string
@@ -26,7 +26,7 @@ post:
               type: string
             'deleteSyncOpt':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'IsSyncSelf':
                   type: boolean
@@ -38,6 +38,15 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.DeleteMsgsReq'
+        example:
+          conversationID: si_1001_2002
+          seqs:
+            - 101
+            - 102
+          userID: user_1001
+          deleteSyncOpt:
+            IsSyncSelf: true
+            IsSyncOther: false
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -51,7 +60,7 @@ post:
                   data:
                     description: Empty payload returned after messages are deleted.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

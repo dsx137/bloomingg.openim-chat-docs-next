@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of third.InitiateMultipartUploadReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'hash':
               type: string
@@ -37,6 +37,15 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.InitiateMultipartUploadReq'
+        example:
+          hash: sha256:abc123
+          size: 10485760
+          partSize: 5242880
+          maxParts: 2
+          cause: user-upload
+          name: video.mp4
+          contentType: video/mp4
+          urlPrefix: https://cdn.example.com/
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -50,7 +59,7 @@ post:
                   data:
                     type: object
                     description: Multipart-upload initialization result.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'url':
                         type: string
@@ -58,7 +67,7 @@ post:
                       'upload':
                         type: object
                         description: Multipart upload parameters.
-                        additionalProperties: true
+                        additionalProperties: false
                         properties:
                           'uploadID':
                             type: string
@@ -70,7 +79,7 @@ post:
                           'sign':
                             type: object
                             description: Signed parameters for multipart upload requests.
-                            additionalProperties: true
+                            additionalProperties: false
                             properties:
                               'url':
                                 type: string
@@ -80,7 +89,7 @@ post:
                                 description: Query parameters for the signed multipart upload.
                                 items:
                                   type: object
-                                  additionalProperties: true
+                                  additionalProperties: false
                                   properties:
                                     'key':
                                       type: string
@@ -98,7 +107,7 @@ post:
                                 description: HTTP headers for the signed multipart upload.
                                 items:
                                   type: object
-                                  additionalProperties: true
+                                  additionalProperties: false
                                   properties:
                                     'key':
                                       type: string
@@ -116,7 +125,7 @@ post:
                                 description: Signing parameters for each multipart upload part.
                                 items:
                                   type: object
-                                  additionalProperties: true
+                                  additionalProperties: false
                                   properties:
                                     'partNumber':
                                       type: integer
@@ -130,7 +139,7 @@ post:
                                       description: Query parameters for the part upload.
                                       items:
                                         type: object
-                                        additionalProperties: true
+                                        additionalProperties: false
                                         properties:
                                           'key':
                                             type: string
@@ -148,7 +157,7 @@ post:
                                       description: HTTP headers for the part upload.
                                       items:
                                         type: object
-                                        additionalProperties: true
+                                        additionalProperties: false
                                         properties:
                                           'key':
                                             type: string

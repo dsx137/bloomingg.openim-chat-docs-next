@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of sdkws.PullMessageBySeqsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -21,7 +21,7 @@ post:
               type: array
               items:
                 type: object
-                additionalProperties: true
+                additionalProperties: false
                 properties:
                   'conversationID':
                     type: string
@@ -46,6 +46,14 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.sdkws.PullMessageBySeqsReq'
+        example:
+          userID: user_1001
+          seqRanges:
+            - conversationID: si_1001_2002
+              begin: 101
+              end: 120
+              num: 20
+          order: 0
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -59,14 +67,14 @@ post:
                   data:
                     description: Messages pulled by conversation and sequence range.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'msgs':
                         description: Pulled messages by conversation.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Conversation ID for this pulled-message result.
@@ -74,14 +82,14 @@ post:
                             'value':
                               description: Pulled-message result for this conversation.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'Msgs':
                                   description: Messages returned for this conversation.
                                   type: array
                                   items:
                                     type: object
-                                    additionalProperties: true
+                                    additionalProperties: false
                                     properties:
                                       'sendID':
                                         description: User ID of the message sender.
@@ -148,7 +156,7 @@ post:
                                         type: array
                                         items:
                                           type: object
-                                          additionalProperties: true
+                                          additionalProperties: false
                                           properties:
                                             'key':
                                               description: Name of this message option.
@@ -162,7 +170,7 @@ post:
                                       'offlinePushInfo':
                                         description: Offline push notification settings.
                                         type: object
-                                        additionalProperties: true
+                                        additionalProperties: false
                                         properties:
                                           'title':
                                             description: Title for the offline push notification.
@@ -217,7 +225,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Conversation ID for this notification-message result.
@@ -225,14 +233,14 @@ post:
                             'value':
                               description: Pulled notification-message result for this conversation.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'Msgs':
                                   description: Notification messages returned for this conversation.
                                   type: array
                                   items:
                                     type: object
-                                    additionalProperties: true
+                                    additionalProperties: false
                                     properties:
                                       'sendID':
                                         description: User ID of the message sender.
@@ -299,7 +307,7 @@ post:
                                         type: array
                                         items:
                                           type: object
-                                          additionalProperties: true
+                                          additionalProperties: false
                                           properties:
                                             'key':
                                               description: Name of this message option.
@@ -313,7 +321,7 @@ post:
                                       'offlinePushInfo':
                                         description: Offline push notification settings.
                                         type: object
-                                        additionalProperties: true
+                                        additionalProperties: false
                                         properties:
                                           'title':
                                             description: Title for the offline push notification.

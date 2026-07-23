@@ -14,13 +14,13 @@ post:
         schema:
           description: 'JSON serialization of relation.GetPaginationFriendsApplyFromReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -39,6 +39,14 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.getPaginationFriendsApplyFromReq'
+        example:
+          userID: user_1001
+          pagination:
+            pageNumber: 1
+            showNumber: 20
+          handleResults:
+            - 0
+            - 1
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -52,14 +60,14 @@ post:
                   data:
                     description: Sent friend applications and their total count.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'friendRequests':
                         description: Friend application records.
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'fromUserID':
                               description: User identifier of the friend applicant.

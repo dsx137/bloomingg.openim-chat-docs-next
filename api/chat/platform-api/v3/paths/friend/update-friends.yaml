@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of relation.UpdateFriendsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'ownerUserID':
               type: string
@@ -24,7 +24,7 @@ post:
                 type: string
             'isPinned':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'value':
                   type: boolean
@@ -33,7 +33,7 @@ post:
               x-source-protobuf-type: 'openim.protobuf.BoolValue'
             'remark':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'value':
                   type: string
@@ -42,7 +42,7 @@ post:
               x-source-protobuf-type: 'openim.protobuf.StringValue'
             'ex':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'value':
                   type: string
@@ -52,6 +52,16 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.updateFriendsReq'
+        example:
+          ownerUserID: user_1001
+          friendUserIDs:
+            - user_2002
+          isPinned:
+            value: true
+          remark:
+            value: Work
+          ex:
+            value: group=coworkers
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -65,7 +75,7 @@ post:
                   data:
                     description: No additional data is returned on success.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

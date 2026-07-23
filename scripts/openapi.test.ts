@@ -32,6 +32,7 @@ type OpenApiOperation = {
 };
 type JsonObject = Record<string, unknown>;
 type JsonContent = {
+  readonly example?: JsonObject;
   readonly schema: JsonObject;
   readonly examples?: Record<string, { readonly value: JsonObject }>;
 };
@@ -361,6 +362,54 @@ test('enforces auth and group request contracts', () => {
   assert.equal(joinGroup({ groupID: 'g', inviterUserID: 'i', joinSource: 2 }), true);
 });
 
+test('matches runtime-bound batch, notification, and object-access request shapes', () => {
+  const batch = requestContent('/msg/batch_send_msg');
+  const batchProperties = required(
+    isRecord(batch.schema.properties) ? batch.schema.properties : undefined,
+    'Missing batch message properties.',
+  );
+  assert.equal('sendMsg' in batchProperties, false);
+  assert.equal('recvID' in batchProperties, false);
+  assert.ok(isRecord(batchProperties.sendID));
+  assert.ok(isRecord(batchProperties.content));
+  const batchExample = required(batch.example, 'Missing batch message example.');
+  assert.equal(batchExample.sendID, 'openIMAdmin');
+  assert.equal('sendMsg' in batchExample, false);
+  assert.equal(compileRequestSchema('/msg/batch_send_msg')(batchExample), true);
+
+  const notification = requestContent('/msg/send_business_notification');
+  const notificationProperties = required(
+    isRecord(notification.schema.properties) ? notification.schema.properties : undefined,
+    'Missing business notification properties.',
+  );
+  const notificationData = required(
+    isRecord(notificationProperties.data) ? notificationProperties.data : undefined,
+    'Missing business notification data schema.',
+  );
+  assert.equal(notificationData.type, 'string');
+  const notificationExample = required(
+    notification.example,
+    'Missing business notification example.',
+  );
+  assert.equal(notificationExample.data, '{"kind":"account_alert"}');
+  assert.equal(compileRequestSchema('/msg/send_business_notification')(notificationExample), true);
+
+  const access = requestContent('/object/access_url');
+  const accessProperties = required(
+    isRecord(access.schema.properties) ? access.schema.properties : undefined,
+    'Missing object access properties.',
+  );
+  const accessQuery = required(
+    isRecord(accessProperties.query) ? accessProperties.query : undefined,
+    'Missing object access query schema.',
+  );
+  assert.equal(accessQuery.type, 'object');
+  assert.deepEqual(accessQuery.additionalProperties, { type: 'string' });
+  const accessExample = required(access.example, 'Missing object access example.');
+  assert.deepEqual(accessExample.query, { download: '1', 'response-content-type': 'image/png' });
+  assert.equal(compileRequestSchema('/object/access_url')(accessExample), true);
+});
+
 test('enforces group decisions, safe server, and HTTP error claims', () => {
   const validate = compileRequestSchema('/group/group_application_response');
   assert.equal(validate({ groupID: 'g', fromUserID: 'u', handleResult: -1 }), true);
@@ -653,6 +702,17 @@ test('converts the bundled OpenAPI into a Postman collection with every document
     rootFolders.some(({ name }) => name === 'Public'),
     false,
   );
+});
+
+test('keeps the bundled OpenAPI free of additionalProperties true', () => {
+  assert.equal(bundledOpenApi.includes('"additionalProperties": true'), false);
+});
+
+test('converts request examples without schema type placeholders', async () => {
+  const collection = await convertOpenApiToPostman(bundledOpenApi);
+  const collectionJson = JSON.stringify(collection);
+  for (const placeholder of ['<integer>', '<string>', '<boolean>'])
+    assert.equal(collectionJson.includes(placeholder), false, placeholder);
 });
 
 test('reports an inaccessible Postman collection before conversion', async (context) => {

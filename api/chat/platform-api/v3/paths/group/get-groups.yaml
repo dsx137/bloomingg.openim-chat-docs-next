@@ -13,11 +13,11 @@ post:
         schema:
           description: 'JSON serialization of group.GetGroupsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -35,6 +35,12 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.GetGroupsReq'
+        example:
+          pagination:
+            pageNumber: 1
+            showNumber: 20
+          groupName: Product Team
+          groupID: grp_product_2026
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -48,7 +54,7 @@ post:
                   data:
                     description: 'Paginated group records that match the query.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'total':
                         description: 'Total number of records in the result.'
@@ -59,12 +65,12 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'groupInfo':
                               description: 'Group details.'
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'groupID':
                                   description: 'Unique group identifier.'

@@ -13,11 +13,12 @@ post:
         schema:
           description: 'JSON serialization of third.PartLimitReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties: {}
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.PartLimitReq'
+        example: {}
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -31,7 +32,7 @@ post:
                   data:
                     type: object
                     description: Multipart upload part constraints.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'minPartSize':
                         type: integer

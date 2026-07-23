@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of msg.GetActiveUserReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'start':
               type: integer
@@ -27,7 +27,7 @@ post:
               type: boolean
             'pagination':
               type: object
-              additionalProperties: true
+              additionalProperties: false
               properties:
                 'pageNumber':
                   type: integer
@@ -41,6 +41,14 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.GetActiveUserReq'
+        example:
+          start: 1710000000000
+          end: 1710086400000
+          ase: true
+          group: false
+          pagination:
+            pageNumber: 1
+            showNumber: 20
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -54,7 +62,7 @@ post:
                   data:
                     description: Active-user statistics result.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'msgCount':
                         description: Message count included in these statistics.
@@ -69,7 +77,7 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'key':
                               description: Date key for this count.
@@ -86,12 +94,12 @@ post:
                         type: array
                         items:
                           type: object
-                          additionalProperties: true
+                          additionalProperties: false
                           properties:
                             'user':
                               description: Profile of this active user.
                               type: object
-                              additionalProperties: true
+                              additionalProperties: false
                               properties:
                                 'userID':
                                   description: Unique user ID.

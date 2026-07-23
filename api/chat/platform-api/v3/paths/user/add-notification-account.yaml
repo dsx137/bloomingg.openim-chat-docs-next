@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of user.AddNotificationAccountReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'userID':
               type: string
@@ -28,6 +28,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.user.addNotificationAccountReq'
+        example:
+          userID: user_1001
+          nickName: Alice
+          faceURL: https://cdn.example.com/users/1001.png
+          appMangerLevel: 1
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -41,7 +46,7 @@ post:
                   data:
                     description: Created notification account details.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'userID':
                         description: Unique user identifier.

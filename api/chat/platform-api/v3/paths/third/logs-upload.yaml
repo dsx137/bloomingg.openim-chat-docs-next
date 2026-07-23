@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of third.UploadLogsReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'platform':
               type: integer
@@ -23,7 +23,7 @@ post:
               type: array
               items:
                 type: object
-                additionalProperties: true
+                additionalProperties: false
                 properties:
                   'filename':
                     type: string
@@ -41,6 +41,14 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.UploadLogsReq'
+        example:
+          platform: 1
+          fileURLs:
+            - filename: client.log
+              URL: https://storage.example.com/client.log
+          appFramework: OpenIM
+          version: 3.8.3
+          ex: device=ios
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -54,7 +62,7 @@ post:
                   data:
                     type: object
                     description: No additional result data is returned after log upload.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

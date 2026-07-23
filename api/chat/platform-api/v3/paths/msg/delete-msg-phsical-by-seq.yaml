@@ -13,7 +13,7 @@ post:
         schema:
           description: 'JSON serialization of msg.DeleteMsgPhysicalBySeqReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'conversationID':
               type: string
@@ -25,6 +25,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.msg.DeleteMsgPhysicalBySeqReq'
+        example:
+          conversationID: si_1001_2002
+          seqs:
+            - 101
+            - 102
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -38,7 +43,7 @@ post:
                   data:
                     description: Empty payload returned after messages are deleted by sequence.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

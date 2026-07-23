@@ -14,13 +14,15 @@ post:
         schema:
           description: 'JSON serialization of group.MuteGroupReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupID':
               type: string
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.MuteGroupReq'
+        example:
+          groupID: grp_product_2026
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -34,7 +36,7 @@ post:
                   data:
                     description: 'Empty result confirming the group was muted.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

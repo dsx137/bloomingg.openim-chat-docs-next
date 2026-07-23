@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of group.KickGroupMemberReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'groupID':
               type: string
@@ -29,6 +29,13 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.group.KickGroupMemberReq'
+        example:
+          groupID: grp_product_2026
+          kickedUserIDs:
+            - user_1003
+            - user_1004
+          reason: Removed from the project
+          sendMessage: true
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -42,7 +49,7 @@ post:
                   data:
                     description: 'Empty result confirming the members were removed from the group.'
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf

@@ -13,26 +13,22 @@ post:
         schema:
           description: 'JSON serialization of third.AccessURLReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'name':
               type: string
             'query':
-              type: array
-              items:
-                type: object
-                additionalProperties: true
-                properties:
-                  'key':
-                    type: string
-                  'value':
-                    type: string
-                x-source-schema-status: field-level
-                x-source-schema-kind: protobuf
-                x-source-protobuf-type: 'openim.third.AccessURLReq.QueryEntry'
+              type: object
+              additionalProperties:
+                type: string
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.third.AccessURLReq'
+        example:
+          name: avatar.png
+          query:
+            response-content-type: image/png
+            download: '1'
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -46,7 +42,7 @@ post:
                   data:
                     type: object
                     description: Object access URL and expiration information.
-                    additionalProperties: true
+                    additionalProperties: false
                     properties:
                       'url':
                         type: string

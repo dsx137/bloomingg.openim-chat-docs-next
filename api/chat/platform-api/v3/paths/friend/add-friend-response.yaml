@@ -14,7 +14,7 @@ post:
         schema:
           description: 'JSON serialization of relation.RespondFriendApplyReq, matching the upstream wire type.'
           type: object
-          additionalProperties: true
+          additionalProperties: false
           properties:
             'fromUserID':
               type: string
@@ -28,6 +28,11 @@ post:
           x-source-schema-status: field-level
           x-source-schema-kind: protobuf
           x-source-protobuf-type: 'openim.relation.respondFriendApplyReq'
+        example:
+          fromUserID: user_1001
+          toUserID: user_2002
+          handleResult: 1
+          handleMsg: Accepted
   responses:
     '200':
       description: OpenIM result envelope. Inspect errCode; zero indicates success.
@@ -41,7 +46,7 @@ post:
                   data:
                     description: No additional data is returned on success.
                     type: object
-                    additionalProperties: true
+                    additionalProperties: false
                     properties: {}
                     x-source-schema-status: field-level
                     x-source-schema-kind: protobuf
