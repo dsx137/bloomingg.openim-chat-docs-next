@@ -1,0 +1,17 @@
+additionalProperties: false
+properties:
+  addSource:
+    format: int32
+    type: integer
+  blackUserInfo:
+    $ref: public-user-info.yaml
+  createTime:
+    format: int64
+    type: integer
+  ex:
+    type: string
+  operatorUserID:
+    type: string
+  ownerUserID:
+    type: string
+type: object

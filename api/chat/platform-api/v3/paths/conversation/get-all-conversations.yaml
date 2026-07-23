@@ -1,0 +1,96 @@
+post:
+  tags:
+    - 'Conversations'
+  summary: 'ConversationGetAllConversations'
+  description: 'OpenIM Server POST route handled by c.GetAllConversations. It accepts the JSON serialization of conversation.GetAllConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postConversationGetAllConversations
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of conversation.GetAllConversationsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'ownerUserID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.conversation.GetAllConversationsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'conversations':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'ownerUserID':
+                              type: string
+                            'conversationID':
+                              type: string
+                            'recvMsgOpt':
+                              type: integer
+                              format: int32
+                            'conversationType':
+                              type: integer
+                              format: int32
+                            'userID':
+                              type: string
+                            'groupID':
+                              type: string
+                            'isPinned':
+                              type: boolean
+                            'attachedInfo':
+                              type: string
+                            'isPrivateChat':
+                              type: boolean
+                            'groupAtType':
+                              type: integer
+                              format: int32
+                            'ex':
+                              type: string
+                            'burnDuration':
+                              type: integer
+                              format: int32
+                            'minSeq':
+                              type: integer
+                              format: int64
+                            'maxSeq':
+                              type: integer
+                              format: int64
+                            'msgDestructTime':
+                              type: integer
+                              format: int64
+                            'latestMsgDestructTime':
+                              type: integer
+                              format: int64
+                            'isMsgDestruct':
+                              type: boolean
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.conversation.Conversation'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.conversation.GetAllConversationsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/conversation.go'
+  x-source-gin-path: '/conversation/get_all_conversations'
+  x-source-request-type: 'conversation.GetAllConversationsReq'
+  x-source-response-type: 'conversation.GetAllConversationsResp'

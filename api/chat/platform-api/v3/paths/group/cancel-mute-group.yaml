@@ -1,0 +1,45 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupCancelMuteGroup'
+  description: 'OpenIM Server POST route handled by g.CancelMuteGroup. It accepts the JSON serialization of group.CancelMuteGroupReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupCancelMuteGroup
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.CancelMuteGroupReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.CancelMuteGroupReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties: {}
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.CancelMuteGroupResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/cancel_mute_group'
+  x-source-request-type: 'group.CancelMuteGroupReq'
+  x-source-response-type: 'group.CancelMuteGroupResp'

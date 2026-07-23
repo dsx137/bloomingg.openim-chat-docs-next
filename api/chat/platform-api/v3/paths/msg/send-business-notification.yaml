@@ -1,0 +1,153 @@
+post:
+  tags:
+    - 'Messages'
+  summary: 'MsgSendBusinessNotification'
+  description: 'OpenIM Server POST route handled by m.SendBusinessNotification. It accepts the JSON serialization of internal.SendBusinessNotificationReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postMsgSendBusinessNotification
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of internal.SendBusinessNotificationReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'key':
+              type: string
+            'data':
+              type: object
+              additionalProperties: true
+              properties: {}
+              x-source-schema-status: field-level
+              x-source-schema-kind: go
+              x-source-go-type: 'openim.apistruct.JsonObject'
+            'sendUserID':
+              type: string
+            'recvUserID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: go
+          x-source-go-type: 'openim.internal.SendBusinessNotificationReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'serverMsgID':
+                        type: string
+                      'clientMsgID':
+                        type: string
+                      'sendTime':
+                        type: integer
+                        format: int64
+                      'modify':
+                        type: object
+                        additionalProperties: true
+                        properties:
+                          'sendID':
+                            type: string
+                          'recvID':
+                            type: string
+                          'groupID':
+                            type: string
+                          'clientMsgID':
+                            type: string
+                          'serverMsgID':
+                            type: string
+                          'senderPlatformID':
+                            type: integer
+                            format: int32
+                          'senderNickname':
+                            type: string
+                          'senderFaceURL':
+                            type: string
+                          'sessionType':
+                            type: integer
+                            format: int32
+                          'msgFrom':
+                            type: integer
+                            format: int32
+                          'contentType':
+                            type: integer
+                            format: int32
+                          'content':
+                            type: string
+                            format: byte
+                          'seq':
+                            type: integer
+                            format: int64
+                          'sendTime':
+                            type: integer
+                            format: int64
+                          'createTime':
+                            type: integer
+                            format: int64
+                          'status':
+                            type: integer
+                            format: int32
+                          'isRead':
+                            type: boolean
+                          'options':
+                            type: array
+                            items:
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'key':
+                                  type: string
+                                'value':
+                                  type: boolean
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.MsgData.OptionsEntry'
+                          'offlinePushInfo':
+                            type: object
+                            additionalProperties: true
+                            properties:
+                              'title':
+                                type: string
+                              'desc':
+                                type: string
+                              'ex':
+                                type: string
+                              'iOSPushSound':
+                                type: string
+                              'iOSBadgeCount':
+                                type: boolean
+                              'signalInfo':
+                                type: string
+                            x-source-schema-status: field-level
+                            x-source-schema-kind: protobuf
+                            x-source-protobuf-type: 'openim.sdkws.OfflinePushInfo'
+                          'atUserIDList':
+                            type: array
+                            items:
+                              type: string
+                          'attachedInfo':
+                            type: string
+                          'ex':
+                            type: string
+                        x-source-schema-status: field-level
+                        x-source-schema-kind: protobuf
+                        x-source-protobuf-type: 'openim.sdkws.MsgData'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.msg.SendMsgResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/msg.go'
+  x-source-gin-path: '/msg/send_business_notification'
+  x-source-request-type: 'internal.SendBusinessNotificationReq'
+  x-source-response-type: 'msg.SendMsgResp'

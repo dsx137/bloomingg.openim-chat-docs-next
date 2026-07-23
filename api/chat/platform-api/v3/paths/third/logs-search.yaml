@@ -1,0 +1,97 @@
+post:
+  tags:
+    - 'Third-party services'
+  summary: 'ThirdLogsSearch'
+  description: 'OpenIM Server POST route handled by t.SearchLogs. It accepts the JSON serialization of third.SearchLogsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postThirdLogsSearch
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of third.SearchLogsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'keyword':
+              type: string
+            'startTime':
+              type: integer
+              format: int64
+            'endTime':
+              type: integer
+              format: int64
+            'pagination':
+              type: object
+              additionalProperties: true
+              properties:
+                'pageNumber':
+                  type: integer
+                  format: int32
+                'showNumber':
+                  type: integer
+                  format: int32
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.sdkws.RequestPagination'
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.third.SearchLogsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'logsInfos':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'userID':
+                              type: string
+                            'platform':
+                              type: string
+                            'url':
+                              type: string
+                            'createTime':
+                              type: integer
+                              format: int64
+                            'nickname':
+                              type: string
+                            'logID':
+                              type: string
+                            'filename':
+                              type: string
+                            'systemType':
+                              type: string
+                            'ex':
+                              type: string
+                            'version':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.LogInfo'
+                      'total':
+                        type: integer
+                        format: int32
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.third.SearchLogsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/third.go'
+  x-source-gin-path: '/third/logs/search'
+  x-source-request-type: 'third.SearchLogsReq'
+  x-source-response-type: 'third.SearchLogsResp'

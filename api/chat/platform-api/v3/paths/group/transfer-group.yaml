@@ -1,0 +1,49 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupTransferGroup'
+  description: 'OpenIM Server POST route handled by g.TransferGroupOwner. It accepts the JSON serialization of group.TransferGroupOwnerReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupTransferGroup
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.TransferGroupOwnerReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupID':
+              type: string
+            'oldOwnerUserID':
+              type: string
+            'newOwnerUserID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.TransferGroupOwnerReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties: {}
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.TransferGroupOwnerResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/transfer_group'
+  x-source-request-type: 'group.TransferGroupOwnerReq'
+  x-source-response-type: 'group.TransferGroupOwnerResp'

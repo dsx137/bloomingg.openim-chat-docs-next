@@ -1,0 +1,52 @@
+post:
+  tags:
+    - 'Object storage'
+  summary: 'ObjectPartLimit'
+  description: 'OpenIM Server POST route handled by t.PartLimit. It accepts the JSON serialization of third.PartLimitReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postObjectPartLimit
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of third.PartLimitReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties: {}
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.third.PartLimitReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'minPartSize':
+                        type: integer
+                        format: int64
+                      'maxPartSize':
+                        type: integer
+                        format: int64
+                      'maxNumSize':
+                        type: integer
+                        format: int32
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.third.PartLimitResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/third.go'
+  x-source-gin-path: '/object/part_limit'
+  x-source-request-type: 'third.PartLimitReq'
+  x-source-response-type: 'third.PartLimitResp'

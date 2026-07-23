@@ -1,0 +1,10 @@
+additionalProperties: false
+properties:
+  total:
+    format: int32
+    type: integer
+  users:
+    items:
+      $ref: ../sdkws/user-info.yaml
+    type: array
+type: object

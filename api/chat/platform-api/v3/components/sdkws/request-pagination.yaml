@@ -1,0 +1,14 @@
+additionalProperties: false
+properties:
+  pageNumber:
+    format: int32
+    type: integer
+    minimum: 1
+  showNumber:
+    format: int32
+    type: integer
+    minimum: 1
+type: object
+required:
+  - pageNumber
+  - showNumber

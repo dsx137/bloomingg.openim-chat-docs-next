@@ -1,0 +1,15 @@
+additionalProperties: false
+properties:
+  desc:
+    type: string
+  ex:
+    type: string
+  iOSBadgeCount:
+    type: boolean
+  iOSPushSound:
+    type: string
+  signalInfo:
+    type: string
+  title:
+    type: string
+type: object

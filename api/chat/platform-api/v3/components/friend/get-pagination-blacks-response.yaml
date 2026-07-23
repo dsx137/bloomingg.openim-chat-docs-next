@@ -1,0 +1,10 @@
+additionalProperties: false
+properties:
+  blacks:
+    items:
+      $ref: ../sdkws/black-info.yaml
+    type: array
+  total:
+    format: int32
+    type: integer
+type: object

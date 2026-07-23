@@ -1,0 +1,99 @@
+post:
+  tags:
+    - 'Object storage'
+  summary: 'ObjectInitiateFormData'
+  description: 'OpenIM Server POST route handled by t.InitiateFormData. It accepts the JSON serialization of third.InitiateFormDataReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postObjectInitiateFormData
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of third.InitiateFormDataReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'name':
+              type: string
+            'size':
+              type: integer
+              format: int64
+            'contentType':
+              type: string
+            'group':
+              type: string
+            'millisecond':
+              type: integer
+              format: int64
+            'absolute':
+              type: boolean
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.third.InitiateFormDataReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'id':
+                        type: string
+                      'url':
+                        type: string
+                      'file':
+                        type: string
+                      'header':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'values':
+                              type: array
+                              items:
+                                type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.KeyValues'
+                      'formData':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'value':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.InitiateFormDataResp.FormDataEntry'
+                      'expires':
+                        type: integer
+                        format: int64
+                      'successCodes':
+                        type: array
+                        items:
+                          type: integer
+                          format: int32
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.third.InitiateFormDataResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/third.go'
+  x-source-gin-path: '/object/initiate_form_data'
+  x-source-request-type: 'third.InitiateFormDataReq'
+  x-source-response-type: 'third.InitiateFormDataResp'

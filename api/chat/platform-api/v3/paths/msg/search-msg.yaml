@@ -1,0 +1,145 @@
+post:
+  tags:
+    - 'Messages'
+  summary: 'MsgSearchMsg'
+  description: 'OpenIM Server POST route handled by m.SearchMsg. It accepts the JSON serialization of msg.SearchMessageReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postMsgSearchMsg
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of msg.SearchMessageReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'sendID':
+              type: string
+            'recvID':
+              type: string
+            'contentType':
+              type: integer
+              format: int32
+            'sendTime':
+              type: string
+            'sessionType':
+              type: integer
+              format: int32
+            'pagination':
+              type: object
+              additionalProperties: true
+              properties:
+                'pageNumber':
+                  type: integer
+                  format: int32
+                'showNumber':
+                  type: integer
+                  format: int32
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.sdkws.RequestPagination'
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.msg.SearchMessageReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'chatLogs':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'chatLog':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'serverMsgID':
+                                  type: string
+                                'clientMsgID':
+                                  type: string
+                                'sendID':
+                                  type: string
+                                'recvID':
+                                  type: string
+                                'groupID':
+                                  type: string
+                                'recvNickname':
+                                  type: string
+                                'senderPlatformID':
+                                  type: integer
+                                  format: int32
+                                'senderNickname':
+                                  type: string
+                                'senderFaceURL':
+                                  type: string
+                                'groupName':
+                                  type: string
+                                'sessionType':
+                                  type: integer
+                                  format: int32
+                                'msgFrom':
+                                  type: integer
+                                  format: int32
+                                'contentType':
+                                  type: integer
+                                  format: int32
+                                'content':
+                                  type: string
+                                'status':
+                                  type: integer
+                                  format: int32
+                                'sendTime':
+                                  type: integer
+                                  format: int64
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'ex':
+                                  type: string
+                                'groupFaceURL':
+                                  type: string
+                                'groupMemberCount':
+                                  type: integer
+                                  format: int32
+                                'seq':
+                                  type: integer
+                                  format: int64
+                                'groupOwner':
+                                  type: string
+                                'groupType':
+                                  type: integer
+                                  format: int32
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.msg.ChatLog'
+                            'isRevoked':
+                              type: boolean
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.msg.SearchChatLog'
+                      'chatLogsNum':
+                        type: integer
+                        format: int32
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.msg.SearchMessageResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/msg.go'
+  x-source-gin-path: '/msg/search_msg'
+  x-source-request-type: 'msg.SearchMessageReq'
+  x-source-response-type: 'msg.SearchMessageResp'

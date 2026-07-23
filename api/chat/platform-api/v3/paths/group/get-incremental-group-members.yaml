@@ -1,0 +1,189 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupGetIncrementalGroupMembers'
+  description: 'OpenIM Server POST route handled by g.GetIncrementalGroupMember. It accepts the JSON serialization of group.GetIncrementalGroupMemberReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupGetIncrementalGroupMembers
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.GetIncrementalGroupMemberReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupID':
+              type: string
+            'versionID':
+              type: string
+            'version':
+              type: integer
+              format: int64
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.getIncrementalGroupMemberReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'version':
+                        type: integer
+                        format: int64
+                      'versionID':
+                        type: string
+                      'full':
+                        type: boolean
+                      'delete':
+                        type: array
+                        items:
+                          type: string
+                      'insert':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'groupID':
+                              type: string
+                            'userID':
+                              type: string
+                            'roleLevel':
+                              type: integer
+                              format: int32
+                            'joinTime':
+                              type: integer
+                              format: int64
+                            'nickname':
+                              type: string
+                            'faceURL':
+                              type: string
+                            'appMangerLevel':
+                              type: integer
+                              format: int32
+                            'joinSource':
+                              type: integer
+                              format: int32
+                            'operatorUserID':
+                              type: string
+                            'ex':
+                              type: string
+                            'muteEndTime':
+                              type: integer
+                              format: int64
+                            'inviterUserID':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.GroupMemberFullInfo'
+                      'update':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'groupID':
+                              type: string
+                            'userID':
+                              type: string
+                            'roleLevel':
+                              type: integer
+                              format: int32
+                            'joinTime':
+                              type: integer
+                              format: int64
+                            'nickname':
+                              type: string
+                            'faceURL':
+                              type: string
+                            'appMangerLevel':
+                              type: integer
+                              format: int32
+                            'joinSource':
+                              type: integer
+                              format: int32
+                            'operatorUserID':
+                              type: string
+                            'ex':
+                              type: string
+                            'muteEndTime':
+                              type: integer
+                              format: int64
+                            'inviterUserID':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.GroupMemberFullInfo'
+                      'group':
+                        type: object
+                        additionalProperties: true
+                        properties:
+                          'groupID':
+                            type: string
+                          'groupName':
+                            type: string
+                          'notification':
+                            type: string
+                          'introduction':
+                            type: string
+                          'faceURL':
+                            type: string
+                          'ownerUserID':
+                            type: string
+                          'createTime':
+                            type: integer
+                            format: int64
+                          'memberCount':
+                            type: integer
+                            format: int32
+                          'ex':
+                            type: string
+                          'status':
+                            type: integer
+                            format: int32
+                          'creatorUserID':
+                            type: string
+                          'groupType':
+                            type: integer
+                            format: int32
+                          'needVerification':
+                            type: integer
+                            format: int32
+                          'lookMemberInfo':
+                            type: integer
+                            format: int32
+                          'applyMemberFriend':
+                            type: integer
+                            format: int32
+                          'notificationUpdateTime':
+                            type: integer
+                            format: int64
+                          'notificationUserID':
+                            type: string
+                        x-source-schema-status: field-level
+                        x-source-schema-kind: protobuf
+                        x-source-protobuf-type: 'openim.sdkws.GroupInfo'
+                      'sortVersion':
+                        type: integer
+                        format: int64
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.getIncrementalGroupMemberResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/get_incremental_group_members'
+  x-source-request-type: 'group.GetIncrementalGroupMemberReq'
+  x-source-response-type: 'group.GetIncrementalGroupMemberResp'

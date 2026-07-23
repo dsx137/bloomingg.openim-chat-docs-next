@@ -1,0 +1,14 @@
+type: object
+required:
+  - errCode
+  - errMsg
+  - errDlt
+properties:
+  errCode:
+    type: integer
+    format: int32
+    description: Business result code. Zero indicates success.
+  errMsg:
+    type: string
+  errDlt:
+    type: string

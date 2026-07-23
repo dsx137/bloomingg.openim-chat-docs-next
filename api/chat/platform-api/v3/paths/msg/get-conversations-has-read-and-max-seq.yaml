@@ -1,0 +1,82 @@
+post:
+  tags:
+    - 'Messages'
+  summary: 'MsgGetConversationsHasReadAndMaxSeq'
+  description: 'OpenIM Server POST route handled by m.GetConversationsHasReadAndMaxSeq. It accepts the JSON serialization of msg.GetConversationsHasReadAndMaxSeqReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postMsgGetConversationsHasReadAndMaxSeq
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of msg.GetConversationsHasReadAndMaxSeqReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userID':
+              type: string
+            'conversationIDs':
+              type: array
+              items:
+                type: string
+            'returnPinned':
+              type: boolean
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.msg.GetConversationsHasReadAndMaxSeqReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'seqs':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'value':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'maxSeq':
+                                  type: integer
+                                  format: int64
+                                'hasReadSeq':
+                                  type: integer
+                                  format: int64
+                                'maxSeqTime':
+                                  type: integer
+                                  format: int64
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.msg.Seqs'
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.msg.GetConversationsHasReadAndMaxSeqResp.SeqsEntry'
+                      'pinnedConversationIDs':
+                        type: array
+                        items:
+                          type: string
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.msg.GetConversationsHasReadAndMaxSeqResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/msg.go'
+  x-source-gin-path: '/msg/get_conversations_has_read_and_max_seq'
+  x-source-request-type: 'msg.GetConversationsHasReadAndMaxSeqReq'
+  x-source-response-type: 'msg.GetConversationsHasReadAndMaxSeqResp'

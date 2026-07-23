@@ -1,0 +1,11 @@
+additionalProperties: false
+properties:
+  members:
+    items:
+      $ref: ../sdkws/group-member-full-info.yaml
+    type: array
+  total:
+    format: int32
+    minimum: 0
+    type: integer
+type: object

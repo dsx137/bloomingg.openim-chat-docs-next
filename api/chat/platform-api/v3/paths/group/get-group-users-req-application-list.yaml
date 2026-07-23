@@ -1,0 +1,147 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupGetGroupUsersReqApplicationList'
+  description: 'OpenIM Server POST route handled by g.GetGroupUsersReqApplicationList. It accepts the JSON serialization of group.GetGroupUsersReqApplicationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupGetGroupUsersReqApplicationList
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.GetGroupUsersReqApplicationListReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupID':
+              type: string
+            'userIDs':
+              type: array
+              items:
+                type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.getGroupUsersReqApplicationListReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'total':
+                        type: integer
+                        format: int64
+                      'groupRequests':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'userInfo':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'userID':
+                                  type: string
+                                'nickname':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'ex':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.PublicUserInfo'
+                            'groupInfo':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'groupID':
+                                  type: string
+                                'groupName':
+                                  type: string
+                                'notification':
+                                  type: string
+                                'introduction':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'ownerUserID':
+                                  type: string
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'memberCount':
+                                  type: integer
+                                  format: int32
+                                'ex':
+                                  type: string
+                                'status':
+                                  type: integer
+                                  format: int32
+                                'creatorUserID':
+                                  type: string
+                                'groupType':
+                                  type: integer
+                                  format: int32
+                                'needVerification':
+                                  type: integer
+                                  format: int32
+                                'lookMemberInfo':
+                                  type: integer
+                                  format: int32
+                                'applyMemberFriend':
+                                  type: integer
+                                  format: int32
+                                'notificationUpdateTime':
+                                  type: integer
+                                  format: int64
+                                'notificationUserID':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.GroupInfo'
+                            'handleResult':
+                              type: integer
+                              format: int32
+                            'reqMsg':
+                              type: string
+                            'handleMsg':
+                              type: string
+                            'reqTime':
+                              type: integer
+                              format: int64
+                            'handleUserID':
+                              type: string
+                            'handleTime':
+                              type: integer
+                              format: int64
+                            'ex':
+                              type: string
+                            'joinSource':
+                              type: integer
+                              format: int32
+                            'inviterUserID':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.GroupRequest'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.getGroupUsersReqApplicationListResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/get_group_users_req_application_list'
+  x-source-request-type: 'group.GetGroupUsersReqApplicationListReq'
+  x-source-response-type: 'group.GetGroupUsersReqApplicationListResp'

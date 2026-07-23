@@ -1,0 +1,162 @@
+post:
+  tags:
+    - 'Object storage'
+  summary: 'ObjectInitiateMultipartUpload'
+  description: 'OpenIM Server POST route handled by t.InitiateMultipartUpload. It accepts the JSON serialization of third.InitiateMultipartUploadReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postObjectInitiateMultipartUpload
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of third.InitiateMultipartUploadReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'hash':
+              type: string
+            'size':
+              type: integer
+              format: int64
+            'partSize':
+              type: integer
+              format: int64
+            'maxParts':
+              type: integer
+              format: int32
+            'cause':
+              type: string
+            'name':
+              type: string
+            'contentType':
+              type: string
+            'urlPrefix':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.third.InitiateMultipartUploadReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'url':
+                        type: string
+                      'upload':
+                        type: object
+                        additionalProperties: true
+                        properties:
+                          'uploadID':
+                            type: string
+                          'partSize':
+                            type: integer
+                            format: int64
+                          'sign':
+                            type: object
+                            additionalProperties: true
+                            properties:
+                              'url':
+                                type: string
+                              'query':
+                                type: array
+                                items:
+                                  type: object
+                                  additionalProperties: true
+                                  properties:
+                                    'key':
+                                      type: string
+                                    'values':
+                                      type: array
+                                      items:
+                                        type: string
+                                  x-source-schema-status: field-level
+                                  x-source-schema-kind: protobuf
+                                  x-source-protobuf-type: 'openim.third.KeyValues'
+                              'header':
+                                type: array
+                                items:
+                                  type: object
+                                  additionalProperties: true
+                                  properties:
+                                    'key':
+                                      type: string
+                                    'values':
+                                      type: array
+                                      items:
+                                        type: string
+                                  x-source-schema-status: field-level
+                                  x-source-schema-kind: protobuf
+                                  x-source-protobuf-type: 'openim.third.KeyValues'
+                              'parts':
+                                type: array
+                                items:
+                                  type: object
+                                  additionalProperties: true
+                                  properties:
+                                    'partNumber':
+                                      type: integer
+                                      format: int32
+                                    'url':
+                                      type: string
+                                    'query':
+                                      type: array
+                                      items:
+                                        type: object
+                                        additionalProperties: true
+                                        properties:
+                                          'key':
+                                            type: string
+                                          'values':
+                                            type: array
+                                            items:
+                                              type: string
+                                        x-source-schema-status: field-level
+                                        x-source-schema-kind: protobuf
+                                        x-source-protobuf-type: 'openim.third.KeyValues'
+                                    'header':
+                                      type: array
+                                      items:
+                                        type: object
+                                        additionalProperties: true
+                                        properties:
+                                          'key':
+                                            type: string
+                                          'values':
+                                            type: array
+                                            items:
+                                              type: string
+                                        x-source-schema-status: field-level
+                                        x-source-schema-kind: protobuf
+                                        x-source-protobuf-type: 'openim.third.KeyValues'
+                                  x-source-schema-status: field-level
+                                  x-source-schema-kind: protobuf
+                                  x-source-protobuf-type: 'openim.third.SignPart'
+                            x-source-schema-status: field-level
+                            x-source-schema-kind: protobuf
+                            x-source-protobuf-type: 'openim.third.AuthSignParts'
+                          'expireTime':
+                            type: integer
+                            format: int64
+                        x-source-schema-status: field-level
+                        x-source-schema-kind: protobuf
+                        x-source-protobuf-type: 'openim.third.UploadInfo'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.third.InitiateMultipartUploadResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/third.go'
+  x-source-gin-path: '/object/initiate_multipart_upload'
+  x-source-request-type: 'third.InitiateMultipartUploadReq'
+  x-source-response-type: 'third.InitiateMultipartUploadResp'

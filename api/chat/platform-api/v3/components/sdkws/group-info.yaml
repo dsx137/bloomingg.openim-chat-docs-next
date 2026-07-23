@@ -1,0 +1,48 @@
+additionalProperties: false
+properties:
+  applyMemberFriend:
+    format: int32
+    type: integer
+  createTime:
+    format: int64
+    type: integer
+  creatorUserID:
+    type: string
+  ex:
+    type: string
+  faceURL:
+    type: string
+  groupID:
+    type: string
+  groupName:
+    type: string
+  groupType:
+    format: int32
+    type: integer
+    minimum: 0
+    maximum: 2
+  introduction:
+    type: string
+  lookMemberInfo:
+    format: int32
+    type: integer
+  memberCount:
+    format: int32
+    minimum: 0
+    type: integer
+  needVerification:
+    format: int32
+    type: integer
+  notification:
+    type: string
+  notificationUpdateTime:
+    format: int64
+    type: integer
+  notificationUserID:
+    type: string
+  ownerUserID:
+    type: string
+  status:
+    format: int32
+    type: integer
+type: object

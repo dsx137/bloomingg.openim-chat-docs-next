@@ -1,0 +1,71 @@
+post:
+  tags:
+    - 'Users'
+  summary: 'UserSubscribeUsersStatus'
+  description: 'OpenIM Server POST route handled by u.SubscriberStatus. It accepts the JSON serialization of user.SubscribeOrCancelUsersStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postUserSubscribeUsersStatus
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of user.SubscribeOrCancelUsersStatusReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userID':
+              type: string
+            'userIDs':
+              type: array
+              items:
+                type: string
+            'genre':
+              type: integer
+              format: int32
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.user.subscribeOrCancelUsersStatusReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'statusList':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'userID':
+                              type: string
+                            'status':
+                              type: integer
+                              format: int32
+                            'platformIDs':
+                              type: array
+                              items:
+                                type: integer
+                                format: int32
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.user.onlineStatus'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.user.subscribeOrCancelUsersStatusResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/user.go'
+  x-source-gin-path: '/user/subscribe_users_status'
+  x-source-request-type: 'user.SubscribeOrCancelUsersStatusReq'
+  x-source-response-type: 'user.SubscribeOrCancelUsersStatusResp'

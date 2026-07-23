@@ -1,0 +1,126 @@
+post:
+  tags:
+    - 'Object storage'
+  summary: 'ObjectAuthSign'
+  description: 'OpenIM Server POST route handled by t.AuthSign. It accepts the JSON serialization of third.AuthSignReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postObjectAuthSign
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of third.AuthSignReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'uploadID':
+              type: string
+            'partNumbers':
+              type: array
+              items:
+                type: integer
+                format: int32
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.third.AuthSignReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'url':
+                        type: string
+                      'query':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'values':
+                              type: array
+                              items:
+                                type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.KeyValues'
+                      'header':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'values':
+                              type: array
+                              items:
+                                type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.KeyValues'
+                      'parts':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'partNumber':
+                              type: integer
+                              format: int32
+                            'url':
+                              type: string
+                            'query':
+                              type: array
+                              items:
+                                type: object
+                                additionalProperties: true
+                                properties:
+                                  'key':
+                                    type: string
+                                  'values':
+                                    type: array
+                                    items:
+                                      type: string
+                                x-source-schema-status: field-level
+                                x-source-schema-kind: protobuf
+                                x-source-protobuf-type: 'openim.third.KeyValues'
+                            'header':
+                              type: array
+                              items:
+                                type: object
+                                additionalProperties: true
+                                properties:
+                                  'key':
+                                    type: string
+                                  'values':
+                                    type: array
+                                    items:
+                                      type: string
+                                x-source-schema-status: field-level
+                                x-source-schema-kind: protobuf
+                                x-source-protobuf-type: 'openim.third.KeyValues'
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.third.SignPart'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.third.AuthSignResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/third.go'
+  x-source-gin-path: '/object/auth_sign'
+  x-source-request-type: 'third.AuthSignReq'
+  x-source-response-type: 'third.AuthSignResp'

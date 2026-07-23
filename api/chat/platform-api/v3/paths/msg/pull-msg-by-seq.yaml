@@ -1,0 +1,301 @@
+post:
+  tags:
+    - 'Messages'
+  summary: 'MsgPullMsgBySeq'
+  description: 'OpenIM Server POST route handled by m.PullMsgBySeqs. It accepts the JSON serialization of sdkws.PullMessageBySeqsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postMsgPullMsgBySeq
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of sdkws.PullMessageBySeqsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userID':
+              type: string
+            'seqRanges':
+              type: array
+              items:
+                type: object
+                additionalProperties: true
+                properties:
+                  'conversationID':
+                    type: string
+                  'begin':
+                    type: integer
+                    format: int64
+                  'end':
+                    type: integer
+                    format: int64
+                  'num':
+                    type: integer
+                    format: int64
+                x-source-schema-status: field-level
+                x-source-schema-kind: protobuf
+                x-source-protobuf-type: 'openim.sdkws.SeqRange'
+            'order':
+              type: integer
+              format: int32
+              enum:
+                - 0
+                - 1
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.sdkws.PullMessageBySeqsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'msgs':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'value':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'Msgs':
+                                  type: array
+                                  items:
+                                    type: object
+                                    additionalProperties: true
+                                    properties:
+                                      'sendID':
+                                        type: string
+                                      'recvID':
+                                        type: string
+                                      'groupID':
+                                        type: string
+                                      'clientMsgID':
+                                        type: string
+                                      'serverMsgID':
+                                        type: string
+                                      'senderPlatformID':
+                                        type: integer
+                                        format: int32
+                                      'senderNickname':
+                                        type: string
+                                      'senderFaceURL':
+                                        type: string
+                                      'sessionType':
+                                        type: integer
+                                        format: int32
+                                      'msgFrom':
+                                        type: integer
+                                        format: int32
+                                      'contentType':
+                                        type: integer
+                                        format: int32
+                                      'content':
+                                        type: string
+                                        format: byte
+                                      'seq':
+                                        type: integer
+                                        format: int64
+                                      'sendTime':
+                                        type: integer
+                                        format: int64
+                                      'createTime':
+                                        type: integer
+                                        format: int64
+                                      'status':
+                                        type: integer
+                                        format: int32
+                                      'isRead':
+                                        type: boolean
+                                      'options':
+                                        type: array
+                                        items:
+                                          type: object
+                                          additionalProperties: true
+                                          properties:
+                                            'key':
+                                              type: string
+                                            'value':
+                                              type: boolean
+                                          x-source-schema-status: field-level
+                                          x-source-schema-kind: protobuf
+                                          x-source-protobuf-type: 'openim.sdkws.MsgData.OptionsEntry'
+                                      'offlinePushInfo':
+                                        type: object
+                                        additionalProperties: true
+                                        properties:
+                                          'title':
+                                            type: string
+                                          'desc':
+                                            type: string
+                                          'ex':
+                                            type: string
+                                          'iOSPushSound':
+                                            type: string
+                                          'iOSBadgeCount':
+                                            type: boolean
+                                          'signalInfo':
+                                            type: string
+                                        x-source-schema-status: field-level
+                                        x-source-schema-kind: protobuf
+                                        x-source-protobuf-type: 'openim.sdkws.OfflinePushInfo'
+                                      'atUserIDList':
+                                        type: array
+                                        items:
+                                          type: string
+                                      'attachedInfo':
+                                        type: string
+                                      'ex':
+                                        type: string
+                                    x-source-schema-status: field-level
+                                    x-source-schema-kind: protobuf
+                                    x-source-protobuf-type: 'openim.sdkws.MsgData'
+                                'isEnd':
+                                  type: boolean
+                                'endSeq':
+                                  type: integer
+                                  format: int64
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.PullMsgs'
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.PullMessageBySeqsResp.MsgsEntry'
+                      'notificationMsgs':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'key':
+                              type: string
+                            'value':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'Msgs':
+                                  type: array
+                                  items:
+                                    type: object
+                                    additionalProperties: true
+                                    properties:
+                                      'sendID':
+                                        type: string
+                                      'recvID':
+                                        type: string
+                                      'groupID':
+                                        type: string
+                                      'clientMsgID':
+                                        type: string
+                                      'serverMsgID':
+                                        type: string
+                                      'senderPlatformID':
+                                        type: integer
+                                        format: int32
+                                      'senderNickname':
+                                        type: string
+                                      'senderFaceURL':
+                                        type: string
+                                      'sessionType':
+                                        type: integer
+                                        format: int32
+                                      'msgFrom':
+                                        type: integer
+                                        format: int32
+                                      'contentType':
+                                        type: integer
+                                        format: int32
+                                      'content':
+                                        type: string
+                                        format: byte
+                                      'seq':
+                                        type: integer
+                                        format: int64
+                                      'sendTime':
+                                        type: integer
+                                        format: int64
+                                      'createTime':
+                                        type: integer
+                                        format: int64
+                                      'status':
+                                        type: integer
+                                        format: int32
+                                      'isRead':
+                                        type: boolean
+                                      'options':
+                                        type: array
+                                        items:
+                                          type: object
+                                          additionalProperties: true
+                                          properties:
+                                            'key':
+                                              type: string
+                                            'value':
+                                              type: boolean
+                                          x-source-schema-status: field-level
+                                          x-source-schema-kind: protobuf
+                                          x-source-protobuf-type: 'openim.sdkws.MsgData.OptionsEntry'
+                                      'offlinePushInfo':
+                                        type: object
+                                        additionalProperties: true
+                                        properties:
+                                          'title':
+                                            type: string
+                                          'desc':
+                                            type: string
+                                          'ex':
+                                            type: string
+                                          'iOSPushSound':
+                                            type: string
+                                          'iOSBadgeCount':
+                                            type: boolean
+                                          'signalInfo':
+                                            type: string
+                                        x-source-schema-status: field-level
+                                        x-source-schema-kind: protobuf
+                                        x-source-protobuf-type: 'openim.sdkws.OfflinePushInfo'
+                                      'atUserIDList':
+                                        type: array
+                                        items:
+                                          type: string
+                                      'attachedInfo':
+                                        type: string
+                                      'ex':
+                                        type: string
+                                    x-source-schema-status: field-level
+                                    x-source-schema-kind: protobuf
+                                    x-source-protobuf-type: 'openim.sdkws.MsgData'
+                                'isEnd':
+                                  type: boolean
+                                'endSeq':
+                                  type: integer
+                                  format: int64
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.PullMsgs'
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.PullMessageBySeqsResp.NotificationMsgsEntry'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.sdkws.PullMessageBySeqsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/msg.go'
+  x-source-gin-path: '/msg/pull_msg_by_seq'
+  x-source-request-type: 'sdkws.PullMessageBySeqsReq'
+  x-source-response-type: 'sdkws.PullMessageBySeqsResp'

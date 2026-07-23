@@ -1,0 +1,32 @@
+additionalProperties: false
+properties:
+  appMangerLevel:
+    format: int32
+    type: integer
+  ex:
+    type: string
+  faceURL:
+    type: string
+  groupID:
+    type: string
+  inviterUserID:
+    type: string
+  joinSource:
+    format: int32
+    type: integer
+  joinTime:
+    format: int64
+    type: integer
+  muteEndTime:
+    format: int64
+    type: integer
+  nickname:
+    type: string
+  operatorUserID:
+    type: string
+  roleLevel:
+    format: int32
+    type: integer
+  userID:
+    type: string
+type: object

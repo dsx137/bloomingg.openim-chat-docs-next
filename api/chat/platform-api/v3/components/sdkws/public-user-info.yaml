@@ -1,0 +1,11 @@
+additionalProperties: false
+properties:
+  ex:
+    type: string
+  faceURL:
+    type: string
+  nickname:
+    type: string
+  userID:
+    type: string
+type: object

@@ -1,0 +1,60 @@
+additionalProperties: false
+properties:
+  atUserIDList:
+    items:
+      type: string
+    type: array
+  attachedInfo:
+    type: string
+  clientMsgID:
+    type: string
+  content:
+    format: byte
+    type: string
+  contentType:
+    format: int32
+    type: integer
+  createTime:
+    format: int64
+    type: integer
+  ex:
+    type: string
+  groupID:
+    type: string
+  isRead:
+    type: boolean
+  msgFrom:
+    format: int32
+    type: integer
+  offlinePushInfo:
+    $ref: offline-push-info.yaml
+  options:
+    additionalProperties:
+      type: boolean
+    type: object
+  recvID:
+    type: string
+  sendID:
+    type: string
+  sendTime:
+    format: int64
+    type: integer
+  senderFaceURL:
+    type: string
+  senderNickname:
+    type: string
+  senderPlatformID:
+    format: int32
+    type: integer
+  seq:
+    format: int64
+    type: integer
+  serverMsgID:
+    type: string
+  sessionType:
+    format: int32
+    type: integer
+  status:
+    format: int32
+    type: integer
+type: object

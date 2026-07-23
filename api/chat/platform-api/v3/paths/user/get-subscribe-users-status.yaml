@@ -1,0 +1,64 @@
+post:
+  tags:
+    - 'Users'
+  summary: 'UserGetSubscribeUsersStatus'
+  description: 'OpenIM Server POST route handled by u.GetSubscribeUsersStatus. It accepts the JSON serialization of user.GetSubscribeUsersStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postUserGetSubscribeUsersStatus
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of user.GetSubscribeUsersStatusReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.user.getSubscribeUsersStatusReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'statusList':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'userID':
+                              type: string
+                            'status':
+                              type: integer
+                              format: int32
+                            'platformIDs':
+                              type: array
+                              items:
+                                type: integer
+                                format: int32
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.user.onlineStatus'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.user.getSubscribeUsersStatusResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/user.go'
+  x-source-gin-path: '/user/get_subscribe_users_status'
+  x-source-request-type: 'user.GetSubscribeUsersStatusReq'
+  x-source-response-type: 'user.GetSubscribeUsersStatusResp'

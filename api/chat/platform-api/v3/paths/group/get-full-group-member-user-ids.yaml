@@ -1,0 +1,59 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupGetFullGroupMemberUserIds'
+  description: 'OpenIM Server POST route handled by g.GetFullGroupMemberUserIDs. It accepts the JSON serialization of group.GetFullGroupMemberUserIDsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupGetFullGroupMemberUserIds
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.GetFullGroupMemberUserIDsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'idHash':
+              type: integer
+              format: int64
+            'groupID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.GetFullGroupMemberUserIDsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'version':
+                        type: integer
+                        format: int64
+                      'versionID':
+                        type: string
+                      'equal':
+                        type: boolean
+                      'userIDs':
+                        type: array
+                        items:
+                          type: string
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.GetFullGroupMemberUserIDsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/get_full_group_member_user_ids'
+  x-source-request-type: 'group.GetFullGroupMemberUserIDsReq'
+  x-source-response-type: 'group.GetFullGroupMemberUserIDsResp'

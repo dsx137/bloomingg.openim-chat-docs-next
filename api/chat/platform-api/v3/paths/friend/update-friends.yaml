@@ -1,0 +1,76 @@
+post:
+  tags:
+    - 'Friends'
+  summary: 'FriendUpdateFriends'
+  description: 'OpenIM Server POST route handled by f.UpdateFriends. It accepts the JSON serialization of relation.UpdateFriendsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postFriendUpdateFriends
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of relation.UpdateFriendsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'ownerUserID':
+              type: string
+            'friendUserIDs':
+              type: array
+              items:
+                type: string
+            'isPinned':
+              type: object
+              additionalProperties: true
+              properties:
+                'value':
+                  type: boolean
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.protobuf.BoolValue'
+            'remark':
+              type: object
+              additionalProperties: true
+              properties:
+                'value':
+                  type: string
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.protobuf.StringValue'
+            'ex':
+              type: object
+              additionalProperties: true
+              properties:
+                'value':
+                  type: string
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.protobuf.StringValue'
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.relation.updateFriendsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties: {}
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.relation.updateFriendsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/friend.go'
+  x-source-gin-path: '/friend/update_friends'
+  x-source-request-type: 'relation.UpdateFriendsReq'
+  x-source-response-type: 'relation.UpdateFriendsResp'

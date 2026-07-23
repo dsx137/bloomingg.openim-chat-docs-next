@@ -1,0 +1,87 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupGetGroupMembersInfo'
+  description: 'OpenIM Server POST route handled by g.GetGroupMembersInfo. It accepts the JSON serialization of group.GetGroupMembersInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupGetGroupMembersInfo
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.GetGroupMembersInfoReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupID':
+              type: string
+            'userIDs':
+              type: array
+              items:
+                type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.GetGroupMembersInfoReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'members':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'groupID':
+                              type: string
+                            'userID':
+                              type: string
+                            'roleLevel':
+                              type: integer
+                              format: int32
+                            'joinTime':
+                              type: integer
+                              format: int64
+                            'nickname':
+                              type: string
+                            'faceURL':
+                              type: string
+                            'appMangerLevel':
+                              type: integer
+                              format: int32
+                            'joinSource':
+                              type: integer
+                              format: int32
+                            'operatorUserID':
+                              type: string
+                            'ex':
+                              type: string
+                            'muteEndTime':
+                              type: integer
+                              format: int64
+                            'inviterUserID':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.GroupMemberFullInfo'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.GetGroupMembersInfoResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/get_group_members_info'
+  x-source-request-type: 'group.GetGroupMembersInfoReq'
+  x-source-response-type: 'group.GetGroupMembersInfoResp'

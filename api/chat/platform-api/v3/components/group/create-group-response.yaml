@@ -1,0 +1,5 @@
+additionalProperties: false
+properties:
+  groupInfo:
+    $ref: ../sdkws/group-info.yaml
+type: object

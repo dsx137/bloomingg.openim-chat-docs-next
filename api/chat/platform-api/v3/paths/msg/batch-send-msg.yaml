@@ -1,0 +1,100 @@
+post:
+  tags:
+    - 'Messages'
+  summary: 'MsgBatchSendMsg'
+  description: 'OpenIM Server POST route handled by m.BatchSendMsg. It accepts the JSON serialization of apistruct.BatchSendMsgReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postMsgBatchSendMsg
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of apistruct.BatchSendMsgReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'sendMsg':
+              type: object
+              additionalProperties: true
+              properties:
+                'sendID':
+                  type: string
+                'recvID':
+                  type: string
+                'groupID':
+                  type: string
+                'content':
+                  type: object
+                  additionalProperties: true
+                  properties: {}
+                  x-source-schema-status: field-level
+                  x-source-schema-kind: go
+                  x-source-go-type: 'openim.apistruct.JsonObject'
+                'contentType':
+                  type: integer
+                  format: int32
+                'sessionType':
+                  type: integer
+                  format: int32
+              x-source-schema-status: field-level
+              x-source-schema-kind: go
+              x-source-go-type: 'openim.apistruct.SendMsg'
+            'recvIDs':
+              type: array
+              items:
+                type: string
+            'isSendAll':
+              type: boolean
+          x-source-schema-status: field-level
+          x-source-schema-kind: go
+          x-source-go-type: 'openim.apistruct.BatchSendMsgReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'results':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'clientMsgID':
+                              type: string
+                            'serverMsgID':
+                              type: string
+                            'sendTime':
+                              type: integer
+                              format: int64
+                            'errCode':
+                              type: integer
+                              format: int32
+                            'errMsg':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: go
+                          x-source-go-type: 'openim.apistruct.SingleReturnResult'
+                      'failedUserIDs':
+                        type: array
+                        items:
+                          type: string
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: go
+                    x-source-go-type: 'openim.apistruct.BatchSendMsgResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/msg.go'
+  x-source-gin-path: '/msg/batch_send_msg'
+  x-source-request-type: 'apistruct.BatchSendMsgReq'
+  x-source-response-type: 'apistruct.BatchSendMsgResp'

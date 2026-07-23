@@ -1,0 +1,303 @@
+post:
+  tags:
+    - 'JavaScript SDK'
+  summary: 'JssdkGetActiveConversations'
+  description: 'OpenIM Server POST route handled by j.GetActiveConversations. It accepts the JSON serialization of jssdk.GetActiveConversationsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postJssdkGetActiveConversations
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of jssdk.GetActiveConversationsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'ownerUserID':
+              type: string
+            'count':
+              type: integer
+              format: int64
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.jssdk.GetActiveConversationsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'unreadCount':
+                        type: integer
+                        format: int64
+                      'conversations':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'conversation':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'ownerUserID':
+                                  type: string
+                                'conversationID':
+                                  type: string
+                                'recvMsgOpt':
+                                  type: integer
+                                  format: int32
+                                'conversationType':
+                                  type: integer
+                                  format: int32
+                                'userID':
+                                  type: string
+                                'groupID':
+                                  type: string
+                                'isPinned':
+                                  type: boolean
+                                'attachedInfo':
+                                  type: string
+                                'isPrivateChat':
+                                  type: boolean
+                                'groupAtType':
+                                  type: integer
+                                  format: int32
+                                'ex':
+                                  type: string
+                                'burnDuration':
+                                  type: integer
+                                  format: int32
+                                'minSeq':
+                                  type: integer
+                                  format: int64
+                                'maxSeq':
+                                  type: integer
+                                  format: int64
+                                'msgDestructTime':
+                                  type: integer
+                                  format: int64
+                                'latestMsgDestructTime':
+                                  type: integer
+                                  format: int64
+                                'isMsgDestruct':
+                                  type: boolean
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.conversation.Conversation'
+                            'lastMsg':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'sendID':
+                                  type: string
+                                'recvID':
+                                  type: string
+                                'groupID':
+                                  type: string
+                                'clientMsgID':
+                                  type: string
+                                'serverMsgID':
+                                  type: string
+                                'senderPlatformID':
+                                  type: integer
+                                  format: int32
+                                'senderNickname':
+                                  type: string
+                                'senderFaceURL':
+                                  type: string
+                                'sessionType':
+                                  type: integer
+                                  format: int32
+                                'msgFrom':
+                                  type: integer
+                                  format: int32
+                                'contentType':
+                                  type: integer
+                                  format: int32
+                                'content':
+                                  type: string
+                                  format: byte
+                                'seq':
+                                  type: integer
+                                  format: int64
+                                'sendTime':
+                                  type: integer
+                                  format: int64
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'status':
+                                  type: integer
+                                  format: int32
+                                'isRead':
+                                  type: boolean
+                                'options':
+                                  type: array
+                                  items:
+                                    type: object
+                                    additionalProperties: true
+                                    properties:
+                                      'key':
+                                        type: string
+                                      'value':
+                                        type: boolean
+                                    x-source-schema-status: field-level
+                                    x-source-schema-kind: protobuf
+                                    x-source-protobuf-type: 'openim.sdkws.MsgData.OptionsEntry'
+                                'offlinePushInfo':
+                                  type: object
+                                  additionalProperties: true
+                                  properties:
+                                    'title':
+                                      type: string
+                                    'desc':
+                                      type: string
+                                    'ex':
+                                      type: string
+                                    'iOSPushSound':
+                                      type: string
+                                    'iOSBadgeCount':
+                                      type: boolean
+                                    'signalInfo':
+                                      type: string
+                                  x-source-schema-status: field-level
+                                  x-source-schema-kind: protobuf
+                                  x-source-protobuf-type: 'openim.sdkws.OfflinePushInfo'
+                                'atUserIDList':
+                                  type: array
+                                  items:
+                                    type: string
+                                'attachedInfo':
+                                  type: string
+                                'ex':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.MsgData'
+                            'user':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'userID':
+                                  type: string
+                                'nickname':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'ex':
+                                  type: string
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'appMangerLevel':
+                                  type: integer
+                                  format: int32
+                                'globalRecvMsgOpt':
+                                  type: integer
+                                  format: int32
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.UserInfo'
+                            'friend':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'ownerUserID':
+                                  type: string
+                                'friendUserID':
+                                  type: string
+                                'remark':
+                                  type: string
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'addSource':
+                                  type: integer
+                                  format: int32
+                                'operatorUserID':
+                                  type: string
+                                'ex':
+                                  type: string
+                                'isPinned':
+                                  type: boolean
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.relation.FriendInfoOnly'
+                            'group':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'groupID':
+                                  type: string
+                                'groupName':
+                                  type: string
+                                'notification':
+                                  type: string
+                                'introduction':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'ownerUserID':
+                                  type: string
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'memberCount':
+                                  type: integer
+                                  format: int32
+                                'ex':
+                                  type: string
+                                'status':
+                                  type: integer
+                                  format: int32
+                                'creatorUserID':
+                                  type: string
+                                'groupType':
+                                  type: integer
+                                  format: int32
+                                'needVerification':
+                                  type: integer
+                                  format: int32
+                                'lookMemberInfo':
+                                  type: integer
+                                  format: int32
+                                'applyMemberFriend':
+                                  type: integer
+                                  format: int32
+                                'notificationUpdateTime':
+                                  type: integer
+                                  format: int64
+                                'notificationUserID':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.GroupInfo'
+                            'maxSeq':
+                              type: integer
+                              format: int64
+                            'readSeq':
+                              type: integer
+                              format: int64
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.jssdk.ConversationMsg'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.jssdk.GetActiveConversationsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/jssdk/jssdk.go'
+  x-source-gin-path: '/jssdk/get_active_conversations'
+  x-source-request-type: 'jssdk.GetActiveConversationsReq'
+  x-source-response-type: 'jssdk.GetActiveConversationsResp'

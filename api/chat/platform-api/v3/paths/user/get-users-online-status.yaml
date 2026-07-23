@@ -1,0 +1,73 @@
+post:
+  tags:
+    - 'Users'
+  summary: 'UserGetUsersOnlineStatus'
+  description: 'OpenIM Server POST route handled by u.GetUsersOnlineStatus. It accepts the JSON serialization of msggateway.GetUsersOnlineStatusReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postUserGetUsersOnlineStatus
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of msggateway.GetUsersOnlineStatusReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userIDs':
+              type: array
+              items:
+                type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.msggateway.GetUsersOnlineStatusReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+                      properties:
+                        'userID':
+                          type: string
+                        'status':
+                          type: integer
+                          format: int32
+                        'detailPlatformStatus':
+                          type: array
+                          items:
+                            type: object
+                            additionalProperties: true
+                            properties:
+                              'platformID':
+                                type: integer
+                                format: int32
+                              'connID':
+                                type: string
+                              'isBackground':
+                                type: boolean
+                              'token':
+                                type: string
+                            x-source-schema-status: field-level
+                            x-source-schema-kind: protobuf
+                            x-source-protobuf-type: 'openim.msggateway.GetUsersOnlineStatusResp.SuccessDetail'
+                      x-source-schema-status: field-level
+                      x-source-schema-kind: protobuf
+                      x-source-protobuf-type: 'openim.msggateway.GetUsersOnlineStatusResp.SuccessResult'
+                    x-source-go-type: '[]*msggateway.GetUsersOnlineStatusResp_SuccessResult'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/user.go'
+  x-source-gin-path: '/user/get_users_online_status'
+  x-source-request-type: 'msggateway.GetUsersOnlineStatusReq'
+  x-source-response-type: '[]*msggateway.GetUsersOnlineStatusResp_SuccessResult'

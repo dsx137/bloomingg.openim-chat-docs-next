@@ -1,0 +1,99 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupSetGroupInfo'
+  description: 'OpenIM Server POST route handled by g.SetGroupInfo. It accepts the JSON serialization of group.SetGroupInfoReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupSetGroupInfo
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.SetGroupInfoReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'groupInfoForSet':
+              type: object
+              additionalProperties: true
+              properties:
+                'groupID':
+                  type: string
+                'groupName':
+                  type: string
+                'notification':
+                  type: string
+                'introduction':
+                  type: string
+                'faceURL':
+                  type: string
+                'ex':
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    'value':
+                      type: string
+                  x-source-schema-status: field-level
+                  x-source-schema-kind: protobuf
+                  x-source-protobuf-type: 'openim.protobuf.StringValue'
+                'needVerification':
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    'value':
+                      type: integer
+                      format: int32
+                  x-source-schema-status: field-level
+                  x-source-schema-kind: protobuf
+                  x-source-protobuf-type: 'openim.protobuf.Int32Value'
+                'lookMemberInfo':
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    'value':
+                      type: integer
+                      format: int32
+                  x-source-schema-status: field-level
+                  x-source-schema-kind: protobuf
+                  x-source-protobuf-type: 'openim.protobuf.Int32Value'
+                'applyMemberFriend':
+                  type: object
+                  additionalProperties: true
+                  properties:
+                    'value':
+                      type: integer
+                      format: int32
+                  x-source-schema-status: field-level
+                  x-source-schema-kind: protobuf
+                  x-source-protobuf-type: 'openim.protobuf.Int32Value'
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.sdkws.GroupInfoForSet'
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.SetGroupInfoReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties: {}
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.SetGroupInfoResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/set_group_info'
+  x-source-request-type: 'group.SetGroupInfoReq'
+  x-source-response-type: 'group.SetGroupInfoResp'

@@ -1,0 +1,125 @@
+post:
+  tags:
+    - 'Groups'
+  summary: 'GroupGetGroups'
+  description: 'OpenIM Server POST route handled by g.GetGroups. It accepts the JSON serialization of group.GetGroupsReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postGroupGetGroups
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of group.GetGroupsReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'pagination':
+              type: object
+              additionalProperties: true
+              properties:
+                'pageNumber':
+                  type: integer
+                  format: int32
+                'showNumber':
+                  type: integer
+                  format: int32
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.sdkws.RequestPagination'
+            'groupName':
+              type: string
+            'groupID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.group.GetGroupsReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'total':
+                        type: integer
+                        format: int32
+                      'groups':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'groupInfo':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'groupID':
+                                  type: string
+                                'groupName':
+                                  type: string
+                                'notification':
+                                  type: string
+                                'introduction':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'ownerUserID':
+                                  type: string
+                                'createTime':
+                                  type: integer
+                                  format: int64
+                                'memberCount':
+                                  type: integer
+                                  format: int32
+                                'ex':
+                                  type: string
+                                'status':
+                                  type: integer
+                                  format: int32
+                                'creatorUserID':
+                                  type: string
+                                'groupType':
+                                  type: integer
+                                  format: int32
+                                'needVerification':
+                                  type: integer
+                                  format: int32
+                                'lookMemberInfo':
+                                  type: integer
+                                  format: int32
+                                'applyMemberFriend':
+                                  type: integer
+                                  format: int32
+                                'notificationUpdateTime':
+                                  type: integer
+                                  format: int64
+                                'notificationUserID':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.sdkws.GroupInfo'
+                            'groupOwnerUserName':
+                              type: string
+                            'groupOwnerUserID':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.group.CMSGroup'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.group.GetGroupsResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/group.go'
+  x-source-gin-path: '/group/get_groups'
+  x-source-request-type: 'group.GetGroupsReq'
+  x-source-response-type: 'group.GetGroupsResp'

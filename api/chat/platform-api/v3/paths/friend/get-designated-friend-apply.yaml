@@ -1,0 +1,85 @@
+post:
+  tags:
+    - 'Friends'
+  summary: 'FriendGetDesignatedFriendApply'
+  description: 'OpenIM Server POST route handled by f.GetDesignatedFriendsApply. It accepts the JSON serialization of relation.GetDesignatedFriendsApplyReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postFriendGetDesignatedFriendApply
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of relation.GetDesignatedFriendsApplyReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'fromUserID':
+              type: string
+            'toUserID':
+              type: string
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.relation.getDesignatedFriendsApplyReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'friendRequests':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'fromUserID':
+                              type: string
+                            'fromNickname':
+                              type: string
+                            'fromFaceURL':
+                              type: string
+                            'toUserID':
+                              type: string
+                            'toNickname':
+                              type: string
+                            'toFaceURL':
+                              type: string
+                            'handleResult':
+                              type: integer
+                              format: int32
+                            'reqMsg':
+                              type: string
+                            'createTime':
+                              type: integer
+                              format: int64
+                            'handlerUserID':
+                              type: string
+                            'handleMsg':
+                              type: string
+                            'handleTime':
+                              type: integer
+                              format: int64
+                            'ex':
+                              type: string
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.sdkws.FriendRequest'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.relation.getDesignatedFriendsApplyResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/friend.go'
+  x-source-gin-path: '/friend/get_designated_friend_apply'
+  x-source-request-type: 'relation.GetDesignatedFriendsApplyReq'
+  x-source-response-type: 'relation.GetDesignatedFriendsApplyResp'

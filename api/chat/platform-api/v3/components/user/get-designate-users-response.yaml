@@ -1,0 +1,7 @@
+additionalProperties: false
+properties:
+  usersInfo:
+    items:
+      $ref: ../sdkws/user-info.yaml
+    type: array
+type: object

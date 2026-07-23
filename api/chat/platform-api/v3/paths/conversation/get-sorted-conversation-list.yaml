@@ -1,0 +1,134 @@
+post:
+  tags:
+    - 'Conversations'
+  summary: 'ConversationGetSortedConversationList'
+  description: 'OpenIM Server POST route handled by c.GetSortedConversationList. It accepts the JSON serialization of conversation.GetSortedConversationListReq. Documented fields reflect the upstream wire types; handler-specific validation may impose additional constraints.'
+  operationId: postConversationGetSortedConversationList
+  parameters:
+    - $ref: ../../components/common/operation-id.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          description: 'JSON serialization of conversation.GetSortedConversationListReq, matching the upstream wire type.'
+          type: object
+          additionalProperties: true
+          properties:
+            'userID':
+              type: string
+            'conversationIDs':
+              type: array
+              items:
+                type: string
+            'pagination':
+              type: object
+              additionalProperties: true
+              properties:
+                'pageNumber':
+                  type: integer
+                  format: int32
+                'showNumber':
+                  type: integer
+                  format: int32
+              x-source-schema-status: field-level
+              x-source-schema-kind: protobuf
+              x-source-protobuf-type: 'openim.sdkws.RequestPagination'
+          x-source-schema-status: field-level
+          x-source-schema-kind: protobuf
+          x-source-protobuf-type: 'openim.conversation.GetSortedConversationListReq'
+  responses:
+    '200':
+      description: OpenIM result envelope. Inspect errCode; zero indicates success.
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: ../../components/common/api-envelope.yaml
+              - type: object
+                properties:
+                  data:
+                    type: object
+                    additionalProperties: true
+                    properties:
+                      'conversationTotal':
+                        type: integer
+                        format: int64
+                      'unreadTotal':
+                        type: integer
+                        format: int64
+                      'conversationElems':
+                        type: array
+                        items:
+                          type: object
+                          additionalProperties: true
+                          properties:
+                            'conversationID':
+                              type: string
+                            'recvMsgOpt':
+                              type: integer
+                              format: int32
+                            'unreadCount':
+                              type: integer
+                              format: int64
+                            'IsPinned':
+                              type: boolean
+                            'msgInfo':
+                              type: object
+                              additionalProperties: true
+                              properties:
+                                'serverMsgID':
+                                  type: string
+                                'clientMsgID':
+                                  type: string
+                                'sessionType':
+                                  type: integer
+                                  format: int32
+                                'sendID':
+                                  type: string
+                                'recvID':
+                                  type: string
+                                'senderName':
+                                  type: string
+                                'faceURL':
+                                  type: string
+                                'groupID':
+                                  type: string
+                                'groupName':
+                                  type: string
+                                'groupFaceURL':
+                                  type: string
+                                'groupType':
+                                  type: integer
+                                  format: int32
+                                'groupMemberCount':
+                                  type: integer
+                                  format: int32
+                                'LatestMsgRecvTime':
+                                  type: integer
+                                  format: int64
+                                'msgFrom':
+                                  type: integer
+                                  format: int32
+                                'contentType':
+                                  type: integer
+                                  format: int32
+                                'content':
+                                  type: string
+                                'ex':
+                                  type: string
+                              x-source-schema-status: field-level
+                              x-source-schema-kind: protobuf
+                              x-source-protobuf-type: 'openim.conversation.MsgInfo'
+                          x-source-schema-status: field-level
+                          x-source-schema-kind: protobuf
+                          x-source-protobuf-type: 'openim.conversation.ConversationElem'
+                    x-source-schema-status: field-level
+                    x-source-schema-kind: protobuf
+                    x-source-protobuf-type: 'openim.conversation.GetSortedConversationListResp'
+  security:
+    - TokenAuth: []
+  x-source-handler: 'https://github.com/openimsdk/open-im-server/blob/v3.8.3-patch.16/internal/api/conversation.go'
+  x-source-gin-path: '/conversation/get_sorted_conversation_list'
+  x-source-request-type: 'conversation.GetSortedConversationListReq'
+  x-source-response-type: 'conversation.GetSortedConversationListResp'

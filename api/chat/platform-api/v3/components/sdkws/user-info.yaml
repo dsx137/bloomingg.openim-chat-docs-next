@@ -1,0 +1,23 @@
+additionalProperties: false
+properties:
+  appMangerLevel:
+    format: int32
+    type: integer
+  createTime:
+    format: int64
+    type: integer
+  ex:
+    type: string
+  faceURL:
+    type: string
+  globalRecvMsgOpt:
+    format: int32
+    type: integer
+  nickname:
+    type: string
+  userID:
+    type: string
+type: object
+required:
+  - userID
+  - nickname
