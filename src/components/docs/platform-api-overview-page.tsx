@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { Breadcrumbs } from '@/src/components/docs/breadcrumbs';
 import { ChevronRightIcon } from '@/src/components/ui/icons';
@@ -21,6 +22,7 @@ type FeatureCard = {
 type ResourceLink = {
   description: string;
   href: string;
+  iconSrc: string;
   title: string;
 };
 
@@ -96,11 +98,13 @@ const copy = {
         title: 'Postman',
         description: 'Explore and run OpenIM API requests in the OpenIM Postman workspace.',
         href: 'https://www.postman.com/openimio/openim',
+        iconSrc: '/brand/postman.svg',
       },
       {
         title: 'Apifox',
         description: 'Browse and debug OpenIM API definitions in the OpenIM Apifox project.',
         href: 'https://app.apifox.com/project/8615422',
+        iconSrc: '/brand/apifox.svg',
       },
     ],
   },
@@ -170,11 +174,13 @@ const copy = {
         title: 'Postman',
         description: '在 Postman 中查看并运行 OpenIM API。',
         href: 'https://www.postman.com/openimio/openim',
+        iconSrc: '/brand/postman.svg',
       },
       {
         title: 'Apifox',
         description: '在 Apifox 中查看并调试 OpenIM API。',
         href: 'https://app.apifox.com/project/8615422',
+        iconSrc: '/brand/apifox.svg',
       },
     ],
   },
@@ -266,6 +272,14 @@ function FeatureCardView({ item, locale }: { item: FeatureCard; locale: Locale }
 function ResourceLinkView({ item, locale }: { item: ResourceLink; locale: Locale }) {
   const content = (
     <>
+      <Image
+        alt=""
+        aria-hidden="true"
+        className="sdk-overview-resource-brand-icon"
+        height={28}
+        src={item.iconSrc}
+        width={28}
+      />
       <span>
         <strong>{item.title}</strong>
         <small>{item.description}</small>
