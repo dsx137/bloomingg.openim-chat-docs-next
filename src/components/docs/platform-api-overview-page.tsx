@@ -93,19 +93,14 @@ const copy = {
     ],
     links: [
       {
-        title: 'Error codes',
-        description: 'Handle OpenIM errCode, errMsg, and errDlt responses consistently.',
-        href: '/platform-api/error-codes',
+        title: 'Postman',
+        description: 'Explore and run OpenIM API requests in the OpenIM Postman workspace.',
+        href: 'https://www.postman.com/openimio/openim',
       },
       {
-        title: 'Issue a session token',
-        description: 'Generate login tokens for clients from a trusted backend.',
-        href: '/platform-api/user/managing-session-tokens/issue-a-session-token',
-      },
-      {
-        title: 'OpenIM REST API introduction',
-        description: 'Review the official OpenIM REST request and response conventions.',
-        href: 'https://docs.openim.io/restapi/apis/introduction',
+        title: 'Apifox',
+        description: 'Browse and debug OpenIM API definitions in the OpenIM Apifox project.',
+        href: 'https://app.apifox.com/project/8615422',
       },
     ],
   },
@@ -172,19 +167,14 @@ const copy = {
     ],
     links: [
       {
-        title: '错误码',
-        description: '统一处理 OpenIM 的 errCode、errMsg 和 errDlt 响应。',
-        href: '/platform-api/error-codes',
+        title: 'Postman',
+        description: '在 Postman 中查看并运行 OpenIM API。',
+        href: 'https://www.postman.com/openimio/openim',
       },
       {
-        title: '签发会话 Token',
-        description: '由可信后端为客户端生成登录 Token。',
-        href: '/platform-api/user/managing-session-tokens/issue-a-session-token',
-      },
-      {
-        title: 'OpenIM REST API 介绍',
-        description: '查看 OpenIM 官方 REST 请求和响应约定。',
-        href: 'https://docs.openim.io/restapi/apis/introduction',
+        title: 'Apifox',
+        description: '在 Apifox 中查看并调试 OpenIM API。',
+        href: 'https://app.apifox.com/project/8615422',
       },
     ],
   },
